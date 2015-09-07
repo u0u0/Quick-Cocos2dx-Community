@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>环境设置</title>
+
+</head>
+<body>
+<h1>player 使用说明</h1>
+
+<h2>环境设置</h2>
+
+<p>player 依赖一些特定的环境设置才能正常工作，所以如果你不确定你的环境设置是否正常，可以按照以下步骤操作：</p>
+
+<ul>
+<li>Mac 平台下运行 setup_mac.sh</li>
+<li>Windows 平台下运行 setup_win.bat</li>
+</ul>
+
+
+<p>设置完成后重新启动 player 即可。</p>
+
+<h2>启动 player</h2>
+
+<p>启动 player 后将看到以下画面(第一次进入或者 <code>我的项目</code> 没有项目,会跳转到示例界面)：</p>
+
+<p><img src="res/my_projects.png" alt="" /></p>
+
+<h3>运行示例</h3>
+
+<p>在 player 主界面上点击“示例”页，上下滚动查看示例列表，选择需要的示例来运行吧。</p>
+
+<p><img src="res/player_sample.png" alt="" /></p>
+
+<h3>创建项目</h3>
+
+<p>创建项目,有两种方式:</p>
+
+<ul>
+<li>命令行创建</li>
+<li>通过 <code>Player</code> 创建</li>
+</ul>
+
+
+<p><a href="../create-project/zh.html">创建工程的两种方式</a></p>
+
+<p>在 player 界面上点选“新建项目”, 设置好要放置的目录,包名,屏幕方向,点击 <code>Create Project</code>, 会弹出一个命令行窗口自动创建</p>
+
+<blockquote><p>一定要等命令行的窗口,创建工程成功,再点击 <code>Open ...</code> 打开工程</p></blockquote>
+
+<p><img src="res/create_project.png" alt="" /></p>
+
+<h3>导入和运行项目</h3>
+
+<p>你可以用 player 来运行自己的quick项目。选择“导入项目”：</p>
+
+<p><img src="res/open_project.png" alt="" /></p>
+
+<p>选“Open Project”就可以运行自己的项目了。</p>
+
+<p>下一次你进入player时，“我的项目”里会列出你运行过的项目，因此你不需要再重新导入，只需要选中项目，点击“打开”即可运行。</p>
+
+<p><img src="res/my_projects.png" alt="" /></p>
+
+<h3>编译项目</h3>
+
+<ol>
+<li>点击 <code>编译</code> 按钮</li>
+<li>根据需要选择对应的参数</li>
+</ol>
+
+
+<p>编译方式:</p>
+
+<ul>
+<li><code>BuildNative</code> 编译so文件</li>
+<li><code>BuildAPK</code> 编译好so后,再打包apk文件</li>
+</ul>
+
+
+<p>编译参数对 <code>BuildAPK</code> 命令的各种参数</p>
+
+<p><code>Clear</code> 按钮可以清上一次的编译记录,需要重新编译,建议先执行下这一步
+<code>Compile</code> 按钮 开始执行编译命令</p>
+
+<p><img src="res/player-compile.png" alt="" /></p>
+
+<blockquote><p><code>Player</code> 中的编默认,你已配好Android NDK,Java相关的环境变量</p></blockquote>
+
+<h3>更详细的编译说明</h3>
+
+<p><a href="../compile-android/zh.html">命令行的编译方式</a></p>
+</body>
+</html>

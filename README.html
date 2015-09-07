@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>使用指南</title>
+
+</head>
+<body>
+<h1>quick-cocos2d-x v3</h1>
+
+<p>quick-cocos2d-x v3 是在 cocos2dx 3.x 的最新版本基础之上，移植了原来 quick-cocos2d-x 的核心框架、强大的 player 、丰富的示例等，并增加更多新的功能。</p>
+
+<blockquote><p>当前版本为 V3.3 </p></blockquote>
+
+<h2>使用指南</h2>
+
+<h3>下载与安装</h3>
+
+<ul>
+<li><p>安装包（含源代码）</p>
+
+<p>安装包可以快速完成一些基本设置，并包含编译好的 player 执行文件，简化了安装配置步骤。只需要下载 quick 安装包后，按照安装程序的提示进行操作即可。如果是 Mac 系统，建议先安装好 Xcode 开发工具。</p>
+
+<p>访问 <a href="http://cn.cocos2d-x.org/">http://cn.cocos2d-x.org/</a> 下载安装包。</p>
+
+<p>安装过程很简单，基本上一路点“继续”或者“下一步”即可。在windows下安装你可以修改要安装的目录位置。另外，如果你以前安装过 quick 3.x 的其他版本，并且对引擎代码自己做过修改，请预先备份自己的工作，避免被新版本覆盖。</p></li>
+</ul>
+
+
+<h3>快速开始</h3>
+
+<p>quick-cocos2d-x 中带有一个名为 player 的工具。</p>
+
+<p><img src="docs/res/player.png" alt="" /></p>
+
+<p>这个工具不但是一个功能完善的模拟器，可以在 Mac/Windows 桌面运行开发者的游戏，还是一个功能齐备的开发工具入口。</p>
+
+<p>开发者启动 player 后，将可以完成下列任务：</p>
+
+<ul>
+<li>创建项目</li>
+<li>打开项目</li>
+<li>编译项目</li>
+<li>查看示例</li>
+</ul>
+
+
+<p>未来，我们还将增加更多功能。</p>
+
+<p>现在就下载安装 quick，然后启动 player3.app 或 player3.exe 查看 quick 中那些精彩的示例程序吧。</p>
+
+<h3>使用指南</h3>
+
+<ul>
+<li> <a href="docs/howto/player-user-manual/zh.html">player 使用说明</a></li>
+<li> <a href="docs/howto/create-project/zh.html">创建工程</a></li>
+<li> <a href="docs/howto/use-codeide/zh.html">在 Code IDE 中调试 quick 工程</a></li>
+<li> <a href="docs/howto/use-ccsloader/zh.html">用 CCSLoader 读取 Cocos Studio 输出的场景/UI 文件</a></li>
+<li> <a href="docs/howto/compile-android/zh.html">编译 Android 工程</a></li>
+<li> <a href="docs/howto/upgrade/zh.html">升级到 quick-cocos2d-x 最新版</a></li>
+<li> <a href="docs/howto/use-bindings-generator/zh.html">使用bindings-generator导出自定义C++类</a></li>
+<li> <a href="docs/howto/encrypt-lua-code/zh.html">对 Lua 字节码进行加密</a></li>
+</ul>
+
+
+<h3>参考手册</h3>
+
+<ul>
+<li> <a href="docs/manual/events/zh.html">quick 中的事件</a></li>
+<li> <a href="docs/manual/touch-events/zh.html">quick 中的触摸事件</a></li>
+<li> <a href="docs/api/index.html">API 文档</a></li>
+</ul>
+
+</body>
+</html>
