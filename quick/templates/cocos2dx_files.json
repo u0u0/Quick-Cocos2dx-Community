@@ -2814,6 +2814,7 @@
         "external/xxhash/xxhash.h", 
         "external/xxtea/xxtea.cpp", 
         "external/xxtea/xxtea.h", 
+        "external/xxtea/xxtea_file.cpp", 
         "licenses/LICENSE_AA-EDT.txt", 
         "licenses/LICENSE_CCBReader.txt", 
         "licenses/LICENSE_CCControlExtension.txt", 
