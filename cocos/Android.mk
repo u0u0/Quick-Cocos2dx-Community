@@ -184,6 +184,7 @@ physics/chipmunk/CCPhysicsWorldInfo_chipmunk.cpp \
 ../external/unzip/ioapi_mem.cpp \
 ../external/unzip/ioapi.cpp \
 ../external/unzip/unzip.cpp \
+../external/xxtea/xxtea_file.cpp \
 ../external/edtaa3func/edtaa3func.cpp \
 ../external/xxhash/xxhash.c
 

@@ -238,6 +238,9 @@
     <Filter Include="cocostudio\reader\WidgetReader\SpriteReader">
       <UniqueIdentifier>{9aee531c-f935-4836-bf84-be42e78e38bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external\xxtea">
+      <UniqueIdentifier>{06127459-97a1-496c-84aa-7921b5792ddd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\physics\CCPhysicsBody.cpp">
@@ -1288,6 +1291,12 @@
     </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\WidgetCallBackHandlerProtocol.cpp">
       <Filter>cocostudio\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\xxtea\xxtea.cpp">
+      <Filter>external\xxtea</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\xxtea\xxtea_file.cpp">
+      <Filter>external\xxtea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2504,6 +2513,9 @@
     </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\WidgetCallBackHandlerProtocol.h">
       <Filter>cocostudio\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\external\xxtea\xxtea.h">
+      <Filter>external\xxtea</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
