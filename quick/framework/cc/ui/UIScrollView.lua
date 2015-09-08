@@ -602,8 +602,15 @@ end
 function UIScrollView:elasticScroll()
 	local cascadeBound = self:getScrollNodeRect()
 	local disX, disY = 0, 0
-	local viewRect = self:getViewRectInWorldSpace()
+	local viewRect = self:getViewRect() -- InWorldSpace()
+ 	local t = self:convertToNodeSpace(cc.p(cascadeBound.x, cascadeBound.y))
+ 
+ 	cascadeBound.x = t.x
+  	cascadeBound.y = t.y
+ 	cascadeBound.width = cascadeBound.width / self.scaleToWorldSpace_.x
+ 	cascadeBound.height = cascadeBound.height / self.scaleToWorldSpace_.y
 
+	-- dump(self.scaleToWorldSpace_, "UIScrollView - scaleToWorldSpace_:")
 	-- dump(cascadeBound, "UIScrollView - cascBoundingBox:")
 	-- dump(viewRect, "UIScrollView - viewRect:")
 
