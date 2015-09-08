@@ -161,10 +161,9 @@ void LuaTouchEventManager::onTouchesBegan(const std::vector<Touch*>& touches, Ev
     LuaEventNode *checkTouchableNode = nullptr;
     LuaTouchTargetNode *touchTarget = nullptr;
 
-    for (auto iter = _touchableNodes.begin(); iter != _touchableNodes.end(); ++iter)
+    for (std::size_t i = 0; i < _touchableNodes.size(); ++i)
     {
-        checkTouchableNode = node = *iter;
-
+        checkTouchableNode = node = _touchableNodes.at(i);
         // check node is visible and capturing enabled
         isTouchable = true;
         do
