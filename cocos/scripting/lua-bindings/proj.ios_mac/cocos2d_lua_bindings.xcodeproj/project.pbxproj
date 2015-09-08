@@ -361,6 +361,7 @@
 		DAC1A7E11A3AF952003BE8E0 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4B56181A3AF60C00567969 /* lzio.c */; };
 		DAC1A7E21A3AF952003BE8E0 /* lzio.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4B56191A3AF60C00567969 /* lzio.h */; };
 		DAC1A7E31A3AF952003BE8E0 /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4B561D1A3AF60C00567969 /* print.c */; };
+		DAC9C71B1A7F502300FB75C8 /* xxtea_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC9C71A1A7F502300FB75C8 /* xxtea_file.cpp */; };
 		F4FE0D5719ECD00100B8B12B /* luasocket_scripts.c in Sources */ = {isa = PBXBuildFile; fileRef = F4FE0D5519ECD00100B8B12B /* luasocket_scripts.c */; };
 		F4FE0D5819ECD00100B8B12B /* luasocket_scripts.c in Sources */ = {isa = PBXBuildFile; fileRef = F4FE0D5519ECD00100B8B12B /* luasocket_scripts.c */; };
 		F4FE0D5919ECD00100B8B12B /* luasocket_scripts.h in Headers */ = {isa = PBXBuildFile; fileRef = F4FE0D5619ECD00100B8B12B /* luasocket_scripts.h */; };
@@ -576,6 +577,7 @@
 		DA4B56181A3AF60C00567969 /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lzio.c; sourceTree = "<group>"; };
 		DA4B56191A3AF60C00567969 /* lzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lzio.h; sourceTree = "<group>"; };
 		DA4B561D1A3AF60C00567969 /* print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = print.c; sourceTree = "<group>"; };
+		DAC9C71A1A7F502300FB75C8 /* xxtea_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xxtea_file.cpp; sourceTree = "<group>"; };
 		F4FE0D5519ECD00100B8B12B /* luasocket_scripts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_scripts.c; sourceTree = "<group>"; };
 		F4FE0D5619ECD00100B8B12B /* luasocket_scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_scripts.h; sourceTree = "<group>"; };
 		F4FE0D5C19ECD02400B8B12B /* lua_cocos2dx_quick_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_quick_manual.cpp; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 		1540AF54193EC30500717D8E /* xxtea */ = {
 			isa = PBXGroup;
 			children = (
+				DAC9C71A1A7F502300FB75C8 /* xxtea_file.cpp */,
 				1540AF55193EC30500717D8E /* xxtea.cpp */,
 				1540AF56193EC30500717D8E /* xxtea.h */,
 			);
@@ -1260,6 +1263,7 @@
 				15AC69DC1987710400D17520 /* tolua_push.c in Sources */,
 				15AC69DD1987710400D17520 /* tolua_to.c in Sources */,
 				15415AAD19A71A53004F1E71 /* except.c in Sources */,
+				DAC9C71B1A7F502300FB75C8 /* xxtea_file.cpp in Sources */,
 				15415ABD19A71A53004F1E71 /* mime.c in Sources */,
 				15C1C2E519874C9200A46ACC /* CCLuaObjcBridge.mm in Sources */,
 				DA4B56281A3AF60C00567969 /* ldo.c in Sources */,

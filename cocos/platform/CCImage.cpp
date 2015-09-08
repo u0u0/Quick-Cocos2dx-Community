@@ -478,6 +478,15 @@ Image::~Image()
         CC_SAFE_FREE(_data);
 }
 
+#define USE_XXTEA_IMAGE 1
+
+#if (USE_XXTEA_IMAGE > 0)
+extern Data xxtea_file_get_data(const std::string& filename);
+#define GET_DATA_FROM_IMAGE_FILE(p) xxtea_file_get_data(p)
+#else
+#define GET_DATA_FROM_IMAGE_FILE(p) FileUtils::getInstance()->getDataFromFile(p)
+#endif
+
 bool Image::initWithImageFile(const std::string& path)
 {
     bool ret = false;
@@ -503,8 +512,8 @@ bool Image::initWithImageFile(const std::string& path)
 
     SDL_FreeSurface(iSurf);
 #else
-    Data data = FileUtils::getInstance()->getDataFromFile(_filePath);
-
+    Data data = GET_DATA_FROM_IMAGE_FILE(_filePath);
+    
     if (!data.isNull())
     {
         ret = initWithImageData(data.getBytes(), data.getSize());
@@ -519,7 +528,7 @@ bool Image::initWithImageFileThreadSafe(const std::string& fullpath)
     bool ret = false;
     _filePath = fullpath;
 
-    Data data = FileUtils::getInstance()->getDataFromFile(fullpath);
+    Data data = GET_DATA_FROM_IMAGE_FILE(fullpath);
 
     if (!data.isNull())
     {
