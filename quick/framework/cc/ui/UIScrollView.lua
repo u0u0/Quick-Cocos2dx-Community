@@ -607,6 +607,7 @@ function UIScrollView:elasticScroll()
  
  	cascadeBound.x = t.x
   	cascadeBound.y = t.y
+  	self.scaleToWorldSpace_ = self.scaleToWorldSpace_ or {x=1,y=1}
  	cascadeBound.width = cascadeBound.width / self.scaleToWorldSpace_.x
  	cascadeBound.height = cascadeBound.height / self.scaleToWorldSpace_.y
 

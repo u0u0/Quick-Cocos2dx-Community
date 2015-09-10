@@ -4,7 +4,10 @@
 #include "json/stringbuffer.h"
 #include "json/writer.h"
 #include "ConfigParser.h"
+
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
 #include "FileServer.h"
+#endif
 
 #define CONFIG_FILE "config.json"
 #define CONSOLE_PORT 6010

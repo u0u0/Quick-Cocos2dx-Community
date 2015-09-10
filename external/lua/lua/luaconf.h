@@ -419,6 +419,8 @@
 #define LUAI_UMEM	size_t
 #if defined WIN32
 #define LUAI_MEM	intptr_t
+#elif defined WP8
+#define LUAI_MEM    intptr_t
 #else
 #define LUAI_MEM	ssize_t
 #endif

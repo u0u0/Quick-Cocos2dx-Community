@@ -6,7 +6,7 @@ NS_CC_BEGIN
 static std::string xxteaKey = "2dxLua";
 static ssize_t xxteaKeyLen = xxteaKey.length();
 static std::string xxteaSign = "XXTEA";
-static ssize_t xxteaSignLen = xxteaKey.length();
+static ssize_t xxteaSignLen = xxteaSign.length();
 
 extern Data xxtea_file_get_data(const std::string& filename)
 {

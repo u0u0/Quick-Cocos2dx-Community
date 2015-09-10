@@ -109,6 +109,10 @@ function UIListView:ctor(params)
 	self.itemsFree_ = {}
 	self.delegate_ = {}
 	self.redundancyViewVal = 0 --异步的视图两个方向上的冗余大小,横向代表宽,竖向代表高
+
+	self.args_ = {params}
+	
+	self:setNodeEventEnabled(true)
 end
 
 function UIListView:onCleanup()

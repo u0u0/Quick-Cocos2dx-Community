@@ -100,10 +100,10 @@ protected:
     void visitTarget(Node* node, bool isRootNode);
 
     /** The map of node and LuaEventNode */
-    std::unordered_map<Node*, LuaEventNode*> _nodeLuaEventNodeMap;
+    std::unordered_map<unsigned int, LuaEventNode*> _nodeLuaEventNodeMap;
 
     /** The map of node and its event priority */
-    std::unordered_map<Node*, int> _nodePriorityMap;
+    std::unordered_map<unsigned int, int> _nodePriorityMap;
 
     /** key: Global Z Order, value: Sorted Nodes */
     std::unordered_map<float, std::vector<Node*>> _globalZOrderNodeMap;
