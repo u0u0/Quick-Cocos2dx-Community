@@ -242,6 +242,9 @@
     <Filter Include="cocostudio\reader\WidgetReader\GameMapReader">
       <UniqueIdentifier>{02d389d5-8f57-4bd6-b12a-95af86c5b356}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external\xxtea">
+      <UniqueIdentifier>{b741ad0b-9eb3-4f43-bc8b-1ad29e39d82c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCAction.cpp">
@@ -1310,6 +1313,12 @@
     </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\WidgetReader\GameMapReader\GameMapReader.cpp">
       <Filter>cocostudio\reader\WidgetReader\GameMapReader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\xxtea\xxtea.cpp">
+      <Filter>external\xxtea</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\xxtea\xxtea_file.cpp">
+      <Filter>external\xxtea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

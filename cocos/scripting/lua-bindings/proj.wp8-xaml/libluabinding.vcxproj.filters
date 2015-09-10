@@ -203,6 +203,9 @@
     <ClCompile Include="..\manual\CCLuaBridge.cpp">
       <Filter>scripting\luabinding\manual</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\external\xxtea\xxtea_file.cpp">
+      <Filter>external\xxtea</Filter>
+    </ClCompile>
     <ClCompile Include="..\manual\CCLuaEngine.cpp">
       <Filter>scripting\luabinding\manual</Filter>
     </ClCompile>
