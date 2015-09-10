@@ -65,6 +65,7 @@ public:
     virtual bool isRunning() const;
     
     virtual void registerWithTouchDispatcher(void);
+    virtual void unregisterWithTouchDispatcher(void);
     
     virtual bool isTouchCaptureEnabled();
     virtual void setTouchCaptureEnabled(bool value);

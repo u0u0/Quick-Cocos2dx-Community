@@ -132,6 +132,16 @@ void LuaEventNode::registerWithTouchDispatcher()
     }
 }
 
+void LuaEventNode::unregisterWithTouchDispatcher()
+{
+    //    CCLOG("CCNODE: UNREGISTER WITH TOUCH DISPATHCER <%p>", this);
+    LuaTouchEventManager *mng = LuaTouchEventManager::getInstance();
+    if (mng)
+    {
+        mng->removeTouchableNode(this);
+    }
+}
+
 bool LuaEventNode::isTouchCaptureEnabled()
 {
     return _bTouchCaptureEnabled;
@@ -256,6 +266,10 @@ void LuaEventNode::setLuaTouchEnabled(bool enabled)
         if (enabled)
         {
             registerWithTouchDispatcher();
+        }
+        else
+        {
+            unregisterWithTouchDispatcher();
         }
     }
 }
