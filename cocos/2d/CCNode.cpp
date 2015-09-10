@@ -172,6 +172,7 @@ Node::~Node()
     {
         ScriptEngineManager::getInstance()->getScriptEngine()->removeScriptHandler(_updateScriptHandler);
     }
+    ScriptEngineManager::getInstance()->getScriptEngine()->removeTouchNodeEvent(this);
 #endif
 
     // User object has to be released before others, since userObject may have a weak reference of this node
