@@ -2550,6 +2550,9 @@
     <ClInclude Include="..\editor-support\cocostudio\WidgetReader\GameMapReader\GameMapReader.h">
       <Filter>cocostudio\reader\WidgetReader\GameMapReader</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\external\xxtea\xxtea.h">
+      <Filter>external\xxtea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\math\Mat4.inl">
