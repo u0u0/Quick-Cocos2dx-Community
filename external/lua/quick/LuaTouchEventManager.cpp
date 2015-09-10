@@ -98,14 +98,14 @@ std::string LuaTouchEventManager::getDescription() const
     return StringUtils::format("<LuaTouchEventManager | tag = %d>", _tag);
 }
 
-void LuaTouchEventManager::addTouchableNode(LuaEventNode *node)
+void LuaTouchEventManager::addTouchableNode(LuaEventNode *lnode)
 {
-    Node *activeNode = node->getActiveNode();
+    Node *activeNode = lnode->getActiveNode();
     if (!activeNode) return;
-    if (!_touchableNodes.contains(node))
+    if (!_touchableNodes.contains(lnode))
     {
-        _touchableNodes.pushBack(node);
-        _nodeLuaEventNodeMap.insert(std::make_pair(activeNode, node));
+        _touchableNodes.pushBack(lnode);
+        _nodeLuaEventNodeMap.insert(std::make_pair(activeNode->_ID, lnode));
         //CCLOG("ADD TOUCHABLE NODE <%p>", node->getNode());
         if (!m_touchDispatchingEnabled)
         {
@@ -114,14 +114,14 @@ void LuaTouchEventManager::addTouchableNode(LuaEventNode *node)
     }
 }
 
-void LuaTouchEventManager::removeTouchableNode(LuaEventNode *node)
+void LuaTouchEventManager::removeTouchableNode(LuaEventNode *lnode)
 {
 	if (_bDispatching) {
 		return;
 	}
 
-    _touchableNodes.eraseObject(node);
-    auto found = _nodeLuaEventNodeMap.find(node->getDetachedNode());
+    _touchableNodes.eraseObject(lnode);
+    auto found = _nodeLuaEventNodeMap.find(lnode->getNodeID());
     if (found != _nodeLuaEventNodeMap.end())
     {
         _nodeLuaEventNodeMap.erase(found);
@@ -358,14 +358,14 @@ void LuaTouchEventManager::sortAllTouchableNodes(Vector<LuaEventNode*>& nodes)
 
     // After sort: priority < 0, > 0
     std::sort(nodes.begin(), nodes.end(), [this](const LuaEventNode* l1, const LuaEventNode* l2) {
-        return _nodePriorityMap[l1->getDetachedNode()] > _nodePriorityMap[l2->getDetachedNode()];
+        return _nodePriorityMap[l1->getNodeID()] > _nodePriorityMap[l2->getNodeID()];
     });
 
 #if DUMP_LISTENER_ITEM_PRIORITY_INFO
     log("-----------------------------------");
     for (auto& l : nodes)
     {
-        log("listener priority: node ([%s]%p), priority (%d)", typeid(*l->getNode()).name(), l->getNode(), _nodePriorityMap[l->getNode()]);
+        log("listener priority: node ([%s]%d), priority (%d)", typeid(*l->getNode()).name(), l->getNodeID(), _nodePriorityMap[l->getNodeID()]);
     }
 #endif
 }
@@ -579,7 +579,7 @@ void LuaTouchEventManager::visitTarget(Node* node, bool isRootNode)
                 break;
         }
 
-        if (_nodeLuaEventNodeMap.find(node) != _nodeLuaEventNodeMap.end())
+        if (_nodeLuaEventNodeMap.find(node->_ID) != _nodeLuaEventNodeMap.end())
         {
             _globalZOrderNodeMap[node->getGlobalZOrder()].push_back(node);
         }
@@ -593,7 +593,7 @@ void LuaTouchEventManager::visitTarget(Node* node, bool isRootNode)
     }
     else
     {
-        if (_nodeLuaEventNodeMap.find(node) != _nodeLuaEventNodeMap.end())
+        if (_nodeLuaEventNodeMap.find(node->_ID) != _nodeLuaEventNodeMap.end())
         {
             _globalZOrderNodeMap[node->getGlobalZOrder()].push_back(node);
         }
@@ -617,7 +617,7 @@ void LuaTouchEventManager::visitTarget(Node* node, bool isRootNode)
         {
             for (const auto& n : _globalZOrderNodeMap[globalZ])
             {
-                _nodePriorityMap[n] = ++_nodePriorityIndex;
+                _nodePriorityMap[n->_ID] = ++_nodePriorityIndex;
             }
         }
 

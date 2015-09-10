@@ -55,8 +55,8 @@ public:
 
     ~LuaEventNode();
 
-    Node *getDetachedNode() const;
     Node *getActiveNode() const;
+    unsigned int getNodeID() const;
     void detachNode();
 
     virtual LuaEventNode* getParent();
@@ -106,7 +106,7 @@ private:
     LuaEventNode(Node *node);
 
     Node *_node;
-    Node *_nodePreuse;
+    unsigned int _nodeID;
     
     // touch events
     bool _bTouchCaptureEnabled;
