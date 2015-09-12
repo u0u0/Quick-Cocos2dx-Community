@@ -1,3 +1,4 @@
+#include <signal.h>
 
 #import "AppController.h"
 
@@ -27,8 +28,11 @@ std::string getCurAppName(void)
     return appName;
 }
 
-void createSimulator(const char* viewName, float width, float height,bool isLandscape,float frameZoomFactor)
+static void signalDeal(int sig)
 {
+    EventCustom event("APP.WINDOW_CLOSE_EVENT");
+    event.setDataString("{\"name\":\"close\"}");
+    Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
 @implementation AppController
@@ -47,6 +51,13 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    // catch SIGTERM, and exit player gracefully
+    struct sigaction action;
+    action.sa_handler = signalDeal;
+    sigemptyset(&action.sa_mask);
+    action.sa_flags = 0;
+    sigaction(SIGTERM, &action, 0);
+    
     auto player = player::PlayerMac::create();
     player->setController(self);
 
@@ -254,9 +265,7 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
 
 - (IBAction) onFileClose:(id)sender
 {
-    EventCustom event("APP.WINDOW_CLOSE_EVENT");
-    event.setDataString("{\"name\":\"close\"}");
-    Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+    signalDeal(1);
 }
 
 - (void) registerEventsHandler
