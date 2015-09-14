@@ -66,6 +66,26 @@ class Player(object):
 		file.close()
 		return True
 
+def setEnvironmentVariableWin32(self, key, value):
+	ret = False
+	import _winreg
+	try:
+		env = None
+		env = _winreg.OpenKeyEx(_winreg.HKEY_CURRENT_USER,
+								'Environment',
+								0,
+								_winreg.KEY_SET_VALUE | _winreg.KEY_READ)
+		_winreg.SetValueEx(env, key, 0, _winreg.REG_SZ, value)
+		_winreg.FlushKey(env)
+		_winreg.CloseKey(env)
+		ret = True
+	except Exception:
+		if env:
+			_winreg.CloseKey(env)
+		ret = False
+
+	return ret
+
 	def genBackupFile(self):
 		file_name = os.path.basename(self.file_used_for_setup)
 		file_path = os.path.dirname(self.file_used_for_setup)
