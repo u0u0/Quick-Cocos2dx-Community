@@ -66,25 +66,25 @@ class Player(object):
 		file.close()
 		return True
 
-def setEnvironmentVariableWin32(self, key, value):
-	ret = False
-	import _winreg
-	try:
-		env = None
-		env = _winreg.OpenKeyEx(_winreg.HKEY_CURRENT_USER,
-								'Environment',
-								0,
-								_winreg.KEY_SET_VALUE | _winreg.KEY_READ)
-		_winreg.SetValueEx(env, key, 0, _winreg.REG_SZ, value)
-		_winreg.FlushKey(env)
-		_winreg.CloseKey(env)
-		ret = True
-	except Exception:
-		if env:
-			_winreg.CloseKey(env)
+	def setEnvironmentVariableWin32(self, key, value):
 		ret = False
+		import _winreg
+		try:
+			env = None
+			env = _winreg.OpenKeyEx(_winreg.HKEY_CURRENT_USER,
+									'Environment',
+									0,
+									_winreg.KEY_SET_VALUE | _winreg.KEY_READ)
+			_winreg.SetValueEx(env, key, 0, _winreg.REG_SZ, value)
+			_winreg.FlushKey(env)
+			_winreg.CloseKey(env)
+			ret = True
+		except Exception:
+			if env:
+				_winreg.CloseKey(env)
+			ret = False
 
-	return ret
+		return ret
 
 	def genBackupFile(self):
 		file_name = os.path.basename(self.file_used_for_setup)
@@ -312,8 +312,6 @@ def setEnvironmentVariableWin32(self, key, value):
 
 		old_dir = self.findEnvironmentVariable(QUICK_V3_ROOT)
 		if old_dir is None:
-			if self.isWindows():
-				setWindowsPath(quick_v3_root)
 			self.setEnvironmentVariable(QUICK_V3_ROOT, quick_v3_root)
 		else:
 			if old_dir == quick_v3_root:
@@ -330,8 +328,8 @@ def setEnvironmentVariableWin32(self, key, value):
 	def launchPlayer(self):
 		if self.isMac():
 			os.system("open ./quick/player/player3.app")
-		elif self.isWindows():
-			os.system(os.path.abspath('.')+"/quick/player/player3.exe")
+		else:
+			os.system(os.path.abspath('.')+"/quick/player/win32/player3.exe")
 
 if __name__ == '__main__':
 	player = Player()
@@ -339,10 +337,9 @@ if __name__ == '__main__':
 	for op, value in opts:
 		if op == "-e":
 			player.setQuickRoot()
-			sys.exit()
 		elif op == "-r":
 			player.launchPlayer()
-			sys.exit()
+		sys.exit()
 
 	print("set environment variable:\n    python player.py -e \nrun palyer:\n    python player.py -r")
 
