@@ -164,7 +164,11 @@ void StartupCall::startup()
     if (p != path.npos)
     {
         workdir = path.substr(0, p);
+        // Lua 代码文件的搜索需要包含src
         stack->addSearchPath(workdir.c_str());
+        // cc.FileUtils的文件搜索去掉src目录
+        size_t p = workdir.find_last_of("/");
+        workdir = path.substr(0, p);
         FileUtils::getInstance()->addSearchPath(workdir);
     }
     
