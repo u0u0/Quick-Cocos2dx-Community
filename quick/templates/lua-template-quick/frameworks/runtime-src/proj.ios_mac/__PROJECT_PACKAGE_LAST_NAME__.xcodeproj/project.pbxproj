@@ -63,12 +63,6 @@
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
 		521A8E7019F0C3D200D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6E19F0C3D200D177D7 /* Default-667h@2x.png */; };
 		521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */; };
-		AB6CB6F21A1F275E009C2562 /* ConnectWaitLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */; };
-		AB6CB6F31A1F275E009C2562 /* ConnectWaitLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */; };
-		AB6CB6F41A1F275E009C2562 /* ConsoleCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */; };
-		AB6CB6F51A1F275E009C2562 /* ConsoleCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */; };
-		AB6CB6F61A1F275E009C2562 /* FileServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6F01A1F275E009C2562 /* FileServer.cpp */; };
-		AB6CB6F71A1F275E009C2562 /* FileServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6F01A1F275E009C2562 /* FileServer.cpp */; };
 		9F598A0819F5F3A6006015D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F598A0719F5F3A6006015D6 /* SystemConfiguration.framework */; };
 		9F598A0B19F5F4F4006015D6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F598A0A19F5F4F4006015D6 /* StoreKit.framework */; };
 		9F9106B419F5614900AD5CAB /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AC19F5614800AD5CAB /* libbase64.c */; };
@@ -183,6 +177,12 @@
 		9F91079719F56A6600AD5CAB /* SimulatorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079219F56A6600AD5CAB /* SimulatorConfig.cpp */; };
 		9F91079E19F5704400AD5CAB /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */; };
 		9F91079F19F5704400AD5CAB /* ConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079D19F5704400AD5CAB /* ConsoleWindowController.m */; };
+		AB6CB6F21A1F275E009C2562 /* ConnectWaitLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */; };
+		AB6CB6F31A1F275E009C2562 /* ConnectWaitLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */; };
+		AB6CB6F41A1F275E009C2562 /* ConsoleCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */; };
+		AB6CB6F51A1F275E009C2562 /* ConsoleCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */; };
+		AB6CB6F61A1F275E009C2562 /* FileServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6F01A1F275E009C2562 /* FileServer.cpp */; };
+		AB6CB6F71A1F275E009C2562 /* FileServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6F01A1F275E009C2562 /* FileServer.cpp */; };
 		C00FD4921938512100C6382D /* Landscape_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48A1938512100C6382D /* Landscape_png.cpp */; };
 		C00FD4931938512100C6382D /* Landscape_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48A1938512100C6382D /* Landscape_png.cpp */; };
 		C00FD4941938512100C6382D /* PlayDisable_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48B1938512100C6382D /* PlayDisable_png.cpp */; };
@@ -340,12 +340,6 @@
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		521A8E6E19F0C3D200D177D7 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
-		AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectWaitLayer.cpp; sourceTree = "<group>"; };
-		AB6CB6ED1A1F275E009C2562 /* ConnectWaitLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectWaitLayer.h; sourceTree = "<group>"; };
-		AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleCommand.cpp; sourceTree = "<group>"; };
-		AB6CB6EF1A1F275E009C2562 /* ConsoleCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleCommand.h; sourceTree = "<group>"; };
-		AB6CB6F01A1F275E009C2562 /* FileServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileServer.cpp; sourceTree = "<group>"; };
-		AB6CB6F11A1F275E009C2562 /* FileServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileServer.h; sourceTree = "<group>"; };
 		9F598A0719F5F3A6006015D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		9F598A0A19F5F4F4006015D6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		9F9105A719F5614800AD5CAB /* HelperFunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunc.cpp; sourceTree = "<group>"; };
@@ -535,6 +529,12 @@
 		9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
 		9F91079C19F5704400AD5CAB /* ConsoleWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindowController.h; sourceTree = "<group>"; };
 		9F91079D19F5704400AD5CAB /* ConsoleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleWindowController.m; sourceTree = "<group>"; };
+		AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectWaitLayer.cpp; sourceTree = "<group>"; };
+		AB6CB6ED1A1F275E009C2562 /* ConnectWaitLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectWaitLayer.h; sourceTree = "<group>"; };
+		AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleCommand.cpp; sourceTree = "<group>"; };
+		AB6CB6EF1A1F275E009C2562 /* ConsoleCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleCommand.h; sourceTree = "<group>"; };
+		AB6CB6F01A1F275E009C2562 /* FileServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileServer.cpp; sourceTree = "<group>"; };
+		AB6CB6F11A1F275E009C2562 /* FileServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileServer.h; sourceTree = "<group>"; };
 		C00FD48A1938512100C6382D /* Landscape_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Landscape_png.cpp; sourceTree = "<group>"; };
 		C00FD48B1938512100C6382D /* PlayDisable_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayDisable_png.cpp; sourceTree = "<group>"; };
 		C00FD48C1938512100C6382D /* PlayEnable_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayEnable_png.cpp; sourceTree = "<group>"; };
@@ -1307,7 +1307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_COCOS_NAME__" */;
+			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1751,6 +1751,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -1778,6 +1779,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1810,7 +1812,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_COCOS_NAME__" */ = {
+		F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F293B6C215EB7BEA00256477 /* Debug */,

@@ -1286,7 +1286,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_COCOS_NAME__" */;
+			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1778,6 +1778,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -1827,6 +1828,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1881,7 +1883,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_COCOS_NAME__" */ = {
+		F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F293B6C215EB7BEA00256477 /* Debug */,
