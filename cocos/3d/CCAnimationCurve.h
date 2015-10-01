@@ -30,10 +30,6 @@
 #include "base/CCRef.h"
 #include "math/CCMath.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-#undef NEAR
-#endif
-
 NS_CC_BEGIN
 
 /**

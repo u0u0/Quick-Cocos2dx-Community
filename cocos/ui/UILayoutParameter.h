@@ -63,12 +63,6 @@ public:
 *   @lua NA
 */
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-#ifdef RELATIVE
-#undef RELATIVE
-#endif
-#endif
-
 class CC_GUI_DLL LayoutParameter : public Ref
 {
 public:

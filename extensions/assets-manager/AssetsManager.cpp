@@ -29,7 +29,7 @@
 #include <vector>
 #include <thread>
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8) && (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT)
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
@@ -454,9 +454,7 @@ bool AssetsManager::uncompress()
  */
 bool AssetsManager::createDirectory(const char *path)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-    return FileUtils::getInstance()->createDirectory(_storagePath.c_str());
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     BOOL ret = CreateDirectoryA(path, nullptr);
     if (!ret && ERROR_ALREADY_EXISTS != GetLastError())
     {
@@ -474,8 +472,6 @@ bool AssetsManager::createDirectory(const char *path)
 
     return true;
 #endif
-
-
 }
 
 void AssetsManager::setSearchPath()
@@ -646,9 +642,7 @@ AssetsManager* AssetsManager::create(const char* packageUrl, const char* version
 void AssetsManager::createStoragePath()
 {
     // Remove downloaded files
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-    FileUtils::getInstance()->createDirectory(_storagePath.c_str());
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     if ((GetFileAttributesA(_storagePath.c_str())) == INVALID_FILE_ATTRIBUTES)
     {
         CreateDirectoryA(_storagePath.c_str(), 0);
@@ -669,9 +663,7 @@ void AssetsManager::destroyStoragePath()
     deleteVersion();
     
     // Remove downloaded files
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-    FileUtils::getInstance()->removeDirectory(_storagePath.c_str());
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     string command = "rd /s /q ";
     // Path may include space.
     command += "\"" + _storagePath + "\"";

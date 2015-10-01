@@ -169,16 +169,6 @@ public:
 
     GLProgram();
     virtual ~GLProgram();
-    /** Initializes the GLProgram with a vertex and fragment with bytes array 
-     * @js initWithString
-     * @lua initWithString
-     */
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-    /** Initializes the CCGLProgram with precompiled shader program */
-    static GLProgram* createWithPrecompiledProgramByteArray(const GLchar* vShaderByteArray, const GLchar* fShaderByteArray);
-    bool initWithPrecompiledProgramByteArray(const GLchar* vShaderByteArray, const GLchar* fShaderByteArray);
-#endif
 
     /** Initializes the GLProgram with a vertex and fragment with bytes array 
      * @js initWithString
@@ -340,10 +330,6 @@ protected:
     GLuint            _fragShader;
     GLint             _builtInUniforms[UNIFORM_MAX];
     bool              _hasShaderCompiler;
-        
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || defined(WP8_SHADER_COMPILER)
-    std::string       _shaderId;
-#endif
 
     struct flag_struct {
         unsigned int usesTime:1;

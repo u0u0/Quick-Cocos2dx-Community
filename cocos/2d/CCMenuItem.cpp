@@ -842,18 +842,6 @@ MenuItemToggle * MenuItemToggle::createWithTarget(Ref* target, SEL_MenuHandler s
     return ret;
 }
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-MenuItemToggle * MenuItemToggle::createWithCallbackVA(const ccMenuCallback &callback, MenuItem* item, ...)
-{
-    va_list args;
-    va_start(args, item);
-    MenuItemToggle *ret = new (std::nothrow) MenuItemToggle();
-    ret->initWithCallback(callback, item, args);
-    ret->autorelease();
-    va_end(args);
-    return ret;
-}
-#else
 MenuItemToggle * MenuItemToggle::createWithCallback(const ccMenuCallback &callback, MenuItem* item, ...)
 {
     va_list args;
@@ -864,7 +852,6 @@ MenuItemToggle * MenuItemToggle::createWithCallback(const ccMenuCallback &callba
     va_end(args);
     return ret;
 }
-#endif
 
 MenuItemToggle * MenuItemToggle::create()
 {
