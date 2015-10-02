@@ -14,11 +14,8 @@ extern "C" {
 // lpack
 #include "lpack/lpack.h"
 
-#ifndef WP8
-
 // filesystem
 #include "filesystem/lfs.h"
-#endif
 
 // lsqlite3
 #include "lsqlite3/lsqlite3.h"
@@ -27,9 +24,7 @@ static luaL_Reg luax_exts[] = {
     {"cjson", luaopen_cjson_safe},
     {"zlib", luaopen_zlib},
     {"pack", luaopen_pack},
-#ifndef WP8
     {"lfs", luaopen_lfs},
-#endif
 #if CC_USE_SQLITE
     {"lsqlite3", luaopen_lsqlite3},
 #endif

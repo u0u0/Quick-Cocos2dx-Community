@@ -73,10 +73,6 @@ elseif target == cc.PLATFORM_OS_IPHONE or target == cc.PLATFORM_OS_IPAD then
     else
         device.model = "ipad"
     end
-elseif target == cc.PLATFORM_OS_WINRT then
-    device.platform = "winrt"
-elseif target == cc.PLATFORM_OS_WP8 then
-    device.platform = "wp8"
 end
 
 local language_ = sharedApplication:getCurrentLanguage()

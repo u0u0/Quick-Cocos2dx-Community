@@ -192,7 +192,7 @@ bool TextureAtlas::initWithTexture(Texture2D *texture, ssize_t capacity)
     memset( _indices, 0, _capacity * 6 * sizeof(GLushort) );
     
 #if CC_ENABLE_CACHE_TEXTURE_DATA
-    /** listen the event that renderer was recreated on Android/WP8 */
+    /** listen the event that renderer was recreated on Android */
     _rendererRecreatedListener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, CC_CALLBACK_1(TextureAtlas::listenRendererRecreated, this));
     Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_rendererRecreatedListener, -1);
 #endif

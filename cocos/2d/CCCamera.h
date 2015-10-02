@@ -147,9 +147,6 @@ CC_CONSTRUCTOR_ACCESS:
     
     void setScene(Scene* scene);
     
-    /**set additional matrix for the projection matrix, it multiplys mat to projection matrix when called, used by WP8*/
-    void setAdditionalProjection(const Mat4& mat);
-    
     /** init camera */
     bool initDefault();
     bool initPerspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane);

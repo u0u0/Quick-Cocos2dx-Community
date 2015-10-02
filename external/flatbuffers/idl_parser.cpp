@@ -565,11 +565,7 @@ uoffset_t Parser::ParseVector(const Type &type) {
     Value val;
     val.type = type;
     ParseAnyValue(val, NULL);
-#ifdef WP8
-    field_stack_.push_back(std::make_pair(val, (FieldDef *)nullptr));
-#else
     field_stack_.push_back(std::make_pair(val, nullptr));
-#endif
     count++;
     if (token_ == ']') break;
     Expect(',');

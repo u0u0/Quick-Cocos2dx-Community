@@ -93,7 +93,7 @@ MeshCommand::MeshCommand()
 {
     _type = RenderCommand::Type::MESH_COMMAND;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    // listen the event that renderer was recreated on Android/WP8
+    // listen the event that renderer was recreated on Android
     _rendererRecreatedListener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, CC_CALLBACK_1(MeshCommand::listenRendererRecreated, this));
     Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_rendererRecreatedListener, -1);
 #endif

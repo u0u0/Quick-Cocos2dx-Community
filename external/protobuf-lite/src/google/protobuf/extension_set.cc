@@ -227,17 +227,11 @@ enum Cardinality {
 
 }  // namespace
 
-#ifndef WP8
 #define GOOGLE_DCHECK_TYPE(EXTENSION, LABEL, CPPTYPE)                             \
   GOOGLE_DCHECK_EQ((EXTENSION).is_repeated ? REPEATED : OPTIONAL, LABEL);         \
   GOOGLE_DCHECK_EQ(cpp_type((EXTENSION).type), WireFormatLite::CPPTYPE_##CPPTYPE)
-#else
-  #define GOOGLE_DCHECK_TYPE(EXTENSION, LABEL, CPPTYPE)
-#endif
 // -------------------------------------------------------------------
 // Primitives
-
-#ifndef WP8
 
 #define PRIMITIVE_ACCESSORS(UPPERCASE, LOWERCASE, CAMELCASE)                   \
                                                                                \
@@ -298,9 +292,6 @@ void ExtensionSet::Add##CAMELCASE(int number, FieldType type,                  \
   }                                                                            \
   extension->repeated_##LOWERCASE##_value->Add(value);                         \
 }
-#else 
-#define PRIMITIVE_ACCESSORS(UPPERCASE, LOWERCASE, CAMELCASE)   
-#endif
 
 PRIMITIVE_ACCESSORS( INT32,  int32,  Int32)
 PRIMITIVE_ACCESSORS( INT64,  int64,  Int64)

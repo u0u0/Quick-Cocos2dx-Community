@@ -2,10 +2,8 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
 #include "CodeIDESupport.h"
 #include "Runtime.h"
-#endif
 #include "ConfigParser.h"
 #include "lua_module_register.h"
 

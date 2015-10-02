@@ -8,7 +8,6 @@ set DIR=%CURDIR%
 rmdir /s /q %DIR%test\LuaJavaBridge\runtime
 rmdir /s /q %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.ios_mac
 rmdir /s /q %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.win32
-rmdir /s /q %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.wp8-xaml
 rmdir /s /q %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.android
 move %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.android_no_anysdk %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.android
 copy %DIR%AppActivity.java %DIR%test\LuaJavaBridge\frameworks\runtime-src\proj.android\src\org\cocos2dx\lua\

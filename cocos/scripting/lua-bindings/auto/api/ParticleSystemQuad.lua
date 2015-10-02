@@ -23,7 +23,7 @@
 -- @param #rect_table rect
         
 --------------------------------
---  listen the event that renderer was recreated on Android/WP8<br>
+--  listen the event that renderer was recreated on Android<br>
 -- js NA<br>
 -- lua NA
 -- @function [parent=#ParticleSystemQuad] listenRendererRecreated 

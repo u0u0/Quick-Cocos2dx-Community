@@ -153,12 +153,6 @@ const Mat4& Camera::getViewProjectionMatrix() const
     return _viewProjection;
 }
 
-void Camera::setAdditionalProjection(const Mat4& mat)
-{
-    _projection = mat * _projection;
-    getViewProjectionMatrix();
-}
-
 bool Camera::initDefault()
 {
     auto size = Director::getInstance()->getWinSize();

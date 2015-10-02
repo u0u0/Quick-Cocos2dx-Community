@@ -81,7 +81,7 @@ public:
      */
     void setTextureWithRect(Texture2D *texture, const Rect& rect);
 
-    /** listen the event that renderer was recreated on Android/WP8
+    /** listen the event that renderer was recreated on Android
      * @js NA
      * @lua NA
      */

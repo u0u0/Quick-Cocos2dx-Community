@@ -54,9 +54,7 @@ public:
         OS_BLACKBERRY,
         OS_NACL,
         OS_EMSCRIPTEN,
-        OS_TIZEN,
-        OS_WINRT,
-        OS_WP8
+        OS_TIZEN
     };
 
     /**

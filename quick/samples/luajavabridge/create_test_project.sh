@@ -5,7 +5,6 @@ $QUICK_V3_ROOT/quick/bin/create_project.sh -p com.quick-x.samples.luajavabridge 
 rm -fr $DIR/test/LuaJavaBridge/runtime
 rm -fr $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.ios_mac
 rm -fr $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.win32
-rm -fr $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.wp8-xaml
 rm -fr $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.android
 mv $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.android_no_anysdk $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.android
 cp $DIR/AppActivity.java $DIR/test/LuaJavaBridge/frameworks/runtime-src/proj.android/src/org/cocos2dx/lua/

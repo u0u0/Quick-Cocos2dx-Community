@@ -85,8 +85,8 @@ public:
     Texture2D* getTexture(int slot);
     const Font* getFont() const;
 
-    /** listen the event that renderer was recreated on Android/WP8
-     It only has effect on Android and WP8.
+    /** listen the event that renderer was recreated on Android
+     It only has effect on Android
      */
     void listenRendererRecreated(EventCustom *event);
     
