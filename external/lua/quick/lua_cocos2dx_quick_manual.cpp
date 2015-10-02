@@ -426,7 +426,7 @@ int register_all_quick_manual(lua_State* tolua_S)
     extendFunctions(tolua_S);
     extendNode(tolua_S);
 
-    CCLOG("Quick-Cocos2d-x C++ support ready.");
+    CCLOG("Quick-Cocos2dx-Community C++ support ready.");
     
     return 0;
 }

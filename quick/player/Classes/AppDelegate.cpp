@@ -87,7 +87,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
 
-    // If you want to use Quick-Cocos2d-X, please uncomment below code
+    // If you want to use Quick-Cocos2dx-Community, please uncomment below code
     quick_module_register(L);
 
     LuaStack* stack = engine->getLuaStack();

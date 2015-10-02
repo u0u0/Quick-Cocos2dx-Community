@@ -289,7 +289,7 @@ int PlayerWin::run()
     const char *QUICK_V3_ROOT = getenv("QUICK_V3_ROOT");
     if (!QUICK_V3_ROOT || strlen(QUICK_V3_ROOT) == 0)
     {
-        MessageBox("Please run \"setup_win.bat\", set quick-cocos2d-x root path.", "quick-cocos2d-x player error");
+        MessageBox("Please run \"setup_win.bat\", set Quick-Cocos2dx-Community root path.", "Quick-Cocos2dx-Community player error");
         return 1;
     }
     SimulatorConfig::getInstance()->setQuickCocos2dxRootPath(QUICK_V3_ROOT);

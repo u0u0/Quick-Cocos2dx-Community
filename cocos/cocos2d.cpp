@@ -31,7 +31,7 @@ NS_CC_BEGIN
 
 CC_DLL const char* cocos2dVersion()
 {
-    return "quick-cocos2d-x 3.3";
+    return "Quick-Cocos2dx-Community 3.6";
 }
 
 NS_CC_END

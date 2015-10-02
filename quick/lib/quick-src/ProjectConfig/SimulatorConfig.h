@@ -43,7 +43,7 @@ public:
     SimulatorScreenSize getScreenSize(int index) const;
     int checkScreenSize(const cocos2d::Size &size) const;
 
-    // set quick-cocos2d-x root path
+    // set Quick-Cocos2dx-Community root path
     void setQuickCocos2dxRootPath(const string &path);
     string getQuickCocos2dxRootPath() const;
 

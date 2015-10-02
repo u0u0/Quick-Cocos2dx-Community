@@ -76,7 +76,7 @@ static void signalDeal(int sig)
                                                  error:&error];
     if ([error code] || env.length == 0)
     {
-        [self showAlertWithoutSheet:@"Please run \"setup_mac.sh\", set quick-cocos2d-x root path."
+        [self showAlertWithoutSheet:@"Please run \"setup_mac.sh\", set Quick-Cocos2dx-Community root path."
                           withTitle:@"quick player error"];
         [[NSApplication sharedApplication] terminate:self];
     }
