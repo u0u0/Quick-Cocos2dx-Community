@@ -1,16 +1,18 @@
 /*
 ** Trace compiler error messages.
-** Copyright (C) 2005-2013 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2015 Mike Pall. See Copyright Notice in luajit.h
 */
 
 /* This file may be included multiple times with different TREDEF macros. */
 
 /* Recording. */
 TREDEF(RECERR,	"error thrown or hook called during recording")
+TREDEF(TRACEUV,	"trace too short")
 TREDEF(TRACEOV,	"trace too long")
 TREDEF(STACKOV,	"trace too deep")
 TREDEF(SNAPOV,	"too many snapshots")
 TREDEF(BLACKL,	"blacklisted")
+TREDEF(RETRY,	"retry recording")
 TREDEF(NYIBC,	"NYI: bytecode %d")
 
 /* Recording loop ops. */
@@ -20,10 +22,10 @@ TREDEF(LUNROLL,	"loop unroll limit reached")
 
 /* Recording calls/returns. */
 TREDEF(BADTYPE,	"bad argument type")
-TREDEF(CJITOFF,	"call to JIT-disabled function")
+TREDEF(CJITOFF,	"JIT compilation disabled for function")
 TREDEF(CUNROLL,	"call unroll limit reached")
 TREDEF(DOWNREC,	"down-recursion, restarting")
-TREDEF(NYICF,	"NYI: C function %p")
+TREDEF(NYICF,	"NYI: C function %s")
 TREDEF(NYIFF,	"NYI: FastFunc %s")
 TREDEF(NYIFFU,	"NYI: unsupported variant of FastFunc %s")
 TREDEF(NYIRETL,	"NYI: return to lower frame")

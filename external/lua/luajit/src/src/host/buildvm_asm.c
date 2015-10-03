@@ -1,6 +1,6 @@
 /*
 ** LuaJIT VM builder: Assembler source code emitter.
-** Copyright (C) 2005-2013 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2015 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #include "buildvm.h"
@@ -51,8 +51,8 @@ static const char *const jccnames[] = {
   "js", "jns", "jpe", "jpo", "jl", "jge", "jle", "jg"
 };
 
-/* Emit relocation for the incredibly stupid OSX assembler. */
-static void emit_asm_reloc_mach(BuildCtx *ctx, uint8_t *cp, int n,
+/* Emit x86/x64 text relocations. */
+static void emit_asm_reloc_text(BuildCtx *ctx, uint8_t *cp, int n,
 				const char *sym)
 {
   const char *opname = NULL;
@@ -71,6 +71,20 @@ err:
     exit(1);
   }
   emit_asm_bytes(ctx, cp, n);
+  if (strncmp(sym+(*sym == '_'), LABEL_PREFIX, sizeof(LABEL_PREFIX)-1)) {
+    /* Various fixups for external symbols outside of our binary. */
+    if (ctx->mode == BUILD_elfasm) {
+      if (LJ_32)
+	fprintf(ctx->fp, "#if __PIC__\n\t%s lj_wrap_%s\n#else\n", opname, sym);
+      fprintf(ctx->fp, "\t%s %s@PLT\n", opname, sym);
+      if (LJ_32)
+	fprintf(ctx->fp, "#endif\n");
+      return;
+    } else if (LJ_32 && ctx->mode == BUILD_machasm) {
+      fprintf(ctx->fp, "\t%s L%s$stub\n", opname, sym);
+      return;
+    }
+  }
   fprintf(ctx->fp, "\t%s %s\n", opname, sym);
 }
 #else
@@ -100,14 +114,23 @@ static void emit_asm_wordreloc(BuildCtx *ctx, uint8_t *p, int n,
     fprintf(ctx->fp, "\tblx %s\n", sym);
   } else if ((ins & 0x0e000000u) == 0x0a000000u) {
     fprintf(ctx->fp, "\t%s%.2s %s\n", (ins & 0x01000000u) ? "bl" : "b",
-	    "eqnecsccmiplvsvchilsgeltgtle" + 2*(ins >> 28), sym);
+	    &"eqnecsccmiplvsvchilsgeltgtle"[2*(ins >> 28)], sym);
   } else {
     fprintf(stderr,
 	    "Error: unsupported opcode %08x for %s symbol relocation.\n",
 	    ins, sym);
     exit(1);
   }
-#elif LJ_TARGET_PPC || LJ_TARGET_PPCSPE
+#elif LJ_TARGET_ARM64
+  if ((ins >> 26) == 0x25u) {
+    fprintf(ctx->fp, "\tbl %s\n", sym);
+  } else {
+    fprintf(stderr,
+	    "Error: unsupported opcode %08x for %s symbol relocation.\n",
+	    ins, sym);
+    exit(1);
+  }
+#elif LJ_TARGET_PPC
 #if LJ_TARGET_PS3
 #define TOCPREFIX "."
 #else
@@ -117,6 +140,14 @@ static void emit_asm_wordreloc(BuildCtx *ctx, uint8_t *p, int n,
     fprintf(ctx->fp, "\t%s %d, %d, " TOCPREFIX "%s\n",
 	    (ins & 1) ? "bcl" : "bc", (ins >> 21) & 31, (ins >> 16) & 31, sym);
   } else if ((ins >> 26) == 18) {
+#if LJ_ARCH_PPC64
+    const char *suffix = strchr(sym, '@');
+    if (suffix && suffix[1] == 'h') {
+      fprintf(ctx->fp, "\taddis 11, 2, %s\n", sym);
+    } else if (suffix && suffix[1] == 'l') {
+      fprintf(ctx->fp, "\tld 12, %s\n", sym);
+    } else
+#endif
     fprintf(ctx->fp, "\t%s " TOCPREFIX "%s\n", (ins & 1) ? "bl" : "b", sym);
   } else {
     fprintf(stderr,
@@ -214,6 +245,9 @@ void emit_asm(BuildCtx *ctx)
   int i, rel;
 
   fprintf(ctx->fp, "\t.file \"buildvm_%s.dasc\"\n", ctx->dasm_arch);
+#if LJ_ARCH_PPC64
+  fprintf(ctx->fp, "\t.abiversion 2\n");
+#endif
   fprintf(ctx->fp, "\t.text\n");
   emit_asm_align(ctx, 4);
 
@@ -254,8 +288,9 @@ void emit_asm(BuildCtx *ctx)
       BuildReloc *r = &ctx->reloc[rel];
       int n = r->ofs - ofs;
 #if LJ_TARGET_X86ORX64
-      if (ctx->mode == BUILD_machasm && r->type != 0) {
-	emit_asm_reloc_mach(ctx, ctx->code+ofs, n, ctx->relocsym[r->sym]);
+      if (r->type != 0 &&
+	  (ctx->mode == BUILD_elfasm || ctx->mode == BUILD_machasm)) {
+	emit_asm_reloc_text(ctx, ctx->code+ofs, n, ctx->relocsym[r->sym]);
       } else {
 	emit_asm_bytes(ctx, ctx->code+ofs, n);
 	emit_asm_reloc(ctx, r->type, ctx->relocsym[r->sym]);
@@ -286,13 +321,10 @@ void emit_asm(BuildCtx *ctx)
   fprintf(ctx->fp, "\n");
   switch (ctx->mode) {
   case BUILD_elfasm:
-#if !LJ_TARGET_PS3
+#if !(LJ_TARGET_PS3 || LJ_TARGET_PSVITA)
     fprintf(ctx->fp, "\t.section .note.GNU-stack,\"\"," ELFASM_PX "progbits\n");
 #endif
-#if LJ_TARGET_PPCSPE
-    /* Soft-float ABI + SPE. */
-    fprintf(ctx->fp, "\t.gnu_attribute 4, 2\n\t.gnu_attribute 8, 3\n");
-#elif LJ_TARGET_PPC && !LJ_TARGET_PS3
+#if LJ_TARGET_PPC && !LJ_TARGET_PS3
     /* Hard-float ABI. */
     fprintf(ctx->fp, "\t.gnu_attribute 4, 1\n");
 #endif

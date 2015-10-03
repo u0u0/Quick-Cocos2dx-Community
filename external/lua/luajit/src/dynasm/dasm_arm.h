@@ -1,6 +1,6 @@
 /*
 ** DynASM ARM encoding engine.
-** Copyright (C) 2005-2013 Mike Pall. All rights reserved.
+** Copyright (C) 2005-2015 Mike Pall. All rights reserved.
 ** Released under the MIT license. See dynasm.lua for full copyright notice.
 */
 
@@ -211,7 +211,8 @@ void dasm_put(Dst_DECL, int start, ...)
       case DASM_ALIGN: ofs += (ins & 255); b[pos++] = ofs; break;
       case DASM_REL_LG:
 	n = (ins & 2047) - 10; pl = D->lglabels + n;
-	if (n >= 0) { CKPL(lg, LG); goto putrel; }  /* Bkwd rel or global. */
+	/* Bkwd rel or global. */
+	if (n >= 0) { CK(n>=10||*pl<0, RANGE_LG); CKPL(lg, LG); goto putrel; }
 	pl += 10; n = *pl;
 	if (n < 0) n = 0;  /* Start new chain for fwd rel if label exists. */
 	goto linkrel;

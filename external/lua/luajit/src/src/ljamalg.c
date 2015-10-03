@@ -1,12 +1,12 @@
 /*
 ** LuaJIT core and libraries amalgamation.
-** Copyright (C) 2005-2013 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2015 Mike Pall. See Copyright Notice in luajit.h
 */
 
 /*
 +--------------------------------------------------------------------------+
 | WARNING: Compiling the amalgamation needs a lot of virtual memory        |
-| (around 200 MB with GCC 4.x)! If you don't have enough physical memory   |
+| (around 300 MB with GCC 4.x)! If you don't have enough physical memory   |
 | your machine will start swapping to disk and the compile will not finish |
 | within a reasonable amount of time.                                      |
 | So either compile on a bigger machine or use the non-amalgamated build.  |
@@ -22,7 +22,7 @@
 #endif
 
 #ifndef WINVER
-#define WINVER 0x0500
+#define WINVER 0x0501
 #endif
 
 #include "lua.h"
@@ -33,6 +33,7 @@
 #include "lj_char.c"
 #include "lj_bc.c"
 #include "lj_obj.c"
+#include "lj_buf.c"
 #include "lj_str.c"
 #include "lj_tab.c"
 #include "lj_func.c"
@@ -44,7 +45,9 @@
 #include "lj_vmevent.c"
 #include "lj_vmmath.c"
 #include "lj_strscan.c"
+#include "lj_strfmt.c"
 #include "lj_api.c"
+#include "lj_profile.c"
 #include "lj_lex.c"
 #include "lj_parse.c"
 #include "lj_bcread.c"
