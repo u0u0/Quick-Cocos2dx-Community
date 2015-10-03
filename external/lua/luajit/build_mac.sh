@@ -8,7 +8,7 @@ rm "$DESTDIR"/*.a
 
 cd $SRCDIR
 make clean
-make CC="gcc -m64 -arch x86_64" clean all
+make CC="gcc -m64 -arch x86_64" all
 
 if [ -f $SRCDIR/src/libluajit.a ]; then
     mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a

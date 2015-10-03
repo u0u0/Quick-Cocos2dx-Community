@@ -22,8 +22,10 @@ if [ -f $SRCDIR/src/libluajit.a ]; then
 fi;
 
 # Android/ARM, armeabi-v7a (ARMv7 VFP), Android 4.0+ (ICS)
+NDKABI=14
 NDKARCH="-march=armv7-a -mfloat-abi=softfp -Wl,--fix-cortex-a8"
 DESTDIR=$DIR/prebuilt/android/armeabi-v7a
+NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm"
 rm "$DESTDIR"/*.a
 make clean
 make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH"
