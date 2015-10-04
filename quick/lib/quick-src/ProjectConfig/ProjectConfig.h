@@ -11,8 +11,6 @@ using namespace std;
 #include "CCLuaStack.h"
 
 #define kCCLuaDebuggerNone      0
-#define kCCLuaDebuggerLDT       1
-#define kCCLuaDebuggerCodeIDE   2
 
 #define kProjectConfigQuickRootPath             1       // -quick "PATH"
 #define kProjectConfigProjectDir                2       // -workdir "PATH"
@@ -97,6 +95,16 @@ public:
 
     bool validate() const;
     void dump();
+    
+    // set Quick-Cocos2dx-Community root path
+    void setQuickCocos2dxRootPath(const string &path);
+    string getQuickCocos2dxRootPath() const;
+    
+    // get precompiled framework path
+    string getPrecompiledFrameworkPath() const;
+    
+    // helper
+    static void makeNormalizePath(string *path, const char *directorySeparator = NULL);
 
 private:
     bool _isWelcome;
@@ -104,6 +112,7 @@ private:
     string _scriptFile;
     string _packagePath;
     string _writablePath;
+    string _quickCocos2dxRootPath;
     cocos2d::Size _frameSize;
     float _frameScale;
     bool _showConsole;

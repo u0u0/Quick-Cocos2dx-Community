@@ -3,7 +3,6 @@
 
 #import "ConsoleWindowController.h"
 #include "ProjectConfig/ProjectConfig.h"
-#include "ProjectConfig/SimulatorConfig.h"
 #include "AppDelegate.h"
 
 @interface AppController : NSObject <NSApplicationDelegate, NSWindowDelegate, NSFileManagerDelegate>

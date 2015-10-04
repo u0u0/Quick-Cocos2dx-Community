@@ -2,7 +2,6 @@
 #include <sstream>
 
 #include "ProjectConfig/ProjectConfig.h"
-#include "ProjectConfig/SimulatorConfig.h"
 
 #ifdef _MSC_VER
 #define strcasecmp _stricmp
@@ -43,10 +42,10 @@ bool ProjectConfig::isWelcome() const
 void ProjectConfig::resetToWelcome()
 {
     _isWelcome = true;
-    auto path = SimulatorConfig::getInstance()->getQuickCocos2dxRootPath();
+    auto path = getQuickCocos2dxRootPath();
     path.append("quick/welcome");
     //path.append("quick/samples/ccsloader");
-    SimulatorConfig::makeNormalizePath(&path);
+    makeNormalizePath(&path);
     setProjectDir(path);
     setWritablePath(path);
     setScriptFile("$(PROJDIR)/src/main.lua");
@@ -65,9 +64,9 @@ void ProjectConfig::resetToWelcome()
 void ProjectConfig::resetToCreator()
 {
     _isWelcome = true;
-    auto path = SimulatorConfig::getInstance()->getQuickCocos2dxRootPath();
+    auto path = getQuickCocos2dxRootPath();
     path.append("quick/creator");
-    SimulatorConfig::makeNormalizePath(&path);
+    makeNormalizePath(&path);
     setProjectDir(path);
     setWritablePath(path);
     setScriptFile("$(PROJDIR)/src/main.lua");
@@ -146,7 +145,7 @@ string ProjectConfig::getNormalizedPackagePath() const
         path.append(";");
     }
     path.append(";");
-    SimulatorConfig::makeNormalizePath(&path, "/");
+    makeNormalizePath(&path, "/");
     return path;
 }
 
@@ -306,7 +305,7 @@ void ProjectConfig::parseCommandLine(const vector<string> &args)
         {
             ++it;
             if (it == args.end()) break;
-            SimulatorConfig::getInstance()->setQuickCocos2dxRootPath((*it).c_str());
+            setQuickCocos2dxRootPath((*it).c_str());
         }
         else if (arg.compare("-workdir") == 0)
         {
@@ -396,18 +395,6 @@ void ProjectConfig::parseCommandLine(const vector<string> &args)
             if (it == args.end()) break;
             setWindowOffset(cocos2d::PointFromString((*it).c_str()));
         }
-        else if (arg.compare("-debugger-ldt") == 0)
-        {
-            setDebuggerType(kCCLuaDebuggerLDT);
-        }
-        else if (arg.compare("-debugger-codeide") == 0)
-        {
-            setDebuggerType(kCCLuaDebuggerCodeIDE);
-        }
-        else if (arg.compare("-disable-debugger") == 0)
-        {
-            setDebuggerType(kCCLuaDebuggerNone);
-        }
         else if (arg.compare("-app-menu") == 0)
         {
             _isAppMenu = true;
@@ -423,6 +410,8 @@ void ProjectConfig::parseCommandLine(const vector<string> &args)
 
         ++it;
     }
+    
+    setDebuggerType(kCCLuaDebuggerNone);
 }
 
 string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfigAll */) const
@@ -431,7 +420,7 @@ string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfigAll *
 
     if (mask & kProjectConfigQuickRootPath)
     {
-        auto path = SimulatorConfig::getInstance()->getQuickCocos2dxRootPath();
+        auto path = getQuickCocos2dxRootPath();
         if (path.length())
         {
             buff << " -quick ";
@@ -545,20 +534,8 @@ string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfigAll *
         }
     }
 
-    if (mask & kProjectConfigDebugger)
-    {
-        switch (getDebuggerType())
-        {
-        case kCCLuaDebuggerLDT:
-            buff << " -debugger-ldt";
-            break;
-        case kCCLuaDebuggerCodeIDE:
-            buff << " -debugger-codeide";
-            break;
-        default:
-            buff << " -disable-debugger";
-        }
-    }
+    // No debugger
+    buff << " -disable-debugger";
 
     string result = buff.str();
     while (result.at(0) == ' ')
@@ -596,7 +573,7 @@ bool ProjectConfig::validate() const
 void ProjectConfig::dump()
 {
     CCLOG("Project Config:");
-    CCLOG("    quick root path: %s", SimulatorConfig::getInstance()->getQuickCocos2dxRootPath().c_str());
+    CCLOG("    quick root path: %s", getQuickCocos2dxRootPath().c_str());
     CCLOG("    project dir: %s", _projectDir.c_str());
     CCLOG("    writable path: %s", _writablePath.length() ? _writablePath.c_str() : "-");
     CCLOG("    script file: %s", _scriptFile.c_str());
@@ -605,27 +582,16 @@ void ProjectConfig::dump()
     CCLOG("    frame scale: %0.2f", _frameScale);
     CCLOG("    show console: %s", _showConsole ? "YES" : "NO");
     CCLOG("    write debug log: %s", _writeDebugLogToFile ? "YES" : "NO");
-    if (_debuggerType == kCCLuaDebuggerLDT)
-    {
-        CCLOG("    debugger: Eclipse LDT");
-    }
-    else if (_debuggerType == kCCLuaDebuggerCodeIDE)
-    {
-        CCLOG("    debugger: Cocos Code IDE");
-    }
-    else
-    {
-        CCLOG("    debugger: none");
-    }
+    CCLOG("    debugger: none");
     CCLOG("\n\n");
 }
 
 void ProjectConfig::normalize()
 {
-    SimulatorConfig::makeNormalizePath(&_projectDir);
-    SimulatorConfig::makeNormalizePath(&_scriptFile);
-    SimulatorConfig::makeNormalizePath(&_writablePath);
-    SimulatorConfig::makeNormalizePath(&_packagePath);
+    makeNormalizePath(&_projectDir);
+    makeNormalizePath(&_scriptFile);
+    makeNormalizePath(&_writablePath);
+    makeNormalizePath(&_packagePath);
 
     // projectDir
     size_t len = _projectDir.length();
@@ -714,4 +680,47 @@ bool ProjectConfig::isAbsolutePath(const string &path) const
         return path.length() > 0 && path[0] == '/';
     }
     return path.length() > 2 && path[1] == ':';
+}
+
+void ProjectConfig::setQuickCocos2dxRootPath(const string &path)
+{
+    if (path.length())
+    {
+        _quickCocos2dxRootPath = path;
+        makeNormalizePath(&_quickCocos2dxRootPath);
+        if (_quickCocos2dxRootPath[_quickCocos2dxRootPath.length() - 1] != DIRECTORY_SEPARATOR_CHAR)
+        {
+            _quickCocos2dxRootPath.append(DIRECTORY_SEPARATOR);
+        }
+    }
+}
+
+string ProjectConfig::getQuickCocos2dxRootPath() const
+{
+    return _quickCocos2dxRootPath;
+}
+
+// load framework
+string ProjectConfig::getPrecompiledFrameworkPath() const
+{
+    string path = _quickCocos2dxRootPath;
+    path.append("quick");
+    path.append(DIRECTORY_SEPARATOR);
+    path.append("lib");
+    path.append(DIRECTORY_SEPARATOR);
+    path.append("framework_precompiled");
+    path.append(DIRECTORY_SEPARATOR);
+    path.append("framework_precompiled.zip");
+    return path;
+}
+
+// helper
+void ProjectConfig::makeNormalizePath(string *path, const char *directorySeparator/* = NULL*/)
+{
+    if (!directorySeparator) directorySeparator = DIRECTORY_SEPARATOR;
+    size_t pos = std::string::npos;
+    while ((pos = path->find_first_of("/\\", pos + 1)) != std::string::npos)
+    {
+        path->replace(pos, 1, directorySeparator);
+    }
 }

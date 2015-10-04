@@ -82,7 +82,7 @@ static void signalDeal(int sig)
     }
 
     env = [env stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    SimulatorConfig::getInstance()->setQuickCocos2dxRootPath([env cStringUsingEncoding:NSUTF8StringEncoding]);
+    _project.setQuickCocos2dxRootPath([env cStringUsingEncoding:NSUTF8StringEncoding]);
 
     [self updateProjectFromCommandLineArgs:&_project];
     [self createWindowAndGLView];
@@ -135,7 +135,6 @@ static void signalDeal(int sig)
         {
             // for Code IDE before RC2
             config->setProjectDir(args.at(1));
-            config->setDebuggerType(kCCLuaDebuggerCodeIDE);
         }
         config->parseCommandLine(args);
     }
@@ -209,7 +208,7 @@ static void signalDeal(int sig)
     //
     // load player.lua file
     //
-    string playerCoreFilePath = SimulatorConfig::getInstance()->getQuickCocos2dxRootPath() + "quick/welcome/src/player.lua";
+    string playerCoreFilePath = _project.getQuickCocos2dxRootPath() + "quick/welcome/src/player.lua";
     pEngine->executeScriptFile(playerCoreFilePath.c_str());
 }
 
@@ -319,7 +318,7 @@ static void signalDeal(int sig)
 {
     FileUtils::getInstance()->setPopupNotify(false);
     
-    std::string path = SimulatorConfig::getInstance()->getQuickCocos2dxRootPath();
+    std::string path = _project.getQuickCocos2dxRootPath();
     const string projectDir = _project.getProjectDir();
     if (projectDir.length())
     {
@@ -333,7 +332,7 @@ static void signalDeal(int sig)
     // set framework path
     if (!_project.isLoadPrecompiledFramework())
     {
-        FileUtils::getInstance()->addSearchPath(SimulatorConfig::getInstance()->getQuickCocos2dxRootPath() + "quick/");
+        FileUtils::getInstance()->addSearchPath(_project.getQuickCocos2dxRootPath() + "quick/");
     }
 
     const string writablePath = _project.getWritableRealPath();

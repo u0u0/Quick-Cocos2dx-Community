@@ -2,8 +2,6 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
-#include "Runtime.h"
-#include "ConfigParser.h"
 #include "lua_module_register.h"
 
 #include "native/CCNative.h"
@@ -62,14 +60,6 @@ void AppDelegate::initGLContextAttrs()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-    if (_project.getDebuggerType() == kCCLuaDebuggerCodeIDE)
-    {
-        initRuntime();
-        {
-            ConfigParser::getInstance()->readConfig();
-        }
-    }
-    
     // initialize director
     auto director = Director::getInstance();
     director->setProjection(Director::Projection::_2D);
@@ -95,20 +85,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     
     StartupCall *call = StartupCall::create(this);
-    if (_project.getDebuggerType() == kCCLuaDebuggerLDT)
-    {
-        auto scene = Scene::create();
-        auto label = Label::createWithSystemFont("WAITING FOR CONNECT TO DEBUGGER...", "Arial", 32);
-        const Size winSize = director->getWinSize();
-        label->setPosition(winSize.width / 2, winSize.height / 2);
-        scene->addChild(label);
-        director->runWithScene(scene);
-        scene->runAction(CallFunc::create(bind(&StartupCall::startup, *call)));
-    }
-    else
-    {
-        call->startup();
-    }
+    call->startup();
     
     return true;
 }
@@ -172,24 +149,11 @@ void StartupCall::startup()
         FileUtils::getInstance()->addSearchPath(workdir);
     }
     
-    // connect debugger
-    if (project.getDebuggerType() != kCCLuaDebuggerNone)
-    {
-        //        stack->connectDebugger(project.getDebuggerType(), NULL, 0, NULL, workdir.c_str());
-    }
-    
     // load framework
     if (project.isLoadPrecompiledFramework())
     {
-        const string precompiledFrameworkPath = SimulatorConfig::getInstance()->getPrecompiledFrameworkPath();
+        const string precompiledFrameworkPath = project.getPrecompiledFrameworkPath();
         stack->loadChunksFromZIP(precompiledFrameworkPath.c_str());
-    }
-    
-    // Code IDE
-    if (project.getDebuggerType() == kCCLuaDebuggerCodeIDE)
-    {
-        startRuntime();
-        return ;
     }
     
     // load script

@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "ProjectConfig/ProjectConfig.h"
-#include "ProjectConfig/SimulatorConfig.h"
 
 /**
 @brief    The cocos2d Application.
