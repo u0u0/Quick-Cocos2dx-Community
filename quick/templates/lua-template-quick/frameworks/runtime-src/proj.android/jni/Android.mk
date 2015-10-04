@@ -37,8 +37,8 @@ $(LOCAL_PATH)/../../Classes/runtime \
 $(LOCAL_PATH)/../../Classes \
 $(COCOS2DX_ROOT)/external \
 $(COCOS2DX_ROOT)/external/protobuf-lite/src \
-$(LOCAL_PATH)/../../Classes/quick-src \
-$(LOCAL_PATH)/../../Classes/quick-src/extra
+$(COCOS2DX_ROOT)/quick/lib/quick-src \
+$(COCOS2DX_ROOT)/quick/lib/quick-src/extra
 
 #anysdk
 LOCAL_C_INCLUDES +=	\

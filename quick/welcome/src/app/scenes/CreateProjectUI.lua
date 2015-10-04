@@ -127,17 +127,6 @@ function CreateProjectUI:onEnter()
     self.portraitCheckBox = portraitCheckBox
     self.landscapeCheckBox = landscapeCheckBox
 
-
-    -- copy source if
-    self.copySourceCB_ = cc.ui.UICheckBoxButton.new(checkboxImages)
-        :setButtonLabel(cc.ui.UILabel.new({text = "Copy Source Files", size = fontSize,  color = display.COLOR_WHITE}))
-        :setButtonLabelOffset(30, 0)
-        :setButtonLabelAlignment(display.LEFT_CENTER)
-        :align(display.LEFT_CENTER, 40, display.cy - 50)
-        :addTo(self)
-        :setButtonSelected(true)
-
-
     -- ok or cancel
 
     local button = cc.ui.UIPushButton.new(images, {scale9 = true})
@@ -187,31 +176,9 @@ function CreateProjectUI:onEnter()
                     projectConfig:changeFrameOrientationToLandscape()
                     screenDirection = " -r landscape "
                 end
-                local copySource = ""
-                if not self.copySourceCB_:isButtonSelected() then
-                    copySource = " -lt "
-                end
-                local arguments = " -p " .. packageEditbox:getText() .. " -f " .. " -o " .. self.projectFolder .. screenDirection .. copySource
+                local arguments = " -p " .. packageEditbox:getText() .. " -f " .. " -o " .. self.projectFolder .. screenDirection
                 local taskId = tostring(os.time())
 
-                -- local scriptPath = cc.player.quickRootPath .. "cocos new"
-
-                -- local screenDirection = "-r portrait"
-                -- if self.landscapeCheckBox:isButtonSelected() then
-                --     projectConfig:changeFrameOrientationToLandscape()
-                --     screenDirection = "-r landscape"
-                -- end
-
-                -- local cmds = {}
-                -- table.insert(cmds, "-l lua")
-                -- table.insert(cmds, "-t quick")
-                -- table.insert(cmds, "-d " .. self.projectFolder)
-                -- table.insert(cmds, "-p " .. packageEditbox:getText())
-                -- table.insert(cmds, screenDirection)
-
-                -- local arguments = table.concat(cmds, " ")
-                -- arguments = " " .. arguments
-                
                 print("Create Cmd:" .. scriptPath .. " " .. arguments)
                 local task = PlayerProtocol:getInstance():getTaskService():createTask(taskId, scriptPath, arguments)
                 eventDispatcher:addEventListenerWithFixedPriority(cc.EventListenerCustom:create(taskId,
