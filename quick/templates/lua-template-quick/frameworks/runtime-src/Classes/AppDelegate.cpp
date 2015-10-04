@@ -2,9 +2,6 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
-#include "CodeIDESupport.h"
-#include "Runtime.h"
-#include "ConfigParser.h"
 #include "lua_module_register.h"
 
 
@@ -52,25 +49,12 @@ static void quick_module_register(lua_State *L)
 
 //
 AppDelegate::AppDelegate()
-:_launchMode(1)
 {
 }
 
 AppDelegate::~AppDelegate()
 {
     SimpleAudioEngine::end();
-
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-	endRuntime();
-#elif (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-	// NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-	if (_launchMode)
-	{
-		endRuntime();
-	}
-#endif
-
-	ConfigParser::purge();
 }
 
 //if you want a different context,just modify the value of glContextAttrs
@@ -86,30 +70,13 @@ void AppDelegate::initGLContextAttrs()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-	initRuntime();
-#elif (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-	// NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-	if (_launchMode)
-	{
-		initRuntime();
-	}
-#endif
-    
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();    
     if(!glview) {
-        Size viewSize = ConfigParser::getInstance()->getInitViewSize();
-        string title = ConfigParser::getInstance()->getInitViewName();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-        extern void createSimulator(const char* viewName, float width, float height, bool isLandscape = true, float frameZoomFactor = 1.0f);
-        bool isLanscape = ConfigParser::getInstance()->isLanscape();
-        createSimulator(title.c_str(),viewSize.width,viewSize.height, isLanscape);
-#else
-        glview = cocos2d::GLViewImpl::createWithRect(title.c_str(), Rect(0, 0, viewSize.width, viewSize.height));
+        string title = "__PROJECT_COCOS_NAME__";
+        glview = cocos2d::GLViewImpl::create(title.c_str());
         director->setOpenGLView(glview);
-#endif
         director->startAnimation();
     }
    
@@ -135,19 +102,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
     
-#if (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-    // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-    if (_launchMode)
-    {
-        startRuntime();
-    }
-    else
-    {
-        engine->executeScriptFile(ConfigParser::getInstance()->getEntryFile().c_str());
-    }
-#else
-    engine->executeScriptFile(ConfigParser::getInstance()->getEntryFile().c_str());
-#endif
+    engine->executeScriptFile("src/main.lua");
 
     return true;
 }
@@ -174,9 +129,4 @@ void AppDelegate::applicationWillEnterForeground()
     SimpleAudioEngine::getInstance()->resumeAllEffects();
 
     Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("APP_ENTER_FOREGROUND_EVENT");
-}
-
-void AppDelegate::setLaunchMode(int mode)
-{
-    _launchMode = mode;
 }

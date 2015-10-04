@@ -7,17 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A54F1641BC17DE60018E100 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A54F1631BC17DE60018E100 /* AppController.mm */; settings = {ASSET_TAGS = (); }; };
 		15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4251834BDA200142BE0 /* libcocos2d iOS.a */; };
 		15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CD2198F220600DC375D /* libluacocos2d iOS.a */; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
 		15A8A4491834C64F00142BE0 /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810C17EBBCAC00990C9B /* Icon-114.png */; };
 		15A8A4881834C90F00142BE0 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4871834C90E00142BE0 /* libcurl.dylib */; };
-		15AA9648199B6D4600725633 /* lua_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 15AA9646199B6D4600725633 /* lua_debugger.c */; };
-		15AA9649199B6D4600725633 /* lua_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 15AA9646199B6D4600725633 /* lua_debugger.c */; };
 		1AF4C403178663F200122817 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
-		3EB5152C19528284006966AA /* Protos.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5152A19528284006966AA /* Protos.pb.cc */; };
-		3EB5152D19528284006966AA /* Protos.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5152A19528284006966AA /* Protos.pb.cc */; };
 		3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */; };
 		49C656541A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */; };
 		49C656551A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */; };
@@ -62,11 +59,6 @@
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
 		521A8E7019F0C3D200D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6E19F0C3D200D177D7 /* Default-667h@2x.png */; };
 		521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */; };
-		87BA718B1A44A57100929C43 /* FileServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6F01A1F275E009C2562 /* FileServer.cpp */; };
-		87BA718C1A44A57100929C43 /* FileServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6F01A1F275E009C2562 /* FileServer.cpp */; };
-		87BA718F1A44A5BF00929C43 /* ConnectWaitLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */; };
-		87BA71901A44A5CA00929C43 /* ConsoleCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */; };
-		87BA71911A44A5CB00929C43 /* ConsoleCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */; };
 		9F598A0819F5F3A6006015D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F598A0719F5F3A6006015D6 /* SystemConfiguration.framework */; };
 		9F598A0B19F5F4F4006015D6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F598A0A19F5F4F4006015D6 /* StoreKit.framework */; };
 		9F9106B419F5614900AD5CAB /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AC19F5614800AD5CAB /* libbase64.c */; };
@@ -175,37 +167,15 @@
 		9F91078E19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91078B19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp */; };
 		9F91079419F56A6600AD5CAB /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */; };
 		9F91079519F56A6600AD5CAB /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */; };
-		9F91079619F56A6600AD5CAB /* SimulatorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079219F56A6600AD5CAB /* SimulatorConfig.cpp */; };
-		9F91079719F56A6600AD5CAB /* SimulatorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079219F56A6600AD5CAB /* SimulatorConfig.cpp */; };
 		9F91079E19F5704400AD5CAB /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */; };
 		9F91079F19F5704400AD5CAB /* ConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079D19F5704400AD5CAB /* ConsoleWindowController.m */; };
-		AB6CB6F31A1F275E009C2562 /* ConnectWaitLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */; };
-		C00FD4921938512100C6382D /* Landscape_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48A1938512100C6382D /* Landscape_png.cpp */; };
-		C00FD4931938512100C6382D /* Landscape_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48A1938512100C6382D /* Landscape_png.cpp */; };
-		C00FD4941938512100C6382D /* PlayDisable_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48B1938512100C6382D /* PlayDisable_png.cpp */; };
-		C00FD4951938512100C6382D /* PlayDisable_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48B1938512100C6382D /* PlayDisable_png.cpp */; };
-		C00FD4961938512100C6382D /* PlayEnable_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48C1938512100C6382D /* PlayEnable_png.cpp */; };
-		C00FD4971938512100C6382D /* PlayEnable_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48C1938512100C6382D /* PlayEnable_png.cpp */; };
-		C00FD4981938512100C6382D /* Portrait_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48D1938512100C6382D /* Portrait_png.cpp */; };
-		C00FD4991938512100C6382D /* Portrait_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48D1938512100C6382D /* Portrait_png.cpp */; };
-		C00FD49A1938512100C6382D /* Runtime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48F1938512100C6382D /* Runtime.cpp */; };
-		C00FD49B1938512100C6382D /* Runtime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD48F1938512100C6382D /* Runtime.cpp */; };
-		C00FD49C1938512100C6382D /* Shine_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD4911938512100C6382D /* Shine_png.cpp */; };
-		C00FD49D1938512100C6382D /* Shine_png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C00FD4911938512100C6382D /* Shine_png.cpp */; };
 		C033B51C191B337200D06937 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C033B51A191B337200D06937 /* VisibleRect.cpp */; };
 		C033B51D191B337200D06937 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C033B51A191B337200D06937 /* VisibleRect.cpp */; };
 		C03781B918BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BA18BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BB18BF655400FE4F13 /* src in Resources */ = {isa = PBXBuildFile; fileRef = C03781B818BF655400FE4F13 /* src */; };
 		C03781BC18BF655400FE4F13 /* src in Resources */ = {isa = PBXBuildFile; fileRef = C03781B818BF655400FE4F13 /* src */; };
-		C05D1C121923449100B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C111923449100B808A4 /* config.json */; };
-		C05D1C131923449100B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C111923449100B808A4 /* config.json */; };
-		C0619CD71896894800872C26 /* Runtime_ios-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0619CD61896894800872C26 /* Runtime_ios-mac.mm */; };
-		C0619CD81896894800872C26 /* Runtime_ios-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0619CD61896894800872C26 /* Runtime_ios-mac.mm */; };
-		C06C3796191A1D1E00617BED /* ConfigParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06C3794191A1D1E00617BED /* ConfigParser.cpp */; };
-		C06C3797191A1D1E00617BED /* ConfigParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06C3794191A1D1E00617BED /* ConfigParser.cpp */; };
 		C07828F818B4D72E00BD2287 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07828F418B4D72E00BD2287 /* main.m */; };
-		C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07828F718B4D72E00BD2287 /* SimulatorApp.mm */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
@@ -277,16 +247,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A54F1621BC17DE60018E100 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		0A54F1631BC17DE60018E100 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		15427CE2198F237300DC375D /* lua_module_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_module_register.h; path = ../Classes/lua_module_register.h; sourceTree = "<group>"; };
 		15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = build/cocos2d_libs.xcodeproj; sourceTree = QUICK_V3_ROOT; };
 		15A8A4871834C90E00142BE0 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
-		15AA9646199B6D4600725633 /* lua_debugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_debugger.c; sourceTree = "<group>"; };
-		15AA9647199B6D4600725633 /* lua_debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_debugger.h; sourceTree = "<group>"; };
 		15C1568D1683131500D239F2 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libcurl.a"; sourceTree = "<group>"; };
 		1AF4C402178663F200122817 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3EB51526195187AF006966AA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		3EB5152A19528284006966AA /* Protos.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Protos.pb.cc; sourceTree = "<group>"; };
-		3EB5152B19528284006966AA /* Protos.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protos.pb.h; sourceTree = "<group>"; };
 		3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NVGDrawNode.cpp; sourceTree = "<group>"; };
 		49C656491A39A1A200603AF5 /* NVGDrawNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGDrawNode.h; sourceTree = "<group>"; };
@@ -516,37 +484,15 @@
 		9F91078C19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lua_cocos2dx_extension_filter_auto.hpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_filter_auto.hpp"; sourceTree = QUICK_V3_ROOT; };
 		9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectConfig.cpp; path = "quick/lib/quick-src/ProjectConfig/ProjectConfig.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F91079119F56A6600AD5CAB /* ProjectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectConfig.h; path = "quick/lib/quick-src/ProjectConfig/ProjectConfig.h"; sourceTree = QUICK_V3_ROOT; };
-		9F91079219F56A6600AD5CAB /* SimulatorConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulatorConfig.cpp; path = "quick/lib/quick-src/ProjectConfig/SimulatorConfig.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F91079319F56A6600AD5CAB /* SimulatorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulatorConfig.h; path = "quick/lib/quick-src/ProjectConfig/SimulatorConfig.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
 		9F91079C19F5704400AD5CAB /* ConsoleWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindowController.h; sourceTree = "<group>"; };
 		9F91079D19F5704400AD5CAB /* ConsoleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleWindowController.m; sourceTree = "<group>"; };
-		AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectWaitLayer.cpp; sourceTree = "<group>"; };
-		AB6CB6ED1A1F275E009C2562 /* ConnectWaitLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectWaitLayer.h; sourceTree = "<group>"; };
-		AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleCommand.cpp; sourceTree = "<group>"; };
-		AB6CB6EF1A1F275E009C2562 /* ConsoleCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleCommand.h; sourceTree = "<group>"; };
-		AB6CB6F01A1F275E009C2562 /* FileServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileServer.cpp; sourceTree = "<group>"; };
-		AB6CB6F11A1F275E009C2562 /* FileServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileServer.h; sourceTree = "<group>"; };
-		C00FD48A1938512100C6382D /* Landscape_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Landscape_png.cpp; sourceTree = "<group>"; };
-		C00FD48B1938512100C6382D /* PlayDisable_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayDisable_png.cpp; sourceTree = "<group>"; };
-		C00FD48C1938512100C6382D /* PlayEnable_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayEnable_png.cpp; sourceTree = "<group>"; };
-		C00FD48D1938512100C6382D /* Portrait_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Portrait_png.cpp; sourceTree = "<group>"; };
-		C00FD48E1938512100C6382D /* ResData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResData.h; sourceTree = "<group>"; };
-		C00FD48F1938512100C6382D /* Runtime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Runtime.cpp; sourceTree = "<group>"; };
-		C00FD4901938512100C6382D /* Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Runtime.h; sourceTree = "<group>"; };
-		C00FD4911938512100C6382D /* Shine_png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shine_png.cpp; sourceTree = "<group>"; };
 		C033B51A191B337200D06937 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/VisibleRect.cpp; sourceTree = "<group>"; };
 		C033B51B191B337200D06937 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/VisibleRect.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = QUICK_V3_ROOT; };
 		C03781B718BF655400FE4F13 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../../res; sourceTree = "<group>"; };
 		C03781B818BF655400FE4F13 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../src; sourceTree = "<group>"; };
-		C05D1C111923449100B808A4 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = config.json; path = ../../../config.json; sourceTree = "<group>"; };
-		C0619CD61896894800872C26 /* Runtime_ios-mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Runtime_ios-mac.mm"; sourceTree = "<group>"; };
-		C06C3794191A1D1E00617BED /* ConfigParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigParser.cpp; path = ../Classes/ConfigParser.cpp; sourceTree = "<group>"; };
-		C06C3795191A1D1E00617BED /* ConfigParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigParser.h; path = ../Classes/ConfigParser.h; sourceTree = "<group>"; };
 		C07828F418B4D72E00BD2287 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C07828F618B4D72E00BD2287 /* SimulatorApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorApp.h; sourceTree = "<group>"; };
-		C07828F718B4D72E00BD2287 /* SimulatorApp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimulatorApp.mm; sourceTree = "<group>"; };
 		D6B061341803AC000077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F293B3C815EB7BE500256477 /* __PROJECT_COCOS_NAME__ iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "__PROJECT_COCOS_NAME__ iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -675,14 +621,14 @@
 		5023817117EBBE3400990C9B /* mac */ = {
 			isa = PBXGroup;
 			children = (
+				0A54F1621BC17DE60018E100 /* AppController.h */,
+				0A54F1631BC17DE60018E100 /* AppController.mm */,
 				9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */,
 				9F91079C19F5704400AD5CAB /* ConsoleWindowController.h */,
 				9F91079D19F5704400AD5CAB /* ConsoleWindowController.m */,
 				5023817217EBBE3400990C9B /* Icon.icns */,
 				C07828F418B4D72E00BD2287 /* main.m */,
 				F405C6CB19ED14AA005AD31C /* MainMenu.xib */,
-				C07828F618B4D72E00BD2287 /* SimulatorApp.h */,
-				C07828F718B4D72E00BD2287 /* SimulatorApp.mm */,
 				5023817317EBBE3400990C9B /* Info.plist */,
 				5023817517EBBE3400990C9B /* Prefix.pch */,
 			);
@@ -1110,36 +1056,8 @@
 			children = (
 				9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */,
 				9F91079119F56A6600AD5CAB /* ProjectConfig.h */,
-				9F91079219F56A6600AD5CAB /* SimulatorConfig.cpp */,
-				9F91079319F56A6600AD5CAB /* SimulatorConfig.h */,
 			);
 			path = ProjectConfig;
-			sourceTree = "<group>";
-		};
-		C00FD4891938512100C6382D /* runtime */ = {
-			isa = PBXGroup;
-			children = (
-				AB6CB6EC1A1F275E009C2562 /* ConnectWaitLayer.cpp */,
-				AB6CB6ED1A1F275E009C2562 /* ConnectWaitLayer.h */,
-				AB6CB6EE1A1F275E009C2562 /* ConsoleCommand.cpp */,
-				AB6CB6EF1A1F275E009C2562 /* ConsoleCommand.h */,
-				AB6CB6F01A1F275E009C2562 /* FileServer.cpp */,
-				AB6CB6F11A1F275E009C2562 /* FileServer.h */,
-				15AA9646199B6D4600725633 /* lua_debugger.c */,
-				15AA9647199B6D4600725633 /* lua_debugger.h */,
-				3EB5152A19528284006966AA /* Protos.pb.cc */,
-				3EB5152B19528284006966AA /* Protos.pb.h */,
-				C00FD48A1938512100C6382D /* Landscape_png.cpp */,
-				C00FD48B1938512100C6382D /* PlayDisable_png.cpp */,
-				C00FD48C1938512100C6382D /* PlayEnable_png.cpp */,
-				C00FD48D1938512100C6382D /* Portrait_png.cpp */,
-				C00FD48E1938512100C6382D /* ResData.h */,
-				C00FD48F1938512100C6382D /* Runtime.cpp */,
-				C00FD4901938512100C6382D /* Runtime.h */,
-				C00FD4911938512100C6382D /* Shine_png.cpp */,
-			);
-			name = runtime;
-			path = ../Classes/runtime;
 			sourceTree = "<group>";
 		};
 		C03781AF18BF654500FE4F13 /* Products */ = {
@@ -1208,12 +1126,8 @@
 			children = (
 				9F91057419F5614700AD5CAB /* quick-src */,
 				15427CE2198F237300DC375D /* lua_module_register.h */,
-				C00FD4891938512100C6382D /* runtime */,
 				C033B51A191B337200D06937 /* VisibleRect.cpp */,
 				C033B51B191B337200D06937 /* VisibleRect.h */,
-				C06C3794191A1D1E00617BED /* ConfigParser.cpp */,
-				C06C3795191A1D1E00617BED /* ConfigParser.h */,
-				C0619CD61896894800872C26 /* Runtime_ios-mac.mm */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
 			);
@@ -1223,7 +1137,6 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C05D1C111923449100B808A4 /* config.json */,
 				C03781B718BF655400FE4F13 /* res */,
 				C03781B818BF655400FE4F13 /* src */,
 			);
@@ -1280,12 +1193,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				TargetAttributes = {
-					F293B3C715EB7BE500256477 = {
-					};
-				};
 			};
-			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */;
+			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "xxx" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1353,7 +1262,6 @@
 				C03781BC18BF655400FE4F13 /* src in Resources */,
 				F405C6C919ED14AA005AD31C /* MainMenu.xib in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
-				C05D1C131923449100B808A4 /* config.json in Resources */,
 				9F91079E19F5704400AD5CAB /* ConsoleWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1381,7 +1289,6 @@
 				C03781BB18BF655400FE4F13 /* src in Resources */,
 				5091733817ECE17A00D62437 /* Icon-50.png in Resources */,
 				5023812117EBBCAC00990C9B /* Icon-72.png in Resources */,
-				C05D1C121923449100B808A4 /* config.json in Resources */,
 				521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1409,22 +1316,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87BA718C1A44A57100929C43 /* FileServer.cpp in Sources */,
-				AB6CB6F31A1F275E009C2562 /* ConnectWaitLayer.cpp in Sources */,
-				C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				49C656611A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
-				C00FD4971938512100C6382D /* PlayEnable_png.cpp in Sources */,
 				9F91079F19F5704400AD5CAB /* ConsoleWindowController.m in Sources */,
 				9F91076F19F5614900AD5CAB /* lua_cjson.c in Sources */,
 				9F91070F19F5614900AD5CAB /* FilterShaders.cpp in Sources */,
-				C00FD4951938512100C6382D /* PlayDisable_png.cpp in Sources */,
-				9F91079719F56A6600AD5CAB /* SimulatorConfig.cpp in Sources */,
 				C033B51D191B337200D06937 /* VisibleRect.cpp in Sources */,
-				C00FD49D1938512100C6382D /* Shine_png.cpp in Sources */,
 				9F91074519F5614900AD5CAB /* SBJsonParser.m in Sources */,
 				9F91074D19F5614900AD5CAB /* ReachabilityIOSMac.m in Sources */,
-				15AA9649199B6D4600725633 /* lua_debugger.c in Sources */,
 				9F9106D119F5614900AD5CAB /* CCHueFilter.cpp in Sources */,
 				49C656591A39A1A200603AF5 /* nanovg.c in Sources */,
 				9F91076D19F5614900AD5CAB /* fpconv.c in Sources */,
@@ -1444,14 +1343,11 @@
 				9F9106BD19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */,
 				9F9106DD19F5614900AD5CAB /* CCTestFilter.cpp in Sources */,
 				9F9106DF19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */,
-				C00FD4991938512100C6382D /* Portrait_png.cpp in Sources */,
 				9F9106C119F5614900AD5CAB /* CCContrastFilter.cpp in Sources */,
 				9F9106C719F5614900AD5CAB /* CCExposureFilter.cpp in Sources */,
-				C06C3797191A1D1E00617BED /* ConfigParser.cpp in Sources */,
 				9F91077919F5614900AD5CAB /* lpack.c in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
 				9F91074B19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
-				C00FD49B1938512100C6382D /* Runtime.cpp in Sources */,
 				9F91072319F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				9F91077D19F5614900AD5CAB /* sqlite3.c in Sources */,
 				49C656571A39A1A200603AF5 /* NVGNode.cpp in Sources */,
@@ -1467,22 +1363,19 @@
 				9F9106C319F5614900AD5CAB /* CCCustomFilter.cpp in Sources */,
 				9F91078119F5614900AD5CAB /* lua_zlib.c in Sources */,
 				9F9106CD19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */,
-				C0619CD81896894800872C26 /* Runtime_ios-mac.mm in Sources */,
 				9F9106D319F5614900AD5CAB /* CCMaskFilter.cpp in Sources */,
 				9F91077119F5614900AD5CAB /* strbuf.c in Sources */,
-				3EB5152D19528284006966AA /* Protos.pb.cc in Sources */,
 				9F9106BF19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */,
 				9F91077F19F5614900AD5CAB /* lua_extensions_more.c in Sources */,
 				9F91074F19F5614900AD5CAB /* CCCryptoMac.mm in Sources */,
 				9F9106C919F5614900AD5CAB /* CCFilter.cpp in Sources */,
-				C00FD4931938512100C6382D /* Landscape_png.cpp in Sources */,
 				9F91074719F5614900AD5CAB /* SBJsonWriter.m in Sources */,
 				9F91078E19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */,
 				9F9106E119F5614900AD5CAB /* ccFilterShaders.cpp in Sources */,
+				0A54F1641BC17DE60018E100 /* AppController.mm in Sources */,
 				9F9106CF19F5614900AD5CAB /* CCHazeFilter.cpp in Sources */,
 				9F9106CB19F5614900AD5CAB /* CCGammaFilter.cpp in Sources */,
 				9F9106DB19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */,
-				87BA71911A44A5CB00929C43 /* ConsoleCommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1490,37 +1383,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15AA9648199B6D4600725633 /* lua_debugger.c in Sources */,
 				9F91074819F5614900AD5CAB /* OpenUDIDIOS.m in Sources */,
 				9F9106D619F5614900AD5CAB /* CCSaturationFilter.cpp in Sources */,
 				9F91073819F5614900AD5CAB /* CCStore.mm in Sources */,
 				9F91073619F5614900AD5CAB /* CCNativeIOS.mm in Sources */,
 				9F91074219F5614900AD5CAB /* SBJsonBase.m in Sources */,
 				9F9106E019F5614900AD5CAB /* ccFilterShaders.cpp in Sources */,
-				87BA718B1A44A57100929C43 /* FileServer.cpp in Sources */,
 				49C656541A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */,
 				9F91078D19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */,
 				9F9106D819F5614900AD5CAB /* CCSepiaFilter.cpp in Sources */,
 				49C6565E1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */,
 				9F9106DC19F5614900AD5CAB /* CCTestFilter.cpp in Sources */,
 				49C656601A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
-				C00FD4981938512100C6382D /* Portrait_png.cpp in Sources */,
 				9F91074A19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
 				9F91071E19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */,
 				9F9106D219F5614900AD5CAB /* CCMaskFilter.cpp in Sources */,
 				9F9106DE19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */,
 				9F9106CC19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */,
-				9F91079619F56A6600AD5CAB /* SimulatorConfig.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
-				C00FD4921938512100C6382D /* Landscape_png.cpp in Sources */,
 				9F91074019F5614900AD5CAB /* SBJSON.m in Sources */,
 				9F91073E19F5614900AD5CAB /* CCStoreReceiptVerifyRequestIOS.mm in Sources */,
 				9F91072219F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				9F91076819F5614900AD5CAB /* CCStoreProduct.cpp in Sources */,
-				C00FD49A1938512100C6382D /* Runtime.cpp in Sources */,
 				9F91072619F5614900AD5CAB /* CCHTTPRequest.cpp in Sources */,
-				87BA71901A44A5CA00929C43 /* ConsoleCommand.cpp in Sources */,
 				9F9106C219F5614900AD5CAB /* CCCustomFilter.cpp in Sources */,
 				9F9106BE19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */,
 				9F9106CE19F5614900AD5CAB /* CCHazeFilter.cpp in Sources */,
@@ -1531,20 +1417,15 @@
 				9F91073419F5614900AD5CAB /* CCNative.mm in Sources */,
 				9F91077819F5614900AD5CAB /* lpack.c in Sources */,
 				9F91079419F56A6600AD5CAB /* ProjectConfig.cpp in Sources */,
-				C06C3796191A1D1E00617BED /* ConfigParser.cpp in Sources */,
 				9F9106C019F5614900AD5CAB /* CCContrastFilter.cpp in Sources */,
-				C00FD4961938512100C6382D /* PlayEnable_png.cpp in Sources */,
 				49C656581A39A1A200603AF5 /* nanovg.c in Sources */,
 				49C656561A39A1A200603AF5 /* NVGNode.cpp in Sources */,
-				3EB5152C19528284006966AA /* Protos.pb.cc in Sources */,
 				9F9106D419F5614900AD5CAB /* CCRGBFilter.cpp in Sources */,
 				9F91077019F5614900AD5CAB /* strbuf.c in Sources */,
-				C00FD4941938512100C6382D /* PlayDisable_png.cpp in Sources */,
 				9F91077619F5614900AD5CAB /* lfs.c in Sources */,
 				9F91077C19F5614900AD5CAB /* sqlite3.c in Sources */,
 				9F91076E19F5614900AD5CAB /* lua_cjson.c in Sources */,
 				9F9106D019F5614900AD5CAB /* CCHueFilter.cpp in Sources */,
-				C00FD49C1938512100C6382D /* Shine_png.cpp in Sources */,
 				9F9106B619F5614900AD5CAB /* CCCrypto.cpp in Sources */,
 				9F91074619F5614900AD5CAB /* SBJsonWriter.m in Sources */,
 				9F9106BC19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */,
@@ -1554,7 +1435,6 @@
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				9F91072819F5614900AD5CAB /* CCNetwork.cpp in Sources */,
 				9F91078719F561CD00AD5CAB /* HelperFunc.cpp in Sources */,
-				87BA718F1A44A5BF00929C43 /* ConnectWaitLayer.cpp in Sources */,
 				9F91073C19F5614900AD5CAB /* CCStorePaymentTransactionWrapper.mm in Sources */,
 				9F91070E19F5614900AD5CAB /* FilterShaders.cpp in Sources */,
 				9F9106C419F5614900AD5CAB /* CCDropShadowFilter.cpp in Sources */,
@@ -1562,7 +1442,6 @@
 				C033B51C191B337200D06937 /* VisibleRect.cpp in Sources */,
 				9F91076C19F5614900AD5CAB /* fpconv.c in Sources */,
 				9F9106C619F5614900AD5CAB /* CCExposureFilter.cpp in Sources */,
-				C0619CD71896894800872C26 /* Runtime_ios-mac.mm in Sources */,
 				9F9106DA19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */,
 				9F9106CA19F5614900AD5CAB /* CCGammaFilter.cpp in Sources */,
 				9F91071A19F5614900AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp in Sources */,

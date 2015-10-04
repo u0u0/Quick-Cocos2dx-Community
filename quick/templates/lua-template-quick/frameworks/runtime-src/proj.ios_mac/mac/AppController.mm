@@ -28,19 +28,16 @@
 #include <string>
 #include <vector>
 
-#import "SimulatorApp.h"
+#import "AppController.h"
 #include "AppDelegate.h"
 #include "glfw3.h"
 #include "glfw3native.h"
-#include "Runtime.h"
-#include "ConfigParser.h"
 
 #include "cocos2d.h"
 
 using namespace cocos2d;
 
 bool g_landscape = false;
-bool g_windTop = false;
 cocos2d::Size g_screenSize;
 GLViewImpl* g_eglView = nullptr;
 
@@ -83,62 +80,13 @@ std::string getCurAppName(void)
     [self startup];
 }
 
-
 #pragma mark -
 #pragma mark functions
-
-- (void) createSimulator:(NSString*)viewName viewWidth:(float)width viewHeight:(float)height factor:(float)frameZoomFactor
-{
-    if (g_eglView)
-    {
-        return;
-    }
-    
-    if(!g_landscape)
-    {
-        float tmpvalue =width;
-        width = height;
-        height = tmpvalue;
-    }
-    g_windTop = ConfigParser::getInstance()->isWindowTop();
-    g_eglView = GLViewImpl::createWithRect([viewName cStringUsingEncoding:NSUTF8StringEncoding],cocos2d::Rect(0.0f,0.0f,width,height),frameZoomFactor);
-    auto director = Director::getInstance();
-    director->setOpenGLView(g_eglView);
-
-    _window = glfwGetCocoaWindow(g_eglView->getWindow());
-    [[NSApplication sharedApplication] setDelegate: self];
-    
-    [self createViewMenu];
-    [self updateMenu];
-    [_window center];
-    
-    [_window becomeFirstResponder];
-    [_window makeKeyAndOrderFront:self];
-}
-
-void createSimulator(const char* viewName, float width, float height,bool isLandscape,float frameZoomFactor)
-{
-    if(g_nsAppDelegate)
-    {
-        g_landscape = isLandscape;
-        if(height > width)
-        {
-            float tmpvalue =width;
-            width = height;
-            height = tmpvalue;
-        }
-        g_screenSize.width = width;
-        g_screenSize.height = height;
-        
-        [g_nsAppDelegate createSimulator:[NSString stringWithUTF8String:viewName] viewWidth:width viewHeight:height factor:frameZoomFactor];
-    }
-    
-}
 
 - (void) updateProjectFromCommandLineArgs:(ProjectConfig*)config
 {
     config->setShowConsole(true);
-    config->setDebuggerType(kCCLuaDebuggerCodeIDE);
+    config->setDebuggerType(kCCLuaDebuggerNone);
     NSArray *nsargs = [[NSProcessInfo processInfo] arguments];
     long n = [nsargs count];
     if (n >= 2)
@@ -151,11 +99,6 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
         }
         config->parseCommandLine(args);
     }
-    
-//    if (config->getProjectDir().length() == 0)
-//    {
-//        config->resetToWelcome();
-//    }
 }
 
 - (void) startup
@@ -165,21 +108,8 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
         [self openConsoleWindow];
     }
     
-//    NSArray *args = [[NSProcessInfo processInfo] arguments];
-//    
-//    if (args!=nullptr && [args count]>=2) {
-//        extern std::string g_resourcePath;
-//        g_resourcePath = [[args objectAtIndex:1]UTF8String];
-//        if (g_resourcePath.at(0) != '/') {
-//            g_resourcePath="";
-//        }
-//    }
     g_nsAppDelegate =self;
     AppDelegate app;
-    if (_project.getDebuggerType()==kCCLuaDebuggerNone)
-    {
-        app.setLaunchMode(0);
-    }
     Application::getInstance()->run();
     // After run, application needs to be terminated immediately.
     [[NSApplication sharedApplication] terminate: self];
@@ -229,23 +159,6 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
     
 }
 
-- (void) createViewMenu
-{
-    
-    NSMenu *submenu = [[[_window menu] itemWithTitle:@"View"] submenu];
-
-    for (int i = ConfigParser::getInstance()->getScreenSizeCount() - 1; i >= 0; --i)
-    {
-        SimulatorScreenSize size = ConfigParser::getInstance()->getScreenSize(i);
-        NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:[NSString stringWithCString:size.title.c_str() encoding:NSUTF8StringEncoding]
-                                                       action:@selector(onViewChangeFrameSize:)
-                                                keyEquivalent:@""] autorelease];
-        [item setTag:i];
-        [submenu insertItem:item atIndex:0];
-    }
-}
-
-
 - (void) updateMenu
 {
 
@@ -265,11 +178,11 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
     
     NSMenu *menuControl = [[[_window menu] itemWithTitle:@"Control"] submenu];
     NSMenuItem *itemTop = [menuControl itemWithTitle:@"Keep Window Top"];
-    if (g_windTop) {
-        [_window setLevel:NSFloatingWindowLevel];
-        [itemTop setState:NSOnState];
-    }
-    else
+//    if (g_windTop) {
+//        [_window setLevel:NSFloatingWindowLevel];
+//        [itemTop setState:NSOnState];
+//    }
+//    else
     {
         [_window setLevel:NSNormalWindowLevel];
         [itemTop setState:NSOffState];
@@ -310,21 +223,6 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
         width = height;
         height = w;
     }
-    
-    int count = ConfigParser::getInstance()->getScreenSizeCount();
-    for (int i = 0; i < count; ++i)
-    {
-        bool bSel = false;
-        SimulatorScreenSize size = ConfigParser::getInstance()->getScreenSize(i);
-        if (size.width == width && size.height == height)
-        {
-            bSel = true;
-        }
-        NSMenuItem *itemView = [menuScreen itemWithTitle:[NSString stringWithUTF8String:size.title.c_str()]];
-        [itemView setState:(bSel? NSOnState : NSOffState)];
-    }
-    
-
 }
 
 
@@ -364,7 +262,6 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
 
 - (IBAction) onSetTop:(id)sender
 {
-    g_windTop = !g_windTop;
     [self updateMenu];
 }
 
@@ -410,20 +307,6 @@ void createSimulator(const char* viewName, float width, float height,bool isLand
     NSArray* args=[[NSArray alloc] initWithObjects:@" ", nil];
     [self relaunch:args];
 }
-
-
-- (IBAction) onViewChangeFrameSize:(id)sender
-{
-    NSInteger index = [sender tag];
-    if (index >= 0 && index < ConfigParser::getInstance()->getScreenSizeCount())
-    {
-        SimulatorScreenSize size = ConfigParser::getInstance()->getScreenSize(index);
-        g_screenSize.width = size.width;
-        g_screenSize.height = size.height;
-        [self updateView];
-    }
-}
-
 
 - (IBAction) onScreenZoomOut:(id)sender
 {

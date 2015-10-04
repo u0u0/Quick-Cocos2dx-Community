@@ -34,11 +34,6 @@ public:
     @param  the pointer of the application
     */
     virtual void applicationWillEnterForeground();
-    
-    void setLaunchMode(int mode);
-    
-private:
-    int _launchMode;
 };
 
 #endif  // __APP_DELEGATE_H__
