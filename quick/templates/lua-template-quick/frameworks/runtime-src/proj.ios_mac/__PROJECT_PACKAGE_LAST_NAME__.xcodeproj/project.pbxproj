@@ -1194,7 +1194,7 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 			};
-			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "xxx" */;
+			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
