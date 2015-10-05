@@ -14,11 +14,5 @@
             "from": "../../../res",
             "to": "res"
         }
-    ],
-    "must_copy_resources": [
-        {
-            "from": "../../../config.json",
-            "to": ""
-        }
     ]
 }

@@ -3,7 +3,6 @@
 #include "platform/android/jni/JniHelper.h"
 #include <jni.h>
 #include <android/log.h>
-#include "ConfigParser.h"
 #include "PluginJniHelper.h"
 
 #define  LOG_TAG    "main"
@@ -21,21 +20,3 @@ void cocos_android_app_init (JNIEnv* env, jobject thiz) {
 	env->GetJavaVM(&vm);
 	PluginJniHelper::setJavaVM(vm);
 }
-
-extern "C"
-{
-	bool Java_org_cocos2dx_lua_AppActivity_nativeIsLandScape(JNIEnv *env, jobject thisz)
-	{
-		return ConfigParser::getInstance()->isLanscape();
-	}
-
-	bool Java_org_cocos2dx_lua_AppActivity_nativeIsDebug(JNIEnv *env, jobject thisz)
-	{
-#if (COCOS2D_DEBUG > 0)
-        return true;
-#else
-        return false;    
-#endif
-	}
-}
-
