@@ -6,12 +6,10 @@ define('BIN_DIR', rtrim(dirname(dirname(__DIR__)), '/\\'));
 if (DS == '/')
 {
     define('LUAJIT_BIN', BIN_DIR . '/mac/luajit');
-    define('LUA_BIN', BIN_DIR . '/mac/luac');
 }
 else
 {
     define('LUAJIT_BIN', BIN_DIR . '\\win32\\luajit.exe');
-    define('LUA_BIN', BIN_DIR . '\\win32\\luac.exe');
 }
 
 // helper functions
@@ -143,7 +141,7 @@ function findFiles($dir, array & $files)
     closedir($dh);
 }
 
-function getScriptFileBytecodes($path, $tmpfile, $usingluajit = 0)
+function getScriptFileBytecodes($path, $tmpfile)
 {
     if (!file_exists($path))
     {
@@ -162,14 +160,7 @@ function getScriptFileBytecodes($path, $tmpfile, $usingluajit = 0)
 
     @mkdir(pathinfo($tmpfile, PATHINFO_DIRNAME), 0777, true);
 
-    if ($usingluajit != 0)
-    {
-        $command = sprintf('%s -b -s "%s" "%s"', LUAJIT_BIN, $path, $tmpfile);
-    }
-    else
-    {
-        $command = sprintf('%s -o "%s" "%s"', LUA_BIN, $tmpfile, $path); 
-    }
+	$command = sprintf('%s -b -s "%s" "%s"', LUAJIT_BIN, $path, $tmpfile);
     passthru($command);
 
     if (!file_exists($tmpfile))
