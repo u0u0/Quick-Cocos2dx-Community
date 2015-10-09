@@ -5,7 +5,6 @@
 #include "cocos2d.h"
 #include "AppDelegate.h"
 #include "ProjectConfig/ProjectConfig.h"
-#include "ProjectConfig/SimulatorConfig.h"
 
 #include "PlayerMacros.h"
 #include "PlayerProtocol.h"

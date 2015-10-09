@@ -236,7 +236,7 @@ void PlayerWin::loadLuaConfig()
     luaopen_PlayerLuaCore_Manual(pEngine->getLuaStack()->getLuaState());
 
     // set env
-    string quickRootPath = SimulatorConfig::getInstance()->getQuickCocos2dxRootPath();
+	string quickRootPath = _project.getQuickCocos2dxRootPath();
     quickRootPath = convertPathFormatToUnixStyle(quickRootPath);
 
     string env = "__G_QUICK_V3_ROOT__=\"";
@@ -292,7 +292,7 @@ int PlayerWin::run()
         MessageBox("Please run \"setup_win.bat\", set Quick-Cocos2dx-Community root path.", "Quick-Cocos2dx-Community player error");
         return 1;
     }
-    SimulatorConfig::getInstance()->setQuickCocos2dxRootPath(QUICK_V3_ROOT);
+	_project.setQuickCocos2dxRootPath(QUICK_V3_ROOT);
 
     // load project config from command line args
     vector<string> args;
@@ -311,7 +311,6 @@ int PlayerWin::run()
         {
             // for Code IDE before RC2
             _project.setProjectDir(args.at(1));
-            _project.setDebuggerType(kCCLuaDebuggerCodeIDE);
         }
         else
         {
@@ -322,7 +321,7 @@ int PlayerWin::run()
     // set framework path
     if (!_project.isLoadPrecompiledFramework())
     {
-        FileUtils::getInstance()->addSearchPath(SimulatorConfig::getInstance()->getQuickCocos2dxRootPath() + "quick/");
+		FileUtils::getInstance()->addSearchPath(_project.getQuickCocos2dxRootPath() + "quick/");
     }
 
     // create the application instance

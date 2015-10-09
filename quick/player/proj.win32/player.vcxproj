@@ -68,7 +68,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\..\lib\quick-src;$(ProjectDir)..\..\lib\quick-src\extra;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external\lua\luajit\include;$(ProjectDir)..\Classes;$(ProjectDir)..\..\lib\quick-src;$(ProjectDir)..\..\lib\quick-src\extra;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -126,7 +126,7 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\..\lib\quick-src\extra;$(ProjectDir)..\..\lib\quick-src;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external\lua\luajit\include;$(ProjectDir)..\Classes;$(ProjectDir)..\..\lib\quick-src\extra;$(ProjectDir)..\..\lib\quick-src;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -192,7 +192,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_image.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\ConfigParser.h" />
     <ClInclude Include="..\Classes\PlayerEditBoxServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerFileDialogServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerLuaCore.h" />
@@ -279,14 +278,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\platform\win32\CCNativeWin32.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\platform\win32\CCNativeWin32def.h" />
     <ClInclude Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.h" />
-    <ClInclude Include="..\..\lib\quick-src\ProjectConfig\SimulatorConfig.h" />
-    <ClInclude Include="..\Classes\runtime\ConnectWaitLayer.h" />
-    <ClInclude Include="..\Classes\runtime\ConsoleCommand.h" />
-    <ClInclude Include="..\Classes\runtime\FileServer.h" />
-    <ClInclude Include="..\Classes\runtime\lua_debugger.h" />
-    <ClInclude Include="..\Classes\runtime\Protos.pb.h" />
-    <ClInclude Include="..\Classes\runtime\ResData.h" />
-    <ClInclude Include="..\Classes\runtime\Runtime.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="PlayerEditBoxServiceWin.h" />
     <ClInclude Include="PlayerFileDialogServiceWin.h" />
@@ -298,27 +289,12 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\extension_set.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\generated_message_util.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\io\coded_stream.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\io\zero_copy_stream.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\io\zero_copy_stream_impl.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\io\zero_copy_stream_impl_lite.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\message_lite.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\repeated_field.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\stubs\atomicops_internals_x86_gcc.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\stubs\atomicops_internals_x86_msvc.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\stubs\common.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\stubs\once.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\stubs\stringprintf.cc" />
-    <ClCompile Include="..\..\..\external\protobuf-lite\src\google\protobuf\wire_format_lite.cc" />
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg.c" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\ConfigParser.cpp" />
     <ClCompile Include="..\Classes\PlayerLuaCore.cpp" />
     <ClCompile Include="..\Classes\PlayerLuaCoreManual.cpp" />
     <ClCompile Include="..\Classes\PlayerMenuServiceProtocol.cpp" />
@@ -444,18 +420,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\..\lib\quick-src\extra\platform\win32\CCNativeWin32.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\platform\win32\CCNetworkWin32.cpp" />
     <ClCompile Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\ProjectConfig\SimulatorConfig.cpp" />
-    <ClCompile Include="..\Classes\runtime\ConnectWaitLayer.cpp" />
-    <ClCompile Include="..\Classes\runtime\ConsoleCommand.cpp" />
-    <ClCompile Include="..\Classes\runtime\FileServer.cpp" />
-    <ClCompile Include="..\Classes\runtime\Landscape_png.cpp" />
-    <ClCompile Include="..\Classes\runtime\lua_debugger.c" />
-    <ClCompile Include="..\Classes\runtime\PlayDisable_png.cpp" />
-    <ClCompile Include="..\Classes\runtime\PlayEnable_png.cpp" />
-    <ClCompile Include="..\Classes\runtime\Portrait_png.cpp" />
-    <ClCompile Include="..\Classes\runtime\Protos.pb.cc" />
-    <ClCompile Include="..\Classes\runtime\Runtime.cpp" />
-    <ClCompile Include="..\Classes\runtime\Shine_png.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="PlayerEditBoxServiceWin.cpp" />
     <ClCompile Include="PlayerFileDialogServiceWin.cpp" />
@@ -463,7 +427,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="PlayerMessageBoxServiceWin.cpp" />
     <ClCompile Include="PlayerTaskServiceWin.cpp" />
     <ClCompile Include="PlayerWin.cpp" />
-    <ClCompile Include="Runtime_win32.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
