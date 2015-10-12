@@ -17,9 +17,5 @@
         }
     ],
     "must_copy_resources": [
-        {
-            "from": "../../../config.json",
-            "to": ""
-        }
     ]
 }

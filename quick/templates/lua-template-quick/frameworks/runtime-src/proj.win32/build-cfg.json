@@ -7,10 +7,6 @@
         {
             "from": "../../../res",
             "to": "res"
-        },
-        {
-            "from": "../../../config.json",
-            "to": ""
         }
     ],
     "must_copy_resources": [
