@@ -22,6 +22,7 @@
 -- refresh bone world matrix
 -- @function [parent=#Skeleton3D] updateBoneMatrix 
 -- @param self
+-- @return Skeleton3D#Skeleton3D self (return value: cc.Skeleton3D)
         
 --------------------------------
 -- get bone
@@ -34,7 +35,7 @@
 -- get & set root bone
 -- @function [parent=#Skeleton3D] getRootCount 
 -- @param self
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- get bone index
@@ -47,6 +48,6 @@
 -- get total bone count
 -- @function [parent=#Skeleton3D] getBoneCount 
 -- @param self
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 return nil

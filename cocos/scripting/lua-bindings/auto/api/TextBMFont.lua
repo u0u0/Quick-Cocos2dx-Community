@@ -9,6 +9,7 @@
 -- @function [parent=#TextBMFont] setFntFile 
 -- @param self
 -- @param #string fileName
+-- @return TextBMFont#TextBMFont self (return value: ccui.TextBMFont)
         
 --------------------------------
 -- Gets the string length of the label.<br>
@@ -17,13 +18,14 @@
 -- return  string length.
 -- @function [parent=#TextBMFont] getStringLength 
 -- @param self
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
 -- @function [parent=#TextBMFont] setString 
 -- @param self
 -- @param #string value
+-- @return TextBMFont#TextBMFont self (return value: ccui.TextBMFont)
         
 --------------------------------
 -- 
@@ -68,5 +70,6 @@
 -- Default constructor
 -- @function [parent=#TextBMFont] TextBMFont 
 -- @param self
+-- @return TextBMFont#TextBMFont self (return value: ccui.TextBMFont)
         
 return nil

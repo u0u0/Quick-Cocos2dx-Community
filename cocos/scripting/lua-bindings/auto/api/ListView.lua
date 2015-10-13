@@ -11,12 +11,13 @@
 -- @function [parent=#ListView] getIndex 
 -- @param self
 -- @param #ccui.Widget item
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
 -- @function [parent=#ListView] removeAllItems 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Changes the gravity of listview.<br>
@@ -24,12 +25,14 @@
 -- @function [parent=#ListView] setGravity 
 -- @param self
 -- @param #int gravity
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Push back custom item into listview.
 -- @function [parent=#ListView] pushBackCustomItem 
 -- @param self
 -- @param #ccui.Widget item
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Returns the item container.
@@ -42,24 +45,27 @@
 -- param index of item.
 -- @function [parent=#ListView] removeItem 
 -- @param self
--- @param #long index
+-- @param #int index
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
 -- @function [parent=#ListView] getCurSelectedIndex 
 -- @param self
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- Insert a default item(create by a cloned model) into listview.
 -- @function [parent=#ListView] insertDefaultItem 
 -- @param self
--- @param #long index
+-- @param #int index
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
 -- @function [parent=#ListView] requestRefreshView 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Changes the margin between each item.<br>
@@ -67,16 +73,19 @@
 -- @function [parent=#ListView] setItemsMargin 
 -- @param self
 -- @param #float margin
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
 -- @function [parent=#ListView] refreshView 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Removes the last item of listview.
 -- @function [parent=#ListView] removeLastItem 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
@@ -89,6 +98,7 @@
 -- @function [parent=#ListView] addEventListener 
 -- @param self
 -- @param #function callback
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Returns a item whose index is same as the parameter.<br>
@@ -96,7 +106,7 @@
 -- return the item widget.
 -- @function [parent=#ListView] getItem 
 -- @param self
--- @param #long index
+-- @param #int index
 -- @return Widget#Widget ret (return value: ccui.Widget)
         
 --------------------------------
@@ -106,23 +116,27 @@
 -- @function [parent=#ListView] setItemModel 
 -- @param self
 -- @param #ccui.Widget model
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
 -- @function [parent=#ListView] doLayout 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Push back a default item(create by a cloned model) into listview.
 -- @function [parent=#ListView] pushBackDefaultItem 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Insert custom item into listview.
 -- @function [parent=#ListView] insertCustomItem 
 -- @param self
 -- @param #ccui.Widget item
--- @param #long index
+-- @param #int index
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Allocates and initializes.
@@ -146,6 +160,7 @@
 -- @param #cc.Node child
 -- @param #int zOrder
 -- @param #string name
+-- @return ListView#ListView self (return value: ccui.ListView)
 
 --------------------------------
 -- Changes scroll direction of scrollview.<br>
@@ -154,6 +169,7 @@
 -- @function [parent=#ListView] setDirection 
 -- @param self
 -- @param #int dir
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
@@ -166,11 +182,13 @@
 -- @function [parent=#ListView] removeAllChildrenWithCleanup 
 -- @param self
 -- @param #bool cleanup
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
 -- @function [parent=#ListView] removeAllChildren 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- 
@@ -178,10 +196,12 @@
 -- @param self
 -- @param #cc.Node child
 -- @param #bool cleaup
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 --------------------------------
 -- Default constructor
 -- @function [parent=#ListView] ListView 
 -- @param self
+-- @return ListView#ListView self (return value: ccui.ListView)
         
 return nil
