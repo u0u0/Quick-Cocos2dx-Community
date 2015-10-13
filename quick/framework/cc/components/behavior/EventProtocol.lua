@@ -120,6 +120,9 @@ end
 function EventProtocol:hasEventListener(eventName)
     eventName = string.upper(tostring(eventName))
     local t = self.listeners_[eventName]
+    if not t then
+        return false
+    end
     for _, __ in pairs(t) do
         return true
     end

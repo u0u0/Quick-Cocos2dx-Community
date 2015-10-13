@@ -17,7 +17,7 @@ local function lazy_init()
         if nil ~= dp_shader then
             dp_colorLocation = gl.getUniformLocation( dp_shader:getProgram(), "u_color")
             dp_pointSizeLocation = gl.getUniformLocation( dp_shader:getProgram(), "u_pointSize")
-            dp_Initialized = true
+            dp_initialized = true
         end
     end
 

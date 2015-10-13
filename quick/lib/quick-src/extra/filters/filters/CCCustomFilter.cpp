@@ -104,7 +104,7 @@ void CustomFilter::setUniforms(GLProgram* $cgp)
                     case 4: {
                         _pProgramState->setUniformVec4(name,
                             Vec4(it->value[0u].GetDouble(), it->value[1].GetDouble(),
-                                 it->value[2].GetDouble(), it->value[2].GetDouble()));
+                                 it->value[2].GetDouble(), it->value[3].GetDouble()));
                         break;
                     }
                     default: {

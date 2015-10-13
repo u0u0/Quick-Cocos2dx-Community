@@ -86,6 +86,8 @@ function UILoadingBar:ctor(params)
 	self.bar:setPosition(0, 0)
 	self:setPercent(params.percent or 0)
 	self:addChild(self.bar)
+
+	self.args_ = {params}
 end
 
 -- start --
@@ -99,9 +101,10 @@ end
 -- end --
 
 function UILoadingBar:setPercent(percent)
+	self.percent_ = percent
 	local rect = cc.rect(self.viewRect_.x, self.viewRect_.y,
 		self.viewRect_.width, self.viewRect_.height)
-	local newWidth = rect.width*percent/100
+	local newWidth = rect.width*self.percent_/100
 
 	rect.x = 0
 	rect.y = 0
@@ -122,6 +125,19 @@ function UILoadingBar:setPercent(percent)
 	end
 
 	return self
+end
+
+-- start --
+
+--------------------------------
+-- 得到进度控件的进度
+-- @function [parent=#UILoadingBar] getPercent
+-- @return number 进度值
+
+-- end --
+
+function UILoadingBar:getPercent()
+	return self.percent_
 end
 
 -- start --
@@ -160,6 +176,12 @@ function UILoadingBar:setViewRect(rect)
 	self.bar:setContentSize(rect.width, rect.height)
 
 	return self
+end
+
+function UILoadingBar:createCloneInstance_()
+	self.args_.viewRect = self.viewRect_
+	self.args_.direction = self.direction_
+	return UILoadingBar.new(unpack(self.args_))
 end
 
 return UILoadingBar

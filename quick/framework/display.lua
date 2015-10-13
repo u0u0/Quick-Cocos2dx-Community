@@ -496,8 +496,12 @@ function display.newColorLayer(color)
         node:setTouchEnabled(true)
         node:setTouchSwallowEnabled(true)
 
-        node.setContentSize = layer.setContentSize
-        node.getContentSize = layer.getContentSize
+        node.setContentSize = function(_, ...)
+            layer:setContentSize(...)
+        end
+        node.getContentSize = function()
+            return layer:getContentSize()
+        end
     else
         node = cc.LayerColor:create(color)
     end
@@ -829,7 +833,7 @@ end
 function display.newFilteredSprite(filename, filters, params)
     local __one = {class=cc.FilteredSpriteWithOne}
     local __multi = {class=cc.FilteredSpriteWithMulti}
-    if not filters then return display.newSprite(filtename, nil,nil , __one) end
+    if not filters then return display.newSprite(filename, nil,nil , __one) end
     local __sp = nil
     local __type = type(filters)
     if __type == "userdata" then __type = tolua.type(filters) end
@@ -1305,12 +1309,17 @@ function display.newTTFLabel(params)
     local label
     if cc.FileUtils:getInstance():isFileExist(font) then
         label = cc.Label:createWithTTF(text, font, size, dimensions, textAlign, textValign)
+        if label then
+            label:setColor(color)
+        end
     else
         label = cc.Label:createWithSystemFont(text, font, size, dimensions, textAlign, textValign)
+        if label then
+            label:setTextColor(color)
+        end
     end
 
     if label then
-        label:setColor(color)
         if x and y then label:setPosition(x, y) end
     end
 
@@ -1430,7 +1439,7 @@ function display.addSpriteFrames(plistFilename, image, handler)
         else
             sharedSpriteFrameCache:addSpriteFrames(plistFilename, image)
         end
-        cc.Texture2D:setDefaultAlphaPixelFormat(cc.TEXTURE2D_PIXEL_FORMAT_RGBA8888)
+        cc.Texture2D:setDefaultAlphaPixelFormat(cc.TEXTURE2_D_PIXEL_FORMAT_BGR_A8888)
     else
         if async then
             sharedTextureCache:addImageAsync(image, asyncHandler)
@@ -1471,7 +1480,7 @@ end
 
 设置材质格式。
 
-为了节约内存，我们会使用一些颜色品质较低的材质格式，例如针对背景图使用 cc.TEXTURE2D_PIXEL_FORMAT_RGB565 格式。
+为了节约内存，我们会使用一些颜色品质较低的材质格式，例如针对背景图使用 cc.TEXTURE2_D_PIXEL_FORMAT_RG_B565 格式。
 
 display.setTexturePixelFormat() 可以指定材质文件的材质格式，这样在加载材质文件时就会使用指定的格式。
 

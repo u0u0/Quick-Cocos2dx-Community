@@ -78,7 +78,7 @@ LuaEventNode* LuaNodeManager::getLuaNodeByNode(Node *node, bool toCreate)
     for (auto it = _luaNodes.begin(); it != _luaNodes.end(); ++it)
     {
         auto lt = (LuaEventNode *)*it;
-        if (lt->getActiveNode() == node)  //A detached node maybe use same mem address
+        if (lt->getNodeID() == node->_ID)
         {
             lnode = lt;
             break;

@@ -106,6 +106,8 @@ function UIScrollView:ctor(params)
 			self:update_(...)
 		end)
 	self:scheduleUpdate()
+
+	self.args_ = {params}
 end
 
 function UIScrollView:addBgColorIf(params)
@@ -603,13 +605,13 @@ function UIScrollView:elasticScroll()
 	local cascadeBound = self:getScrollNodeRect()
 	local disX, disY = 0, 0
 	local viewRect = self:getViewRect() -- InWorldSpace()
- 	local t = self:convertToNodeSpace(cc.p(cascadeBound.x, cascadeBound.y))
- 
- 	cascadeBound.x = t.x
-  	cascadeBound.y = t.y
-  	self.scaleToWorldSpace_ = self.scaleToWorldSpace_ or {x=1,y=1}
- 	cascadeBound.width = cascadeBound.width / self.scaleToWorldSpace_.x
- 	cascadeBound.height = cascadeBound.height / self.scaleToWorldSpace_.y
+	local t = self:convertToNodeSpace(cc.p(cascadeBound.x, cascadeBound.y))
+
+	cascadeBound.x = t.x
+	cascadeBound.y = t.y
+	self.scaleToWorldSpace_ = self.scaleToWorldSpace_ or {x=1,y=1}
+	cascadeBound.width = cascadeBound.width / self.scaleToWorldSpace_.x
+	cascadeBound.height = cascadeBound.height / self.scaleToWorldSpace_.y
 
 	-- dump(self.scaleToWorldSpace_, "UIScrollView - scaleToWorldSpace_:")
 	-- dump(cascadeBound, "UIScrollView - cascBoundingBox:")
@@ -669,12 +671,18 @@ end
 -- 是否显示到边缘
 function UIScrollView:isSideShow()
 	local bound = self.scrollNode:getCascadeBoundingBox()
-	if bound.x > self.viewRect_.x
-		or bound.y > self.viewRect_.y
-		or bound.x + bound.width < self.viewRect_.x + self.viewRect_.width
-		or bound.y + bound.height < self.viewRect_.y + self.viewRect_.height then
-		return true
-	end
+    local localPos = self:convertToNodeSpace(cc.p(bound.x, bound.y))
+    local verticalSideShow = (localPos.y > self.viewRect_.y) 
+                           or (localPos.y + bound.height < self.viewRect_.y + self.viewRect_.height)
+    local horizontalSideShow = (localPos.x > self.viewRect_.x)
+                             or (localPos.x + bound.width < self.viewRect_.x + self.viewRect_.width)
+    if UIScrollView.DIRECTION_VERTICAL == self.direction then
+        return verticalSideShow
+    elseif UIScrollView.DIRECTION_HORIZONTAL == self.direction then
+        return horizontalSideShow
+    else
+        return (verticalSideShow or horizontalSideShow)
+    end
 
 	return false
 end
@@ -1001,6 +1009,28 @@ function UIScrollView:fill(nodes,params)
 
   end
 
+end
+
+function UIScrollView:createCloneInstance_()
+    return UIScrollView.new(unpack(self.args_))
+end
+
+function UIScrollView:copyClonedWidgetChildren_(node)
+	local scrollNode = node:getScrollNode()
+	local cloneScrollNode = scrollNode:clone()
+	self:addScrollNode(cloneScrollNode)
+end
+
+function UIScrollView:copySpecialProperties_(node)
+	self:setViewRect(node.viewRect_)
+	self:setDirection(node:getDirection())
+	self:setLayoutPadding(
+		node.layoutPadding.top,
+		node.layoutPadding.right,
+		node.layoutPadding.bottom,
+		node.layoutPadding.left)
+	self:setBounceable(node.bBounce)
+	self:setTouchType(node.touchOnContent)
 end
 
 return UIScrollView

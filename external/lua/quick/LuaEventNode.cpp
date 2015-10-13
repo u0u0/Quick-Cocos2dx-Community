@@ -61,7 +61,7 @@ Node *LuaEventNode::getActiveNode() const
 
 unsigned int LuaEventNode::getNodeID() const
 {
-    return  _nodeID;
+    return _nodeID;
 }
 
 LuaEventNode* LuaEventNode::getParent()

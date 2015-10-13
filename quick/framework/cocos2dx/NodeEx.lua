@@ -88,19 +88,21 @@ end
 测试一个点是否在当前结点区域中
 
 @param tabel point cc.p的点位置,世界坐标
-@param boolean bCascade 是否用结点的所有子结点共同区域计算还是只用本身的区域
+@param boolean isCascade 是否用结点的所有子结点共同区域计算还是只用本身的区域
 
 @return boolean 是否在结点区域中
 
 ]]
-function Node:hitTest(point, bCascade)
+function Node:hitTest(point, isCascade)
     local nsp = self:convertToNodeSpace(point)
     local rect
-    if bCascade then
+    if isCascade then
         rect = self:getCascadeBoundingBox()
     else
         rect = self:getBoundingBox()
     end
+    rect.x = 0
+    rect.y = 0
 
     if cc.rectContainsPoint(rect, nsp) then
         return true
@@ -162,18 +164,50 @@ function Node:setTouchEnabled(enable)
     local func = tolua.getcfunction(self, "setTouchEnabled")
     func(self, enable)
     if not flagNodeTouchInCocos then
-        return
+        return self
     end
     
-    if enable then
-        self:setBaseNodeEventListener()
+    self:setBaseNodeEventListener()
+    return self
+end
+
+function Node:setTouchMode(mode)
+    local func = tolua.getcfunction(self, "setTouchMode")
+    func(self, mode)
+    if not flagNodeTouchInCocos then
+        return self
     end
+    
+    self:setBaseNodeEventListener()
+    return self
+end
+
+function Node:setTouchSwallowEnabled(enable)
+    local func = tolua.getcfunction(self, "setTouchSwallowEnabled")
+    func(self, enable)
+    if not flagNodeTouchInCocos then
+        return self
+    end
+    
+    self:setBaseNodeEventListener()
+    return self
+end
+
+function Node:setTouchCaptureEnabled(enable)
+    local func = tolua.getcfunction(self, "setTouchCaptureEnabled")
+    func(self, enable)
+    if not flagNodeTouchInCocos then
+        return self
+    end
+    
+    self:setBaseNodeEventListener()
+    return self
 end
 
 function Node:setKeypadEnabled(enable)
     if not flagNodeTouchInCocos then
         self:setKeyboardEnabled(enable)
-        return
+        return self
     end
     
     _enable = self._keyboardEnabled or false
@@ -220,7 +254,7 @@ end
 function Node:scheduleUpdate()
     if not flagNodeTouchInCocos then
         tolua.getcfunction(self, "scheduleUpdate")(self)
-        return
+        return self
     end
 
     local listener = function (dt)
@@ -228,6 +262,7 @@ function Node:scheduleUpdate()
     end
 
     self:scheduleUpdateWithPriorityLua(listener, 0) 
+    return self
 end
 
 function Node:setBaseNodeEventListener()
@@ -240,8 +275,7 @@ end
 
 function Node:addNodeEventListener( evt, hdl, tag, priority )
     if not flagNodeTouchInCocos then
-        tolua.getcfunction(self, "addNodeEventListener")(self, evt, hdl, tag, priority)
-        return
+        return tolua.getcfunction(self, "addNodeEventListener")(self, evt, hdl, tag, priority)
     end
 
     priority = priority or 0
@@ -391,7 +425,7 @@ function Node:EventDispatcher( idx, data )
                 end
 
                 if v.enable_ then
-                    listenerRet = v.listener_(event)
+                    local listenerRet = v.listener_(event)
                     if not listenerRet then
                         if idx==cc.NODE_TOUCH_CAPTURE_EVENT then
                             local evtname  = event.name
@@ -420,4 +454,103 @@ function Node:EventDispatcher( idx, data )
     end
 
     return rnval
+end
+
+-- clone related
+
+function Node:clone()
+    local cloneNode = self:createCloneInstance_()
+
+    cloneNode:copyProperties_(self)
+    cloneNode:copySpecialPeerVal_(self)
+    cloneNode:copyClonedWidgetChildren_(self)
+
+    return cloneNode
+end
+
+function Node:createCloneInstance_()
+    local nodeType = tolua.type(self)
+    local cloneNode
+
+    if "cc.Sprite" == nodeType then
+        cloneNode = cc.Sprite:create()
+    elseif "ccui.Scale9Sprite" == nodeType then
+        cloneNode = ccui.Scale9Sprite:create()
+    elseif "cc.LayerColor" == nodeType then
+        local clr = self:getColor()
+        clr.a = self:getOpacity()
+        cloneNode = cc.LayerColor:create(clr)
+    else
+        cloneNode = display.newNode()
+        if "cc.Node" ~= nodeType then
+            print("WARING! treat " .. nodeType .. " as cc.Node")
+        end
+    end
+
+    return cloneNode
+end
+
+function Node:copyClonedWidgetChildren_(node)
+    local children = node:getChildren()
+    if not children or 0 == #children then
+        return
+    end
+
+    for i, child in ipairs(children) do
+        local cloneChild = child:clone()
+        if cloneChild then
+            self:addChild(cloneChild)
+        end
+    end
+end
+
+function Node:copySpecialProperties_(node)
+    local nodeType = tolua.type(self)
+
+    if "cc.Sprite" == nodeType then
+        self:setSpriteFrame(node:getSpriteFrame())
+    elseif "ccui.Scale9Sprite" == nodeType then
+        self:setSpriteFrame(node:getSprite():getSpriteFrame())
+    elseif "cc.LayerColor" == nodeType then
+        self:setTouchEnabled(false)
+    end
+
+    -- copy peer
+    local peer = tolua.getpeer(node)
+    if peer then
+        local clonePeer = clone(peer)
+        tolua.setpeer(self, clonePeer)
+    end
+    
+end
+
+function Node:copyProperties_(node)
+    self:setVisible(node:isVisible())
+    self:setTouchEnabled(node:isTouchEnabled())
+    self:setLocalZOrder(node:getLocalZOrder())
+    self:setTag(node:getTag())
+    self:setName(node:getName())
+    self:setContentSize(node:getContentSize())
+    self:setPosition(node:getPosition())
+    self:setAnchorPoint(node:getAnchorPoint())
+    self:setScaleX(node:getScaleX())
+    self:setScaleY(node:getScaleY())
+    self:setRotation(node:getRotation())
+    self:setRotationSkewX(node:getRotationSkewX())
+    self:setRotationSkewY(node:getRotationSkewY())
+    if self.isFlippedX and node.isFlippedX then
+        self:setFlippedX(node:isFlippedX())
+        self:setFlippedY(node:isFlippedY())
+    end
+    self:setColor(node:getColor())
+    self:setOpacity(node:getOpacity())
+
+    self:copySpecialProperties_(node)
+end
+
+-- 拷贝特殊的peer值
+function Node:copySpecialPeerVal_(node)
+    if node.name then
+        self.name = node.name
+    end
 end

@@ -35,6 +35,8 @@
 #include "network/CCHTTPRequest.h"
 #include "native/CCNative.h"
 
+#include "UncaughtExceptionHandler.h"
+
 static WNDPROC g_oldWindowProc = NULL;
 void shutDownApp()
 {
@@ -74,6 +76,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     auto player = player::PlayerWin::getInstance();
+    InstallUncaughtExceptionHandler();
     return player->run();
 }
 
@@ -414,6 +417,8 @@ int PlayerWin::run()
 
     const Rect frameRect = Rect(0, 0, frameSize.width, frameSize.height);
     const bool isResize = _project.isResizeWindow();
+    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
+    GLView::setGLContextAttrs(glContextAttrs)
     //auto glview = GLView::createWithRect("Quick-Cocos2dx-Community", frameRect, frameScale, isResize, false, true);
     auto glview = GLViewImpl::createWithRect("Quick-Cocos2dx-Community", frameRect, frameScale);
     _hwnd = glview->getWin32Window();

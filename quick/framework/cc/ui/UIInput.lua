@@ -75,6 +75,8 @@ function UIInput:ctor(options)
     if 2 == options.UIInputType then
         self.getText = self.getStringValue
     end
+
+    self.args_ = options
 end
 
 
@@ -236,12 +238,16 @@ function UIInput.newTextField_(params)
     end
     local editbox = textfieldCls:create()
     editbox:setPlaceHolder(params.placeHolder)
-    editbox:setPosition(params.x, params.y)
+    if params.x and params.y then
+        editbox:setPosition(params.x, params.y)
+    end
     if params.listener then
         editbox:addEventListener(params.listener)
     end
     if params.size then
         editbox:setTextAreaSize(params.size)
+        editbox:setTouchSize(params.size)
+        editbox:setTouchAreaEnabled(true)
     end
     if params.text then
         if editbox.setString then
@@ -268,6 +274,10 @@ function UIInput.newTextField_(params)
     end
 
     return editbox
+end
+
+function UIInput:createcloneInstance_()
+    return UIInput.new(unpack(self.args_))
 end
 
 return UIInput

@@ -42,7 +42,8 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setStoragePath(lua_State* tolua_S)
             return 0;
         }
         cobj->setStoragePath(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManager:setStoragePath",argc, 1);
     return 0;
@@ -91,7 +92,8 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setPackageUrl(lua_State* tolua_S)
             return 0;
         }
         cobj->setPackageUrl(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManager:setPackageUrl",argc, 1);
     return 0;
@@ -231,7 +233,8 @@ int lua_cocos2dx_assetsmanager_AssetsManager_update(lua_State* tolua_S)
             return 0;
         }
         cobj->update();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManager:update",argc, 0);
     return 0;
@@ -280,7 +283,8 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setConnectionTimeout(lua_State* tol
             return 0;
         }
         cobj->setConnectionTimeout(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManager:setConnectionTimeout",argc, 1);
     return 0;
@@ -329,7 +333,8 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setVersionFileUrl(lua_State* tolua_
             return 0;
         }
         cobj->setVersionFileUrl(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManager:setVersionFileUrl",argc, 1);
     return 0;
@@ -563,7 +568,8 @@ int lua_cocos2dx_assetsmanager_AssetsManager_deleteVersion(lua_State* tolua_S)
             return 0;
         }
         cobj->deleteVersion();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManager:deleteVersion",argc, 0);
     return 0;
@@ -1554,7 +1560,8 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_checkUpdate(lua_State* tolua_S)
             return 0;
         }
         cobj->checkUpdate();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManagerEx:checkUpdate",argc, 0);
     return 0;
@@ -1647,7 +1654,8 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_update(lua_State* tolua_S)
             return 0;
         }
         cobj->update();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManagerEx:update",argc, 0);
     return 0;
@@ -1787,7 +1795,8 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_downloadFailedAssets(lua_State* t
             return 0;
         }
         cobj->downloadFailedAssets();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManagerEx:downloadFailedAssets",argc, 0);
     return 0;

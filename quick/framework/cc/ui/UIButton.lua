@@ -56,17 +56,21 @@ UIButton.LABEL_ZORDER = 0
 -- end --
 
 function UIButton:ctor(events, initialState, options)
+    self.args_ = {events, initialState, options}
+
     self.fsm_ = {}
     cc(self.fsm_)
         :addComponent("components.behavior.StateMachine")
         :exportMethods()
-    self.fsm_:setupState({
+
+    self.fsmState_ = {
         initial = {state = initialState, event = "startup", defer = false},
         events = events,
         callbacks = {
             onchangestate = handler(self, self.onChangeState_),
         }
-    })
+    }
+    self.fsm_:setupState(self.fsmState_)
 
     makeUIControl_(self)
     self:setLayoutSizePolicy(display.FIXED_SIZE, display.FIXED_SIZE)
@@ -297,8 +301,10 @@ function UIButton:setButtonSize(width, height)
             v:setContentSize(cc.size(self.scale9Size_[1], self.scale9Size_[2]))
         else
             local size = v:getContentSize()
-            local scaleX = v:getScaleX()
-            local scaleY = v:getScaleY()
+            local scaleX = 1
+            local scaleY = 1
+            -- scaleX = v:getScaleX()
+            -- scaleY = v:getScaleY()
             scaleX = scaleX * self.scale9Size_[1]/size.width
             scaleY = scaleY * self.scale9Size_[2]/size.height
             v:setScaleX(scaleX)
@@ -540,6 +546,29 @@ function UIButton:checkTouchInSprite_(x, y)
     else
         return self:getCascadeBoundingBox():containsPoint(cc.p(x, y))
     end
+end
+
+function UIButton:createCloneInstance_()
+    return UIButton.new(unpack(self.args_))
+end
+
+function UIButton:copyClonedWidgetChildren_(node)
+    for state, label in pairs(node.labels_) do
+        self:setButtonLabel(state, label:clone())
+    end
+
+    self:updateButtonImage_()
+    self:updateButtonLable_()
+end
+
+function UIButton:copySpecialProperties_(node)
+    if node.scale9Size_ then
+        self:setButtonSize(unpack(node.scale9Size_))
+    end
+    self.labelAlign_ = node.labelAlign_
+    self.labelOffset_ = clone(node.labelOffset_)
+    self.images_ = clone(node.images_)
+    self:setButtonEnabled(node:isButtonEnabled())
 end
 
 return UIButton

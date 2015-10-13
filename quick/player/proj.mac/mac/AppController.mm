@@ -1,6 +1,6 @@
-#include <signal.h>
 
 #import "AppController.h"
+#import "UncaughtExceptionHandler.h"
 
 #include "AppDelegate.h"
 #include "glfw3.h"
@@ -28,13 +28,6 @@ std::string getCurAppName(void)
     return appName;
 }
 
-static void signalDeal(int sig)
-{
-    EventCustom event("APP.WINDOW_CLOSE_EVENT");
-    event.setDataString("{\"name\":\"close\"}");
-    Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
-}
-
 @implementation AppController
 
 @synthesize menu;
@@ -49,14 +42,14 @@ static void signalDeal(int sig)
     [super dealloc];
 }
 
+- (void)installUncaughtExceptionHandler
+{
+    InstallUncaughtExceptionHandler();
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // catch SIGTERM, and exit player gracefully
-    struct sigaction action;
-    action.sa_handler = signalDeal;
-    sigemptyset(&action.sa_mask);
-    action.sa_flags = 0;
-    sigaction(SIGTERM, &action, 0);
+    [self installUncaughtExceptionHandler];
     
     auto player = player::PlayerMac::create();
     player->setController(self);

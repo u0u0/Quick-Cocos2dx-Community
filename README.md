@@ -16,9 +16,7 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。
 
 	>Quick-Cocos2dx-Community 发展自用户公认的最稳定版本 Quick-Cocos2d-x v3.3。
 	>并且我们认为v3.3是最适合Lua语言开发的版本。
-	>我们保留了v3.3的所有优势：
-
-- Quick-Cocos2dx-Community 
+	>我们保留了v3.3的所有优势。
 
 ##优势
 Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点。让开发商可以用更低的成本、更高的开发效率、更省的人力成本创造高品质手游产品。
@@ -44,7 +42,3 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点
 3. 启动 player
 	 Mac 系统在 Applications 文件夹(或系统应用列表)中 player.app 。
 	 Windows 系统在桌面上的 player.exe 快捷方式。
-
-
-
-
