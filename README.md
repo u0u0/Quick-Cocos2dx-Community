@@ -4,6 +4,8 @@ Quick-Cocos2dx-Community 是由[泰然网](http://www.tairan.com)负责开发维
 
 Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。并在 Quick-Cocos2d-x 基础上更新了最新的平台和第三方功能。让开发者可以用更低的成本、更高的开发效率、更省的人力成本创造高品质手游产品。
 
+####我们认为：一切导致崩溃，损失流畅度，增加包体积 的行为，都是耍流氓
+
 ##Q&A
 - 你们为什么要制作 Quick-Cocos2dx-Community ？
 
@@ -16,9 +18,9 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。
 
 	>Quick-Cocos2dx-Community 发展自用户公认的最稳定版本 Quick-Cocos2d-x v3.3。
 	>并且我们认为v3.3是最适合Lua语言开发的版本。
-	>我们保留了v3.3的所有优势：
+	>我们保留了v3.3的所有优势：tbd
 
-- Quick-Cocos2dx-Community 
+- Quick-Cocos2dx-Community 未来发展思路是什么？（tbd）
 
 ##优势
 Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点。让开发商可以用更低的成本、更高的开发效率、更省的人力成本创造高品质手游产品。
@@ -42,6 +44,8 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点
 2. 运行 setup_mac.sh（Mac系统） 或者 setup_win.bat（Windows系统）
 
 3. 启动 player
+	>note：运行步骤2以后，脚本会自动创建player的快捷方式。
+	
 	 Mac 系统在 Applications 文件夹(或系统应用列表)中 player.app 。
 	 Windows 系统在桌面上的 player.exe 快捷方式。
 
