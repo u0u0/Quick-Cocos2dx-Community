@@ -63,7 +63,7 @@ std::string getCurAppName(void)
     // load QUICK_V3_ROOT from ~/.QUICK_V3_ROOT
     NSMutableString *path = [NSMutableString stringWithString:NSHomeDirectory()];
     [path appendString:@"/.QUICK_V3_ROOT"];
-    NSError *error = [[[NSError alloc] init] autorelease];
+    NSError *error = nil;
     NSString *env = [NSString stringWithContentsOfFile:path
                                               encoding:NSUTF8StringEncoding
                                                  error:&error];
@@ -142,7 +142,7 @@ std::string getCurAppName(void)
 {
     NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     NSMutableDictionary *configuration = [NSMutableDictionary dictionaryWithObject:args forKey:NSWorkspaceLaunchConfigurationArguments];
-    NSError *error = [[[NSError alloc] init] autorelease];
+    NSError *error = nil;
     [[NSWorkspace sharedWorkspace] launchApplicationAtURL:url
                                                   options:NSWorkspaceLaunchNewInstance
                                             configuration:configuration error:&error];
@@ -257,7 +257,9 @@ std::string getCurAppName(void)
 
 - (IBAction) onFileClose:(id)sender
 {
-    signalDeal(1);
+    EventCustom event("APP.WINDOW_CLOSE_EVENT");
+    event.setDataString("{\"name\":\"close\"}");
+    Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
 - (void) registerEventsHandler

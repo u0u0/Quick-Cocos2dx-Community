@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */; settings = {ASSET_TAGS = (); }; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
 		15A8A4881834C90F00142BE0 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4871834C90E00142BE0 /* libcurl.dylib */; };
@@ -142,6 +143,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A5237BC1BCD45B300B39D5F /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UncaughtExceptionHandler.mm; sourceTree = "<group>"; };
 		15427CE2198F237300DC375D /* lua_module_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_module_register.h; path = ../Classes/lua_module_register.h; sourceTree = "<group>"; };
 		15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../../../build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		15A8A4871834C90E00142BE0 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
@@ -452,6 +455,7 @@
 			children = (
 				9FD01B2B19F8C6BA005E0C49 /* AppController.h */,
 				9FD01B2C19F8C6BA005E0C49 /* AppController.mm */,
+				0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */,
 				9FD01B1319F8C6A3005E0C49 /* NSApplication+SheetAdditions.h */,
 				9FD01B1419F8C6A3005E0C49 /* NSApplication+SheetAdditions.m */,
 				9FD01B1519F8C6A3005E0C49 /* NumberFormater.h */,
@@ -918,6 +922,7 @@
 				9FD0191519F8C4C6005E0C49 /* player */,
 				C033B51A191B337200D06937 /* VisibleRect.cpp */,
 				C033B51B191B337200D06937 /* VisibleRect.h */,
+				0A5237BC1BCD45B300B39D5F /* UncaughtExceptionHandler.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1075,6 +1080,7 @@
 				9FD0193019F8C4D4005E0C49 /* PlayerMenuServiceProtocol.cpp in Sources */,
 				9F7289371A24957700EE0234 /* CCGammaFilter.cpp in Sources */,
 				9FD0193119F8C4D4005E0C49 /* PlayerProtocol.cpp in Sources */,
+				0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */,
 				9F72897D1A24957700EE0234 /* OpenUDIDMac.m in Sources */,
 				9F72893E1A24957700EE0234 /* CCSepiaFilter.cpp in Sources */,
 				9F7289391A24957700EE0234 /* CCHazeFilter.cpp in Sources */,
