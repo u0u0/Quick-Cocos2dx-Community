@@ -148,7 +148,8 @@ int lua_cocos2dx_studio_ActionFrame_setFrameTime(lua_State* tolua_S)
             return 0;
         }
         cobj->setFrameTime(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionFrame:setFrameTime",argc, 1);
     return 0;
@@ -197,7 +198,8 @@ int lua_cocos2dx_studio_ActionFrame_setEasingType(lua_State* tolua_S)
             return 0;
         }
         cobj->setEasingType(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionFrame:setEasingType",argc, 1);
     return 0;
@@ -340,7 +342,8 @@ int lua_cocos2dx_studio_ActionFrame_setFrameType(lua_State* tolua_S)
             return 0;
         }
         cobj->setFrameType(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionFrame:setFrameType",argc, 1);
     return 0;
@@ -389,7 +392,8 @@ int lua_cocos2dx_studio_ActionFrame_setFrameIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->setFrameIndex(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionFrame:setFrameIndex",argc, 1);
     return 0;
@@ -438,7 +442,8 @@ int lua_cocos2dx_studio_ActionFrame_setEasingParameter(lua_State* tolua_S)
             return 0;
         }
         cobj->setEasingParameter(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionFrame:setEasingParameter",argc, 1);
     return 0;
@@ -601,7 +606,8 @@ int lua_cocos2dx_studio_ActionMoveFrame_setPosition(lua_State* tolua_S)
             return 0;
         }
         cobj->setPosition(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionMoveFrame:setPosition",argc, 1);
     return 0;
@@ -807,7 +813,8 @@ int lua_cocos2dx_studio_ActionScaleFrame_setScaleY(lua_State* tolua_S)
             return 0;
         }
         cobj->setScaleY(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionScaleFrame:setScaleY",argc, 1);
     return 0;
@@ -856,7 +863,8 @@ int lua_cocos2dx_studio_ActionScaleFrame_setScaleX(lua_State* tolua_S)
             return 0;
         }
         cobj->setScaleX(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionScaleFrame:setScaleX",argc, 1);
     return 0;
@@ -1111,7 +1119,8 @@ int lua_cocos2dx_studio_ActionRotationFrame_setRotation(lua_State* tolua_S)
             return 0;
         }
         cobj->setRotation(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionRotationFrame:setRotation",argc, 1);
     return 0;
@@ -1423,7 +1432,8 @@ int lua_cocos2dx_studio_ActionFadeFrame_setOpacity(lua_State* tolua_S)
             return 0;
         }
         cobj->setOpacity(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionFadeFrame:setOpacity",argc, 1);
     return 0;
@@ -1629,7 +1639,8 @@ int lua_cocos2dx_studio_ActionTintFrame_setColor(lua_State* tolua_S)
             return 0;
         }
         cobj->setColor(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTintFrame:setColor",argc, 1);
     return 0;
@@ -1738,7 +1749,8 @@ int lua_cocos2dx_studio_ActionObject_setCurrentTime(lua_State* tolua_S)
             return 0;
         }
         cobj->setCurrentTime(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:setCurrentTime",argc, 1);
     return 0;
@@ -1784,7 +1796,8 @@ int lua_cocos2dx_studio_ActionObject_pause(lua_State* tolua_S)
             return 0;
         }
         cobj->pause();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:pause",argc, 0);
     return 0;
@@ -1833,7 +1846,8 @@ int lua_cocos2dx_studio_ActionObject_setName(lua_State* tolua_S)
             return 0;
         }
         cobj->setName(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:setName",argc, 1);
     return 0;
@@ -1882,7 +1896,8 @@ int lua_cocos2dx_studio_ActionObject_setUnitTime(lua_State* tolua_S)
             return 0;
         }
         cobj->setUnitTime(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:setUnitTime",argc, 1);
     return 0;
@@ -2022,7 +2037,8 @@ int lua_cocos2dx_studio_ActionObject_stop(lua_State* tolua_S)
             return 0;
         }
         cobj->stop();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:stop",argc, 0);
     return 0;
@@ -2062,14 +2078,16 @@ int lua_cocos2dx_studio_ActionObject_play(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->play(arg0);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
     do{
         if (argc == 0) {
             cobj->play();
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -2167,7 +2185,8 @@ int lua_cocos2dx_studio_ActionObject_removeActionNode(lua_State* tolua_S)
             return 0;
         }
         cobj->removeActionNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:removeActionNode",argc, 1);
     return 0;
@@ -2263,7 +2282,8 @@ int lua_cocos2dx_studio_ActionObject_addActionNode(lua_State* tolua_S)
             return 0;
         }
         cobj->addActionNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:addActionNode",argc, 1);
     return 0;
@@ -2406,7 +2426,8 @@ int lua_cocos2dx_studio_ActionObject_updateToFrameByTime(lua_State* tolua_S)
             return 0;
         }
         cobj->updateToFrameByTime(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:updateToFrameByTime",argc, 1);
     return 0;
@@ -2455,7 +2476,8 @@ int lua_cocos2dx_studio_ActionObject_setLoop(lua_State* tolua_S)
             return 0;
         }
         cobj->setLoop(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:setLoop",argc, 1);
     return 0;
@@ -2504,7 +2526,8 @@ int lua_cocos2dx_studio_ActionObject_simulationActionUpdate(lua_State* tolua_S)
             return 0;
         }
         cobj->simulationActionUpdate(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionObject:simulationActionUpdate",argc, 1);
     return 0;
@@ -2744,7 +2767,8 @@ int lua_cocos2dx_studio_ActionManagerEx_releaseActions(lua_State* tolua_S)
             return 0;
         }
         cobj->releaseActions();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionManagerEx:releaseActions",argc, 0);
     return 0;
@@ -2779,7 +2803,8 @@ int lua_cocos2dx_studio_ActionManagerEx_destroyInstance(lua_State* tolua_S)
             return 0;
         }
         cocostudio::ActionManagerEx::destroyInstance();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "ccs.ActionManagerEx:destroyInstance",argc, 0);
     return 0;
@@ -2931,7 +2956,8 @@ int lua_cocos2dx_studio_BaseData_setColor(lua_State* tolua_S)
             return 0;
         }
         cobj->setColor(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.BaseData:setColor",argc, 1);
     return 0;
@@ -3074,7 +3100,8 @@ int lua_cocos2dx_studio_DisplayData_copy(lua_State* tolua_S)
             return 0;
         }
         cobj->copy(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.DisplayData:copy",argc, 1);
     return 0;
@@ -3253,7 +3280,8 @@ int lua_cocos2dx_studio_SpriteDisplayData_copy(lua_State* tolua_S)
             return 0;
         }
         cobj->copy(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.SpriteDisplayData:copy",argc, 1);
     return 0;
@@ -3676,7 +3704,8 @@ int lua_cocos2dx_studio_BoneData_addDisplayData(lua_State* tolua_S)
             return 0;
         }
         cobj->addDisplayData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.BoneData:addDisplayData",argc, 1);
     return 0;
@@ -3820,7 +3849,8 @@ int lua_cocos2dx_studio_ArmatureData_addBoneData(lua_State* tolua_S)
             return 0;
         }
         cobj->addBoneData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureData:addBoneData",argc, 1);
     return 0;
@@ -4061,7 +4091,8 @@ int lua_cocos2dx_studio_FrameData_copy(lua_State* tolua_S)
             return 0;
         }
         cobj->copy(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.FrameData:copy",argc, 1);
     return 0;
@@ -4300,7 +4331,8 @@ int lua_cocos2dx_studio_MovementBoneData_addFrameData(lua_State* tolua_S)
             return 0;
         }
         cobj->addFrameData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.MovementBoneData:addFrameData",argc, 1);
     return 0;
@@ -4494,7 +4526,8 @@ int lua_cocos2dx_studio_MovementData_addMovementBoneData(lua_State* tolua_S)
             return 0;
         }
         cobj->addMovementBoneData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.MovementData:addMovementBoneData",argc, 1);
     return 0;
@@ -4734,7 +4767,8 @@ int lua_cocos2dx_studio_AnimationData_addMovement(lua_State* tolua_S)
             return 0;
         }
         cobj->addMovement(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.AnimationData:addMovement",argc, 1);
     return 0;
@@ -4925,7 +4959,8 @@ int lua_cocos2dx_studio_ContourData_addVertex(lua_State* tolua_S)
             return 0;
         }
         cobj->addVertex(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ContourData:addVertex",argc, 1);
     return 0;
@@ -5165,7 +5200,8 @@ int lua_cocos2dx_studio_TextureData_addContourData(lua_State* tolua_S)
             return 0;
         }
         cobj->addContourData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.TextureData:addContourData",argc, 1);
     return 0;
@@ -5356,7 +5392,8 @@ int lua_cocos2dx_studio_Tween_gotoAndPause(lua_State* tolua_S)
             return 0;
         }
         cobj->gotoAndPause(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Tween:gotoAndPause",argc, 1);
     return 0;
@@ -5417,7 +5454,8 @@ int lua_cocos2dx_studio_Tween_play(lua_State* tolua_S)
             return 0;
         }
         cobj->play(arg0, arg1, arg2, arg3, arg4);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Tween:play",argc, 5);
     return 0;
@@ -5466,7 +5504,8 @@ int lua_cocos2dx_studio_Tween_gotoAndPlay(lua_State* tolua_S)
             return 0;
         }
         cobj->gotoAndPlay(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Tween:gotoAndPlay",argc, 1);
     return 0;
@@ -5565,7 +5604,8 @@ int lua_cocos2dx_studio_Tween_setAnimation(lua_State* tolua_S)
             return 0;
         }
         cobj->setAnimation(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Tween:setAnimation",argc, 1);
     return 0;
@@ -5855,7 +5895,8 @@ int lua_cocos2dx_studio_DisplayManager_removeDisplay(lua_State* tolua_S)
             return 0;
         }
         cobj->removeDisplay(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.DisplayManager:removeDisplay",argc, 1);
     return 0;
@@ -5904,7 +5945,8 @@ int lua_cocos2dx_studio_DisplayManager_setForceChangeDisplay(lua_State* tolua_S)
             return 0;
         }
         cobj->setForceChangeDisplay(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.DisplayManager:setForceChangeDisplay",argc, 1);
     return 0;
@@ -6092,7 +6134,8 @@ int lua_cocos2dx_studio_DisplayManager_addDisplay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->addDisplay(arg0, arg1);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -6107,7 +6150,8 @@ int lua_cocos2dx_studio_DisplayManager_addDisplay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->addDisplay(arg0, arg1);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -6220,7 +6264,8 @@ int lua_cocos2dx_studio_DisplayManager_changeDisplayWithIndex(lua_State* tolua_S
             return 0;
         }
         cobj->changeDisplayWithIndex(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.DisplayManager:changeDisplayWithIndex",argc, 2);
     return 0;
@@ -6272,7 +6317,8 @@ int lua_cocos2dx_studio_DisplayManager_changeDisplayWithName(lua_State* tolua_S)
             return 0;
         }
         cobj->changeDisplayWithName(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.DisplayManager:changeDisplayWithName",argc, 2);
     return 0;
@@ -6556,7 +6602,8 @@ int lua_cocos2dx_studio_DisplayManager_setVisible(lua_State* tolua_S)
             return 0;
         }
         cobj->setVisible(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.DisplayManager:setVisible",argc, 1);
     return 0;
@@ -6808,7 +6855,8 @@ int lua_cocos2dx_studio_Bone_updateZOrder(lua_State* tolua_S)
             return 0;
         }
         cobj->updateZOrder();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:updateZOrder",argc, 0);
     return 0;
@@ -6951,7 +6999,8 @@ int lua_cocos2dx_studio_Bone_addChildBone(lua_State* tolua_S)
             return 0;
         }
         cobj->addChildBone(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:addChildBone",argc, 1);
     return 0;
@@ -7138,7 +7187,8 @@ int lua_cocos2dx_studio_Bone_updateColor(lua_State* tolua_S)
             return 0;
         }
         cobj->updateColor();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:updateColor",argc, 0);
     return 0;
@@ -7187,7 +7237,8 @@ int lua_cocos2dx_studio_Bone_setTransformDirty(lua_State* tolua_S)
             return 0;
         }
         cobj->setTransformDirty(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:setTransformDirty",argc, 1);
     return 0;
@@ -7283,7 +7334,8 @@ int lua_cocos2dx_studio_Bone_removeDisplay(lua_State* tolua_S)
             return 0;
         }
         cobj->removeDisplay(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:removeDisplay",argc, 1);
     return 0;
@@ -7332,7 +7384,8 @@ int lua_cocos2dx_studio_Bone_setBoneData(lua_State* tolua_S)
             return 0;
         }
         cobj->setBoneData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:setBoneData",argc, 1);
     return 0;
@@ -7432,7 +7485,8 @@ int lua_cocos2dx_studio_Bone_setParentBone(lua_State* tolua_S)
             return 0;
         }
         cobj->setParentBone(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:setParentBone",argc, 1);
     return 0;
@@ -7476,7 +7530,8 @@ int lua_cocos2dx_studio_Bone_addDisplay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->addDisplay(arg0, arg1);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -7491,7 +7546,8 @@ int lua_cocos2dx_studio_Bone_addDisplay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->addDisplay(arg0, arg1);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -7542,7 +7598,8 @@ int lua_cocos2dx_studio_Bone_removeFromParent(lua_State* tolua_S)
             return 0;
         }
         cobj->removeFromParent(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:removeFromParent",argc, 1);
     return 0;
@@ -7735,7 +7792,8 @@ int lua_cocos2dx_studio_Bone_changeDisplayWithIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->changeDisplayWithIndex(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:changeDisplayWithIndex",argc, 2);
     return 0;
@@ -7787,7 +7845,8 @@ int lua_cocos2dx_studio_Bone_changeDisplayWithName(lua_State* tolua_S)
             return 0;
         }
         cobj->changeDisplayWithName(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:changeDisplayWithName",argc, 2);
     return 0;
@@ -7836,7 +7895,8 @@ int lua_cocos2dx_studio_Bone_setArmature(lua_State* tolua_S)
             return 0;
         }
         cobj->setArmature(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:setArmature",argc, 1);
     return 0;
@@ -7885,7 +7945,8 @@ int lua_cocos2dx_studio_Bone_setBlendDirty(lua_State* tolua_S)
             return 0;
         }
         cobj->setBlendDirty(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:setBlendDirty",argc, 1);
     return 0;
@@ -7937,7 +7998,8 @@ int lua_cocos2dx_studio_Bone_removeChildBone(lua_State* tolua_S)
             return 0;
         }
         cobj->removeChildBone(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:removeChildBone",argc, 2);
     return 0;
@@ -7986,7 +8048,8 @@ int lua_cocos2dx_studio_Bone_setChildArmature(lua_State* tolua_S)
             return 0;
         }
         cobj->setChildArmature(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Bone:setChildArmature",argc, 1);
     return 0;
@@ -8503,7 +8566,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_pause(lua_State* tolua_S)
             return 0;
         }
         cobj->pause();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:pause",argc, 0);
     return 0;
@@ -8552,7 +8616,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_setSpeedScale(lua_State* tolua_S)
             return 0;
         }
         cobj->setSpeedScale(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:setSpeedScale",argc, 1);
     return 0;
@@ -8651,7 +8716,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithIndexes(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithIndexes(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 2) 
     {
@@ -8667,7 +8733,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithIndexes(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithIndexes(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -8686,7 +8753,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithIndexes(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithIndexes(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:playWithIndexes",argc, 1);
     return 0;
@@ -8735,7 +8803,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_play(lua_State* tolua_S)
             return 0;
         }
         cobj->play(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 2) 
     {
@@ -8751,7 +8820,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_play(lua_State* tolua_S)
             return 0;
         }
         cobj->play(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -8770,7 +8840,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_play(lua_State* tolua_S)
             return 0;
         }
         cobj->play(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:play",argc, 1);
     return 0;
@@ -8819,7 +8890,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_gotoAndPause(lua_State* tolua_S)
             return 0;
         }
         cobj->gotoAndPause(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:gotoAndPause",argc, 1);
     return 0;
@@ -8865,7 +8937,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_resume(lua_State* tolua_S)
             return 0;
         }
         cobj->resume();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:resume",argc, 0);
     return 0;
@@ -8911,7 +8984,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_stop(lua_State* tolua_S)
             return 0;
         }
         cobj->stop();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:stop",argc, 0);
     return 0;
@@ -8960,7 +9034,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_update(lua_State* tolua_S)
             return 0;
         }
         cobj->update(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:update",argc, 1);
     return 0;
@@ -9056,7 +9131,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithIndex(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 2) 
     {
@@ -9072,7 +9148,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithIndex(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -9091,7 +9168,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithIndex(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:playWithIndex",argc, 1);
     return 0;
@@ -9187,7 +9265,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_setAnimationData(lua_State* tolua_S)
             return 0;
         }
         cobj->setAnimationData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:setAnimationData",argc, 1);
     return 0;
@@ -9236,7 +9315,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_gotoAndPlay(lua_State* tolua_S)
             return 0;
         }
         cobj->gotoAndPlay(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:gotoAndPlay",argc, 1);
     return 0;
@@ -9285,7 +9365,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithNames(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithNames(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 2) 
     {
@@ -9301,7 +9382,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithNames(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithNames(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -9320,7 +9402,8 @@ int lua_cocos2dx_studio_ArmatureAnimation_playWithNames(lua_State* tolua_S)
             return 0;
         }
         cobj->playWithNames(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureAnimation:playWithNames",argc, 1);
     return 0;
@@ -9574,7 +9657,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_removeAnimationData(lua_State* tolua
             return 0;
         }
         cobj->removeAnimationData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:removeAnimationData",argc, 1);
     return 0;
@@ -9626,7 +9710,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addArmatureData(lua_State* tolua_S)
             return 0;
         }
         cobj->addArmatureData(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -9645,7 +9730,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addArmatureData(lua_State* tolua_S)
             return 0;
         }
         cobj->addArmatureData(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:addArmatureData",argc, 2);
     return 0;
@@ -9693,7 +9779,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addArmatureFileInfo(lua_State* tolua
 
             if (!ok) { break; }
             cobj->addArmatureFileInfo(arg0, arg1, arg2);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -9704,7 +9791,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addArmatureFileInfo(lua_State* tolua
 
             if (!ok) { break; }
             cobj->addArmatureFileInfo(arg0);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -9755,7 +9843,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_removeArmatureFileInfo(lua_State* to
             return 0;
         }
         cobj->removeArmatureFileInfo(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:removeArmatureFileInfo",argc, 1);
     return 0;
@@ -10004,7 +10093,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addAnimationData(lua_State* tolua_S)
             return 0;
         }
         cobj->addAnimationData(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -10023,7 +10113,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addAnimationData(lua_State* tolua_S)
             return 0;
         }
         cobj->addAnimationData(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:addAnimationData",argc, 2);
     return 0;
@@ -10119,7 +10210,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_removeArmatureData(lua_State* tolua_
             return 0;
         }
         cobj->removeArmatureData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:removeArmatureData",argc, 1);
     return 0;
@@ -10215,7 +10307,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_removeTextureData(lua_State* tolua_S
             return 0;
         }
         cobj->removeTextureData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:removeTextureData",argc, 1);
     return 0;
@@ -10267,7 +10360,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addTextureData(lua_State* tolua_S)
             return 0;
         }
         cobj->addTextureData(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -10286,7 +10380,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addTextureData(lua_State* tolua_S)
             return 0;
         }
         cobj->addTextureData(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:addTextureData",argc, 2);
     return 0;
@@ -10385,7 +10480,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addSpriteFrameFromFile(lua_State* to
             return 0;
         }
         cobj->addSpriteFrameFromFile(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     if (argc == 3) 
     {
@@ -10404,7 +10500,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_addSpriteFrameFromFile(lua_State* to
             return 0;
         }
         cobj->addSpriteFrameFromFile(arg0, arg1, arg2);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ArmatureDataManager:addSpriteFrameFromFile",argc, 2);
     return 0;
@@ -10439,7 +10536,8 @@ int lua_cocos2dx_studio_ArmatureDataManager_destroyInstance(lua_State* tolua_S)
             return 0;
         }
         cocostudio::ArmatureDataManager::destroyInstance();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "ccs.ArmatureDataManager:destroyInstance",argc, 0);
     return 0;
@@ -10611,7 +10709,8 @@ int lua_cocos2dx_studio_Armature_changeBoneParent(lua_State* tolua_S)
             return 0;
         }
         cobj->changeBoneParent(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:changeBoneParent",argc, 2);
     return 0;
@@ -10660,7 +10759,8 @@ int lua_cocos2dx_studio_Armature_setAnimation(lua_State* tolua_S)
             return 0;
         }
         cobj->setAnimation(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:setAnimation",argc, 1);
     return 0;
@@ -10809,7 +10909,8 @@ int lua_cocos2dx_studio_Armature_setVersion(lua_State* tolua_S)
             return 0;
         }
         cobj->setVersion(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:setVersion",argc, 1);
     return 0;
@@ -10855,7 +10956,8 @@ int lua_cocos2dx_studio_Armature_updateOffsetPoint(lua_State* tolua_S)
             return 0;
         }
         cobj->updateOffsetPoint();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:updateOffsetPoint",argc, 0);
     return 0;
@@ -10954,7 +11056,8 @@ int lua_cocos2dx_studio_Armature_removeBone(lua_State* tolua_S)
             return 0;
         }
         cobj->removeBone(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:removeBone",argc, 2);
     return 0;
@@ -11117,7 +11220,8 @@ int lua_cocos2dx_studio_Armature_setParentBone(lua_State* tolua_S)
             return 0;
         }
         cobj->setParentBone(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:setParentBone",argc, 1);
     return 0;
@@ -11166,7 +11270,8 @@ int lua_cocos2dx_studio_Armature_setBatchNode(lua_State* tolua_S)
             return 0;
         }
         cobj->setBatchNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:setBatchNode",argc, 1);
     return 0;
@@ -11215,7 +11320,8 @@ int lua_cocos2dx_studio_Armature_setArmatureData(lua_State* tolua_S)
             return 0;
         }
         cobj->setArmatureData(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:setArmatureData",argc, 1);
     return 0;
@@ -11267,7 +11373,8 @@ int lua_cocos2dx_studio_Armature_addBone(lua_State* tolua_S)
             return 0;
         }
         cobj->addBone(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Armature:addBone",argc, 2);
     return 0;
@@ -11878,7 +11985,8 @@ int lua_cocos2dx_studio_Skin_updateArmatureTransform(lua_State* tolua_S)
             return 0;
         }
         cobj->updateArmatureTransform();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Skin:updateArmatureTransform",argc, 0);
     return 0;
@@ -11977,7 +12085,8 @@ int lua_cocos2dx_studio_Skin_setBone(lua_State* tolua_S)
             return 0;
         }
         cobj->setBone(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Skin:setBone",argc, 1);
     return 0;
@@ -12310,7 +12419,8 @@ int lua_cocos2dx_studio_ComAttribute_setFloat(lua_State* tolua_S)
             return 0;
         }
         cobj->setFloat(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAttribute:setFloat",argc, 2);
     return 0;
@@ -12362,7 +12472,8 @@ int lua_cocos2dx_studio_ComAttribute_setString(lua_State* tolua_S)
             return 0;
         }
         cobj->setString(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAttribute:setString",argc, 2);
     return 0;
@@ -12481,7 +12592,8 @@ int lua_cocos2dx_studio_ComAttribute_setInt(lua_State* tolua_S)
             return 0;
         }
         cobj->setInt(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAttribute:setInt",argc, 2);
     return 0;
@@ -12650,7 +12762,8 @@ int lua_cocos2dx_studio_ComAttribute_setBool(lua_State* tolua_S)
             return 0;
         }
         cobj->setBool(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAttribute:setBool",argc, 2);
     return 0;
@@ -12794,7 +12907,8 @@ int lua_cocos2dx_studio_ComAudio_stopAllEffects(lua_State* tolua_S)
             return 0;
         }
         cobj->stopAllEffects();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:stopAllEffects",argc, 0);
     return 0;
@@ -12890,7 +13004,8 @@ int lua_cocos2dx_studio_ComAudio_stopEffect(lua_State* tolua_S)
             return 0;
         }
         cobj->stopEffect(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:stopEffect",argc, 1);
     return 0;
@@ -13033,7 +13148,8 @@ int lua_cocos2dx_studio_ComAudio_setBackgroundMusicVolume(lua_State* tolua_S)
             return 0;
         }
         cobj->setBackgroundMusicVolume(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:setBackgroundMusicVolume",argc, 1);
     return 0;
@@ -13079,7 +13195,8 @@ int lua_cocos2dx_studio_ComAudio_end(lua_State* tolua_S)
             return 0;
         }
         cobj->end();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:end",argc, 0);
     return 0;
@@ -13115,7 +13232,8 @@ int lua_cocos2dx_studio_ComAudio_stopBackgroundMusic(lua_State* tolua_S)
     do{
         if (argc == 0) {
             cobj->stopBackgroundMusic();
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -13126,7 +13244,8 @@ int lua_cocos2dx_studio_ComAudio_stopBackgroundMusic(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->stopBackgroundMusic(arg0);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -13174,7 +13293,8 @@ int lua_cocos2dx_studio_ComAudio_pauseBackgroundMusic(lua_State* tolua_S)
             return 0;
         }
         cobj->pauseBackgroundMusic();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:pauseBackgroundMusic",argc, 0);
     return 0;
@@ -13314,7 +13434,8 @@ int lua_cocos2dx_studio_ComAudio_resumeAllEffects(lua_State* tolua_S)
             return 0;
         }
         cobj->resumeAllEffects();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:resumeAllEffects",argc, 0);
     return 0;
@@ -13360,7 +13481,8 @@ int lua_cocos2dx_studio_ComAudio_pauseAllEffects(lua_State* tolua_S)
             return 0;
         }
         cobj->pauseAllEffects();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:pauseAllEffects",argc, 0);
     return 0;
@@ -13409,7 +13531,8 @@ int lua_cocos2dx_studio_ComAudio_preloadBackgroundMusic(lua_State* tolua_S)
             return 0;
         }
         cobj->preloadBackgroundMusic(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:preloadBackgroundMusic",argc, 1);
     return 0;
@@ -13449,7 +13572,8 @@ int lua_cocos2dx_studio_ComAudio_playBackgroundMusic(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->playBackgroundMusic(arg0);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -13464,14 +13588,16 @@ int lua_cocos2dx_studio_ComAudio_playBackgroundMusic(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->playBackgroundMusic(arg0, arg1);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
     do{
         if (argc == 0) {
             cobj->playBackgroundMusic();
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -13589,7 +13715,8 @@ int lua_cocos2dx_studio_ComAudio_preloadEffect(lua_State* tolua_S)
             return 0;
         }
         cobj->preloadEffect(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:preloadEffect",argc, 1);
     return 0;
@@ -13638,7 +13765,8 @@ int lua_cocos2dx_studio_ComAudio_setLoop(lua_State* tolua_S)
             return 0;
         }
         cobj->setLoop(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:setLoop",argc, 1);
     return 0;
@@ -13687,7 +13815,8 @@ int lua_cocos2dx_studio_ComAudio_unloadEffect(lua_State* tolua_S)
             return 0;
         }
         cobj->unloadEffect(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:unloadEffect",argc, 1);
     return 0;
@@ -13733,7 +13862,8 @@ int lua_cocos2dx_studio_ComAudio_rewindBackgroundMusic(lua_State* tolua_S)
             return 0;
         }
         cobj->rewindBackgroundMusic();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:rewindBackgroundMusic",argc, 0);
     return 0;
@@ -13782,7 +13912,8 @@ int lua_cocos2dx_studio_ComAudio_pauseEffect(lua_State* tolua_S)
             return 0;
         }
         cobj->pauseEffect(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:pauseEffect",argc, 1);
     return 0;
@@ -13828,7 +13959,8 @@ int lua_cocos2dx_studio_ComAudio_resumeBackgroundMusic(lua_State* tolua_S)
             return 0;
         }
         cobj->resumeBackgroundMusic();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:resumeBackgroundMusic",argc, 0);
     return 0;
@@ -13877,7 +14009,8 @@ int lua_cocos2dx_studio_ComAudio_setFile(lua_State* tolua_S)
             return 0;
         }
         cobj->setFile(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:setFile",argc, 1);
     return 0;
@@ -13926,7 +14059,8 @@ int lua_cocos2dx_studio_ComAudio_setEffectsVolume(lua_State* tolua_S)
             return 0;
         }
         cobj->setEffectsVolume(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:setEffectsVolume",argc, 1);
     return 0;
@@ -14022,7 +14156,8 @@ int lua_cocos2dx_studio_ComAudio_resumeEffect(lua_State* tolua_S)
             return 0;
         }
         cobj->resumeEffect(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComAudio:resumeEffect",argc, 1);
     return 0;
@@ -14313,7 +14448,8 @@ int lua_cocos2dx_studio_ComRender_setNode(lua_State* tolua_S)
             return 0;
         }
         cobj->setNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ComRender:setNode",argc, 1);
     return 0;
@@ -14514,7 +14650,8 @@ int lua_cocos2dx_studio_GUIReader_setFilePath(lua_State* tolua_S)
             return 0;
         }
         cobj->setFilePath(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.GUIReader:setFilePath",argc, 1);
     return 0;
@@ -14746,7 +14883,8 @@ int lua_cocos2dx_studio_GUIReader_destroyInstance(lua_State* tolua_S)
             return 0;
         }
         cocostudio::GUIReader::destroyInstance();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "ccs.GUIReader:destroyInstance",argc, 0);
     return 0;
@@ -14857,7 +14995,8 @@ int lua_cocos2dx_studio_SceneReader_setTarget(lua_State* tolua_S)
             return 0;
         }
         cobj->setTarget(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.SceneReader:setTarget",argc, 1);
     return 0;
@@ -15056,7 +15195,8 @@ int lua_cocos2dx_studio_SceneReader_destroyInstance(lua_State* tolua_S)
             return 0;
         }
         cocostudio::SceneReader::destroyInstance();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "ccs.SceneReader:destroyInstance",argc, 0);
     return 0;
@@ -15344,7 +15484,8 @@ int lua_cocos2dx_studio_ActionTimelineCache_purge(lua_State* tolua_S)
             return 0;
         }
         cobj->purge();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimelineCache:purge",argc, 0);
     return 0;
@@ -15390,7 +15531,8 @@ int lua_cocos2dx_studio_ActionTimelineCache_init(lua_State* tolua_S)
             return 0;
         }
         cobj->init();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimelineCache:init",argc, 0);
     return 0;
@@ -15542,7 +15684,8 @@ int lua_cocos2dx_studio_ActionTimelineCache_removeAction(lua_State* tolua_S)
             return 0;
         }
         cobj->removeAction(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimelineCache:removeAction",argc, 1);
     return 0;
@@ -15627,7 +15770,8 @@ int lua_cocos2dx_studio_ActionTimelineCache_destroyInstance(lua_State* tolua_S)
             return 0;
         }
         cocostudio::timeline::ActionTimelineCache::destroyInstance();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "ccs.ActionTimelineCache:destroyInstance",argc, 0);
     return 0;
@@ -15787,7 +15931,8 @@ int lua_cocos2dx_studio_Frame_setNode(lua_State* tolua_S)
             return 0;
         }
         cobj->setNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Frame:setNode",argc, 1);
     return 0;
@@ -15836,7 +15981,8 @@ int lua_cocos2dx_studio_Frame_setTimeline(lua_State* tolua_S)
             return 0;
         }
         cobj->setTimeline(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Frame:setTimeline",argc, 1);
     return 0;
@@ -15979,7 +16125,8 @@ int lua_cocos2dx_studio_Frame_apply(lua_State* tolua_S)
             return 0;
         }
         cobj->apply(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Frame:apply",argc, 1);
     return 0;
@@ -16075,7 +16222,8 @@ int lua_cocos2dx_studio_Frame_setFrameIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->setFrameIndex(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Frame:setFrameIndex",argc, 1);
     return 0;
@@ -16124,7 +16272,8 @@ int lua_cocos2dx_studio_Frame_setTween(lua_State* tolua_S)
             return 0;
         }
         cobj->setTween(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Frame:setTween",argc, 1);
     return 0;
@@ -16344,7 +16493,8 @@ int lua_cocos2dx_studio_VisibleFrame_setVisible(lua_State* tolua_S)
             return 0;
         }
         cobj->setVisible(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.VisibleFrame:setVisible",argc, 1);
     return 0;
@@ -16534,7 +16684,8 @@ int lua_cocos2dx_studio_TextureFrame_setNode(lua_State* tolua_S)
             return 0;
         }
         cobj->setNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.TextureFrame:setNode",argc, 1);
     return 0;
@@ -16583,7 +16734,8 @@ int lua_cocos2dx_studio_TextureFrame_setTextureName(lua_State* tolua_S)
             return 0;
         }
         cobj->setTextureName(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.TextureFrame:setTextureName",argc, 1);
     return 0;
@@ -16727,7 +16879,8 @@ int lua_cocos2dx_studio_RotationFrame_setRotation(lua_State* tolua_S)
             return 0;
         }
         cobj->setRotation(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.RotationFrame:setRotation",argc, 1);
     return 0;
@@ -16964,7 +17117,8 @@ int lua_cocos2dx_studio_SkewFrame_setSkewX(lua_State* tolua_S)
             return 0;
         }
         cobj->setSkewX(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.SkewFrame:setSkewX",argc, 1);
     return 0;
@@ -17013,7 +17167,8 @@ int lua_cocos2dx_studio_SkewFrame_setSkewY(lua_State* tolua_S)
             return 0;
         }
         cobj->setSkewY(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.SkewFrame:setSkewY",argc, 1);
     return 0;
@@ -17391,7 +17546,8 @@ int lua_cocos2dx_studio_PositionFrame_setPosition(lua_State* tolua_S)
             return 0;
         }
         cobj->setPosition(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.PositionFrame:setPosition",argc, 1);
     return 0;
@@ -17440,7 +17596,8 @@ int lua_cocos2dx_studio_PositionFrame_setX(lua_State* tolua_S)
             return 0;
         }
         cobj->setX(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.PositionFrame:setX",argc, 1);
     return 0;
@@ -17489,7 +17646,8 @@ int lua_cocos2dx_studio_PositionFrame_setY(lua_State* tolua_S)
             return 0;
         }
         cobj->setY(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.PositionFrame:setY",argc, 1);
     return 0;
@@ -17683,7 +17841,8 @@ int lua_cocos2dx_studio_ScaleFrame_setScaleY(lua_State* tolua_S)
             return 0;
         }
         cobj->setScaleY(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ScaleFrame:setScaleY",argc, 1);
     return 0;
@@ -17732,7 +17891,8 @@ int lua_cocos2dx_studio_ScaleFrame_setScaleX(lua_State* tolua_S)
             return 0;
         }
         cobj->setScaleX(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ScaleFrame:setScaleX",argc, 1);
     return 0;
@@ -17875,7 +18035,8 @@ int lua_cocos2dx_studio_ScaleFrame_setScale(lua_State* tolua_S)
             return 0;
         }
         cobj->setScale(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ScaleFrame:setScale",argc, 1);
     return 0;
@@ -18021,7 +18182,8 @@ int lua_cocos2dx_studio_AnchorPointFrame_setAnchorPoint(lua_State* tolua_S)
             return 0;
         }
         cobj->setAnchorPoint(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.AnchorPointFrame:setAnchorPoint",argc, 1);
     return 0;
@@ -18258,7 +18420,8 @@ int lua_cocos2dx_studio_InnerActionFrame_setStartFrameIndex(lua_State* tolua_S)
             return 0;
         }
         cobj->setStartFrameIndex(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.InnerActionFrame:setStartFrameIndex",argc, 1);
     return 0;
@@ -18307,7 +18470,8 @@ int lua_cocos2dx_studio_InnerActionFrame_setInnerActionType(lua_State* tolua_S)
             return 0;
         }
         cobj->setInnerActionType(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.InnerActionFrame:setInnerActionType",argc, 1);
     return 0;
@@ -18593,7 +18757,8 @@ int lua_cocos2dx_studio_ColorFrame_setAlpha(lua_State* tolua_S)
             return 0;
         }
         cobj->setAlpha(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ColorFrame:setAlpha",argc, 1);
     return 0;
@@ -18642,7 +18807,8 @@ int lua_cocos2dx_studio_ColorFrame_setColor(lua_State* tolua_S)
             return 0;
         }
         cobj->setColor(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ColorFrame:setColor",argc, 1);
     return 0;
@@ -18787,7 +18953,8 @@ int lua_cocos2dx_studio_EventFrame_setEvent(lua_State* tolua_S)
             return 0;
         }
         cobj->setEvent(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.EventFrame:setEvent",argc, 1);
     return 0;
@@ -18833,7 +19000,8 @@ int lua_cocos2dx_studio_EventFrame_init(lua_State* tolua_S)
             return 0;
         }
         cobj->init();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.EventFrame:init",argc, 0);
     return 0;
@@ -19071,7 +19239,8 @@ int lua_cocos2dx_studio_ZOrderFrame_setZOrder(lua_State* tolua_S)
             return 0;
         }
         cobj->setZOrder(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ZOrderFrame:setZOrder",argc, 1);
     return 0;
@@ -19261,7 +19430,8 @@ int lua_cocos2dx_studio_Timeline_gotoFrame(lua_State* tolua_S)
             return 0;
         }
         cobj->gotoFrame(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:gotoFrame",argc, 1);
     return 0;
@@ -19310,7 +19480,8 @@ int lua_cocos2dx_studio_Timeline_setNode(lua_State* tolua_S)
             return 0;
         }
         cobj->setNode(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:setNode",argc, 1);
     return 0;
@@ -19409,7 +19580,8 @@ int lua_cocos2dx_studio_Timeline_insertFrame(lua_State* tolua_S)
             return 0;
         }
         cobj->insertFrame(arg0, arg1);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:insertFrame",argc, 2);
     return 0;
@@ -19458,7 +19630,8 @@ int lua_cocos2dx_studio_Timeline_setActionTag(lua_State* tolua_S)
             return 0;
         }
         cobj->setActionTag(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:setActionTag",argc, 1);
     return 0;
@@ -19507,7 +19680,8 @@ int lua_cocos2dx_studio_Timeline_addFrame(lua_State* tolua_S)
             return 0;
         }
         cobj->addFrame(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:addFrame",argc, 1);
     return 0;
@@ -19697,7 +19871,8 @@ int lua_cocos2dx_studio_Timeline_removeFrame(lua_State* tolua_S)
             return 0;
         }
         cobj->removeFrame(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:removeFrame",argc, 1);
     return 0;
@@ -19746,7 +19921,8 @@ int lua_cocos2dx_studio_Timeline_setActionTimeline(lua_State* tolua_S)
             return 0;
         }
         cobj->setActionTimeline(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:setActionTimeline",argc, 1);
     return 0;
@@ -19795,7 +19971,8 @@ int lua_cocos2dx_studio_Timeline_stepToFrame(lua_State* tolua_S)
             return 0;
         }
         cobj->stepToFrame(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.Timeline:stepToFrame",argc, 1);
     return 0;
@@ -19949,7 +20126,8 @@ int lua_cocos2dx_studio_ActionTimelineData_setActionTag(lua_State* tolua_S)
             return 0;
         }
         cobj->setActionTag(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimelineData:setActionTag",argc, 1);
     return 0;
@@ -20107,7 +20285,8 @@ int lua_cocos2dx_studio_ActionTimeline_setFrameEventCallFunc(lua_State* tolua_S)
             return 0;
         }
         cobj->setFrameEventCallFunc(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:setFrameEventCallFunc",argc, 1);
     return 0;
@@ -20156,7 +20335,8 @@ int lua_cocos2dx_studio_ActionTimeline_addTimeline(lua_State* tolua_S)
             return 0;
         }
         cobj->addTimeline(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:addTimeline",argc, 1);
     return 0;
@@ -20296,7 +20476,8 @@ int lua_cocos2dx_studio_ActionTimeline_pause(lua_State* tolua_S)
             return 0;
         }
         cobj->pause();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:pause",argc, 0);
     return 0;
@@ -20392,7 +20573,8 @@ int lua_cocos2dx_studio_ActionTimeline_removeTimeline(lua_State* tolua_S)
             return 0;
         }
         cobj->removeTimeline(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:removeTimeline",argc, 1);
     return 0;
@@ -20445,7 +20627,8 @@ int lua_cocos2dx_studio_ActionTimeline_setLastFrameCallFunc(lua_State* tolua_S)
             return 0;
         }
         cobj->setLastFrameCallFunc(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:setLastFrameCallFunc",argc, 1);
     return 0;
@@ -20538,7 +20721,8 @@ int lua_cocos2dx_studio_ActionTimeline_resume(lua_State* tolua_S)
             return 0;
         }
         cobj->resume();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:resume",argc, 0);
     return 0;
@@ -20681,7 +20865,8 @@ int lua_cocos2dx_studio_ActionTimeline_gotoFrameAndPause(lua_State* tolua_S)
             return 0;
         }
         cobj->gotoFrameAndPause(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:gotoFrameAndPause",argc, 1);
     return 0;
@@ -20772,7 +20957,8 @@ int lua_cocos2dx_studio_ActionTimeline_gotoFrameAndPlay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->gotoFrameAndPlay(arg0, arg1);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -20783,7 +20969,8 @@ int lua_cocos2dx_studio_ActionTimeline_gotoFrameAndPlay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->gotoFrameAndPlay(arg0);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -20802,7 +20989,8 @@ int lua_cocos2dx_studio_ActionTimeline_gotoFrameAndPlay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->gotoFrameAndPlay(arg0, arg1, arg2);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -20825,7 +21013,8 @@ int lua_cocos2dx_studio_ActionTimeline_gotoFrameAndPlay(lua_State* tolua_S)
 
             if (!ok) { break; }
             cobj->gotoFrameAndPlay(arg0, arg1, arg2, arg3);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -20873,7 +21062,8 @@ int lua_cocos2dx_studio_ActionTimeline_clearFrameEventCallFunc(lua_State* tolua_
             return 0;
         }
         cobj->clearFrameEventCallFunc();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:clearFrameEventCallFunc",argc, 0);
     return 0;
@@ -20969,7 +21159,8 @@ int lua_cocos2dx_studio_ActionTimeline_setTimeSpeed(lua_State* tolua_S)
             return 0;
         }
         cobj->setTimeSpeed(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:setTimeSpeed",argc, 1);
     return 0;
@@ -21015,7 +21206,8 @@ int lua_cocos2dx_studio_ActionTimeline_clearLastFrameCallFunc(lua_State* tolua_S
             return 0;
         }
         cobj->clearLastFrameCallFunc();
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:clearLastFrameCallFunc",argc, 0);
     return 0;
@@ -21064,7 +21256,8 @@ int lua_cocos2dx_studio_ActionTimeline_setDuration(lua_State* tolua_S)
             return 0;
         }
         cobj->setDuration(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:setDuration",argc, 1);
     return 0;
@@ -21113,7 +21306,8 @@ int lua_cocos2dx_studio_ActionTimeline_setCurrentFrame(lua_State* tolua_S)
             return 0;
         }
         cobj->setCurrentFrame(arg0);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccs.ActionTimeline:setCurrentFrame",argc, 1);
     return 0;
