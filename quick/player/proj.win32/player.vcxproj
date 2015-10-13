@@ -278,6 +278,7 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\platform\win32\CCNativeWin32.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\platform\win32\CCNativeWin32def.h" />
     <ClInclude Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.h" />
+    <ClInclude Include="..\Classes\UncaughtExceptionHandler.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="PlayerEditBoxServiceWin.h" />
     <ClInclude Include="PlayerFileDialogServiceWin.h" />
@@ -428,6 +429,7 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="PlayerTaskServiceWin.cpp" />
     <ClCompile Include="PlayerWin.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="UncaughtExceptionHandler_win32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\cocos\scripting\lua-bindings\proj.win32\libluacocos2d.vcxproj">

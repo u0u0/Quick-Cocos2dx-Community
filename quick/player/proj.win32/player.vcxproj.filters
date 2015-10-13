@@ -408,6 +408,9 @@
     <ClInclude Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.hpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\UncaughtExceptionHandler.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -604,6 +607,9 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
+    </ClCompile>
+    <ClCompile Include="UncaughtExceptionHandler_win32.cpp">
+      <Filter>Classes\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
