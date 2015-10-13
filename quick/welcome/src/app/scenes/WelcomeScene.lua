@@ -318,7 +318,7 @@ function WelcomeScene:createCopyright(node)
 
     local label = cc.ui.UILabel.new({
 		UILabelType = 2,
-        text = "Copyright (c) 2012-2014 chukong-inc.com, Powered by quick-cocos2d-x.",
+        text = "Copyright (c) 2015 tairan.com, Powered by Quick-Cocos2dx-Community",
         size = 15,
         color = cc.c3b(128, 128, 128),
         x = 48,
