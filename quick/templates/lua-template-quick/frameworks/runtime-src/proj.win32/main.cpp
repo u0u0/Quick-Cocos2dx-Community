@@ -35,7 +35,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     LPWSTR *szArgList=nullptr;
     int argCount=0;
 
-    bool isCodeIDEDebugger = true;
     szArgList = CommandLineToArgvW(GetCommandLine(),&argCount);
     if (argCount >=2 )
     {
@@ -49,7 +48,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     ProjectConfig project;
     HWND hwndConsole;
 
-	if(isCodeIDEDebugger) project.setDebuggerType(kCCLuaDebuggerCodeIDE);
+	project.setDebuggerType(kCCLuaDebuggerNone);
     // load project config from command line args
     vector<string> args;
     for (int i = 0; i < __argc; ++i)
@@ -60,6 +59,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
         args.push_back(s);
     }
     project.parseCommandLine(args);
+
+	// set environments for debug mode
+	if (project.getProjectDir().empty()) {
+		string projectDir = "../../..";
+		project.setProjectDir(projectDir);
+		FileUtils::getInstance()->addSearchPath(projectDir);
+		FileUtils::getInstance()->addSearchPath(projectDir + "/res");
+	}
 
 #ifndef USE_WIN32_CONSOLE
     project.setShowConsole(false);
@@ -83,38 +90,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     }
     project.dump();
 
-    // set environments
-    CCLOG("the project directory is: %s", project.getProjectDir().c_str());
-    if (!project.getProjectDir().empty())
-    {
-        isCodeIDEDebugger = false;
-        extern std::string g_projectPath;
-        g_projectPath = replaceAll(project.getProjectDir(), "\\", "/");
-        auto engine = cocos2d::LuaEngine::getInstance();
-        register_runtime_override_function(engine->getLuaStack()->getLuaState());
-
-        FileUtils::getInstance()->addSearchPath(g_projectPath);
-    }
-    if (project.getDebuggerType() == kCCLuaDebuggerCodeIDE)
-    {
-        isCodeIDEDebugger = true;
-    }
-	else
-	{
-        isCodeIDEDebugger = false;
-	}
-
     // create the application instance
     AppDelegate app;
-
-    if (isCodeIDEDebugger)
-    {
-        app.setLaunchMode(1);
-    }
-	else
-	{
-        app.setLaunchMode(0);
-	}
     int ret = Application::getInstance()->run();
 
 #ifdef USE_WIN32_CONSOLE
