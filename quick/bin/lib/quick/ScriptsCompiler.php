@@ -117,6 +117,11 @@ class ScriptsCompiler
             print("ERR: Invalid bit mode only support 32 or 64\n");
             return false;
         }
+		if (DS == '\\' && $this->config['bit'] == '64')
+		{
+            print("ERR: bit mode 64 only support on Mac\n");
+            return false;
+		}
 
         if (!$this->config['quiet'])
         {

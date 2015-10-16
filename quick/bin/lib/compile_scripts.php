@@ -57,7 +57,7 @@ encrypt mode:
 
 bit mode:
     -b 32 (default)     use bit 32 luajit to compile bytecode
-    -b 64               use bit 64 luajit to compile bytecode
+    -b 64 (Mac Only)    use bit 64 luajit to compile bytecode
 
 config file format:
 

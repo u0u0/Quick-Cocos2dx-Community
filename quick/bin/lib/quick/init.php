@@ -11,7 +11,6 @@ if (DS == '/')
 else
 {
     define('LUAJIT_BIN', BIN_DIR . '\\win32\\luajit.exe');
-    define('LUAJIT64_BIN', BIN_DIR . '\\win32\\luajit64.exe');
 }
 
 // helper functions
