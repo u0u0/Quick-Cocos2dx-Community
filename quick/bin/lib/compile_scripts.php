@@ -15,6 +15,7 @@ $options = array(
     array('ex',  'extname',    1,      'lua',       'encrypted file extension name (default is "lua"), only valid for xxtea_chunk'),
     array('c',   'config',     1,      null,        'load options from config file'),
     array('q',   'quiet',      0,      false,       'quiet'),
+    array('b',   'bit',        1,      '32',        'use 32 bit or 64 bit luajit'),
 );
 
 function errorhelp()
@@ -53,6 +54,10 @@ encrypt mode:
     -e xxtea_chunk      encrypt every bytecodes chunk with XXTEA algorithm.
                         * default encrypt sign is "XXTEA"
                         * output file extension name is "bytes"
+
+bit mode:
+    -b 32 (default)     use bit 32 luajit to compile bytecode
+    -b 64               use bit 64 luajit to compile bytecode
 
 config file format:
 
