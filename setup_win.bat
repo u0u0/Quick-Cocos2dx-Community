@@ -12,7 +12,10 @@ echo.
 
 echo.
 
-del /f /q %userprofile%\Desktop\player3.lnk
+set shortPathLnk=%userprofile%\Desktop\player3.lnk
+if exist %shortPathLnk% del /f /q %shortPathLnk%
+set shortPathUrl=%userprofile%\Desktop\player3.url
+if exist %shortPathUrl% del /f /q %shortPathUrl%
 %QUICK_V3_ROOT%quick\bin\win32\shortcut.exe %QUICK_V3_ROOT%quick\player\win32\player3.exe /d player3 /ld player3.lnk
 
 pause
