@@ -9,10 +9,17 @@ echo "QUICK_V3_ROOT = \"$QUICK_V3_ROOT\""
 echo ""
 
 # set Xcode
-defaults write com.apple.dt.Xcode IDEApplicationwideBuildSettings -dict-add QUICK_V3_ROOT "$QUICK_V3_ROOT"
-defaults write com.apple.dt.Xcode IDESourceTreeDisplayNames -dict-add QUICK_V3_ROOT QUICK_V3_ROOT
 IDEApplicationwideBuildSettings=`defaults read com.apple.dt.Xcode IDEApplicationwideBuildSettings`
+if [ -z "$IDEApplicationwideBuildSettings" ]; then
+	defaults write com.apple.dt.Xcode IDEApplicationwideBuildSettings -dict
+fi
+defaults write com.apple.dt.Xcode IDEApplicationwideBuildSettings -dict-add QUICK_V3_ROOT "$QUICK_V3_ROOT"
+
 IDESourceTreeDisplayNames=`defaults read com.apple.dt.Xcode IDESourceTreeDisplayNames`
+if [ -z "$IDESourceTreeDisplayNames" ]; then
+	defaults write com.apple.dt.Xcode IDESourceTreeDisplayNames -dict
+fi
+defaults write com.apple.dt.Xcode IDESourceTreeDisplayNames -dict-add QUICK_V3_ROOT QUICK_V3_ROOT
 
 echo "> Xcode settings updated."
 
@@ -22,9 +29,9 @@ echo "> quick player settings updated."
 
 # set .bash_profile or .profile
 if [ -f ~/.bash_profile ]; then
-PROFILE_NAME=~/.bash_profile
+	PROFILE_NAME=~/.bash_profile
 else
-PROFILE_NAME=~/.profile
+	PROFILE_NAME=~/.profile
 fi
 
 sed -e '/QUICK_V3_ROOT/d' $PROFILE_NAME | sed -e '/add by quick-cocos2d-x setup/d' > $PROFILE_NAME.tmp
@@ -47,7 +54,7 @@ echo ""
 export QUICK_V3_ROOT=`cat ~/.QUICK_V3_ROOT`
 
 # Create link for player at QuickRoot
-cp -Rf $QUICK_V3_ROOT"/quick/player/player3.app" /Applications/
+sudo cp -Rf $QUICK_V3_ROOT"/quick/player/player3.app" /Applications/
 echo "Player3 has installed in /Applications"
 
 echo ""
