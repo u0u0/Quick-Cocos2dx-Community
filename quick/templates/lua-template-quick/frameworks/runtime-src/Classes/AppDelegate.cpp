@@ -96,13 +96,24 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_pop(stack->getLuaState(), 1);
 #endif
 
-    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
-
     //register custom function
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
     
+#if 0
+    // use luajit bytecode package
+    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
+
+    if (sizeof(long) == 4) {
+        stack->loadChunksFromZIP("res/game.zip");
+    } else {
+        stack->loadChunksFromZIP("res/game64.zip");
+    }
+    stack->executeString("require 'main'");
+#else
+    // use discrete files
     engine->executeScriptFile("src/main.lua");
+#endif
 
     return true;
 }
