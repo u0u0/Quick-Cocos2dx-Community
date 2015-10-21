@@ -1,7 +1,7 @@
 <?php
 
 ini_set('memory_limit','256M');
-require_once(__DIR__ . '/quick/FilesPacker.php');
+require_once(__DIR__ . '/quick/ResEncrypt.php');
 
 $options = array(
     array('h',   'help',       0,      false,       'show help'),
