@@ -393,6 +393,11 @@ public:
      *  @return The file size.
      */
     virtual long getFileSize(const std::string &filepath);
+    
+    /**
+     *  Set resource encrypt Sign and key.
+     */
+    virtual void setResourceEncryptKeyAndSign(const std::string& key, const std::string& sign);
 
     /** Returns the full path cache */
     const std::unordered_map<std::string, std::string>& getFullPathCache() const { return _fullPathCache; }
@@ -509,6 +514,16 @@ protected:
      * Writable path (for debug)
      */
     std::string _writablePath;
+    
+    /**
+     * Resource encrypt Sign
+     */
+    std::string _xxteaSign;
+    
+    /**
+     * Resource encrypt Key
+     */
+    std::string _xxteaKey;
     
     /**
      *  The singleton pointer of FileUtils.

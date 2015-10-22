@@ -713,8 +713,11 @@ int LuaStack::reload(const char* moduleFileName)
     return executeString(require.c_str());
 }
 
-void LuaStack::setXXTEAKeyAndSign(const char *key, int keyLen, const char *sign, int signLen)
+void LuaStack::setXXTEAKeyAndSign(const char *key, const char *sign)
 {
+    int keyLen = (int)strlen(key);
+    int signLen = (int)strlen(sign);
+    
     cleanupXXTEAKeyAndSign();
     
     if (key && keyLen && sign && signLen)

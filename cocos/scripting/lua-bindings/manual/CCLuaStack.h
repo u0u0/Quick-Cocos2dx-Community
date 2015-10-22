@@ -131,7 +131,7 @@ public:
 
 	virtual bool handleAssert(const char *msg, const char *cond, const char *file, int line);
     
-    virtual void setXXTEAKeyAndSign(const char *key, int keyLen, const char *sign, int signLen);
+    virtual void setXXTEAKeyAndSign(const char *key, const char *sign);
     virtual void cleanupXXTEAKeyAndSign();
     
     virtual const char *getXXTEAKey(int *len);

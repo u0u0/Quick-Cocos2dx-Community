@@ -100,9 +100,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
     
+    //FileUtils::getInstance()->setResourceEncryptKeyAndSign("test", "XXTEA");
 #if 0
     // use luajit bytecode package
-    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
+    stack->setXXTEAKeyAndSign("2dxLua", "XXTEA");
 
     if (sizeof(long) == 4) {
         stack->loadChunksFromZIP("res/game.zip");

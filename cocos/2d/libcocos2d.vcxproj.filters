@@ -1295,9 +1295,6 @@
     <ClCompile Include="..\..\external\xxtea\xxtea.cpp">
       <Filter>external\xxtea</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\external\xxtea\xxtea_file.cpp">
-      <Filter>external\xxtea</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">

@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "base/CCDirector.h"
 #include "platform/CCSAXParser.h"
 #include "base/ccUtils.h"
+#include "external/xxtea/xxtea.h"
 
 #include "tinyxml2.h"
 #ifdef MINIZIP_FROM_SYSTEM
@@ -594,6 +595,12 @@ static Data getData(const std::string& filename, bool forString)
     return ret;
 }
 
+void FileUtils::setResourceEncryptKeyAndSign(const std::string& key, const std::string& sign)
+{
+    _xxteaKey = key;
+    _xxteaSign = sign;
+}
+
 std::string FileUtils::getStringFromFile(const std::string& filename)
 {
     Data data = getData(filename, true);
@@ -606,7 +613,31 @@ std::string FileUtils::getStringFromFile(const std::string& filename)
 
 Data FileUtils::getDataFromFile(const std::string& filename)
 {
-    return getData(filename, false);
+    Data data = getData(filename, false);
+    
+    // decrypt XXTEA
+    if (!data.isNull() && _xxteaSign.length() > 0) {
+        bool isXXTEA = false;
+        unsigned char *buf = data.getBytes();
+        ssize_t size = data.getSize();
+        for (int i = 0; i < _xxteaSign.length() && i < size; ++i) {
+            isXXTEA = buf[i] == _xxteaSign[i];
+        }
+        
+        if (isXXTEA) {
+            xxtea_long len = 0;
+            unsigned char* buffer = xxtea_decrypt(
+                                        buf + _xxteaSign.length(),
+                                        (xxtea_long)size - (xxtea_long)_xxteaSign.length(),
+                                        (unsigned char*)_xxteaKey.c_str(),
+                                        (xxtea_long)_xxteaKey.length(),
+                                        &len);
+            data.clear();
+            data.fastSet(buffer, len);
+        }
+    }
+    
+    return data;
 }
 
 unsigned char* FileUtils::getFileData(const std::string& filename, const char* mode, ssize_t *size)

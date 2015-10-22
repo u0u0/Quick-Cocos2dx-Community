@@ -81,7 +81,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     quick_module_register(L);
 
     LuaStack* stack = engine->getLuaStack();
-    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
+    stack->setXXTEAKeyAndSign("2dxLua", "XXTEA");
     
     
     StartupCall *call = StartupCall::create(this);
