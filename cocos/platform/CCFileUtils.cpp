@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "base/CCDirector.h"
 #include "platform/CCSAXParser.h"
 #include "base/ccUtils.h"
-#include "external/xxtea/xxtea.h"
+#include "xxtea/xxtea.h"
 
 #include "tinyxml2.h"
 #ifdef MINIZIP_FROM_SYSTEM
