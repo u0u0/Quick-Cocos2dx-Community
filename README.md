@@ -58,3 +58,45 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点
 
 	 Mac 系统在 Applications 文件夹(或系统应用列表)中 player.app 。
 	 Windows 系统在桌面上的 player.exe 快捷方式。
+
+## 相关文档
+
+### 更新说明
+
+- [Quick-Cocos2dx-Community 3.6 Beta2 更新说明](http://tairan.com/archives/10563/)
+- [Quick-Cocos2dx-Community 3.6 Beta1 内部测试版](http://tairan.com/archives/10516/)
+
+### 使用指南
+
+- [Quick-Cocos2dx-Community 在发布时加密资源文件](http://tairan.com/archives/10562/)
+- [Quick-Cocos2dx-Community 中 64 位 Luajit 使用说明](http://tairan.com/archives/10561/)
+- [quick-community-dev插件安装](http://tairan.com/archives/10542/)
+- [在发布时加密lua源文件](http://tairan.com/archives/10157/)
+- [开发环境搭建](http://tairan.com/archives/7344/)
+
+### 参考手册
+
+- [quick 中的事件](./docs/manual/events/zh.html)
+- [quick 中的触摸事件](./docs/manual/touch-events/zh.html)
+- [API 文档](./docs/api/index.html)
+
+## 相关教程
+
+### 使用Quick初学者系列教程
+
+- [Quick初学者游戏教程1](http://tairan.com/archives/10184/)
+- [Quick初学者游戏教程2](http://tairan.com/archives/10212/)
+- [Quick初学者游戏教程3](http://tairan.com/archives/10287/)
+- [Quick初学者游戏教程4](http://tairan.com/archives/10290/)
+- [Quick初学者游戏教程5](http://tairan.com/archives/10299/)
+- [Quick初学者游戏教程6](http://tairan.com/archives/10306/)
+- [Quick初学者游戏教程7](http://tairan.com/archives/10312/)
+- [Quick初学者游戏教程8](http://tairan.com/archives/10323/)
+- [Quick初学者游戏教程9](http://tairan.com/archives/10328/)
+- [Quick初学者游戏教程10](http://tairan.com/archives/10334/)
+- [Quick初学者游戏教程11](http://tairan.com/archives/10339/)
+- [Quick初学者游戏教程12](http://tairan.com/archives/10341/)
+
+## 官方书籍
+
+- [Cocos2d-x 之Lua 核心编程](http://tairan.com/cocos2d-lua-book)
