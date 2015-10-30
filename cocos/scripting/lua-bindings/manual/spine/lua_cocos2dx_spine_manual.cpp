@@ -99,9 +99,8 @@ static int lua_cocos2dx_CCSkeletonAnimation_createWithFile(lua_State* L)
 #if COCOS2D_DEBUG >= 1
         if (!tolua_isusertype(L,2,"sp.SkeletonData",0,&tolua_err)) goto tolua_lerror;
 #endif
-        spSkeletonData* data = (spSkeletonData *)tolua_tousertype(L,2,0);
-        
-        auto tolua_ret = LuaSkeletonAnimation::createWithData(data);
+        lua_spSkeletonData *luaSpData = static_cast<lua_spSkeletonData *>(tolua_tousertype(L,2,0));
+        auto tolua_ret = LuaSkeletonAnimation::createWithData(luaSpData->data);
         
         int nID = (tolua_ret) ? (int)tolua_ret->_ID : -1;
         int* pLuaID = (tolua_ret) ? &tolua_ret->_luaID : NULL;
@@ -118,7 +117,6 @@ static int lua_cocos2dx_CCSkeletonAnimation_createWithFile(lua_State* L)
 #endif
         const char* skeletonDataFile = tolua_tostring(L, 2, "");
         const char* atlasFile = tolua_tostring(L, 3, "");;
-        
         auto tolua_ret = LuaSkeletonAnimation::createWithFile(skeletonDataFile, atlasFile);
         
         int nID = (tolua_ret) ? (int)tolua_ret->_ID : -1;

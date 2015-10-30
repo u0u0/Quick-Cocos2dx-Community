@@ -39,7 +39,7 @@ LuaSkeletonAnimation::LuaSkeletonAnimation (const char* skeletonDataFile, const 
 }
 
 LuaSkeletonAnimation::LuaSkeletonAnimation (spSkeletonData *data)
-: spine::SkeletonAnimation(data)
+: spine::SkeletonAnimation(data, false)
 {
     
 }

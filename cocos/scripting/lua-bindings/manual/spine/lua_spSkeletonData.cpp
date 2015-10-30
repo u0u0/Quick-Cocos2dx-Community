@@ -1,7 +1,6 @@
 #include "lua_spSkeletonData.hpp"
 #include "tolua_fix.h"
 #include "LuaBasicConversions.h"
-#include "spine-cocos2dx.h"
 
 using namespace spine;
 
@@ -38,7 +37,11 @@ static int lua_cocos2dx_SkeletonData_create(lua_State* L)
         CCAssert(data, json->error ? json->error : "Error reading skeleton data.");
         spSkeletonJson_dispose(json);
         
-        tolua_pushusertype(L,(void*)data,"sp.SkeletonData");
+        lua_spSkeletonData *luaSpData = new lua_spSkeletonData;
+        luaSpData->atlas = atlas;
+        luaSpData->data = data;
+        
+        tolua_pushusertype(L,(void*)luaSpData,"sp.SkeletonData");
         tolua_register_gc(L,lua_gettop(L));
         return 1;
     }
@@ -53,8 +56,10 @@ tolua_lerror:
 
 int lua_cocos2dx_SkeletonData_finalize(lua_State* L)
 {
-    spSkeletonData *data = (spSkeletonData *)tolua_tousertype(L,1,0);
-    CC_SAFE_DELETE(data);
+    lua_spSkeletonData *luaSpData = static_cast<lua_spSkeletonData *>(tolua_tousertype(L,1,0));
+    spSkeletonData_dispose(luaSpData->data);
+    spAtlas_dispose(luaSpData->atlas);
+    delete luaSpData;
     CCLOG("sp.SkeletonData freed");
     return 0;
 }
