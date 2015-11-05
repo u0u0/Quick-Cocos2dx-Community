@@ -62,7 +62,7 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点
 ## 相关文档
 
 ### 更新说明
-
+- [Quick-Cocos2dx-Community 3.6 Release 更新说明](http://www.tairan.com/archives/10573/)
 - [Quick-Cocos2dx-Community 3.6 Beta2 更新说明](http://tairan.com/archives/10563/)
 - [Quick-Cocos2dx-Community 3.6 Beta1 内部测试版](http://tairan.com/archives/10516/)
 

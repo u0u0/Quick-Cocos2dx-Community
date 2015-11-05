@@ -1,0 +1,47 @@
+Quick-Cocos2dx-Community v3.6 release
+
+[修正]	在setup_mac.sh中为player.app添加可执行权限
+[修正]	修复sp.SkeletonData内存泄漏问题
+[修正]	修复TileMap中getTileAt()方法
+
+Quick-Cocos2dx-Community v3.6 beta2,build e0032f7
+
+[新增]	compile_script 加入 bit mode，已支持生成64位的luajit bytecode
+[新增]	新增 encrypt_res 工具，用于资源文件加密
+
+[修正]	修正新增的sample没有预览图片的问题
+[修正]	修正塔防sample存档之后不能启动的bug
+[修正]	修正setup_win.bat中的错误提示
+[修正]	增强setup_mac.sh的异常处理，并更新说明文档
+[修正]	win32 player 打包加入运行库，并能正确显示log
+[修正]	修正 Android 编译ndk时候找不到opengl头文件的错误
+
+[删除]	去掉build_apk脚本（脚本需要Android环境支持，并不能直接运行）
+
+Quick-Cocos2dx-Community v3.6 beta1,build 3b7c215
+
+[更新]	Spine runtime更新到2.3
+[更新]	新增Spine对象绑定sp.SkeletonData，可从sp.SkeletonData创建SkeletonAnimation，以便开发者可用数据缓存提升spine加载速度
+[更新]	更新 Luajit 到 2.1.0-beta1，支持 arm64
+[更新]	创建工程去掉"Copy Sources Files"选项
+[更新]	更新 compile_script，使用 Luajit 来生成 bytecode
+[更新]	更新模版工程，适应 iOS9 变化，默认bitcode改为"NO"
+
+[新增]	CONFIG_SCREEN_AUTOSCALE 新增 EXACT_FIT 选项
+[新增]	新增 cc.FileUtils:getDataFromFile 接口
+[新增]	新增 CocoStudio 2.0 支持
+[新增]	UI控件新增 clone() 接口
+
+[修正]	修正Mac Player不能正确调用cc.FileUtils:getInstance():getStringFromFile的错误
+[修正]	修正 DrawPrimitives.lua 中的拼写错误
+[修正]	修正 EventProtocol.lua中的 bug
+[修正]	修正 clipping rectangle node 缩放 bug
+[修正]	修正 autorelease 内存泄漏
+[修正]	修正 Mac 下显示 FPS 导致崩溃的bug
+[修正]	修正 Node:hitTest 错误
+[修正]	修正 UIScrollView 滚动bug
+[修正]	修正 UIListView 中的内存泄漏
+[修正]	修正 LuaEventNode 中的bug
+
+[删除]	去掉 Windows Phone 支持
+[删除]	去掉 Cocos Code IDE 支持
