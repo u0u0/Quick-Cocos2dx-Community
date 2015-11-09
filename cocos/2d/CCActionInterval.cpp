@@ -1102,10 +1102,12 @@ MoveTo* MoveTo::clone() const
 	return a;
 }
 
-void MoveTo::startWithTarget(Node *target)
+void MoveTo::update(float t)
 {
-    MoveBy::startWithTarget(target);
-    _positionDelta = _endPosition - target->getPosition();
+    if (0 == t) {
+        _positionDelta = _endPosition - _target->getPosition();
+    }
+    MoveBy::update(t);
 }
 
 
