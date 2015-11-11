@@ -299,15 +299,18 @@ class ProjectCreator
 
     private function copyFrameworkFiles()
     {
-        $quickPath = $_ENV['QUICK_V3_ROOT'] . "/quick";
+		# find "\quick\" from template path for get QUICK_V3_ROOT.
+		$pos = strrpos($this->config['template'], DS . "quick" . DS);
+		$quickRoot = substr($this->config['template'], 0, $pos);
+        $quickPath = $quickRoot . DS . "quick";
         $cocosPath = $this->config['output'] . "src";
 
-        $dirname = "/cocos";
+        $dirname = DS . "cocos";
         $src = $quickPath . $dirname;
         $dst = $cocosPath . $dirname;
         $this->copyDir($src, $dst, false);
 
-        $dirname = "/framework";
+        $dirname = DS . "framework";
         $src = $quickPath . $dirname;
         $dst = $cocosPath . $dirname;
         $this->copyDir($src, $dst, false);

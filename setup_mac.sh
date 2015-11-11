@@ -55,6 +55,9 @@ export QUICK_V3_ROOT=`cat ~/.QUICK_V3_ROOT`
 
 # Create link for player at QuickRoot
 sudo cp -Rf $QUICK_V3_ROOT"/quick/player/player3.app" /Applications/
+# add x permission
+sudo chmod -R 755 $QUICK_V3_ROOT"/quick/player/player3.app"
+sudo chmod -R 755 /Applications/player3.app
 echo "Player3 has installed in /Applications"
 
 echo ""

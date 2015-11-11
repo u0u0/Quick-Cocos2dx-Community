@@ -324,10 +324,7 @@ Sprite * TMXLayer::getTileAt(const Vec2& pos)
 
             tile = Sprite::createWithTexture(this->getTexture(), rect);
             tile->setBatchNode(this);
-            tile->setPosition(getPositionAt(pos));
-            tile->setPositionZ((float)getVertexZForPos(pos));
-            tile->setAnchorPoint(Vec2::ZERO);
-            tile->setOpacity(_opacity);
+            setupTileSprite(tile, pos, _tiles[z]);
 
             ssize_t indexForZ = atlasIndexForExistantZ(z);
             this->addSpriteWithoutQuad(tile, static_cast<int>(indexForZ), z);
