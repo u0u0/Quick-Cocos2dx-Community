@@ -73,26 +73,6 @@ if ($config['help'])
     exit(0);
 }
 
-if ($config['config'])
-{
-    $configFilename = $config['config'];
-    if (file_exists($configFilename))
-    {
-        $config = @include($configFilename);
-    }
-    else
-    {
-        $config = null;
-    }
-
-    if (!is_array($config))
-    {
-        printf("ERR: invalid config file, %s\n", $configFilename);
-        errorhelp();
-        exit(1);
-    }
-}
-
 $creator = new ProjectCreator($config, $options);
 if ($creator->validateConfig())
 {
