@@ -73,7 +73,6 @@ if ($config['help'])
     exit(0);
 }
 
-
 $creator = new ProjectCreator($config, $options);
 if ($creator->validateConfig())
 {
