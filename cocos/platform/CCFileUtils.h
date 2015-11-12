@@ -80,14 +80,16 @@ public:
     
     /**
      *  Gets string from a file.
+     *  IMPORTANT: DO NOT OVERRIDE ME!
      */
-    virtual std::string getStringFromFile(const std::string& filename);
+    std::string getStringFromFile(const std::string& filename);
     
     /**
      *  Creates binary data from a file.
+     *  IMPORTANT: DO NOT OVERRIDE ME!
      *  @return A data object.
      */
-    virtual Data getDataFromFile(const std::string& filename);
+    Data getDataFromFile(const std::string& filename);
     
     /**
      *  Gets resource file data
@@ -99,6 +101,14 @@ public:
      *  @warning Recall: you are responsible for calling free() on any Non-NULL pointer returned.
      */
     CC_DEPRECATED_ATTRIBUTE virtual unsigned char* getFileData(const std::string& filename, const char* mode, ssize_t *size);
+
+    /**
+     *  Get File date from file.
+     *  OVERRIDE ME, if not use fopen to get file data
+     *  @param[in] forString, openfile with string mode or not.
+     *  @return A data object
+     */
+    virtual Data getData(const std::string& filename, bool forString);
 
     /**
      *  Gets resource file data from a zip file.

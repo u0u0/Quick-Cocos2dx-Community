@@ -62,27 +62,16 @@ public:
     bool init();
 
     virtual std::string getNewFilename(const std::string &filename) const override;
+    virtual Data getData(const std::string& filename, bool forString) override;
 
     /** @deprecated Please use FileUtils::getDataFromFile or FileUtils::getStringFromFile instead. */
     CC_DEPRECATED_ATTRIBUTE virtual unsigned char* getFileData(const std::string& filename, const char* mode, ssize_t * size) override;
-
-    /**
-     *  Gets string from a file.
-     */
-    virtual std::string getStringFromFile(const std::string& filename) override;
-    
-    /**
-     *  Creates binary data from a file.
-     *  @return A data object.
-     */
-    virtual Data getDataFromFile(const std::string& filename) override;
 
     virtual std::string getWritablePath() const;
     virtual bool isAbsolutePath(const std::string& strPath) const;
     
 private:
     virtual bool isFileExistInternal(const std::string& strFilePath) const;
-    Data getData(const std::string& filename, bool forString);
 
     static AAssetManager* assetmanager;
 };

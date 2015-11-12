@@ -292,21 +292,6 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
     return ret;
 }
 
-std::string FileUtilsAndroid::getStringFromFile(const std::string& filename)
-{
-    Data data = getData(filename, true);
-    if (data.isNull())
-        return "";
-
-    std::string ret((const char*)data.getBytes());
-    return ret;
-}
-    
-Data FileUtilsAndroid::getDataFromFile(const std::string& filename)
-{
-    return getData(filename, false);
-}
-
 unsigned char* FileUtilsAndroid::getFileData(const std::string& filename, const char* mode, ssize_t * size)
 {    
     unsigned char * data = 0;

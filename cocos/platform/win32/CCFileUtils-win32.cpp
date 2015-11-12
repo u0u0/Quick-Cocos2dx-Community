@@ -143,7 +143,7 @@ bool FileUtilsWin32::isAbsolutePath(const std::string& strPath) const
     return false;
 }
 
-static Data getData(const std::string& filename, bool forString)
+Data FileUtilsWin32::getData(const std::string& filename, bool forString)
 {
     if (filename.empty())
     {
@@ -205,23 +205,6 @@ static Data getData(const std::string& filename, bool forString)
         ret.fastSet(buffer, size);
     }
     return ret;
-}
-
-std::string FileUtilsWin32::getStringFromFile(const std::string& filename)
-{
-    Data data = getData(filename, true);
-	if (data.isNull())
-	{
-		return "";
-	}
-
-    std::string ret((const char*)data.getBytes());
-    return ret;
-}
-    
-Data FileUtilsWin32::getDataFromFile(const std::string& filename)
-{
-    return getData(filename, false);
 }
 
 unsigned char* FileUtilsWin32::getFileData(const std::string& filename, const char* mode, ssize_t* size)

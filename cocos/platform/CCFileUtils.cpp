@@ -534,7 +534,7 @@ void FileUtils::purgeCachedEntries()
     _fullPathCache.clear();
 }
 
-static Data getData(const std::string& filename, bool forString)
+Data FileUtils::getData(const std::string& filename, bool forString)
 {
     if (filename.empty())
     {
