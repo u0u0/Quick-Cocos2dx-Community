@@ -127,7 +127,10 @@ function findFiles($dir, array & $files)
 
     while (($file = readdir($dh)) !== false)
     {
-        if ($file == '.' || $file == '..' || $file == ".DS_Store") { continue; }
+		if ($file == '.' || $file == '..' || $file == ".DS_Store" || $file == ".svn")
+		{
+			continue;
+		}
 
         $path = $dir . $file;
         if (is_dir($path))
