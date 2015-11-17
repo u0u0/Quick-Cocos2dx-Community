@@ -795,8 +795,8 @@ function CCSUILoader:prettyJson(json)
 		-- 调整百分比的子节点宽高,位置
 		if node.PositionPercentXEnabled then
 			node.Position = node.Position or {}
-			node.Position.X = parent.Size.X * node.PerPosition.X
-			node.Position.Y = parent.Size.Y * node.PerPosition.Y
+			node.Position.X = parent.Size.X * node.PrePosition.X
+			node.Position.Y = parent.Size.Y * node.PrePosition.Y
 		end
 		if node.PercentWidthEnable then
 			node.Size = node.Size or {}
