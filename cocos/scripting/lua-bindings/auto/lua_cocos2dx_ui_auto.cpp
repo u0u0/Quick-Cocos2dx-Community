@@ -18291,9 +18291,16 @@ int lua_cocos2dx_ui_Helper_seekWidgetByName(lua_State* tolua_S)
 
     if (argc == 2)
     {
-        cocos2d::ui::Widget* arg0;
+        cocos2d::ui::Widget *arg0;
+        cocos2d::Node *nodeArg0;
         std::string arg1;
-        ok &= luaval_to_object<cocos2d::ui::Widget>(tolua_S, 2, "ccui.Widget",&arg0);
+        ok = luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&nodeArg0);
+        if (!ok) {
+            ok = luaval_to_object<cocos2d::ui::Widget>(tolua_S, 2, "ccui.Widget",&arg0);
+        } else {
+            arg0 = static_cast<cocos2d::ui::Widget *>(nodeArg0);
+        }
+        
         ok &= luaval_to_std_string(tolua_S, 3,&arg1, "ccui.Helper:seekWidgetByName");
         if(!ok)
         {
@@ -18330,8 +18337,15 @@ int lua_cocos2dx_ui_Helper_seekWidgetByTag(lua_State* tolua_S)
     if (argc == 2)
     {
         cocos2d::ui::Widget* arg0;
+        cocos2d::Node *nodeArg0;
         int arg1;
-        ok &= luaval_to_object<cocos2d::ui::Widget>(tolua_S, 2, "ccui.Widget",&arg0);
+        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&nodeArg0);
+        if (!ok) {
+            ok &= luaval_to_object<cocos2d::ui::Widget>(tolua_S, 2, "ccui.Widget",&arg0);
+        } else {
+            arg0 = static_cast<cocos2d::ui::Widget *>(nodeArg0);
+        }
+        
         ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "ccui.Helper:seekWidgetByTag");
         if(!ok)
         {
