@@ -2602,6 +2602,79 @@ tolua_lerror:
 #endif
 }
 
+int lua_cocos2d_CardinalSplineTo_create(lua_State* tolua_S)
+{
+    if (NULL == tolua_S)
+        return 0;
+    
+    int argc = 0;
+    bool ok = true;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertable(tolua_S,1,"cc.CardinalSplineTo",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    
+    if (argc == 3)
+    {
+        double dur = 0.0;
+        ok &= luaval_to_number(tolua_S, 2, &dur, "cc.CardinalSplineTo:create");
+        if (!ok)
+            return 0;
+        
+        int num = 0;
+        cocos2d::Vec2 *arr = NULL;
+        ok &= luaval_to_array_of_vec2(tolua_S, 3, &arr, &num, "cc.CardinalSplineTo:create");
+        if (!ok)
+            return 0;
+        
+        double ten = 0.0;
+        ok &= luaval_to_number(tolua_S, 4, &ten, "cc.CardinalSplineTo:create");
+        if (!ok)
+        {
+            CC_SAFE_DELETE_ARRAY(arr);
+            return 0;
+        }
+        
+        if (num > 0)
+        {
+            PointArray* points = PointArray::create(num);
+            
+            if (NULL == points)
+            {
+                CC_SAFE_DELETE_ARRAY(arr);
+                return 0;
+            }
+            
+            for( int i = 0; i < num; i++) {
+                points->addControlPoint(arr[i]);
+            }
+            
+            CC_SAFE_DELETE_ARRAY(arr);
+            CardinalSplineTo* tolua_ret = CardinalSplineTo::create(dur, points, ten);
+            if (NULL != tolua_ret)
+            {
+                int nID = (tolua_ret) ? (int)tolua_ret->_ID : -1;
+                int* pLuaID = (tolua_ret) ? &tolua_ret->_luaID : NULL;
+                toluafix_pushusertype_ccobject(tolua_S, nID, pLuaID, (void*)tolua_ret,"cc.CardinalSplineTo");
+                return 1;
+            }
+        }
+    }
+    
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n", "cc.CardinalSplineTo:create", argc, 3);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2d_CardinalSplineTo_create'.",&tolua_err);
+    return 0;
+#endif
+}
+
+
 int tolua_cocos2d_CatmullRomBy_create(lua_State* tolua_S)
 {
     if (NULL == tolua_S)
@@ -4825,6 +4898,19 @@ static void extendCardinalSplineBy(lua_State* tolua_S)
     {
         lua_pushstring(tolua_S,"create");
         lua_pushcfunction(tolua_S,lua_cocos2d_CardinalSplineBy_create);
+        lua_rawset(tolua_S,-3);
+    }
+    lua_pop(tolua_S, 1);
+}
+
+static void extendCardinalSplineTo(lua_State* tolua_S)
+{
+    lua_pushstring(tolua_S,"cc.CardinalSplineTo");
+    lua_rawget(tolua_S,LUA_REGISTRYINDEX);
+    if (lua_istable(tolua_S,-1))
+    {
+        lua_pushstring(tolua_S,"create");
+        lua_pushcfunction(tolua_S,lua_cocos2d_CardinalSplineTo_create);
         lua_rawset(tolua_S,-3);
     }
     lua_pop(tolua_S, 1);
@@ -7252,6 +7338,7 @@ int register_all_cocos2dx_manual(lua_State* tolua_S)
     extendCallFunc(tolua_S);
     extendSpawn(tolua_S);
     extendCardinalSplineBy(tolua_S);
+    extendCardinalSplineTo(tolua_S);
     extendCatmullRomBy(tolua_S);
     extendCatmullRomTo(tolua_S);
     extendBezierBy(tolua_S);
