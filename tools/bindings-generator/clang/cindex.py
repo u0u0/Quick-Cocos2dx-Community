@@ -3386,7 +3386,13 @@ class Config:
             file = 'libclang.so'
 
         if Config.library_path:
-            file = Config.library_path + '/' + file
+            file = os.path.join(Config.library_path, file)
+        else:
+            import os
+            script_path = os.path.split(os.path.realpath(__file__))[0]
+            bindings_path = os.path.split(script_path)[0]
+            library_path = os.path.join(bindings_path, "libclang")
+            file = os.path.join(library_path, file)
 
         return file
 
