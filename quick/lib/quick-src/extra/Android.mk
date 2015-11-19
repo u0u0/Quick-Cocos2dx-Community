@@ -49,6 +49,10 @@ LOCAL_SRC_FILES += \
     $(LOCAL_PATH)/nanovg/nanonode/NVGNode.cpp \
     $(LOCAL_PATH)/nanovg/nanonode/NVGDrawNode.cpp
 
+ifeq ($(CC_CURL_ENABLED),0)
+	LOCAL_SRC_FILES += \
+		$(LOCAL_PATH)/extra/crypto/md5/md5.c
+endif	
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                            $(LOCAL_PATH)/luabinding
