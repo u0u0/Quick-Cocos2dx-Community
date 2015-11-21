@@ -104,14 +104,19 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if 0
     // use luajit bytecode package
     stack->setXXTEAKeyAndSign("2dxLua", "XXTEA");
-
+    
+#ifdef CC_TARGET_OS_IPHONE
     if (sizeof(long) == 4) {
         stack->loadChunksFromZIP("res/game.zip");
     } else {
         stack->loadChunksFromZIP("res/game64.zip");
     }
-    stack->executeString("require 'main'");
 #else
+    // android, mac, win32, etc
+    stack->loadChunksFromZIP("res/game.zip");
+#endif
+    stack->executeString("require 'main'");
+#else // #if 0
     // use discrete files
     engine->executeScriptFile("src/main.lua");
 #endif
