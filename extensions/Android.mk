@@ -28,7 +28,6 @@ LOCAL_STATIC_LIBRARIES := cocos2dx_internal_static
 ifeq ($(CC_USE_CURL),1)
 LOCAL_SRC_FILES += \
 assets-manager/AssetsManager.cpp \
-assets-manager/AssetsManager.cpp \
 assets-manager/Downloader.cpp \
 assets-manager/Manifest.cpp \
 assets-manager/AssetsManagerEx.cpp \
