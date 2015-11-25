@@ -39,6 +39,28 @@ THE SOFTWARE.
 #include "base/ccUtils.h"
 #include "base/ccUTF8.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#ifndef GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WIN32
+#endif
+#ifndef GLFW_EXPOSE_NATIVE_WGL
+#define GLFW_EXPOSE_NATIVE_WGL
+#endif
+#include "glfw3native.h"
+#endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
+
+// move from .h file to .cpp, to make cocoa Size not effect to CCSize.
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+#ifndef GLFW_EXPOSE_NATIVE_NSGL
+#define GLFW_EXPOSE_NATIVE_NSGL
+#endif
+#ifndef GLFW_EXPOSE_NATIVE_COCOA
+#define GLFW_EXPOSE_NATIVE_COCOA
+#endif
+#include "glfw3native.h"
+#endif // #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+
+
 NS_CC_BEGIN
 
 // GLFWEventHandler
@@ -302,6 +324,20 @@ GLViewImpl::~GLViewImpl()
     GLFWEventHandler::setGLViewImpl(nullptr);
     glfwTerminate();
 }
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+HWND GLViewImpl::getWin32Window()
+{
+    return glfwGetWin32Window(_mainWindow);
+}
+#endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+id GLViewImpl::getCocoaWindow()
+{
+    return glfwGetCocoaWindow(_mainWindow);
+}
+#endif // #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 
 GLViewImpl* GLViewImpl::create(const std::string& viewName)
 {

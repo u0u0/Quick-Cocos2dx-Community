@@ -10,14 +10,12 @@
 		0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
-		15A8A4881834C90F00142BE0 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4871834C90E00142BE0 /* libcurl.dylib */; };
 		494047851A31C0A6004CECA6 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 4940477F1A31C0A6004CECA6 /* nanovg.c */; };
 		4940478A1A31C0EF004CECA6 /* NVGNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 494047881A31C0EF004CECA6 /* NVGNode.cpp */; };
 		49C655C41A35403D00603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C655C21A35403D00603AF5 /* NVGDrawNode.cpp */; };
 		49C655D01A3692EF00603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C655CE1A3692EF00603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp */; };
 		49C655D31A36C71400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C655D11A36C71400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp */; };
 		5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
-		5023813717EBBCE400990C9B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
 		5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		5023814117EBBCE400990C9B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
@@ -30,7 +28,6 @@
 		9F72892B1A24957700EE0234 /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288311A24957700EE0234 /* HelperFunc.cpp */; };
 		9F72892C1A24957700EE0234 /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288361A24957700EE0234 /* libbase64.c */; };
 		9F72892D1A24957700EE0234 /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288381A24957700EE0234 /* CCCrypto.cpp */; };
-		9F72892E1A24957700EE0234 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F72883B1A24957700EE0234 /* md5.c */; };
 		9F7289301A24957700EE0234 /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288411A24957700EE0234 /* CCBlurFilter.cpp */; };
 		9F7289311A24957700EE0234 /* CCBrightnessFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288431A24957700EE0234 /* CCBrightnessFilter.cpp */; };
 		9F7289321A24957700EE0234 /* CCContrastFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288451A24957700EE0234 /* CCContrastFilter.cpp */; };
@@ -183,8 +180,6 @@
 		9F7288371A24957700EE0234 /* libbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libbase64.h; sourceTree = "<group>"; };
 		9F7288381A24957700EE0234 /* CCCrypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCCrypto.cpp; sourceTree = "<group>"; };
 		9F7288391A24957700EE0234 /* CCCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCrypto.h; sourceTree = "<group>"; };
-		9F72883B1A24957700EE0234 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
-		9F72883C1A24957700EE0234 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		9F72883F1A24957700EE0234 /* cocos2dFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dFilters.h; sourceTree = "<group>"; };
 		9F7288411A24957700EE0234 /* CCBlurFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBlurFilter.cpp; sourceTree = "<group>"; };
 		9F7288421A24957700EE0234 /* CCBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBlurFilter.h; sourceTree = "<group>"; };
@@ -391,11 +386,9 @@
 				9FD01B0D19F8C58C005E0C49 /* SystemConfiguration.framework in Frameworks */,
 				15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */,
 				15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */,
-				15A8A4881834C90F00142BE0 /* libcurl.dylib in Frameworks */,
 				50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */,
 				50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */,
 				50D7C96C17EBBEDF005D0B91 /* OpenGL.framework in Frameworks */,
-				5023813717EBBCE400990C9B /* libz.dylib in Frameworks */,
 				5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */,
 				5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */,
 				5023814117EBBCE400990C9B /* AudioToolbox.framework in Frameworks */,
@@ -526,7 +519,6 @@
 				9F7288351A24957700EE0234 /* base64 */,
 				9F7288381A24957700EE0234 /* CCCrypto.cpp */,
 				9F7288391A24957700EE0234 /* CCCrypto.h */,
-				9F72883A1A24957700EE0234 /* md5 */,
 			);
 			path = crypto;
 			sourceTree = "<group>";
@@ -538,15 +530,6 @@
 				9F7288371A24957700EE0234 /* libbase64.h */,
 			);
 			path = base64;
-			sourceTree = "<group>";
-		};
-		9F72883A1A24957700EE0234 /* md5 */ = {
-			isa = PBXGroup;
-			children = (
-				9F72883B1A24957700EE0234 /* md5.c */,
-				9F72883C1A24957700EE0234 /* md5.h */,
-			);
-			path = md5;
 			sourceTree = "<group>";
 		};
 		9F72883D1A24957700EE0234 /* filters */ = {
@@ -1100,7 +1083,6 @@
 				9F7289941A24957700EE0234 /* ProjectConfig.cpp in Sources */,
 				49C655C41A35403D00603AF5 /* NVGDrawNode.cpp in Sources */,
 				9F7289931A24957700EE0234 /* lua_zlib.c in Sources */,
-				9F72892E1A24957700EE0234 /* md5.c in Sources */,
 				9FD0192F19F8C4D4005E0C49 /* PlayerLuaCoreManual.cpp in Sources */,
 				9F72897C1A24957700EE0234 /* CCNativeMac.mm in Sources */,
 				9F7289411A24957700EE0234 /* CCFilteredSprite.cpp in Sources */,
@@ -1227,6 +1209,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../.. $(SRCROOT)/../../../cocos $(SRCROOT)/../../../cocos/base $(SRCROOT)/../../../cocos/physics $(SRCROOT)/../../../cocos/math/kazmath $(SRCROOT)/../../../cocos/2d $(SRCROOT)/../../../cocos/ui $(SRCROOT)/../../../cocos/network $(SRCROOT)/../../../cocos/audio/include $(SRCROOT)/../../../cocos/editor-support $(SRCROOT)/../../../extensions $(SRCROOT)/../../../external $(SRCROOT)/../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../external/lua/luajit/include $(SRCROOT)/../../../external/lua/tolua $(SRCROOT)/../../../cocos/scripting/lua-bindings/manual $(SRCROOT)/../../../cocos/scripting/lua-bindings/auto $(SRCROOT)/../../lib/quick-src/ $(SRCROOT)/../../lib/quick-src/extra";
@@ -1253,6 +1236,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../.. $(SRCROOT)/../../../cocos $(SRCROOT)/../../../cocos/base $(SRCROOT)/../../../cocos/physics $(SRCROOT)/../../../cocos/math/kazmath $(SRCROOT)/../../../cocos/2d $(SRCROOT)/../../../cocos/ui $(SRCROOT)/../../../cocos/network $(SRCROOT)/../../../cocos/audio/include $(SRCROOT)/../../../cocos/editor-support $(SRCROOT)/../../../extensions $(SRCROOT)/../../../external $(SRCROOT)/../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../external/lua/luajit/include $(SRCROOT)/../../../external/lua/tolua $(SRCROOT)/../../../cocos/scripting/lua-bindings/manual $(SRCROOT)/../../../cocos/scripting/lua-bindings/auto $(SRCROOT)/../../lib/quick-src/ $(SRCROOT)/../../lib/quick-src/extra";
