@@ -212,7 +212,7 @@ protected:
     void selectedEvent();
     void unSelectedEvent();
     
-    virtual void releaseUpEvent();
+    virtual void releaseUpEvent() override;
     
     virtual void onSizeChanged() override;
     

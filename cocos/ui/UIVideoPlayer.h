@@ -56,8 +56,8 @@ namespace experimental{
             virtual const std::string& getURL() const { return _videoURL;}
 
             virtual void play();
-            virtual void pause();
-            virtual void resume();
+            virtual void pause() override;
+            virtual void resume() override;
             virtual void stop();
 
             virtual void seekTo(float sec);

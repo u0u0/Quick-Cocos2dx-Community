@@ -94,8 +94,8 @@ public:
 
 	static FilteredSpriteWithMulti* createWithSpriteFrameName(const char* $pszSpriteFrameName);
 
-	virtual void setFilter(Filter* $pFilter);
-    virtual void clearFilter();
+	virtual void setFilter(Filter* $pFilter) override;
+    virtual void clearFilter() override;
 
 	FilteredSpriteWithMulti();
 	~FilteredSpriteWithMulti();
@@ -112,8 +112,8 @@ public:
     virtual void update(float delta) override;
 
 protected:
-	virtual void drawFilter();
-	virtual bool updateFilters();
+	virtual void drawFilter() override;
+	virtual bool updateFilters() override;
 private:
 	Texture2D* _pTexture;
 	SpriteFrame* _pFrame;

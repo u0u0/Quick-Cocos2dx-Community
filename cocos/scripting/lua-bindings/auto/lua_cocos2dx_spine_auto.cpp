@@ -689,7 +689,7 @@ int lua_cocos2dx_spine_SkeletonRenderer_createWithFile(lua_State* tolua_S)
             if (!ok) { break; }
             spAtlas* arg1;
             #pragma warning NO CONVERSION TO NATIVE FOR spAtlas*
-		ok = false;
+            ok = false;
             if (!ok) { break; }
             spine::SkeletonRenderer* ret = spine::SkeletonRenderer::createWithFile(arg0, arg1);
             object_to_luaval<spine::SkeletonRenderer>(tolua_S, "sp.SkeletonRenderer",(spine::SkeletonRenderer*)ret);

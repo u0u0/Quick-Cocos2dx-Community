@@ -65,7 +65,7 @@ public:
     void onTouchesEnded(const std::vector<Touch*>& touches, Event *pEvent);
     void onTouchesCancelled(const std::vector<Touch*>& touches, Event *pEvent);
 
-    virtual void cleanup(void);
+    virtual void cleanup(void) override;
 
     using Node::addChild;
     virtual std::string getDescription() const override;
@@ -74,7 +74,7 @@ CC_CONSTRUCTOR_ACCESS:
     LuaTouchEventManager();
     ~LuaTouchEventManager();
 
-    bool init();
+    bool init() override;
     bool initWithSize(const Size& size);
 
 protected:

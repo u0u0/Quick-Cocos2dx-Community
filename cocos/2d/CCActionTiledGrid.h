@@ -180,7 +180,7 @@ public:
     /** creates the action with the grid size and the duration */
     static FadeOutUpTiles* create(float duration, const Size& gridSize);
 
-    virtual void transformTile(const Vec2& pos, float distance);
+    virtual void transformTile(const Vec2& pos, float distance) override;
 
     // Overrides
 	virtual FadeOutUpTiles* clone() const override;

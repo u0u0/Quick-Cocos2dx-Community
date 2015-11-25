@@ -68,7 +68,6 @@ void DropShadowFilter::setParameter(float $resolation)
 
 void DropShadowFilter::initSprite(FilteredSprite* $sprite)
 {
-	float __aspectRatio = 1.0f;
 	Size __size = $sprite->getContentSize();
 	/*_textureWidth = __size.width;
 	_textureHeight = __size.height;*/

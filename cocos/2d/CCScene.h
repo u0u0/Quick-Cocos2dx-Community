@@ -82,7 +82,7 @@ CC_CONSTRUCTOR_ACCESS:
     Scene();
     virtual ~Scene();
     
-    bool init();
+    bool init() override;
     bool initWithSize(const Size& size);
     
     void onProjectionChanged(EventCustom* event);

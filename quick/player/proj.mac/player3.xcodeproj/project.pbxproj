@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */; settings = {ASSET_TAGS = (); }; };
+		0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
 		15A8A4881834C90F00142BE0 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4871834C90E00142BE0 /* libcurl.dylib */; };
@@ -1161,11 +1161,7 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = mac/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/jryin/workspace/cocos2d-x-dualface/quick/lib/quick-src/extra/anysdk/protocols/android/lib/armeabi",
-					"/Users/jryin/workspace/cocos2d-x-dualface/quick/lib/quick-src/extra/anysdk/protocols/android/lib/armeabi-v7a",
-					"/Users/jryin/workspace/cocos2d-x-dualface/quick/lib/quick-src/extra/anysdk/protocols/android/lib/x86",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-image_base",
@@ -1195,11 +1191,7 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = mac/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/jryin/workspace/cocos2d-x-dualface/quick/lib/quick-src/extra/anysdk/protocols/android/lib/armeabi",
-					"/Users/jryin/workspace/cocos2d-x-dualface/quick/lib/quick-src/extra/anysdk/protocols/android/lib/armeabi-v7a",
-					"/Users/jryin/workspace/cocos2d-x-dualface/quick/lib/quick-src/extra/anysdk/protocols/android/lib/x86",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-image_base",
