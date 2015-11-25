@@ -457,7 +457,7 @@ Image::Image()
 , _width(0)
 , _height(0)
 , _unpack(false)
-, _fileType(Format::UNKOWN)
+, _fileType(Format::UNKNOWN)
 , _renderFormat(Texture2D::PixelFormat::NONE)
 , _numberOfMipmaps(0)
 , _hasPremultipliedAlpha(true)
@@ -481,33 +481,12 @@ bool Image::initWithImageFile(const std::string& path)
     bool ret = false;
     _filePath = FileUtils::getInstance()->fullPathForFilename(path);
 
-#ifdef EMSCRIPTEN
-    // Emscripten includes a re-implementation of SDL that uses HTML5 canvas
-    // operations underneath. Consequently, loading images via IMG_Load (an SDL
-    // API) will be a lot faster than running libpng et al as compiled with
-    // Emscripten.
-    SDL_Surface *iSurf = IMG_Load(fullPath.c_str());
-
-    int size = 4 * (iSurf->w * iSurf->h);
-    ret = initWithRawData((const unsigned char*)iSurf->pixels, size, iSurf->w, iSurf->h, 8, true);
-
-    unsigned int *tmp = (unsigned int *)_data;
-    int nrPixels = iSurf->w * iSurf->h;
-    for(int i = 0; i < nrPixels; i++)
-    {
-        unsigned char *p = _data + i * 4;
-        tmp[i] = CC_RGB_PREMULTIPLY_ALPHA( p[0], p[1], p[2], p[3] );
-    }
-
-    SDL_FreeSurface(iSurf);
-#else
     Data data = FileUtils::getInstance()->getDataFromFile(_filePath);
-    
+
     if (!data.isNull())
     {
         ret = initWithImageData(data.getBytes(), data.getSize());
     }
-#endif // EMSCRIPTEN
 
     return ret;
 }
@@ -635,7 +614,6 @@ bool Image::isS3TC(const unsigned char * data, ssize_t dataLen)
     
     if (strncmp(header->fileCode, "DDS", 3) != 0)
     {
-        CCLOG("cocos2d: the file is not a dds file!");
         return false;
     }
     return true;
@@ -647,7 +625,6 @@ bool Image::isATITC(const unsigned char *data, ssize_t dataLen)
     
     if (strncmp(&header->identifier[1], "KTX", 3) != 0)
     {
-        CCLOG("cocos3d: the file is not a ktx file!");
         return false;
     }
     return true;
@@ -742,7 +719,8 @@ Image::Format Image::detectFormat(const unsigned char * data, ssize_t dataLen)
     }
     else
     {
-        return Format::UNKOWN;
+        CCLOG("cocos2d: can't detect image format");
+        return Format::UNKNOWN;
     }
 }
 
@@ -909,6 +887,7 @@ bool Image::initWithJpgData(const unsigned char * data, ssize_t dataLen)
 
     return ret;
 #else
+    CCLOG("jpeg is not enabled");
     return false;
 #endif // CC_USE_JPEG
 }
@@ -1236,9 +1215,9 @@ bool Image::initWithTiffData(const unsigned char * data, ssize_t dataLen)
     } while (0);
     return ret;
 #else
-    CCLOG("tiff is not enabled, please enalbe it in ccConfig.h");
+    CCLOG("tiff is not enabled");
     return false;
-#endif
+#endif //CC_USE_TIFF
 }
 
 namespace
@@ -2036,6 +2015,9 @@ bool Image::initWithWebpData(const unsigned char * data, ssize_t dataLen)
         _renderFormat = Texture2D::PixelFormat::RGBA8888;
         _width    = config.input.width;
         _height   = config.input.height;
+        
+        //webp doesn't have premultipliedAlpha
+        _hasPremultipliedAlpha = false;
         
         _dataLen = _width * _height * 4;
         _data = static_cast<unsigned char*>(malloc(_dataLen * sizeof(unsigned char)));
