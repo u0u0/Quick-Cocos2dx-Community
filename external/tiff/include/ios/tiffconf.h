@@ -15,7 +15,7 @@
 #define TIFF_INT32_T signed int
 
 /* Signed 64-bit type */
-#define TIFF_INT64_T int64_t
+#define TIFF_INT64_T signed long
 
 /* Signed 8-bit type */
 #define TIFF_INT8_T signed char
@@ -27,7 +27,7 @@
 #define TIFF_UINT32_T unsigned int
 
 /* Unsigned 64-bit type */
-#define TIFF_UINT64_T uint64_t
+#define TIFF_UINT64_T unsigned long
 
 /* Unsigned 8-bit type */
 #define TIFF_UINT8_T unsigned char
@@ -54,7 +54,7 @@
 #define HAVE_IEEEFP 1
 
 /* Set the native cpu bit order (FILLORDER_LSB2MSB or FILLORDER_MSB2LSB) */
-#define HOST_FILLORDER FILLORDER_MSB2LSB
+#define HOST_FILLORDER FILLORDER_LSB2MSB
 
 /* Native cpu byte order: 1 if big-endian (Motorola) or 0 if little-endian
    (Intel) */
@@ -86,13 +86,13 @@
 #define PACKBITS_SUPPORT 1
 
 /* Support Pixar log-format algorithm (requires Zlib) */
-#define PIXARLOG_SUPPORT 1
+/* #undef PIXARLOG_SUPPORT */
 
 /* Support ThunderScan 4-bit RLE algorithm */
 #define THUNDER_SUPPORT 1
 
 /* Support Deflate compression */
-#define ZIP_SUPPORT 1
+/* #undef ZIP_SUPPORT */
 
 /* Support strip chopping (whether or not to convert single-strip uncompressed
    images to mutiple strips of ~8Kb to reduce memory usage) */

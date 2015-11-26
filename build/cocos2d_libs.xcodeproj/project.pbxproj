@@ -11,6 +11,9 @@
 		0A1183231C05BB2900BAB07A /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1183221C05BB2900BAB07A /* libz.a */; };
 		0A1183241C05BC4B00BAB07A /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A11831D1C05B9EF00BAB07A /* libcurl.a */; };
 		0A1183251C05BC9C00BAB07A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A11831C1C05B9EF00BAB07A /* libcrypto.a */; };
+		0AFCD6121C070F2200A8D0DB /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFCD6111C070F2200A8D0DB /* libz.a */; };
+		0AFCD6151C070F4800A8D0DB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFCD6131C070F4800A8D0DB /* libcrypto.a */; };
+		0AFCD6161C070F4800A8D0DB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFCD6141C070F4800A8D0DB /* libssl.a */; };
 		15AE180819AAD2F700C27E9E /* CCAABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AE17E419AAD2F700C27E9E /* CCAABB.cpp */; };
 		15AE180919AAD2F700C27E9E /* CCAABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15AE17E419AAD2F700C27E9E /* CCAABB.cpp */; };
 		15AE180A19AAD2F700C27E9E /* CCAABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 15AE17E519AAD2F700C27E9E /* CCAABB.h */; };
@@ -1955,6 +1958,9 @@
 		0A11831D1C05B9EF00BAB07A /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../external/curl/prebuilt/mac/libcurl.a; sourceTree = "<group>"; };
 		0A11831E1C05B9EF00BAB07A /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/curl/prebuilt/mac/libssl.a; sourceTree = "<group>"; };
 		0A1183221C05BB2900BAB07A /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../external/png/prebuilt/mac/libz.a; sourceTree = "<group>"; };
+		0AFCD6111C070F2200A8D0DB /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../external/png/prebuilt/ios/libz.a; sourceTree = "<group>"; };
+		0AFCD6131C070F4800A8D0DB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../external/curl/prebuilt/ios/libcrypto.a; sourceTree = "<group>"; };
+		0AFCD6141C070F4800A8D0DB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/curl/prebuilt/ios/libssl.a; sourceTree = "<group>"; };
 		1551A33F158F2AB200E66CFE /* libcocos2d Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1551A342158F2AB200E66CFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15AE17E419AAD2F700C27E9E /* CCAABB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCAABB.cpp; sourceTree = "<group>"; };
@@ -3013,8 +3019,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15AE1C1919AAE30900C27E9E /* libwebsockets.a in Frameworks */,
+				0AFCD6151C070F4800A8D0DB /* libcrypto.a in Frameworks */,
+				0AFCD6161C070F4800A8D0DB /* libssl.a in Frameworks */,
 				15AE1B4A19AAD49000C27E9E /* libcurl.a in Frameworks */,
+				0AFCD6121C070F2200A8D0DB /* libz.a in Frameworks */,
+				15AE1C1919AAE30900C27E9E /* libwebsockets.a in Frameworks */,
 				A07A4CAF1783777C0073F6A7 /* Foundation.framework in Frameworks */,
 				1A570364180BD1120088DEC7 /* libpng.a in Frameworks */,
 				1A570378180BD1B40088DEC7 /* libjpeg.a in Frameworks */,
@@ -3084,6 +3093,9 @@
 		1551A341158F2AB200E66CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AFCD6131C070F4800A8D0DB /* libcrypto.a */,
+				0AFCD6141C070F4800A8D0DB /* libssl.a */,
+				0AFCD6111C070F2200A8D0DB /* libz.a */,
 				0A1183221C05BB2900BAB07A /* libz.a */,
 				0A11831C1C05B9EF00BAB07A /* libcrypto.a */,
 				0A11831D1C05B9EF00BAB07A /* libcurl.a */,
@@ -7274,7 +7286,7 @@
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include/chipmunk";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include/chipmunk";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -7307,7 +7319,7 @@
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include/chipmunk";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include/chipmunk";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
