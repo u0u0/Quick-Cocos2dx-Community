@@ -431,7 +431,7 @@ public:
     // Overrides
     //
     virtual MoveTo* clone() const override;
-    virtual void update(float time) override;
+    virtual void startWithTarget(Node *target) override;
     
 CC_CONSTRUCTOR_ACCESS:
     MoveTo() {}
