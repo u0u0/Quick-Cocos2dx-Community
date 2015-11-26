@@ -618,10 +618,10 @@ Data FileUtils::getDataFromFile(const std::string& filename)
     
     // decrypt XXTEA
     if (!data.isNull() && _xxteaSign.length() > 0) {
-        bool isXXTEA = false;
+        bool isXXTEA = true;
         unsigned char *buf = data.getBytes();
         ssize_t size = data.getSize();
-        for (int i = 0; i < _xxteaSign.length() && i < size; ++i) {
+        for (int i = 0; isXXTEA && i < _xxteaSign.length() && i < size; ++i) {
             isXXTEA = buf[i] == _xxteaSign[i];
         }
         
