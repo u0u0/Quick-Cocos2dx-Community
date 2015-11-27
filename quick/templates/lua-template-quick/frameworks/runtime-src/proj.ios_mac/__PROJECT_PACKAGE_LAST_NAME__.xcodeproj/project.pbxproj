@@ -13,7 +13,6 @@
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
 		15A8A4491834C64F00142BE0 /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810C17EBBCAC00990C9B /* Icon-114.png */; };
-		1AF4C403178663F200122817 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
 		3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */; };
 		49C656541A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */; };
 		49C656551A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */; };
@@ -63,7 +62,6 @@
 		9F9106B519F5614900AD5CAB /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AC19F5614800AD5CAB /* libbase64.c */; };
 		9F9106B619F5614900AD5CAB /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */; };
 		9F9106B719F5614900AD5CAB /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */; };
-		9F9106B919F5614900AD5CAB /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B119F5614800AD5CAB /* md5.c */; };
 		9F9106BC19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */; };
 		9F9106BD19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */; };
 		9F9106BE19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B919F5614800AD5CAB /* CCBrightnessFilter.cpp */; };
@@ -312,8 +310,6 @@
 		9F9105AD19F5614800AD5CAB /* libbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libbase64.h; path = "quick/lib/quick-src/extra/crypto/base64/libbase64.h"; sourceTree = QUICK_V3_ROOT; };
 		9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCCrypto.cpp; path = "quick/lib/quick-src/extra/crypto/CCCrypto.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F9105AF19F5614800AD5CAB /* CCCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCCrypto.h; path = "quick/lib/quick-src/extra/crypto/CCCrypto.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105B119F5614800AD5CAB /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5.c; path = "quick/lib/quick-src/extra/crypto/md5/md5.c"; sourceTree = QUICK_V3_ROOT; };
-		9F9105B219F5614800AD5CAB /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = "quick/lib/quick-src/extra/crypto/md5/md5.h"; sourceTree = QUICK_V3_ROOT; };
 		9F9105B519F5614800AD5CAB /* cocos2dFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cocos2dFilters.h; path = "quick/lib/quick-src/extra/filters/cocos2dFilters.h"; sourceTree = QUICK_V3_ROOT; };
 		9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCBlurFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCBlurFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F9105B819F5614800AD5CAB /* CCBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCBlurFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCBlurFilter.h"; sourceTree = QUICK_V3_ROOT; };
@@ -535,7 +531,6 @@
 				15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */,
 				3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */,
 				D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */,
-				1AF4C403178663F200122817 /* libz.dylib in Frameworks */,
 				50805AAF17EBBEAA004CFAD3 /* UIKit.framework in Frameworks */,
 				5023817A17EBBE8300990C9B /* OpenGLES.framework in Frameworks */,
 				F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */,
@@ -694,7 +689,6 @@
 				9F9105AB19F5614800AD5CAB /* base64 */,
 				9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */,
 				9F9105AF19F5614800AD5CAB /* CCCrypto.h */,
-				9F9105B019F5614800AD5CAB /* md5 */,
 			);
 			path = crypto;
 			sourceTree = "<group>";
@@ -706,15 +700,6 @@
 				9F9105AD19F5614800AD5CAB /* libbase64.h */,
 			);
 			path = base64;
-			sourceTree = "<group>";
-		};
-		9F9105B019F5614800AD5CAB /* md5 */ = {
-			isa = PBXGroup;
-			children = (
-				9F9105B119F5614800AD5CAB /* md5.c */,
-				9F9105B219F5614800AD5CAB /* md5.h */,
-			);
-			path = md5;
 			sourceTree = "<group>";
 		};
 		9F9105B319F5614800AD5CAB /* filters */ = {
@@ -1188,7 +1173,7 @@
 		F293B3BF15EB7BE500256477 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0710;
 			};
 			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "__PROJECT_PACKAGE_LAST_NAME__" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1333,7 +1318,6 @@
 				9F9106D919F5614900AD5CAB /* CCSepiaFilter.cpp in Sources */,
 				9F91074119F5614900AD5CAB /* SBJSON.m in Sources */,
 				9F91071F19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */,
-				9F9106B919F5614900AD5CAB /* md5.c in Sources */,
 				9F91074319F5614900AD5CAB /* SBJsonBase.m in Sources */,
 				9F91074919F5614900AD5CAB /* OpenUDIDIOS.m in Sources */,
 				9F9106BD19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */,
@@ -1488,7 +1472,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1519,7 +1502,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mac/Prefix.pch;
@@ -1550,6 +1532,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
