@@ -79,3 +79,4 @@ tags
 # Android
 project.properties
 *.iml
+quick/player/win32/

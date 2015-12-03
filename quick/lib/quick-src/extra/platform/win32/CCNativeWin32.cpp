@@ -1,10 +1,6 @@
-
-#include "platform/win32/CCNativeWin32.h"
+﻿#include "platform/win32/CCNativeWin32.h"
 #include "platform/win32/CCNativeWin32def.h"
 
-#define GLFW_EXPOSE_NATIVE_WIN32
-#define GLFW_EXPOSE_NATIVE_WGL
-#include "glfw3native.h"
 // for mac address
 #include <WinSock2.h>
 #include <Iphlpapi.h>
@@ -48,31 +44,25 @@ int NativeWin32::addAlertButton(const char* buttonTitle)
 
 void NativeWin32::showAlertViewWithDelegate(AlertViewDelegate *delegate)
 {
-	/*
-	wstring title(m_alertViewTitle.begin(), m_alertViewTitle.end());
-	wstring message(m_alertViewMessage.begin(), m_alertViewMessage.end());
-	int button = MessageBox(NULL, message.c_str(), title.c_str(), MB_OKCANCEL);
-	*/
-	// 显示unicode编码的字符  by zhanglei0321@gmail.com
 	WCHAR *wszTitleBuf;
-        WCHAR *wszMessageBuf;
+	WCHAR *wszMessageBuf;
 
-        int titleBufLen = MultiByteToWideChar(CP_UTF8, 0, m_alertViewTitle.c_str(), -1, NULL, 0);
-        int messageBufLen = MultiByteToWideChar(CP_UTF8, 0, m_alertViewMessage.c_str(), -1, NULL, 0);
+	int titleBufLen = MultiByteToWideChar(CP_UTF8, 0, m_alertViewTitle.c_str(), -1, NULL, 0);
+	int messageBufLen = MultiByteToWideChar(CP_UTF8, 0, m_alertViewMessage.c_str(), -1, NULL, 0);
 
-        wszTitleBuf = new WCHAR[titleBufLen+1];
-        wszMessageBuf = new WCHAR[messageBufLen+1];
+	wszTitleBuf = new WCHAR[titleBufLen + 1];
+	wszMessageBuf = new WCHAR[messageBufLen + 1];
 
-        memset(wszTitleBuf, 0, sizeof(WCHAR)*(titleBufLen + 1) );
+	memset(wszTitleBuf, 0, sizeof(WCHAR)*(titleBufLen + 1));
 
-        memset(wszMessageBuf, 0, sizeof(WCHAR)*(messageBufLen + 1) );
-        MultiByteToWideChar(CP_UTF8, 0, m_alertViewTitle.c_str(), -1, wszTitleBuf, titleBufLen);
-        MultiByteToWideChar(CP_UTF8, 0, m_alertViewMessage.c_str(),-1, wszMessageBuf, messageBufLen);
+	memset(wszMessageBuf, 0, sizeof(WCHAR)*(messageBufLen + 1));
+	MultiByteToWideChar(CP_UTF8, 0, m_alertViewTitle.c_str(), -1, wszTitleBuf, titleBufLen);
+	MultiByteToWideChar(CP_UTF8, 0, m_alertViewMessage.c_str(), -1, wszMessageBuf, messageBufLen);
 
-        int button = MessageBoxW(NULL, wszMessageBuf, wszTitleBuf, MB_OKCANCEL);
+	int button = MessageBoxW(NULL, wszMessageBuf, wszTitleBuf, MB_OKCANCEL);
 
-        delete [] wszTitleBuf;
-        delete [] wszMessageBuf;
+	delete[] wszTitleBuf;
+	delete[] wszMessageBuf;
 
 	if (button == IDOK || button == IDYES)
 	{
