@@ -54,7 +54,7 @@ void CustomFilter::setParameter(const char* paramsStr)
     m_json.Parse<0>(paramsStr);
     if (m_json.HasParseError())
     {
-        CCLOG("CustomFilter - setParameter param is not json format:%s", m_json.GetParseError());
+        CCLOG("CustomFilter - setParameter param is not json format:%d", m_json.GetParseError());
         return;
     }
 //    if (!m_json.IsArray())
@@ -63,8 +63,8 @@ void CustomFilter::setParameter(const char* paramsStr)
 //        return;
 //    }
     
-    for (rapidjson::Value::ConstMemberIterator it = m_json.MemberonBegin();
-         it != m_json.MemberonEnd(); ++it) {
+    for (rapidjson::Value::ConstMemberIterator it = m_json.MemberBegin();
+         it != m_json.MemberEnd(); ++it) {
         std::string name = it->name.GetString();
         //std::string val = it->value.GetString();
         if (0 == name.compare("vert")) {
@@ -81,8 +81,8 @@ void CustomFilter::setParameter(const char* paramsStr)
 
 void CustomFilter::setUniforms(GLProgram* $cgp)
 {
-    for (rapidjson::Value::ConstMemberIterator it = m_json.MemberonBegin();
-         it != m_json.MemberonEnd(); ++it) {
+    for (rapidjson::Value::ConstMemberIterator it = m_json.MemberBegin();
+         it != m_json.MemberEnd(); ++it) {
         std::string name = it->name.GetString();
         //std::string val = it->value.GetString();
         if (0 != name.compare("vert") && 0 != name.compare("frag") && 0 != name.compare("shaderName")) {

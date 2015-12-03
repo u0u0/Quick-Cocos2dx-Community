@@ -76,9 +76,9 @@ namespace cocostudio
             customOptions.Accept(writer);
 
             auto stack = LuaEngine::getInstance()->getLuaStack();
-            stack->pushString(classType.c_str(), classType.size());
+            stack->pushString(classType.c_str(), (int)classType.size());
             stack->pushObject(widget, "cc.Ref");
-            stack->pushString(buffer.GetString(), buffer.Size());
+            stack->pushString(buffer.GetString(), (int)buffer.GetSize());
             stack->executeFunctionByHandler(_setPropsFunc, 3);
         }
 	}
