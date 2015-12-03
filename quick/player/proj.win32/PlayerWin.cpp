@@ -15,6 +15,7 @@
 #include <objidl.h>
 #include <shlguid.h>
 #include <shellapi.h>
+#include <windows.h>
 
 // for mac address
 #include <WinSock2.h>
@@ -22,9 +23,6 @@
 #pragma comment(lib,"Iphlpapi.lib")
 
 #include "PlayerWin.h"
-
-#include "glfw3.h"
-#include "glfw3native.h"
 
 #include "CCLuaEngine.h"
 #include "PlayerLuaCore.h"
