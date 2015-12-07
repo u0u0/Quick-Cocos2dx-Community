@@ -80,3 +80,4 @@ tags
 project.properties
 *.iml
 quick/player/win32/
+quick/player/player3.app
