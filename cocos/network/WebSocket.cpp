@@ -597,13 +597,11 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
             
         case LWS_CALLBACK_CLOSED:
             {
-                
-                CCLOG("%s", "connection closing..");
-
                 _wsHelper->quitSubThread();
                 
                 if (_readyState != State::CLOSED)
                 {
+					CCLOG("%s", "connection closing..");
                     WsMessage* msg = new (std::nothrow) WsMessage();
                     _readyState = State::CLOSED;
                     msg->what = WS_MSG_TO_UITHREAD_CLOSE;
