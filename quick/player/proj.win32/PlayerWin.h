@@ -74,7 +74,7 @@ protected:
     std::string getUserDocumentPath();
     std::string getApplicationExePath();
     std::string getUserGUID();
-    char*	    convertTCharToUtf8(const TCHAR* src);
+	char*	    convertTCharToANSI(const TCHAR* src);
 
     std::string _userGUID;
     static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

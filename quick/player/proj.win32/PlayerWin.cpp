@@ -36,35 +36,6 @@
 #include "UncaughtExceptionHandler.h"
 
 static WNDPROC g_oldWindowProc = NULL;
-void shutDownApp()
-{
-    auto glview = dynamic_cast<GLViewImpl*> (Director::getInstance()->getOpenGLView());
-    HWND hWnd = glview->getWin32Window();
-    ::SendMessage(hWnd, WM_CLOSE, NULL, NULL);
-}
-
-std::string getCurAppPath(void)
-{
-    TCHAR szAppDir[MAX_PATH] = { 0 };
-    if (!GetModuleFileName(NULL, szAppDir, MAX_PATH))
-        return "";
-    int nEnd = 0;
-    for (int i = 0; szAppDir[i]; i++)
-    {
-        if (szAppDir[i] == '\\')
-            nEnd = i;
-    }
-    szAppDir[nEnd] = 0;
-    int iLen = 2 * wcslen(szAppDir);
-    char* chRtn = new char[iLen + 1];
-    wcstombs(chRtn, szAppDir, iLen + 1);
-    std::string strPath = chRtn;
-    delete[] chRtn;
-    chRtn = NULL;
-    char fuldir[MAX_PATH] = { 0 };
-    _fullpath(fuldir, strPath.c_str(), MAX_PATH);
-    return fuldir;
-}
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
@@ -188,7 +159,7 @@ void PlayerWin::openNewPlayerWithProjectConfig(const ProjectConfig &config)
 
     WCHAR command[MAX_COMMAND];
     memset(command, 0, sizeof(command));
-    MultiByteToWideChar(CP_UTF8, 0, commandLine.c_str(), -1, command, MAX_COMMAND);
+	MultiByteToWideChar(CP_ACP, 0, commandLine.c_str(), -1, command, MAX_COMMAND);
 
     BOOL success = CreateProcess(NULL,
                                  command,   // command line 
@@ -576,10 +547,14 @@ std::string PlayerWin::getUserDocumentPath()
     TCHAR filePath[MAX_PATH];
     SHGetSpecialFolderPath(NULL, filePath, CSIDL_PERSONAL, FALSE);
     int length = 2 * wcslen(filePath);
-    char* tempstring = new char[length + 1];
-    wcstombs(tempstring, filePath, length + 1);
-    string userDocumentPath(tempstring);
-    free(tempstring);
+
+	char *pWideCharStr = convertTCharToANSI(filePath);
+	if (!pWideCharStr) {
+		return string("==Get User Document Path Fail==");
+	}
+	string userDocumentPath(pWideCharStr);
+	HeapFree(GetProcessHeap(), 0, pWideCharStr);
+	pWideCharStr = NULL;
 
     userDocumentPath = convertPathFormatToUnixStyle(userDocumentPath);
     userDocumentPath.append("/");
@@ -590,29 +565,22 @@ std::string PlayerWin::getUserDocumentPath()
 //
 // convert Unicode/LocalCode TCHAR to Utf8 char
 //
-char* PlayerWin::convertTCharToUtf8(const TCHAR* src)
+char* PlayerWin::convertTCharToANSI(const TCHAR* src)
 {
-#ifdef UNICODE
-    WCHAR* tmp = (WCHAR*)src;
-    size_t size = wcslen(src) * 3 + 1;
-    char* dest = new char[size];
-    memset(dest, 0, size);
-    WideCharToMultiByte(CP_UTF8, 0, tmp, -1, dest, size, NULL, NULL);
-    return dest;
-#else
-    char* tmp = (char*)src;
-    uint32 size = strlen(tmp) + 1;
-    WCHAR* dest = new WCHAR[size];
-    memset(dest, 0, sizeof(WCHAR)*size);
-    MultiByteToWideChar(CP_ACP, 0, src, -1, dest, (int)size); // convert local code to unicode.
+	char* pWideCharStr;
+	int nLenOfWideChar, nReturnlen;
+	nLenOfWideChar = WideCharToMultiByte(CP_ACP, 0, src, -1, NULL, 0, NULL, NULL);
+	if (!nLenOfWideChar) {
+		return NULL;
+	}
+	pWideCharStr = (char*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, nLenOfWideChar + 1);
+	nReturnlen = WideCharToMultiByte(CP_ACP, 0, src, -1, pWideCharStr, nLenOfWideChar, NULL, NULL);
+	if (!nReturnlen){
+		HeapFree(GetProcessHeap(), 0, pWideCharStr);
+		return NULL;
+	}
 
-    size = wcslen(dest) * 3 + 1;
-    char* dest2 = new char[size];
-    memset(dest2, 0, size);
-    WideCharToMultiByte(CP_UTF8, 0, dest, -1, dest2, size, NULL, NULL); // convert unicode to utf8.
-    delete[] dest;
-    return dest2;
-#endif
+	return pWideCharStr;
 }
 
 //
@@ -621,9 +589,13 @@ std::string PlayerWin::getApplicationExePath()
     TCHAR szFileName[MAX_PATH];
     GetModuleFileName(NULL, szFileName, MAX_PATH);
     std::u16string u16ApplicationName;
-    char *applicationExePath = convertTCharToUtf8(szFileName);
-    std::string path(applicationExePath);
-    CC_SAFE_FREE(applicationExePath);
+	char *applicationExePath = convertTCharToANSI(szFileName);
+	if (!applicationExePath) {
+		return string("Error on convertTCharToANSI");
+	}
+	std::string path(applicationExePath);
+	HeapFree(GetProcessHeap(), 0, applicationExePath);
+	applicationExePath = NULL;
 
     return path;
 }

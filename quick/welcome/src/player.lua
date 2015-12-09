@@ -303,10 +303,18 @@ function player:onScreenZoomOut(sender)
     cc.Director:getInstance():getEventDispatcher():dispatchEvent(eventcustom)
 end
 
+function player:isFileExist(path)
+	local file = io.open(path, "rb")
+	if file then file:close() end
+	return file ~= nil
+end
+
 function player:readSettings()
     self.userHomeDir = __USER_HOME__
     self.configFilePath = player.userHomeDir .. ".quick_player.lua"
-    if not cc.FileUtils:getInstance():isFileExist(player.configFilePath) then
+	-- do not use cc.FileUtils:getInstance():isFileExist
+	-- "__USER_HOME__" is ANSI encoding, while cocos engine use UTF8.
+    if not self:isFileExist(player.configFilePath) then
         self:restorDefaultSettings()
     end
     self:loadSetting(player.configFilePath)
