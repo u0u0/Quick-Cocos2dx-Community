@@ -32,23 +32,11 @@ function WelcomeScene:createLogo(node)
 
     local label = cc.ui.UILabel.new({
 		UILabelType = 2,
-        text = cc.FRAMEWORK_NAME,
+        text = __VERSION__,
         size = 38,
         color = display.COLOR_WHITE,
         x = 138,
         y = display.top - 55,
-        })
-    label:align(display.LEFT_CENTER)
-    node:addChild(label)
-
-
-    label = cc.ui.UILabel.new({
-		UILabelType = 2,
-        text = "v" .. cc.VERSION,
-        size = 14,
-        color = cc.c3b(243,156,18),
-        x = 140 + label:getContentSize().width,
-        y = display.top - 36,
         })
     label:align(display.LEFT_CENTER)
     node:addChild(label)

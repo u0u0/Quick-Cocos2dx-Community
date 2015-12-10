@@ -355,7 +355,7 @@ Texture2D * TextureCache::addImage(const std::string &path)
             else
             {
                 CCLOG("cocos2d: Couldn't create texture for file:%s in TextureCache", path.c_str());
-                CC_SAFE_DELETE(texture)
+                CC_SAFE_DELETE(texture);
             }
         } while (0);
     }

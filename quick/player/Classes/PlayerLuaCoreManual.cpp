@@ -221,6 +221,10 @@ tolua_lerror:
 
 int luaopen_PlayerLuaCore_Manual(lua_State* tolua_S)
 {
+    // engine version
+    lua_pushstring(tolua_S, cocos2dVersion());
+    lua_setglobal(tolua_S, "__VERSION__");
+    
     // ProjectConfig
     tolua_beginmodule(tolua_S,"ProjectConfig");
         tolua_function(tolua_S,"getFrameSize",tolua_PlayerLuaCore_ProjectConfig_getFrameSize00);
