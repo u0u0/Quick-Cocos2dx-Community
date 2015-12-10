@@ -113,7 +113,24 @@ function WelcomeScene:createButtons(node)
         self.localProjectListView_:setCurrentIndex(index)
     end)
 
-    top = top - 248
+    top = top - 68
+    cc.ui.UIPushButton.new(images, {scale9 = true})
+    :setButtonSize(buttonWidth, buttonHeight)
+    :setButtonLabel("normal", cc.ui.UILabel.new({
+            UILabelType = 2,
+            text = "编译",
+            size = 18,
+        }))
+    :pos(display.width-padding, top)
+    :addTo(node)
+    :onButtonClicked(function()
+        local index = self.localProjectListView_:getCurrentIndex()
+        local projSetting = cc.player.settings.PLAYER_OPEN_RECENTS[index]
+        require("app.scenes.BuildProjectUI").new({projDir = projSetting and projSetting.title})
+        :addTo(self)
+    end)
+
+    top = top - 180
     cc.ui.UIPushButton.new(images, {scale9 = true})
     :setButtonSize(buttonWidth, buttonHeight)
     :setButtonLabel("normal", cc.ui.UILabel.new({
@@ -150,7 +167,7 @@ function WelcomeScene:createListItem(icon, title, path)
     container.path = path
 
     -- icon
-    cc.ui.UIImage.new(icon, {scale9 = true})
+    cc.ui.UIImage.new(icon, {scale9 = false})
     :setLayoutSize(48, 48)
     :pos(20, 20)
     :addTo(container)
@@ -190,6 +207,7 @@ function WelcomeScene:createTabWidget(node)
     self:createButtons(node)
     self:createSamples(node)
     self:createHeaders(node)
+    self:createUrlLinks(node)
 
     function self.tabWidget.setCurrentIndex(index)
         self.tabWidget.currentWidget.header:setButtonSelected(false)
@@ -209,12 +227,17 @@ function WelcomeScene:createTabWidget(node)
                 self:loadSampleItems()
                 self.tabWidget.currentWidget.widget.hasItemLoaded = true
             end
+            if self.tabWidget.currentWidget.widget.hasItemLoaded1 == false then
+                self:loadLinkItems()
+                self.tabWidget.currentWidget.widget.hasItemLoaded1 = true
+            end
             self.tabWidget.currentWidget.widget:setVisible(true)
         end
     end
 
-    local index = (#cc.player.settings.PLAYER_OPEN_RECENTS < 1 and 2) or 1
+    local index = (#cc.player.settings.PLAYER_OPEN_RECENTS < 1 and 2) or 1 or (#cc.player.settings.PLAYER_OPEN_RECENTS < 1 and 3) 
     self.tabWidget.setCurrentIndex(index)
+
 end
 
 function WelcomeScene:createOpenRecents(recents, node)
@@ -266,7 +289,10 @@ function WelcomeScene:createHeaders(node)
         off = "#TabButtonNormal.png",
     }
 
-    local headers = {{title="我的项目",widget=self.localProjectListView_}, {title="示例",widget=self.lvGrid}}
+    local headers = {{title="我的项目",widget=self.localProjectListView_}, 
+        {title="示例",widget=self.lvGrid},
+        {title="社区动态",widget=self.linkGrid}
+    }
     for i,v in ipairs(headers) do
 
         local header =
@@ -418,6 +444,131 @@ function WelcomeScene:loadSampleItems()
         self.lvGrid:addItem(item)
     end
     self.lvGrid:reload()
+end
+
+function WelcomeScene:createUrlLinks(node)
+    self.myLinks = dofile(cc.player.quickRootPath .. "quick/welcome/src/articles.lua")
+    self.linkGrid = cc.ui.UIListView.new {
+        bg = "#TabButtonSelected.png",
+        bgScale9 = true,
+        viewRect = cc.rect(40,92, 40*17, 40*9+28),
+        direction = cc.ui.UIScrollView.DIRECTION_VERTICAL,
+        scrollbarImgV = "#ScrollBarHandler.png"
+    }
+
+    self.linkGrid:onTouch(function(event)
+        if not event.listView:isItemInViewRect(event.itemPos) then
+            return
+        end
+
+        local listView = event.listView
+        if "clicked" == event.name then
+            self.linkGrid.currentItem = event.item
+        end
+    end)
+
+
+    self.linkGrid:setTouchSwallowEnabled(false)
+    self.linkGrid:setVisible(false)
+    self.linkGrid:addTo(node)
+    self.linkGrid.hasItemLoaded1 = false
+    self.tabWidget.widgets_[#self.tabWidget.widgets_ +1] = self.linkGrid
+end
+
+function WelcomeScene:loadLinkItems()
+    for i=1,#self.myLinks,1 do
+        local item = self.linkGrid:newItem()
+        local content = display.newNode()
+
+        local left = 20
+
+        local myLink = self.myLinks[i]
+
+        local k = i%2
+        local color = {
+            -- cc.c3b(70,201,11),
+            cc.c3b(230,120,0),
+            cc.c3b(230,120,0)
+        }
+        self:createOneLink(myLink, color[k+1])
+                :addTo(content)
+                :pos(left, 0)
+
+        content:setContentSize(40*17, 170)
+        item:addContent(content)
+        item:setItemSize(40*17, 170)
+        self.linkGrid:addItem(item)
+    end
+    self.linkGrid:reload()
+end
+
+function WelcomeScene:createOneLink(sample, colorVal)
+    local node = display.newNode()
+
+    -- 标题
+    local label = cc.ui.UILabel.new({
+            UILabelType = 2,
+            text = sample.title,
+            align = cc.ui.TEXT_ALIGNMENT_CENTER,
+            color = cc.c3b(176,202,235),
+            size = 16,
+    })
+    label:setAnchorPoint(0.5, 1.0)
+    label:setPosition(425, 160)
+    label:setLayoutSize(40*16, 70)
+    label:addTo(node)
+
+    -- URL按钮和图片
+    local demoImage = "#ItemSelected.png"
+    local button = cc.ui.UIPushButton.new(demoImage, {scale9 = true})
+    button.isTouchMoved_ = false
+    button:setTouchSwallowEnabled(false)
+    button:pos(100, 85)
+    button:setButtonSize(190, 140)
+    local image = display.newSprite(sample.image)
+        :addTo(button)
+    button:addNodeEventListener(cc.NODE_TOUCH_EVENT, function ( event )
+            if event.name == "began" then
+                image:setScale(1.1)
+                return true
+
+            elseif event.name == "moved" then
+                image:setScale(1.0)
+                button.isTouchMoved_ = true
+
+            elseif event.name == "ended" then
+                if button.isTouchMoved_ == false then
+                    image:setScale(1.0)
+                    device.openURL(sample.path)
+                end
+                button.isTouchMoved_ = false
+            else 
+                image:setScale(1.0)
+            end
+        end)
+    button:addTo(node)
+    
+
+    -- 简单表述
+    local label2 = cc.ui.UILabel.new({
+        UILabelType = 2,
+        text        = sample.description,
+        align       = cc.ui.TEXT_ALIGNMENT_CENTER,
+        color       = colorVal,
+        size        = 14,
+    })
+    label2:setAnchorPoint(0, 1.0)
+    label2:setPosition(210, 130)
+    label2:setLayoutSize(40*16, 70)
+    label2:addTo(node)
+
+    -- 分割线
+    display.newLine(
+        {{0, 1}, {40*16 - 0, 1}},
+        {borderColor = cc.c4f(0.5, 0.5, 0.6, 0.8)})
+        :addTo(node)
+
+    return node
 end
 
 function WelcomeScene:createOneSampleUI(sample, item)
