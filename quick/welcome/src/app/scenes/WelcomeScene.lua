@@ -326,7 +326,7 @@ function WelcomeScene:createCopyright(node)
 
     label = cc.ui.UILabel.new({
 		UILabelType = 2,
-        text = "QQ:146069008",
+        text = "QQ群:190864188",
         size = 15,
         color = cc.c3b(128, 128, 128),
         x = display.width - 38,
