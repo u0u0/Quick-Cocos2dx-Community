@@ -101,24 +101,7 @@ function WelcomeScene:createButtons(node)
         self.localProjectListView_:setCurrentIndex(index)
     end)
 
-    top = top - 68
-    cc.ui.UIPushButton.new(images, {scale9 = true})
-    :setButtonSize(buttonWidth, buttonHeight)
-    :setButtonLabel("normal", cc.ui.UILabel.new({
-            UILabelType = 2,
-            text = "编译",
-            size = 18,
-        }))
-    :pos(display.width-padding, top)
-    :addTo(node)
-    :onButtonClicked(function()
-        local index = self.localProjectListView_:getCurrentIndex()
-        local projSetting = cc.player.settings.PLAYER_OPEN_RECENTS[index]
-        require("app.scenes.BuildProjectUI").new({projDir = projSetting and projSetting.title})
-        :addTo(self)
-    end)
-
-    top = top - 180
+    top = top - 248
     cc.ui.UIPushButton.new(images, {scale9 = true})
     :setButtonSize(buttonWidth, buttonHeight)
     :setButtonLabel("normal", cc.ui.UILabel.new({
