@@ -30,6 +30,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := cocos2d_lua_static
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE_FILENAME := libluacocos2d
 
 LOCAL_SRC_FILES := ../manual/CCLuaBridge.cpp \

@@ -4,6 +4,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := extra_static
 LOCAL_MODULE_FILENAME := libextra
+LOCAL_ARM_MODE := arm
 
 LOCAL_SRC_FILES := \
     $(LOCAL_PATH)/luabinding/cocos2dx_extra_luabinding.cpp \
