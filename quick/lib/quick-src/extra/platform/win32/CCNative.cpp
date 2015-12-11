@@ -58,7 +58,15 @@ const std::string Native::getOpenUDID(void)
 
 void Native::openURL(const char* url)
 {
-    if (!url) return;
+	if (!url) {
+		return;
+	}
+	int urlLen = MultiByteToWideChar(CP_UTF8, 0, url, -1, NULL, 0) + 1;
+	WCHAR *wUrl = new WCHAR[urlLen];
+	memset(wUrl, 0, sizeof(WCHAR)*urlLen);
+	MultiByteToWideChar(CP_UTF8, 0, url, -1, wUrl, urlLen);
+	ShellExecute(0, L"open", wUrl, NULL, 0, 0);
+	delete wUrl;
 }
 
 const std::string Native::getInputText(const char* title, const char* message, const char* defaultValue)
