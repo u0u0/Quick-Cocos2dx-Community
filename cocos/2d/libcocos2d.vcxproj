@@ -571,7 +571,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="..\..\external\flatbuffers\idl.h" />
     <ClInclude Include="..\..\external\flatbuffers\util.h" />
     <ClInclude Include="..\..\external\json\document.h" />
-    <ClInclude Include="..\..\external\json\filestream.h" />
     <ClInclude Include="..\..\external\json\internal\pow10.h" />
     <ClInclude Include="..\..\external\json\internal\stack.h" />
     <ClInclude Include="..\..\external\json\internal\strfunc.h" />
