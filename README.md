@@ -6,6 +6,13 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。
 
 #### 我们认为：一切导致崩溃，损失流畅度，增加包体积 的行为，都是耍流氓
 
+## 稳定版本下载地址
+
+github上并未提供已编译好的Player，请在下面的地址下载稳定版本。
+
+[http://www.tairan.com/engines-download](http://www.tairan.com/engines-download)
+
+
 ## Q&A
 - 你们为什么要制作 Quick-Cocos2dx-Community ？
 
@@ -62,6 +69,7 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 以及 Quick-Cocos2d-x 的所有优点
 ## 相关文档
 
 ### 更新说明
+- [Quick-Cocos2dx-Community 3.6.1 Beta1 更新说明](http://www.tairan.com/archives/10607/)
 - [Quick-Cocos2dx-Community 3.6 Release 更新说明](http://www.tairan.com/archives/10573/)
 - [Quick-Cocos2dx-Community 3.6 Beta2 更新说明](http://tairan.com/archives/10563/)
 - [Quick-Cocos2dx-Community 3.6 Beta1 内部测试版](http://tairan.com/archives/10516/)
