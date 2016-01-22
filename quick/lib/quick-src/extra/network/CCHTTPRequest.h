@@ -31,6 +31,8 @@ NS_CC_EXTRA_BEGIN
 
 #define kCCHTTPRequestMethodGET                 0
 #define kCCHTTPRequestMethodPOST                1
+#define kCCHTTPRequestMethodPUT                 2
+#define kCCHTTPRequestMethodDELETE              3
 
 #define kCCHTTPRequestAcceptEncodingIdentity    0
 #define kCCHTTPRequestAcceptEncodingGzip        1

@@ -185,6 +185,10 @@ function network.createHTTPRequest(callback, url, method)
     if not method then method = "GET" end
     if string.upper(tostring(method)) == "GET" then
         method = cc.kCCHTTPRequestMethodGET
+    elseif string.upper(tostring(method)) == "PUT" then
+        method = cc.kCCHTTPRequestMethodPUT
+    elseif string.upper(tostring(method)) == "DELETE" then
+        method = cc.kCCHTTPRequestMethodDELETE
     else
         method = cc.kCCHTTPRequestMethodPOST
     end
