@@ -67,16 +67,15 @@ bool HTTPRequest::initWithUrl(const char *url, int method)
 
     m_url = url;
 
-    if (method == kCCHTTPRequestMethodPOST) {
-        m_httpMethod = "POST";
-    } else if(method == kCCHTTPRequestMethodPUT) {
+	if (method == kCCHTTPRequestMethodPOST) {
+		m_httpMethod = "POST";
+	} else if(method == kCCHTTPRequestMethodPUT) {
 		m_httpMethod = "PUT";
 	} else if(method == kCCHTTPRequestMethodDELETE) {
 		m_httpMethod = "DELETE";
-	}else
-	{
-        m_httpMethod = "GET";
-    }
+	} else {
+		m_httpMethod = "GET";
+	}
 
     ++s_id;
     // CCLOG("HTTPRequest[0x%04x] - create request with url: %s", s_id, url);
@@ -148,7 +147,7 @@ void HTTPRequest::setPOSTData(const char *data, size_t len)
 void HTTPRequest::addFormFile(const char *name, const char *filePath, const char *contentType)
 {
     m_postFile[string(name)] = string(filePath);
-    string str = string("Content-Type=");
+    string str = string("Content-Type:");
     str = str.append(contentType);
     m_headers.push_back(str);
 }
@@ -156,7 +155,7 @@ void HTTPRequest::addFormFile(const char *name, const char *filePath, const char
 void HTTPRequest::addFormContents(const char *name, const char *value)
 {
     m_postContent[string(name)] = string(value);
-    string str = string("Content-Type=multipart/form-data");
+    string str = string("Content-Type:multipart/form-data");
     m_headers.push_back(str);
     CCLOG("addFormContents:%d", m_headers.size());
 }

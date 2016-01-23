@@ -1,3 +1,25 @@
+Quick-Cocos2dx-Community v3.6.1 release
+
+[更新]	Android 库全部用NDK r10d编译并更新，3.6.1 推荐使用 NDK r10d 进行项目编译。
+[更新]	Chipmunk升级到 6.2.2
+[更新]	curl升级到7.40.0
+[更新]	freetype升级到2.5.5
+[更新]	jpeg升级到v9
+[更新]	tiff升级到4.0.3
+[更新]	web升级到 0.4.4
+[更新]	libwebsockets升级到 1.3-chrome37-firefox30
+[更新]	rapidjson升级到 dee230b。
+
+[修正]	cc.pIsSegmentIntersect 判断修正
+[修正]	创建项目的php脚本去掉_ENV依赖，解决Mac用户用brew升级php后导致创建项目失败的bug。
+[修正]	Android与win32 现在能正确处理加密的资源文件。
+[修正]	ccui.Helper:seekWidgetByName 与 ccui.Helper:seekWidgetByTag 现在能正常工作。
+[修正]	手动添加 cc.CardinalSplineTo:create 绑定。
+[修正]	Luajit能完整打印log了。
+[修正]	Android 5.0 运行报告 md5_init 错误修正。
+[修正]	CCFileUtils 解析 UTF8＋BOM 字节文件时“key not found”的问题修正。
+[修正]	修正Windows player 部分机器不能保存历史记录的bug。
+
 Quick-Cocos2dx-Community v3.6 release
 
 [修正]	在setup_mac.sh中为player.app添加可执行权限
