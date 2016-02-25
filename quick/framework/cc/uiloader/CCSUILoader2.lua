@@ -343,6 +343,9 @@ function CCSUILoader:createNode(options)
 	if options.Size then
 		node:setContentSize(cc.size(options.Size.X or 0, options.Size.Y or 0))
 	end
+	if not options.Position then
+		options.Position = {}
+	end
 	node:setPositionX(options.Position.X or 0)
 	node:setPositionY(options.Position.Y or 0)
 	node:setAnchorPoint(
