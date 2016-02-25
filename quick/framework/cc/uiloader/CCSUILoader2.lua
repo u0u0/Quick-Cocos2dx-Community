@@ -494,7 +494,7 @@ end
 function CCSUILoader:createCheckBox(options)
 	local node = cc.ui.UICheckBoxButton.new(
 		self:getCheckBoxImages(options))
-
+	node:setButtonSelected(options.CheckedState)
 	node:align(self:getAnchorType(options.AnchorPoint.ScaleX or 0, options.AnchorPoint.ScaleY or 0),
 		options.Position.X or 0, options.Position.Y or 0)
 
