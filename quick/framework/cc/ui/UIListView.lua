@@ -100,7 +100,7 @@ function UIListView:ctor(params)
 	-- params.viewRect.width = params.viewRect.width - self.padding_.left - self.padding_.right
 	-- params.viewRect.height = params.viewRect.height - self.padding_.bottom - self.padding_.top
 
-	self:setDirection(params.direction)
+	self:setDirection(self.direction)
 	self:setViewRect(params.viewRect)
 	self:addScrollNode(self.container)
 	self:onScroll(handler(self, self.scrollListener))
