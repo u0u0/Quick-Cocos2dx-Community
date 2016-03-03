@@ -703,6 +703,10 @@ function CCSUILoader:createPanel(options)
 	node:setAnchorPoint(
 		cc.p(options.AnchorPoint.ScaleX or 0, options.AnchorPoint.ScaleY or 0))
 
+	if options.Alpha then
+		node:setCascadeOpacityEnabled(true)
+		node:setOpacity(options.Alpha)
+	end
 	return node
 end
 
