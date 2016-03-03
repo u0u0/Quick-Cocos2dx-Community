@@ -88,6 +88,10 @@ function CCSUILoader:generateUINode(jsonNode, parent)
 	uiNode:setSkewY(jsonNode.RotationSkewY or 0)
 
 	-- uiNode:setVisible(jsonNode.visible) -- ccs havn't export visible attribute
+	if jsonNode.VisibleForFrame ~= nil then
+		uiNode:setVisible(jsonNode.VisibleForFrame)
+	end
+
 	if jsonNode.Scale then
 		uiNode:setScaleX((jsonNode.Scale.ScaleX or 1) * uiNode:getScaleX())
 		uiNode:setScaleY((jsonNode.Scale.ScaleY or 1) * uiNode:getScaleY())
