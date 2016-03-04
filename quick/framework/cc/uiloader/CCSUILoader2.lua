@@ -104,6 +104,7 @@ function CCSUILoader:generateUINode(jsonNode, parent)
 	if "ScrollView" == clsName then
 		emptyNode = cc.Node:create()
 		emptyNode:setPosition(jsonNode.Position.X, jsonNode.Position.Y)
+		emptyNode:setContentSize(uiNode:getViewRect().width, uiNode:getViewRect().height)
 		uiNode:addScrollNode(emptyNode)
 	end
 
