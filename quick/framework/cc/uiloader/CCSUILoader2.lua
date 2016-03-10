@@ -93,6 +93,10 @@ function CCSUILoader:generateUINode(jsonNode, parent)
 	end
 
 	-- uiNode:setVisible(jsonNode.visible) -- ccs havn't export visible attribute
+	if jsonNode.VisibleForFrame ~= nil then
+		uiNode:setVisible(jsonNode.VisibleForFrame)
+	end
+
 	if jsonNode.Scale then
 		uiNode:setScaleX((jsonNode.Scale.ScaleX or 1) * uiNode:getScaleX())
 		uiNode:setScaleY((jsonNode.Scale.ScaleY or 1) * uiNode:getScaleY())
@@ -709,6 +713,10 @@ function CCSUILoader:createPanel(options)
 	node:setAnchorPoint(
 		cc.p(options.AnchorPoint.ScaleX or 0, options.AnchorPoint.ScaleY or 0))
 
+	if options.Alpha then
+		node:setCascadeOpacityEnabled(true)
+		node:setOpacity(options.Alpha)
+	end
 	return node
 end
 
