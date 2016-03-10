@@ -83,9 +83,14 @@ function CCSUILoader:generateUINode(jsonNode, parent)
 	end
 
 	uiNode:setTag(jsonNode.Tag or 0)
-	uiNode:setRotation(jsonNode.Rotation or 0)
-	uiNode:setSkewX(jsonNode.RotationSkewX or 0)
-	uiNode:setSkewY(jsonNode.RotationSkewY or 0)
+	if jsonNode.Rotation then
+		uiNode:setRotation(jsonNode.Rotation or 0)
+		uiNode:setSkewX(jsonNode.RotationSkewX or 0)
+		uiNode:setSkewY(jsonNode.RotationSkewY or 0)
+	else
+		uiNode:setRotationSkewX(jsonNode.RotationSkewX or 0)
+		uiNode:setRotationSkewY(jsonNode.RotationSkewY or 0)
+	end
 
 	-- uiNode:setVisible(jsonNode.visible) -- ccs havn't export visible attribute
 	if jsonNode.Scale then
@@ -99,6 +104,7 @@ function CCSUILoader:generateUINode(jsonNode, parent)
 	if "ScrollView" == clsName then
 		emptyNode = cc.Node:create()
 		emptyNode:setPosition(jsonNode.Position.X, jsonNode.Position.Y)
+		emptyNode:setContentSize(uiNode:getViewRect().width, uiNode:getViewRect().height)
 		uiNode:addScrollNode(emptyNode)
 	end
 
@@ -359,6 +365,9 @@ function CCSUILoader:createLayer(options)
     if options.Size then
         node:setContentSize(cc.size(options.Size.X or 0, options.Size.Y or 0))
     end
+	if not options.Position then
+		options.Position = {}
+	end
     node:setPositionX(options.Position.X or 0)
     node:setPositionY(options.Position.Y or 0)
     node:setAnchorPoint(
@@ -605,6 +614,7 @@ function CCSUILoader:createEditBox(options)
         passwordEnable = options.PasswordEnable,
         font = options.FontResource and options.FontResource.Path,
         fontSize = options.FontSize,
+        fontColor = options.CColor,
         maxLength = options.MaxLengthEnable and options.MaxLengthText
         })
 	end
