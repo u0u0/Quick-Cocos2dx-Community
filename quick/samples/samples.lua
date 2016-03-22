@@ -2,6 +2,13 @@
 local data =
 {
     {
+        title       = "Online Update",
+        description = "一个Lua热更新示例",
+        path        = "samples/liveupdate",
+        image       = "update_ss.png"
+    },
+
+    {
         title       = "towerdefense",
         description = "一个塔防演示",
         path        = "samples/towerdefense",
