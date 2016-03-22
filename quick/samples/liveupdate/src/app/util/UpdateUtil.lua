@@ -2,9 +2,7 @@
 -- Author: rsma
 -- Date: 2016-03-17 15:39:48
 --
--- require("config")
--- require("cocos.init")
--- require("framework.init")
+
 require "lfs"
 --保存在本地的版本文件名称
 UpdateResName="ResList"
@@ -13,12 +11,7 @@ UpdateResConfig=nil
 --更新资源存放目录
 UpdatePath = cc.FileUtils:getInstance():getWritablePath().."upd/"
 
-function hex(s)
-	s=string.gsub(s,"(.)",function (x) return string.format("%02X",string.byte(x)) end)
-	return s
-end
-
-function readFile(path)
+local function readFile(path)
 	local _file = io.open(path, "rb")
 	if _file then
 		local content = _file:read("*all")
@@ -26,32 +19,6 @@ function readFile(path)
 		return content
 	end
 	return nil
-end
-
-function removeFile(path)
-	print("removeFile: "..path)
-	os.remove(path)
-end
-
-function checkFile(fileName, cryptoCode)
-	if not io.exists(fileName) then
-		return false
-	end
-
-	local data=readFile(fileName)
-	if data==nil then
-		return false
-	end
-
-	if cryptoCode==nil then
-		return true
-	end
-
-	local ms = crypto.md5(hex(data))
-	if ms==cryptoCode then
-		return true
-	end
-	return false
 end
 
 function checkDirOK( basepath, filepath)
@@ -125,6 +92,7 @@ function os.rmdir(path)
     end
     return true
 end
+
 --进入游戏优先检查UPD下的更新文件并加载
 function checkUpdateFile()
 	if os.exists(UpdatePath .. UpdateResName) then

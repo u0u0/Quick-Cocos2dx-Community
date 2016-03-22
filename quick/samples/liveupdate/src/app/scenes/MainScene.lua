@@ -2,7 +2,9 @@
 -- Author: rsma
 -- Date: 2016-03-17 15:39:34
 --
+
 require("app.util.UpdateUtil")
+
 local MainScene = class("MainScene", function()
     return display.newScene("MainScene")
 end)
@@ -42,6 +44,7 @@ function MainScene:onEnter()
             :addTo(self)
     -- self:buildUpdateUI()
 end
+
 function MainScene:startUpdate()
     if UpdateResConfig and GAME_VERSION >= UpdateResConfig.ver then
         print("已是最新版本，可删除/upd目录，重新执行更新!")
@@ -61,6 +64,7 @@ function MainScene:startUpdate()
     self.currUpdAction="CheckVersion"
     self:requestFromServer("ResList")
 end
+
 --构建更新进度UI
 --更新界面-面向玩家显示整个更新过程
 function MainScene:buildUpdateUI()
@@ -88,11 +92,13 @@ function MainScene:buildUpdateUI()
         :addTo(self)
     -- self.fill:setPercent(100)
 end
+
 function MainScene:cleanUpdateUI()
     self.fill:removeSelf()
     self.progress:removeSelf()
     self.txtprocess:removeSelf()
 end
+
 --向服务器请求资源
 --@filename 资源名
 --@waittime 连接等待时长
@@ -107,6 +113,7 @@ function MainScene:requestFromServer(filename, waittime)
     request:setTimeout(15)
     request:start()
 end
+
 --响应服务器下载
 function MainScene:onResponse(event)
     local request = event.request
@@ -134,12 +141,14 @@ function MainScene:onResponse(event)
         self:onUpdateEnd(false)
     end
 end
+
 function MainScene:onUpdatePercent(i_Msg,i_Event)
     if i_Event and i_Event.dltotal and i_Event.dltotal>0 and self.numFile>0 then
         self.fill:setPercent((self.numFileCheck/self.numFile)*100)
     end
     self.txtprocess:setString(i_Msg or "")
 end
+
 --检查要更新文件列表
 function MainScene:checkVersion(dataRecv)
     if dataRecv then
@@ -159,6 +168,7 @@ function MainScene:checkVersion(dataRecv)
         self:requestFromServer(UpdateResConfig.stage[self.currUpdFileIndex].path..UpdateResConfig.stage[self.currUpdFileIndex].name)
     end
 end
+
 function MainScene:updateResource(dataRecv)
     if dataRecv then
         io.writefile(UpdatePath.. UpdateResConfig.stage[self.currUpdFileIndex].name, dataRecv)
@@ -171,6 +181,7 @@ function MainScene:updateResource(dataRecv)
         requestFromServer(UpdateResConfig.stage[self.currUpdFileIndex].path..UpdateResConfig.stage[self.currUpdFileIndex].name)
     end
 end
+
 --更新本地的下载资源列表及将.upd文件改成正常文件
 function MainScene:updateFiles()
     self.txtprocess:setString("资源解压中......")
@@ -195,6 +206,7 @@ function MainScene:onUpdateEnd()
     self.fill:setPercent(100)
     self:performWithDelay(handler(self,self.exitUpdate),1)
 end
+
 -- 退出更新
 function MainScene:exitUpdate()
     self:cleanUpdateUI()
