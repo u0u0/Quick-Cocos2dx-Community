@@ -16,6 +16,7 @@ $options = array(
     array('c',   'config',     1,      null,        'load options from config file'),
     array('q',   'quiet',      0,      false,       'quiet'),
     array('b',   'bit',        1,      '32',        'use 32 bit or 64 bit luajit'),
+    array('jit', 'jit',        1,      true,        'using luajit compile framework'),
 );
 
 function errorhelp()
