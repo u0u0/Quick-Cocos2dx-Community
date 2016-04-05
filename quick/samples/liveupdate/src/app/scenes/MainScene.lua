@@ -178,7 +178,7 @@ function MainScene:updateResource(dataRecv)
     else
         self.currUpdFileIndex = self.currUpdFileIndex + 1
         self.txtprocess:setString("正在更新资源，请耐心等候......")
-        requestFromServer(UpdateResConfig.stage[self.currUpdFileIndex].path..UpdateResConfig.stage[self.currUpdFileIndex].name)
+        self:requestFromServer(UpdateResConfig.stage[self.currUpdFileIndex].path..UpdateResConfig.stage[self.currUpdFileIndex].name)
     end
 end
 
