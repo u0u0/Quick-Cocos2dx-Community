@@ -490,30 +490,31 @@ static int lua_cocos2dx_spine_SkeletonAnimation_setAttachment(lua_State* tolua_S
 #endif
     
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 2)
-    {
-        const char* arg0;
-        const char* arg1;
-        
+    if (argc > 0) {
+        const char* arg0 = NULL;
         std::string arg0_tmp;
-        ok &= luaval_to_std_string(tolua_S, 2, &arg0_tmp, "sp.SkeletonAnimation:setAttachment");
+        ok = luaval_to_std_string(tolua_S, 2, &arg0_tmp, "sp.SkeletonAnimation:setAttachment");
         arg0 = arg0_tmp.c_str();
-        
-        std::string arg1_tmp;
-        ok &= luaval_to_std_string(tolua_S, 3, &arg1_tmp, "sp.SkeletonAnimation:setAttachment");
-        arg1 = arg1_tmp.c_str();
         
         if(!ok)
             return 0;
         
-        // call spine func
-        cobj->setAttachment(arg0, arg1);
+        const char* arg1 = NULL;
+        std::string arg1_tmp;
+        ok = luaval_to_std_string(tolua_S, 3, &arg1_tmp, "sp.SkeletonAnimation:setAttachment");
+        arg1 = arg1_tmp.c_str();
+        
+        if (ok) {
+            // set new Attachment
+            cobj->setAttachment(arg0, arg1);
+        } else {
+            // remove Attachment
+            cobj->setAttachment(arg0, NULL);
+        }
         
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "setAttachment has wrong number of arguments: %d, was expecting %d \n", argc, 2);
-    return 0;
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
@@ -673,10 +674,10 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findSlot(lua_State* tolua_S)
         // return a table
         lua_newtable(tolua_S);
         lua_pushstring(tolua_S, "attachmentWidth");
-        lua_pushnumber(tolua_S, attachment->width);
+        lua_pushnumber(tolua_S, attachment ? attachment->width : 0);
         lua_rawset(tolua_S, -3);    /* slot.attachmentWidth */
         lua_pushstring(tolua_S, "attachmentHeight");
-        lua_pushnumber(tolua_S, attachment->height);
+        lua_pushnumber(tolua_S, attachment ? attachment->height : 0);
         lua_rawset(tolua_S, -3);    /* slot.attachmentHeight */
         return 1;
     }
