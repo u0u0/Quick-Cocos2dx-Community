@@ -472,7 +472,6 @@ static int lua_cocos2dx_spine_SkeletonAnimation_setAttachment(lua_State* tolua_S
 {
     int argc = 0;
     spine::SkeletonAnimation* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -491,20 +490,15 @@ static int lua_cocos2dx_spine_SkeletonAnimation_setAttachment(lua_State* tolua_S
     
     argc = lua_gettop(tolua_S)-1;
     if (argc > 0) {
-        const char* arg0 = NULL;
-        std::string arg0_tmp;
-        ok = luaval_to_std_string(tolua_S, 2, &arg0_tmp, "sp.SkeletonAnimation:setAttachment");
-        arg0 = arg0_tmp.c_str();
+        const char *arg0 = lua_tostring(tolua_S, 2);
         
-        if(!ok)
+        if(!arg0) {
+            tolua_error(tolua_S, "sp.SkeletonAnimation:setAttachment arg 1 must string", nullptr);
             return 0;
+        }
         
-        const char* arg1 = NULL;
-        std::string arg1_tmp;
-        ok = luaval_to_std_string(tolua_S, 3, &arg1_tmp, "sp.SkeletonAnimation:setAttachment");
-        arg1 = arg1_tmp.c_str();
-        
-        if (ok) {
+        const char* arg1 = lua_tostring(tolua_S, 3);
+        if (arg1) {
             // set new Attachment
             cobj->setAttachment(arg0, arg1);
         } else {
@@ -528,7 +522,6 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findBone(lua_State* tolua_S)
 {
     int argc = 0;
     spine::SkeletonAnimation* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -548,14 +541,11 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findBone(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1)
     {
-        const char* arg0;
-        
-        std::string arg0_tmp;
-        ok &= luaval_to_std_string(tolua_S, 2, &arg0_tmp, "sp.SkeletonAnimation:findBone");
-        arg0 = arg0_tmp.c_str();
-        
-        if(!ok)
+        const char *arg0 = lua_tostring(tolua_S, 2);
+        if(!arg0) {
+            tolua_error(tolua_S, "sp.SkeletonAnimation:findBone arg 1 must string", nullptr);
             return 0;
+        }
         
         // call spine func
         spBone *bone = cobj->findBone(arg0);
@@ -692,6 +682,42 @@ tolua_lerror:
     return 0;
 }
 
+static int lua_cocos2dx_spine_SkeletonAnimation_setClone(lua_State* tolua_S)
+{
+    int argc = 0;
+    spine::SkeletonAnimation* cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(tolua_S,1,"sp.SkeletonAnimation",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        spine::SkeletonAnimation *cloneObj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,2,0);
+        
+        if(!cloneObj) {
+            tolua_error(tolua_S, "sp.SkeletonAnimation:setClone arg 1 must sp.SkeletonAnimation", nullptr);
+            return 0;
+        }
+        
+        cobj->setClone(cloneObj);
+        
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_setClone'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
 static void extendCCSkeletonAnimation(lua_State* L)
 {
     lua_pushstring(L, "sp.SkeletonAnimation");
@@ -707,6 +733,7 @@ static void extendCCSkeletonAnimation(lua_State* L)
         tolua_function(L, "setAttachment", lua_cocos2dx_spine_SkeletonAnimation_setAttachment);
         tolua_function(L, "findBone", lua_cocos2dx_spine_SkeletonAnimation_findBone);
         tolua_function(L, "findSlot", lua_cocos2dx_spine_SkeletonAnimation_findSlot);
+        tolua_function(L, "setClone", lua_cocos2dx_spine_SkeletonAnimation_setClone);
     }
     lua_pop(L, 1);
     

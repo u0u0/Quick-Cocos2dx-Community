@@ -62,6 +62,9 @@ SkeletonRenderer* SkeletonRenderer::createWithFile (const std::string& skeletonD
 }
 
 void SkeletonRenderer::initialize () {
+    _cloneSkeleton = NULL;
+    _isClone = false;
+    
 	_worldVertices = MALLOC(float, 1000); // Max number of vertices per mesh.
 
 	_batch = PolygonBatch::createWithCapacity(2000); // Max number of vertices and triangles per batch.
@@ -150,6 +153,11 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 }
 
 void SkeletonRenderer::drawSkeleton (const Mat4 &transform, uint32_t transformFlags) {
+    if (_isClone) {
+        // clone Skeleton skip draw, but do not skip updata.
+        return;
+    }
+    
 	getGLProgramState()->apply(transform);
 
 	Color3B nodeColor = getColor();
@@ -166,8 +174,17 @@ void SkeletonRenderer::drawSkeleton (const Mat4 &transform, uint32_t transformFl
 	int trianglesCount = 0;
 	float r = 0, g = 0, b = 0, a = 0;
 	for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
-		spSlot* slot = _skeleton->drawOrder[i];
-		if (!slot->attachment) continue;
+        spSlot *slot = _skeleton->drawOrder[i];
+        if (!slot->attachment) {
+            // use clone's slot to draw
+            slot = _cloneSkeleton->_skeleton->drawOrder[i];
+        }
+
+        if (!slot->attachment) {
+            // not attachment, skip slot draw
+            continue;
+        }
+        
 		Texture2D *texture = nullptr;
 		switch (slot->attachment->type) {
 		case SP_ATTACHMENT_REGION: {
@@ -360,8 +377,16 @@ spSlot* SkeletonRenderer::findSlot (const std::string& slotName) const {
 bool SkeletonRenderer::setSkin (const std::string& skinName) {
 	return spSkeleton_setSkinByName(_skeleton, skinName.empty() ? 0 : skinName.c_str()) ? true : false;
 }
+
 bool SkeletonRenderer::setSkin (const char* skinName) {
 	return spSkeleton_setSkinByName(_skeleton, skinName) ? true : false;
+}
+
+void SkeletonRenderer::setClone(SkeletonRenderer *clone)
+{
+    // clone Skeleton's bones will render by real one
+    _cloneSkeleton = clone;
+    clone->_isClone = true;
 }
 
 spAttachment* SkeletonRenderer::getAttachment (const std::string& slotName, const std::string& attachmentName) const {

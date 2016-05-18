@@ -82,6 +82,9 @@ public:
 	bool setSkin (const std::string& skinName);
 	/** @param skin May be 0 for no skin.*/
 	bool setSkin (const char* skinName);
+    
+    /* set clone Skeleton to the real Skeleton */
+    void setClone(SkeletonRenderer *clone);
 	
 	/* Returns 0 if the slot or attachment was not found. */
 	spAttachment* getAttachment (const std::string& slotName, const std::string& attachmentName) const;
@@ -128,6 +131,10 @@ protected:
 	float _timeScale;
 	bool _debugSlots;
 	bool _debugBones;
+    
+    // for twins rendering
+    SkeletonRenderer *_cloneSkeleton;//ref only
+    bool _isClone;
 };
 
 }
