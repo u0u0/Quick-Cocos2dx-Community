@@ -5,9 +5,11 @@
    #include "TargetConditionals.h"
 #endif
 
-#if ((TARGET_OS_IPHONE == 1) || (TARGET_OS_MAC == 1)) && (!defined CP_USE_CGPOINTS)
-	#define CP_USE_CGPOINTS 1
-#endif
+// XXX: if open, will bug on iOS
+// https://github.com/iTyran/Quick-Cocos2dx-Community/issues/36
+//#if ((TARGET_OS_IPHONE == 1) || (TARGET_OS_MAC == 1)) && (!defined CP_USE_CGPOINTS)
+//	#define CP_USE_CGPOINTS 1
+//#endif
 
 #if CP_USE_CGPOINTS == 1
 	#if TARGET_OS_IPHONE
