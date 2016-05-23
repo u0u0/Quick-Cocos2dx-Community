@@ -175,7 +175,7 @@ void SkeletonRenderer::drawSkeleton (const Mat4 &transform, uint32_t transformFl
 	float r = 0, g = 0, b = 0, a = 0;
 	for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
         spSlot *slot = _skeleton->drawOrder[i];
-        if (!slot->attachment) {
+        if (!slot->attachment && _cloneSkeleton) {
             // use clone's slot to draw
             slot = _cloneSkeleton->_skeleton->drawOrder[i];
         }
