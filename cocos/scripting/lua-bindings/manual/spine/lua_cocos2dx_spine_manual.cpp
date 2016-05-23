@@ -705,14 +705,52 @@ static int lua_cocos2dx_spine_SkeletonAnimation_setClone(lua_State* tolua_S)
         }
         
         cobj->setClone(cloneObj);
-        
-        lua_settop(tolua_S, 1);
-        return 1;
+    } else {
+        cobj->setClone(NULL);
     }
+    lua_settop(tolua_S, 1);
+    return 1;
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_setClone'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
+static int lua_cocos2dx_spine_SkeletonAnimation_setFeedback(lua_State* tolua_S)
+{
+    int argc = 0;
+    spine::SkeletonAnimation* cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(tolua_S,1,"sp.SkeletonAnimation",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        spine::SkeletonAnimation *cloneObj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,2,0);
+        
+        if(!cloneObj) {
+            tolua_error(tolua_S, "sp.SkeletonAnimation:setFeedback arg 1 must sp.SkeletonAnimation", nullptr);
+            return 0;
+        }
+        
+        cobj->setFeedback(cloneObj);
+    } else {
+        cobj->setFeedback(NULL);
+    }
+    lua_settop(tolua_S, 1);
+    return 1;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_setFeedback'.",&tolua_err);
 #endif
     
     return 0;
@@ -734,6 +772,7 @@ static void extendCCSkeletonAnimation(lua_State* L)
         tolua_function(L, "findBone", lua_cocos2dx_spine_SkeletonAnimation_findBone);
         tolua_function(L, "findSlot", lua_cocos2dx_spine_SkeletonAnimation_findSlot);
         tolua_function(L, "setClone", lua_cocos2dx_spine_SkeletonAnimation_setClone);
+        tolua_function(L, "setFeedback", lua_cocos2dx_spine_SkeletonAnimation_setFeedback);
     }
     lua_pop(L, 1);
     

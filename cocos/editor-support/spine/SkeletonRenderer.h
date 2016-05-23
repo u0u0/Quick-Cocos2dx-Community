@@ -83,8 +83,9 @@ public:
 	/** @param skin May be 0 for no skin.*/
 	bool setSkin (const char* skinName);
     
-    /* set clone Skeleton to the real Skeleton */
+    /* clone and feedback Skeleton */
     void setClone(SkeletonRenderer *clone);
+    void setFeedback(SkeletonRenderer *feedback);
 	
 	/* Returns 0 if the slot or attachment was not found. */
 	spAttachment* getAttachment (const std::string& slotName, const std::string& attachmentName) const;
@@ -134,7 +135,8 @@ protected:
     
     // for twins rendering
     SkeletonRenderer *_cloneSkeleton;//ref only
-    bool _isClone;
+    SkeletonRenderer *_feedbackSkeleton;//ref only
+    bool _NotDrawSkeleton;
 };
 
 }

@@ -63,7 +63,8 @@ SkeletonRenderer* SkeletonRenderer::createWithFile (const std::string& skeletonD
 
 void SkeletonRenderer::initialize () {
     _cloneSkeleton = NULL;
-    _isClone = false;
+    _feedbackSkeleton = NULL;
+    _NotDrawSkeleton = false;
     
 	_worldVertices = MALLOC(float, 1000); // Max number of vertices per mesh.
 
@@ -153,7 +154,7 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 }
 
 void SkeletonRenderer::drawSkeleton (const Mat4 &transform, uint32_t transformFlags) {
-    if (_isClone) {
+    if (_NotDrawSkeleton) {
         // clone Skeleton skip draw, but do not skip updata.
         return;
     }
@@ -175,6 +176,15 @@ void SkeletonRenderer::drawSkeleton (const Mat4 &transform, uint32_t transformFl
 	float r = 0, g = 0, b = 0, a = 0;
 	for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
         spSlot *slot = _skeleton->drawOrder[i];
+        
+        // check feedback first
+        if (_feedbackSkeleton) {
+            spSlot *fdslot = _feedbackSkeleton->_skeleton->drawOrder[i];
+            if (fdslot->attachment) {
+                slot = fdslot;
+            }
+        }
+        
         if (!slot->attachment && _cloneSkeleton) {
             // use clone's slot to draw
             slot = _cloneSkeleton->_skeleton->drawOrder[i];
@@ -386,7 +396,18 @@ void SkeletonRenderer::setClone(SkeletonRenderer *clone)
 {
     // clone Skeleton's bones will render by real one
     _cloneSkeleton = clone;
-    clone->_isClone = true;
+    if (clone) {
+        clone->_NotDrawSkeleton = true;
+    }
+}
+
+void SkeletonRenderer::setFeedback(SkeletonRenderer *feedback)
+{
+    // clone Skeleton's bones will render by real one
+    _feedbackSkeleton = feedback;
+    if (feedback) {
+        feedback->_NotDrawSkeleton = true;
+    }
 }
 
 spAttachment* SkeletonRenderer::getAttachment (const std::string& slotName, const std::string& attachmentName) const {
