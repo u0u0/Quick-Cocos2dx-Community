@@ -77,6 +77,7 @@ std::string PlayerFileDialogServiceMac::openDirectory( const std::string &title,
     }
     
     std::string path;
+    // HOW TO FIX: runModal 会在部分机器上破坏OpenGL,而且VALIDATE_FRAMEBUFFER无法恢复这种破坏
     if ([openDlg runModal] == NSFileHandlingPanelOKButton)
     {
         NSURL *url = [openDlg.URLs objectAtIndex:0];

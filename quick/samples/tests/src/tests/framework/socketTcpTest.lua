@@ -25,7 +25,6 @@ function SocketTcpTestScene:init()
 
 	local socket = net.SocketTCP.new()
 	socket:setName("TestSocketTcp")
-	socket:setTickTime(1)
 	socket:setReconnTime(6)
 	socket:setConnFailTime(4)
 
