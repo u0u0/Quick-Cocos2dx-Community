@@ -274,10 +274,10 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
 
 bool Downloader::prepareHeader(void *curl, const std::string &srcUrl) const
 {
-    curl_easy_setopt(curl, CURLOPT_URL, srcUrl.c_str());
-    curl_easy_setopt(curl, CURLOPT_HEADER, 1);
-    curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
-    if (curl_easy_perform(curl) == CURLE_OK)
+    curl_easy_setopt((CURL *)curl, CURLOPT_URL, srcUrl.c_str());
+    curl_easy_setopt((CURL *)curl, CURLOPT_HEADER, 1);
+    curl_easy_setopt((CURL *)curl, CURLOPT_NOBODY, 1);
+    if (curl_easy_perform((CURL *)curl) == CURLE_OK)
         return true;
     else
         return false;
@@ -655,7 +655,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
     {
         FILE *f = (*it)->fp;
         fclose(f);
-        auto single = (*it)->curl;
+        CURL *single = (CURL *)((*it)->curl);
         curl_multi_remove_handle(multi_handle, single);
         curl_easy_cleanup(single);
     }
