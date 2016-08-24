@@ -102,7 +102,8 @@ int ${signature_name}(lua_State* tolua_S)
         return 1;
                 #else
         cobj->${func_name}($arg_list);
-        return 0;
+        lua_settop(tolua_S, 1);
+        return 1;
                 #end if
         #end if         
     }
