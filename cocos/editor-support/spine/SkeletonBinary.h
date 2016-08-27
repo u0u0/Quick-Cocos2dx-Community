@@ -2,7 +2,7 @@
  * Spine Runtimes Software License
  * Version 2.3
  * 
- * Copyright (c) 2013-2015, Esoteric Software
+ * Copyright (c) 2013-2016, Esoteric Software
  * All rights reserved.
  * 
  * You are granted a perpetual, non-exclusive, non-sublicensable and
@@ -29,17 +29,44 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/Event.h>
-#include <spine/extension.h>
+#ifndef SPINE_SKELETONBINARY_H_
+#define SPINE_SKELETONBINARY_H_
 
-spEvent* spEvent_create (float time, spEventData* data) {
-	spEvent* self = NEW(spEvent);
-	CONST_CAST(spEventData*, self->data) = data;
-	CONST_CAST(float, self->time) = time;
-	return self;
-}
+#include <spine/Attachment.h>
+#include <spine/AttachmentLoader.h>
+#include <spine/SkeletonData.h>
+#include <spine/Atlas.h>
 
-void spEvent_dispose (spEvent* self) {
-	FREE(self->stringValue);
-	FREE(self);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+struct spAtlasAttachmentLoader;
+
+typedef struct spSkeletonBinary {
+	float scale;
+	spAttachmentLoader* attachmentLoader;
+	const char* const error;
+} spSkeletonBinary;
+
+spSkeletonBinary* spSkeletonBinary_createWithLoader (spAttachmentLoader* attachmentLoader);
+spSkeletonBinary* spSkeletonBinary_create (spAtlas* atlas);
+void spSkeletonBinary_dispose (spSkeletonBinary* self);
+
+spSkeletonData* spSkeletonBinary_readSkeletonData (spSkeletonBinary* self, const unsigned char* binary, const int length);
+spSkeletonData* spSkeletonBinary_readSkeletonDataFile (spSkeletonBinary* self, const char* path);
+
+#ifdef SPINE_SHORT_NAMES
+typedef spSkeletonBinary SkeletonBinary;
+#define SkeletonBinary_createWithLoader(...) spSkeletonBinary_createWithLoader(__VA_ARGS__)
+#define SkeletonBinary_create(...) spSkeletonBinary_create(__VA_ARGS__)
+#define SkeletonBinary_dispose(...) spSkeletonBinary_dispose(__VA_ARGS__)
+#define SkeletonBinary_readSkeletonData(...) spSkeletonBinary_readSkeletonData(__VA_ARGS__)
+#define SkeletonBinary_readSkeletonDataFile(...) spSkeletonBinary_readSkeletonDataFile(__VA_ARGS__)
+#endif
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* SPINE_SKELETONBINARY_H_ */
