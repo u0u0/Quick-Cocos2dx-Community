@@ -2020,7 +2020,6 @@
 		0A11831D1C05B9EF00BAB07A /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../external/curl/prebuilt/mac/libcurl.a; sourceTree = "<group>"; };
 		0A11831E1C05B9EF00BAB07A /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/curl/prebuilt/mac/libssl.a; sourceTree = "<group>"; };
 		0A1183221C05BB2900BAB07A /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../external/png/prebuilt/mac/libz.a; sourceTree = "<group>"; };
-		0A2110A41D71569200002345 /* Android.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android.mk; sourceTree = "<group>"; };
 		0A2110A51D71569200002345 /* Animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Animation.c; sourceTree = "<group>"; };
 		0A2110A61D71569200002345 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		0A2110A71D71569200002345 /* AnimationState.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnimationState.c; sourceTree = "<group>"; };
@@ -4096,7 +4095,6 @@
 		1AD71D7C180E26E600808F54 /* spine */ = {
 			isa = PBXGroup;
 			children = (
-				0A2110A41D71569200002345 /* Android.mk */,
 				0A2110A51D71569200002345 /* Animation.c */,
 				0A2110A61D71569200002345 /* Animation.h */,
 				0A2110A71D71569200002345 /* AnimationState.c */,
