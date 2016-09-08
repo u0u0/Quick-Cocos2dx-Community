@@ -41,13 +41,8 @@ namespace spine {
 
 static SkeletonBatch* instance = nullptr;
 
-void SkeletonBatch::setBufferSize (int vertexCount) {
-	if (instance) delete instance;
-	instance = new SkeletonBatch(vertexCount);
-}
-
 SkeletonBatch* SkeletonBatch::getInstance () {
-	if (!instance) instance = new SkeletonBatch(8192);
+	if (!instance) instance = new SkeletonBatch();
 	return instance;
 }
     
@@ -58,10 +53,8 @@ void SkeletonBatch::destroyInstance () {
     }
 }
 
-SkeletonBatch::SkeletonBatch (int capacity) :
-	_capacity(capacity), _position(0)
+SkeletonBatch::SkeletonBatch ()
 {
-	_buffer = new V3F_C4B_T2F[capacity];
 	_firstCommand = new Command();
 	_command = _firstCommand;
 
@@ -79,39 +72,16 @@ SkeletonBatch::~SkeletonBatch () {
 		delete command;
 		command = next;
 	}
-
-	delete [] _buffer;
 }
 
 void SkeletonBatch::update (float delta) {
-	_position = 0;
 	_command = _firstCommand;
 }
 
 void SkeletonBatch::addCommand (cocos2d::Renderer* renderer, float globalZOrder, GLuint textureID, GLProgramState* glProgramState,
 	BlendFunc blendFunc, const TrianglesCommand::Triangles& triangles, const Mat4& transform, uint32_t transformFlags
 ) {
-	if (_position + triangles.vertCount > _capacity) {
-        int newCapacity = std::max<int>(_capacity + _capacity / 2, _position + triangles.vertCount);
-		V3F_C4B_T2F* newBuffer = new V3F_C4B_T2F[newCapacity];
-		memcpy(newBuffer, _buffer, _position);
-
-		int newPosition = 0;
-		Command* command = _firstCommand;
-		while (newPosition < _position) {
-			command->triangles->verts = newBuffer + newPosition;
-			newPosition += command->triangles->vertCount;
-			command = command->next;
-		}
-
-		delete [] _buffer;
-		_buffer = newBuffer;
-		_capacity = newCapacity;
-	}
-
-	memcpy(_buffer + _position, triangles.verts, sizeof(V3F_C4B_T2F) * triangles.vertCount);
-	_command->triangles->verts = _buffer + _position;
-	_position += triangles.vertCount;
+	_command->triangles->verts = triangles.verts;
 
 	_command->triangles->vertCount = triangles.vertCount;
 	_command->triangles->indexCount = triangles.indexCount;
