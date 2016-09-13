@@ -314,13 +314,14 @@ void Manifest::setAssetDownloadState(const std::string &key, const Manifest::Dow
                         std::string jkey = itr->name.GetString();
                         if (jkey == key) {
                             rapidjson::Value &entry = itr->value;
-                            rapidjson::Value &value = entry[KEY_DOWNLOAD_STATE];
-                            if (value.IsInt())
+                            if (entry.HasMember(KEY_DOWNLOAD_STATE))
                             {
-                                value.SetInt((int)state);
-                            }
-                            else
-                            {
+                                rapidjson::Value &value = entry[KEY_DOWNLOAD_STATE];
+                                if (value.IsInt())
+                                {
+                                    value.SetInt((int)state);
+                                }
+                            } else {
                                 entry.AddMember<int>(KEY_DOWNLOAD_STATE, (int)state, _json.GetAllocator());
                             }
                         }
