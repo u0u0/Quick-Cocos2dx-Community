@@ -2,7 +2,7 @@
 local data =
 {
     {
-        title       = "Quick-Cocos2dx-Community 3.6.1 released！(2016-01-18)",
+        title       = "Quick-Cocos2dx-Community 3.6.3 Release",
         description = "这是Quick社区版最新稳定版本，同支持 Luajit 64 的版本。点\n击进入可查看更多更新信息和下载信息。Quick-Cocos2dx-Community\n是由泰然网负责开发并维护的一款基于 Quick-Cocos2d-x 引擎的\n增强版。Quick-Cocos2dx-Community 具有Cocos2d-x 和 \nQuick-Cocos2d-x的所有优点。并在 Quick-Cocos2d-x 础上更新\n了最新的平台和第三方功能。",
         path        = "http://www.tairan.com/engines-download",
         image       = "version.png"
