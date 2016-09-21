@@ -670,7 +670,8 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findSlot(lua_State* tolua_S)
             height = mesh->height;
         } else {
             delete[] _worldVertices;
-            goto tolua_lerror;
+			luaL_error(tolua_S, "findSlot unsupport attachment type \n");
+			return 0;
         }
 
         // return a table
