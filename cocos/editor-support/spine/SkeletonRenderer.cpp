@@ -356,6 +356,16 @@ bool SkeletonRenderer::setAttachment (const std::string& slotName, const std::st
 bool SkeletonRenderer::setAttachment (const std::string& slotName, const char* attachmentName) {
 	return spSkeleton_setAttachment(_skeleton, slotName.c_str(), attachmentName) ? true : false;
 }
+    
+void SkeletonRenderer::setFlippedX(int flippedX)
+{
+    _skeleton->flipX = flippedX;
+}
+
+void SkeletonRenderer::setFlippedY(int flippedY)
+{
+    _skeleton->flipY = flippedY;
+}
 
 spSkeleton* SkeletonRenderer::getSkeleton () {
 	return _skeleton;

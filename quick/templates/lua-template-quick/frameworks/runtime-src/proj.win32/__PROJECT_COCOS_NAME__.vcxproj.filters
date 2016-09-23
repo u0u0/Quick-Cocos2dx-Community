@@ -355,6 +355,10 @@
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.hpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h">
+      <Filter>win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -513,6 +517,7 @@
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

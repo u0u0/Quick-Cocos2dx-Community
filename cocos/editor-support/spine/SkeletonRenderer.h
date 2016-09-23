@@ -98,6 +98,9 @@ public:
     virtual const cocos2d::BlendFunc& getBlendFunc () const override;
     virtual void setOpacityModifyRGB (bool value) override;
     virtual bool isOpacityModifyRGB () const override;
+    
+    void setFlippedX(int flippedX);
+    void setFlippedY(int flippedY);
 
 CC_CONSTRUCTOR_ACCESS:
 	SkeletonRenderer ();

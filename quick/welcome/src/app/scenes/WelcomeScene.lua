@@ -33,7 +33,7 @@ function WelcomeScene:createLogo(node)
     local label = cc.ui.UILabel.new({
 		UILabelType = 2,
         text = __VERSION__,
-        size = 38,
+        size = 30,
         color = display.COLOR_WHITE,
         x = 138,
         y = display.top - 55,
@@ -53,6 +53,19 @@ function WelcomeScene:createButtons(node)
         pressed = "#ButtonPressed.png",
         disabled = "#ButtonDisabled.png",
     }
+
+	cc.ui.UIPushButton.new(images, {scale9 = true})
+    :setButtonSize(buttonWidth, buttonHeight)
+    :setButtonLabel("normal", cc.ui.UILabel.new({
+		    UILabelType = 2,
+            text = "捐赠",
+            size = 18,
+        }))
+    :pos(display.width-padding, display.top - 55)
+    :addTo(node)
+    :onButtonClicked(function()
+       device.openURL("http://tairan.com/engines-download") 
+    end)
 
     cc.ui.UIPushButton.new(images, {scale9 = true})
     :setButtonSize(buttonWidth, buttonHeight)
