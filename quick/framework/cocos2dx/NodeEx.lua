@@ -501,6 +501,9 @@ function Node:copyClonedWidgetChildren_(node)
         if cloneChild then
             self:addChild(cloneChild)
         end
+		if child.name then
+            self.subChildren[child.name] = cloneChild
+        end
     end
 end
 
