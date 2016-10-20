@@ -8,6 +8,7 @@ LOCAL_MODULE_FILENAME := libluaextensions
 LOCAL_SRC_FILES := $(LOCAL_PATH)/lua_extensions_more.c \
                     $(LOCAL_PATH)/zlib/lua_zlib.c \
                     $(LOCAL_PATH)/filesystem/lfs.c \
+                    $(LOCAL_PATH)/protobuf/pb.c \
                     $(LOCAL_PATH)/lpack/lpack.c
 
 LOCAL_SRC_FILES += \
