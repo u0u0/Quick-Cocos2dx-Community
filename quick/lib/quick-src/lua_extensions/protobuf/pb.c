@@ -59,11 +59,7 @@ defined (BIT_ZERO_ON_LEFT) || defined(m68k) || defined(__sparc)
 #endif /* BSD */
 #endif /* BYTE_ORDER */
 
-#ifndef BYTE_ORDER
-#pragma error("BYTE_ORDER not defined")
-#endif
-
-#if BYTE_ORDER == LITTLE_ENDIAN
+#if !defined(BYTE_ORDER) || (BYTE_ORDER == LITTLE_ENDIAN)
 #define IS_LITTLE_ENDIAN
 #endif
 

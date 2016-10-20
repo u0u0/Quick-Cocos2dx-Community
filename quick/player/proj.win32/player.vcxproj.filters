@@ -88,6 +88,9 @@
     <Filter Include="Classes\quick-src\extra\nanovg\nanonode">
       <UniqueIdentifier>{9ca55602-f554-40dc-a516-f27d6facc62c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\quick-src\lua_extensions\protobuf">
+      <UniqueIdentifier>{0e2bbe5b-e4f1-48a7-92e1-c3b1e82a39d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -411,6 +414,9 @@
     <ClInclude Include="..\Classes\UncaughtExceptionHandler.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.h">
+      <Filter>Classes\quick-src\lua_extensions\protobuf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -610,6 +616,9 @@
     </ClCompile>
     <ClCompile Include="UncaughtExceptionHandler_win32.cpp">
       <Filter>Classes\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.c">
+      <Filter>Classes\quick-src\lua_extensions\protobuf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
