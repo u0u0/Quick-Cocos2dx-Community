@@ -17,15 +17,20 @@ import sys
 import getopt
 import subprocess
 import shutil
+import platform
 
 projectRoot = os.path.split(os.path.realpath(__file__))[0]
 runtimeRoot = os.path.split(projectRoot)[0]
 frameworksRoot = os.path.split(runtimeRoot)[0]
 appRoot = os.path.split(frameworksRoot)[0]
 engineRoot = os.environ.get('QUICK_V3_ROOT')
-ndkModulePath = engineRoot + ":" + engineRoot + "/cocos:" + engineRoot + "/quick/lib:" + engineRoot + "/external:" + engineRoot + "/cocos/scripting:" + runtimeRoot + "/Classes"
 new_env = os.environ.copy()
 new_env['COCOS2DX_ROOT'] = engineRoot
+
+ndkPathDepart = ":"
+if(platform.system() =="Windows"):
+    ndkPathDepart = ";"
+ndkModulePath = engineRoot + ndkPathDepart + engineRoot + "/cocos" + ndkPathDepart + engineRoot + "/quick/lib" + ndkPathDepart + engineRoot + "/external" + ndkPathDepart + engineRoot + "/cocos/scripting" + ndkPathDepart + runtimeRoot + "/Classes"
 
 def joinDir(root, *dirs):
     for item in dirs:
