@@ -1,3 +1,18 @@
+Quick-Cocos2dx-Community v3.6.4 release
+
+[新增]	Android Studio 打包支持。
+[新增]	protobuffer 2.6.1 支持。
+
+[移除]	去掉ADT编译支持，去掉Android的anysdk支持。
+
+[更新]	OpenSSL 1.0.2g for android 重新进行了编译。
+[更新]	lib webp update to 0.5.1。
+
+[修正]	修正 macOS 10.12.1 下 player 不能输入文字。
+[修正]	Spine runtime 修正同时渲染多个cachedata的bug。
+[修正]	macOS Sierra php脚本运行错误修正。
+[修正]	win32 release build error fix。
+
 Quick-Cocos2dx-Community v3.6.3 release
 
 [更新]	Spine runtime更新以支持Spine 3.4编辑器导出的新Json格式。
