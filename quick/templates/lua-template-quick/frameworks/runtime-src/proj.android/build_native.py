@@ -90,6 +90,10 @@ def cleanNative():
         print "Error while cleaning, check error above!"
         return
 
+    objDir = joinDir(projectRoot, "libcocos2dx", "obj")
+    if os.path.exists(objDir):
+        shutil.rmtree(objDir)
+
     print "====> clean done\n"
 
 if __name__ == "__main__":

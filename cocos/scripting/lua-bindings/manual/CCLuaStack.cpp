@@ -838,7 +838,13 @@ int LuaStack::luaLoadChunksFromZIP(lua_State *L)
                 unsigned char *zbuffer = zip->getFileData(filename.c_str(), &bufferSize);
                 if (bufferSize) {
                     if (stack->luaLoadBuffer(L, (char*)zbuffer, (int)bufferSize, filename.c_str()) == 0) {
-                        lua_setfield(L, -2, filename.c_str());
+                        
+                        // special fix for protobuf find path in zip.
+                        if (filename.find("framework.protobuf.") != std::string::npos) {
+                            lua_setfield(L, -2, filename.c_str() + 19);
+                        } else {
+                            lua_setfield(L, -2, filename.c_str());
+                        }
                         ++count;
                     }
                     free(zbuffer);
