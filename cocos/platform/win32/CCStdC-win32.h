@@ -49,7 +49,7 @@ typedef SSIZE_T ssize_t;
     #define isnan   _isnan
 #endif
 
-#ifndef snprintf
+#if !defined(snprintf) && _MSC_VER < 1900
 #define snprintf _snprintf
 #endif
 
