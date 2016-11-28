@@ -269,8 +269,13 @@ void ProjectConfig::setWriteDebugLogToFile(bool writeDebugLogToFile)
 
 string ProjectConfig::getDebugLogFilePath() const
 {
-    auto path(getProjectDir());
-    path.append("debug.log");
+	auto path(getProjectDir());
+	time_t t = time(0);
+	char tmp[64];
+	strftime(tmp, sizeof(tmp), "_%Y%m%d_%H%M%S", localtime(&t));
+	path.append("debug");
+	path.append(tmp);
+	path.append(".log");
     return path;
 }
 
