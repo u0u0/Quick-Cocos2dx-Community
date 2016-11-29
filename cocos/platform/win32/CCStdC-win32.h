@@ -49,11 +49,7 @@ typedef SSIZE_T ssize_t;
     #define isnan   _isnan
 #endif
 
-#ifndef snprintf
-#define snprintf _snprintf
-#endif
-
-#endif // __MINGW32__
+#endif // __MINGW32__  
 
 #include <math.h>
 #include <string.h>
