@@ -24,6 +24,7 @@
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #include "AudioEngine-inl.h"
 
+#include <unistd.h>
 // for native asset manager
 #include <sys/types.h>
 #include <android/asset_manager.h>
@@ -64,6 +65,7 @@ AudioPlayer::AudioPlayer()
     , _duration(0.0f)
     , _playOver(false)
     , _loop(false)
+    , _assetFd(0)
 {
 
 }
@@ -78,13 +80,18 @@ AudioPlayer::~AudioPlayer()
         _fdPlayerVolume = nullptr;
         _fdPlayerSeek = nullptr;
     }
+    if(_assetFd > 0)
+    {
+      close(_assetFd);
+      _assetFd = 0;
+    }
 }
 
 bool AudioPlayer::init(SLEngineItf engineEngine, SLObjectItf outputMixObject,const std::string& fileFullPath, float volume, bool loop)
 {
     bool ret = false;
 
-    do 
+    do
     {
         SLDataSource audioSrc;
 
@@ -109,15 +116,15 @@ bool AudioPlayer::init(SLEngineItf engineEngine, SLObjectItf outputMixObject,con
 
             // open asset as file descriptor
             off_t start, length;
-            int fd = AAsset_openFileDescriptor(asset, &start, &length);
-            if (fd <= 0){
+            _assetFd = AAsset_openFileDescriptor(asset, &start, &length);
+            if (_assetFd <= 0){
                 AAsset_close(asset);
                 break;
             }
             AAsset_close(asset);
 
             // configure audio source
-            loc_fd = {SL_DATALOCATOR_ANDROIDFD, fd, start, length};
+            loc_fd = {SL_DATALOCATOR_ANDROIDFD, _assetFd, start, length};
 
             audioSrc.pLocator = &loc_fd;
         }
@@ -214,7 +221,7 @@ bool AudioEngineImpl::init()
         // create output mix
         const SLInterfaceID outputMixIIDs[] = {};
         const SLboolean outputMixReqs[] = {};
-        result = (*_engineEngine)->CreateOutputMix(_engineEngine, &_outputMixObject, 0, outputMixIIDs, outputMixReqs);           
+        result = (*_engineEngine)->CreateOutputMix(_engineEngine, &_outputMixObject, 0, outputMixIIDs, outputMixReqs);
         if(SL_RESULT_SUCCESS != result){ ERRORLOG("create output mix fail"); break; }
 
         // realize the output mix
@@ -231,7 +238,7 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
 {
     auto audioId = AudioEngine::INVAILD_AUDIO_ID;
 
-    do 
+    do
     {
         if (_engineEngine == nullptr)
             break;
@@ -251,10 +258,10 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
         (*(player._fdPlayerPlay))->SetCallbackEventsMask(player._fdPlayerPlay, SL_PLAYEVENT_HEADATEND);
 
         AudioEngine::_audioIDInfoMap[audioId].state = AudioEngine::AudioState::PLAYING;
-        
+
         if (_lazyInitLoop) {
             _lazyInitLoop = false;
-            
+
             auto scheduler = Director::getInstance()->getScheduler();
             scheduler->schedule(schedule_selector(AudioEngineImpl::update), this, 0.03f, false);
         }
@@ -271,17 +278,17 @@ void AudioEngineImpl::update(float dt)
         if(iter->second._playOver)
         {
             if (iter->second._finishCallback)
-                iter->second._finishCallback(iter->second._audioID, *AudioEngine::_audioIDInfoMap[iter->second._audioID].filePath); 
+                iter->second._finishCallback(iter->second._audioID, *AudioEngine::_audioIDInfoMap[iter->second._audioID].filePath);
 
             AudioEngine::remove(iter->second._audioID);
             _audioPlayers.erase(iter);
             break;
         }
     }
-    
+
     if(_audioPlayers.empty()){
         _lazyInitLoop = true;
-        
+
         auto scheduler = Director::getInstance()->getScheduler();
         scheduler->unschedule(schedule_selector(AudioEngineImpl::update), this);
     }
@@ -383,7 +390,7 @@ bool AudioEngineImpl::setCurrentTime(int audioID, float time)
     auto& player = _audioPlayers[audioID];
     SLmillisecond pos = 1000 * time;
     auto result = (*player._fdPlayerSeek)->SetPosition(player._fdPlayerSeek, pos, SL_SEEKMODE_ACCURATE);
-    if(SL_RESULT_SUCCESS != result){ 
+    if(SL_RESULT_SUCCESS != result){
         return false;
     }
     return true;
