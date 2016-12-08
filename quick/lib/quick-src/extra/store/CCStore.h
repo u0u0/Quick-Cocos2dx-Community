@@ -39,7 +39,7 @@ public:
 #endif
     void cancelLoadProducts(void);
     bool isProductLoaded(const char* productId);
-    bool purchase(const char* productId);
+    bool purchase(const char* productId, const char* userInfo);
     void restore(void);
     void finishTransaction(StorePaymentTransaction *transaction);
 #if CC_LUA_ENGINE_ENABLED > 0
