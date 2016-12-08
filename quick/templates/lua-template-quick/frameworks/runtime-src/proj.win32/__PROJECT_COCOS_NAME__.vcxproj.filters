@@ -88,6 +88,9 @@
     <Filter Include="Classes\quick-src\extra\nanovg\nanonode">
       <UniqueIdentifier>{fa2bffea-5bf4-480a-a40f-2b3499c85bbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\quick-src\lua_extensions\protobuf">
+      <UniqueIdentifier>{8de054e7-cb4f-473d-ae26-e8cb1fa744c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -359,6 +362,9 @@
     <ClInclude Include="targetver.h">
       <Filter>win32</Filter>
     </ClInclude>
+    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\protobuf\pb.h">
+      <Filter>Classes\quick-src\lua_extensions\protobuf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -516,6 +522,9 @@
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
+    </ClCompile>
+    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\protobuf\pb.c">
+      <Filter>Classes\quick-src\lua_extensions\protobuf</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

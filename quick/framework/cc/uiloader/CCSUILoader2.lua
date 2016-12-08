@@ -825,14 +825,14 @@ function CCSUILoader:prettyJson(json)
 			node.Size.Y = parent.Size.Y * node.PreSize.Y
 		end
 		node.AnchorPoint = node.AnchorPoint or {} 
-		if not node.children then
+		if not node.Children then
 			return
 		end
-		if 0 == #node.children then
+		if 0 == #node.Children then
 			return
 		end
 
-		for i,v in ipairs(node.children) do
+		for i,v in ipairs(node.Children) do
 			prettyNode(v, node)
 		end
 	end

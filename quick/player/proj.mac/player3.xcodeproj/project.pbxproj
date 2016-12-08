@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */; };
+		0AA993221DAF389F002339DC /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AA993201DAF389F002339DC /* pb.c */; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
 		494047851A31C0A6004CECA6 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 4940477F1A31C0A6004CECA6 /* nanovg.c */; };
@@ -142,6 +143,8 @@
 /* Begin PBXFileReference section */
 		0A5237BC1BCD45B300B39D5F /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UncaughtExceptionHandler.mm; sourceTree = "<group>"; };
+		0AA993201DAF389F002339DC /* pb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pb.c; sourceTree = "<group>"; };
+		0AA993211DAF389F002339DC /* pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pb.h; sourceTree = "<group>"; };
 		15427CE2198F237300DC375D /* lua_module_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_module_register.h; path = ../Classes/lua_module_register.h; sourceTree = "<group>"; };
 		15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../../../build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		15A8A4871834C90E00142BE0 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
@@ -297,7 +300,6 @@
 		9F7288DD1A24957700EE0234 /* CCNativeMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCNativeMac.mm; sourceTree = "<group>"; };
 		9F7288DF1A24957700EE0234 /* OpenUDIDMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDIDMac.h; sourceTree = "<group>"; };
 		9F7288E01A24957700EE0234 /* OpenUDIDMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDIDMac.m; sourceTree = "<group>"; };
-		9F7288F71A24957700EE0234 /* Android.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android.mk; sourceTree = "<group>"; };
 		9F7288F91A24957700EE0234 /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fpconv.c; sourceTree = "<group>"; };
 		9F7288FA1A24957700EE0234 /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpconv.h; sourceTree = "<group>"; };
 		9F7288FB1A24957700EE0234 /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
@@ -400,6 +402,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AA9931F1DAF389F002339DC /* protobuf */ = {
+			isa = PBXGroup;
+			children = (
+				0AA993201DAF389F002339DC /* pb.c */,
+				0AA993211DAF389F002339DC /* pb.h */,
+			);
+			path = protobuf;
+			sourceTree = "<group>";
+		};
 		15A8A4041834BDA200142BE0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -739,7 +750,7 @@
 		9F7288F61A24957700EE0234 /* lua_extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9F7288F71A24957700EE0234 /* Android.mk */,
+				0AA9931F1DAF389F002339DC /* protobuf */,
 				9F7288F81A24957700EE0234 /* cjson */,
 				9F7289031A24957700EE0234 /* filesystem */,
 				9F7289061A24957700EE0234 /* lpack */,
@@ -1039,6 +1050,7 @@
 				9F7289901A24957700EE0234 /* lsqlite3.c in Sources */,
 				9F7289421A24957700EE0234 /* ccFilterShaders.cpp in Sources */,
 				9F72898E1A24957700EE0234 /* lfs.c in Sources */,
+				0AA993221DAF389F002339DC /* pb.c in Sources */,
 				9F72893D1A24957700EE0234 /* CCSaturationFilter.cpp in Sources */,
 				49C655D31A36C71400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
 				9FD0193419F8C4D4005E0C49 /* PlayerTaskServiceProtocol.cpp in Sources */,
