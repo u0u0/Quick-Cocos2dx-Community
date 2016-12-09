@@ -419,7 +419,7 @@ end
 
 --------------------------------
 -- 压入栈方式切换到新场景
--- @function [parent=#display] replaceScene
+-- @function [parent=#display] pushScene
 -- @param Scene newScene 场景对象
 -- @param string transitionType 过渡效果名
 -- @param number time 过渡时间
@@ -450,7 +450,7 @@ end
 
 --------------------------------
 -- 返回到上一个场景, 如果没有前一个场景则不执行
--- @function [parent=#display] getRunningScene
+-- @function [parent=#display] popScene
 -- @param string transitionType 过渡效果名
 -- @param number time 过渡时间
 -- @param mixed more 过渡效果附加参数
@@ -475,7 +475,7 @@ function display.popScene(transitionType, time, more)
     if not previousScene then return end
 
     if transitionType then
-        previousScene = display.wrapSceneWithTransition(newScene, transitionType, time, more)
+        previousScene = display.wrapSceneWithTransition(previousScene, transitionType, time, more)
         sharedDirector:popScene(previousScene)
     else
         sharedDirector:popScene()
@@ -486,7 +486,7 @@ end
 
 --------------------------------
 -- 返回当前正在运行的前一个场景对象
--- @function [parent=#display] getRunningScene
+-- @function [parent=#display] getPreviousScene
 -- @return Scene#Scene ret (return value: cc.Scene)  场景对象
 
 -- end --
