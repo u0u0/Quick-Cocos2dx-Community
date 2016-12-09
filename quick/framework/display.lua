@@ -418,6 +418,86 @@ end
 -- start --
 
 --------------------------------
+-- 压入栈方式切换到新场景
+-- @function [parent=#display] replaceScene
+-- @param Scene newScene 场景对象
+-- @param string transitionType 过渡效果名
+-- @param number time 过渡时间
+-- @param mixed more 过渡效果附加参数
+
+--[[--
+
+切换到新场景
+
+~~~ lua
+
+-- 使用红色做过渡色
+display.pushScene(nextScene, "fade", 0.5, cc.c3b(255, 0, 0))
+
+~~~
+
+]]
+-- end --
+
+function display.pushScene(newScene, transitionType, time, more)
+    if transitionType then
+        newScene = display.wrapSceneWithTransition(newScene, transitionType, time, more)
+    end
+    sharedDirector:pushScene(newScene)
+end
+
+-- start --
+
+--------------------------------
+-- 返回到上一个场景, 如果没有前一个场景则不执行
+-- @function [parent=#display] getRunningScene
+-- @param string transitionType 过渡效果名
+-- @param number time 过渡时间
+-- @param mixed more 过渡效果附加参数
+
+--[[--
+
+返回到上一个场景
+
+~~~ lua
+
+-- 使用红色做过渡色
+display.popScene("fade", 0.5, cc.c3b(255, 0, 0))
+
+~~~
+
+]]
+
+-- end --
+
+function display.popScene(transitionType, time, more)
+    local previousScene = display.getPreviousScene()
+    if not previousScene then return end
+
+    if transitionType then
+        previousScene = display.wrapSceneWithTransition(newScene, transitionType, time, more)
+        sharedDirector:popScene(previousScene)
+    else
+        sharedDirector:popScene()
+    end
+end
+
+-- start --
+
+--------------------------------
+-- 返回当前正在运行的前一个场景对象
+-- @function [parent=#display] getRunningScene
+-- @return Scene#Scene ret (return value: cc.Scene)  场景对象
+
+-- end --
+
+function display.getPreviousScene()
+    return sharedDirector:getPreviousScene()
+end
+
+-- start --
+
+--------------------------------
 -- 返回当前正在运行的场景对象
 -- @function [parent=#display] getRunningScene
 -- @return Scene#Scene ret (return value: cc.Scene)  场景对象
