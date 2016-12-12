@@ -75,10 +75,14 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
     return [SKPaymentQueue canMakePayments];
 }
 
-- (void)purchase:(SKProduct *)product
+- (void)purchase:(SKProduct *)product userInfo:(NSString *)userInfo;
 {
     CCLOG("[CCStore_obj] purchase() pid: %s", utf8cstr(product.productIdentifier));
-    [[SKPaymentQueue defaultQueue] addPayment:[SKPayment paymentWithProduct:product]];
+    SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
+    if (userInfo != nil && [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        payment.applicationUsername = userInfo;
+    }
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
 - (void)restore

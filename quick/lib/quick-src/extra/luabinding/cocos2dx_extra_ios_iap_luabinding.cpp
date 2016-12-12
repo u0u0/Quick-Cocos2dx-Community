@@ -253,7 +253,8 @@ static int tolua_cocos2dx_extra_ios_iap_luabinding_Store_purchase00(lua_State* t
  if (
      !tolua_isusertype(tolua_S,1,"Store",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !tolua_isstring(tolua_S,3,0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
   goto tolua_lerror;
  else
@@ -261,11 +262,12 @@ static int tolua_cocos2dx_extra_ios_iap_luabinding_Store_purchase00(lua_State* t
  {
   Store* self = (Store*)  tolua_tousertype(tolua_S,1,0);
   const char* productId = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* userInfo = ((const char*)  tolua_tostring(tolua_S,3,0));
 #if COCOS2D_DEBUG >= 1
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'purchase'", NULL);
 #endif
   {
-   bool tolua_ret = (bool)  self->purchase(productId);
+   bool tolua_ret = (bool)  self->purchase(productId, userInfo);
    tolua_pushboolean(tolua_S,(bool)tolua_ret);
   }
  }
