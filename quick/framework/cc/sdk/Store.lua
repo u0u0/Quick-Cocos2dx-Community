@@ -100,7 +100,7 @@ function Store.isProductLoaded(productId)
     return cc.storeProvider:isProductLoaded(productId)
 end
 
-function Store.purchase(productId)
+function Store.purchase(productId, userInfo)
     if not checkCCStore() then return false end
 
     if not cc.storeProvider then
@@ -113,7 +113,7 @@ function Store.purchase(productId)
         return false
     end
 
-    return cc.storeProvider:purchase(productId)
+    return cc.storeProvider:purchase(productId, userInfo or "")
 end
 
 function Store.restore()
