@@ -250,8 +250,19 @@ public:
      * The running scene will be deleted. If there are no more scenes in the stack the execution is terminated.
      * ONLY call it if there is a running scene.
      */
+    void popScene();
+    
+    /** Get the second scene at the top of the stack. If there no more scene in the stack return NULL */
     Scene* getPreviousScene();
-    void popScene(Scene *scene = nullptr);
+    
+    /** Back to show previousScene and pops out a scene from the stack.
+     * This scene will replace the running one.
+     The scene must be getPreviousScene() or getPreviouscene() in TransitionScene
+     If scene is NULL same as popScene.
+     * The running scene will be deleted. If there are no more scenes in the stack the execution is terminated.
+     * ONLY call it if there is a running scene.
+     */
+    void backPreviousScene(Scene *scene = nullptr);
 
     /** Pops out all scenes from the stack until the root scene in the queue.
      * This scene will replace the running one.
