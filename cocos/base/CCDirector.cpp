@@ -837,7 +837,7 @@ void Director::pushScene(Scene *scene)
     _nextScene = scene;
 }
 
-void Director::popScene()
+void Director::popScene(void)
 {
     CCASSERT(_runningScene != nullptr, "running scene should not null");
 
