@@ -8,6 +8,7 @@ StorePaymentTransaction::transactionWithState(StorePaymentTransactionWrapper* tr
                                                 CCStorePaymentTransactionState state,
                                                 const char* transactionId,
                                                 const char* productId,
+                                                const char* userInfo,
                                                 int quantity,
                                                 double dateTime,
                                                 int receiptDataLength,
@@ -23,6 +24,7 @@ StorePaymentTransaction::transactionWithState(StorePaymentTransactionWrapper* tr
                                state,
                                transactionId,
                                productId,
+                               userInfo,
                                quantity,
                                dateTime,
                                receiptDataLength,
@@ -55,6 +57,7 @@ bool StorePaymentTransaction::initWithState(StorePaymentTransactionWrapper* tran
                                               CCStorePaymentTransactionState state,
                                               const char* transactionId,
                                               const char* productId,
+                                              const char* userInfo,
                                               int quantity,
                                               double dateTime,
                                               int receiptDataLength,
@@ -69,6 +72,7 @@ bool StorePaymentTransaction::initWithState(StorePaymentTransactionWrapper* tran
     m_transactionState = state;
     m_transactionIdentifier = transactionId;
     m_productIdentifier = productId;
+    m_userInfo = userInfo;
     m_quantity = quantity;
     m_dateTime = dateTime;
     m_receiptDataLength = receiptDataLength;
@@ -104,6 +108,7 @@ const LuaValueDict StorePaymentTransaction::convertToLuaTable(void)
     transaction_["state"] = LuaValue::stringValue(CCStorePaymentTransactionStateNames[m_transactionState]);
     transaction_["transactionIdentifier"] = LuaValue::stringValue(m_transactionIdentifier);
     transaction_["productIdentifier"] = LuaValue::stringValue(m_productIdentifier);
+    transaction_["userInfo"] = LuaValue::stringValue(m_userInfo);
     transaction_["quantity"] = LuaValue::intValue(m_quantity);
     transaction_["date"] = LuaValue::floatValue(m_dateTime);
     transaction_["errorCode"] = LuaValue::intValue(m_errorCode);
