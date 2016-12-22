@@ -1164,7 +1164,7 @@
 					10000,
 				);
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac $(SRCROOT)/../../../external/protobuf-lite/src";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac";
 			};
 			name = Debug;
 		};
@@ -1194,7 +1194,7 @@
 					10000,
 				);
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac $(SRCROOT)/../../../external/protobuf-lite/src";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac";
 			};
 			name = Release;
 		};
