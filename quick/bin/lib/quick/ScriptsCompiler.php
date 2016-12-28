@@ -320,7 +320,8 @@ class ScriptsCompiler
         // create ZIP archive
         $zipfile = $this->config['output'];
         $zip = new ZipArchive();
-        if (!$zip->open($zipfile, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
+				$flag = current(explode('.', PHP_VERSION)) == '7' ? ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::OVERWRITE | ZIPARCHIVE::CM_STORE;
+        if (!$zip->open($zipfile, $flag))
         {
             return false;
         }

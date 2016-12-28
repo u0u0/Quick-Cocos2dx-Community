@@ -75,14 +75,10 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
     return [SKPaymentQueue canMakePayments];
 }
 
-- (void)purchase:(SKProduct *)product userInfo:(NSString *)userInfo;
+- (void)purchase:(SKProduct *)product
 {
     CCLOG("[CCStore_obj] purchase() pid: %s", utf8cstr(product.productIdentifier));
-    SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
-    if (userInfo != nil && [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        payment.applicationUsername = userInfo;
-    }
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    [[SKPaymentQueue defaultQueue] addPayment:[SKPayment paymentWithProduct:product]];
 }
 
 - (void)restore
@@ -452,10 +448,6 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
 
     const char *ccid        = utf8cstr(transaction.transactionIdentifier);
     const char *ccproductId = utf8cstr(transaction.payment.productIdentifier);
-    const char *userInfo = "";
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        userInfo = utf8cstr(transaction.payment.applicationUsername);
-    }
     int quantity            = transaction.payment.quantity;
     double dateTime         = [transaction.transactionDate timeIntervalSince1970];
     int receiptDataLength   = 0;
@@ -508,7 +500,6 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
                                                                ccstate,
                                                                ccid,
                                                                ccproductId,
-                                                               userInfo,
                                                                quantity,
                                                                dateTime,
                                                                receiptDataLength,
@@ -525,7 +516,6 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
                                                                ccstate,
                                                                ccid,
                                                                ccproductId,
-                                                               userInfo,
                                                                quantity,
                                                                dateTime,
                                                                receiptDataLength,

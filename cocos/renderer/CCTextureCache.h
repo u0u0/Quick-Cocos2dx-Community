@@ -197,13 +197,10 @@ public:
     struct AsyncStruct
     {
     public:
-        AsyncStruct(const std::string& fn, std::function<void(Texture2D*)> f, Texture2D::PixelFormat format)
-            :filename(fn), callback(f), pixelFormat(format)
-        {}
+        AsyncStruct(const std::string& fn, std::function<void(Texture2D*)> f) : filename(fn), callback(f) {}
 
         std::string filename;
         std::function<void(Texture2D*)> callback;
-        Texture2D::PixelFormat pixelFormat;
     };
 
 protected:

@@ -34,7 +34,6 @@
 #include "HttpClient.h"
 #include <algorithm>
 #include <sstream>
-#include <iterator>
 
 NS_CC_BEGIN
 
