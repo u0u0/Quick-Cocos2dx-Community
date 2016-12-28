@@ -50,7 +50,6 @@ public:
                                                            CCStorePaymentTransactionState state,
                                                            const char* transactionId,
                                                            const char* productId,
-                                                           const char* userInfo,
                                                            int quantity,
                                                            double dateTime,
                                                            int receiptDataLength,
@@ -80,11 +79,6 @@ public:
     const std::string& getProductIdentifier(void)
     {
         return m_productIdentifier;
-    }
-    
-    const std::string& getUserInfo(void)
-    {
-        return m_userInfo;
     }
     
     int getQuantity(void)
@@ -143,7 +137,6 @@ private:
                        CCStorePaymentTransactionState state,
                        const char* transactionId,
                        const char* productId,
-                       const char* userInfo,
                        int quantity,
                        double dateTime,
                        int receiptDataLength,
@@ -159,7 +152,6 @@ private:
     std::string                         m_transactionIdentifier;
     std::string                         m_productIdentifier;
     int                                 m_quantity;
-    std::string                         m_userInfo;
     double                              m_dateTime;
     int                                 m_receiptDataLength;
     void*                               m_receiptData;

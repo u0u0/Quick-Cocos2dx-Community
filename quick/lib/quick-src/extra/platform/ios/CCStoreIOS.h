@@ -36,7 +36,7 @@ class CCStoreReceiptVerifyRequestIOS;
 #pragma mark Making a Purchase
 
 - (BOOL)canMakePurchases;
-- (void)purchase:(SKProduct *)product userInfo:(NSString *)userInfo;
+- (void)purchase:(SKProduct *)product;
 - (void)restore;
 - (void)finishTransaction:(SKPaymentTransaction *)transaction;
 

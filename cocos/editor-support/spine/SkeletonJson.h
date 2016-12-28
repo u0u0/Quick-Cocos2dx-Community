@@ -42,8 +42,6 @@
 extern "C" {
 #endif
 
-struct spAtlasAttachmentLoader;
-
 typedef struct spSkeletonJson {
 	float scale;
 	spAttachmentLoader* attachmentLoader;

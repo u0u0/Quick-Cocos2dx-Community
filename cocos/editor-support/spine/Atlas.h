@@ -39,7 +39,6 @@ extern "C" {
 typedef struct spAtlas spAtlas;
 
 typedef enum {
-	SP_ATLAS_UNKNOWN_FORMAT,
 	SP_ATLAS_ALPHA,
 	SP_ATLAS_INTENSITY,
 	SP_ATLAS_LUMINANCE_ALPHA,
@@ -50,7 +49,6 @@ typedef enum {
 } spAtlasFormat;
 
 typedef enum {
-	SP_ATLAS_UNKNOWN_FILTER,
 	SP_ATLAS_NEAREST,
 	SP_ATLAS_LINEAR,
 	SP_ATLAS_MIPMAP,
@@ -61,9 +59,7 @@ typedef enum {
 } spAtlasFilter;
 
 typedef enum {
-	SP_ATLAS_MIRROREDREPEAT,
-	SP_ATLAS_CLAMPTOEDGE,
-	SP_ATLAS_REPEAT
+	SP_ATLAS_MIRROREDREPEAT, SP_ATLAS_CLAMPTOEDGE, SP_ATLAS_REPEAT
 } spAtlasWrap;
 
 typedef struct spAtlasPage spAtlasPage;
@@ -85,7 +81,6 @@ void spAtlasPage_dispose (spAtlasPage* self);
 
 #ifdef SPINE_SHORT_NAMES
 typedef spAtlasFormat AtlasFormat;
-#define ATLAS_UNKNOWN_FORMAT SP_ATLAS_UNKNOWN_FORMAT
 #define ATLAS_ALPHA SP_ATLAS_ALPHA
 #define ATLAS_INTENSITY SP_ATLAS_INTENSITY
 #define ATLAS_LUMINANCE_ALPHA SP_ATLAS_LUMINANCE_ALPHA
@@ -94,7 +89,6 @@ typedef spAtlasFormat AtlasFormat;
 #define ATLAS_RGB888 SP_ATLAS_RGB888
 #define ATLAS_RGBA8888 SP_ATLAS_RGBA8888
 typedef spAtlasFilter AtlasFilter;
-#define ATLAS_UNKNOWN_FILTER SP_ATLAS_UNKNOWN_FILTER
 #define ATLAS_NEAREST SP_ATLAS_NEAREST
 #define ATLAS_LINEAR SP_ATLAS_LINEAR
 #define ATLAS_MIPMAP SP_ATLAS_MIPMAP

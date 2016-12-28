@@ -33,7 +33,6 @@
 #define SPINE_MESHATTACHMENT_H_
 
 #include <spine/Attachment.h>
-#include <spine/VertexAttachment.h>
 #include <spine/Atlas.h>
 #include <spine/Slot.h>
 
@@ -41,9 +40,21 @@
 extern "C" {
 #endif
 
-typedef struct spMeshAttachment spMeshAttachment;
-struct spMeshAttachment {
-	spVertexAttachment super;
+typedef struct spMeshAttachment {
+	spAttachment super;
+	const char* path;
+
+	int verticesCount;
+	float* vertices;
+	int hullLength;
+
+	float* regionUVs;
+	float* uvs;
+
+	int trianglesCount;
+	int* triangles;
+
+	float r, g, b, a;
 
 	void* rendererObject;
 	int regionOffsetX, regionOffsetY; /* Pixels stripped from the bottom left, unrotated. */
@@ -52,38 +63,21 @@ struct spMeshAttachment {
 	float regionU, regionV, regionU2, regionV2;
 	int/*bool*/regionRotate;
 
-	const char* path;
-
-	float* regionUVs;
-	float* uvs;
-
-	int trianglesCount;
-	unsigned short* triangles;
-
-	float r, g, b, a;
-
-	int hullLength;
-
-	spMeshAttachment* const parentMesh;
-	int/*bool*/inheritDeform;
-
 	/* Nonessential. */
 	int edgesCount;
 	int* edges;
 	float width, height;
-};
+} spMeshAttachment;
 
 spMeshAttachment* spMeshAttachment_create (const char* name);
 void spMeshAttachment_updateUVs (spMeshAttachment* self);
 void spMeshAttachment_computeWorldVertices (spMeshAttachment* self, spSlot* slot, float* worldVertices);
-void spMeshAttachment_setParentMesh (spMeshAttachment* self, spMeshAttachment* parentMesh);
 
 #ifdef SPINE_SHORT_NAMES
 typedef spMeshAttachment MeshAttachment;
 #define MeshAttachment_create(...) spMeshAttachment_create(__VA_ARGS__)
 #define MeshAttachment_updateUVs(...) spMeshAttachment_updateUVs(__VA_ARGS__)
 #define MeshAttachment_computeWorldVertices(...) spMeshAttachment_computeWorldVertices(__VA_ARGS__)
-#define MeshAttachment_setParentMesh(...) spMeshAttachment_setParentMesh(__VA_ARGS__)
 #endif
 
 #ifdef __cplusplus

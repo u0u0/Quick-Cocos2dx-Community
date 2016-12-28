@@ -24,7 +24,6 @@
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #include "AudioEngine-inl.h"
 
-#include <unistd.h>
 // for native asset manager
 #include <sys/types.h>
 #include <android/asset_manager.h>
@@ -41,9 +40,6 @@
 
 using namespace cocos2d;
 using namespace cocos2d::experimental;
-
-
-#define DELAY_TIME_TO_REMOVE 0.5f
 
 void PlayOverEvent(SLPlayItf caller, void* context, SLuint32 playEvent)
 {
@@ -68,8 +64,6 @@ AudioPlayer::AudioPlayer()
     , _duration(0.0f)
     , _playOver(false)
     , _loop(false)
-    , _assetFd(0)
-    , _delayTimeToRemove(-1.f)
 {
 
 }
@@ -84,18 +78,13 @@ AudioPlayer::~AudioPlayer()
         _fdPlayerVolume = nullptr;
         _fdPlayerSeek = nullptr;
     }
-    if(_assetFd > 0)
-    {
-      close(_assetFd);
-      _assetFd = 0;
-    }
 }
 
 bool AudioPlayer::init(SLEngineItf engineEngine, SLObjectItf outputMixObject,const std::string& fileFullPath, float volume, bool loop)
 {
     bool ret = false;
 
-    do
+    do 
     {
         SLDataSource audioSrc;
 
@@ -120,15 +109,15 @@ bool AudioPlayer::init(SLEngineItf engineEngine, SLObjectItf outputMixObject,con
 
             // open asset as file descriptor
             off_t start, length;
-            _assetFd = AAsset_openFileDescriptor(asset, &start, &length);
-            if (_assetFd <= 0){
+            int fd = AAsset_openFileDescriptor(asset, &start, &length);
+            if (fd <= 0){
                 AAsset_close(asset);
                 break;
             }
             AAsset_close(asset);
 
             // configure audio source
-            loc_fd = {SL_DATALOCATOR_ANDROIDFD, _assetFd, start, length};
+            loc_fd = {SL_DATALOCATOR_ANDROIDFD, fd, start, length};
 
             audioSrc.pLocator = &loc_fd;
         }
@@ -225,7 +214,7 @@ bool AudioEngineImpl::init()
         // create output mix
         const SLInterfaceID outputMixIIDs[] = {};
         const SLboolean outputMixReqs[] = {};
-        result = (*_engineEngine)->CreateOutputMix(_engineEngine, &_outputMixObject, 0, outputMixIIDs, outputMixReqs);
+        result = (*_engineEngine)->CreateOutputMix(_engineEngine, &_outputMixObject, 0, outputMixIIDs, outputMixReqs);           
         if(SL_RESULT_SUCCESS != result){ ERRORLOG("create output mix fail"); break; }
 
         // realize the output mix
@@ -242,7 +231,7 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
 {
     auto audioId = AudioEngine::INVAILD_AUDIO_ID;
 
-    do
+    do 
     {
         if (_engineEngine == nullptr)
             break;
@@ -262,10 +251,10 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
         (*(player._fdPlayerPlay))->SetCallbackEventsMask(player._fdPlayerPlay, SL_PLAYEVENT_HEADATEND);
 
         AudioEngine::_audioIDInfoMap[audioId].state = AudioEngine::AudioState::PLAYING;
-
+        
         if (_lazyInitLoop) {
             _lazyInitLoop = false;
-
+            
             auto scheduler = Director::getInstance()->getScheduler();
             scheduler->schedule(schedule_selector(AudioEngineImpl::update), this, 0.03f, false);
         }
@@ -276,36 +265,23 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
 
 void AudioEngineImpl::update(float dt)
 {
-    AudioPlayer* player = nullptr;
-
     auto itend = _audioPlayers.end();
-    for (auto iter = _audioPlayers.begin(); iter != itend; )
+    for (auto iter = _audioPlayers.begin(); iter != itend; ++iter)
     {
-        player = &(iter->second);
-        if (player->_playOver)
+        if(iter->second._playOver)
         {
-            if (player->_finishCallback)
-                player->_finishCallback(player->_audioID, *AudioEngine::_audioIDInfoMap[player->_audioID].filePath);
+            if (iter->second._finishCallback)
+                iter->second._finishCallback(iter->second._audioID, *AudioEngine::_audioIDInfoMap[iter->second._audioID].filePath); 
 
-            AudioEngine::remove(player->_audioID);
-            iter = _audioPlayers.erase(iter);
-            continue;
+            AudioEngine::remove(iter->second._audioID);
+            _audioPlayers.erase(iter);
+            break;
         }
-        else if (player->_delayTimeToRemove > 0.f)
-        {
-            player->_delayTimeToRemove -= dt;
-            if (player->_delayTimeToRemove < 0.f)
-            {
-              iter = _audioPlayers.erase(iter);
-              continue;
-            }
-        }
-        ++iter;
     }
-
+    
     if(_audioPlayers.empty()){
         _lazyInitLoop = true;
-
+        
         auto scheduler = Director::getInstance()->getScheduler();
         scheduler->unschedule(schedule_selector(AudioEngineImpl::update), this);
     }
@@ -361,9 +337,7 @@ void AudioEngineImpl::stop(int audioID)
         log("%s error:%u",__func__, result);
     }
 
-    //If destroy openSL object immediately,it may cause dead lock.
-    player._delayTimeToRemove = DELAY_TIME_TO_REMOVE;
-    //_audioPlayers.erase(audioID);
+    _audioPlayers.erase(audioID);
 }
 
 void AudioEngineImpl::stopAll()
@@ -371,13 +345,9 @@ void AudioEngineImpl::stopAll()
     auto itEnd = _audioPlayers.end();
     for (auto it = _audioPlayers.begin(); it != itEnd; ++it)
     {
-        (*it->second._fdPlayerPlay)->SetPlayState(it->second._fdPlayerPlay, SL_PLAYSTATE_STOPPED);
-        if (it->second._delayTimeToRemove < 0.f)
-        {
-          //If destroy openSL object immediately,it may cause dead lock.
-          it->second._delayTimeToRemove = DELAY_TIME_TO_REMOVE;
-        }
+        auto result = (*it->second._fdPlayerPlay)->SetPlayState(it->second._fdPlayerPlay, SL_PLAYSTATE_STOPPED);
     }
+    _audioPlayers.clear();
 }
 
 float AudioEngineImpl::getDuration(int audioID)
@@ -413,7 +383,7 @@ bool AudioEngineImpl::setCurrentTime(int audioID, float time)
     auto& player = _audioPlayers[audioID];
     SLmillisecond pos = 1000 * time;
     auto result = (*player._fdPlayerSeek)->SetPosition(player._fdPlayerSeek, pos, SL_SEEKMODE_ACCURATE);
-    if(SL_RESULT_SUCCESS != result){
+    if(SL_RESULT_SUCCESS != result){ 
         return false;
     }
     return true;

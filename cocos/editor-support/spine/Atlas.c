@@ -77,18 +77,23 @@ static void trim (Str* str) {
 }
 
 /* Tokenize string without modification. Returns 0 on failure. */
-static int readLine (const char** begin, const char* end, Str* str) {
-	if (*begin == end) return 0;
-	str->begin = *begin;
+static int readLine (const char* begin, const char* end, Str* str) {
+	static const char* nextStart;
+	if (begin) {
+		nextStart = begin;
+		return 1;
+	}
+	if (nextStart == end) return 0;
+	str->begin = nextStart;
 
 	/* Find next delimiter. */
-	while (*begin != end && **begin != '\n')
-		(*begin)++;
+	while (nextStart != end && *nextStart != '\n')
+		nextStart++;
 
-	str->end = *begin;
+	str->end = nextStart;
 	trim(str);
 
-	if (*begin != end) (*begin)++;
+	if (nextStart != end) nextStart++;
 	return 1;
 }
 
@@ -106,18 +111,18 @@ static int beginPast (Str* str, char c) {
 }
 
 /* Returns 0 on failure. */
-static int readValue (const char** begin, const char* end, Str* str) {
-	readLine(begin, end, str);
+static int readValue (const char* end, Str* str) {
+	readLine(0, end, str);
 	if (!beginPast(str, ':')) return 0;
 	trim(str);
 	return 1;
 }
 
 /* Returns the number of tuple values read (1, 2, 4, or 0 for failure). */
-static int readTuple (const char** begin, const char* end, Str tuple[]) {
+static int readTuple (const char* end, Str tuple[]) {
 	int i;
 	Str str = {NULL, NULL};
-	readLine(begin, end, &str);
+	readLine(0, end, &str);
 	if (!beginPast(&str, ':')) return 0;
 
 	for (i = 0; i < 3; ++i) {
@@ -145,7 +150,7 @@ static int indexOf (const char** array, int count, Str* str) {
 	int i;
 	for (i = count - 1; i >= 0; i--)
 		if (strncmp(array[i], str->begin, length) == 0) return i;
-	return 0;
+	return -1;
 }
 
 static int equals (Str* str, const char* other) {
@@ -161,8 +166,8 @@ static spAtlas* abortAtlas (spAtlas* self) {
 	return 0;
 }
 
-static const char* formatNames[] = {"", "Alpha", "Intensity", "LuminanceAlpha", "RGB565", "RGBA4444", "RGB888", "RGBA8888"};
-static const char* textureFilterNames[] = {"", "Nearest", "Linear", "MipMap", "MipMapNearestNearest", "MipMapLinearNearest",
+static const char* formatNames[] = {"Alpha", "Intensity", "LuminanceAlpha", "RGB565", "RGBA4444", "RGB888", "RGBA8888"};
+static const char* textureFilterNames[] = {"Nearest", "Linear", "MipMap", "MipMapNearestNearest", "MipMapLinearNearest",
 		"MipMapNearestLinear", "MipMapLinearLinear"};
 
 spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* rendererObject) {
@@ -182,7 +187,8 @@ spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* r
 	self = NEW(spAtlas);
 	self->rendererObject = rendererObject;
 
-	while (readLine(&begin, end, &str)) {
+	readLine(begin, 0, 0);
+	while (readLine(0, end, &str)) {
 		if (str.end - str.begin == 0) {
 			page = 0;
 		} else if (!page) {
@@ -200,34 +206,24 @@ spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* r
 				self->pages = page;
 			lastPage = page;
 
-			switch (readTuple(&begin, end, tuple)) {
+			switch (readTuple(end, tuple)) {
 			case 0:
 				return abortAtlas(self);
 			case 2:  /* size is only optional for an atlas packed with an old TexturePacker. */
 				page->width = toInt(tuple);
 				page->height = toInt(tuple + 1);
-				if (!readTuple(&begin, end, tuple)) return abortAtlas(self);
+				if (!readTuple(end, tuple)) return abortAtlas(self);
 			}
-			page->format = (spAtlasFormat)indexOf(formatNames, 8, tuple);
+			page->format = (spAtlasFormat)indexOf(formatNames, 7, tuple);
 
-			if (!readTuple(&begin, end, tuple)) return abortAtlas(self);
-			page->minFilter = (spAtlasFilter)indexOf(textureFilterNames, 8, tuple);
-			page->magFilter = (spAtlasFilter)indexOf(textureFilterNames, 8, tuple + 1);
+			if (!readTuple(end, tuple)) return abortAtlas(self);
+			page->minFilter = (spAtlasFilter)indexOf(textureFilterNames, 7, tuple);
+			page->magFilter = (spAtlasFilter)indexOf(textureFilterNames, 7, tuple + 1);
 
-			if (!readValue(&begin, end, &str)) return abortAtlas(self);
-
-			page->uWrap = SP_ATLAS_CLAMPTOEDGE;
-			page->vWrap = SP_ATLAS_CLAMPTOEDGE;
+			if (!readValue(end, &str)) return abortAtlas(self);
 			if (!equals(&str, "none")) {
-				if (str.end - str.begin == 1) {
-					if (*str.begin == 'x')
-						page->uWrap = SP_ATLAS_REPEAT;
-					else if (*str.begin == 'y')
-						page->vWrap = SP_ATLAS_REPEAT;
-				} else if (equals(&str, "xy")) {
-					page->uWrap = SP_ATLAS_REPEAT;
-					page->vWrap = SP_ATLAS_REPEAT;
-				}
+				page->uWrap = *str.begin == 'x' ? SP_ATLAS_REPEAT : (*str.begin == 'y' ? SP_ATLAS_CLAMPTOEDGE : SP_ATLAS_REPEAT);
+				page->vWrap = *str.begin == 'x' ? SP_ATLAS_CLAMPTOEDGE : (*str.begin == 'y' ? SP_ATLAS_REPEAT : SP_ATLAS_REPEAT);
 			}
 
 			_spAtlasPage_createTexture(page, path);
@@ -243,14 +239,14 @@ spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* r
 			region->page = page;
 			region->name = mallocString(&str);
 
-			if (!readValue(&begin, end, &str)) return abortAtlas(self);
+			if (!readValue(end, &str)) return abortAtlas(self);
 			region->rotate = equals(&str, "true");
 
-			if (readTuple(&begin, end, tuple) != 2) return abortAtlas(self);
+			if (readTuple(end, tuple) != 2) return abortAtlas(self);
 			region->x = toInt(tuple);
 			region->y = toInt(tuple + 1);
 
-			if (readTuple(&begin, end, tuple) != 2) return abortAtlas(self);
+			if (readTuple(end, tuple) != 2) return abortAtlas(self);
 			region->width = toInt(tuple);
 			region->height = toInt(tuple + 1);
 
@@ -264,7 +260,7 @@ spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* r
 				region->v2 = (region->y + region->height) / (float)page->height;
 			}
 
-			if (!(count = readTuple(&begin, end, tuple))) return abortAtlas(self);
+			if (!(count = readTuple(end, tuple))) return abortAtlas(self);
 			if (count == 4) { /* split is optional */
 				region->splits = MALLOC(int, 4);
 				region->splits[0] = toInt(tuple);
@@ -272,7 +268,7 @@ spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* r
 				region->splits[2] = toInt(tuple + 2);
 				region->splits[3] = toInt(tuple + 3);
 
-				if (!(count = readTuple(&begin, end, tuple))) return abortAtlas(self);
+				if (!(count = readTuple(end, tuple))) return abortAtlas(self);
 				if (count == 4) { /* pad is optional, but only present with splits */
 					region->pads = MALLOC(int, 4);
 					region->pads[0] = toInt(tuple);
@@ -280,18 +276,18 @@ spAtlas* spAtlas_create (const char* begin, int length, const char* dir, void* r
 					region->pads[2] = toInt(tuple + 2);
 					region->pads[3] = toInt(tuple + 3);
 
-					if (!readTuple(&begin, end, tuple)) return abortAtlas(self);
+					if (!readTuple(end, tuple)) return abortAtlas(self);
 				}
 			}
 
 			region->originalWidth = toInt(tuple);
 			region->originalHeight = toInt(tuple + 1);
 
-			readTuple(&begin, end, tuple);
+			readTuple(end, tuple);
 			region->offsetX = toInt(tuple);
 			region->offsetY = toInt(tuple + 1);
 
-			if (!readValue(&begin, end, &str)) return abortAtlas(self);
+			if (!readValue(end, &str)) return abortAtlas(self);
 			region->index = toInt(&str);
 		}
 	}

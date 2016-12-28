@@ -131,7 +131,7 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
     ++_asyncRefCount;
 
     // generate async struct
-    AsyncStruct *data = new (std::nothrow) AsyncStruct(fullpath, callback, Texture2D::getDefaultAlphaPixelFormat());
+    AsyncStruct *data = new (std::nothrow) AsyncStruct(fullpath, callback);
 
     // add async struct into queue
     _asyncStructQueueMutex.lock();
@@ -274,7 +274,7 @@ void TextureCache::addImageAsyncCallBack(float dt)
             // generate texture in render thread
             texture = new (std::nothrow) Texture2D();
 
-            texture->initWithImage(image, asyncStruct->pixelFormat);
+            texture->initWithImage(image);
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA
             // cache the texture file name
@@ -733,7 +733,10 @@ void VolatileTextureMgr::reloadAllTextures()
                 
                 if (image && image->initWithImageData(data.getBytes(), data.getSize()))
                 {
-                    vt->_texture->initWithImage(image, vt->_pixelFormat);
+                    Texture2D::PixelFormat oldPixelFormat = Texture2D::getDefaultAlphaPixelFormat();
+                    Texture2D::setDefaultAlphaPixelFormat(vt->_pixelFormat);
+                    vt->_texture->initWithImage(image);
+                    Texture2D::setDefaultAlphaPixelFormat(oldPixelFormat);
                 }
                 
                 CC_SAFE_RELEASE(image);
