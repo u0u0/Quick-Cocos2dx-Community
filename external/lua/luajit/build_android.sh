@@ -14,7 +14,7 @@ NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm"
 DESTDIR=$DIR/prebuilt/android/armeabi
 rm "$DESTDIR"/*.a
 make clean
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
+make CC=gcc HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
 
 if [ -f $SRCDIR/src/libluajit.a ]; then
     mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
@@ -27,7 +27,7 @@ DESTDIR=$DIR/prebuilt/android/armeabi-v7a
 NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm"
 rm "$DESTDIR"/*.a
 make clean
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH"
+make CC=gcc HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH"
 
 if [ -f $SRCDIR/src/libluajit.a ]; then
     mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
@@ -41,7 +41,7 @@ NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/i686-linux-android-
 NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-x86"
 rm "$DESTDIR"/*.a
 make clean
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
+make CC=gcc HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
 
 if [ -f $SRCDIR/src/libluajit.a ]; then
     mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a

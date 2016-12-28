@@ -58,14 +58,14 @@ typedef struct _TrackEntryListeners {
 
 static _TrackEntryListeners* getListeners (spTrackEntry* entry) {
 	if (!entry->rendererObject) {
-		entry->rendererObject = NEW(spine::_TrackEntryListeners);
+		entry->rendererObject = new spine::_TrackEntryListeners();
 		entry->listener = trackEntryCallback;
 	}
 	return (_TrackEntryListeners*)entry->rendererObject;
 }
 
 void disposeTrackEntry (spTrackEntry* entry) {
-	if (entry->rendererObject) FREE(entry->rendererObject);
+	if (entry->rendererObject) delete (spine::_TrackEntryListeners*)entry->rendererObject;
 	_spTrackEntry_dispose(entry);
 }
 
@@ -164,6 +164,10 @@ spTrackEntry* SkeletonAnimation::addAnimation (int trackIndex, const std::string
 		return 0;
 	}
 	return spAnimationState_addAnimation(_state, trackIndex, animation, loop, delay);
+}
+    
+spAnimation* SkeletonAnimation::findAnimation(const std::string& name) const {
+    return spSkeletonData_findAnimation(_skeleton->data, name.c_str());
 }
 
 spTrackEntry* SkeletonAnimation::getCurrent (int trackIndex) { 

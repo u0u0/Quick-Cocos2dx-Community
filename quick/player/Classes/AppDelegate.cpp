@@ -185,7 +185,7 @@ void StartupCall::trackEvent(const char *eventName)
                                                       "http://www.google-analytics.com/collect",
                                                       kCCHTTPRequestMethodPOST);
     request->addPOSTValue("v", "1");
-    request->addPOSTValue("tid", "UA-68691280-1");
+    request->addPOSTValue("tid", "UA-84326395-1");
     request->addPOSTValue("cid", Native::getOpenUDID().c_str());
     request->addPOSTValue("t", "event");
     

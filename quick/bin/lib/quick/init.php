@@ -5,8 +5,13 @@ define('BIN_DIR', rtrim(dirname(dirname(__DIR__)), '/\\'));
 
 if (DS == '/')
 {
-    define('LUAJIT_BIN', BIN_DIR . '/mac/luajit');
-    define('LUAJIT64_BIN', BIN_DIR . '/mac/luajit64');
+		if(php_uname('s') == 'Linux'){
+			define('LUAJIT_BIN', BIN_DIR . '/linux/luajit');
+			define('LUAJIT64_BIN', BIN_DIR . '/linux/luajit64');
+		}else{
+			define('LUAJIT_BIN', BIN_DIR . '/mac/luajit');
+			define('LUAJIT64_BIN', BIN_DIR . '/mac/luajit64');
+		}
 }
 else
 {

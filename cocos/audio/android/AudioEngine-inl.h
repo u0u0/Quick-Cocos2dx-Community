@@ -59,6 +59,8 @@ private:
 
     float _duration;
     int _audioID;
+    int _assetFd;
+    float _delayTimeToRemove;
 
     std::function<void (int, const std::string &)> _finishCallback;
 
@@ -86,7 +88,7 @@ public:
 
     void uncache(const std::string& filePath){}
     void uncacheAll(){}
-    
+
     void update(float dt);
 private:
 
@@ -101,7 +103,7 @@ private:
     std::unordered_map<int, AudioPlayer>  _audioPlayers;
 
     int currentAudioID;
-    
+
     bool _lazyInitLoop;
 };
 
