@@ -29,10 +29,13 @@ static int lua_cocos2dx_SkeletonData_create(lua_State* L)
 #endif
         const char* skeletonDataFile = tolua_tostring(L, 2, "");
         const char* atlasFile = tolua_tostring(L, 3, "");;
-        
+
         spAtlas *atlas = spAtlas_createFromFile(atlasFile, NULL);
         CCAssert(atlas, "Error reading atlas file.");
-        spSkeletonJson *json = spSkeletonJson_create(atlas);
+#define SUPER(VALUE) (&VALUE->super)
+        spAttachmentLoader *attachmentLoader = SUPER(Cocos2dAttachmentLoader_create(atlas));
+#undef SUPER
+        spSkeletonJson *json = spSkeletonJson_createWithLoader(attachmentLoader);
         spSkeletonData *data = spSkeletonJson_readSkeletonDataFile(json, skeletonDataFile);
         CCAssert(data, json->error ? json->error : "Error reading skeleton data.");
         spSkeletonJson_dispose(json);
@@ -40,6 +43,7 @@ static int lua_cocos2dx_SkeletonData_create(lua_State* L)
         lua_spSkeletonData *luaSpData = new lua_spSkeletonData;
         luaSpData->atlas = atlas;
         luaSpData->data = data;
+        luaSpData->attachmentLoader = attachmentLoader;
         
         tolua_pushusertype(L,(void*)luaSpData,"sp.SkeletonData");
         tolua_register_gc(L,lua_gettop(L));
@@ -59,6 +63,7 @@ int lua_cocos2dx_SkeletonData_finalize(lua_State* L)
     lua_spSkeletonData *luaSpData = static_cast<lua_spSkeletonData *>(tolua_tousertype(L,1,0));
     spSkeletonData_dispose(luaSpData->data);
     spAtlas_dispose(luaSpData->atlas);
+    spAttachmentLoader_dispose(luaSpData->attachmentLoader);
     delete luaSpData;
     CCLOG("sp.SkeletonData freed");
     return 0;

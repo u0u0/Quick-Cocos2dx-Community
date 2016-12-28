@@ -60,7 +60,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                 selector:@selector(onTextDidChanged:)
-                                                    name:NSControlTextDidEndEditingNotification
+                                                    name:NSControlTextDidChangeNotification
                                                   object:nil];
     }
     
@@ -69,9 +69,6 @@
 
 - (void)onTextDidChanged:(NSNotification *) notification
 {
-    // hide first
-    [self.textField setHidden:YES];
-    
     player::PlayerEditBoxServiceMac *macEditBox = static_cast<player::PlayerEditBoxServiceMac *>(self.editBox);
     auto luaStack = cocos2d::LuaEngine::getInstance()->getLuaStack();
     

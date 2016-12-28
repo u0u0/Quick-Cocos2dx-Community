@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A54F1641BC17DE60018E100 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A54F1631BC17DE60018E100 /* AppController.mm */; };
+		0AC1AE931DB8B629006D4001 /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1AE911DB8B629006D4001 /* pb.c */; };
+		0AC1AE941DB8B629006D4001 /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1AE911DB8B629006D4001 /* pb.c */; };
 		15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4251834BDA200142BE0 /* libcocos2d iOS.a */; };
 		15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CD2198F220600DC375D /* libluacocos2d iOS.a */; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
@@ -461,6 +463,8 @@
 		9F91067019F5614800AD5CAB /* lua_cjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_cjson.h; path = "quick/lib/quick-src/lua_extensions/cjson/lua_cjson.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91067119F5614800AD5CAB /* strbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = strbuf.c; path = "quick/lib/quick-src/lua_extensions/cjson/strbuf.c"; sourceTree = QUICK_V3_ROOT; };
 		9F91067219F5614800AD5CAB /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = strbuf.h; path = "quick/lib/quick-src/lua_extensions/cjson/strbuf.h"; sourceTree = QUICK_V3_ROOT; };
+		0AC1AE911DB8B629006D4001 /* pb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pb.c; path = "quick/lib/quick-src/lua_extensions/protobuf/pb.c"; sourceTree = QUICK_V3_ROOT; };
+		0AC1AE921DB8B629006D4001 /* pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pb.h; path = "quick/lib/quick-src/lua_extensions/protobuf/pb.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91067819F5614800AD5CAB /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfs.c; path = "quick/lib/quick-src/lua_extensions/filesystem/lfs.c"; sourceTree = QUICK_V3_ROOT; };
 		9F91067919F5614800AD5CAB /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lfs.h; path = "quick/lib/quick-src/lua_extensions/filesystem/lfs.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91067B19F5614800AD5CAB /* lpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpack.c; path = "quick/lib/quick-src/lua_extensions/lpack/lpack.c"; sourceTree = QUICK_V3_ROOT; };
@@ -970,6 +974,7 @@
 		9F91066A19F5614800AD5CAB /* lua_extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0A2F057D1DB8B29400276572 /* protobuf */,
 				9F91066C19F5614800AD5CAB /* cjson */,
 				9F91067719F5614800AD5CAB /* filesystem */,
 				9F91067A19F5614800AD5CAB /* lpack */,
@@ -979,6 +984,15 @@
 				9F91068419F5614800AD5CAB /* zlib */,
 			);
 			path = lua_extensions;
+			sourceTree = "<group>";
+		};
+		0A2F057D1DB8B29400276572 /* protobuf */ = {
+			isa = PBXGroup;
+			children = (
+				0AC1AE911DB8B629006D4001 /* pb.c */,
+				0AC1AE921DB8B629006D4001 /* pb.h */,
+			);
+			path = protobuf;
 			sourceTree = "<group>";
 		};
 		9F91066C19F5614800AD5CAB /* cjson */ = {
@@ -1300,6 +1314,7 @@
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				49C656611A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
 				9F91079F19F5704400AD5CAB /* ConsoleWindowController.m in Sources */,
+				0AC1AE941DB8B629006D4001 /* pb.c in Sources */,
 				9F91076F19F5614900AD5CAB /* lua_cjson.c in Sources */,
 				9F91070F19F5614900AD5CAB /* FilterShaders.cpp in Sources */,
 				C033B51D191B337200D06937 /* VisibleRect.cpp in Sources */,
@@ -1366,6 +1381,7 @@
 				9F91074819F5614900AD5CAB /* OpenUDIDIOS.m in Sources */,
 				9F9106D619F5614900AD5CAB /* CCSaturationFilter.cpp in Sources */,
 				9F91073819F5614900AD5CAB /* CCStore.mm in Sources */,
+				0AC1AE931DB8B629006D4001 /* pb.c in Sources */,
 				9F91073619F5614900AD5CAB /* CCNativeIOS.mm in Sources */,
 				9F91074219F5614900AD5CAB /* SBJsonBase.m in Sources */,
 				9F9106E019F5614900AD5CAB /* ccFilterShaders.cpp in Sources */,
@@ -1494,7 +1510,7 @@
 					10000,
 				);
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\" \"$(QUICK_V3_ROOT)/external/protobuf-lite/src\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"";
 			};
 			name = Debug;
 		};
@@ -1522,7 +1538,7 @@
 					10000,
 				);
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\" \"$(QUICK_V3_ROOT)/external/protobuf-lite/src\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"";
 			};
 			name = Release;
 		};
@@ -1572,7 +1588,6 @@
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"",
-					"\"$(QUICK_V3_ROOT)/external/protobuf-lite/src\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1620,7 +1635,6 @@
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"",
-					"\"$(QUICK_V3_ROOT)/external/protobuf-lite/src\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1667,7 +1681,6 @@
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"",
-					"\"$(QUICK_V3_ROOT)/external/protobuf-lite/src\"",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -1716,7 +1729,6 @@
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"",
-					"\"$(QUICK_V3_ROOT)/external/protobuf-lite/src\"",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

@@ -18,6 +18,7 @@ extern "C" {
 typedef struct{
     spAtlas *atlas;
     spSkeletonData *data;
+    spAttachmentLoader *attachmentLoader;
 }lua_spSkeletonData;
 
 TOLUA_API int register_spSkeletonData_manual(lua_State* L);

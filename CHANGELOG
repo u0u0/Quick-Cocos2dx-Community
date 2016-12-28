@@ -1,3 +1,42 @@
+Quick-Cocos2dx-Community v3.6.4 release
+
+[新增]	Android Studio 打包支持。
+[新增]	protobuffer 2.6.1 支持。
+
+[移除]	去掉ADT编译支持，去掉Android的anysdk支持。
+
+[更新]	OpenSSL 1.0.2g for android 重新进行了编译。
+[更新]	lib webp update to 0.5.1。
+
+[修正]	修正 macOS 10.12.1 下 player 不能输入文字。
+[修正]	Spine runtime 修正同时渲染多个cachedata的bug。
+[修正]	macOS Sierra php脚本运行错误修正。
+[修正]	win32 release build error fix。
+
+Quick-Cocos2dx-Community v3.6.3 release
+
+[更新]	Spine runtime更新以支持Spine 3.4编辑器导出的新Json格式。
+[更新]	OpenSSL更新到1.0.2g，以满足 google play 审核。
+[更新]	更新网络库，以支持ipv6 （iOS App Store 审核需求）
+[更新]	SocketTCP 加入ipv6网络检查（服务器地址必需域名方式）。
+
+[新增]	Spine 新增绑定接口 http://www.tairan.com/archives/11277/
+
+[修正]	Luajit log buffer size恢复到512，解决log信息不全。
+[修正]	UISilder bugfix：在onSliderPressed中调用SilderValue不能正确更新滑块位置。
+[修正]	assert-manager json解析错误与curl下载错误修正。
+[修正]	修正Cocos2dConstants.lua中cc.LANGUAGE_xxx 系列常量错误
+
+Quick-Cocos2dx-Community v3.6.2 release
+
+[新增]	Spine 新增加lua绑定接口: http://www.tairan.com/archives/11166/
+[新增]	新增加 Quick 热更新 demo。
+[新增]	network.createHTTPRequest 新增put和delete方法支持。
+
+[更新]	更新LuaJIT 2.1.0-beta2
+[更新]	cc/uiloader/CCSUILoader2 改进
+[更新]	Android NDK 支持更新到 r10e。
+
 Quick-Cocos2dx-Community v3.6.1 release
 
 [更新]	Android 库全部用NDK r10d编译并更新，3.6.1 推荐使用 NDK r10d 进行项目编译。

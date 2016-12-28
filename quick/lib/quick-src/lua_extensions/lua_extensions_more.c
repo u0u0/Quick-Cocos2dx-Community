@@ -20,6 +20,9 @@ extern "C" {
 // lsqlite3
 #include "lsqlite3/lsqlite3.h"
 
+// protoc-gen-lua
+#include "protobuf/pb.h"
+
 static luaL_Reg luax_exts[] = {
     {"cjson", luaopen_cjson_safe},
     {"zlib", luaopen_zlib},
@@ -42,6 +45,10 @@ void luaopen_lua_extensions_more(lua_State *L)
         lua_pushcfunction(L, lib->func);
         lua_setfield(L, -2, lib->name);
     }
+	
+	//register protobuf
+	luaopen_pb(L);
+	
     lua_pop(L, 2);
 }
 
