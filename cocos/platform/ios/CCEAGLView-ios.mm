@@ -863,7 +863,7 @@ UIInterfaceOrientation getFixedOrientation(UIInterfaceOrientation statusBarOrien
     switch (getFixedOrientation([[UIApplication sharedApplication] statusBarOrientation]))
     {
         case UIInterfaceOrientationPortrait:
-            self.frame = CGRectMake(originalRect_.origin.x, originalRect_.origin.y - dis, originalRect_.size.width, originalRect_.size.height);
+            self.frame = CGRectMake(originalRect_.origin.x, originalRect_.origin.y - dis, size_.width / self.contentScaleFactor, size_.height / self.contentScaleFactor);
             break;
             
         case UIInterfaceOrientationPortraitUpsideDown:

@@ -1077,7 +1077,7 @@ shape = display.newLine(point表, [参数])
 ~~~ lua
 
 -- 创建一个线宽为2，颜色为红色，从(10,10)到(100,100)的线段
-local shape3 = display.newLine({(10, 10), (100,100)},
+local shape3 = display.newLine({{10, 10}, {100,100}},
     {borderColor = cc.c4f(1.0, 0.0, 0.0, 1.0),
     borderWidth = 1})
 

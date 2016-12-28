@@ -589,21 +589,12 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findBone(lua_State* tolua_S)
         lua_pushstring(tolua_S, "worldY");
         lua_pushnumber(tolua_S, bone->worldY);
         lua_rawset(tolua_S, -3);    /* bone.worldY */
-        lua_pushstring(tolua_S, "worldRotation");
-        lua_pushnumber(tolua_S, bone->worldRotation);
-        lua_rawset(tolua_S, -3);    /* bone.worldRotation */
-        lua_pushstring(tolua_S, "worldScaleX");
-        lua_pushnumber(tolua_S, bone->worldScaleX);
+        lua_pushstring(tolua_S, "worldSignX");
+        lua_pushnumber(tolua_S, bone->worldSignX);
         lua_rawset(tolua_S, -3);    /* bone.worldScaleX */
-        lua_pushstring(tolua_S, "worldScaleY");
-        lua_pushnumber(tolua_S, bone->worldScaleY);
+        lua_pushstring(tolua_S, "worldSignY");
+        lua_pushnumber(tolua_S, bone->worldSignY);
         lua_rawset(tolua_S, -3);    /* bone.worldScaleY */
-        lua_pushstring(tolua_S, "worldFlipX");
-        lua_pushboolean(tolua_S, bone->worldFlipX);
-        lua_rawset(tolua_S, -3);    /* bone.worldFlipX */
-        lua_pushstring(tolua_S, "worldFlipY");
-        lua_pushboolean(tolua_S, bone->worldFlipY);
-        lua_rawset(tolua_S, -3);    /* bone.worldFlipY */
         // === end of table ===
         return 1;
     }
@@ -659,16 +650,58 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findSlot(lua_State* tolua_S)
             return 0;
         }
 #endif
-        
-        spRegionAttachment *attachment = (spRegionAttachment *)slot->attachment;
+
+        float scaleX = cobj->getScaleX(), scaleY = cobj->getScaleY();
+        float width = 0;
+        float height = 0;
+        float* _worldVertices = new float[1000]; // Max number of vertices per mesh.
+        int verticesCount;
+        if (slot->attachment->type == SP_ATTACHMENT_REGION) {
+            spRegionAttachment* attachment = (spRegionAttachment*)slot->attachment;
+            spRegionAttachment_computeWorldVertices(attachment, slot->bone, _worldVertices);
+            verticesCount = 8;
+            width = attachment->width;
+            height = attachment->height;
+        } else if (slot->attachment->type == SP_ATTACHMENT_MESH) {
+            spMeshAttachment* mesh = (spMeshAttachment*)slot->attachment;
+            spMeshAttachment_computeWorldVertices(mesh, slot, _worldVertices);
+            verticesCount = mesh->super.worldVerticesLength;
+            width = mesh->width;
+            height = mesh->height;
+        } else {
+            delete[] _worldVertices;
+			luaL_error(tolua_S, "findSlot unsupport attachment type \n");
+			return 0;
+        }
+
         // return a table
         lua_newtable(tolua_S);
         lua_pushstring(tolua_S, "attachmentWidth");
-        lua_pushnumber(tolua_S, attachment ? attachment->width : 0);
+        lua_pushnumber(tolua_S, width);
         lua_rawset(tolua_S, -3);    /* slot.attachmentWidth */
         lua_pushstring(tolua_S, "attachmentHeight");
-        lua_pushnumber(tolua_S, attachment ? attachment->height : 0);
+        lua_pushnumber(tolua_S, height);
         lua_rawset(tolua_S, -3);    /* slot.attachmentHeight */
+        
+        // push points of slot
+        lua_pushstring(tolua_S, "points");
+        lua_newtable(tolua_S);
+        for (int index = 0; index  < verticesCount; index += 2) {
+            lua_newtable(tolua_S);
+            
+            lua_pushstring(tolua_S, "x");
+            lua_pushnumber(tolua_S, _worldVertices[index] * scaleX);
+            lua_rawset(tolua_S, -3);
+            
+            lua_pushstring(tolua_S, "y");
+            lua_pushnumber(tolua_S, _worldVertices[index + 1] * scaleY);
+            lua_rawset(tolua_S, -3);
+            
+            lua_rawseti(tolua_S, -2, index / 2 + 1);
+        }
+        lua_rawset(tolua_S, -3);
+
+        delete[] _worldVertices;
         return 1;
     }
     luaL_error(tolua_S, "findSlot has wrong number of arguments: %d, was expecting %d \n", argc, 1);
@@ -682,78 +715,107 @@ tolua_lerror:
     return 0;
 }
 
-static int lua_cocos2dx_spine_SkeletonAnimation_setClone(lua_State* tolua_S)
+static int lua_cocos2dx_spine_SkeletonAnimation_setFlippedX(lua_State* tolua_S)
 {
-    int argc = 0;
-    spine::SkeletonAnimation* cobj = nullptr;
+    spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
     
 #if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertype(tolua_S,1,"sp.SkeletonAnimation",0,&tolua_err)) goto tolua_lerror;
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_setFlippedX'", nullptr);
+        return 0;
+    }
 #endif
     
-    cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
-    
-    argc = lua_gettop(tolua_S)-1;
+    int argc = lua_gettop(tolua_S)-1;
     if (argc == 1)
     {
-        spine::SkeletonAnimation *cloneObj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,2,0);
-        
-        if(!cloneObj) {
-            tolua_error(tolua_S, "sp.SkeletonAnimation:setClone arg 1 must sp.SkeletonAnimation", nullptr);
-            return 0;
-        }
-        
-        cobj->setClone(cloneObj);
-    } else {
-        cobj->setClone(NULL);
+        int arg0 = lua_toboolean(tolua_S, 2);
+        cobj->setFlippedX(arg0);
+        return 0;
     }
-    lua_settop(tolua_S, 1);
-    return 1;
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_setClone'.",&tolua_err);
-#endif
-    
+    luaL_error(tolua_S, "setFlippedX has wrong number of arguments: %d, was expecting %d \n", argc, 1);
     return 0;
 }
 
-static int lua_cocos2dx_spine_SkeletonAnimation_setFeedback(lua_State* tolua_S)
+static int lua_cocos2dx_spine_SkeletonAnimation_setFlippedY(lua_State* tolua_S)
 {
-    int argc = 0;
-    spine::SkeletonAnimation* cobj = nullptr;
+    spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
     
 #if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertype(tolua_S,1,"sp.SkeletonAnimation",0,&tolua_err)) goto tolua_lerror;
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_setFlippedY'", nullptr);
+        return 0;
+    }
 #endif
     
-    cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
-    
-    argc = lua_gettop(tolua_S)-1;
+    int argc = lua_gettop(tolua_S)-1;
     if (argc == 1)
     {
-        spine::SkeletonAnimation *cloneObj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,2,0);
-        
-        if(!cloneObj) {
-            tolua_error(tolua_S, "sp.SkeletonAnimation:setFeedback arg 1 must sp.SkeletonAnimation", nullptr);
-            return 0;
-        }
-        
-        cobj->setFeedback(cloneObj);
-    } else {
-        cobj->setFeedback(NULL);
+        int arg0 = lua_toboolean(tolua_S, 2);
+        cobj->setFlippedY(arg0);
+        return 0;
     }
-    lua_settop(tolua_S, 1);
-    return 1;
+    luaL_error(tolua_S, "setFlippedY has wrong number of arguments: %d, was expecting %d \n", argc, 1);
+    return 0;
+}
+
+static int lua_cocos2dx_spine_SkeletonAnimation_findAnimation(lua_State* tolua_S)
+{
+    spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
     
 #if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_setFeedback'.",&tolua_err);
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_findAnimation'", nullptr);
+        return 0;
+    }
 #endif
     
+    int argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        const char *arg0 = lua_tostring(tolua_S, 2);
+        if (cobj->findAnimation(arg0)) {
+            lua_pushboolean(tolua_S, 1);
+        } else {
+            lua_pushboolean(tolua_S, 0);
+        }
+        return 1;
+    }
+    luaL_error(tolua_S, "findAnimation has wrong number of arguments: %d, was expecting %d \n", argc, 1);
     return 0;
+}
+
+static int lua_cocos2dx_spine_SkeletonAnimation_getBoundingBox(lua_State* tolua_S)
+{
+    spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_getBoundingBox'", nullptr);
+        return 0;
+    }
+#endif
+    
+    Rect rect = cobj->getBoundingBox();
+    // return a table
+    lua_newtable(tolua_S);
+    lua_pushstring(tolua_S, "x");
+    lua_pushnumber(tolua_S, rect.origin.x);
+    lua_rawset(tolua_S, -3);
+    lua_pushstring(tolua_S, "y");
+    lua_pushnumber(tolua_S, rect.origin.y);
+    lua_rawset(tolua_S, -3);
+    lua_pushstring(tolua_S, "width");
+    lua_pushnumber(tolua_S, rect.size.width);
+    lua_rawset(tolua_S, -3);
+    lua_pushstring(tolua_S, "height");
+    lua_pushnumber(tolua_S, rect.size.height);
+    lua_rawset(tolua_S, -3);
+    return 1;
 }
 
 static void extendCCSkeletonAnimation(lua_State* L)
@@ -771,8 +833,10 @@ static void extendCCSkeletonAnimation(lua_State* L)
         tolua_function(L, "setAttachment", lua_cocos2dx_spine_SkeletonAnimation_setAttachment);
         tolua_function(L, "findBone", lua_cocos2dx_spine_SkeletonAnimation_findBone);
         tolua_function(L, "findSlot", lua_cocos2dx_spine_SkeletonAnimation_findSlot);
-        tolua_function(L, "setClone", lua_cocos2dx_spine_SkeletonAnimation_setClone);
-        tolua_function(L, "setFeedback", lua_cocos2dx_spine_SkeletonAnimation_setFeedback);
+        tolua_function(L, "setFlippedX", lua_cocos2dx_spine_SkeletonAnimation_setFlippedX);
+        tolua_function(L, "setFlippedY", lua_cocos2dx_spine_SkeletonAnimation_setFlippedY);
+        tolua_function(L, "findAnimation", lua_cocos2dx_spine_SkeletonAnimation_findAnimation);
+        tolua_function(L, "getBoundingBox", lua_cocos2dx_spine_SkeletonAnimation_getBoundingBox);
     }
     lua_pop(L, 1);
     

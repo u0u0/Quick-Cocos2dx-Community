@@ -16,10 +16,6 @@
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "luabinding/cocos2dx_extra_ios_iap_luabinding.h"
 #endif
-#if ANYSDK_DEFINE > 0
-#include "anysdkbindings.h"
-#include "anysdk_manual_bindings.h"
-#endif
 
 using namespace CocosDenshion;
 
@@ -89,12 +85,6 @@ bool AppDelegate::applicationDidFinishLaunching()
     quick_module_register(L);
 
     LuaStack* stack = engine->getLuaStack();
-#if ANYSDK_DEFINE > 0
-    lua_getglobal(stack->getLuaState(), "_G");
-    tolua_anysdk_open(stack->getLuaState());
-    tolua_anysdk_manual_open(stack->getLuaState());
-    lua_pop(stack->getLuaState(), 1);
-#endif
 
     //register custom function
     //LuaStack* stack = engine->getLuaStack();

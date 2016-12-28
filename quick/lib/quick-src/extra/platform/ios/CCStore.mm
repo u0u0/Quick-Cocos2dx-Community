@@ -133,13 +133,14 @@ bool Store::isProductLoaded(const char* productId)
     return [[StoreIOS sharedStore] isProductLoaded:[NSString stringWithUTF8String:productId]];
 }
 
-bool Store::purchase(const char* productId)
+bool Store::purchase(const char* productId, const char* userInfo)
 {
     if (!productId) return false;
     SKProduct *product = [[StoreIOS sharedStore] getProduct:[NSString stringWithUTF8String:productId]];
+    NSString *info = [NSString stringWithUTF8String:userInfo];
     if (product)
     {
-        [[StoreIOS sharedStore] purchase:product];
+        [[StoreIOS sharedStore] purchase:product userInfo:info];
         return true;
     }
     return false;
