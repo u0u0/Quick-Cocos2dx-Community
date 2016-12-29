@@ -267,6 +267,7 @@ bool WebSocket::init(const Delegate& delegate,
     {
         host.erase(0,6);
         useSSL = true;
+        port = 443;// wss default port
     }
     
     pos = host.find(":");
