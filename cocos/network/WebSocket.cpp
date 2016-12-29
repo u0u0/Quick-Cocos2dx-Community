@@ -286,7 +286,8 @@ bool WebSocket::init(const Delegate& delegate,
     _host = host;
     _port = port;
     _path = path;
-    _SSLConnection = useSSL ? 1 : 0;
+    /* 1 = take care about cert verification, 2 = allow anything */
+    _SSLConnection = useSSL ? 2 : 0;
     
     CCLOG("[WebSocket::init] _host: %s, _port: %d, _path: %s", _host.c_str(), _port, _path.c_str());
 
@@ -389,6 +390,10 @@ WebSocket::State WebSocket::getReadyState()
 
 int WebSocket::onSubThreadLoop()
 {
+    if (!_wsContext) {
+        return 1;//exit the loop.
+    }
+    
     if (_readyState == State::CLOSED || _readyState == State::CLOSING)
     {
         libwebsocket_context_destroy(_wsContext);
