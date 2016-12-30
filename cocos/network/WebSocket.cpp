@@ -444,6 +444,9 @@ void WebSocket::onSubThreadStarted()
     std::string caPath = std::string("wssca.pem");
     std::string caFullPath = FileUtils::getInstance()->fullPathForFilename(caPath);
     info.ssl_ca_filepath = caFullPath.c_str();
+    if (0 == _SSLConnection) {
+        info.ssl_ca_filepath = NULL;
+    }
     
 	_wsContext = libwebsocket_create_context(&info);
     
