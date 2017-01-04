@@ -177,8 +177,14 @@ public class PSNative {
 		if (mContext == null) {
 			return;
 		}
-		Uri uri = Uri.parse(url);
-		mContext.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+
+		try {
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(Uri.parse(url));
+			mContext.startActivity(i);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static String getInputText(String title, String message,
