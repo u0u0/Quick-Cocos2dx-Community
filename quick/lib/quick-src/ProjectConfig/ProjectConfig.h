@@ -118,6 +118,7 @@ private:
     bool _showConsole;
     bool _loadPrecompiledFramework;
     bool _writeDebugLogToFile;
+	bool _isMultiLogFiles;
     bool _restartProcess;
     cocos2d::Vec2 _windowOffset;
     int _debuggerType;
