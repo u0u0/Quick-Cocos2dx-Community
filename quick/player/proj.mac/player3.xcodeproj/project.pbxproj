@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0450D5F51D05B05F00B9B05E /* lunqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0450D5F11D05B05F00B9B05E /* lunqlite.c */; };
+		0450D5F61D05B05F00B9B05E /* unqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0450D5F31D05B05F00B9B05E /* unqlite.c */; };
 		0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */; };
 		0AA993221DAF389F002339DC /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AA993201DAF389F002339DC /* pb.c */; };
 		15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CC2198F220600DC375D /* libluacocos2d Mac.a */; };
@@ -141,6 +143,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0450D5F11D05B05F00B9B05E /* lunqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lunqlite.c; sourceTree = "<group>"; };
+		0450D5F21D05B05F00B9B05E /* lunqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lunqlite.h; sourceTree = "<group>"; };
+		0450D5F31D05B05F00B9B05E /* unqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unqlite.c; sourceTree = "<group>"; };
+		0450D5F41D05B05F00B9B05E /* unqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unqlite.h; sourceTree = "<group>"; };
 		0A5237BC1BCD45B300B39D5F /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		0A5237BF1BCD45E000B39D5F /* UncaughtExceptionHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UncaughtExceptionHandler.mm; sourceTree = "<group>"; };
 		0AA993201DAF389F002339DC /* pb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pb.c; sourceTree = "<group>"; };
@@ -402,6 +408,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0450D5F01D05B05F00B9B05E /* unqlite */ = {
+			isa = PBXGroup;
+			children = (
+				0450D5F11D05B05F00B9B05E /* lunqlite.c */,
+				0450D5F21D05B05F00B9B05E /* lunqlite.h */,
+				0450D5F31D05B05F00B9B05E /* unqlite.c */,
+				0450D5F41D05B05F00B9B05E /* unqlite.h */,
+			);
+			path = unqlite;
+			sourceTree = "<group>";
+		};
 		0AA9931F1DAF389F002339DC /* protobuf */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				0AA9931F1DAF389F002339DC /* protobuf */,
+				0450D5F01D05B05F00B9B05E /* unqlite */,
 				9F7288F81A24957700EE0234 /* cjson */,
 				9F7289031A24957700EE0234 /* filesystem */,
 				9F7289061A24957700EE0234 /* lpack */,
@@ -1053,8 +1071,10 @@
 				0AA993221DAF389F002339DC /* pb.c in Sources */,
 				9F72893D1A24957700EE0234 /* CCSaturationFilter.cpp in Sources */,
 				49C655D31A36C71400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
+				0450D5F51D05B05F00B9B05E /* lunqlite.c in Sources */,
 				9FD0193419F8C4D4005E0C49 /* PlayerTaskServiceProtocol.cpp in Sources */,
 				9F72892B1A24957700EE0234 /* HelperFunc.cpp in Sources */,
+				0450D5F61D05B05F00B9B05E /* unqlite.c in Sources */,
 				9FD01B2919F8C6A3005E0C49 /* PlayerMessageBoxServiceMac.mm in Sources */,
 				9FD01B2D19F8C6BA005E0C49 /* AppController.mm in Sources */,
 				9F7289351A24957700EE0234 /* CCExposureFilter.cpp in Sources */,
