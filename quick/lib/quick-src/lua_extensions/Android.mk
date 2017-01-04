@@ -14,7 +14,9 @@ LOCAL_SRC_FILES := $(LOCAL_PATH)/lua_extensions_more.c \
 LOCAL_SRC_FILES += \
                         $(LOCAL_PATH)/cjson/fpconv.c \
                         $(LOCAL_PATH)/cjson/lua_cjson.c \
-                        $(LOCAL_PATH)/cjson/strbuf.c
+                        $(LOCAL_PATH)/cjson/strbuf.c \
+                        $(LOCAL_PATH)/unqlite/unqlite.c \
+			$(LOCAL_PATH)/unqlite/lunqlite.c
 
 ifeq ($(CC_USE_SQLITE),1)
 LOCAL_SRC_FILES += \
@@ -28,7 +30,8 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ \
                            $(LOCAL_PATH)/debugger \
                            $(LOCAL_PATH)/filesystem \
                            $(LOCAL_PATH)/lpack \
-                           $(LOCAL_PATH)/lsqlite3
+                           $(LOCAL_PATH)/lsqlite3 \
+                           $(LOCAL_PATH)/unqlite
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/ \
                     $(LOCAL_PATH)/cjson \
@@ -37,6 +40,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/ \
                     $(LOCAL_PATH)/filesystem \
                     $(LOCAL_PATH)/lpack \
                     $(LOCAL_PATH)/lsqlite3 \
+                    $(LOCAL_PATH)/unqlite \
                     $(COCOS2DX_ROOT)/cocos \
                     $(COCOS2DX_ROOT)/external/lua/luajit/include
 

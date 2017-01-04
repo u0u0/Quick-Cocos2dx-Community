@@ -20,6 +20,9 @@ extern "C" {
 // lsqlite3
 #include "lsqlite3/lsqlite3.h"
 
+// lunqlite3
+#include "unqlite/lunqlite.h"
+
 // protoc-gen-lua
 #include "protobuf/pb.h"
 
@@ -31,6 +34,7 @@ static luaL_Reg luax_exts[] = {
 #if CC_USE_SQLITE
     {"lsqlite3", luaopen_lsqlite3},
 #endif
+	{"unqlite", luaopen_lunqlite},
     {NULL, NULL}
 };
 
