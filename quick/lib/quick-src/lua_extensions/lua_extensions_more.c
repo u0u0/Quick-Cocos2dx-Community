@@ -34,7 +34,9 @@ static luaL_Reg luax_exts[] = {
 #if CC_USE_SQLITE
     {"lsqlite3", luaopen_lsqlite3},
 #endif
+#if CC_USE_UNQLITE
 	{"unqlite", luaopen_lunqlite},
+#endif
     {NULL, NULL}
 };
 
