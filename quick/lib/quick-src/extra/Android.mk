@@ -13,11 +13,13 @@ LOCAL_SRC_FILES := \
     $(LOCAL_PATH)/crypto/CCCrypto.cpp \
     $(LOCAL_PATH)/crypto/base64/libbase64.c \
     $(LOCAL_PATH)/network/CCNetwork.cpp \
-    $(LOCAL_PATH)/platform/android/CCHTTPRequestAndroid.cpp \
     $(LOCAL_PATH)/platform/android/CCCryptoAndroid.cpp \
     $(LOCAL_PATH)/platform/android/CCNativeAndroid.cpp \
     $(LOCAL_PATH)/platform/android/CCNetworkAndroid.cpp
 
+ifeq ($(CC_USE_CURL),1)
+LOCAL_SRC_FILES += $(LOCAL_PATH)/network/CCHTTPRequest.cpp
+endif
 
 #filters
 LOCAL_SRC_FILES += \
@@ -58,13 +60,9 @@ LOCAL_C_INCLUDES := $(LOCAL_EXPORT_C_INCLUDES) \
                     $(COCOS2DX_ROOT)/external/lua/luajit/include \
                     $(COCOS2DX_ROOT)/external/lua/tolua \
                     $(COCOS2DX_ROOT)/external \
-                    $(COCOS2DX_ROOT)/cocos/scripting/lua-bindings/manual
-
-#filters
-LOCAL_C_INCLUDES += $(COCOS2DX_ROOT)/extensions
-
-
-
+                    $(COCOS2DX_ROOT)/cocos/scripting/lua-bindings/manual \
+					$(COCOS2DX_ROOT)/extensions \
+					$(COCOS2DX_ROOT)/external/curl/include/android
 
 
 include $(BUILD_STATIC_LIBRARY)
