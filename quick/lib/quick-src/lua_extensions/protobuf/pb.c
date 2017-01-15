@@ -497,5 +497,6 @@ int luaopen_pb (lua_State *L)
     luaL_register(L, NULL, _c_iostring_m);
 
     luaL_register(L, "pb", _pb);
+    lua_pop(L, 2);
     return 1;
 } 
