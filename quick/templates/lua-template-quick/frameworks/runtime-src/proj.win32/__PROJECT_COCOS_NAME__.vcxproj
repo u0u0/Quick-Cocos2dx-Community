@@ -71,7 +71,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_SQLITE=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -127,7 +127,7 @@
       <ExceptionHandling>
       </ExceptionHandling>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -170,6 +170,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\lunqlite.h" />
+    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\unqlite.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\base64\libbase64.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\CCCrypto.h" />
@@ -265,6 +267,22 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.cpp" />
+    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\lunqlite.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\unqlite.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\base64\libbase64.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

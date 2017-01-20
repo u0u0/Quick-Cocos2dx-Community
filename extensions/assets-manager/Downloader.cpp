@@ -263,6 +263,7 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
     }
     else
     {
+        _fileUtils->createDirectory(pData->path);
         fDesc->fp = fopen(outFileName.c_str(), "wb");
     }
     if (!fDesc->fp)

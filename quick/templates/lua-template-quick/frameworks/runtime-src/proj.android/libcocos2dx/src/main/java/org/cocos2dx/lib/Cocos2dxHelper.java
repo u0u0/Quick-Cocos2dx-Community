@@ -181,6 +181,7 @@ public class Cocos2dxHelper {
             sActivity.startActivity(i);
             ret = true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return ret;
     }
