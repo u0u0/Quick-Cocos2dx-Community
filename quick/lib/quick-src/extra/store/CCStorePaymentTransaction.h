@@ -160,7 +160,6 @@ private:
     std::string                         m_productIdentifier;
     std::string                         m_userInfo;
     int                                 m_quantity;
-    std::string                         m_userInfo;
     double                              m_dateTime;
     int                                 m_receiptDataLength;
     void*                               m_receiptData;
