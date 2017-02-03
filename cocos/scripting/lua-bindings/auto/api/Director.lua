@@ -10,18 +10,7 @@
 -- @function [parent=#Director] pause 
 -- @param self
 -- @return Director#Director self (return value: cc.Director)
-
---------------------------------
---  Back to show previousScene and pops out a scene from the stack.<br>
--- This scene will replace the running one.<br>
--- The scene must be getPreviousScene() or getPreviouscene() in TransitionScene<br>
--- If scene is NULL same as popScene.<br>
--- The running scene will be deleted. If there are no more scenes in the stack the execution is terminated.<br>
--- ONLY call it if there is a running scene.
--- @function [parent=#Director] backPreviousScene 
--- @param self
--- @return Director#Director self (return value: cc.Director)
-        
+    
 --------------------------------
 --  Sets the EventDispatcher associated with this director <br>
 -- since v3.0
@@ -58,12 +47,6 @@
 -- @param self
 -- @return float#float ret (return value: float)
         
---------------------------------
---  Get the second scene at the top of the stack. If there no more scene in the stack return NULL 
--- @function [parent=#Director] getPreviousScene 
--- @param self
--- @return Scene#Scene ret (return value: cc.Scene)
-
 --------------------------------
 --  sets the OpenGL default values 
 -- @function [parent=#Director] setGLDefaultValues 

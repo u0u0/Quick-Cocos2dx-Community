@@ -855,32 +855,6 @@ void Director::popScene(void)
     }
 }
 
-Scene* Director::getPreviousScene()
-{
-    ssize_t c = _scenesStack.size();
-    if (c <= 1) return NULL;
-    return (Scene*)_scenesStack.at(c - 2);
-}
-
-void Director::backPreviousScene(Scene* scene)
-{
-    CCASSERT(_runningScene != nullptr, "running scene should not null");
-    
-    _scenesStack.popBack();
-    ssize_t c = _scenesStack.size();
-    
-    if (c == 0)
-    {
-        end();
-    }
-    else
-    {
-        _sendCleanupToScene = true;
-        _scenesStack.replace(c - 1, scene);
-        _nextScene = _scenesStack.at(c - 1);
-    }
-}
-
 void Director::popToRootScene(void)
 {
     popToSceneStackLevel(1);
