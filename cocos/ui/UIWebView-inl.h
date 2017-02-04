@@ -137,7 +137,30 @@ namespace experimental{
         void WebView::setVisible(bool visible)
         {
             Node::setVisible(visible);
-            _impl->setVisible(visible);
+            if (!visible || isRunning())
+            {
+                _impl->setVisible(visible);
+            }
+        }
+
+        void WebView::onEnter()
+        {
+            Widget::onEnter();
+            if(isVisible())
+            {
+                _impl->setVisible(true);
+            }
+        }
+
+        void WebView::onExit()
+        {
+            Widget::onExit();
+            _impl->setVisible(false);
+        }
+        
+        void WebView::setBounces(bool bounces)
+        {
+          _impl->setBounces(bounces);
         }
         
         cocos2d::ui::Widget* WebView::createCloneInstance()

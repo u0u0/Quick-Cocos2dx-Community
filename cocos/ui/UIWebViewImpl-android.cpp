@@ -36,6 +36,7 @@
 #include "platform/CCGLView.h"
 #include "base/CCDirector.h"
 #include "platform/CCFileUtils.h"
+#include "UIHelper.h"
 
 #define CLASS_NAME "org/cocos2dx/lib/Cocos2dxWebViewHelper"
 
@@ -410,26 +411,19 @@ namespace cocos2d {
 
             void WebViewImpl::draw(cocos2d::Renderer *renderer, cocos2d::Mat4 const &transform, uint32_t flags) {
                 if (flags & cocos2d::Node::FLAGS_TRANSFORM_DIRTY) {
-                    auto directorInstance = cocos2d::Director::getInstance();
-                    auto glView = directorInstance->getOpenGLView();
-                    auto frameSize = glView->getFrameSize();
-
-                    auto winSize = directorInstance->getWinSize();
-
-                    auto leftBottom = this->_webView->convertToWorldSpace(cocos2d::Point::ZERO);
-                    auto rightTop = this->_webView->convertToWorldSpace(cocos2d::Point(this->_webView->getContentSize().width,this->_webView->getContentSize().height));
-
-                    auto uiLeft = frameSize.width / 2 + (leftBottom.x - winSize.width / 2 ) * glView->getScaleX();
-                    auto uiTop = frameSize.height /2 - (rightTop.y - winSize.height / 2) * glView->getScaleY();
-
-                    setWebViewRectJNI(_viewTag,uiLeft,uiTop,
-                                      (rightTop.x - leftBottom.x) * glView->getScaleX(),
-                                      (rightTop.y - leftBottom.y) * glView->getScaleY());
+                    auto uiRect = cocos2d::ui::Helper::convertBoundingBoxToScreen(_webView);
+                    setWebViewRectJNI(_viewTag,
+                                      (int)uiRect.origin.x, (int)uiRect.origin.y,
+                                      (int)uiRect.size.width, (int)uiRect.size.height);
                 }
             }
 
             void WebViewImpl::setVisible(bool visible) {
                 setWebViewVisibleJNI(_viewTag, visible);
+            }
+            
+            void WebViewImpl::setBounces(bool bounces) {
+                // empty function as this was mainly a fix for iOS
             }
         } // namespace ui
     } // namespace experimental

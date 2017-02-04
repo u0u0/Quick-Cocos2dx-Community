@@ -158,8 +158,8 @@ private:
     CCStorePaymentTransactionState      m_transactionState;
     std::string                         m_transactionIdentifier;
     std::string                         m_productIdentifier;
-    int                                 m_quantity;
     std::string                         m_userInfo;
+    int                                 m_quantity;
     double                              m_dateTime;
     int                                 m_receiptDataLength;
     void*                               m_receiptData;

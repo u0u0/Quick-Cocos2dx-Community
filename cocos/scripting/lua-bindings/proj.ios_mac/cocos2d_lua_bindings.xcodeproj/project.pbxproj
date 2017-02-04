@@ -239,6 +239,14 @@
 		15EFA64A198B3311000C57D3 /* tolua_to.c in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCA1FE18CD8F6E0087CE3A /* tolua_to.c */; };
 		15EFA64B198B3320000C57D3 /* tolua_event.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ABCA1FA18CD8F6E0087CE3A /* tolua_event.h */; };
 		15EFA64C198B3320000C57D3 /* tolua++.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ABCA1FF18CD8F6E0087CE3A /* tolua++.h */; };
+		3D598E6C1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */; };
+		3D598E6D1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */; };
+		3D598E6E1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3D598E6B1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp */; };
+		3D598E6F1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3D598E6B1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp */; };
+		3D598E721E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D598E701E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp */; };
+		3D598E731E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D598E701E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp */; };
+		3D598E741E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3D598E711E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp */; };
+		3D598E751E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3D598E711E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp */; };
 		3E2BDB0519C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BDB0319C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.cpp */; };
 		3E2BDB0619C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E2BDB0419C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.hpp */; };
 		3E2BDB0A19C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BDB0819C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp */; };
@@ -407,6 +415,10 @@
 		1ABCA1FF18CD8F6E0087CE3A /* tolua++.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "tolua++.h"; path = "../../../../external/lua/tolua/tolua++.h"; sourceTree = "<group>"; };
 		2905FACE18CF12E600240AA3 /* lua_cocos2dx_ui_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_ui_auto.cpp; sourceTree = "<group>"; };
 		2905FACF18CF12E600240AA3 /* lua_cocos2dx_ui_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_ui_auto.hpp; sourceTree = "<group>"; };
+		3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_experimental_webview_auto.cpp; sourceTree = "<group>"; };
+		3D598E6B1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_experimental_webview_auto.hpp; sourceTree = "<group>"; };
+		3D598E701E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_experimental_webview_manual.cpp; sourceTree = "<group>"; };
+		3D598E711E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_experimental_webview_manual.hpp; sourceTree = "<group>"; };
 		3E2BDB0319C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_audioengine_auto.cpp; sourceTree = "<group>"; };
 		3E2BDB0419C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_audioengine_auto.hpp; sourceTree = "<group>"; };
 		3E2BDB0819C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_audioengine_manual.cpp; sourceTree = "<group>"; };
@@ -564,6 +576,8 @@
 			children = (
 				15C1C24B1987473200A46ACC /* lua_cocos2dx_experimental_video_manual.cpp */,
 				15C1C24C1987473200A46ACC /* lua_cocos2dx_experimental_video_manual.hpp */,
+				3D598E701E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp */,
+				3D598E711E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp */,
 				15C1BD1A1986526C00A46ACC /* lua_cocos2dx_ui_manual.cpp */,
 				15C1BD1B1986526C00A46ACC /* lua_cocos2dx_ui_manual.hpp */,
 			);
@@ -600,6 +614,8 @@
 				15C1BCC319864D8700A46ACC /* lua_cocos2dx_cocosdenshion_auto.hpp */,
 				156EADF11977A2BA00F53709 /* lua_cocos2dx_experimental_video_auto.cpp */,
 				156EADF21977A2BA00F53709 /* lua_cocos2dx_experimental_video_auto.hpp */,
+				3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */,
+				3D598E6B1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp */,
 				15622967197780DE009C9067 /* lua_cocos2dx_experimental_auto.cpp */,
 				15622968197780DE009C9067 /* lua_cocos2dx_experimental_auto.hpp */,
 				2905FACE18CF12E600240AA3 /* lua_cocos2dx_ui_auto.cpp */,
@@ -771,12 +787,14 @@
 				15EFA1F71989E582000C57D3 /* lua_cocos2dx_experimental_auto.hpp in Headers */,
 				15415AA719A71A53004F1E71 /* auxiliar.h in Headers */,
 				155C7E1019A71C9D00F08B25 /* lua_extensions.h in Headers */,
+				3D598E6E1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp in Headers */,
 				15415ABF19A71A53004F1E71 /* mime.h in Headers */,
 				15AC69E21987712500D17520 /* tolua_event.h in Headers */,
 				15415AD719A71A53004F1E71 /* udp.h in Headers */,
 				15AC69E31987712500D17520 /* tolua++.h in Headers */,
 				15415ADB19A71A53004F1E71 /* unix.h in Headers */,
 				155C7DF419A71C3700F08B25 /* lua_cocos2dx_3d_manual.h in Headers */,
+				3D598E741E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp in Headers */,
 				15415ABB19A71A53004F1E71 /* luasocket.h in Headers */,
 				159552421A25E4B8001E9FC9 /* lua_cocos2dx_csloader_manual.hpp in Headers */,
 				155C7E2419A71CD800F08B25 /* lua_cocos2dx_experimental_video_manual.hpp in Headers */,
@@ -840,12 +858,14 @@
 				15415AA819A71A53004F1E71 /* auxiliar.h in Headers */,
 				155C7E1119A71C9F00F08B25 /* lua_extensions.h in Headers */,
 				15415AC019A71A53004F1E71 /* mime.h in Headers */,
+				3D598E6F1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp in Headers */,
 				15415AD819A71A53004F1E71 /* udp.h in Headers */,
 				15415ADC19A71A53004F1E71 /* unix.h in Headers */,
 				155C7DF519A71C3900F08B25 /* lua_cocos2dx_3d_manual.h in Headers */,
 				15415ABC19A71A53004F1E71 /* luasocket.h in Headers */,
 				159552431A25E4B8001E9FC9 /* lua_cocos2dx_csloader_manual.hpp in Headers */,
 				155C7E2519A71CDA00F08B25 /* lua_cocos2dx_experimental_video_manual.hpp in Headers */,
+				3D598E751E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.hpp in Headers */,
 				15415AD019A71A53004F1E71 /* tcp.h in Headers */,
 				15415AAC19A71A53004F1E71 /* buffer.h in Headers */,
 				155C7E1519A71CAA00F08B25 /* Lua_web_socket.h in Headers */,
@@ -975,6 +995,7 @@
 				15415A7319A718FB004F1E71 /* lua_cocos2dx_cocosbuilder_auto.cpp in Sources */,
 				150906F219D556CE002C4D97 /* lua_cocos2dx_audioengine_manual.cpp in Sources */,
 				15415A7519A718FB004F1E71 /* lua_cocos2dx_experimental_video_auto.cpp in Sources */,
+				3D598E6C1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp in Sources */,
 				15415A7619A718FB004F1E71 /* lua_cocos2dx_ui_auto.cpp in Sources */,
 				15415A7719A718FB004F1E71 /* lua_cocos2dx_spine_auto.cpp in Sources */,
 				15415A7819A718FB004F1E71 /* lua_cocos2dx_studio_auto.cpp in Sources */,
@@ -1039,6 +1060,7 @@
 				15C1C2D11987498B00A46ACC /* lua_cocos2dx_manual.cpp in Sources */,
 				15C1C2D21987498B00A46ACC /* lua_cocos2dx_physics_manual.cpp in Sources */,
 				15C1C2D31987498B00A46ACC /* LuaScriptHandlerMgr.cpp in Sources */,
+				3D598E721E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp in Sources */,
 				15415AA919A71A53004F1E71 /* buffer.c in Sources */,
 				15C1C2CD1987495500A46ACC /* lua_cocos2dx_auto.cpp in Sources */,
 				15415AB919A71A53004F1E71 /* luasocket.c in Sources */,
@@ -1055,6 +1077,7 @@
 				15EFA646198B3311000C57D3 /* tolua_event.c in Sources */,
 				3E2BDB0A19C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp in Sources */,
 				15415AA619A71A53004F1E71 /* auxiliar.c in Sources */,
+				3D598E6D1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp in Sources */,
 				15EFA647198B3311000C57D3 /* tolua_is.c in Sources */,
 				15EFA648198B3311000C57D3 /* tolua_map.c in Sources */,
 				15EFA649198B3311000C57D3 /* tolua_push.c in Sources */,
@@ -1119,6 +1142,7 @@
 				15EFA629198B31FB000C57D3 /* lua_cocos2dx_physics_manual.cpp in Sources */,
 				15EFA62A198B31FB000C57D3 /* LuaScriptHandlerMgr.cpp in Sources */,
 				15EFA617198B2E2B000C57D3 /* lua_cocos2dx_experimental_auto.cpp in Sources */,
+				3D598E731E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp in Sources */,
 				15EFA618198B2E2B000C57D3 /* lua_cocos2dx_auto.cpp in Sources */,
 				15EFA619198B2E2B000C57D3 /* lua_cocos2dx_physics_auto.cpp in Sources */,
 				15415AB219A71A53004F1E71 /* inet.c in Sources */,

@@ -10,7 +10,7 @@
 -- @function [parent=#Director] pause 
 -- @param self
 -- @return Director#Director self (return value: cc.Director)
-        
+    
 --------------------------------
 --  Sets the EventDispatcher associated with this director <br>
 -- since v3.0
