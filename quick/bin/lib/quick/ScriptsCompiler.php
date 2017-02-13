@@ -329,9 +329,14 @@ class ScriptsCompiler
         {
             printf("create ZIP archive file: %s\n", $zipfile);
         }
+
         foreach ($modules as $path => $module)
         {
-            $zip->addFromString($this->config['prefix'] . $module['moduleName'], $bytes[$path]);
+            /* Fixed the file time in zip file.
+             * Otherwise, the md5 of zip will changes with each compilation
+             */
+            touch($module['tempFilePath'], 1465164366);
+            $zip->addFile($module['tempFilePath'], $this->config['prefix'] . $module['moduleName']);
         }
         $zip->close();
 
