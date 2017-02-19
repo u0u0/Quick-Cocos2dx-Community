@@ -59,7 +59,7 @@ public class Cocos2dxWebViewHelper {
         sCocos2dxActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Cocos2dxWebView webView = new Cocos2dxWebView(sCocos2dxActivity, index);
+                final Cocos2dxWebView webView = new Cocos2dxWebView(sCocos2dxActivity, index);
                 webView.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
