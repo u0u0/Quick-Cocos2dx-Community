@@ -175,7 +175,8 @@ function getScriptFileBytecodes($bit, $path, $tmpfile)
 	} else {
 		$bin = LUAJIT64_BIN;
 	}
-	$command = sprintf('%s -b "%s" "%s"', $bin, $path, $tmpfile);
+	/* -g keep debug info */
+	$command = sprintf('%s -bg "%s" "%s"', $bin, $path, $tmpfile);
     passthru($command);
 
     if (!file_exists($tmpfile))
