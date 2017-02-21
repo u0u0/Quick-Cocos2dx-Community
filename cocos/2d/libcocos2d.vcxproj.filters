@@ -829,9 +829,6 @@
     <ClCompile Include="..\network\HttpClient.cpp">
       <Filter>network\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\network\SocketIO.cpp">
-      <Filter>network\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\network\WebSocket.cpp">
       <Filter>network\Source Files</Filter>
     </ClCompile>
@@ -1974,9 +1971,6 @@
       <Filter>network\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\network\HttpResponse.h">
-      <Filter>network\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\network\SocketIO.h">
       <Filter>network\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\network\WebSocket.h">
