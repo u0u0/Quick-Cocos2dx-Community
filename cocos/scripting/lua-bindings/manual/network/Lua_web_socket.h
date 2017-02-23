@@ -21,6 +21,10 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+
+#include "base/ccConfig.h"
+#if (CC_USE_WEBSOCKET)
+
 #ifndef __LUA_WEB_SOCKET_H__
 #define __LUA_WEB_SOCKET_H__
 
@@ -59,3 +63,5 @@ TOLUA_API int register_web_socket_manual(lua_State* tolua_S);
 #endif //(CC_TARGET_PLATFORM == CC_PLATFORM_IOS ...
 
 #endif //__LUA_WEB_SOCKET_H__
+
+#endif

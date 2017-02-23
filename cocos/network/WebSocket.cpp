@@ -28,6 +28,8 @@
  ****************************************************************************/
 
 #include "network/WebSocket.h"
+#if (CC_USE_WEBSOCKET)
+
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
 #include "CCFileUtils.h"
@@ -985,3 +987,5 @@ int WebSocket::onSocketCallback(struct lws *wsi,
 }
 
 NS_CC_END
+
+#endif

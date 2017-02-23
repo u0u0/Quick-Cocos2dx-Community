@@ -22,8 +22,9 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 #include "Lua_web_socket.h"
+#if (CC_USE_WEBSOCKET)
+
 #include <map>
 #include <string>
 #include "tolua_fix.h"
@@ -463,4 +464,5 @@ TOLUA_API int register_web_socket_manual(lua_State* tolua_S)
     
     return 1;
 }
-#endif//(CC_TARGET_PLATFORM == CC_PLATFORM_IOS ...
+
+#endif

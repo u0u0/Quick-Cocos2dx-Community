@@ -27,6 +27,9 @@
 
  ****************************************************************************/
 
+#include "base/ccConfig.h"
+#if (CC_USE_WEBSOCKET)
+
 #ifndef __CC_WEBSOCKET_H__
 #define __CC_WEBSOCKET_H__
 
@@ -252,4 +255,5 @@ NS_CC_END
 // end group
 /// @}
 
-#endif /* defined(__CC_JSB_WEBSOCKET_H__) */
+#endif /* __CC_WEBSOCKET_H__ */
+#endif /* CC_USE_WEBSOCKET */

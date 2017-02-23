@@ -293,6 +293,12 @@ To enable set it to a value different than 0. Disabled by default.
 #define CC_USE_CURL  1
 #endif // CC_USE_CURL
 
+/** Use WebSocket or not. If your application don't use WebSocket, you can undefine this macro to save package size.
+ */
+#ifndef CC_USE_WEBSOCKET
+#define CC_USE_WEBSOCKET  1
+#endif // CC_USE_WEBSOCKET
+
 /** Use cocos studio or not. If your application don't use ccs, you can undefine this macro to save package size.
  */
 #ifndef CC_USE_CCSTUDIO
