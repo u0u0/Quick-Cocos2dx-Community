@@ -4,7 +4,6 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := extra_static
 LOCAL_MODULE_FILENAME := libextra
-LOCAL_ARM_MODE := arm
 
 LOCAL_SRC_FILES := \
     $(LOCAL_PATH)/luabinding/cocos2dx_extra_luabinding.cpp \
@@ -19,6 +18,13 @@ LOCAL_SRC_FILES := \
 
 ifeq ($(CC_USE_CURL),1)
 LOCAL_SRC_FILES += $(LOCAL_PATH)/network/CCHTTPRequest.cpp
+endif
+
+# bugfix for md5_init not found on Android 5.x
+ifeq ($(CC_USE_CURL),0)
+ifeq ($(CC_USE_WEBSOCKET),0)
+LOCAL_SRC_FILES += $(LOCAL_PATH)/crypto/md5/md5.c
+endif
 endif
 
 #filters

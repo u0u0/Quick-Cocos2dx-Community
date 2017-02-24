@@ -3,7 +3,6 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := spine_static
 LOCAL_MODULE_FILENAME := libspine
-LOCAL_ARM_MODE := arm
 
 LOCAL_SRC_FILES :=
 ifeq ($(CC_USE_SPINE),1)

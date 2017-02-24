@@ -6,8 +6,6 @@ LOCAL_MODULE := cocos2dx_internal_static
 
 LOCAL_MODULE_FILENAME := libcocos2dxinternal
 
-LOCAL_ARM_MODE := arm
-
 LOCAL_SRC_FILES := \
 cocos2d.cpp \
 2d/CCAction.cpp \

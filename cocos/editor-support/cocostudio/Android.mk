@@ -5,8 +5,6 @@ LOCAL_MODULE := cocostudio_static
 
 LOCAL_MODULE_FILENAME := libcocostudio
 
-LOCAL_ARM_MODE := arm
-
 LOCAL_SRC_FILES := 
 
 ifeq ($(CC_USE_CCSTUDIO),1)
