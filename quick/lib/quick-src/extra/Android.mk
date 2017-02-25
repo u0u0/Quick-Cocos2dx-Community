@@ -18,6 +18,8 @@ LOCAL_SRC_FILES := \
 
 ifeq ($(CC_USE_CURL),1)
 LOCAL_SRC_FILES += $(LOCAL_PATH)/network/CCHTTPRequest.cpp
+else
+LOCAL_SRC_FILES += $(LOCAL_PATH)/platform/android/CCHTTPRequestAndroid.cpp
 endif
 
 # bugfix for md5_init not found on Android 5.x

@@ -7,7 +7,7 @@ HTTPRequest* Network::createHTTPRequest(HTTPRequestDelegate* delegate,
                                             const char* url,
                                             int method)
 {
-#if (CC_USE_CURL)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_USE_CURL)
     HTTPRequest* request = HTTPRequest::createWithUrl(delegate, url, method);
     request->start();
     return request;
@@ -21,7 +21,7 @@ HTTPRequest* Network::createHTTPRequestLua(LUA_FUNCTION listener,
                                                const char* url,
                                                int method)
 {
-#if (CC_USE_CURL)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_USE_CURL)
     HTTPRequest* request = HTTPRequest::createWithUrlLua(listener, url, method);
     request->start();
     return request;

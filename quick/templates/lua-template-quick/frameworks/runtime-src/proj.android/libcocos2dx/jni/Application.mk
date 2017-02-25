@@ -15,7 +15,8 @@ else
   APP_OPTIM := release
 endif
 
-CC_USE_CURL := 1
+# if CC_USE_CURL set to 0, use java http interface
+CC_USE_CURL := 0
 CC_USE_CCSTUDIO := 1
 CC_USE_CCBUILDER := 1
 CC_USE_SPINE := 1
