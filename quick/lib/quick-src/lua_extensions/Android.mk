@@ -8,7 +8,6 @@ LOCAL_MODULE_FILENAME := libluaextensions
 LOCAL_SRC_FILES := $(LOCAL_PATH)/lua_extensions_more.c \
 	$(LOCAL_PATH)/zlib/lua_zlib.c \
 	$(LOCAL_PATH)/filesystem/lfs.c \
-	$(LOCAL_PATH)/protobuf/pb.c \
 	$(LOCAL_PATH)/lpack/lpack.c \
 	$(LOCAL_PATH)/cjson/fpconv.c \
 	$(LOCAL_PATH)/cjson/lua_cjson.c \
@@ -23,6 +22,11 @@ ifeq ($(CC_USE_UNQLITE),1)
 LOCAL_SRC_FILES +=$(LOCAL_PATH)/unqlite/unqlite.c \
 				  $(LOCAL_PATH)/unqlite/lunqlite.c
 endif
+
+ifeq ($(CC_USE_PROTOBUF),1)
+LOCAL_SRC_FILES +=$(LOCAL_PATH)/protobuf/pb.c
+endif
+
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ \
 	$(LOCAL_PATH)/cjson \
