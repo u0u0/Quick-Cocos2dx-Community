@@ -94,6 +94,12 @@
     <Filter Include="Classes\quick-src\lua_extensions\unqlite">
       <UniqueIdentifier>{220ff569-ecf6-4888-9abb-24a8bfd17973}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\quick-src\lua_extensions\sproto">
+      <UniqueIdentifier>{ca75df84-f1ac-4aac-92a2-cf13945ed1ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\quick-src\lua_extensions\lpeg">
+      <UniqueIdentifier>{8d438074-a2dd-4316-8006-592a849bf3fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -426,6 +432,30 @@
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\unqlite.h">
       <Filter>Classes\quick-src\lua_extensions\unqlite</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\sproto\msvcint.h">
+      <Filter>Classes\quick-src\lua_extensions\sproto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\sproto\sproto.h">
+      <Filter>Classes\quick-src\lua_extensions\sproto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.h">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.h">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.h">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lptree.h">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lptypes.h">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpvm.h">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -634,6 +664,27 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\unqlite\unqlite.c">
       <Filter>Classes\quick-src\lua_extensions\unqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\sproto\lsproto.c">
+      <Filter>Classes\quick-src\lua_extensions\sproto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\sproto\sproto.c">
+      <Filter>Classes\quick-src\lua_extensions\sproto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.c">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.c">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.c">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lptree.c">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpvm.c">
+      <Filter>Classes\quick-src\lua_extensions\lpeg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

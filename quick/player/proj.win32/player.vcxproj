@@ -71,7 +71,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_PROTOBUF=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_PROTOBUF=1;CC_USE_SPROTO=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -128,7 +128,7 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
       <ExceptionHandling>
       </ExceptionHandling>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_PROTOBUF=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_PROTOBUF=1;CC_USE_SPROTO=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -185,7 +185,15 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg_gl_utils.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_image.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lptree.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lptypes.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpvm.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\sproto\msvcint.h" />
+    <ClInclude Include="..\..\lib\quick-src\lua_extensions\sproto\sproto.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\lunqlite.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\unqlite.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -292,6 +300,62 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg.c" />
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lptree.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpvm.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\sproto\lsproto.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\sproto\sproto.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\unqlite\lunqlite.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
