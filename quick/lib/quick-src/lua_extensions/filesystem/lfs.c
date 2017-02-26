@@ -550,7 +550,7 @@ static int dir_iter_factory (lua_State *L) {
 /*
 ** Creates directory metatable.
 */
-static int dir_create_meta (lua_State *L) {
+static void dir_create_meta (lua_State *L) {
         luaL_newmetatable (L, DIR_METATABLE);
 
         /* Method table */
@@ -564,13 +564,15 @@ static int dir_create_meta (lua_State *L) {
         lua_setfield(L, -2, "__index");
         lua_pushcfunction (L, dir_close);
         lua_setfield (L, -2, "__gc");
-        return 1;
+
+        /* remove metatable from stack */
+        lua_pop(L, 1);
 }
 
 /*
 ** Creates lock metatable.
 */
-static int lock_create_meta (lua_State *L) {
+static void lock_create_meta (lua_State *L) {
         luaL_newmetatable (L, LOCK_METATABLE);
 
         /* Method table */
@@ -582,7 +584,9 @@ static int lock_create_meta (lua_State *L) {
         lua_setfield(L, -2, "__index");
         lua_pushcfunction(L, lfs_unlock_dir);
         lua_setfield(L, -2, "__gc");
-        return 1;
+    
+        /* remove metatable from stack */
+        lua_pop(L, 1);
 }
 
 

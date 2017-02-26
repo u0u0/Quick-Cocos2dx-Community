@@ -495,8 +495,9 @@ int luaopen_pb (lua_State *L)
     lua_pushvalue(L, -1);
     lua_setfield(L, -2, "__index");
     luaL_register(L, NULL, _c_iostring_m);
+    /* remove metatable from stack */
+    lua_pop(L, 1);
 
     luaL_register(L, "pb", _pb);
-    lua_pop(L, 2);
     return 1;
 } 

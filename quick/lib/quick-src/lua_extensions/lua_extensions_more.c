@@ -37,6 +37,9 @@ static luaL_Reg luax_exts[] = {
 #if CC_USE_UNQLITE
 	{"unqlite", luaopen_lunqlite},
 #endif
+#if CC_USE_PROTOBUF
+    {"pb", luaopen_pb},
+#endif
     {NULL, NULL}
 };
 
@@ -51,11 +54,6 @@ void luaopen_lua_extensions_more(lua_State *L)
         lua_pushcfunction(L, lib->func);
         lua_setfield(L, -2, lib->name);
     }
-	
-#if CC_USE_PROTOBUF
-	//register protobuf
-	luaopen_pb(L);
-#endif
 	
     lua_pop(L, 2);
 }

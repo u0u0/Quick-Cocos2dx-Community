@@ -146,7 +146,7 @@ static const luaL_reg unqlitelib[] = {
 int luaopen_lunqlite(lua_State *L)
 {
 	 luaL_register(L, "unqlite", unqlitelib);
-	 return 0;
+	 return 1;
 }
 
 #if __cplusplus
