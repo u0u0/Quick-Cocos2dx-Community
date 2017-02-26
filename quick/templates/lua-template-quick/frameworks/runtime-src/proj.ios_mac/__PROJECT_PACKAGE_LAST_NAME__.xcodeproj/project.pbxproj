@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A532A421E62F3D8004E2B32 /* lsproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A3E1E62F3D8004E2B32 /* lsproto.c */; };
+		0A532A431E62F3D8004E2B32 /* lsproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A3E1E62F3D8004E2B32 /* lsproto.c */; };
+		0A532A441E62F3D8004E2B32 /* sproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A401E62F3D8004E2B32 /* sproto.c */; };
+		0A532A451E62F3D8004E2B32 /* sproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A401E62F3D8004E2B32 /* sproto.c */; };
+		0A532A5C1E62FB06004E2B32 /* lpcap.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A511E62FB06004E2B32 /* lpcap.c */; };
+		0A532A5D1E62FB06004E2B32 /* lpcap.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A511E62FB06004E2B32 /* lpcap.c */; };
+		0A532A5E1E62FB06004E2B32 /* lpcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A531E62FB06004E2B32 /* lpcode.c */; };
+		0A532A5F1E62FB06004E2B32 /* lpcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A531E62FB06004E2B32 /* lpcode.c */; };
+		0A532A601E62FB06004E2B32 /* lpprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A551E62FB06004E2B32 /* lpprint.c */; };
+		0A532A611E62FB06004E2B32 /* lpprint.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A551E62FB06004E2B32 /* lpprint.c */; };
+		0A532A621E62FB06004E2B32 /* lptree.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A571E62FB06004E2B32 /* lptree.c */; };
+		0A532A631E62FB06004E2B32 /* lptree.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A571E62FB06004E2B32 /* lptree.c */; };
+		0A532A641E62FB06004E2B32 /* lpvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A5A1E62FB06004E2B32 /* lpvm.c */; };
+		0A532A651E62FB06004E2B32 /* lpvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A5A1E62FB06004E2B32 /* lpvm.c */; };
 		0A54F1641BC17DE60018E100 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A54F1631BC17DE60018E100 /* AppController.mm */; };
 		0A8541271E2B3139002A5473 /* lunqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A8541231E2B3139002A5473 /* lunqlite.c */; };
 		0A8541281E2B3139002A5473 /* lunqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A8541231E2B3139002A5473 /* lunqlite.c */; };
@@ -249,6 +263,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A532A3E1E62F3D8004E2B32 /* lsproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lsproto.c; path = "quick/lib/quick-src/lua_extensions/sproto/lsproto.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A3F1E62F3D8004E2B32 /* msvcint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = msvcint.h; path = "quick/lib/quick-src/lua_extensions/sproto/msvcint.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A401E62F3D8004E2B32 /* sproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sproto.c; path = "quick/lib/quick-src/lua_extensions/sproto/sproto.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A411E62F3D8004E2B32 /* sproto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sproto.h; path = "quick/lib/quick-src/lua_extensions/sproto/sproto.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A511E62FB06004E2B32 /* lpcap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpcap.c; path = "quick/lib/quick-src/lua_extensions/lpeg/lpcap.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A521E62FB06004E2B32 /* lpcap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lpcap.h; path = "quick/lib/quick-src/lua_extensions/lpeg/lpcap.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A531E62FB06004E2B32 /* lpcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpcode.c; path = "quick/lib/quick-src/lua_extensions/lpeg/lpcode.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A541E62FB06004E2B32 /* lpcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lpcode.h; path = "quick/lib/quick-src/lua_extensions/lpeg/lpcode.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A551E62FB06004E2B32 /* lpprint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpprint.c; path = "quick/lib/quick-src/lua_extensions/lpeg/lpprint.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A561E62FB06004E2B32 /* lpprint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lpprint.h; path = "quick/lib/quick-src/lua_extensions/lpeg/lpprint.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A571E62FB06004E2B32 /* lptree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lptree.c; path = "quick/lib/quick-src/lua_extensions/lpeg/lptree.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A581E62FB06004E2B32 /* lptree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lptree.h; path = "quick/lib/quick-src/lua_extensions/lpeg/lptree.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A591E62FB06004E2B32 /* lptypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lptypes.h; path = "quick/lib/quick-src/lua_extensions/lpeg/lptypes.h"; sourceTree = QUICK_V3_ROOT; };
+		0A532A5A1E62FB06004E2B32 /* lpvm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpvm.c; path = "quick/lib/quick-src/lua_extensions/lpeg/lpvm.c"; sourceTree = QUICK_V3_ROOT; };
+		0A532A5B1E62FB06004E2B32 /* lpvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lpvm.h; path = "quick/lib/quick-src/lua_extensions/lpeg/lpvm.h"; sourceTree = QUICK_V3_ROOT; };
 		0A54F1621BC17DE60018E100 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		0A54F1631BC17DE60018E100 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		0A8541231E2B3139002A5473 /* lunqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lunqlite.c; path = "quick/lib/quick-src/lua_extensions/unqlite/lunqlite.c"; sourceTree = QUICK_V3_ROOT; };
@@ -564,6 +593,35 @@
 				0AC1AE921DB8B629006D4001 /* pb.h */,
 			);
 			path = protobuf;
+			sourceTree = "<group>";
+		};
+		0A532A3D1E62F3D8004E2B32 /* sproto */ = {
+			isa = PBXGroup;
+			children = (
+				0A532A3E1E62F3D8004E2B32 /* lsproto.c */,
+				0A532A3F1E62F3D8004E2B32 /* msvcint.h */,
+				0A532A401E62F3D8004E2B32 /* sproto.c */,
+				0A532A411E62F3D8004E2B32 /* sproto.h */,
+			);
+			name = sproto;
+			sourceTree = "<group>";
+		};
+		0A532A501E62FB06004E2B32 /* lpeg */ = {
+			isa = PBXGroup;
+			children = (
+				0A532A511E62FB06004E2B32 /* lpcap.c */,
+				0A532A521E62FB06004E2B32 /* lpcap.h */,
+				0A532A531E62FB06004E2B32 /* lpcode.c */,
+				0A532A541E62FB06004E2B32 /* lpcode.h */,
+				0A532A551E62FB06004E2B32 /* lpprint.c */,
+				0A532A561E62FB06004E2B32 /* lpprint.h */,
+				0A532A571E62FB06004E2B32 /* lptree.c */,
+				0A532A581E62FB06004E2B32 /* lptree.h */,
+				0A532A591E62FB06004E2B32 /* lptypes.h */,
+				0A532A5A1E62FB06004E2B32 /* lpvm.c */,
+				0A532A5B1E62FB06004E2B32 /* lpvm.h */,
+			);
+			name = lpeg;
 			sourceTree = "<group>";
 		};
 		0A8541221E2B3139002A5473 /* unqlite */ = {
@@ -1002,6 +1060,8 @@
 		9F91066A19F5614800AD5CAB /* lua_extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0A532A501E62FB06004E2B32 /* lpeg */,
+				0A532A3D1E62F3D8004E2B32 /* sproto */,
 				0A8541221E2B3139002A5473 /* unqlite */,
 				0A2F057D1DB8B29400276572 /* protobuf */,
 				9F91066C19F5614800AD5CAB /* cjson */,
@@ -1331,9 +1391,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A532A451E62F3D8004E2B32 /* sproto.c in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				49C656611A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
 				9F91079F19F5704400AD5CAB /* ConsoleWindowController.m in Sources */,
+				0A532A5F1E62FB06004E2B32 /* lpcode.c in Sources */,
 				0AC1AE941DB8B629006D4001 /* pb.c in Sources */,
 				0A85412A1E2B3139002A5473 /* unqlite.c in Sources */,
 				9F91076F19F5614900AD5CAB /* lua_cjson.c in Sources */,
@@ -1341,6 +1403,7 @@
 				C033B51D191B337200D06937 /* VisibleRect.cpp in Sources */,
 				0A8541281E2B3139002A5473 /* lunqlite.c in Sources */,
 				9F91074519F5614900AD5CAB /* SBJsonParser.m in Sources */,
+				0A532A651E62FB06004E2B32 /* lpvm.c in Sources */,
 				9F91074D19F5614900AD5CAB /* ReachabilityIOSMac.m in Sources */,
 				9F9106D119F5614900AD5CAB /* CCHueFilter.cpp in Sources */,
 				49C656591A39A1A200603AF5 /* nanovg.c in Sources */,
@@ -1367,10 +1430,13 @@
 				9F91074B19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
 				9F91072319F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				9F91077D19F5614900AD5CAB /* sqlite3.c in Sources */,
+				0A532A611E62FB06004E2B32 /* lpprint.c in Sources */,
 				49C656571A39A1A200603AF5 /* NVGNode.cpp in Sources */,
 				9F91075119F5614900AD5CAB /* CCNative.mm in Sources */,
 				9F9106B519F5614900AD5CAB /* libbase64.c in Sources */,
+				0A532A5D1E62FB06004E2B32 /* lpcap.c in Sources */,
 				49C6565F1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */,
+				0A532A431E62F3D8004E2B32 /* lsproto.c in Sources */,
 				49C656551A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */,
 				9F91075319F5614900AD5CAB /* CCNativeMac.mm in Sources */,
 				9F91075519F5614900AD5CAB /* OpenUDIDMac.m in Sources */,
@@ -1387,6 +1453,7 @@
 				9F91074F19F5614900AD5CAB /* CCCryptoMac.mm in Sources */,
 				9F9106C919F5614900AD5CAB /* CCFilter.cpp in Sources */,
 				9F91074719F5614900AD5CAB /* SBJsonWriter.m in Sources */,
+				0A532A631E62FB06004E2B32 /* lptree.c in Sources */,
 				9F91078E19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */,
 				9F9106E119F5614900AD5CAB /* ccFilterShaders.cpp in Sources */,
 				0A54F1641BC17DE60018E100 /* AppController.mm in Sources */,
@@ -1414,16 +1481,20 @@
 				9F9106DC19F5614900AD5CAB /* CCTestFilter.cpp in Sources */,
 				49C656601A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
 				9F91074A19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
+				0A532A441E62F3D8004E2B32 /* sproto.c in Sources */,
 				9F91071E19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */,
 				9F9106D219F5614900AD5CAB /* CCMaskFilter.cpp in Sources */,
 				9F9106DE19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */,
 				9F9106CC19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				0A532A421E62F3D8004E2B32 /* lsproto.c in Sources */,
+				0A532A621E62FB06004E2B32 /* lptree.c in Sources */,
 				9F91074019F5614900AD5CAB /* SBJSON.m in Sources */,
 				9F91073E19F5614900AD5CAB /* CCStoreReceiptVerifyRequestIOS.mm in Sources */,
 				9F91072219F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				9F91076819F5614900AD5CAB /* CCStoreProduct.cpp in Sources */,
+				0A532A5C1E62FB06004E2B32 /* lpcap.c in Sources */,
 				9F91072619F5614900AD5CAB /* CCHTTPRequest.cpp in Sources */,
 				9F9106C219F5614900AD5CAB /* CCCustomFilter.cpp in Sources */,
 				9F9106BE19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */,
@@ -1437,6 +1508,7 @@
 				9F91079419F56A6600AD5CAB /* ProjectConfig.cpp in Sources */,
 				9F9106C019F5614900AD5CAB /* CCContrastFilter.cpp in Sources */,
 				0A8541291E2B3139002A5473 /* unqlite.c in Sources */,
+				0A532A5E1E62FB06004E2B32 /* lpcode.c in Sources */,
 				49C656581A39A1A200603AF5 /* nanovg.c in Sources */,
 				49C656561A39A1A200603AF5 /* NVGNode.cpp in Sources */,
 				9F9106D419F5614900AD5CAB /* CCRGBFilter.cpp in Sources */,
@@ -1455,11 +1527,13 @@
 				9F91072819F5614900AD5CAB /* CCNetwork.cpp in Sources */,
 				9F91078719F561CD00AD5CAB /* HelperFunc.cpp in Sources */,
 				9F91073C19F5614900AD5CAB /* CCStorePaymentTransactionWrapper.mm in Sources */,
+				0A532A641E62FB06004E2B32 /* lpvm.c in Sources */,
 				9F91070E19F5614900AD5CAB /* FilterShaders.cpp in Sources */,
 				9F9106C419F5614900AD5CAB /* CCDropShadowFilter.cpp in Sources */,
 				9F9106B419F5614900AD5CAB /* libbase64.c in Sources */,
 				C033B51C191B337200D06937 /* VisibleRect.cpp in Sources */,
 				9F91076C19F5614900AD5CAB /* fpconv.c in Sources */,
+				0A532A601E62FB06004E2B32 /* lpprint.c in Sources */,
 				9F9106C619F5614900AD5CAB /* CCExposureFilter.cpp in Sources */,
 				9F9106DA19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */,
 				0A8541271E2B3139002A5473 /* lunqlite.c in Sources */,
@@ -1586,6 +1660,7 @@
 					"CC_USE_CURL=1",
 					"CC_USE_UNQLITE=1",
 					"CC_USE_PROTOBUF=1",
+					"CC_USE_SPROTO=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1636,6 +1711,7 @@
 					"CC_USE_CURL=1",
 					"CC_USE_UNQLITE=1",
 					"CC_USE_PROTOBUF=1",
+					"CC_USE_SPROTO=1",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

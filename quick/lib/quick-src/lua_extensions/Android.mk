@@ -27,6 +27,15 @@ ifeq ($(CC_USE_PROTOBUF),1)
 LOCAL_SRC_FILES +=$(LOCAL_PATH)/protobuf/pb.c
 endif
 
+ifeq ($(CC_USE_SPROTO),1)
+LOCAL_SRC_FILES +=$(LOCAL_PATH)/sproto/sproto.c \
+				  $(LOCAL_PATH)/sproto/lsproto.c \
+				  $(LOCAL_PATH)/lpeg/lpcap.c \
+				  $(LOCAL_PATH)/lpeg/lpcode.c \
+				  $(LOCAL_PATH)/lpeg/lpprint.c \
+				  $(LOCAL_PATH)/lpeg/lptree.c \
+				  $(LOCAL_PATH)/lpeg/lpvm.c
+endif
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ \
 	$(LOCAL_PATH)/cjson \
