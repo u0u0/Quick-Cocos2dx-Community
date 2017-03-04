@@ -1,0 +1,9 @@
+{
+  "packageUrl": "127.0.0.1:3000/hotupdate/", 
+  "searchPaths": [], 
+  "assets": {}, 
+  "remoteVersionUrl": "127.0.0.1:3000/hotupdate/res/version.manifest", 
+  "version": "1.0.1", 
+  "engineVersion": "Cocos2dx-lua 3.6.5", 
+  "remoteManifestUrl": "127.0.0.1:3000/hotupdate/res/project.manifest"
+}

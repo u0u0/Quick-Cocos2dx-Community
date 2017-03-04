@@ -10,8 +10,17 @@ function MyApp:ctor()
 end
 
 function MyApp:run()
-    cc.FileUtils:getInstance():addSearchPath("res/")
-    self:enterScene("MainScene")
+	local writePath = cc.FileUtils:getInstance():getWritablePath() 
+	cc.FileUtils:getInstance():addSearchPath(writePath .. "hotupdate/res/")
+	cc.FileUtils:getInstance():addSearchPath("res/")
+
+	print("== listing engine search path")
+	local searchPaths = cc.FileUtils:getInstance():getSearchPaths()
+	for k,v in pairs(searchPaths) do
+		print(k,v)
+	end
+
+	self:enterScene("MainScene")
 end
 
 return MyApp

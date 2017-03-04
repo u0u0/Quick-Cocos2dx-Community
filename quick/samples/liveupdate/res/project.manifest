@@ -1,0 +1,19 @@
+{
+  "assets": {
+    "res/project.manifest": {
+      "md5": "c698f9db0b5994c06441ea27a6940ef2"
+    }, 
+    "res/up2.png": {
+      "md5": "d9e42641b74b7271fd35a1e82b2529fe"
+    }, 
+    "res/version.manifest": {
+      "md5": "05746fd5e5e73976937d44dd2fb9099d"
+    }
+  }, 
+  "engineVersion": "Cocos2dx-lua 3.6.5", 
+  "packageUrl": "127.0.0.1:3000/hotupdate/", 
+  "remoteManifestUrl": "127.0.0.1:3000/hotupdate/res/project.manifest", 
+  "remoteVersionUrl": "127.0.0.1:3000/hotupdate/res/version.manifest", 
+  "searchPaths": [], 
+  "version": "1.0.0"
+}

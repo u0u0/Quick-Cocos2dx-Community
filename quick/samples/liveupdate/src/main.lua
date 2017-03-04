@@ -6,8 +6,6 @@ function __G__TRACKBACK__(errorMessage)
     print("----------------------------------------")
 end
 
-package.path = package.path .. ";src/"
---添加资源目录
-cc.FileUtils:getInstance():addSearchPath("res/")
+package.path = package.path .. ";src/?.lua"
 cc.FileUtils:getInstance():setPopupNotify(false)
 require("app.MyApp").new():run()
