@@ -193,6 +193,9 @@ bool HTTPRequest::start(void)
     retain();
 
     createURLConnectJava();
+	if (!m_httpConnect) {
+		return false;
+	}
     setRequestMethodJava();
     setTimeoutJava(m_nTimeOut*1000);
 
