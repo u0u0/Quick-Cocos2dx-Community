@@ -1,3 +1,35 @@
+Quick-Cocos2dx-Community v3.6.5 release
+
+[新增]	Win32 平台升级到 VS 2015 编译，放弃 VS 2013 支持。
+[新增]	iOS 的 IAP 支付封装，支持 iOS 7 新增的 userInfo 属性。（感谢 ShineWu）
+[新增]	libwebsockets 添加 wss 支持，并支持自定义证书。
+[新增]	Websocket 加入编译控制宏：CC_USE_WEBSOCKET。
+[新增]	添加 unqlite 数据库支持，并添加编译控制宏。（感谢 dancingfish）
+[新增]	新加 Webview 的 Lua 绑定。（感谢 ShineWu）
+[新增]	CCS 添加 setLastFrameCallFunc 事件绑定。(感谢马超)
+[新增]	添加 protobuf 编译控制宏：CC_USE_PROTOBUF。
+[新增]	新加 Sproto，并加入编译控制宏：CC_USE_SPROTO。
+
+[更新]	libwebsockets 更新到 1.7.9。经测试，这个版本可以同时支持 ipv6 和 wss。
+[更新]	Android Studo模板工程更新，以支持低版本SDK的编译。
+[更新]	重写热更新Demo，并附加说明文档：热更新 Demo 说明。(感谢SamSara)
+
+[修正]	Android r10d release build fix，去掉LOCAL_ARM_MODE=arm。Application.mk 中使用 NDK_TOOLCHAIN_VERSION=4.9 能正确编译release，这样保持了引擎与第三方库编译配置的一致性。
+[修正]	CCS clone 节点异常修正。
+[修正]	修复因为AudioEngine::stop或audioEngine::stopAll引起的界面冻结。（感谢 8liang）
+[修正]	Win32和Mac可以正确获取到键盘的”Pressed”和”Released”事件了。
+[修正]	Player在显示超出显示器支持的窗口大小时，会自动缩放在屏幕内显示，这样可保证触摸点击不会漂移。
+[修正]	display.addSpriteFrames 异步加载图片，支持 display.setTexturePixelFormat 指定图片加载格式。
+[修正]	修正“device.openURL”在 android 上崩溃的问题。
+[修正]	修正AssetsManager: when last hot fix was interrupted, the next hot fix will dump。（感谢 HantaoSun）
+[修正]	同步cocos2dx的android videoplay，修复ccexp.VideoPlayer概率性黑屏。
+[修正]	Android 的 http 使用 CC_USE_CURL 宏控制启动 Java http 还是 CURL http。
+[修正]	Java http 异常处理优化。
+[修正]	ScriptsCompiler.php 解决每次执行lua代码打包脚本，即使lua文件无任何改动，zip包的md5值也不一样的问题。
+[修正]	修正metatable 的 __tostring 不能正常被 print 调用的bug修正。
+[修正]	Quick/lib下的第三方 lua 库的 stack 异常修正。
+[修正]	Android 的 TTF lable 修正：input is not valid Modified UTF-8: illegal start byte。通常是由输入法的emoji表情导致。
+
 Quick-Cocos2dx-Community v3.6.4 release
 
 [新增]	Android Studio 打包支持。
