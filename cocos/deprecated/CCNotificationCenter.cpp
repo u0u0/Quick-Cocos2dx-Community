@@ -196,7 +196,7 @@ void __NotificationCenter::postNotification(const std::string& name, Ref *sender
         {
             if (0 == observer->getHandler())
             {
-                observer->performSelector(sender);
+                observer->callSelector(sender);
             }
         }
     }
@@ -254,7 +254,7 @@ NotificationObserver::~NotificationObserver()
 
 }
 
-void NotificationObserver::performSelector(Ref *sender)
+void NotificationObserver::callSelector(Ref *sender)
 {
     if (_target)
     {

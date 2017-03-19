@@ -155,7 +155,7 @@ public:
      * @js NA
      * @lua NA
      */
-    void performSelector(Ref *sender);
+    void callSelector(Ref *sender);
     
     // Getters / Setters
     /**
