@@ -457,6 +457,8 @@ protected:
      */
     bool checkFocusEnabledChild()const;
     
+    virtual void setCameraMask(unsigned short mask, bool applyChildren = true) override;
+    
 protected:
     
     //background
