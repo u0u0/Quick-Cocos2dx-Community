@@ -579,30 +579,30 @@ void ScrollView::onAfterDraw()
 void ScrollView::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags)
 {
     // quick return if not visible
-    if (!isVisible() || !isVisitableByVisitingCamera())
+    if (!isVisible())
     {
         return;
     }
-
+    
     uint32_t flags = processParentFlags(parentTransform, parentFlags);
-
+    
     // IMPORTANT:
     // To ease the migration to v3.0, we still support the Mat4 stack,
     // but it is deprecated and your code should not rely on it
     Director* director = Director::getInstance();
-    CCASSERT(nullptr != director, "Director is null when seting matrix stack");
+    CCASSERT(nullptr != director, "Director is null when setting matrix stack");
     director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
     director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
-
+    
     this->beforeDraw();
     bool visibleByCamera = isVisitableByVisitingCamera();
-
+    
     if (!_children.empty())
     {
         int i=0;
-		
-		// draw children zOrder < 0
-        for( ; i < _children.size(); i++ )
+        
+        // draw children zOrder < 0
+        for(auto size = _children.size(); i < size; i++)
         {
             Node *child = _children.at(i);
             if ( child->getLocalZOrder() < 0 )
@@ -614,25 +614,25 @@ void ScrollView::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t
                 break;
             }
         }
-		
-		// this draw
+        
+        // this draw
         if (visibleByCamera)
             this->draw(renderer, _modelViewTransform, flags);
         
         // draw children zOrder >= 0
-        for( ; i < _children.size(); i++ )
+        for(auto size = _children.size(); i < size; i++)
         {
-			Node *child = _children.at(i);
-			child->visit(renderer, _modelViewTransform, flags);
+            Node *child = _children.at(i);
+            child->visit(renderer, _modelViewTransform, flags);
         }
     }
     else if (visibleByCamera)
     {
         this->draw(renderer, _modelViewTransform, flags);
     }
-
+    
     this->afterDraw();
-
+    
     director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 }
 

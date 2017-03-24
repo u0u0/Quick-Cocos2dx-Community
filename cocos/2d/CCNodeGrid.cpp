@@ -86,36 +86,36 @@ void NodeGrid::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t p
         return;
     }
     
-    _groupCommand.init(_globalZOrder);
-    renderer->addCommand(&_groupCommand);
-    renderer->pushGroup(_groupCommand.getRenderQueueID());
-
     bool dirty = (parentFlags & FLAGS_TRANSFORM_DIRTY) || _transformUpdated;
     if(dirty)
         _modelViewTransform = this->transform(parentTransform);
     _transformUpdated = false;
-
+    
+    _groupCommand.init(_globalZOrder);
+    renderer->addCommand(&_groupCommand);
+    renderer->pushGroup(_groupCommand.getRenderQueueID());
+    
     // IMPORTANT:
     // To ease the migration to v3.0, we still support the Mat4 stack,
     // but it is deprecated and your code should not rely on it
     Director* director = Director::getInstance();
-    CCASSERT(nullptr != director, "Director is null when seting matrix stack");
+    CCASSERT(nullptr != director, "Director is null when setting matrix stack");
     
     director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
     director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
-
+    
     Director::Projection beforeProjectionType = Director::Projection::DEFAULT;
     if(_nodeGrid && _nodeGrid->isActive())
     {
         beforeProjectionType = Director::getInstance()->getProjection();
         _nodeGrid->set2DProjection();
     }
-
+    
     _gridBeginCommand.init(_globalZOrder);
     _gridBeginCommand.func = CC_CALLBACK_0(NodeGrid::onGridBeginDraw, this);
     renderer->addCommand(&_gridBeginCommand);
-
-
+    
+    
     if(_gridTarget)
     {
         _gridTarget->visit(renderer, _modelViewTransform, dirty);
@@ -123,15 +123,15 @@ void NodeGrid::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t p
     
     int i = 0;
     bool visibleByCamera = isVisitableByVisitingCamera();
-
+    
     if(!_children.empty())
     {
         sortAllChildren();
         // draw children zOrder < 0
-        for( ; i < _children.size(); i++ )
+        for(auto size = _children.size(); i < size; ++i)
         {
             auto node = _children.at(i);
-
+            
             if ( node && node->getLocalZOrder() < 0 )
                 node->visit(renderer, _modelViewTransform, dirty);
             else
@@ -140,8 +140,8 @@ void NodeGrid::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t p
         // self draw,currently we have nothing to draw on NodeGrid, so there is no need to add render command
         if (visibleByCamera)
             this->draw(renderer, _modelViewTransform, dirty);
-
-        for(auto it=_children.cbegin()+i; it != _children.cend(); ++it) {
+        
+        for(auto it=_children.cbegin()+i, itCend = _children.cend(); it != itCend; ++it) {
             (*it)->visit(renderer, _modelViewTransform, dirty);
         }
     }
@@ -159,13 +159,13 @@ void NodeGrid::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t p
         // restore projection
         director->setProjection(beforeProjectionType);
     }
-
+    
     _gridEndCommand.init(_globalZOrder);
     _gridEndCommand.func = CC_CALLBACK_0(NodeGrid::onGridEndDraw, this);
     renderer->addCommand(&_gridEndCommand);
-
+    
     renderer->popGroup();
- 
+    
     director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 }
 

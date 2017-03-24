@@ -1078,7 +1078,7 @@ void Label::setCameraMask(unsigned short mask, bool applyChildren)
 
 void Label::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags)
 {
-    if (! _visible || _originalUTF8String.empty() || !isVisitableByVisitingCamera())
+    if (!_visible || _originalUTF8String.empty())
     {
         return;
     }
@@ -1106,6 +1106,12 @@ void Label::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t pare
         _transformDirty = _inverseDirty = true;
 
         _shadowDirty = false;
+    }
+    
+    bool visibleByCamera = isVisitableByVisitingCamera();
+    if (!_textSprite && !visibleByCamera)
+    {
+        return;
     }
 
     // IMPORTANT:
