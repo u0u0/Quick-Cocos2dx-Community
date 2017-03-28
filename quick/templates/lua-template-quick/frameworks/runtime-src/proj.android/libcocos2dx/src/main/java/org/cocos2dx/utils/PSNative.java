@@ -193,7 +193,7 @@ public class PSNative {
 	}
 
 	private static String getMacAddress() {
-		WifiManager wifi = (WifiManager) mContext
+		WifiManager wifi = (WifiManager) mContext.getApplicationContext()
 				.getSystemService(Context.WIFI_SERVICE);
 		WifiInfo info = wifi.getConnectionInfo();
 		if (info == null)
