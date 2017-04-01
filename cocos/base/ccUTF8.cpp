@@ -89,7 +89,7 @@ bool isCJKUnicode(char16_t ch)
         || (ch >= 0xAC00 && ch <= 0xD7AF)   // Hangul Syllables
         || (ch >= 0xF900 && ch <= 0xFAFF)   // CJK Compatibility Ideographs
         || (ch >= 0xFE30 && ch <= 0xFE4F)   // CJK Compatibility Forms
-        || (ch >= 0x31C0 && ch <= 0x4DFF);  // Other exiensions
+        || (ch >= 0x31C0 && ch <= 0x4DFF);  // Other extensions
 }
 
 void trimUTF16Vector(std::vector<char16_t>& str)
@@ -205,9 +205,8 @@ bool iscjk_unicode(unsigned short ch)
 }
 
 
-long cc_utf8_strlen (const char * p, int max)
+long cc_utf8_strlen (const char * p, int /*max*/)
 {
-    CC_UNUSED_PARAM(max);
     if (p == nullptr)
         return -1;
     return StringUtils::getCharacterCountInUTF8String(p);
@@ -248,11 +247,12 @@ unsigned short* cc_utf8_to_utf16(const char* str_old, int length/* = -1*/, int* 
     unsigned short* ret = nullptr;
     
     std::u16string outUtf16;
-    bool succeed = StringUtils::UTF8ToUTF16(str_old, outUtf16);
+    std::string inUtf8 = length == -1 ? std::string(str_old) : std::string(str_old, length);
+    bool succeed = StringUtils::UTF8ToUTF16(inUtf8, outUtf16);
     
     if (succeed)
     {
-        ret = new unsigned short[outUtf16.length() + 1];
+        ret = new (std::nothrow) unsigned short[outUtf16.length() + 1];
         ret[outUtf16.length()] = 0;
         memcpy(ret, outUtf16.data(), outUtf16.length() * sizeof(unsigned short));
         if (rUtf16Size)
@@ -266,8 +266,8 @@ unsigned short* cc_utf8_to_utf16(const char* str_old, int length/* = -1*/, int* 
 
 char * cc_utf16_to_utf8 (const unsigned short  *str,
                   int             len,
-                  long            *items_read,
-                  long            *items_written)
+                  long            * /*items_read*/,
+                  long            * /*items_written*/)
 {
     if (str == nullptr)
         return nullptr;
@@ -287,7 +287,7 @@ char * cc_utf16_to_utf8 (const unsigned short  *str,
     
     if (succeed)
     {
-        ret = new char[outUtf8.length() + 1];
+        ret = new (std::nothrow) char[outUtf8.length() + 1];
         ret[outUtf8.length()] = '\0';
         memcpy(ret, outUtf8.data(), outUtf8.length());
     }

@@ -2,7 +2,7 @@
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
-Copyright (c) 2013-2014 Chukong Technologies Inc.
+Copyright (c) 2013-2016 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -147,7 +147,7 @@ void TileMapAtlas::setTile(const Color3B& tile, const Vec2& position)
         int num = _posToAtlasIndex[key].asInt();
 
         this->updateAtlasValueAt(position, tile, num);
-    }    
+    }
 }
 
 Color3B TileMapAtlas::getTileAt(const Vec2& position) const

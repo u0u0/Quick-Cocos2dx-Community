@@ -306,7 +306,7 @@ public:
         _state = SAX_NONE;
     }
 
-    void textHandler(void *ctx, const char *ch, int len)
+    void textHandler(void *ctx, const char *ch, size_t len)
     {
         CC_UNUSED_PARAM(ctx);
         if (_state == SAX_NONE)
