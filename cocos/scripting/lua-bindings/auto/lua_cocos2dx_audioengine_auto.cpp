@@ -961,7 +961,7 @@ int lua_register_cocos2dx_audioengine_AudioEngine(lua_State* tolua_S)
         tolua_function(tolua_S,"resumeAll", lua_cocos2dx_audioengine_AudioEngine_resumeAll);
         tolua_function(tolua_S,"stopAll", lua_cocos2dx_audioengine_AudioEngine_stopAll);
         tolua_function(tolua_S,"pause", lua_cocos2dx_audioengine_AudioEngine_pause);
-        tolua_function(tolua_S,"end", lua_cocos2dx_audioengine_AudioEngine_end);
+        tolua_function(tolua_S,"endToLua", lua_cocos2dx_audioengine_AudioEngine_end);
         tolua_function(tolua_S,"getMaxAudioInstance", lua_cocos2dx_audioengine_AudioEngine_getMaxAudioInstance);
         tolua_function(tolua_S,"getCurrentTime", lua_cocos2dx_audioengine_AudioEngine_getCurrentTime);
         tolua_function(tolua_S,"setMaxAudioInstance", lua_cocos2dx_audioengine_AudioEngine_setMaxAudioInstance);

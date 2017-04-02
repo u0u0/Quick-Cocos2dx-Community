@@ -44,6 +44,9 @@ Configuration::Configuration()
 , _supportsBGRA8888(false)
 , _supportsDiscardFramebuffer(false)
 , _supportsShareableVAO(false)
+, _supportsOESDepth24(false)
+, _supportsOESPackedDepthStencil(false)
+, _supportsOESMapBuffer(false)
 , _maxSamplesAllowed(0)
 , _maxTextureUnits(0)
 , _glExtensions(nullptr)
@@ -133,14 +136,25 @@ void Configuration::gatherGPUInfo()
     _supportsNPOT = true;
 	_valueDict["gl.supports_NPOT"] = Value(_supportsNPOT);
 	
-    _supportsBGRA8888 = checkForGLExtension("GL_IMG_texture_format_BGRA888");
+    _supportsBGRA8888 = checkForGLExtension("GL_IMG_texture_format_BGRA8888");
 	_valueDict["gl.supports_BGRA8888"] = Value(_supportsBGRA8888);
 
     _supportsDiscardFramebuffer = checkForGLExtension("GL_EXT_discard_framebuffer");
 	_valueDict["gl.supports_discard_framebuffer"] = Value(_supportsDiscardFramebuffer);
 
     _supportsShareableVAO = checkForGLExtension("vertex_array_object");
-	_valueDict["gl.supports_vertex_array_object"] = Value(_supportsShareableVAO);
+    _valueDict["gl.supports_vertex_array_object"] = Value(_supportsShareableVAO);
+
+    _supportsOESMapBuffer = checkForGLExtension("GL_OES_mapbuffer");
+    _valueDict["gl.supports_OES_map_buffer"] = Value(_supportsOESMapBuffer);
+
+    _supportsOESDepth24 = checkForGLExtension("GL_OES_depth24");
+    _valueDict["gl.supports_OES_depth24"] = Value(_supportsOESDepth24);
+
+    
+    _supportsOESPackedDepthStencil = checkForGLExtension("GL_OES_packed_depth_stencil");
+    _valueDict["gl.supports_OES_packed_depth_stencil"] = Value(_supportsOESPackedDepthStencil);
+
 
     CHECK_GL_ERROR_DEBUG();
 }
@@ -181,7 +195,7 @@ bool Configuration::checkForGLExtension(const std::string &searchName) const
 
 //
 // getters for specific variables.
-// Mantained for backward compatiblity reasons only.
+// Maintained for backward compatibility reasons only.
 //
 int Configuration::getMaxTextureSize() const
 {
@@ -245,6 +259,33 @@ bool Configuration::supportsShareableVAO() const
 #else
     return false;
 #endif
+}
+
+bool Configuration::supportsMapBuffer() const
+{
+    // Fixes Github issue #16123
+    //
+    // XXX: Fixme. Should check GL ES and not iOS or Android
+    // For example, linux could be compiled with GL ES. Or perhaps in the future Android will
+    // support OpenGL. This is because glMapBufferOES() is an extension of OpenGL ES. And glMapBuffer()
+    // is always implemented in OpenGL.
+
+    // XXX: Warning. On iOS this is always `true`. Avoiding the comparison.
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    return _supportsOESMapBuffer;
+#else
+    return true;
+#endif
+}
+
+bool Configuration::supportsOESDepth24() const
+{
+    return _supportsOESDepth24;
+}
+
+bool Configuration::supportsOESPackedDepthStencil() const
+{
+    return _supportsOESPackedDepthStencil;
 }
 
 int Configuration::getMaxSupportDirLightInShader() const
@@ -324,12 +365,12 @@ void Configuration::loadConfigFile(const std::string& filename)
 	// Add all keys in the existing dictionary
     
 	const auto& dataMap = dataIter->second.asValueMap();
-    for (auto dataMapIter = dataMap.cbegin(); dataMapIter != dataMap.cend(); ++dataMapIter)
+    for (const auto& dataMapIter : dataMap)
     {
-        if (_valueDict.find(dataMapIter->first) == _valueDict.cend())
-            _valueDict[dataMapIter->first] = dataMapIter->second;
+        if (_valueDict.find(dataMapIter.first) == _valueDict.cend())
+            _valueDict[dataMapIter.first] = dataMapIter.second;
         else
-            CCLOG("Key already present. Ignoring '%s'",dataMapIter->first.c_str());
+            CCLOG("Key already present. Ignoring '%s'",dataMapIter.first.c_str());
     }
     
     //light info
