@@ -37,7 +37,6 @@
 #include "WidgetReader/SpriteReader/SpriteReader.h"
 #include "WidgetReader/ParticleReader/ParticleReader.h"
 #include "WidgetReader/GameMapReader/GameMapReader.h"
-#include "WidgetReader/ComAudioReader/ComAudioReader.h"
 #include "WidgetReader/ProjectNodeReader/ProjectNodeReader.h"
 
 #include "WidgetReader/ButtonReader/ButtonReader.h"
@@ -290,11 +289,6 @@ Offset<NodeTree> FlatBuffersSerialize::createNodeTree(const tinyxml2::XMLElement
     if (classname == "ProjectNode")
     {
         auto reader = ProjectNodeReader::getInstance();
-        options = CreateOptions(*_builder, reader->createOptionsWithFlatBuffers(objectData, _builder));
-    }
-    else if (classname == "SimpleAudio")
-    {
-        auto reader = ComAudioReader::getInstance();
         options = CreateOptions(*_builder, reader->createOptionsWithFlatBuffers(objectData, _builder));
     }
     else
@@ -1073,11 +1067,6 @@ Offset<NodeTree> FlatBuffersSerialize::createNodeTreeForSimulator(const tinyxml2
     {
         auto projectNodeOptions = createProjectNodeOptionsForSimulator(objectData);
         options = CreateOptions(*_builder, *(Offset<Table>*)(&projectNodeOptions));
-    }
-    else if (classname == "SimpleAudio")
-    {
-        auto reader = ComAudioReader::getInstance();
-        options = CreateOptions(*_builder, reader->createOptionsWithFlatBuffers(objectData, _builder));
     }
     else
     {

@@ -42,7 +42,6 @@
 #include "cocostudio/WidgetReader/ParticleReader/ParticleReader.h"
 #include "cocostudio/WidgetReader/GameMapReader/GameMapReader.h"
 #include "cocostudio/WidgetReader/ProjectNodeReader/ProjectNodeReader.h"
-#include "cocostudio/WidgetReader/ComAudioReader/ComAudioReader.h"
 
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "cocostudio/WidgetReader/CheckBoxReader/CheckBoxReader.h"
@@ -233,9 +232,6 @@ void CSLoader::init()
     _funcs.insert(Pair(ClassName_PageView,  std::bind(&CSLoader::loadWidget,   this, _1)));
     _funcs.insert(Pair(ClassName_Widget,    std::bind(&CSLoader::loadWidget,   this, _1)));
     _funcs.insert(Pair(ClassName_Label,     std::bind(&CSLoader::loadWidget,   this, _1)));
-    
-    _componentFuncs.insert(ComponentPair(ClassName_ComAudio, std::bind(&CSLoader::loadComAudio, this, _1)));
-    
 }
 
 Node* CSLoader::createNode(const std::string& filename)
@@ -714,26 +710,6 @@ Component* CSLoader::loadComponent(const rapidjson::Value &json)
     return component;
 }
 
-Component* CSLoader::loadComAudio(const rapidjson::Value &json)
-{
-    ComAudio* audio = ComAudio::create();
-    
-    const char* name = DICTOOL->getStringValue_json(json, COMPONENT_NAME);
-    bool enabled = DICTOOL->getBooleanValue_json(json, COMPONENT_ENABLED);
-    
-    audio->setName(name);
-    audio->setEnabled(enabled);
-    
-    const char* filePath = DICTOOL->getStringValue_json(json, COMPONENT_AUDIO_FILE_PATH);
-    bool loop = DICTOOL->getBooleanValue_json(json, COMPONENT_LOOP);
-    
-    audio->setFile(filePath);
-    audio->setLoop(loop);
-    
-    
-    return audio;
-}
-
 Node* CSLoader::createNodeWithFlatBuffersFile(const std::string &filename)
 {
     Node* node = nodeWithFlatBuffersFile(filename);
@@ -793,17 +769,6 @@ Node* CSLoader::nodeWithFlatBuffers(const flatbuffers::NodeTree *nodetree)
                 node->runAction(action);
                 action->gotoFrameAndPlay(0);
             }
-        }
-    }
-    else if (classname == "SimpleAudio")
-    {
-        node = Node::create();
-        auto reader = ComAudioReader::getInstance();
-        Component* component = reader->createComAudioWithFlatBuffers(options->data());
-        if (component)
-        {
-            node->addComponent(component);
-            reader->setPropsWithFlatBuffers(node, options->data());
         }
     }
     else
@@ -1119,17 +1084,6 @@ Node* CSLoader::nodeWithFlatBuffersForSimulator(const flatbuffers::NodeTree *nod
                 node->runAction(action);
                 action->gotoFrameAndPlay(0);
             }
-        }
-    }
-    else if (classname == "SimpleAudio")
-    {
-        node = Node::create();
-        auto reader = ComAudioReader::getInstance();
-        Component* component = reader->createComAudioWithFlatBuffers(options->data());
-        if (component)
-        {
-            node->addComponent(component);
-            reader->setPropsWithFlatBuffers(node, options->data());
         }
     }
     else

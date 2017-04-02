@@ -49,7 +49,6 @@ THE SOFTWARE.
 #include "cocostudio/CCUtilMath.h"
 #include "cocostudio/CCComBase.h"
 #include "cocostudio/CCComAttribute.h"
-#include "cocostudio/CCComAudio.h"
 #include "cocostudio/CCComController.h"
 #include "cocostudio/CCComRender.h"
 #include "cocostudio/CCInputDelegate.h"

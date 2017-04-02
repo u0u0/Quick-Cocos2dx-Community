@@ -121,7 +121,6 @@ protected:
     
     // load component
     cocos2d::Component* loadComponent(const rapidjson::Value& json);
-    cocos2d::Component* loadComAudio(const rapidjson::Value& json);    
     
     bool isWidget(const std::string& type);
     bool isCustomWidget(const std::string& type);

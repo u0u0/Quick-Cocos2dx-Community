@@ -24,7 +24,6 @@ THE SOFTWARE.
 
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
-#include "audio/include/SimpleAudioEngine.h"
 #include "base/ObjectFactory.h"
 
 using namespace cocos2d;
@@ -41,7 +40,6 @@ SceneReader::SceneReader()
 {
     ObjectFactory::getInstance()->registerType(CREATE_CLASS_COMPONENT_INFO(ComAttribute));
     ObjectFactory::getInstance()->registerType(CREATE_CLASS_COMPONENT_INFO(ComRender));
-    ObjectFactory::getInstance()->registerType(CREATE_CLASS_COMPONENT_INFO(ComAudio));
     ObjectFactory::getInstance()->registerType(CREATE_CLASS_COMPONENT_INFO(ComController));
 }
 
@@ -584,7 +582,6 @@ void SceneReader::destroyInstance()
 {
     DictionaryHelper::destroyInstance();
     TriggerMng::destroyInstance();
-    CocosDenshion::SimpleAudioEngine::end();
     CC_SAFE_DELETE(s_sharedReader);
 }
 

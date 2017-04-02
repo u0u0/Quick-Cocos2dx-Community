@@ -2,7 +2,6 @@
 
 #include "CCBReader.h"
 #include "CCNode+CCBRelativePositioning.h"
-#include "audio/include/SimpleAudioEngine.h"
 #include "CCBSelectorResolver.h"
 
 #include <string>
@@ -1052,7 +1051,7 @@ CCBSoundEffect* CCBSoundEffect::reverse() const
 
 void CCBSoundEffect::update(float time)
 {
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(_soundFile.c_str());
+//    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(_soundFile.c_str());
 }
 
 
