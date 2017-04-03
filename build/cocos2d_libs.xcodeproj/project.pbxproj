@@ -195,6 +195,160 @@
 		0AE62CFE1C1036A700BF1BF4 /* stringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE62CE31C1036A700BF1BF4 /* stringbuffer.h */; };
 		0AE62CFF1C1036A700BF1BF4 /* writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE62CE41C1036A700BF1BF4 /* writer.h */; };
 		0AE62D001C1036A700BF1BF4 /* writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE62CE41C1036A700BF1BF4 /* writer.h */; };
+		0AFC98931E91487A00F3D63F /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983C1E91487A00F3D63F /* ogg.h */; };
+		0AFC98941E91487A00F3D63F /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983C1E91487A00F3D63F /* ogg.h */; };
+		0AFC98951E91487A00F3D63F /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983D1E91487A00F3D63F /* os_types.h */; };
+		0AFC98961E91487A00F3D63F /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983D1E91487A00F3D63F /* os_types.h */; };
+		0AFC98971E91487A00F3D63F /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC983F1E91487A00F3D63F /* bitwise.c */; };
+		0AFC98981E91487A00F3D63F /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC983F1E91487A00F3D63F /* bitwise.c */; };
+		0AFC98991E91487A00F3D63F /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98401E91487A00F3D63F /* framing.c */; };
+		0AFC989A1E91487A00F3D63F /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98401E91487A00F3D63F /* framing.c */; };
+		0AFC989B1E91487A00F3D63F /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98431E91487A00F3D63F /* analysis.c */; };
+		0AFC989C1E91487A00F3D63F /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98431E91487A00F3D63F /* analysis.c */; };
+		0AFC989D1E91487A00F3D63F /* backends.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98441E91487A00F3D63F /* backends.h */; };
+		0AFC989E1E91487A00F3D63F /* backends.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98441E91487A00F3D63F /* backends.h */; };
+		0AFC989F1E91487A00F3D63F /* barkmel.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98451E91487A00F3D63F /* barkmel.c */; };
+		0AFC98A01E91487A00F3D63F /* barkmel.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98451E91487A00F3D63F /* barkmel.c */; };
+		0AFC98A11E91487A00F3D63F /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98461E91487A00F3D63F /* bitrate.c */; };
+		0AFC98A21E91487A00F3D63F /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98461E91487A00F3D63F /* bitrate.c */; };
+		0AFC98A31E91487A00F3D63F /* bitrate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98471E91487A00F3D63F /* bitrate.h */; };
+		0AFC98A41E91487A00F3D63F /* bitrate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98471E91487A00F3D63F /* bitrate.h */; };
+		0AFC98A51E91487A00F3D63F /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98481E91487A00F3D63F /* block.c */; };
+		0AFC98A61E91487A00F3D63F /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98481E91487A00F3D63F /* block.c */; };
+		0AFC98A71E91487A00F3D63F /* res_books_51.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC984B1E91487A00F3D63F /* res_books_51.h */; };
+		0AFC98A81E91487A00F3D63F /* res_books_51.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC984B1E91487A00F3D63F /* res_books_51.h */; };
+		0AFC98A91E91487A00F3D63F /* res_books_stereo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC984C1E91487A00F3D63F /* res_books_stereo.h */; };
+		0AFC98AA1E91487A00F3D63F /* res_books_stereo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC984C1E91487A00F3D63F /* res_books_stereo.h */; };
+		0AFC98AB1E91487A00F3D63F /* floor_books.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC984E1E91487A00F3D63F /* floor_books.h */; };
+		0AFC98AC1E91487A00F3D63F /* floor_books.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC984E1E91487A00F3D63F /* floor_books.h */; };
+		0AFC98AD1E91487A00F3D63F /* res_books_uncoupled.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98501E91487A00F3D63F /* res_books_uncoupled.h */; };
+		0AFC98AE1E91487A00F3D63F /* res_books_uncoupled.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98501E91487A00F3D63F /* res_books_uncoupled.h */; };
+		0AFC98AF1E91487A00F3D63F /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98511E91487A00F3D63F /* codebook.c */; };
+		0AFC98B01E91487A00F3D63F /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98511E91487A00F3D63F /* codebook.c */; };
+		0AFC98B11E91487A00F3D63F /* codebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98521E91487A00F3D63F /* codebook.h */; };
+		0AFC98B21E91487A00F3D63F /* codebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98521E91487A00F3D63F /* codebook.h */; };
+		0AFC98B31E91487A00F3D63F /* codec_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98531E91487A00F3D63F /* codec_internal.h */; };
+		0AFC98B41E91487A00F3D63F /* codec_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98531E91487A00F3D63F /* codec_internal.h */; };
+		0AFC98B51E91487A00F3D63F /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98541E91487A00F3D63F /* envelope.c */; };
+		0AFC98B61E91487A00F3D63F /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98541E91487A00F3D63F /* envelope.c */; };
+		0AFC98B71E91487A00F3D63F /* envelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98551E91487A00F3D63F /* envelope.h */; };
+		0AFC98B81E91487A00F3D63F /* envelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98551E91487A00F3D63F /* envelope.h */; };
+		0AFC98B91E91487A00F3D63F /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98561E91487A00F3D63F /* floor0.c */; };
+		0AFC98BA1E91487A00F3D63F /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98561E91487A00F3D63F /* floor0.c */; };
+		0AFC98BB1E91487A00F3D63F /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98571E91487A00F3D63F /* floor1.c */; };
+		0AFC98BC1E91487A00F3D63F /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98571E91487A00F3D63F /* floor1.c */; };
+		0AFC98BD1E91487A00F3D63F /* highlevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98581E91487A00F3D63F /* highlevel.h */; };
+		0AFC98BE1E91487A00F3D63F /* highlevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98581E91487A00F3D63F /* highlevel.h */; };
+		0AFC98BF1E91487A00F3D63F /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98591E91487A00F3D63F /* info.c */; };
+		0AFC98C01E91487A00F3D63F /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98591E91487A00F3D63F /* info.c */; };
+		0AFC98C11E91487A00F3D63F /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC985A1E91487A00F3D63F /* lookup.c */; };
+		0AFC98C21E91487A00F3D63F /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC985A1E91487A00F3D63F /* lookup.c */; };
+		0AFC98C31E91487A00F3D63F /* lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC985B1E91487A00F3D63F /* lookup.h */; };
+		0AFC98C41E91487A00F3D63F /* lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC985B1E91487A00F3D63F /* lookup.h */; };
+		0AFC98C51E91487A00F3D63F /* lookup_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC985C1E91487A00F3D63F /* lookup_data.h */; };
+		0AFC98C61E91487A00F3D63F /* lookup_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC985C1E91487A00F3D63F /* lookup_data.h */; };
+		0AFC98C71E91487A00F3D63F /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC985E1E91487A00F3D63F /* lpc.c */; };
+		0AFC98C81E91487A00F3D63F /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC985E1E91487A00F3D63F /* lpc.c */; };
+		0AFC98C91E91487A00F3D63F /* lpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC985F1E91487A00F3D63F /* lpc.h */; };
+		0AFC98CA1E91487A00F3D63F /* lpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC985F1E91487A00F3D63F /* lpc.h */; };
+		0AFC98CB1E91487A00F3D63F /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98601E91487A00F3D63F /* lsp.c */; };
+		0AFC98CC1E91487A00F3D63F /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98601E91487A00F3D63F /* lsp.c */; };
+		0AFC98CD1E91487A00F3D63F /* lsp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98611E91487A00F3D63F /* lsp.h */; };
+		0AFC98CE1E91487A00F3D63F /* lsp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98611E91487A00F3D63F /* lsp.h */; };
+		0AFC98CF1E91487A00F3D63F /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98621E91487A00F3D63F /* mapping0.c */; };
+		0AFC98D01E91487A00F3D63F /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98621E91487A00F3D63F /* mapping0.c */; };
+		0AFC98D11E91487A00F3D63F /* masking.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98631E91487A00F3D63F /* masking.h */; };
+		0AFC98D21E91487A00F3D63F /* masking.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98631E91487A00F3D63F /* masking.h */; };
+		0AFC98D31E91487A00F3D63F /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98641E91487A00F3D63F /* mdct.c */; };
+		0AFC98D41E91487A00F3D63F /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98641E91487A00F3D63F /* mdct.c */; };
+		0AFC98D51E91487A00F3D63F /* mdct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98651E91487A00F3D63F /* mdct.h */; };
+		0AFC98D61E91487A00F3D63F /* mdct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98651E91487A00F3D63F /* mdct.h */; };
+		0AFC98D71E91487A00F3D63F /* misc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98661E91487A00F3D63F /* misc.h */; };
+		0AFC98D81E91487A00F3D63F /* misc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98661E91487A00F3D63F /* misc.h */; };
+		0AFC98D91E91487A00F3D63F /* floor_all.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98681E91487A00F3D63F /* floor_all.h */; };
+		0AFC98DA1E91487A00F3D63F /* floor_all.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98681E91487A00F3D63F /* floor_all.h */; };
+		0AFC98DB1E91487A00F3D63F /* psych_11.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98691E91487A00F3D63F /* psych_11.h */; };
+		0AFC98DC1E91487A00F3D63F /* psych_11.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98691E91487A00F3D63F /* psych_11.h */; };
+		0AFC98DD1E91487A00F3D63F /* psych_16.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986A1E91487A00F3D63F /* psych_16.h */; };
+		0AFC98DE1E91487A00F3D63F /* psych_16.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986A1E91487A00F3D63F /* psych_16.h */; };
+		0AFC98DF1E91487A00F3D63F /* psych_44.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986B1E91487A00F3D63F /* psych_44.h */; };
+		0AFC98E01E91487A00F3D63F /* psych_44.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986B1E91487A00F3D63F /* psych_44.h */; };
+		0AFC98E11E91487A00F3D63F /* psych_8.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986C1E91487A00F3D63F /* psych_8.h */; };
+		0AFC98E21E91487A00F3D63F /* psych_8.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986C1E91487A00F3D63F /* psych_8.h */; };
+		0AFC98E31E91487A00F3D63F /* residue_16.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986D1E91487A00F3D63F /* residue_16.h */; };
+		0AFC98E41E91487A00F3D63F /* residue_16.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986D1E91487A00F3D63F /* residue_16.h */; };
+		0AFC98E51E91487A00F3D63F /* residue_44.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986E1E91487A00F3D63F /* residue_44.h */; };
+		0AFC98E61E91487A00F3D63F /* residue_44.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986E1E91487A00F3D63F /* residue_44.h */; };
+		0AFC98E71E91487A00F3D63F /* residue_44p51.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986F1E91487A00F3D63F /* residue_44p51.h */; };
+		0AFC98E81E91487A00F3D63F /* residue_44p51.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC986F1E91487A00F3D63F /* residue_44p51.h */; };
+		0AFC98E91E91487A00F3D63F /* residue_44u.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98701E91487A00F3D63F /* residue_44u.h */; };
+		0AFC98EA1E91487A00F3D63F /* residue_44u.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98701E91487A00F3D63F /* residue_44u.h */; };
+		0AFC98EB1E91487A00F3D63F /* residue_8.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98711E91487A00F3D63F /* residue_8.h */; };
+		0AFC98EC1E91487A00F3D63F /* residue_8.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98711E91487A00F3D63F /* residue_8.h */; };
+		0AFC98ED1E91487A00F3D63F /* setup_11.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98721E91487A00F3D63F /* setup_11.h */; };
+		0AFC98EE1E91487A00F3D63F /* setup_11.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98721E91487A00F3D63F /* setup_11.h */; };
+		0AFC98EF1E91487A00F3D63F /* setup_16.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98731E91487A00F3D63F /* setup_16.h */; };
+		0AFC98F01E91487A00F3D63F /* setup_16.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98731E91487A00F3D63F /* setup_16.h */; };
+		0AFC98F11E91487A00F3D63F /* setup_22.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98741E91487A00F3D63F /* setup_22.h */; };
+		0AFC98F21E91487A00F3D63F /* setup_22.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98741E91487A00F3D63F /* setup_22.h */; };
+		0AFC98F31E91487A00F3D63F /* setup_32.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98751E91487A00F3D63F /* setup_32.h */; };
+		0AFC98F41E91487A00F3D63F /* setup_32.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98751E91487A00F3D63F /* setup_32.h */; };
+		0AFC98F51E91487A00F3D63F /* setup_44.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98761E91487A00F3D63F /* setup_44.h */; };
+		0AFC98F61E91487A00F3D63F /* setup_44.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98761E91487A00F3D63F /* setup_44.h */; };
+		0AFC98F71E91487A00F3D63F /* setup_44p51.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98771E91487A00F3D63F /* setup_44p51.h */; };
+		0AFC98F81E91487A00F3D63F /* setup_44p51.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98771E91487A00F3D63F /* setup_44p51.h */; };
+		0AFC98F91E91487A00F3D63F /* setup_44u.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98781E91487A00F3D63F /* setup_44u.h */; };
+		0AFC98FA1E91487A00F3D63F /* setup_44u.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98781E91487A00F3D63F /* setup_44u.h */; };
+		0AFC98FB1E91487A00F3D63F /* setup_8.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98791E91487A00F3D63F /* setup_8.h */; };
+		0AFC98FC1E91487A00F3D63F /* setup_8.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98791E91487A00F3D63F /* setup_8.h */; };
+		0AFC98FD1E91487A00F3D63F /* setup_X.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987A1E91487A00F3D63F /* setup_X.h */; };
+		0AFC98FE1E91487A00F3D63F /* setup_X.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987A1E91487A00F3D63F /* setup_X.h */; };
+		0AFC98FF1E91487A00F3D63F /* os.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987B1E91487A00F3D63F /* os.h */; };
+		0AFC99001E91487A00F3D63F /* os.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987B1E91487A00F3D63F /* os.h */; };
+		0AFC99011E91487A00F3D63F /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC987C1E91487A00F3D63F /* psy.c */; };
+		0AFC99021E91487A00F3D63F /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC987C1E91487A00F3D63F /* psy.c */; };
+		0AFC99031E91487A00F3D63F /* psy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987D1E91487A00F3D63F /* psy.h */; };
+		0AFC99041E91487A00F3D63F /* psy.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987D1E91487A00F3D63F /* psy.h */; };
+		0AFC99051E91487A00F3D63F /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC987E1E91487A00F3D63F /* registry.c */; };
+		0AFC99061E91487A00F3D63F /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC987E1E91487A00F3D63F /* registry.c */; };
+		0AFC99071E91487A00F3D63F /* registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987F1E91487A00F3D63F /* registry.h */; };
+		0AFC99081E91487A00F3D63F /* registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC987F1E91487A00F3D63F /* registry.h */; };
+		0AFC99091E91487A00F3D63F /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98801E91487A00F3D63F /* res0.c */; };
+		0AFC990A1E91487A00F3D63F /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98801E91487A00F3D63F /* res0.c */; };
+		0AFC990B1E91487A00F3D63F /* scales.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98811E91487A00F3D63F /* scales.h */; };
+		0AFC990C1E91487A00F3D63F /* scales.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98811E91487A00F3D63F /* scales.h */; };
+		0AFC990D1E91487A00F3D63F /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98821E91487A00F3D63F /* sharedbook.c */; };
+		0AFC990E1E91487A00F3D63F /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98821E91487A00F3D63F /* sharedbook.c */; };
+		0AFC990F1E91487A00F3D63F /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98831E91487A00F3D63F /* smallft.c */; };
+		0AFC99101E91487A00F3D63F /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98831E91487A00F3D63F /* smallft.c */; };
+		0AFC99111E91487A00F3D63F /* smallft.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98841E91487A00F3D63F /* smallft.h */; };
+		0AFC99121E91487A00F3D63F /* smallft.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98841E91487A00F3D63F /* smallft.h */; };
+		0AFC99131E91487A00F3D63F /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98851E91487A00F3D63F /* synthesis.c */; };
+		0AFC99141E91487A00F3D63F /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98851E91487A00F3D63F /* synthesis.c */; };
+		0AFC99151E91487A00F3D63F /* tone.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98861E91487A00F3D63F /* tone.c */; };
+		0AFC99161E91487A00F3D63F /* tone.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98861E91487A00F3D63F /* tone.c */; };
+		0AFC99171E91487A00F3D63F /* vorbisenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98871E91487A00F3D63F /* vorbisenc.c */; };
+		0AFC99181E91487A00F3D63F /* vorbisenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98871E91487A00F3D63F /* vorbisenc.c */; };
+		0AFC99191E91487A00F3D63F /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98881E91487A00F3D63F /* vorbisfile.c */; };
+		0AFC991A1E91487A00F3D63F /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98881E91487A00F3D63F /* vorbisfile.c */; };
+		0AFC991B1E91487A00F3D63F /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98891E91487A00F3D63F /* window.c */; };
+		0AFC991C1E91487A00F3D63F /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98891E91487A00F3D63F /* window.c */; };
+		0AFC991D1E91487A00F3D63F /* window.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988A1E91487A00F3D63F /* window.h */; };
+		0AFC991E1E91487A00F3D63F /* window.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988A1E91487A00F3D63F /* window.h */; };
+		0AFC991F1E91487A00F3D63F /* codec.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988C1E91487A00F3D63F /* codec.h */; };
+		0AFC99201E91487A00F3D63F /* codec.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988C1E91487A00F3D63F /* codec.h */; };
+		0AFC99211E91487A00F3D63F /* vorbisenc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988D1E91487A00F3D63F /* vorbisenc.h */; };
+		0AFC99221E91487A00F3D63F /* vorbisenc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988D1E91487A00F3D63F /* vorbisenc.h */; };
+		0AFC99231E91487A00F3D63F /* vorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988E1E91487A00F3D63F /* vorbisfile.h */; };
+		0AFC99241E91487A00F3D63F /* vorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC988E1E91487A00F3D63F /* vorbisfile.h */; };
+		0AFC99251E91487A00F3D63F /* RDAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC988F1E91487A00F3D63F /* RDAudio.cpp */; };
+		0AFC99261E91487A00F3D63F /* RDAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC988F1E91487A00F3D63F /* RDAudio.cpp */; };
+		0AFC99271E91487A00F3D63F /* RDAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98901E91487A00F3D63F /* RDAudio.h */; };
+		0AFC99281E91487A00F3D63F /* RDAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98901E91487A00F3D63F /* RDAudio.h */; };
+		0AFC99291E91487A00F3D63F /* RDAudioOgg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98911E91487A00F3D63F /* RDAudioOgg.cpp */; };
+		0AFC992A1E91487A00F3D63F /* RDAudioOgg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC98911E91487A00F3D63F /* RDAudioOgg.cpp */; };
+		0AFC992B1E91487A00F3D63F /* RDAudioOgg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98921E91487A00F3D63F /* RDAudioOgg.h */; };
+		0AFC992C1E91487A00F3D63F /* RDAudioOgg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC98921E91487A00F3D63F /* RDAudioOgg.h */; };
 		0AFCD6121C070F2200A8D0DB /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFCD6111C070F2200A8D0DB /* libz.a */; };
 		0AFCD6151C070F4800A8D0DB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFCD6131C070F4800A8D0DB /* libcrypto.a */; };
 		0AFCD6161C070F4800A8D0DB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFCD6141C070F4800A8D0DB /* libssl.a */; };
@@ -2061,6 +2215,84 @@
 		0AE62CE21C1036A700BF1BF4 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
 		0AE62CE31C1036A700BF1BF4 /* stringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringbuffer.h; sourceTree = "<group>"; };
 		0AE62CE41C1036A700BF1BF4 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		0AFC983C1E91487A00F3D63F /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		0AFC983D1E91487A00F3D63F /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		0AFC983F1E91487A00F3D63F /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitwise.c; sourceTree = "<group>"; };
+		0AFC98401E91487A00F3D63F /* framing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = framing.c; sourceTree = "<group>"; };
+		0AFC98431E91487A00F3D63F /* analysis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = analysis.c; sourceTree = "<group>"; };
+		0AFC98441E91487A00F3D63F /* backends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backends.h; sourceTree = "<group>"; };
+		0AFC98451E91487A00F3D63F /* barkmel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = barkmel.c; sourceTree = "<group>"; };
+		0AFC98461E91487A00F3D63F /* bitrate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitrate.c; sourceTree = "<group>"; };
+		0AFC98471E91487A00F3D63F /* bitrate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitrate.h; sourceTree = "<group>"; };
+		0AFC98481E91487A00F3D63F /* block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
+		0AFC984B1E91487A00F3D63F /* res_books_51.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = res_books_51.h; sourceTree = "<group>"; };
+		0AFC984C1E91487A00F3D63F /* res_books_stereo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = res_books_stereo.h; sourceTree = "<group>"; };
+		0AFC984E1E91487A00F3D63F /* floor_books.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = floor_books.h; sourceTree = "<group>"; };
+		0AFC98501E91487A00F3D63F /* res_books_uncoupled.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = res_books_uncoupled.h; sourceTree = "<group>"; };
+		0AFC98511E91487A00F3D63F /* codebook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = codebook.c; sourceTree = "<group>"; };
+		0AFC98521E91487A00F3D63F /* codebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codebook.h; sourceTree = "<group>"; };
+		0AFC98531E91487A00F3D63F /* codec_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codec_internal.h; sourceTree = "<group>"; };
+		0AFC98541E91487A00F3D63F /* envelope.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = envelope.c; sourceTree = "<group>"; };
+		0AFC98551E91487A00F3D63F /* envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = envelope.h; sourceTree = "<group>"; };
+		0AFC98561E91487A00F3D63F /* floor0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = floor0.c; sourceTree = "<group>"; };
+		0AFC98571E91487A00F3D63F /* floor1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = floor1.c; sourceTree = "<group>"; };
+		0AFC98581E91487A00F3D63F /* highlevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = highlevel.h; sourceTree = "<group>"; };
+		0AFC98591E91487A00F3D63F /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = info.c; sourceTree = "<group>"; };
+		0AFC985A1E91487A00F3D63F /* lookup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lookup.c; sourceTree = "<group>"; };
+		0AFC985B1E91487A00F3D63F /* lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lookup.h; sourceTree = "<group>"; };
+		0AFC985C1E91487A00F3D63F /* lookup_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lookup_data.h; sourceTree = "<group>"; };
+		0AFC985D1E91487A00F3D63F /* lookups.pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = lookups.pl; sourceTree = "<group>"; };
+		0AFC985E1E91487A00F3D63F /* lpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lpc.c; sourceTree = "<group>"; };
+		0AFC985F1E91487A00F3D63F /* lpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lpc.h; sourceTree = "<group>"; };
+		0AFC98601E91487A00F3D63F /* lsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lsp.c; sourceTree = "<group>"; };
+		0AFC98611E91487A00F3D63F /* lsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lsp.h; sourceTree = "<group>"; };
+		0AFC98621E91487A00F3D63F /* mapping0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mapping0.c; sourceTree = "<group>"; };
+		0AFC98631E91487A00F3D63F /* masking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = masking.h; sourceTree = "<group>"; };
+		0AFC98641E91487A00F3D63F /* mdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mdct.c; sourceTree = "<group>"; };
+		0AFC98651E91487A00F3D63F /* mdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdct.h; sourceTree = "<group>"; };
+		0AFC98661E91487A00F3D63F /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
+		0AFC98681E91487A00F3D63F /* floor_all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = floor_all.h; sourceTree = "<group>"; };
+		0AFC98691E91487A00F3D63F /* psych_11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psych_11.h; sourceTree = "<group>"; };
+		0AFC986A1E91487A00F3D63F /* psych_16.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psych_16.h; sourceTree = "<group>"; };
+		0AFC986B1E91487A00F3D63F /* psych_44.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psych_44.h; sourceTree = "<group>"; };
+		0AFC986C1E91487A00F3D63F /* psych_8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psych_8.h; sourceTree = "<group>"; };
+		0AFC986D1E91487A00F3D63F /* residue_16.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = residue_16.h; sourceTree = "<group>"; };
+		0AFC986E1E91487A00F3D63F /* residue_44.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = residue_44.h; sourceTree = "<group>"; };
+		0AFC986F1E91487A00F3D63F /* residue_44p51.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = residue_44p51.h; sourceTree = "<group>"; };
+		0AFC98701E91487A00F3D63F /* residue_44u.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = residue_44u.h; sourceTree = "<group>"; };
+		0AFC98711E91487A00F3D63F /* residue_8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = residue_8.h; sourceTree = "<group>"; };
+		0AFC98721E91487A00F3D63F /* setup_11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_11.h; sourceTree = "<group>"; };
+		0AFC98731E91487A00F3D63F /* setup_16.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_16.h; sourceTree = "<group>"; };
+		0AFC98741E91487A00F3D63F /* setup_22.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_22.h; sourceTree = "<group>"; };
+		0AFC98751E91487A00F3D63F /* setup_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_32.h; sourceTree = "<group>"; };
+		0AFC98761E91487A00F3D63F /* setup_44.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_44.h; sourceTree = "<group>"; };
+		0AFC98771E91487A00F3D63F /* setup_44p51.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_44p51.h; sourceTree = "<group>"; };
+		0AFC98781E91487A00F3D63F /* setup_44u.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_44u.h; sourceTree = "<group>"; };
+		0AFC98791E91487A00F3D63F /* setup_8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_8.h; sourceTree = "<group>"; };
+		0AFC987A1E91487A00F3D63F /* setup_X.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_X.h; sourceTree = "<group>"; };
+		0AFC987B1E91487A00F3D63F /* os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os.h; sourceTree = "<group>"; };
+		0AFC987C1E91487A00F3D63F /* psy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psy.c; sourceTree = "<group>"; };
+		0AFC987D1E91487A00F3D63F /* psy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psy.h; sourceTree = "<group>"; };
+		0AFC987E1E91487A00F3D63F /* registry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = registry.c; sourceTree = "<group>"; };
+		0AFC987F1E91487A00F3D63F /* registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registry.h; sourceTree = "<group>"; };
+		0AFC98801E91487A00F3D63F /* res0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = res0.c; sourceTree = "<group>"; };
+		0AFC98811E91487A00F3D63F /* scales.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scales.h; sourceTree = "<group>"; };
+		0AFC98821E91487A00F3D63F /* sharedbook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sharedbook.c; sourceTree = "<group>"; };
+		0AFC98831E91487A00F3D63F /* smallft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smallft.c; sourceTree = "<group>"; };
+		0AFC98841E91487A00F3D63F /* smallft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smallft.h; sourceTree = "<group>"; };
+		0AFC98851E91487A00F3D63F /* synthesis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = synthesis.c; sourceTree = "<group>"; };
+		0AFC98861E91487A00F3D63F /* tone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tone.c; sourceTree = "<group>"; };
+		0AFC98871E91487A00F3D63F /* vorbisenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vorbisenc.c; sourceTree = "<group>"; };
+		0AFC98881E91487A00F3D63F /* vorbisfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vorbisfile.c; sourceTree = "<group>"; };
+		0AFC98891E91487A00F3D63F /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = window.c; sourceTree = "<group>"; };
+		0AFC988A1E91487A00F3D63F /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
+		0AFC988C1E91487A00F3D63F /* codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
+		0AFC988D1E91487A00F3D63F /* vorbisenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbisenc.h; sourceTree = "<group>"; };
+		0AFC988E1E91487A00F3D63F /* vorbisfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbisfile.h; sourceTree = "<group>"; };
+		0AFC988F1E91487A00F3D63F /* RDAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RDAudio.cpp; sourceTree = "<group>"; };
+		0AFC98901E91487A00F3D63F /* RDAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDAudio.h; sourceTree = "<group>"; };
+		0AFC98911E91487A00F3D63F /* RDAudioOgg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RDAudioOgg.cpp; sourceTree = "<group>"; };
+		0AFC98921E91487A00F3D63F /* RDAudioOgg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDAudioOgg.h; sourceTree = "<group>"; };
 		0AFCD6111C070F2200A8D0DB /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../external/png/prebuilt/ios/libz.a; sourceTree = "<group>"; };
 		0AFCD6131C070F4800A8D0DB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../external/curl/prebuilt/ios/libcrypto.a; sourceTree = "<group>"; };
 		0AFCD6141C070F4800A8D0DB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/curl/prebuilt/ios/libssl.a; sourceTree = "<group>"; };
@@ -3047,6 +3279,166 @@
 				0634A4CF194B19E400E608AF /* CCTimelineMacro.h */,
 			);
 			path = ActionTimeline;
+			sourceTree = "<group>";
+		};
+		0AFC983A1E91487A00F3D63F /* libogg */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC983B1E91487A00F3D63F /* ogg */,
+				0AFC983E1E91487A00F3D63F /* src */,
+			);
+			path = libogg;
+			sourceTree = "<group>";
+		};
+		0AFC983B1E91487A00F3D63F /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC983C1E91487A00F3D63F /* ogg.h */,
+				0AFC983D1E91487A00F3D63F /* os_types.h */,
+			);
+			path = ogg;
+			sourceTree = "<group>";
+		};
+		0AFC983E1E91487A00F3D63F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC983F1E91487A00F3D63F /* bitwise.c */,
+				0AFC98401E91487A00F3D63F /* framing.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		0AFC98411E91487A00F3D63F /* libvorbis */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC98421E91487A00F3D63F /* lib */,
+				0AFC988B1E91487A00F3D63F /* vorbis */,
+			);
+			path = libvorbis;
+			sourceTree = "<group>";
+		};
+		0AFC98421E91487A00F3D63F /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC98431E91487A00F3D63F /* analysis.c */,
+				0AFC98441E91487A00F3D63F /* backends.h */,
+				0AFC98451E91487A00F3D63F /* barkmel.c */,
+				0AFC98461E91487A00F3D63F /* bitrate.c */,
+				0AFC98471E91487A00F3D63F /* bitrate.h */,
+				0AFC98481E91487A00F3D63F /* block.c */,
+				0AFC98491E91487A00F3D63F /* books */,
+				0AFC98511E91487A00F3D63F /* codebook.c */,
+				0AFC98521E91487A00F3D63F /* codebook.h */,
+				0AFC98531E91487A00F3D63F /* codec_internal.h */,
+				0AFC98541E91487A00F3D63F /* envelope.c */,
+				0AFC98551E91487A00F3D63F /* envelope.h */,
+				0AFC98561E91487A00F3D63F /* floor0.c */,
+				0AFC98571E91487A00F3D63F /* floor1.c */,
+				0AFC98581E91487A00F3D63F /* highlevel.h */,
+				0AFC98591E91487A00F3D63F /* info.c */,
+				0AFC985A1E91487A00F3D63F /* lookup.c */,
+				0AFC985B1E91487A00F3D63F /* lookup.h */,
+				0AFC985C1E91487A00F3D63F /* lookup_data.h */,
+				0AFC985D1E91487A00F3D63F /* lookups.pl */,
+				0AFC985E1E91487A00F3D63F /* lpc.c */,
+				0AFC985F1E91487A00F3D63F /* lpc.h */,
+				0AFC98601E91487A00F3D63F /* lsp.c */,
+				0AFC98611E91487A00F3D63F /* lsp.h */,
+				0AFC98621E91487A00F3D63F /* mapping0.c */,
+				0AFC98631E91487A00F3D63F /* masking.h */,
+				0AFC98641E91487A00F3D63F /* mdct.c */,
+				0AFC98651E91487A00F3D63F /* mdct.h */,
+				0AFC98661E91487A00F3D63F /* misc.h */,
+				0AFC98671E91487A00F3D63F /* modes */,
+				0AFC987B1E91487A00F3D63F /* os.h */,
+				0AFC987C1E91487A00F3D63F /* psy.c */,
+				0AFC987D1E91487A00F3D63F /* psy.h */,
+				0AFC987E1E91487A00F3D63F /* registry.c */,
+				0AFC987F1E91487A00F3D63F /* registry.h */,
+				0AFC98801E91487A00F3D63F /* res0.c */,
+				0AFC98811E91487A00F3D63F /* scales.h */,
+				0AFC98821E91487A00F3D63F /* sharedbook.c */,
+				0AFC98831E91487A00F3D63F /* smallft.c */,
+				0AFC98841E91487A00F3D63F /* smallft.h */,
+				0AFC98851E91487A00F3D63F /* synthesis.c */,
+				0AFC98861E91487A00F3D63F /* tone.c */,
+				0AFC98871E91487A00F3D63F /* vorbisenc.c */,
+				0AFC98881E91487A00F3D63F /* vorbisfile.c */,
+				0AFC98891E91487A00F3D63F /* window.c */,
+				0AFC988A1E91487A00F3D63F /* window.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0AFC98491E91487A00F3D63F /* books */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC984A1E91487A00F3D63F /* coupled */,
+				0AFC984D1E91487A00F3D63F /* floor */,
+				0AFC984F1E91487A00F3D63F /* uncoupled */,
+			);
+			path = books;
+			sourceTree = "<group>";
+		};
+		0AFC984A1E91487A00F3D63F /* coupled */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC984B1E91487A00F3D63F /* res_books_51.h */,
+				0AFC984C1E91487A00F3D63F /* res_books_stereo.h */,
+			);
+			path = coupled;
+			sourceTree = "<group>";
+		};
+		0AFC984D1E91487A00F3D63F /* floor */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC984E1E91487A00F3D63F /* floor_books.h */,
+			);
+			path = floor;
+			sourceTree = "<group>";
+		};
+		0AFC984F1E91487A00F3D63F /* uncoupled */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC98501E91487A00F3D63F /* res_books_uncoupled.h */,
+			);
+			path = uncoupled;
+			sourceTree = "<group>";
+		};
+		0AFC98671E91487A00F3D63F /* modes */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC98681E91487A00F3D63F /* floor_all.h */,
+				0AFC98691E91487A00F3D63F /* psych_11.h */,
+				0AFC986A1E91487A00F3D63F /* psych_16.h */,
+				0AFC986B1E91487A00F3D63F /* psych_44.h */,
+				0AFC986C1E91487A00F3D63F /* psych_8.h */,
+				0AFC986D1E91487A00F3D63F /* residue_16.h */,
+				0AFC986E1E91487A00F3D63F /* residue_44.h */,
+				0AFC986F1E91487A00F3D63F /* residue_44p51.h */,
+				0AFC98701E91487A00F3D63F /* residue_44u.h */,
+				0AFC98711E91487A00F3D63F /* residue_8.h */,
+				0AFC98721E91487A00F3D63F /* setup_11.h */,
+				0AFC98731E91487A00F3D63F /* setup_16.h */,
+				0AFC98741E91487A00F3D63F /* setup_22.h */,
+				0AFC98751E91487A00F3D63F /* setup_32.h */,
+				0AFC98761E91487A00F3D63F /* setup_44.h */,
+				0AFC98771E91487A00F3D63F /* setup_44p51.h */,
+				0AFC98781E91487A00F3D63F /* setup_44u.h */,
+				0AFC98791E91487A00F3D63F /* setup_8.h */,
+				0AFC987A1E91487A00F3D63F /* setup_X.h */,
+			);
+			path = modes;
+			sourceTree = "<group>";
+		};
+		0AFC988B1E91487A00F3D63F /* vorbis */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC988C1E91487A00F3D63F /* codec.h */,
+				0AFC988D1E91487A00F3D63F /* vorbisenc.h */,
+				0AFC988E1E91487A00F3D63F /* vorbisfile.h */,
+			);
+			path = vorbis;
 			sourceTree = "<group>";
 		};
 		1551A334158F2AB200E66CFE = {
@@ -4327,6 +4719,12 @@
 		46A15FD01807A56F005B8026 /* audio */ = {
 			isa = PBXGroup;
 			children = (
+				0AFC983A1E91487A00F3D63F /* libogg */,
+				0AFC98411E91487A00F3D63F /* libvorbis */,
+				0AFC988F1E91487A00F3D63F /* RDAudio.cpp */,
+				0AFC98901E91487A00F3D63F /* RDAudio.h */,
+				0AFC98911E91487A00F3D63F /* RDAudioOgg.cpp */,
+				0AFC98921E91487A00F3D63F /* RDAudioOgg.h */,
 			);
 			name = audio;
 			path = ../cocos/audio;
@@ -5064,6 +5462,7 @@
 				0AE62CEB1C1036A700BF1BF4 /* encodings.h in Headers */,
 				50ABBE851925AB6F00A911A9 /* ccFPSImages.h in Headers */,
 				15AE1A5319AAD40300C27E9E /* b2Draw.h in Headers */,
+				0AFC98F31E91487A00F3D63F /* setup_32.h in Headers */,
 				38B8E2E319E671D2002D7CE7 /* UILayoutComponent.h in Headers */,
 				5034CA39191D591100CE6051 /* ccShader_PositionColorLengthTexture.frag in Headers */,
 				292DB14B19B4574100A80320 /* UIEditBoxImpl-mac.h in Headers */,
@@ -5081,7 +5480,9 @@
 				5091A7A319BFABA800AC8789 /* CCPlatformDefine.h in Headers */,
 				5034CA3F191D591100CE6051 /* ccShader_Position_uColor.vert in Headers */,
 				50ABBD461925AB0000A911A9 /* CCVertex.h in Headers */,
+				0AFC98951E91487A00F3D63F /* os_types.h in Headers */,
 				15AE180A19AAD2F700C27E9E /* CCAABB.h in Headers */,
+				0AFC98FB1E91487A00F3D63F /* setup_8.h in Headers */,
 				46A170E71807CECA005B8026 /* CCPhysicsBody.h in Headers */,
 				0A21113C1D71569200002345 /* Json.h in Headers */,
 				15AE1A5A19AAD40300C27E9E /* b2StackAllocator.h in Headers */,
@@ -5109,6 +5510,7 @@
 				15AE191419AAD35000C27E9E /* CCSGUIReader.h in Headers */,
 				15AE196D19AAD35700C27E9E /* CCActionTimeline.h in Headers */,
 				15AE1A6D19AAD40300C27E9E /* b2ChainAndPolygonContact.h in Headers */,
+				0AFC98AB1E91487A00F3D63F /* floor_books.h in Headers */,
 				15AE183A19AAD2F700C27E9E /* CCRay.h in Headers */,
 				B375107B1823AC9F00B3BA6A /* CCPhysicsWorldInfo_chipmunk.h in Headers */,
 				0AE62CE91C1036A700BF1BF4 /* encodedstream.h in Headers */,
@@ -5116,6 +5518,7 @@
 				46A170F01807CECA005B8026 /* CCPhysicsWorld.h in Headers */,
 				15AE199D19AAD39600C27E9E /* ScrollViewReader.h in Headers */,
 				DABC9FAB19E7DFA900FA252C /* CCClippingRectangleNode.h in Headers */,
+				0AFC98931E91487A00F3D63F /* ogg.h in Headers */,
 				0A2110F81D71569200002345 /* Animation.h in Headers */,
 				50ABBEC11925AB6F00A911A9 /* CCValue.h in Headers */,
 				B276EF631988D1D500CD400F /* CCVertexIndexBuffer.h in Headers */,
@@ -5139,6 +5542,9 @@
 				5034CA3B191D591100CE6051 /* ccShader_PositionColor.vert in Headers */,
 				1A570077180BC5A10088DEC7 /* CCActionGrid3D.h in Headers */,
 				1A57007B180BC5A10088DEC7 /* CCActionInstant.h in Headers */,
+				0AFC98A31E91487A00F3D63F /* bitrate.h in Headers */,
+				0AFC98D51E91487A00F3D63F /* mdct.h in Headers */,
+				0AFC99271E91487A00F3D63F /* RDAudio.h in Headers */,
 				15AE182A19AAD2F700C27E9E /* CCMeshSkin.h in Headers */,
 				B276EF5F1988D1D500CD400F /* CCVertexIndexData.h in Headers */,
 				1A57007F180BC5A10088DEC7 /* CCActionInterval.h in Headers */,
@@ -5171,8 +5577,10 @@
 				15AE191219AAD35000C27E9E /* CCProcessBase.h in Headers */,
 				0A2111341D71569200002345 /* IkConstraint.h in Headers */,
 				1A570093180BC5A10088DEC7 /* CCActionTween.h in Headers */,
+				0AFC992B1E91487A00F3D63F /* RDAudioOgg.h in Headers */,
 				50ABBD4A1925AB0000A911A9 /* Mat4.h in Headers */,
 				0A2111241D71569200002345 /* Cocos2dAttachmentLoader.h in Headers */,
+				0AFC99031E91487A00F3D63F /* psy.h in Headers */,
 				15AE1A6919AAD40300C27E9E /* b2WorldCallbacks.h in Headers */,
 				29394CF419B01DBA00D2DE1A /* UIWebViewImpl-ios.h in Headers */,
 				1A57009A180BC5C10088DEC7 /* CCAtlasNode.h in Headers */,
@@ -5196,7 +5604,9 @@
 				1A57011D180BC90D0088DEC7 /* CCGrabber.h in Headers */,
 				15AE1B6819AADA9900C27E9E /* UIScale9Sprite.h in Headers */,
 				1A570121180BC90D0088DEC7 /* CCGrid.h in Headers */,
+				0AFC98A91E91487A00F3D63F /* res_books_stereo.h in Headers */,
 				5034CA2D191D591100CE6051 /* ccShader_PositionTextureA8Color.frag in Headers */,
+				0AFC991F1E91487A00F3D63F /* codec.h in Headers */,
 				382383F21A258FA7002C4610 /* idl.h in Headers */,
 				1AC0269C1914068200FA920D /* ConvertUTF.h in Headers */,
 				0AE62CE51C1036A700BF1BF4 /* allocators.h in Headers */,
@@ -5218,6 +5628,7 @@
 				5034CA47191D591100CE6051 /* ccShader_Label_normal.frag in Headers */,
 				15AE182219AAD2F700C27E9E /* CCBundleReader.h in Headers */,
 				15AE18A519AAD33D00C27E9E /* CCScale9SpriteLoader.h in Headers */,
+				0AFC99071E91487A00F3D63F /* registry.h in Headers */,
 				50ED2BE019BEAF7900A0AB90 /* UIEditBoxImpl-win32.h in Headers */,
 				15AE197119AAD35700C27E9E /* CCFrame.h in Headers */,
 				15AE1A6519AAD40300C27E9E /* b2TimeStep.h in Headers */,
@@ -5231,6 +5642,7 @@
 				15AE1BC119AADFFB00C27E9E /* cocos-ext.h in Headers */,
 				1A5701BF180BCB5A0088DEC7 /* CCLabelAtlas.h in Headers */,
 				50ABBED91925AB6F00A911A9 /* ZipUtils.h in Headers */,
+				0AFC991D1E91487A00F3D63F /* window.h in Headers */,
 				50643BDB19BFAF4400EF68ED /* CCStdC.h in Headers */,
 				1A5701C3180BCB5A0088DEC7 /* CCLabelBMFont.h in Headers */,
 				50ABBE5F1925AB6F00A911A9 /* CCEventListener.h in Headers */,
@@ -5260,7 +5672,9 @@
 				1A5701F0180BCB8C0088DEC7 /* CCTransitionProgress.h in Headers */,
 				1A5701F9180BCBAD0088DEC7 /* CCMenu.h in Headers */,
 				50ABBD401925AB0000A911A9 /* CCMath.h in Headers */,
+				0AFC98B11E91487A00F3D63F /* codebook.h in Headers */,
 				15AE1A9319AAD40300C27E9E /* b2WheelJoint.h in Headers */,
+				0AFC98B71E91487A00F3D63F /* envelope.h in Headers */,
 				15AE1A3119AAD3D500C27E9E /* b2ChainShape.h in Headers */,
 				1A5701FD180BCBAD0088DEC7 /* CCMenuItem.h in Headers */,
 				1A570204180BCBD40088DEC7 /* CCClippingNode.h in Headers */,
@@ -5269,6 +5683,7 @@
 				15AE1A2919AAD3D500C27E9E /* b2Collision.h in Headers */,
 				38B8E2D719E66581002D7CE7 /* CSLoader.h in Headers */,
 				50643BE419BFCF1800EF68ED /* CCPlatformMacros.h in Headers */,
+				0AFC98E71E91487A00F3D63F /* residue_44p51.h in Headers */,
 				0A21115A1D71569200002345 /* SkeletonAnimation.h in Headers */,
 				15AE184219AAD2F700C27E9E /* CCSprite3D.h in Headers */,
 				15AE18A019AAD33D00C27E9E /* CCNodeLoaderLibrary.h in Headers */,
@@ -5288,10 +5703,13 @@
 				0A2110FC1D71569200002345 /* AnimationState.h in Headers */,
 				15AE189719AAD33D00C27E9E /* CCMenuItemImageLoader.h in Headers */,
 				15AE189319AAD33D00C27E9E /* CCLayerGradientLoader.h in Headers */,
+				0AFC98ED1E91487A00F3D63F /* setup_11.h in Headers */,
 				15AE18EF19AAD35000C27E9E /* CCArmature.h in Headers */,
 				15AE19A719AAD39600C27E9E /* TextReader.h in Headers */,
 				1A570227180BCC1A0088DEC7 /* CCParticleExamples.h in Headers */,
+				0AFC98D71E91487A00F3D63F /* misc.h in Headers */,
 				1A57022B180BCC1A0088DEC7 /* CCParticleSystem.h in Headers */,
+				0AFC98EB1E91487A00F3D63F /* residue_8.h in Headers */,
 				15AE190E19AAD35000C27E9E /* CCDisplayManager.h in Headers */,
 				15AE1A6719AAD40300C27E9E /* b2World.h in Headers */,
 				15AE199B19AAD39600C27E9E /* PageViewReader.h in Headers */,
@@ -5336,9 +5754,11 @@
 				1A57028C180BCC900088DEC7 /* CCSpriteFrameCache.h in Headers */,
 				5027253A190BF1B900AAF4ED /* cocos2d.h in Headers */,
 				0A2111841D71569200002345 /* spine.h in Headers */,
+				0AFC98DF1E91487A00F3D63F /* psych_44.h in Headers */,
 				15AE1B5A19AADA9900C27E9E /* UIText.h in Headers */,
 				15AE1BA019AADFDF00C27E9E /* UILayout.h in Headers */,
 				1A570294180BCCAB0088DEC7 /* CCAnimation.h in Headers */,
+				0AFC98FF1E91487A00F3D63F /* os.h in Headers */,
 				0A21116E1D71569200002345 /* SkeletonJson.h in Headers */,
 				382384001A258FA7002C4610 /* util.h in Headers */,
 				0AE62CFF1C1036A700BF1BF4 /* writer.h in Headers */,
@@ -5346,6 +5766,7 @@
 				1A570298180BCCAB0088DEC7 /* CCAnimationCache.h in Headers */,
 				50ABC05D1926664800A911A9 /* CCApplication-mac.h in Headers */,
 				15AE190419AAD35000C27E9E /* CCComRender.h in Headers */,
+				0AFC98F11E91487A00F3D63F /* setup_22.h in Headers */,
 				15AE18AA19AAD33D00C27E9E /* CocosBuilder.h in Headers */,
 				50ABC0071926664800A911A9 /* CCApplicationProtocol.h in Headers */,
 				15AE1A7919AAD40300C27E9E /* b2PolygonAndCircleContact.h in Headers */,
@@ -5361,6 +5782,7 @@
 				1A12775B18DFCC540005F345 /* CCTweenFunction.h in Headers */,
 				1A5702CA180BCE370088DEC7 /* CCTextFieldTTF.h in Headers */,
 				15EFA213198A2BB5000C57D3 /* CCProtectedNode.h in Headers */,
+				0AFC99111E91487A00F3D63F /* smallft.h in Headers */,
 				1A5702EC180BCE750088DEC7 /* CCTileMapAtlas.h in Headers */,
 				15AE18E019AAD35000C27E9E /* TriggerBase.h in Headers */,
 				15AE187D19AAD33D00C27E9E /* CCBFileLoader.h in Headers */,
@@ -5373,6 +5795,8 @@
 				50ABBDAF1925AB4100A911A9 /* CCRenderer.h in Headers */,
 				15AE181E19AAD2F700C27E9E /* CCBundle3DData.h in Headers */,
 				1A5702F8180BCE750088DEC7 /* CCTMXTiledMap.h in Headers */,
+				0AFC98B31E91487A00F3D63F /* codec_internal.h in Headers */,
+				0AFC99231E91487A00F3D63F /* vorbisfile.h in Headers */,
 				5034CA21191D591100CE6051 /* ccShader_PositionTextureColorAlphaTest.frag in Headers */,
 				15AE1A2419AAD3D500C27E9E /* b2BroadPhase.h in Headers */,
 				382384381A259126002C4610 /* ProjectNodeReader.h in Headers */,
@@ -5387,12 +5811,14 @@
 				382383EE1A258FA7002C4610 /* flatbuffers.h in Headers */,
 				0A21114E1D71569200002345 /* PathConstraintData.h in Headers */,
 				15AE1B5619AADA9900C27E9E /* UIScrollView.h in Headers */,
+				0AFC98DB1E91487A00F3D63F /* psych_11.h in Headers */,
 				50ABBDBB1925AB4100A911A9 /* CCTextureAtlas.h in Headers */,
 				1A570302180BCE890088DEC7 /* CCParallaxNode.h in Headers */,
 				50ABBE4B1925AB6F00A911A9 /* CCEventAcceleration.h in Headers */,
 				1A57030E180BCF190088DEC7 /* CCComponent.h in Headers */,
 				1A570312180BCF190088DEC7 /* CCComponentContainer.h in Headers */,
 				15AE1B7119AADA9900C27E9E /* CocosGUI.h in Headers */,
+				0AFC98F71E91487A00F3D63F /* setup_44p51.h in Headers */,
 				15AE1A2D19AAD3D500C27E9E /* b2DynamicTree.h in Headers */,
 				50ABBD851925AB4100A911A9 /* CCBatchCommand.h in Headers */,
 				15AE1A6F19AAD40300C27E9E /* b2CircleContact.h in Headers */,
@@ -5405,9 +5831,11 @@
 				15AE1A5119AAD40300C27E9E /* b2BlockAllocator.h in Headers */,
 				15AE199119AAD37200C27E9E /* ImageViewReader.h in Headers */,
 				15AE18FE19AAD35000C27E9E /* CCComAttribute.h in Headers */,
+				0AFC98C51E91487A00F3D63F /* lookup_data.h in Headers */,
 				50ABBD621925AB0000A911A9 /* Vec4.h in Headers */,
 				B60C5BD619AC68B10056FBDE /* CCBillBoard.h in Headers */,
 				15AE1BA419AADFDF00C27E9E /* UILayoutManager.h in Headers */,
+				0AFC98E51E91487A00F3D63F /* residue_44.h in Headers */,
 				1A01C69418F57BE800EFE3A6 /* CCFloat.h in Headers */,
 				1A57034D180BD09B0088DEC7 /* tinyxml2.h in Headers */,
 				0A2111101D71569200002345 /* AttachmentLoader.h in Headers */,
@@ -5419,6 +5847,7 @@
 				50ABBE331925AB6F00A911A9 /* CCConfiguration.h in Headers */,
 				15AE199519AAD39600C27E9E /* LayoutReader.h in Headers */,
 				15AE183219AAD2F700C27E9E /* CCOBB.h in Headers */,
+				0AFC98D91E91487A00F3D63F /* floor_all.h in Headers */,
 				15AE1BE319AAE01E00C27E9E /* CCScrollView.h in Headers */,
 				50ABC01F1926664800A911A9 /* CCThread.h in Headers */,
 				1A57035A180BD0B00088DEC7 /* unzip.h in Headers */,
@@ -5437,11 +5866,13 @@
 				15AE1A5619AAD40300C27E9E /* b2Math.h in Headers */,
 				0A2111521D71569200002345 /* RegionAttachment.h in Headers */,
 				50ABBE9D1925AB6F00A911A9 /* CCRefPtr.h in Headers */,
+				0AFC98EF1E91487A00F3D63F /* setup_16.h in Headers */,
 				15AE198319AAD36400C27E9E /* WidgetReader.h in Headers */,
 				B257B461198A353E00D9A687 /* CCPrimitiveCommand.h in Headers */,
 				5034CA31191D591100CE6051 /* ccShader_PositionTexture_uColor.vert in Headers */,
 				15AE189E19AAD33D00C27E9E /* CCNodeLoader.h in Headers */,
 				50ABBE7B1925AB6F00A911A9 /* CCEventMouse.h in Headers */,
+				0AFC990B1E91487A00F3D63F /* scales.h in Headers */,
 				503DD8F91926B0DB00CD74DD /* CCIMEDispatcher.h in Headers */,
 				15AE1B6619AADA9900C27E9E /* UIImageView.h in Headers */,
 				15AE1BB419AADFEF00C27E9E /* HttpResponse.h in Headers */,
@@ -5458,8 +5889,12 @@
 				15AE192319AAD35000C27E9E /* DictionaryHelper.h in Headers */,
 				B257B4501989D5E800D9A687 /* CCPrimitive.h in Headers */,
 				15B3707E19EE414C00ABE682 /* CCEventAssetsManagerEx.h in Headers */,
+				0AFC98E11E91487A00F3D63F /* psych_8.h in Headers */,
 				50ABBE6B1925AB6F00A911A9 /* CCEventListenerFocus.h in Headers */,
+				0AFC98DD1E91487A00F3D63F /* psych_16.h in Headers */,
 				0A2111881D71569200002345 /* TransformConstraint.h in Headers */,
+				0AFC98CD1E91487A00F3D63F /* lsp.h in Headers */,
+				0AFC98E91E91487A00F3D63F /* residue_44u.h in Headers */,
 				0A21110C1D71569200002345 /* Attachment.h in Headers */,
 				0AE62CF11C1036A700BF1BF4 /* memorybuffer.h in Headers */,
 				50ABBDA51925AB4100A911A9 /* CCQuadCommand.h in Headers */,
@@ -5473,6 +5908,7 @@
 				15AE1BB319AADFEF00C27E9E /* HttpRequest.h in Headers */,
 				3823843F1A259140002C4610 /* SingleNodeReader.h in Headers */,
 				50ABBE571925AB6F00A911A9 /* CCEventFocus.h in Headers */,
+				0AFC989D1E91487A00F3D63F /* backends.h in Headers */,
 				1A01C69218F57BE800EFE3A6 /* CCDouble.h in Headers */,
 				15AE18F919AAD35000C27E9E /* CCBone.h in Headers */,
 				0A21116A1D71569200002345 /* SkeletonData.h in Headers */,
@@ -5501,9 +5937,11 @@
 				15B3708219EE414C00ABE682 /* CCEventListenerAssetsManagerEx.h in Headers */,
 				15B3708619EE414C00ABE682 /* Downloader.h in Headers */,
 				5034CA41191D591100CE6051 /* ccShader_Position_uColor.frag in Headers */,
+				0AFC98AD1E91487A00F3D63F /* res_books_uncoupled.h in Headers */,
 				50ABBE7F1925AB6F00A911A9 /* CCEventTouch.h in Headers */,
 				50ABBE5B1925AB6F00A911A9 /* CCEventKeyboard.h in Headers */,
 				1A01C69E18F57BE800EFE3A6 /* CCString.h in Headers */,
+				0AFC98F51E91487A00F3D63F /* setup_44.h in Headers */,
 				50ABC00F1926664800A911A9 /* CCFileUtils.h in Headers */,
 				15AE1A3719AAD3D500C27E9E /* b2PolygonShape.h in Headers */,
 				15AE1B5419AADA9900C27E9E /* UIRichText.h in Headers */,
@@ -5518,6 +5956,7 @@
 				292DB13F19B4574100A80320 /* UIEditBox.h in Headers */,
 				50ABBE671925AB6F00A911A9 /* CCEventListenerCustom.h in Headers */,
 				0A21115E1D71569200002345 /* SkeletonBatch.h in Headers */,
+				0AFC98BD1E91487A00F3D63F /* highlevel.h in Headers */,
 				15AE18E219AAD35000C27E9E /* TriggerMng.h in Headers */,
 				50ABBE2F1925AB6F00A911A9 /* ccConfig.h in Headers */,
 				0AE62CE71C1036A700BF1BF4 /* document.h in Headers */,
@@ -5526,26 +5965,33 @@
 				1A01C69018F57BE800EFE3A6 /* CCDictionary.h in Headers */,
 				1A9DCA29180E6955007A3AD4 /* CCGLBufferedNode.h in Headers */,
 				50ABC0031926664800A911A9 /* CCLock-apple.h in Headers */,
+				0AFC98A71E91487A00F3D63F /* res_books_51.h in Headers */,
 				B37510721823AC9F00B3BA6A /* CCPhysicsBodyInfo_chipmunk.h in Headers */,
 				50ABBE2D1925AB6F00A911A9 /* ccCArray.h in Headers */,
 				50ABBD5E1925AB0000A911A9 /* Vec3.h in Headers */,
+				0AFC98C91E91487A00F3D63F /* lpc.h in Headers */,
 				15AE188919AAD33D00C27E9E /* CCControlButtonLoader.h in Headers */,
+				0AFC98D11E91487A00F3D63F /* masking.h in Headers */,
 				15AE189119AAD33D00C27E9E /* CCLayerColorLoader.h in Headers */,
 				50ABBE211925AB6F00A911A9 /* atitc.h in Headers */,
 				15AE19A519AAD39600C27E9E /* TextFieldReader.h in Headers */,
 				B24AA98B195A675C007B4522 /* CCFastTMXTiledMap.h in Headers */,
 				B29594B61926D5EC003EEF37 /* CCMeshCommand.h in Headers */,
 				0AE62CF31C1036A700BF1BF4 /* memorystream.h in Headers */,
+				0AFC98E31E91487A00F3D63F /* residue_16.h in Headers */,
 				50ABBE371925AB6F00A911A9 /* CCConsole.h in Headers */,
 				50ABC00B1926664800A911A9 /* CCDevice.h in Headers */,
 				50ABC0131926664800A911A9 /* CCGLView.h in Headers */,
+				0AFC98FD1E91487A00F3D63F /* setup_X.h in Headers */,
 				15AE189C19AAD33D00C27E9E /* CCNode+CCBRelativePositioning.h in Headers */,
 				15AE190A19AAD35000C27E9E /* CCDecorativeDisplay.h in Headers */,
 				50ABBDB31925AB4100A911A9 /* ccShaders.h in Headers */,
 				50ABBDAB1925AB4100A911A9 /* CCRenderCommandPool.h in Headers */,
+				0AFC98F91E91487A00F3D63F /* setup_44u.h in Headers */,
 				5034CA45191D591100CE6051 /* ccShader_Label_outline.frag in Headers */,
 				50ABBEB11925AB6F00A911A9 /* CCUserDefault.h in Headers */,
 				50ABBEC71925AB6F00A911A9 /* etc1.h in Headers */,
+				0AFC98C31E91487A00F3D63F /* lookup.h in Headers */,
 				0AE62CF71C1036A700BF1BF4 /* prettywriter.h in Headers */,
 				15AE1BC619AAE00000C27E9E /* AssetsManager.h in Headers */,
 				50ABBEA91925AB6F00A911A9 /* CCTouch.h in Headers */,
@@ -5554,6 +6000,7 @@
 				50ABC0691926664800A911A9 /* CCStdC-mac.h in Headers */,
 				15AE1A2B19AAD3D500C27E9E /* b2Distance.h in Headers */,
 				15AE198919AAD36A00C27E9E /* ButtonReader.h in Headers */,
+				0AFC99211E91487A00F3D63F /* vorbisenc.h in Headers */,
 				15AE190219AAD35000C27E9E /* CCComController.h in Headers */,
 				15AE18DE19AAD35000C27E9E /* TriggerObj.h in Headers */,
 				0A21112C1D71569200002345 /* EventData.h in Headers */,
@@ -5578,6 +6025,7 @@
 			files = (
 				503DD8F01926736A00CD74DD /* CCStdC-ios.h in Headers */,
 				15AE1A9A19AAD40300C27E9E /* b2Math.h in Headers */,
+				0AFC98EE1E91487A00F3D63F /* setup_11.h in Headers */,
 				46A170FF1807CECB005B8026 /* CCPhysicsContact.h in Headers */,
 				3EACC9A319F5014D00EB3C5E /* CCCamera.h in Headers */,
 				15AE1AC719AAD40300C27E9E /* b2GearJoint.h in Headers */,
@@ -5587,6 +6035,7 @@
 				15AE18C219AAD33D00C27E9E /* CCLayerColorLoader.h in Headers */,
 				50643BDA19BFAF4400EF68ED /* CCApplication.h in Headers */,
 				15AE181519AAD2F700C27E9E /* CCAnimationCurve.h in Headers */,
+				0AFC98E61E91487A00F3D63F /* residue_44.h in Headers */,
 				0AE62D001C1036A700BF1BF4 /* writer.h in Headers */,
 				503DD8EF1926736A00CD74DD /* CCPlatformDefine-ios.h in Headers */,
 				15AE196919AAD35100C27E9E /* CocoStudio.h in Headers */,
@@ -5608,15 +6057,19 @@
 				46A171061807CECB005B8026 /* CCPhysicsWorld.h in Headers */,
 				50ABBDB41925AB4100A911A9 /* ccShaders.h in Headers */,
 				15AE19B319AAD39700C27E9E /* SliderReader.h in Headers */,
+				0AFC99121E91487A00F3D63F /* smallft.h in Headers */,
 				15AE1B7919AADA9A00C27E9E /* UIRichText.h in Headers */,
 				15AE1A4A19AAD3D500C27E9E /* b2CircleShape.h in Headers */,
 				50ABBE861925AB6F00A911A9 /* ccFPSImages.h in Headers */,
+				0AFC98FE1E91487A00F3D63F /* setup_X.h in Headers */,
 				15B3708719EE414C00ABE682 /* Downloader.h in Headers */,
+				0AFC98941E91487A00F3D63F /* ogg.h in Headers */,
 				15AE192619AAD35100C27E9E /* TriggerObj.h in Headers */,
 				50ABBE2E1925AB6F00A911A9 /* ccCArray.h in Headers */,
 				15B3707B19EE414C00ABE682 /* AssetsManagerEx.h in Headers */,
 				15AE1B9119AADA9A00C27E9E /* UIWidget.h in Headers */,
 				50ABC0041926664800A911A9 /* CCLock-apple.h in Headers */,
+				0AFC99081E91487A00F3D63F /* registry.h in Headers */,
 				382384401A259140002C4610 /* SingleNodeReader.h in Headers */,
 				15AE1A4019AAD3D500C27E9E /* b2Collision.h in Headers */,
 				5034CA40191D591100CE6051 /* ccShader_Position_uColor.vert in Headers */,
@@ -5625,6 +6078,7 @@
 				15AE1BFC19AAE01E00C27E9E /* CCControlUtils.h in Headers */,
 				0A2111731D71569200002345 /* SkeletonRenderer.h in Headers */,
 				15AE193519AAD35100C27E9E /* CCActionObject.h in Headers */,
+				0AFC98E01E91487A00F3D63F /* psych_44.h in Headers */,
 				0A2111311D71569200002345 /* extension.h in Headers */,
 				15AE1AA919AAD40300C27E9E /* b2TimeStep.h in Headers */,
 				15AE197A19AAD35700C27E9E /* CCActionTimelineCache.h in Headers */,
@@ -5705,6 +6159,7 @@
 				1A5700A1180BC5D20088DEC7 /* CCNode.h in Headers */,
 				15AE181919AAD2F700C27E9E /* CCAttachNode.h in Headers */,
 				292DB14C19B4574100A80320 /* UIEditBoxImpl-mac.h in Headers */,
+				0AFC98EA1E91487A00F3D63F /* residue_44u.h in Headers */,
 				15AE1BF019AAE01E00C27E9E /* CCControlHuePicker.h in Headers */,
 				0A2111191D71569200002345 /* Bone.h in Headers */,
 				0A21118D1D71569200002345 /* TransformConstraintData.h in Headers */,
@@ -5714,6 +6169,7 @@
 				15AE1B7719AADA9A00C27E9E /* UIPageView.h in Headers */,
 				50ABBD8A1925AB4100A911A9 /* CCCustomCommand.h in Headers */,
 				299754F7193EC95400A54AC3 /* ObjectFactory.h in Headers */,
+				0AFC989E1E91487A00F3D63F /* backends.h in Headers */,
 				50ABBE881925AB6F00A911A9 /* ccMacros.h in Headers */,
 				50ABC0101926664800A911A9 /* CCFileUtils.h in Headers */,
 				15AE19A919AAD39700C27E9E /* LayoutReader.h in Headers */,
@@ -5724,10 +6180,12 @@
 				50ABBE381925AB6F00A911A9 /* CCConsole.h in Headers */,
 				50ABBE8A1925AB6F00A911A9 /* CCMap.h in Headers */,
 				503DD8E61926736A00CD74DD /* CCEAGLView-ios.h in Headers */,
+				0AFC98D61E91487A00F3D63F /* mdct.h in Headers */,
 				50ABBE4C1925AB6F00A911A9 /* CCEventAcceleration.h in Headers */,
 				50ABBD571925AB0000A911A9 /* TransformUtils.h in Headers */,
 				1A570115180BC8EE0088DEC7 /* CCDrawNode.h in Headers */,
 				1A57011E180BC90D0088DEC7 /* CCGrabber.h in Headers */,
+				0AFC98CA1E91487A00F3D63F /* lpc.h in Headers */,
 				1A570122180BC90D0088DEC7 /* CCGrid.h in Headers */,
 				15AE1AB319AAD40300C27E9E /* b2CircleContact.h in Headers */,
 				5034CA2E191D591100CE6051 /* ccShader_PositionTextureA8Color.frag in Headers */,
@@ -5735,6 +6193,7 @@
 				29394CF519B01DBA00D2DE1A /* UIWebViewImpl-ios.h in Headers */,
 				0AE62CFC1C1036A700BF1BF4 /* reader.h in Headers */,
 				50ABBD5B1925AB0000A911A9 /* Vec2.h in Headers */,
+				0AFC98F01E91487A00F3D63F /* setup_16.h in Headers */,
 				50ABBD411925AB0000A911A9 /* CCMath.h in Headers */,
 				1A5701A0180BCB590088DEC7 /* CCFont.h in Headers */,
 				292DB14819B4574100A80320 /* UIEditBoxImpl-ios.h in Headers */,
@@ -5742,14 +6201,18 @@
 				50ABBD9A1925AB4100A911A9 /* CCGLProgramStateCache.h in Headers */,
 				15AE181D19AAD2F700C27E9E /* CCBundle3D.h in Headers */,
 				15AE192519AAD35100C27E9E /* CocoLoader.h in Headers */,
+				0AFC98FA1E91487A00F3D63F /* setup_44u.h in Headers */,
 				15AE1BBB19AADFF000C27E9E /* HttpRequest.h in Headers */,
 				B60C5BD719AC68B10056FBDE /* CCBillBoard.h in Headers */,
 				B230ED7419B417AE00364AA8 /* CCTrianglesCommand.h in Headers */,
 				0A2111291D71569200002345 /* Event.h in Headers */,
 				50ED2BE119BEAF7900A0AB90 /* UIEditBoxImpl-win32.h in Headers */,
+				0AFC98961E91487A00F3D63F /* os_types.h in Headers */,
 				15AE1ACB19AAD40300C27E9E /* b2MouseJoint.h in Headers */,
+				0AFC98E81E91487A00F3D63F /* residue_44p51.h in Headers */,
 				50ABBD3F1925AB0000A911A9 /* CCGeometry.h in Headers */,
 				15AE1AD319AAD40300C27E9E /* b2RopeJoint.h in Headers */,
+				0AFC99281E91487A00F3D63F /* RDAudio.h in Headers */,
 				50ABBFFE1926664800A911A9 /* CCFileUtils-apple.h in Headers */,
 				15AE1AAD19AAD40300C27E9E /* b2WorldCallbacks.h in Headers */,
 				1A5701A4180BCB590088DEC7 /* CCFontAtlas.h in Headers */,
@@ -5766,6 +6229,7 @@
 				15AE1A4819AAD3D500C27E9E /* b2ChainShape.h in Headers */,
 				15AE18CB19AAD33D00C27E9E /* CCMenuLoader.h in Headers */,
 				1A5701BC180BCB5A0088DEC7 /* CCLabel.h in Headers */,
+				0AFC991E1E91487A00F3D63F /* window.h in Headers */,
 				1A5701C0180BCB5A0088DEC7 /* CCLabelAtlas.h in Headers */,
 				50ABBE681925AB6F00A911A9 /* CCEventListenerCustom.h in Headers */,
 				0AE62CEA1C1036A700BF1BF4 /* encodedstream.h in Headers */,
@@ -5780,6 +6244,7 @@
 				1A5701C4180BCB5A0088DEC7 /* CCLabelBMFont.h in Headers */,
 				0A2111211D71569200002345 /* BoundingBoxAttachment.h in Headers */,
 				15AE193F19AAD35100C27E9E /* CCBatchNode.h in Headers */,
+				0AFC99221E91487A00F3D63F /* vorbisenc.h in Headers */,
 				15AE1C1819AAE2C700C27E9E /* CCPhysicsSprite.h in Headers */,
 				0A21110D1D71569200002345 /* Attachment.h in Headers */,
 				15AE1BC819AAE00000C27E9E /* AssetsManager.h in Headers */,
@@ -5804,12 +6269,14 @@
 				15AE194E19AAD35100C27E9E /* CCDataReaderHelper.h in Headers */,
 				15AE1ADB19AAD41000C27E9E /* b2Rope.h in Headers */,
 				1A5701CE180BCB5A0088DEC7 /* CCLabelTTF.h in Headers */,
+				0AFC98AE1E91487A00F3D63F /* res_books_uncoupled.h in Headers */,
 				15AE1AB119AAD40300C27E9E /* b2ChainAndPolygonContact.h in Headers */,
 				1A5701E1180BCB8C0088DEC7 /* CCLayer.h in Headers */,
 				15AE1BEE19AAE01E00C27E9E /* CCControlExtensions.h in Headers */,
 				0A21113D1D71569200002345 /* Json.h in Headers */,
 				1A5701E5180BCB8C0088DEC7 /* CCScene.h in Headers */,
 				1A5701E9180BCB8C0088DEC7 /* CCTransition.h in Headers */,
+				0AFC99001E91487A00F3D63F /* os.h in Headers */,
 				15AE198F19AAD36E00C27E9E /* CheckBoxReader.h in Headers */,
 				382384011A258FA7002C4610 /* util.h in Headers */,
 				50ABBED41925AB6F00A911A9 /* uthash.h in Headers */,
@@ -5821,6 +6288,7 @@
 				15AE18BA19AAD33D00C27E9E /* CCControlButtonLoader.h in Headers */,
 				1A5701FE180BCBAD0088DEC7 /* CCMenuItem.h in Headers */,
 				50ABC00C1926664800A911A9 /* CCDevice.h in Headers */,
+				0AFC98B41E91487A00F3D63F /* codec_internal.h in Headers */,
 				1A570205180BCBD40088DEC7 /* CCClippingNode.h in Headers */,
 				15AE1B8919AADA9A00C27E9E /* UICheckBox.h in Headers */,
 				5034CA34191D591100CE6051 /* ccShader_PositionTexture_uColor.frag in Headers */,
@@ -5836,15 +6304,19 @@
 				15AE194619AAD35100C27E9E /* CCComAttribute.h in Headers */,
 				382384241A2590DA002C4610 /* GameMapReader.h in Headers */,
 				15AE1ABD19AAD40300C27E9E /* b2PolygonAndCircleContact.h in Headers */,
+				0AFC98F41E91487A00F3D63F /* setup_32.h in Headers */,
 				15AE1AA819AAD40300C27E9E /* b2Island.h in Headers */,
 				15B3708B19EE414C00ABE682 /* Manifest.h in Headers */,
 				1A570213180BCBF40088DEC7 /* CCProgressTimer.h in Headers */,
+				0AFC98C41E91487A00F3D63F /* lookup.h in Headers */,
 				B37510821823ACA100B3BA6A /* CCPhysicsJointInfo_chipmunk.h in Headers */,
+				0AFC98AA1E91487A00F3D63F /* res_books_stereo.h in Headers */,
 				1A570217180BCBF40088DEC7 /* CCRenderTexture.h in Headers */,
 				15AE1ABB19AAD40300C27E9E /* b2EdgeAndPolygonContact.h in Headers */,
 				15AE198719AAD36400C27E9E /* WidgetReaderProtocol.h in Headers */,
 				15AE198619AAD36400C27E9E /* WidgetReader.h in Headers */,
 				1A570224180BCC1A0088DEC7 /* CCParticleBatchNode.h in Headers */,
+				0AFC98A41E91487A00F3D63F /* bitrate.h in Headers */,
 				15AE1AC919AAD40300C27E9E /* b2Joint.h in Headers */,
 				382383EF1A258FA7002C4610 /* flatbuffers.h in Headers */,
 				15AE196819AAD35100C27E9E /* CCUtilMath.h in Headers */,
@@ -5868,6 +6340,7 @@
 				15EFA214198A2BB5000C57D3 /* CCProtectedNode.h in Headers */,
 				0A2111671D71569200002345 /* SkeletonBounds.h in Headers */,
 				0A2111051D71569200002345 /* Atlas.h in Headers */,
+				0AFC992C1E91487A00F3D63F /* RDAudioOgg.h in Headers */,
 				15AE194419AAD35100C27E9E /* CCComBase.h in Headers */,
 				15AE1A3B19AAD3D500C27E9E /* b2BroadPhase.h in Headers */,
 				15AE195619AAD35100C27E9E /* CCDisplayManager.h in Headers */,
@@ -5887,7 +6360,10 @@
 				15AE1A9819AAD40300C27E9E /* b2GrowableStack.h in Headers */,
 				0AE62CF81C1036A700BF1BF4 /* prettywriter.h in Headers */,
 				1A57028D180BCC900088DEC7 /* CCSpriteFrameCache.h in Headers */,
+				0AFC99241E91487A00F3D63F /* vorbisfile.h in Headers */,
 				0AE62CF61C1036A700BF1BF4 /* pointer.h in Headers */,
+				0AFC98DE1E91487A00F3D63F /* psych_16.h in Headers */,
+				0AFC98EC1E91487A00F3D63F /* residue_8.h in Headers */,
 				1A570295180BCCAB0088DEC7 /* CCAnimation.h in Headers */,
 				50ABBDB81925AB4100A911A9 /* CCTexture2D.h in Headers */,
 				15AE1AAB19AAD40300C27E9E /* b2World.h in Headers */,
@@ -5947,6 +6423,7 @@
 				15AE183F19AAD2F700C27E9E /* CCSkeleton3D.h in Headers */,
 				50ABBD531925AB0000A911A9 /* Quaternion.h in Headers */,
 				15AE19B119AAD39700C27E9E /* ScrollViewReader.h in Headers */,
+				0AFC98DA1E91487A00F3D63F /* floor_all.h in Headers */,
 				503DD8E81926736A00CD74DD /* CCES2Renderer-ios.h in Headers */,
 				50ABBE6C1925AB6F00A911A9 /* CCEventListenerFocus.h in Headers */,
 				5034CA3E191D591100CE6051 /* ccShader_PositionColor.frag in Headers */,
@@ -5957,9 +6434,11 @@
 				50ABC0181926664800A911A9 /* CCImage.h in Headers */,
 				15AE1A4E19AAD3D500C27E9E /* b2PolygonShape.h in Headers */,
 				382384471A25915C002C4610 /* SpriteReader.h in Headers */,
+				0AFC99201E91487A00F3D63F /* codec.h in Headers */,
 				50ABBE8E1925AB6F00A911A9 /* CCNS.h in Headers */,
 				15AE1AB519AAD40300C27E9E /* b2Contact.h in Headers */,
 				50ABBEA61925AB6F00A911A9 /* CCScriptSupport.h in Headers */,
+				0AFC98D21E91487A00F3D63F /* masking.h in Headers */,
 				46C02E0A18E91123004B7456 /* xxhash.h in Headers */,
 				5034CA4C191D591100CE6051 /* ccShader_Label_df_glow.frag in Headers */,
 				503DD8EB1926736A00CD74DD /* CCGL-ios.h in Headers */,
@@ -5972,6 +6451,8 @@
 				50ABBDB01925AB4100A911A9 /* CCRenderer.h in Headers */,
 				B29594B71926D5EC003EEF37 /* CCMeshCommand.h in Headers */,
 				3E6176771960F89B00DE83F5 /* CCEventListenerController.h in Headers */,
+				0AFC98F81E91487A00F3D63F /* setup_44p51.h in Headers */,
+				0AFC990C1E91487A00F3D63F /* scales.h in Headers */,
 				50ABBD861925AB4100A911A9 /* CCBatchCommand.h in Headers */,
 				15AE18CA19AAD33D00C27E9E /* CCMenuItemLoader.h in Headers */,
 				50ABBE481925AB6F00A911A9 /* CCEvent.h in Headers */,
@@ -5993,9 +6474,11 @@
 				15AE1B8319AADA9A00C27E9E /* UITextBMFont.h in Headers */,
 				0AE62CF41C1036A700BF1BF4 /* memorystream.h in Headers */,
 				50ABBD8E1925AB4100A911A9 /* CCGLProgram.h in Headers */,
+				0AFC98E21E91487A00F3D63F /* psych_8.h in Headers */,
 				38B8E2D819E66581002D7CE7 /* CSLoader.h in Headers */,
 				50ABC0081926664800A911A9 /* CCApplicationProtocol.h in Headers */,
 				1ABA68B11888D700007D1BB4 /* CCFontCharMap.h in Headers */,
+				0AFC99041E91487A00F3D63F /* psy.h in Headers */,
 				15AE1ACF19AAD40300C27E9E /* b2PulleyJoint.h in Headers */,
 				15AE198019AAD35700C27E9E /* CCTimeLine.h in Headers */,
 				38B8E2E419E671D2002D7CE7 /* UILayoutComponent.h in Headers */,
@@ -6006,9 +6489,11 @@
 				50ABBEBE1925AB6F00A911A9 /* ccUtils.h in Headers */,
 				15AE183719AAD2F700C27E9E /* CCObjLoader.h in Headers */,
 				0A2111011D71569200002345 /* AnimationStateData.h in Headers */,
+				0AFC98C61E91487A00F3D63F /* lookup_data.h in Headers */,
 				15AE18CF19AAD33D00C27E9E /* CCNodeLoader.h in Headers */,
 				50ABBE801925AB6F00A911A9 /* CCEventTouch.h in Headers */,
 				299CF1FE19A434BC00C378C1 /* ccRandom.h in Headers */,
+				0AFC98F61E91487A00F3D63F /* setup_44.h in Headers */,
 				50ABBDBC1925AB4100A911A9 /* CCTextureAtlas.h in Headers */,
 				0A21113F1D71569200002345 /* kvec.h in Headers */,
 				15AE182319AAD2F700C27E9E /* CCBundleReader.h in Headers */,
@@ -6019,6 +6504,7 @@
 				15AE1AD119AAD40300C27E9E /* b2RevoluteJoint.h in Headers */,
 				50643BD519BFAECF00EF68ED /* CCGL.h in Headers */,
 				15AE193919AAD35100C27E9E /* CCArmatureAnimation.h in Headers */,
+				0AFC98E41E91487A00F3D63F /* residue_16.h in Headers */,
 				15AE1AA419AAD40300C27E9E /* b2ContactManager.h in Headers */,
 				B276EF601988D1D500CD400F /* CCVertexIndexData.h in Headers */,
 				50ABBD5F1925AB0000A911A9 /* Vec3.h in Headers */,
@@ -6028,9 +6514,11 @@
 				15AE194119AAD35100C27E9E /* CCBone.h in Headers */,
 				50ABBD471925AB0000A911A9 /* CCVertex.h in Headers */,
 				15AE195A19AAD35100C27E9E /* CCProcessBase.h in Headers */,
+				0AFC98FC1E91487A00F3D63F /* setup_8.h in Headers */,
 				15AE193D19AAD35100C27E9E /* CCArmatureDefine.h in Headers */,
 				382384041A259005002C4610 /* CSParseBinary_generated.h in Headers */,
 				15AE1A4219AAD3D500C27E9E /* b2Distance.h in Headers */,
+				0AFC98B81E91487A00F3D63F /* envelope.h in Headers */,
 				15AE195419AAD35100C27E9E /* CCDisplayFactory.h in Headers */,
 				1A9DCA2A180E6955007A3AD4 /* CCGLBufferedNode.h in Headers */,
 				1A01C69F18F57BE800EFE3A6 /* CCString.h in Headers */,
@@ -6040,13 +6528,17 @@
 				5034CA36191D591100CE6051 /* ccShader_PositionTexture.frag in Headers */,
 				B24AA98C195A675C007B4522 /* CCFastTMXTiledMap.h in Headers */,
 				50ABBEAE1925AB6F00A911A9 /* ccTypes.h in Headers */,
+				0AFC98A81E91487A00F3D63F /* res_books_51.h in Headers */,
 				0AE62CE81C1036A700BF1BF4 /* document.h in Headers */,
 				15AE1BF819AAE01E00C27E9E /* CCControlStepper.h in Headers */,
+				0AFC98D81E91487A00F3D63F /* misc.h in Headers */,
 				50ABBE261925AB6F00A911A9 /* base64.h in Headers */,
+				0AFC98F21E91487A00F3D63F /* setup_22.h in Headers */,
 				15AE1C1619AAE2C700C27E9E /* CCPhysicsDebugNode.h in Headers */,
 				15AE1BF619AAE01E00C27E9E /* CCControlSlider.h in Headers */,
 				1A01C68718F57BE800EFE3A6 /* CCArray.h in Headers */,
 				1A01C6A718F58F7500EFE3A6 /* CCNotificationCenter.h in Headers */,
+				0AFC98BE1E91487A00F3D63F /* highlevel.h in Headers */,
 				50ABBEDA1925AB6F00A911A9 /* ZipUtils.h in Headers */,
 				50ABBDC01925AB4100A911A9 /* CCTextureCache.h in Headers */,
 				B276EF641988D1D500CD400F /* CCVertexIndexBuffer.h in Headers */,
@@ -6063,6 +6555,7 @@
 				50ABBED21925AB6F00A911A9 /* TGAlib.h in Headers */,
 				15AE1BED19AAE01E00C27E9E /* CCControlColourPicker.h in Headers */,
 				15AE195019AAD35100C27E9E /* CCDatas.h in Headers */,
+				0AFC98CE1E91487A00F3D63F /* lsp.h in Headers */,
 				15AE18B319AAD33D00C27E9E /* CCBReader.h in Headers */,
 				15AE18D219AAD33D00C27E9E /* CCNodeLoaderListener.h in Headers */,
 				0A21115B1D71569200002345 /* SkeletonAnimation.h in Headers */,
@@ -6085,9 +6578,12 @@
 				38ACD1FF1A27111900C3093D /* WidgetCallBackHandlerProtocol.h in Headers */,
 				B37510801823ACA100B3BA6A /* CCPhysicsHelper_chipmunk.h in Headers */,
 				50ABBDAA1925AB4100A911A9 /* CCRenderCommand.h in Headers */,
+				0AFC98B21E91487A00F3D63F /* codebook.h in Headers */,
 				15AE1BE919AAE01E00C27E9E /* CCControl.h in Headers */,
 				15AE193719AAD35100C27E9E /* CCArmature.h in Headers */,
+				0AFC98DC1E91487A00F3D63F /* psych_11.h in Headers */,
 				15AE1BC319AADFFB00C27E9E /* cocos-ext.h in Headers */,
+				0AFC98AC1E91487A00F3D63F /* floor_books.h in Headers */,
 				15AE1B8B19AADA9A00C27E9E /* UIImageView.h in Headers */,
 				15AE1A4619AAD3D500C27E9E /* b2TimeOfImpact.h in Headers */,
 				50ABBE601925AB6F00A911A9 /* CCEventListener.h in Headers */,
@@ -6212,6 +6708,7 @@
 				0A2111781D71569200002345 /* Slot.c in Sources */,
 				15AE1B6319AADA9900C27E9E /* UICheckBox.cpp in Sources */,
 				15EFA211198A2BB5000C57D3 /* CCProtectedNode.cpp in Sources */,
+				0AFC98CF1E91487A00F3D63F /* mapping0.c in Sources */,
 				50ABBEB71925AB6F00A911A9 /* ccUTF8.cpp in Sources */,
 				15AE189819AAD33D00C27E9E /* CCMenuItemLoader.cpp in Sources */,
 				0A2111361D71569200002345 /* IkConstraintData.c in Sources */,
@@ -6219,12 +6716,14 @@
 				50ABBE271925AB6F00A911A9 /* CCAutoreleasePool.cpp in Sources */,
 				15AE197419AAD35700C27E9E /* CCTimeLine.cpp in Sources */,
 				0A2111121D71569200002345 /* AttachmentVertices.cpp in Sources */,
+				0AFC989F1E91487A00F3D63F /* barkmel.c in Sources */,
 				15AE188E19AAD33D00C27E9E /* CCLabelTTFLoader.cpp in Sources */,
 				15AE1A3019AAD3D500C27E9E /* b2ChainShape.cpp in Sources */,
 				0A2110F61D71569200002345 /* Animation.c in Sources */,
 				50ABBE8B1925AB6F00A911A9 /* CCNS.cpp in Sources */,
 				0A21116C1D71569200002345 /* SkeletonJson.c in Sources */,
 				15AE1BD819AAE01E00C27E9E /* CCControlStepper.cpp in Sources */,
+				0AFC98A11E91487A00F3D63F /* bitrate.c in Sources */,
 				46A170E81807CECA005B8026 /* CCPhysicsContact.cpp in Sources */,
 				1A570061180BC5A10088DEC7 /* CCAction.cpp in Sources */,
 				15AE1BDC19AAE01E00C27E9E /* CCControlUtils.cpp in Sources */,
@@ -6262,7 +6761,9 @@
 				15AE18A619AAD33D00C27E9E /* CCScrollViewLoader.cpp in Sources */,
 				15AE18F619AAD35000C27E9E /* CCBatchNode.cpp in Sources */,
 				15AE184419AAD2F700C27E9E /* CCSprite3DMaterial.cpp in Sources */,
+				0AFC99191E91487A00F3D63F /* vorbisfile.c in Sources */,
 				50ABBE591925AB6F00A911A9 /* CCEventKeyboard.cpp in Sources */,
+				0AFC98D31E91487A00F3D63F /* mdct.c in Sources */,
 				0A2111541D71569200002345 /* Skeleton.c in Sources */,
 				1A57007D180BC5A10088DEC7 /* CCActionInterval.cpp in Sources */,
 				15AE189F19AAD33D00C27E9E /* CCNodeLoaderLibrary.cpp in Sources */,
@@ -6276,6 +6777,7 @@
 				0A2111161D71569200002345 /* Bone.c in Sources */,
 				1A570091180BC5A10088DEC7 /* CCActionTween.cpp in Sources */,
 				15AE188419AAD33D00C27E9E /* CCBSequence.cpp in Sources */,
+				0AFC99251E91487A00F3D63F /* RDAudio.cpp in Sources */,
 				50ABBEBF1925AB6F00A911A9 /* CCValue.cpp in Sources */,
 				1A570098180BC5C10088DEC7 /* CCAtlasNode.cpp in Sources */,
 				1A57009E180BC5D20088DEC7 /* CCNode.cpp in Sources */,
@@ -6318,9 +6820,11 @@
 				3823842F1A259112002C4610 /* ParticleReader.cpp in Sources */,
 				15AE191119AAD35000C27E9E /* CCProcessBase.cpp in Sources */,
 				15AE18EE19AAD35000C27E9E /* CCArmature.cpp in Sources */,
+				0AFC991B1E91487A00F3D63F /* window.c in Sources */,
 				0A21111E1D71569200002345 /* BoundingBoxAttachment.c in Sources */,
 				15AE1BCD19AAE01E00C27E9E /* CCControlColourPicker.cpp in Sources */,
 				1A5701B1180BCB590088DEC7 /* CCFontFNT.cpp in Sources */,
+				0AFC99011E91487A00F3D63F /* psy.c in Sources */,
 				15AE181619AAD2F700C27E9E /* CCAttachNode.cpp in Sources */,
 				0A2111401D71569200002345 /* MeshAttachment.c in Sources */,
 				1A5701B5180BCB590088DEC7 /* CCFontFreeType.cpp in Sources */,
@@ -6334,6 +6838,7 @@
 				3823843D1A259140002C4610 /* SingleNodeReader.cpp in Sources */,
 				1A5701C1180BCB5A0088DEC7 /* CCLabelBMFont.cpp in Sources */,
 				15AE182C19AAD2F700C27E9E /* CCMeshVertexIndexData.cpp in Sources */,
+				0AFC98B91E91487A00F3D63F /* floor0.c in Sources */,
 				15AE1A8C19AAD40300C27E9E /* b2RevoluteJoint.cpp in Sources */,
 				50ABBD4C1925AB0000A911A9 /* MathUtil.cpp in Sources */,
 				15AE191719AAD35000C27E9E /* CCSpriteFrameCacheHelper.cpp in Sources */,
@@ -6343,8 +6848,10 @@
 				0A21111A1D71569200002345 /* BoneData.c in Sources */,
 				1A5701C7180BCB5A0088DEC7 /* CCLabelTextFormatter.cpp in Sources */,
 				15AE18A819AAD33D00C27E9E /* CCSpriteLoader.cpp in Sources */,
+				0AFC98991E91487A00F3D63F /* framing.c in Sources */,
 				1A5701CB180BCB5A0088DEC7 /* CCLabelTTF.cpp in Sources */,
 				50ABBE711925AB6F00A911A9 /* CCEventListenerMouse.cpp in Sources */,
+				0AFC99131E91487A00F3D63F /* synthesis.c in Sources */,
 				1A5701DE180BCB8C0088DEC7 /* CCLayer.cpp in Sources */,
 				15AE1B5919AADA9900C27E9E /* UIText.cpp in Sources */,
 				15B3707C19EE414C00ABE682 /* CCEventAssetsManagerEx.cpp in Sources */,
@@ -6356,6 +6863,7 @@
 				1A12775C18DFCC590005F345 /* CCTweenFunction.cpp in Sources */,
 				1A5701E6180BCB8C0088DEC7 /* CCTransition.cpp in Sources */,
 				B24AA985195A675C007B4522 /* CCFastTMXLayer.cpp in Sources */,
+				0AFC98BF1E91487A00F3D63F /* info.c in Sources */,
 				15AE1A6A19AAD40300C27E9E /* b2ChainAndCircleContact.cpp in Sources */,
 				15B3708819EE414C00ABE682 /* Manifest.cpp in Sources */,
 				1A5701EA180BCB8C0088DEC7 /* CCTransitionPageTurn.cpp in Sources */,
@@ -6401,8 +6909,10 @@
 				15AE189219AAD33D00C27E9E /* CCLayerGradientLoader.cpp in Sources */,
 				15AE1B6A19AADA9900C27E9E /* UIDeprecated.cpp in Sources */,
 				15AE183C19AAD2F700C27E9E /* CCSkeleton3D.cpp in Sources */,
+				0AFC99151E91487A00F3D63F /* tone.c in Sources */,
 				15AE1A2319AAD3D500C27E9E /* b2BroadPhase.cpp in Sources */,
 				382384211A2590DA002C4610 /* GameMapReader.cpp in Sources */,
+				0AFC98AF1E91487A00F3D63F /* codebook.c in Sources */,
 				382383F01A258FA7002C4610 /* flatc.cpp in Sources */,
 				1A57028A180BCC900088DEC7 /* CCSpriteFrameCache.cpp in Sources */,
 				0A21110E1D71569200002345 /* AttachmentLoader.c in Sources */,
@@ -6412,6 +6922,7 @@
 				15B3708019EE414C00ABE682 /* CCEventListenerAssetsManagerEx.cpp in Sources */,
 				1A570292180BCCAB0088DEC7 /* CCAnimation.cpp in Sources */,
 				1A570296180BCCAB0088DEC7 /* CCAnimationCache.cpp in Sources */,
+				0AFC98CB1E91487A00F3D63F /* lsp.c in Sources */,
 				50ABBE351925AB6F00A911A9 /* CCConsole.cpp in Sources */,
 				15AE1BB119AADFEF00C27E9E /* HttpClient.cpp in Sources */,
 				50ABBEAF1925AB6F00A911A9 /* CCUserDefault.cpp in Sources */,
@@ -6437,6 +6948,7 @@
 				15AE18EA19AAD35000C27E9E /* CCActionNode.cpp in Sources */,
 				15AE1A7819AAD40300C27E9E /* b2PolygonAndCircleContact.cpp in Sources */,
 				15AE1A3419AAD3D500C27E9E /* b2EdgeShape.cpp in Sources */,
+				0AFC98BB1E91487A00F3D63F /* floor1.c in Sources */,
 				15AE1BA319AADFDF00C27E9E /* UILayoutManager.cpp in Sources */,
 				0A2111061D71569200002345 /* AtlasAttachmentLoader.c in Sources */,
 				B230ED7119B417AE00364AA8 /* CCTrianglesCommand.cpp in Sources */,
@@ -6447,15 +6959,18 @@
 				1A5702FA180BCE750088DEC7 /* CCTMXXMLParser.cpp in Sources */,
 				15AE18DF19AAD35000C27E9E /* TriggerBase.cpp in Sources */,
 				0A2111741D71569200002345 /* Skin.c in Sources */,
+				0AFC98C11E91487A00F3D63F /* lookup.c in Sources */,
 				15AE1A7219AAD40300C27E9E /* b2ContactSolver.cpp in Sources */,
 				15AE1BC519AAE00000C27E9E /* AssetsManager.cpp in Sources */,
 				50ABBD5C1925AB0000A911A9 /* Vec3.cpp in Sources */,
+				0AFC99091E91487A00F3D63F /* res0.c in Sources */,
 				1A570300180BCE890088DEC7 /* CCParallaxNode.cpp in Sources */,
 				15AE191D19AAD35000C27E9E /* CCTween.cpp in Sources */,
 				15AE1A6C19AAD40300C27E9E /* b2ChainAndPolygonContact.cpp in Sources */,
 				15AE1A2719AAD3D500C27E9E /* b2CollidePolygon.cpp in Sources */,
 				15AE199A19AAD39600C27E9E /* PageViewReader.cpp in Sources */,
 				1A57030C180BCF190088DEC7 /* CCComponent.cpp in Sources */,
+				0AFC99171E91487A00F3D63F /* vorbisenc.c in Sources */,
 				382383F61A258FA7002C4610 /* idl_gen_fbs.cpp in Sources */,
 				15AE1A5919AAD40300C27E9E /* b2StackAllocator.cpp in Sources */,
 				15AE192219AAD35000C27E9E /* DictionaryHelper.cpp in Sources */,
@@ -6472,6 +6987,7 @@
 				0A2111581D71569200002345 /* SkeletonAnimation.cpp in Sources */,
 				15AE1A8019AAD40300C27E9E /* b2FrictionJoint.cpp in Sources */,
 				50ABBD931925AB4100A911A9 /* CCGLProgramState.cpp in Sources */,
+				0AFC99291E91487A00F3D63F /* RDAudioOgg.cpp in Sources */,
 				15AE183419AAD2F700C27E9E /* CCObjLoader.cpp in Sources */,
 				1A57034B180BD09B0088DEC7 /* tinyxml2.cpp in Sources */,
 				1A570354180BD0B00088DEC7 /* ioapi.cpp in Sources */,
@@ -6517,6 +7033,7 @@
 				15AE18F019AAD35000C27E9E /* CCArmatureAnimation.cpp in Sources */,
 				50ABBE511925AB6F00A911A9 /* CCEventDispatcher.cpp in Sources */,
 				50ABC0051926664800A911A9 /* CCThread-apple.mm in Sources */,
+				0AFC990D1E91487A00F3D63F /* sharedbook.c in Sources */,
 				15B3708419EE414C00ABE682 /* Downloader.cpp in Sources */,
 				50ABC0631926664800A911A9 /* CCDevice-mac.mm in Sources */,
 				15AE1A2819AAD3D500C27E9E /* b2Collision.cpp in Sources */,
@@ -6530,6 +7047,7 @@
 				15AE1BD219AAE01E00C27E9E /* CCControlPotentiometer.cpp in Sources */,
 				50ABBEA31925AB6F00A911A9 /* CCScriptSupport.cpp in Sources */,
 				38B8E2D519E66581002D7CE7 /* CSLoader.cpp in Sources */,
+				0AFC98971E91487A00F3D63F /* bitwise.c in Sources */,
 				15AE190519AAD35000C27E9E /* CCDataReaderHelper.cpp in Sources */,
 				15AE19A019AAD39600C27E9E /* TextAtlasReader.cpp in Sources */,
 				15AE1A2A19AAD3D500C27E9E /* b2Distance.cpp in Sources */,
@@ -6549,15 +7067,20 @@
 				0A2111221D71569200002345 /* Cocos2dAttachmentLoader.cpp in Sources */,
 				15AE197019AAD35700C27E9E /* CCFrame.cpp in Sources */,
 				3823840F1A259092002C4610 /* NodeReaderDefine.cpp in Sources */,
+				0AFC98C71E91487A00F3D63F /* lpc.c in Sources */,
 				15AE1B9F19AADFDF00C27E9E /* UILayout.cpp in Sources */,
 				50ABBECF1925AB6F00A911A9 /* TGAlib.cpp in Sources */,
 				15AE199E19AAD39600C27E9E /* SliderReader.cpp in Sources */,
 				50ABBE451925AB6F00A911A9 /* CCEvent.cpp in Sources */,
 				50ABBE611925AB6F00A911A9 /* CCEventListenerAcceleration.cpp in Sources */,
 				50ABBD9F1925AB4100A911A9 /* CCGroupCommand.cpp in Sources */,
+				0AFC98B51E91487A00F3D63F /* envelope.c in Sources */,
 				15AE1A8E19AAD40300C27E9E /* b2RopeJoint.cpp in Sources */,
 				50ABBD871925AB4100A911A9 /* CCCustomCommand.cpp in Sources */,
+				0AFC990F1E91487A00F3D63F /* smallft.c in Sources */,
+				0AFC98A51E91487A00F3D63F /* block.c in Sources */,
 				50ABBDBD1925AB4100A911A9 /* CCTextureCache.cpp in Sources */,
+				0AFC99051E91487A00F3D63F /* registry.c in Sources */,
 				15AE188619AAD33D00C27E9E /* CCBSequenceProperty.cpp in Sources */,
 				15AE1B4F19AADA9900C27E9E /* UILoadingBar.cpp in Sources */,
 				299754F4193EC95400A54AC3 /* ObjectFactory.cpp in Sources */,
@@ -6570,6 +7093,7 @@
 				50ABBE4D1925AB6F00A911A9 /* CCEventCustom.cpp in Sources */,
 				15AE1A6819AAD40300C27E9E /* b2WorldCallbacks.cpp in Sources */,
 				50ABBE9F1925AB6F00A911A9 /* CCScheduler.cpp in Sources */,
+				0AFC989B1E91487A00F3D63F /* analysis.c in Sources */,
 				15AE1C1119AAE2C600C27E9E /* CCPhysicsDebugNode.cpp in Sources */,
 				50ABC0151926664800A911A9 /* CCImage.cpp in Sources */,
 				50ABBE231925AB6F00A911A9 /* base64.cpp in Sources */,
@@ -6629,6 +7153,7 @@
 				B230ED7219B417AE00364AA8 /* CCTrianglesCommand.cpp in Sources */,
 				382383F91A258FA7002C4610 /* idl_gen_general.cpp in Sources */,
 				15AE1B9019AADA9A00C27E9E /* UIWidget.cpp in Sources */,
+				0AFC98BA1E91487A00F3D63F /* floor0.c in Sources */,
 				ED9C6A9518599AD8000A5232 /* CCNodeGrid.cpp in Sources */,
 				1A01C68F18F57BE800EFE3A6 /* CCDictionary.cpp in Sources */,
 				B276EF621988D1D500CD400F /* CCVertexIndexData.cpp in Sources */,
@@ -6643,6 +7168,7 @@
 				B2165EEA19921124000BE3E6 /* CCPrimitiveCommand.cpp in Sources */,
 				15AE182519AAD2F700C27E9E /* CCMesh.cpp in Sources */,
 				503DD8EE1926736A00CD74DD /* CCImage-ios.mm in Sources */,
+				0AFC98C81E91487A00F3D63F /* lpc.c in Sources */,
 				B37510811823ACA100B3BA6A /* CCPhysicsJointInfo_chipmunk.cpp in Sources */,
 				46A170FC1807CECB005B8026 /* CCPhysicsBody.cpp in Sources */,
 				15AE1BEA19AAE01E00C27E9E /* CCControlButton.cpp in Sources */,
@@ -6651,6 +7177,7 @@
 				50ABBE281925AB6F00A911A9 /* CCAutoreleasePool.cpp in Sources */,
 				15AE18D519AAD33D00C27E9E /* CCScale9SpriteLoader.cpp in Sources */,
 				15AE192919AAD35100C27E9E /* TriggerMng.cpp in Sources */,
+				0AFC992A1E91487A00F3D63F /* RDAudioOgg.cpp in Sources */,
 				46A170FE1807CECB005B8026 /* CCPhysicsContact.cpp in Sources */,
 				1A570062180BC5A10088DEC7 /* CCAction.cpp in Sources */,
 				0A2111591D71569200002345 /* SkeletonAnimation.cpp in Sources */,
@@ -6659,6 +7186,7 @@
 				15AE1C0119AAE01E00C27E9E /* CCScrollView.cpp in Sources */,
 				15B3708919EE414C00ABE682 /* Manifest.cpp in Sources */,
 				15AE1A9B19AAD40300C27E9E /* b2Settings.cpp in Sources */,
+				0AFC99141E91487A00F3D63F /* synthesis.c in Sources */,
 				1A57006A180BC5A10088DEC7 /* CCActionCatmullRom.cpp in Sources */,
 				15AE1BEF19AAE01E00C27E9E /* CCControlHuePicker.cpp in Sources */,
 				15AE197B19AAD35700C27E9E /* CCFrame.cpp in Sources */,
@@ -6666,6 +7194,7 @@
 				1A57006E180BC5A10088DEC7 /* CCActionEase.cpp in Sources */,
 				50ABBD8C1925AB4100A911A9 /* CCGLProgram.cpp in Sources */,
 				15AE196119AAD35100C27E9E /* CCSSceneReader.cpp in Sources */,
+				0AFC98BC1E91487A00F3D63F /* floor1.c in Sources */,
 				1A570072180BC5A10088DEC7 /* CCActionGrid.cpp in Sources */,
 				15AE1ABC19AAD40300C27E9E /* b2PolygonAndCircleContact.cpp in Sources */,
 				15AE1ADA19AAD41000C27E9E /* b2Rope.cpp in Sources */,
@@ -6700,6 +7229,7 @@
 				15AE1AC819AAD40300C27E9E /* b2Joint.cpp in Sources */,
 				50ABBE461925AB6F00A911A9 /* CCEvent.cpp in Sources */,
 				50ABBEA01925AB6F00A911A9 /* CCScheduler.cpp in Sources */,
+				0AFC99101E91487A00F3D63F /* smallft.c in Sources */,
 				15AE1A4119AAD3D500C27E9E /* b2Distance.cpp in Sources */,
 				50ABBE4E1925AB6F00A911A9 /* CCEventCustom.cpp in Sources */,
 				15AE1BF519AAE01E00C27E9E /* CCControlSlider.cpp in Sources */,
@@ -6718,6 +7248,7 @@
 				0A2110F71D71569200002345 /* Animation.c in Sources */,
 				15AE19B219AAD39700C27E9E /* SliderReader.cpp in Sources */,
 				382383F51A258FA7002C4610 /* idl_gen_cpp.cpp in Sources */,
+				0AFC98A21E91487A00F3D63F /* bitrate.c in Sources */,
 				0A2111871D71569200002345 /* TransformConstraint.c in Sources */,
 				0A2111331D71569200002345 /* IkConstraint.c in Sources */,
 				15AE1B7E19AADA9A00C27E9E /* UIText.cpp in Sources */,
@@ -6740,6 +7271,7 @@
 				15AE192419AAD35100C27E9E /* CocoLoader.cpp in Sources */,
 				50ABBE421925AB6F00A911A9 /* CCDirector.cpp in Sources */,
 				15AE1C0319AAE01E00C27E9E /* CCTableView.cpp in Sources */,
+				0AFC99021E91487A00F3D63F /* psy.c in Sources */,
 				1A57007E180BC5A10088DEC7 /* CCActionInterval.cpp in Sources */,
 				15AE1BF319AAE01E00C27E9E /* CCControlSaturationBrightnessPicker.cpp in Sources */,
 				1A570082180BC5A10088DEC7 /* CCActionManager.cpp in Sources */,
@@ -6801,6 +7333,8 @@
 				1A5701BA180BCB5A0088DEC7 /* CCLabel.cpp in Sources */,
 				15AE18AD19AAD33D00C27E9E /* CCBFileLoader.cpp in Sources */,
 				15AE18AB19AAD33D00C27E9E /* CCBAnimationManager.cpp in Sources */,
+				0AFC99181E91487A00F3D63F /* vorbisenc.c in Sources */,
+				0AFC98C01E91487A00F3D63F /* info.c in Sources */,
 				15AE1B7219AADA9A00C27E9E /* UIListView.cpp in Sources */,
 				1A5701BE180BCB5A0088DEC7 /* CCLabelAtlas.cpp in Sources */,
 				15AE1A3D19AAD3D500C27E9E /* b2CollideEdge.cpp in Sources */,
@@ -6809,6 +7343,7 @@
 				0A21118F1D71569200002345 /* VertexAttachment.c in Sources */,
 				0A2111371D71569200002345 /* IkConstraintData.c in Sources */,
 				15AE194219AAD35100C27E9E /* CCColliderDetector.cpp in Sources */,
+				0AFC99061E91487A00F3D63F /* registry.c in Sources */,
 				15AE1A9919AAD40300C27E9E /* b2Math.cpp in Sources */,
 				15AE1B7C19AADA9A00C27E9E /* UISlider.cpp in Sources */,
 				15AE1AA519AAD40300C27E9E /* b2Fixture.cpp in Sources */,
@@ -6816,6 +7351,7 @@
 				3823843E1A259140002C4610 /* SingleNodeReader.cpp in Sources */,
 				B375107E1823ACA100B3BA6A /* CCPhysicsContactInfo_chipmunk.cpp in Sources */,
 				0A2111131D71569200002345 /* AttachmentVertices.cpp in Sources */,
+				0AFC98C21E91487A00F3D63F /* lookup.c in Sources */,
 				15AE19AA19AAD39700C27E9E /* ListViewReader.cpp in Sources */,
 				0A21115D1D71569200002345 /* SkeletonBatch.cpp in Sources */,
 				1A5701C8180BCB5A0088DEC7 /* CCLabelTextFormatter.cpp in Sources */,
@@ -6853,6 +7389,7 @@
 				50ABBD491925AB0000A911A9 /* Mat4.cpp in Sources */,
 				1A570203180BCBD40088DEC7 /* CCClippingNode.cpp in Sources */,
 				15AE1B8619AADA9A00C27E9E /* UIButton.cpp in Sources */,
+				0AFC98B01E91487A00F3D63F /* codebook.c in Sources */,
 				1A570209180BCBDF0088DEC7 /* CCMotionStreak.cpp in Sources */,
 				1A570211180BCBF40088DEC7 /* CCProgressTimer.cpp in Sources */,
 				15AE193819AAD35100C27E9E /* CCArmatureAnimation.cpp in Sources */,
@@ -6871,6 +7408,7 @@
 				15AE182919AAD2F700C27E9E /* CCMeshSkin.cpp in Sources */,
 				3EACC9A119F5014D00EB3C5E /* CCCamera.cpp in Sources */,
 				15AE1A4319AAD3D500C27E9E /* b2DynamicTree.cpp in Sources */,
+				0AFC990A1E91487A00F3D63F /* res0.c in Sources */,
 				15AE1A3A19AAD3D500C27E9E /* b2BroadPhase.cpp in Sources */,
 				15AE19B619AAD39700C27E9E /* TextBMFontReader.cpp in Sources */,
 				0A2111551D71569200002345 /* Skeleton.c in Sources */,
@@ -6885,11 +7423,13 @@
 				50ABBD901925AB4100A911A9 /* CCGLProgramCache.cpp in Sources */,
 				15AE197F19AAD35700C27E9E /* CCTimeLine.cpp in Sources */,
 				1A57027F180BCC900088DEC7 /* CCSprite.cpp in Sources */,
+				0AFC989C1E91487A00F3D63F /* analysis.c in Sources */,
 				15AE192719AAD35100C27E9E /* TriggerBase.cpp in Sources */,
 				15AE1B8819AADA9A00C27E9E /* UICheckBox.cpp in Sources */,
 				15AE1A4B19AAD3D500C27E9E /* b2EdgeShape.cpp in Sources */,
 				15AE18B519AAD33D00C27E9E /* CCBSequence.cpp in Sources */,
 				1A570283180BCC900088DEC7 /* CCSpriteBatchNode.cpp in Sources */,
+				0AFC98981E91487A00F3D63F /* bitwise.c in Sources */,
 				1A570287180BCC900088DEC7 /* CCSpriteFrame.cpp in Sources */,
 				15AE193E19AAD35100C27E9E /* CCBatchNode.cpp in Sources */,
 				1A57028B180BCC900088DEC7 /* CCSpriteFrameCache.cpp in Sources */,
@@ -6897,6 +7437,7 @@
 				15AE1AAE19AAD40300C27E9E /* b2ChainAndCircleContact.cpp in Sources */,
 				15AE194D19AAD35100C27E9E /* CCDataReaderHelper.cpp in Sources */,
 				0A21112B1D71569200002345 /* EventData.c in Sources */,
+				0AFC991C1E91487A00F3D63F /* window.c in Sources */,
 				15AE1B8C19AADA9A00C27E9E /* UIScale9Sprite.cpp in Sources */,
 				15AE19AE19AAD39700C27E9E /* PageViewReader.cpp in Sources */,
 				1A570297180BCCAB0088DEC7 /* CCAnimationCache.cpp in Sources */,
@@ -6904,6 +7445,7 @@
 				15AE1A9F19AAD40300C27E9E /* b2Timer.cpp in Sources */,
 				15AE1AD419AAD40300C27E9E /* b2WeldJoint.cpp in Sources */,
 				1A5702C9180BCE370088DEC7 /* CCTextFieldTTF.cpp in Sources */,
+				0AFC991A1E91487A00F3D63F /* vorbisfile.c in Sources */,
 				15AE1C1719AAE2C700C27E9E /* CCPhysicsSprite.cpp in Sources */,
 				1A5702EB180BCE750088DEC7 /* CCTileMapAtlas.cpp in Sources */,
 				1A5702EF180BCE750088DEC7 /* CCTMXLayer.cpp in Sources */,
@@ -6912,9 +7454,11 @@
 				382384221A2590DA002C4610 /* GameMapReader.cpp in Sources */,
 				15AE1BAF19AADFDF00C27E9E /* UILayoutManager.cpp in Sources */,
 				15AE182119AAD2F700C27E9E /* CCBundleReader.cpp in Sources */,
+				0AFC99161E91487A00F3D63F /* tone.c in Sources */,
 				50ABBD3D1925AB0000A911A9 /* CCGeometry.cpp in Sources */,
 				15AE18D919AAD33D00C27E9E /* CCSpriteLoader.cpp in Sources */,
 				50ABBECC1925AB6F00A911A9 /* s3tc.cpp in Sources */,
+				0AFC98D41E91487A00F3D63F /* mdct.c in Sources */,
 				15AE1B7819AADA9A00C27E9E /* UIRichText.cpp in Sources */,
 				15AE195D19AAD35100C27E9E /* CCSkin.cpp in Sources */,
 				1A5702F7180BCE750088DEC7 /* CCTMXTiledMap.cpp in Sources */,
@@ -6938,6 +7482,7 @@
 				15AE1B7619AADA9A00C27E9E /* UIPageView.cpp in Sources */,
 				1A570311180BCF190088DEC7 /* CCComponentContainer.cpp in Sources */,
 				50ABBE2C1925AB6F00A911A9 /* ccCArray.cpp in Sources */,
+				0AFC99261E91487A00F3D63F /* RDAudio.cpp in Sources */,
 				15AE193219AAD35100C27E9E /* CCActionNode.cpp in Sources */,
 				15AE195319AAD35100C27E9E /* CCDisplayFactory.cpp in Sources */,
 				50ABC0061926664800A911A9 /* CCThread-apple.mm in Sources */,
@@ -6947,9 +7492,11 @@
 				1A57034C180BD09B0088DEC7 /* tinyxml2.cpp in Sources */,
 				50ABBDB61925AB4100A911A9 /* CCTexture2D.cpp in Sources */,
 				15AE1BAB19AADFDF00C27E9E /* UILayout.cpp in Sources */,
+				0AFC990E1E91487A00F3D63F /* sharedbook.c in Sources */,
 				0A2111491D71569200002345 /* PathConstraint.c in Sources */,
 				1A570355180BD0B00088DEC7 /* ioapi.cpp in Sources */,
 				1A570359180BD0B00088DEC7 /* unzip.cpp in Sources */,
+				0AFC98D01E91487A00F3D63F /* mapping0.c in Sources */,
 				15AE18BB19AAD33D00C27E9E /* CCControlLoader.cpp in Sources */,
 				15AE19B819AAD39700C27E9E /* TextFieldReader.cpp in Sources */,
 				382384101A259092002C4610 /* NodeReaderDefine.cpp in Sources */,
@@ -6970,6 +7517,7 @@
 				15AE183919AAD2F700C27E9E /* CCRay.cpp in Sources */,
 				15AE1B8219AADA9A00C27E9E /* UITextBMFont.cpp in Sources */,
 				50ABBE6A1925AB6F00A911A9 /* CCEventListenerFocus.cpp in Sources */,
+				0AFC98B61E91487A00F3D63F /* envelope.c in Sources */,
 				50ABBE661925AB6F00A911A9 /* CCEventListenerCustom.cpp in Sources */,
 				503DD8F81926B0DB00CD74DD /* CCIMEDispatcher.cpp in Sources */,
 				50ABBDB21925AB4100A911A9 /* ccShaders.cpp in Sources */,
@@ -6983,6 +7531,7 @@
 				15AE19A819AAD39700C27E9E /* LayoutReader.cpp in Sources */,
 				1A01C68B18F57BE800EFE3A6 /* CCDeprecated.cpp in Sources */,
 				15AE195719AAD35100C27E9E /* CCInputDelegate.cpp in Sources */,
+				0AFC98A01E91487A00F3D63F /* barkmel.c in Sources */,
 				15AE1B8A19AADA9A00C27E9E /* UIImageView.cpp in Sources */,
 				50ABBD391925AB0000A911A9 /* CCAffineTransform.cpp in Sources */,
 				15AE1C1519AAE2C700C27E9E /* CCPhysicsDebugNode.cpp in Sources */,
@@ -7001,6 +7550,7 @@
 				15AE18C319AAD33D00C27E9E /* CCLayerGradientLoader.cpp in Sources */,
 				0A21114D1D71569200002345 /* PathConstraintData.c in Sources */,
 				15AE197919AAD35700C27E9E /* CCActionTimelineCache.cpp in Sources */,
+				0AFC98CC1E91487A00F3D63F /* lsp.c in Sources */,
 				1AAF5850180E40B9000584C8 /* LocalStorage.cpp in Sources */,
 				50ED2BE519BEAF7900A0AB90 /* UIEditBoxImpl-win32.cpp in Sources */,
 				15AE192E19AAD35100C27E9E /* CCActionFrameEasing.cpp in Sources */,
@@ -7010,10 +7560,12 @@
 				1A9DCA28180E6955007A3AD4 /* CCGLBufferedNode.cpp in Sources */,
 				15AE1BF919AAE01E00C27E9E /* CCControlSwitch.cpp in Sources */,
 				15AE196719AAD35100C27E9E /* CCUtilMath.cpp in Sources */,
+				0AFC98A61E91487A00F3D63F /* block.c in Sources */,
 				50ABBE201925AB6F00A911A9 /* atitc.cpp in Sources */,
 				50ABBE9A1925AB6F00A911A9 /* CCRef.cpp in Sources */,
 				15AE18BF19AAD33D00C27E9E /* CCLabelTTFLoader.cpp in Sources */,
 				15AE1B9519AADA9A00C27E9E /* CocosGUI.cpp in Sources */,
+				0AFC989A1E91487A00F3D63F /* framing.c in Sources */,
 				15AE180919AAD2F700C27E9E /* CCAABB.cpp in Sources */,
 				15AE1AA719AAD40300C27E9E /* b2Island.cpp in Sources */,
 				3E6176741960F89B00DE83F5 /* CCEventController.cpp in Sources */,
@@ -7093,7 +7645,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external $(SRCROOT)/../cocos/audio/libvorbis $(SRCROOT)/../cocos/audio/libvorbis/lib $(SRCROOT)/../cocos/audio/libogg";
 			};
 			name = Debug;
 		};
@@ -7126,7 +7678,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external $(SRCROOT)/../cocos/audio/libvorbis $(SRCROOT)/../cocos/audio/libvorbis/lib $(SRCROOT)/../cocos/audio/libogg";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
