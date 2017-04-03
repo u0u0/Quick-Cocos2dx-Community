@@ -61,9 +61,6 @@
     <Filter Include="cocostudio">
       <UniqueIdentifier>{dbdbbfad-71fc-4f1d-a809-b43651f87267}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cocosdenshion">
-      <UniqueIdentifier>{3bd71d42-dfa4-4649-bb01-ad607fdca1c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ui">
       <UniqueIdentifier>{704c4ce6-b7ad-4406-9414-71169734bbc1}</UniqueIdentifier>
     </Filter>
@@ -81,12 +78,6 @@
     </Filter>
     <Filter Include="extension\physics_nodes">
       <UniqueIdentifier>{1de7fce7-0dee-4571-8fcd-43eb617aaf8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cocosdenshion\Header Files">
-      <UniqueIdentifier>{f42979de-0079-4eba-b469-81ebff9ec588}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cocosdenshion\Source Files">
-      <UniqueIdentifier>{f42ec238-cddc-475a-b343-6d0984cb9681}</UniqueIdentifier>
     </Filter>
     <Filter Include="network">
       <UniqueIdentifier>{31338a7d-ebe1-4867-9c17-d3645122a864}</UniqueIdentifier>
@@ -208,17 +199,11 @@
     <Filter Include="extension\GUI\CCControlExtensions">
       <UniqueIdentifier>{118d80ca-ccf2-480c-b87d-25220af23440}</UniqueIdentifier>
     </Filter>
-    <Filter Include="audioengine">
-      <UniqueIdentifier>{e916e2b4-0a6e-4d25-8b36-66fa03719f48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cocostudio\TimelineAction\trigger">
       <UniqueIdentifier>{0554a5b1-03a1-4d38-87a5-976dbe9a39d9}</UniqueIdentifier>
     </Filter>
     <Filter Include="cocostudio\json\flatbuffers">
       <UniqueIdentifier>{db915acb-1838-413d-b290-dc280365eabc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cocostudio\reader\WidgetReader\ComAudioReader">
-      <UniqueIdentifier>{b71e98df-9863-4ee5-9818-04fad2ef8da1}</UniqueIdentifier>
     </Filter>
     <Filter Include="cocostudio\reader\WidgetReader\GameMapReader">
       <UniqueIdentifier>{78a3fbcc-4233-47f0-9b53-5a445dad9400}</UniqueIdentifier>
@@ -240,6 +225,15 @@
     </Filter>
     <Filter Include="external\xxtea">
       <UniqueIdentifier>{06127459-97a1-496c-84aa-7921b5792ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{0da52fba-d2fc-4c33-a5fc-16ca15480bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio\libogg">
+      <UniqueIdentifier>{1bf19a86-121d-42c6-8b2a-b395e9aef194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio\libvorbis">
+      <UniqueIdentifier>{738895c0-6aca-471a-8fb3-5c0526d97e75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -820,12 +814,6 @@
     <ClCompile Include="..\..\extensions\physics-nodes\CCPhysicsSprite.cpp">
       <Filter>extension\physics_nodes</Filter>
     </ClCompile>
-    <ClCompile Include="..\audio\win32\MciPlayer.cpp">
-      <Filter>cocosdenshion\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\audio\win32\SimpleAudioEngine.cpp">
-      <Filter>cocosdenshion\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\network\HttpClient.cpp">
       <Filter>network\Source Files</Filter>
     </ClCompile>
@@ -980,9 +968,6 @@
       <Filter>cocostudio\json</Filter>
     </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\CCComAttribute.cpp">
-      <Filter>cocostudio\components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\editor-support\cocostudio\CCComAudio.cpp">
       <Filter>cocostudio\components</Filter>
     </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\CCComController.cpp">
@@ -1210,18 +1195,6 @@
     <ClCompile Include="..\ui\UIWebView.cpp">
       <Filter>ui\UIWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\audio\AudioEngine.cpp">
-      <Filter>audioengine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\audio\win32\AudioCache.cpp">
-      <Filter>audioengine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\audio\win32\AudioEngine-win32.cpp">
-      <Filter>audioengine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\audio\win32\AudioPlayer.cpp">
-      <Filter>audioengine</Filter>
-    </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\ActionTimeline\CCNodeReader.cpp" />
     <ClCompile Include="..\editor-support\cocostudio\ActionTimeline\CSLoader.cpp">
       <Filter>cocostudio\TimelineAction</Filter>
@@ -1259,9 +1232,6 @@
     <ClCompile Include="..\editor-support\cocostudio\FlatBuffersSerialize.cpp">
       <Filter>cocostudio\json</Filter>
     </ClCompile>
-    <ClCompile Include="..\editor-support\cocostudio\WidgetReader\ComAudioReader\ComAudioReader.cpp">
-      <Filter>cocostudio\reader\WidgetReader\ComAudioReader</Filter>
-    </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\WidgetReader\GameMapReader\GameMapReader.cpp">
       <Filter>cocostudio\reader\WidgetReader\GameMapReader</Filter>
     </ClCompile>
@@ -1291,6 +1261,84 @@
     </ClCompile>
     <ClCompile Include="..\..\external\xxtea\xxtea.cpp">
       <Filter>external\xxtea</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\RDAudio.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\RDAudioOgg.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libogg\src\bitwise.c">
+      <Filter>audio\libogg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libogg\src\framing.c">
+      <Filter>audio\libogg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\analysis.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\bitrate.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\block.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\codebook.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\envelope.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\floor0.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\floor1.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\info.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\lookup.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\lpc.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\lsp.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\mapping0.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\mdct.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\psy.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\registry.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\res0.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\sharedbook.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\smallft.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\synthesis.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\vorbisenc.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\vorbisfile.c">
+      <Filter>audio\libvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\libvorbis\lib\window.c">
+      <Filter>audio\libvorbis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1955,15 +2003,6 @@
     <ClInclude Include="..\..\extensions\ExtensionMacros.h">
       <Filter>extension</Filter>
     </ClInclude>
-    <ClInclude Include="..\audio\include\Export.h">
-      <Filter>cocosdenshion\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\audio\win32\MciPlayer.h">
-      <Filter>cocosdenshion\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\audio\include\SimpleAudioEngine.h">
-      <Filter>cocosdenshion\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\network\HttpClient.h">
       <Filter>network\Header Files</Filter>
     </ClInclude>
@@ -2166,9 +2205,6 @@
       <Filter>cocostudio\json\rapidjson\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\CCComAttribute.h">
-      <Filter>cocostudio\components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\editor-support\cocostudio\CCComAudio.h">
       <Filter>cocostudio\components</Filter>
     </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\CCComBase.h">
@@ -2423,18 +2459,6 @@
     <ClInclude Include="..\ui\UIWebView.h">
       <Filter>ui\UIWidgets</Filter>
     </ClInclude>
-    <ClInclude Include="..\audio\include\AudioEngine.h">
-      <Filter>audioengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\audio\win32\AudioCache.h">
-      <Filter>audioengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\audio\win32\AudioEngine-win32.h">
-      <Filter>audioengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\audio\win32\AudioPlayer.h">
-      <Filter>audioengine</Filter>
-    </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\ActionTimeline\CCNodeReader.h" />
     <ClInclude Include="..\editor-support\cocostudio\ActionTimeline\CSLoader.h">
       <Filter>cocostudio\TimelineAction</Filter>
@@ -2462,9 +2486,6 @@
     </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\FlatBuffersSerialize.h">
       <Filter>cocostudio\json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\editor-support\cocostudio\WidgetReader\ComAudioReader\ComAudioReader.h">
-      <Filter>cocostudio\reader\WidgetReader\ComAudioReader</Filter>
     </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\WidgetReader\GameMapReader\GameMapReader.h">
       <Filter>cocostudio\reader\WidgetReader\GameMapReader</Filter>
@@ -2495,6 +2516,153 @@
     </ClInclude>
     <ClInclude Include="..\..\external\xxtea\xxtea.h">
       <Filter>external\xxtea</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\RDAudio.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\RDAudioOgg.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libogg\ogg\ogg.h">
+      <Filter>audio\libogg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libogg\ogg\os_types.h">
+      <Filter>audio\libogg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\backends.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\bitrate.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\books\coupled\res_books_51.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\books\coupled\res_books_stereo.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\books\floor\floor_books.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\books\uncoupled\res_books_uncoupled.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\codebook.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\codec_internal.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\envelope.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\highlevel.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\lookup.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\lookup_data.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\lpc.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\lsp.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\masking.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\mdct.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\misc.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\floor_all.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\psych_11.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\psych_16.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\psych_44.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\psych_8.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\residue_16.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\residue_44.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\residue_44p51.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\residue_44u.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\residue_8.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_11.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_16.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_22.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_32.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_44.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_44p51.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_44u.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_8.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\modes\setup_X.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\os.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\psy.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\registry.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\scales.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\smallft.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\lib\window.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\vorbis\codec.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\vorbis\vorbisenc.h">
+      <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\libvorbis\vorbis\vorbisfile.h">
+      <Filter>audio\libvorbis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

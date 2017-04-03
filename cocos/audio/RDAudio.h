@@ -34,7 +34,7 @@
 
 typedef void (*AudioCallback)(int funcID, ALuint bufferID);
 
-class RDAudio : public cocos2d::Ref
+class CC_DLL RDAudio : public cocos2d::Ref
 {
 public:
     RDAudio();

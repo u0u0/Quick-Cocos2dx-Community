@@ -38,10 +38,8 @@
     <ClCompile Include="..\..\..\..\external\xxtea\xxtea.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_3d_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_assetsmanager_auto.cpp" />
-    <ClCompile Include="..\auto\lua_cocos2dx_audioengine_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_cocosbuilder_auto.cpp" />
-    <ClCompile Include="..\auto\lua_cocos2dx_cocosdenshion_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_csloader_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_experimental_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_experimental_video_auto.cpp" />
@@ -51,7 +49,7 @@
     <ClCompile Include="..\auto\lua_cocos2dx_studio_auto.cpp" />
     <ClCompile Include="..\auto\lua_cocos2dx_ui_auto.cpp" />
     <ClCompile Include="..\manual\3d\lua_cocos2dx_3d_manual.cpp" />
-    <ClCompile Include="..\manual\audioengine\lua_cocos2dx_audioengine_manual.cpp" />
+    <ClCompile Include="..\manual\audio\lua_audio_manual.cpp" />
     <ClCompile Include="..\manual\CCLuaBridge.cpp" />
     <ClCompile Include="..\manual\CCLuaEngine.cpp" />
     <ClCompile Include="..\manual\CCLuaStack.cpp" />
@@ -65,7 +63,6 @@
     <ClCompile Include="..\manual\cocos2d\lua_cocos2dx_physics_manual.cpp" />
     <ClCompile Include="..\manual\cocosbuilder\CCBProxy.cpp" />
     <ClCompile Include="..\manual\cocosbuilder\lua_cocos2dx_cocosbuilder_manual.cpp" />
-    <ClCompile Include="..\manual\cocosdenshion\lua_cocos2dx_cocosdenshion_manual.cpp" />
     <ClCompile Include="..\manual\cocostudio\CustomGUIReader.cpp" />
     <ClCompile Include="..\manual\cocostudio\lua_cocos2dx_coco_studio_manual.cpp" />
     <ClCompile Include="..\manual\cocostudio\lua_cocos2dx_csloader_manual.cpp" />
@@ -112,10 +109,8 @@
     <ClInclude Include="..\..\..\..\external\xxtea\xxtea.h" />
     <ClInclude Include="..\auto\lua_cocos2dx_3d_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_assetsmanager_auto.hpp" />
-    <ClInclude Include="..\auto\lua_cocos2dx_audioengine_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_cocosbuilder_auto.hpp" />
-    <ClInclude Include="..\auto\lua_cocos2dx_cocosdenshion_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_csloader_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_experimental_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_experimental_video_auto.hpp" />
@@ -125,7 +120,7 @@
     <ClInclude Include="..\auto\lua_cocos2dx_studio_auto.hpp" />
     <ClInclude Include="..\auto\lua_cocos2dx_ui_auto.hpp" />
     <ClInclude Include="..\manual\3d\lua_cocos2dx_3d_manual.h" />
-    <ClInclude Include="..\manual\audioengine\lua_cocos2dx_audioengine_manual.h" />
+    <ClInclude Include="..\manual\audio\lua_audio_manual.h" />
     <ClInclude Include="..\manual\CCLuaBridge.h" />
     <ClInclude Include="..\manual\CCLuaEngine.h" />
     <ClInclude Include="..\manual\CCLuaStack.h" />
@@ -139,7 +134,6 @@
     <ClInclude Include="..\manual\cocos2d\lua_cocos2dx_physics_manual.hpp" />
     <ClInclude Include="..\manual\cocosbuilder\CCBProxy.h" />
     <ClInclude Include="..\manual\cocosbuilder\lua_cocos2dx_cocosbuilder_manual.h" />
-    <ClInclude Include="..\manual\cocosdenshion\lua_cocos2dx_cocosdenshion_manual.h" />
     <ClInclude Include="..\manual\cocostudio\CustomGUIReader.h" />
     <ClInclude Include="..\manual\cocostudio\lua_cocos2dx_coco_studio_manual.hpp" />
     <ClInclude Include="..\manual\cocostudio\lua_cocos2dx_csloader_manual.hpp" />
@@ -274,7 +268,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)external\lua\luajit\include;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\lua;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\2d;$(EngineRoot)cocos\3d;$(EngineRoot)cocos\editor-support\cocostudio;$(EngineRoot)cocos\editor-support\cocostudio\ActionTimeline;$(EngineRoot)cocos\editor-support\spine;$(EngineRoot)cocos\scripting\lua-bindings\manual\extension;$(EngineRoot)cocos\scripting\lua-bindings\manual\cocostudio;$(EngineRoot)cocos\scripting\lua-bindings\manual\ui;$(EngineRoot)cocos\scripting\lua-bindings\manual\cocos2d;$(EngineRoot)extensions;$(EngineRoot)cocos\editor-support\cocosbuilder;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\libwebsockets\win32\include;$(EngineRoot)cocos\ui;$(EngineRoot)cocos\editor-support;$(EngineRoot)external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)external\lua\luajit\include;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\lua;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\2d;$(EngineRoot)cocos\3d;$(EngineRoot)cocos\editor-support\cocostudio;$(EngineRoot)cocos\editor-support\cocostudio\ActionTimeline;$(EngineRoot)cocos\editor-support\spine;$(EngineRoot)cocos\scripting\lua-bindings\manual\extension;$(EngineRoot)cocos\scripting\lua-bindings\manual\cocostudio;$(EngineRoot)cocos\scripting\lua-bindings\manual\ui;$(EngineRoot)cocos\scripting\lua-bindings\manual\cocos2d;$(EngineRoot)extensions;$(EngineRoot)cocos\editor-support\cocosbuilder;$(EngineRoot)cocos\audio;$(EngineRoot)external\OpenAL\inc;$(EngineRoot)external\libwebsockets\win32\include;$(EngineRoot)cocos\ui;$(EngineRoot)cocos\editor-support;$(EngineRoot)external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_CRT_SECURE_NO_WARNINGS;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

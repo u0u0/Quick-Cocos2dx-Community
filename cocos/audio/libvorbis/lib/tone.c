@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 
-#if defined(RD_PLATFORM_WIN32)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #define M_PI (3.14159265358)
 #endif
 
