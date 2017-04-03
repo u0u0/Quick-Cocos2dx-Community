@@ -12,9 +12,6 @@ require "cocos.cocos2d.OpenglConstants"
 -- cocosbuilder
 require "cocos.cocosbuilder.CCBReaderLoad"
 
--- cocosdenshion
-require "cocos.cocosdenshion.AudioEngine"
-
 -- cocosstudio
 require "cocos.cocostudio.CocoStudio"
 

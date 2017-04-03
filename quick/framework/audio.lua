@@ -1,419 +1,165 @@
 --[[
+Copyright 2017 KeNan Liu
 
-Copyright (c) 2011-2014 chukong-inc.com
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+http://www.apache.org/licenses/LICENSE-2.0
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ]]
 
---------------------------------
--- @module audio
-
---[[--
-
-播放音乐、音效
-
-]]
-
+-- Singleton class
 local audio = {}
+audio._buffers = {}
+audio._sources = {}
+-- pos 1 is for BGM
+audio._sources[1] = Rapid2D_CAudio.newSource()
+audio._BGMVolume = 1.0
+audio._effectVolume = 1.0
 
-local sharedEngine = cc.SimpleAudioEngine:getInstance()
+local scheduler = require("framework.scheduler")
 
-
--- start --
-
---------------------------------
--- 返回音乐的音量值
--- @function [parent=#audio] getMusicVolume
--- @return number#number ret (return value: number)  返回值在 0.0 到 1.0 之间，0.0 表示完全静音，1.0 表示 100% 音量
-
--- end --
-
-function audio.getMusicVolume()
-    local volume = sharedEngine:getMusicVolume()
-    if DEBUG > 1 then
-        printInfo("audio.getMusicVolume() - volume: %0.1f", volume)
-    end
-    return volume
+--------------- buffer -------------------
+function audio.loadFile(path, callback)
+	if not audio._buffers[path] then
+		-- audio._buffers[path] = Rapid2D_CAudio.newBuffer(path)
+		Rapid2D_CAudio.newBuffer(path, function(buffID)
+			if buffID then
+				audio._buffers[path] = buffID
+				callback(path, true)
+			else
+				callback(path, false)
+			end
+		end)
+	end
 end
 
--- start --
-
---------------------------------
--- 设置音乐的音量
--- @function [parent=#audio] setMusicVolume
--- @param number volume 音量在 0.0 到 1.0 之间, 0.0 表示完全静音，1.0 表示 100% 音量
-
--- end --
-
-function audio.setMusicVolume(volume)
-    volume = checknumber(volume)
-    if DEBUG > 1 then
-        printInfo("audio.setMusicVolume() - volume: %0.1f", volume)
-    end
-    sharedEngine:setMusicVolume(volume)
+function audio.unloadFile(path)
+	audio._buffers[path] = nil
+	collectgarbage("collect")
 end
 
--- start --
-
---------------------------------
--- 返回音效的音量值
--- @function [parent=#audio] getSoundsVolume
--- @return number#number ret (return value: number)  返回值在 0.0 到 1.0 之间, 0.0 表示完全静音，1.0 表示 100% 音量
-
--- end --
-
-function audio.getSoundsVolume()
-    local volume = sharedEngine:getEffectsVolume()
-    if DEBUG > 1 then
-        printInfo("audio.getSoundsVolume() - volume: %0.1f", volume)
-    end
-    return volume
+function audio.unloadAllFile()
+	audio._buffers = {}
+	collectgarbage("collect")
 end
 
--- start --
+--[[
+function for CSource
+	play2d(buffer, isLoop)
+    pause()
+    resume()
+    stop()
+	setVolume(vol)
+    getStat()
+]]--
 
---------------------------------
--- 设置音效的音量
--- @function [parent=#audio] setSoundsVolume
--- @param number volume 音量在 0.0 到 1.0 之间, 0.0 表示完全静音，1.0 表示 100% 音量
+--------------- BGM 2D API -------------------
+function audio.playBGM(path, isLoop)
+	if not audio._buffers[path] then
+		print(path .. " have not loaded!!")
+		return
+	end
 
--- end --
-
-function audio.setSoundsVolume(volume)
-    volume = checknumber(volume)
-    if DEBUG > 1 then
-        printInfo("audio.setSoundsVolume() - volume: %0.1f", volume)
-    end
-    sharedEngine:setEffectsVolume(volume)
+	isLoop = isLoop or true
+	audio._sources[1]:stop()
+	audio._sources[1]:play2d(audio._buffers[path], isLoop)
+	audio._sources[1]:setVolume(audio._BGMVolume)
 end
 
--- start --
-
---------------------------------
--- 预载入一个音乐文件
--- @function [parent=#audio] preloadMusic
--- @param string filename 音乐文件名
-
--- end --
-
-function audio.preloadMusic(filename)
-    if not filename then
-        printError("audio.preloadMusic() - invalid filename")
-        return
-    end
-    if DEBUG > 1 then
-        printInfo("audio.preloadMusic() - filename: %s", tostring(filename))
-    end
-    sharedEngine:preloadMusic(filename)
+function audio.stopBGM()
+	audio._sources[1]:stop()
 end
 
--- start --
-
---------------------------------
--- 播放音乐
--- @function [parent=#audio] playMusic
--- @param string filename 音乐文件名
--- @param boolean isLoop 是否循环播放，默认为 true
-
--- end --
-
-function audio.playMusic(filename, isLoop)
-    if not filename then
-        printError("audio.playMusic() - invalid filename")
-        return
-    end
-    if type(isLoop) ~= "boolean" then isLoop = true end
-
-    audio.stopMusic()
-    if DEBUG > 1 then
-        printInfo("audio.playMusic() - filename: %s, isLoop: %s", tostring(filename), tostring(isLoop))
-    end
-    sharedEngine:playMusic(filename, isLoop)
+function audio.setBGMVolume(vol)
+	if vol > 1.0 then
+		vol = 1.0
+	end
+	if vol < 0.0 then
+		vol = 0.0
+	end
+	audio._sources[1]:setVolume(vol)
+	audio._BGMVolume = vol
 end
 
--- start --
-
---------------------------------
--- 停止播放音乐
--- @function [parent=#audio] stopMusic
--- @param boolean isReleaseData 是否释放音乐数据，默认为 true
-
--- end --
-
-function audio.stopMusic(isReleaseData)
-    isReleaseData = checkbool(isReleaseData)
-    if DEBUG > 1 then
-        printInfo("audio.stopMusic() - isReleaseData: %s", tostring(isReleaseData))
-    end
-    sharedEngine:stopMusic(isReleaseData)
+--------------- Effect 2D API -------------------
+function audio.playEffect(path, isLoop)
+	if not audio._buffers[path] then
+		print(path .. " have not loaded!!")
+		return
+	end
+	
+	local source = Rapid2D_CAudio.newSource()
+	if source then
+		isLoop = isLoop or false
+		table.insert(audio._sources, source)
+		source:setVolume(audio._effectVolume)
+		source:play2d(audio._buffers[path], isLoop)
+	end
 end
 
--- start --
+function audio.setEffectVolume(vol)
+	if vol > 1.0 then
+		vol = 1.0
+	end
+	if vol < 0.0 then
+		vol = 0.0
+	end
+	audio._effectVolume = vol
 
---------------------------------
--- 暂停音乐的播放
--- @function [parent=#audio] pauseMusic
-
--- end --
-
-function audio.pauseMusic()
-    if DEBUG > 1 then
-        printInfo("audio.pauseMusic()")
-    end
-    sharedEngine:pauseMusic()
+	for i = 2, #audio._sources do
+		audio._sources[i]:setVolume(vol)
+	end
 end
 
--- start --
-
---------------------------------
--- 恢复暂停的音乐
--- @function [parent=#audio] resumeMusic
-
--- end --
-
-function audio.resumeMusic()
-    if DEBUG > 1 then
-        printInfo("audio.resumeMusic()")
-    end
-    sharedEngine:resumeMusic()
+--------------- work both on BGM and Effects -------------------
+function audio.stopAll()
+	for i = 1, #audio._sources do
+		audio._sources[i]:stop()
+	end
 end
 
--- start --
-
---------------------------------
--- 从头开始重新播放当前音乐
--- @function [parent=#audio] rewindMusic
-
--- end --
-
-function audio.rewindMusic()
-    if DEBUG > 1 then
-        printInfo("audio.rewindMusic()")
-    end
-    sharedEngine:rewindMusic()
+function audio.pauseAll()
+	for i = 1, #audio._sources do
+		audio._sources[i]:pause()
+	end
 end
 
--- start --
-
---------------------------------
--- 检查是否可以开始播放音乐
--- 如果可以则返回 true。
--- 如果尚未载入音乐，或者载入的音乐格式不被设备所支持，该方法将返回 false。
--- @function [parent=#audio] willPlayMusic
--- @return boolean#boolean ret (return value: bool) 
-
--- end --
-
-function audio.willPlayMusic()
-    local ret = sharedEngine:willPlayMusic()
-    if DEBUG > 1 then
-        printInfo("audio.willPlayMusic() - ret: %s", tostring(ret))
-    end
-    return ret
+function audio.resumeAll()
+	for i = 1, #audio._sources do
+		audio._sources[i]:resume()
+	end
 end
 
--- start --
+-- INTERNAL API, recircle source from effects, call by director
+local function update()
+	local isRemoved = false
+	local total = #audio._sources
+	local index = 2
+	while index <= total do
+		local stat = audio._sources[index]:getStat()
+		if 4 == stat then
+			table.remove(audio._sources, index)
+			total = total - 1
+			isRemoved = true
+		else
+			index = index + 1
+		end
+	end
 
---------------------------------
--- 检查当前是否正在播放音乐
--- @function [parent=#audio] isMusicPlaying
--- @return boolean#boolean ret (return value: bool) 
-
--- end --
-
-function audio.isMusicPlaying()
-    local ret = sharedEngine:isMusicPlaying()
-    if DEBUG > 1 then
-        printInfo("audio.isMusicPlaying() - ret: %s", tostring(ret))
-    end
-    return ret
+	if isRemoved then
+		collectgarbage("collect")
+	end
 end
 
--- start --
-
---------------------------------
--- 播放音效，并返回音效句柄
--- 如果音效尚未载入，则会载入后开始播放。
--- 该方法返回的音效句柄用于 audio.stopSound()、audio.pauseSound() 等方法。
--- @function [parent=#audio] playSound
--- @param string filename 音效文件名
--- @param boolean isLoop 是否重复播放，默认为 false
--- @return integer#integer ret (return value: int)  音效句柄
-
--- end --
-
-function audio.playSound(filename, isLoop)
-    if not filename then
-        printError("audio.playSound() - invalid filename")
-        return
-    end
-    if type(isLoop) ~= "boolean" then isLoop = false end
-    if DEBUG > 1 then
-        printInfo("audio.playSound() - filename: %s, isLoop: %s", tostring(filename), tostring(isLoop))
-    end
-    return sharedEngine:playEffect(filename, isLoop)
-end
-
--- start --
-
---------------------------------
--- 暂停指定的音效
--- @function [parent=#audio] pauseSound
--- @param integer 音效句柄
-
--- end --
-
-function audio.pauseSound(handle)
-    if not handle then
-        printError("audio.pauseSound() - invalid handle")
-        return
-    end
-    if DEBUG > 1 then
-        printInfo("audio.pauseSound() - handle: %s", tostring(handle))
-    end
-    sharedEngine:pauseEffect(handle)
-end
-
--- start --
-
---------------------------------
--- 暂停所有音效
--- @function [parent=#audio] pauseAllSounds
-
--- end --
-
-function audio.pauseAllSounds()
-    if DEBUG > 1 then
-        printInfo("audio.pauseAllSounds()")
-    end
-    sharedEngine:pauseAllEffects()
-end
-
--- start --
-
---------------------------------
--- 恢复暂停的音效
--- @function [parent=#audio] resumeSound
--- @param integer 音效句柄
-
--- end --
-
-function audio.resumeSound(handle)
-    if not handle then
-        printError("audio.resumeSound() - invalid handle")
-        return
-    end
-    if DEBUG > 1 then
-        printInfo("audio.resumeSound() - handle: %s", tostring(handle))
-    end
-    sharedEngine:resumeEffect(handle)
-end
-
--- start --
-
---------------------------------
--- 恢复所有的音效
--- @function [parent=#audio] resumeAllSounds
-
--- end --
-
-function audio.resumeAllSounds()
-    if DEBUG > 1 then
-        printInfo("audio.resumeAllSounds()")
-    end
-    sharedEngine:resumeAllEffects()
-end
-
--- start --
-
---------------------------------
--- 停止指定的音效
--- @function [parent=#audio] stopSound
--- @param integer 音效句柄
-
--- end --
-
-function audio.stopSound(handle)
-    if not handle then
-        printError("audio.stopSound() - invalid handle")
-        return
-    end
-    if DEBUG > 1 then
-        printInfo("audio.stopSound() - handle: %s", tostring(handle))
-    end
-    sharedEngine:stopEffect(handle)
-end
-
--- start --
-
---------------------------------
--- 停止所有音效
--- @function [parent=#audio] stopAllSounds
-
--- end --
-
-function audio.stopAllSounds()
-    if DEBUG > 1 then
-        printInfo("audio.stopAllSounds()")
-    end
-    sharedEngine:stopAllEffects()
-end
-
--- start --
-
---------------------------------
--- 预载入一个音效文件
--- @function [parent=#audio] preloadSound
--- @param string 音效文件名
-
--- end --
-
-function audio.preloadSound(filename)
-    if not filename then
-        printError("audio.preloadSound() - invalid filename")
-        return
-    end
-    if DEBUG > 1 then
-        printInfo("audio.preloadSound() - filename: %s", tostring(filename))
-    end
-    sharedEngine:preloadEffect(filename)
-end
-
--- start --
-
---------------------------------
--- 从内存卸载一个音效
--- @function [parent=#audio] unloadSound
--- @param string 音效文件名
-
--- end --
-
-function audio.unloadSound(filename)
-    if not filename then
-        printError("audio.unloadSound() - invalid filename")
-        return
-    end
-    if DEBUG > 1 then
-        printInfo("audio.unloadSound() - filename: %s", tostring(filename))
-    end
-    sharedEngine:unloadEffect(filename)
-end
+scheduler.scheduleGlobal(function ()
+	update()
+end, 1.0)
 
 return audio
