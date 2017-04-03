@@ -2,20 +2,18 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := static_Rapid2DAudio
+LOCAL_STATIC_LIBRARIES := static_OpenAL
 
+LOCAL_MODULE := static_Rapid2DAudio
 LOCAL_MODULE_FILENAME := libRapid2DAudio
 
-LOCAL_CFLAGS := -DRD_PLATFORM_ANDROID
-
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+	$(LOCAL_PATH)/../ \
+	$(LOCAL_PATH)/../../ \
 	$(LOCAL_PATH)/libogg \
 	$(LOCAL_PATH)/libvorbis/lib \
 	$(LOCAL_PATH)/libvorbis \
-	$(LOCAL_PATH)/../math \
-	$(LOCAL_PATH)/../porting/inc \
-	$(LOCAL_PATH)/../utils \
-	$(LOCAL_PATH)/../../thirdParty/OpenAL/inc
+	$(LOCAL_PATH)/../../external/OpenAL/inc
 
 # audio
 LOCAL_SRC_FILES := \
@@ -53,3 +51,5 @@ LOCAL_SRC_FILES += \
 	libvorbis/lib/window.c
 
 include $(BUILD_STATIC_LIBRARY)
+
+$(call import-module, OpenAL/android)

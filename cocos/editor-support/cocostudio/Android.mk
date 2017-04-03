@@ -33,7 +33,6 @@ CCSpriteFrameCacheHelper.cpp \
 CCTransformHelp.cpp \
 CCUtilMath.cpp \
 CCComAttribute.cpp \
-CCComAudio.cpp \
 CCComController.cpp \
 CCComRender.cpp \
 CCInputDelegate.cpp \
@@ -50,7 +49,6 @@ WidgetReader/SpriteReader/SpriteReader.cpp \
 WidgetReader/ParticleReader/ParticleReader.cpp \
 WidgetReader/GameMapReader/GameMapReader.cpp \
 WidgetReader/ProjectNodeReader/ProjectNodeReader.cpp \
-WidgetReader/ComAudioReader/ComAudioReader.cpp \
 WidgetReader/WidgetReader.cpp \
 WidgetReader/ButtonReader/ButtonReader.cpp \
 WidgetReader/CheckBoxReader/CheckBoxReader.cpp \

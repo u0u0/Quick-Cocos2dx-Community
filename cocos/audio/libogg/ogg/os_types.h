@@ -17,6 +17,9 @@
 #ifndef _OS_TYPES_H
 #define _OS_TYPES_H
 
+#include <inttypes.h>
+#include <sys/types.h>
+
 /* make it easy on the folks that want to compile the libs with a
    different malloc than stdlib */
 #define _ogg_malloc  malloc

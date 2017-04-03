@@ -18,6 +18,8 @@
 #include <queue>
 #include <thread>
 #include <string>
+#include <mutex>
+#include <condition_variable>
 
 #include "platform/CCPlatformConfig.h"
 #include "base/CCRef.h"

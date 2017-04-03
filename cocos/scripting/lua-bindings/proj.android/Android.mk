@@ -53,9 +53,7 @@ LOCAL_SRC_FILES := ../manual/CCLuaBridge.cpp \
           ../../../../external/lua/tolua/tolua_map.c \
           ../../../../external/lua/tolua/tolua_push.c \
           ../../../../external/lua/tolua/tolua_to.c \
-          ../../../../external/xxtea/xxtea.cpp \
-          ../auto/lua_cocos2dx_audioengine_auto.cpp \
-          ../manual/audioengine/lua_cocos2dx_audioengine_manual.cpp
+          ../../../../external/xxtea/xxtea.cpp
 
 #3d
 ifeq ($(CC_USE_3D),1)
@@ -63,9 +61,8 @@ LOCAL_SRC_FILES += ../manual/3d/lua_cocos2dx_3d_manual.cpp \
                    ../auto/lua_cocos2dx_3d_auto.cpp
 endif
 
-#cocosdenshion
-LOCAL_SRC_FILES += ../manual/cocosdenshion/lua_cocos2dx_cocosdenshion_manual.cpp \
-                   ../auto/lua_cocos2dx_cocosdenshion_auto.cpp
+# audio
+LOCAL_SRC_FILES += ../manual/audio/lua_audio_manual.cpp
 
 #network
 LOCAL_SRC_FILES += ../manual/network/lua_cocos2dx_network_manual.cpp \
@@ -142,6 +139,9 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../../../../external/lua/luajit/include \
                     $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../3d \
+                    $(LOCAL_PATH)/../../../audio \
+                    $(LOCAL_PATH)/../../../../external/OpenAL/inc \
+                    $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../network \
                     $(LOCAL_PATH)/../../../editor-support/cocosbuilder \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio \
@@ -153,8 +153,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../manual \
                     $(LOCAL_PATH)/../manual/cocos2d \
                     $(LOCAL_PATH)/../manual/3d \
-                    $(LOCAL_PATH)/../manual/cocosdenshion \
-                    $(LOCAL_PATH)/../manual/audioengine \
+                    $(LOCAL_PATH)/../manual/audio \
                     $(LOCAL_PATH)/../manual/network \
                     $(LOCAL_PATH)/../manual/extension \
                     $(LOCAL_PATH)/../manual/cocostudio \
@@ -172,8 +171,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                            $(LOCAL_PATH)/../manual \
                            $(LOCAL_PATH)/../manual/cocos2d \
                            $(LOCAL_PATH)/../manual/3d \
-                           $(LOCAL_PATH)/../manual/cocosdenshion \
-                           $(LOCAL_PATH)/../manual/audioengine \
+						   $(LOCAL_PATH)/../manual/audio \
                            $(LOCAL_PATH)/../manual/network \
                            $(LOCAL_PATH)/../manual/cocosbuilder \
                            $(LOCAL_PATH)/../manual/cocostudio \
