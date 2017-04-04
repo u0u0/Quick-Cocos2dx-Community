@@ -67,7 +67,7 @@ void RDAudio::waitForQuit()
 {
     // notify sub thread to quick
     _needQuit = true;
-    _sleepCondition.notify_one();
+    _inCondition.notify_one();
     if (_thread) {
         _thread->join();
     }
@@ -86,7 +86,7 @@ void RDAudio::init(void)
         // Check for EAX 2.0 support
         ALboolean g_bEAX = alIsExtensionPresent("EAX2.0");
         if (g_bEAX == false) {
-            cocos2d::log("Error: RDAudio_init can't support EAX2.0");
+            cocos2d::log("Worning: OpenAL can't support EAX2.0 on this platform");
         }
         alGetError(); // clear error code
         
@@ -99,20 +99,20 @@ void RDAudio::threadLoop()
     AsyncStruct *asyncStruct = nullptr;
     
     while (true) {
-        _inMutex.lock();
-        if (_inQueue.empty()) {
-            _inMutex.unlock();
+        std::unique_lock<std::mutex> lock(_inMutex);
+        // deal with fade notify
+        while (_inQueue.empty()) {
+            // ONLY exit while the queue is empty
             if (_needQuit) {
-                break;
+                lock.unlock();
+                return;
             }
-            std::unique_lock<std::mutex> lk(_sleepMutex);
-            _sleepCondition.wait(lk);
-            continue;
+            _inCondition.wait(lock);
         }
         
         asyncStruct = _inQueue.front();
         _inQueue.pop();
-        _inMutex.unlock();
+        lock.unlock();
         
         // decode
         cocos2d::Data data = cocos2d::FileUtils::getInstance()->getDataFromFile(asyncStruct->filename);
@@ -192,10 +192,10 @@ void RDAudio::loadFileAsyn(const char *filename, int funcID, AudioCallback cb)
     
     // add task in sub thread
     AsyncStruct *asyncStruct = new (std::nothrow) AsyncStruct(filename, funcID, cb);
-    _inMutex.lock();
+    std::unique_lock<std::mutex> lock(_inMutex);
     _inQueue.push(asyncStruct);
-    _inMutex.unlock();
+    lock.unlock();
     
     // weak up sub thread
-    _sleepCondition.notify_one();
+    _inCondition.notify_one();
 }

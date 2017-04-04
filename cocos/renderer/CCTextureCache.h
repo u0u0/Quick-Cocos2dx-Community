@@ -221,7 +221,6 @@ protected:
     std::mutex _asyncStructQueueMutex;
     std::mutex _imageInfoMutex;
 
-    std::mutex _sleepMutex;
     std::condition_variable _sleepCondition;
 
     bool _needQuit;

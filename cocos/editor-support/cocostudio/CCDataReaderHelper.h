@@ -204,8 +204,6 @@ protected:
 
 	std::thread     *_loadingThread;
 
-	std::mutex      _sleepMutex;
-
 	std::mutex      _asyncStructQueueMutex;
 	std::mutex      _dataInfoMutex;
 

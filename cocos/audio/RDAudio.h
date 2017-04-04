@@ -87,8 +87,7 @@ private:
     std::queue<AsyncStruct *> _outQueue;
     std::mutex _inMutex;
     std::mutex _outMutex;
-    std::mutex _sleepMutex;
-    std::condition_variable _sleepCondition;
+    std::condition_variable _inCondition;
 };
 
 #endif // __RDAudio_H__

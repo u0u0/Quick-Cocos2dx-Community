@@ -160,27 +160,20 @@ void DataReaderHelper::loadData()
     while (true)
     {
         std::queue<AsyncStruct *> *pQueue = _asyncStructQueue;
-        _asyncStructQueueMutex.lock(); // get async struct from queue
-        if (pQueue->empty())
-        {
-            _asyncStructQueueMutex.unlock();
-            if (need_quit)
-            {
-                break;
+        std::unique_lock<std::mutex> lock(_asyncStructQueueMutex);
+        // deal with fade notify
+        while (pQueue->empty()) {
+            // ONLY exit while the queue is empty
+            if (need_quit) {
+                lock.unlock();
+                return;
             }
-            else
-            {
-				std::unique_lock<std::mutex> lk(_sleepMutex);
-				_sleepCondition.wait(lk);
-                continue;
-            }
+            _sleepCondition.wait(lock);
         }
-        else
-        {
-            pAsyncStruct = pQueue->front();
-            pQueue->pop();
-            _asyncStructQueueMutex.unlock();
-        }
+
+        pAsyncStruct = pQueue->front();
+        pQueue->pop();
+        lock.unlock();
 
         // generate data info
         DataInfo *pDataInfo = new (std::nothrow) DataInfo();
@@ -448,9 +441,9 @@ void DataReaderHelper::addDataFromFileAsync(const std::string& imagePath, const 
 
 
     // add async struct into queue
-    _asyncStructQueueMutex.lock();
+    std::unique_lock<std::mutex> lock(_asyncStructQueueMutex);
     _asyncStructQueue->push(data);
-    _asyncStructQueueMutex.unlock();
+    lock.unlock();
 
     _sleepCondition.notify_one();
 }

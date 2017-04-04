@@ -134,9 +134,9 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
     AsyncStruct *data = new (std::nothrow) AsyncStruct(fullpath, callback, Texture2D::getDefaultAlphaPixelFormat());
 
     // add async struct into queue
-    _asyncStructQueueMutex.lock();
+    std::unique_lock<std::mutex> lock(_asyncStructQueueMutex);
     _asyncStructQueue->push(data);
-    _asyncStructQueueMutex.unlock();
+    lock.unlock();
 
     _sleepCondition.notify_one();
 }
@@ -173,25 +173,20 @@ void TextureCache::loadImage()
     while (true)
     {
         std::queue<AsyncStruct*> *pQueue = _asyncStructQueue;
-        _asyncStructQueueMutex.lock();
-        if (pQueue->empty())
-        {
-            _asyncStructQueueMutex.unlock();
+        std::unique_lock<std::mutex> lock(_asyncStructQueueMutex);
+        // deal with fade notify
+        while (pQueue->empty()) {
+            // ONLY exit while the queue is empty
             if (_needQuit) {
-                break;
+                lock.unlock();
+                return;
             }
-            else {
-                std::unique_lock<std::mutex> lk(_sleepMutex);
-                _sleepCondition.wait(lk);
-                continue;
-            }
+            _sleepCondition.wait(lock);
         }
-        else
-        {
-            asyncStruct = pQueue->front();
-            pQueue->pop();
-            _asyncStructQueueMutex.unlock();
-        }        
+        
+        asyncStruct = pQueue->front();
+        pQueue->pop();
+        lock.unlock();
 
         Image *image = nullptr;
         bool generateImage = false;
