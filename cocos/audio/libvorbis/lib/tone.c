@@ -3,8 +3,8 @@
 #include <math.h>
 #include <string.h>
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-#define M_PI (3.14159265358)
+#ifndef M_PI
+#define M_PI (3.14159265358979323846) // for win32
 #endif
 
 void usage(){
