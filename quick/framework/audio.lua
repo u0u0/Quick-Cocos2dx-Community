@@ -18,6 +18,7 @@ limitations under the License.
 local audio = {}
 audio._buffers = {}
 audio._sources = {}
+audio._scheduler = nil -- global schedule hander
 -- pos 1 is for BGM
 audio._sources[1] = Rapid2D_CAudio.newSource()
 audio._BGMVolume = 1.0
@@ -25,10 +26,35 @@ audio._effectVolume = 1.0
 
 local scheduler = require("framework.scheduler")
 
+-- INTERNAL API, recircle source from effects, call by director
+local function update(dt)
+	local isRemoved = false
+	local total = #audio._sources
+	local index = 2
+	while index <= total do
+		local stat = audio._sources[index]:getStat()
+		if 4 == stat then
+			table.remove(audio._sources, index)
+			total = total - 1
+			isRemoved = true
+		else
+			index = index + 1
+		end
+	end
+
+	if isRemoved then
+		if 1 == total then
+			scheduler.unscheduleGlobal(audio._scheduler)
+			audio._scheduler = nil
+		end
+		collectgarbage("collect")
+	end
+end
+
 --------------- buffer -------------------
 function audio.loadFile(path, callback)
 	if not audio._buffers[path] then
-		-- audio._buffers[path] = Rapid2D_CAudio.newBuffer(path)
+		assert(callback, "ONLY support asyn load file, please set callback!")
 		Rapid2D_CAudio.newBuffer(path, function(buffID)
 			if buffID then
 				audio._buffers[path] = buffID
@@ -101,6 +127,11 @@ function audio.playEffect(path, isLoop)
 		table.insert(audio._sources, source)
 		source:setVolume(audio._effectVolume)
 		source:play2d(audio._buffers[path], isLoop)
+
+		-- start recircle scheduler
+		if not audio._scheduler then
+			audio._scheduler = scheduler.scheduleGlobal(update, 1.0)
+		end
 	end
 end
 
@@ -136,30 +167,5 @@ function audio.resumeAll()
 		audio._sources[i]:resume()
 	end
 end
-
--- INTERNAL API, recircle source from effects, call by director
-local function update()
-	local isRemoved = false
-	local total = #audio._sources
-	local index = 2
-	while index <= total do
-		local stat = audio._sources[index]:getStat()
-		if 4 == stat then
-			table.remove(audio._sources, index)
-			total = total - 1
-			isRemoved = true
-		else
-			index = index + 1
-		end
-	end
-
-	if isRemoved then
-		collectgarbage("collect")
-	end
-end
-
-scheduler.scheduleGlobal(function ()
-	update()
-end, 1.0)
 
 return audio

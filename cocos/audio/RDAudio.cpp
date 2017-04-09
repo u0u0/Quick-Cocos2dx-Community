@@ -82,6 +82,9 @@ void RDAudio::init(void)
         if (_device) {
             _context = alcCreateContext(_device, NULL);
             alcMakeContextCurrent(_context);
+        } else {
+            cocos2d::log("Error: alcOpenDevice fail!");
+            return;
         }
         // Check for EAX 2.0 support
         ALboolean g_bEAX = alIsExtensionPresent("EAX2.0");
@@ -168,6 +171,8 @@ void RDAudio::scheduleLoop(float)
                 bufferID = 0;
             }
         }
+    } else {
+        cocos2d::log("Fail to decode file: %s, ONLY support ogg now!", asyncStruct->filename.c_str());
     }
     // callback to lua
     asyncStruct->cb(asyncStruct->funcID, bufferID);
