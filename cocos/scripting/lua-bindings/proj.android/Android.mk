@@ -171,7 +171,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                            $(LOCAL_PATH)/../manual \
                            $(LOCAL_PATH)/../manual/cocos2d \
                            $(LOCAL_PATH)/../manual/3d \
-						   $(LOCAL_PATH)/../manual/audio \
+                           $(LOCAL_PATH)/../manual/audio \
                            $(LOCAL_PATH)/../manual/network \
                            $(LOCAL_PATH)/../manual/cocosbuilder \
                            $(LOCAL_PATH)/../manual/cocostudio \

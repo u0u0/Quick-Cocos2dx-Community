@@ -216,7 +216,7 @@ LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
                        -lz \
                        -landroid \
-					   -lOpenSLES
+                       -lOpenSLES
 
 LOCAL_STATIC_LIBRARIES := cocos_freetype2_static
 LOCAL_STATIC_LIBRARIES += cocos_png_static
