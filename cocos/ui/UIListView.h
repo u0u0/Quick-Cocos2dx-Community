@@ -197,6 +197,9 @@ CC_CONSTRUCTOR_ACCESS:
     
 protected:
     
+    void onTouchMoved(Touch *touch, Event *event) override;
+    void onTouchEnded(Touch *touch, Event *event) override;
+
     void updateInnerContainerSize();
     void remedyLayoutParameter(Widget* item);
     virtual void onSizeChanged() override;
@@ -209,7 +212,7 @@ protected:
     Widget* _model;
     
     Vector<Widget*> _items;
-    
+    Direction _curSlideDir;
     Gravity _gravity;
     
     float _itemsMargin;

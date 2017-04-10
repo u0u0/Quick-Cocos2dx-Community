@@ -39,7 +39,8 @@ _curSelectedIndex(0),
 _refreshViewDirty(true),
 _listViewEventListener(nullptr),
 _listViewEventSelector(nullptr),
-_eventCallback(nullptr)
+_eventCallback(nullptr),
+_curSlideDir(ListView::Direction::NONE)
 {
     this->setTouchEnabled(true);
 }
@@ -528,6 +529,37 @@ void ListView::interceptTouchEvent(TouchEventType event, Widget *sender, Touch* 
             selectedItemEvent(event);
         }
     }
+}
+
+void ListView::onTouchMoved(Touch* touch, Event *event) {
+    if (_curSlideDir == ListView::Direction::NONE) {
+        if (fabs(touch->getDelta().x) < fabs(touch->getDelta().y)) {
+            _curSlideDir = ListView::Direction::VERTICAL;
+        } else {
+            _curSlideDir = ListView::Direction::HORIZONTAL;
+        }
+    }
+    
+    if (_curSlideDir == _direction) {
+        _propagateTouchEvents = false;
+        Layout::onTouchMoved(touch, event);
+        if (!_isInterceptTouch) {
+            handleMoveLogic(touch);
+        }
+    } else {
+        propagateTouchEvent(TouchEventType::MOVED, this, touch);
+    }
+}
+
+void ListView::onTouchEnded(Touch* touch, Event *event) {
+    _curSlideDir = ListView::Direction::NONE;
+    _propagateTouchEvents = true;
+    
+    Layout::onTouchEnded(touch, event);
+    if (!_isInterceptTouch) {
+        handleReleaseLogic(touch);
+    }
+    _isInterceptTouch = false;
 }
     
 ssize_t ListView::getCurSelectedIndex() const
