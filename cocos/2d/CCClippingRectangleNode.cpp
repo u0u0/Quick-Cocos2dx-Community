@@ -9,7 +9,7 @@ NS_CC_BEGIN
 
 ClippingRectangleNode* ClippingRectangleNode::create(const Rect& clippingRegion)
 {
-    ClippingRectangleNode* node = new ClippingRectangleNode();
+    ClippingRectangleNode* node = new (std::nothrow) ClippingRectangleNode();
     if (node && node->init()) {
         node->setClippingRegion(clippingRegion);
         node->autorelease();
@@ -22,7 +22,7 @@ ClippingRectangleNode* ClippingRectangleNode::create(const Rect& clippingRegion)
 
 ClippingRectangleNode* ClippingRectangleNode::create()
 {
-    ClippingRectangleNode* node = new ClippingRectangleNode();
+    ClippingRectangleNode* node = new (std::nothrow) ClippingRectangleNode();
     if (node && node->init()) {
         node->autorelease();
     } else {
@@ -37,69 +37,33 @@ void ClippingRectangleNode::setClippingRegion(const Rect &clippingRegion)
     _clippingRegion = clippingRegion;
 }
 
-Rect ClippingRectangleNode::intersectionRect(Rect& rect1, Rect& rect2)
-{
-    float top1    = rect1.getMaxY();
-    float left1   = rect1.getMinX();
-    float right1  = rect1.getMaxX();
-    float bottom1 = rect1.getMinY();
-    
-    float top2    = rect2.getMaxY();
-    float left2   = rect2.getMinX();
-    float right2  = rect2.getMaxX();
-    float bottom2 = rect2.getMinY();
-    
-    Rect rect;
-    rect.origin.x = std::max(left1, left2);
-    rect.origin.y = std::max(bottom1, bottom2);
-    rect.size.width = std::min(right1, right2) - rect.origin.x;
-    rect.size.height = std::min(top1, top2) - rect.origin.y;
-    
-    if (rect.size.width < 0 || rect.size.height < 0) {
-        rect.size.width = 0;
-        rect.size.height = 0;
-    }
-    
-    rect.origin = convertToNodeSpace(rect.origin);
-    
-    return rect;
-}
-
 void ClippingRectangleNode::onBeforeVisitScissor()
 {
     if (_clippingEnabled) {
+        // record old ClipRegion
+        GLView* glView = Director::getInstance()->getOpenGLView();
+        if (glView->isScissorEnabled()) {
+            _preClipRegion = glView->getScissorRect();
+        } else {
+            _preClipRegion = Rect::ZERO;
+        }
         glEnable(GL_SCISSOR_TEST);
-        
-        Rect clippingRegion = Rect(_clippingRegion);
         
         float scaleX = _scaleX;
         float scaleY = _scaleY;
         Node *parent = this->getParent();
-        ClippingRectangleNode* parentClip = nullptr;
-        Rect parentClippingRegion;
         while (parent) {
             scaleX *= parent->getScaleX();
             scaleY *= parent->getScaleY();
-
-            parentClip = dynamic_cast<ClippingRectangleNode*>(parent);
-            if (parentClip) {
-                if (parentClip->isClippingEnabled()) {
-                    parentClippingRegion = parentClip->getClippingRegion();
-                    parentClippingRegion.origin = parentClip->convertToWorldSpace(parentClippingRegion.origin);
-                    clippingRegion.origin = convertToWorldSpace(clippingRegion.origin);
-                    clippingRegion = this->intersectionRect(clippingRegion, parentClippingRegion);
-                }
-            }
-            
             parent = parent->getParent();
         }
         
-        const Point pos = convertToWorldSpace(Point(clippingRegion.origin.x, clippingRegion.origin.y));
-        GLView* glView = Director::getInstance()->getOpenGLView();
+        // push this ClipRegion
+        const Point pos = convertToWorldSpace(Point(_clippingRegion.origin.x, _clippingRegion.origin.y));
         glView->setScissorInPoints(pos.x,
                                    pos.y,
-                                   clippingRegion.size.width * scaleX,
-                                   clippingRegion.size.height * scaleY);
+                                   _clippingRegion.size.width * scaleX,
+                                   _clippingRegion.size.height * scaleY);
     }
 }
 
@@ -107,7 +71,16 @@ void ClippingRectangleNode::onAfterVisitScissor()
 {
     if (_clippingEnabled)
     {
-        glDisable(GL_SCISSOR_TEST);
+        // rollback to old ClipRegion
+        if (_preClipRegion.size.width > 0) {
+            GLView* glView = Director::getInstance()->getOpenGLView();
+            glView->setScissorInPoints(_preClipRegion.origin.x,
+                                       _preClipRegion.origin.y,
+                                       _preClipRegion.size.width,
+                                       _preClipRegion.size.height);
+        } else {
+            glDisable(GL_SCISSOR_TEST);
+        }
     }
 }
 

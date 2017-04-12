@@ -45,7 +45,7 @@ public:
     }
     void setClippingRegion(const Rect& clippingRegion);
     
-    const bool isClippingEnabled() const {
+    bool isClippingEnabled() const {
         return _clippingEnabled;
     }
     void setClippingEnabled(bool enabled) {
@@ -63,9 +63,9 @@ protected:
     
     void onBeforeVisitScissor();
     void onAfterVisitScissor();
-    Rect intersectionRect(Rect& rect1, Rect& rect);
     
     Rect _clippingRegion;
+    Rect _preClipRegion;
     bool _clippingEnabled;
     
     CustomCommand _beforeVisitCmdScissor;
