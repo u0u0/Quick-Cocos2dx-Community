@@ -7,6 +7,9 @@ LOCAL_STATIC_LIBRARIES := static_OpenAL
 LOCAL_MODULE := static_Rapid2DAudio
 LOCAL_MODULE_FILENAME := libRapid2DAudio
 
+# ogg soft decode performance optimization
+LOCAL_CFLAGS := -mfpu=vfp -mfloat-abi=softfp -O2
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../ \
 	$(LOCAL_PATH)/../../ \
