@@ -1,3 +1,5 @@
+luaj = require(cc.PACKAGE_NAME .. ".luaj")
+
 function io.exists(path)
     return cc.FileUtils:getInstance():isFileExist(path)
 end
