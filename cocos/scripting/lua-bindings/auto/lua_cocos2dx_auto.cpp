@@ -67434,7 +67434,7 @@ tolua_lerror:
     return 0;
 }
 
-int lua_cocos2dx_TMXTilesetInfo_getTileOffset(lua_State* tolua_S)
+int lua_cocos2dx_TMXTilesetInfo_getProperties(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTilesetInfo* cobj = nullptr;
@@ -67442,7 +67442,6 @@ int lua_cocos2dx_TMXTilesetInfo_getTileOffset(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTilesetInfo",0,&tolua_err)) goto tolua_lerror;
@@ -67453,7 +67452,7 @@ int lua_cocos2dx_TMXTilesetInfo_getTileOffset(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj)
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_TMXTilesetInfo_getTileOffset'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_TMXTilesetInfo_getProperties'", nullptr);
         return 0;
     }
 #endif
@@ -67461,16 +67460,24 @@ int lua_cocos2dx_TMXTilesetInfo_getTileOffset(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        cocos2d::Vec2 ret = cobj->_tileOffset;
-        vec2_to_luaval(tolua_S, ret);
+        lua_newtable(tolua_S);
+        
+        lua_pushstring(tolua_S, "offset");
+        vec2_to_luaval(tolua_S, cobj->_tileOffset);
+        lua_rawset(tolua_S, -3);    /* property.offset */
+        
+        lua_pushstring(tolua_S, "name");
+        lua_pushstring(tolua_S, cobj->_name.c_str());
+        lua_rawset(tolua_S, -3);    /* property.name */
+        
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.TMXTilesetInfo:getTileOffset",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.TMXTilesetInfo:getProperties",argc, 0);
     return 0;
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_TMXTilesetInfo_getTileOffset'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_TMXTilesetInfo_getProperties'.",&tolua_err);
 #endif
     
     return 0;
@@ -67527,7 +67534,7 @@ int lua_register_cocos2dx_TMXTilesetInfo(lua_State* tolua_S)
     tolua_beginmodule(tolua_S,"TMXTilesetInfo");
     tolua_function(tolua_S,"new",lua_cocos2dx_TMXTilesetInfo_constructor);
     tolua_function(tolua_S,"getRectForGID",lua_cocos2dx_TMXTilesetInfo_getRectForGID);
-    tolua_function(tolua_S,"getTileOffset",lua_cocos2dx_TMXTilesetInfo_getTileOffset);
+    tolua_function(tolua_S,"getProperties",lua_cocos2dx_TMXTilesetInfo_getProperties);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::TMXTilesetInfo).name();
     g_luaType[typeName] = "cc.TMXTilesetInfo";
