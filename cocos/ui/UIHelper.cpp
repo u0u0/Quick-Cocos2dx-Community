@@ -62,25 +62,19 @@ Widget* Helper::seekWidgetByTag(Widget* root, int tag)
 
 Widget* Helper::seekWidgetByName(Widget* root, const std::string& name)
 {
-    if (!root)
-    {
+    if (!root) {
         return nullptr;
     }
-    if (root->getName() == name)
-    {
-        return root;
+    
+    if (root->getName() == name) {
+        return dynamic_cast<Widget*>(root);
     }
-    const auto& arrayRootChildren = root->getChildren();
-    for (auto& subWidget : arrayRootChildren)
-    {
-        Widget* child = dynamic_cast<Widget*>(subWidget);
-        if (child)
-        {
-            Widget* res = seekWidgetByName(child,name);
-            if (res != nullptr)
-            {
-                return res;
-            }
+    
+    const auto& children = root->getChildren();
+    for (auto& child : children) {
+        Widget *find = seekWidgetByName((Widget *)child, name);
+        if (find != nullptr) {
+            return find;
         }
     }
     return nullptr;
