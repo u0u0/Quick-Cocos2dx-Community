@@ -83,8 +83,6 @@ public:
      @brief Remove Lua function reference
      */
     virtual void removeScriptHandler(int nHandler) override;
-
-    virtual void removeTouchNodeEvent(Node *node) override;
     
     /**
      @brief Reallocate Lua function reference

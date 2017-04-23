@@ -390,8 +390,6 @@ public:
      * @lua NA
      */
     virtual void removeScriptHandler(int handler) {};
-
-    virtual void removeTouchNodeEvent(Node *node) {};
     
     /** Reallocate script function handler, only LuaEngine class need to implement this function. 
      * @js NA

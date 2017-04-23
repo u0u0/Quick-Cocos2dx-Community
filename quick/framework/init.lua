@@ -56,13 +56,6 @@ quick framework 初始化
     DEBUG_MEM = false   -- 不输出（默认值）
     DEBUG_MEM = true    -- 每 10 秒输出一次
     ```
-
--   LOAD_DEPRECATED_API: 是否载入过时的 API 定义，默认为 false
-
--   DISABLE_DEPRECATED_WARNING: 使用过时的 API 时是否显示警告信息，默认为 true
-
--   USE_DEPRECATED_EVENT_ARGUMENTS: 是否使用过时的 Node 事件参数格式，默认为 false
-
 <br />
 
 ### 自动载入的模块
@@ -94,10 +87,6 @@ print("===========================================================")
 if type(DEBUG) ~= "number" then DEBUG = 0 end
 if type(DEBUG_FPS) ~= "boolean" then DEBUG_FPS = false end
 if type(DEBUG_MEM) ~= "boolean" then DEBUG_MEM = false end
-if type(LOAD_SHORTCODES_API) ~= "boolean" then LOAD_SHORTCODES_API = true end
-if type(LOAD_DEPRECATED_API) ~= "boolean" then LOAD_DEPRECATED_API = false end
-if type(DISABLE_DEPRECATED_WARNING) ~= "boolean" then DISABLE_DEPRECATED_WARNING = false end
-if type(USE_DEPRECATED_EVENT_ARGUMENTS) ~= "boolean" then USE_DEPRECATED_EVENT_ARGUMENTS = false end
 
 ----
 
@@ -106,13 +95,8 @@ local CURRENT_MODULE_NAME = ...
 cc = cc or {}
 cc.PACKAGE_NAME = string.sub(CURRENT_MODULE_NAME, 1, -6)
 
-if cc.Node.removeTouchEvent then
-    cc.bPlugin_ = true
-end
-
 require(cc.PACKAGE_NAME .. ".debug")
 require(cc.PACKAGE_NAME .. ".functions")
-require(cc.PACKAGE_NAME .. ".cocos2dx")
 
 printInfo("")
 printInfo("# DEBUG                        = "..DEBUG)
@@ -125,13 +109,9 @@ filter     = require(cc.PACKAGE_NAME .. ".filter")
 audio      = require(cc.PACKAGE_NAME .. ".audio")
 network    = require(cc.PACKAGE_NAME .. ".network")
 crypto     = require(cc.PACKAGE_NAME .. ".crypto")
-
-local cjson = require(cc.PACKAGE_NAME .. ".json")
-if cjson then
-    json = cjson
-else
-    require("cocos.cocos2d.json")
-end
+require(cc.PACKAGE_NAME .. ".json")
+require(cc.PACKAGE_NAME .. ".shortcodes")
+require(cc.PACKAGE_NAME .. ".NodeEx")
 
 if device.platform == "android" then
     require(cc.PACKAGE_NAME .. ".platform.android")
@@ -141,20 +121,6 @@ elseif device.platform == "mac" then
     require(cc.PACKAGE_NAME .. ".platform.mac")
 end
 
-require(cc.PACKAGE_NAME .. ".cc.init")
-
-if LOAD_DEPRECATED_API then
-    ui         = require(cc.PACKAGE_NAME .. ".ui")
-
-    local dp = cc.PACKAGE_NAME .. ".deprecated."
-    require(dp .. "deprecated_functions")
-end
-
-if LOAD_SHORTCODES_API then
-    require(cc.PACKAGE_NAME .. ".shortcodes")
-end
-
-----
 
 local sharedTextureCache = cc.Director:getInstance():getTextureCache()
 local sharedDirector = cc.Director:getInstance()

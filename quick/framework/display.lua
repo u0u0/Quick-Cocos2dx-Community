@@ -115,11 +115,7 @@ if CONFIG_SCREEN_AUTOSCALE and CONFIG_SCREEN_AUTOSCALE ~="NONE" then
         CONFIG_SCREEN_WIDTH = w
         CONFIG_SCREEN_HEIGHT = h
         scale = 1.0
-        if cc.bPlugin_ then
-            glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.NO_BORDER)
-        else
-            glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.SHOW_ALL)
-        end
+		glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.SHOW_ALL)
     else
         if not scaleX or not scaleY then
             scaleX, scaleY = w / CONFIG_SCREEN_WIDTH, h / CONFIG_SCREEN_HEIGHT
@@ -266,8 +262,6 @@ display.DEFAULT_TTF_FONT_SIZE   = 24
 
 function display.newScene(name)
     local scene = cc.Scene:create()
-    scene:setNodeEventEnabled(true)
-    scene:setAutoCleanupEnabled()
     scene.name = name or "<unknown-scene>"
     return scene
 end
@@ -462,17 +456,7 @@ end
 -- end --
 
 function display.newLayer()
-    local layer
-
-    if cc.bPlugin_ then
-        layer = display.newNode()
-        layer:setContentSize(display.width, display.height)
-        layer:setTouchEnabled(true)
-    else
-        layer = cc.Layer:create()
-    end
-
-    return layer
+    return cc.Layer:create()
 end
 
 -- start --
@@ -487,26 +471,7 @@ end
 -- end --
 
 function display.newColorLayer(color)
-    local node
-
-    if cc.bPlugin_ then
-        node = display.newNode()
-        local layer = cc.LayerColor:create(color)
-        node:addChild(layer)
-        node:setTouchEnabled(true)
-        node:setTouchSwallowEnabled(true)
-
-        node.setContentSize = function(_, ...)
-            layer:setContentSize(...)
-        end
-        node.getContentSize = function()
-            return layer:getContentSize()
-        end
-    else
-        node = cc.LayerColor:create(color)
-    end
-
-    return node
+    return cc.LayerColor:create(color)
 end
 
 -- start --

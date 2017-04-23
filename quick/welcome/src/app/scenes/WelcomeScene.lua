@@ -8,7 +8,6 @@ function WelcomeScene:ctor()
     local bg = cc.LayerColor:create(cc.c4b(56, 56, 56, 255))
     self:addChild(bg)
 
-    -- self:createTitleBar(bg)
     self:createLogo(bg)
     self:createTabWidget(bg)
     self:createCopyright(bg)
@@ -30,7 +29,7 @@ function WelcomeScene:createLogo(node)
         :align(display.LEFT_TOP, display.left + 48, display.top - 24)
         :addTo(node)
 
-    local label = cc.ui.UILabel.new({
+    local label = display.newTTFLabel({
 		UILabelType = 2,
         text = __VERSION__,
         size = 30,
@@ -43,122 +42,109 @@ function WelcomeScene:createLogo(node)
 end
 
 function WelcomeScene:createButtons(node)
-    local top = display.top - 140
-
     local buttonWidth = 170
     local buttonHeight = 48
     local padding = 120
-    local images = {
-        normal = "#ButtonNormal.png",
-        pressed = "#ButtonPressed.png",
-        disabled = "#ButtonDisabled.png",
-    }
 
-	cc.ui.UIPushButton.new(images, {scale9 = true})
-    :setButtonSize(buttonWidth, buttonHeight)
-    :setButtonLabel("normal", cc.ui.UILabel.new({
-		    UILabelType = 2,
-            text = "捐赠",
-            size = 18,
-        }))
-    :pos(display.width-padding, display.top - 55)
-    :addTo(node)
-    :onButtonClicked(function()
-       device.openURL("http://cocos2d-lua.org/donate/index.md")
-    end)
+	local buttns = {
+		{"捐献", display.top - 55, function()
+			device.openURL("http://cocos2d-lua.org/donate/index.md")
+		end},
+		{"打开", display.top - 190, function()
+			local projectConfig = ProjectConfig:new()
+			local argumentVector = vector_string_:new_local()
+			local index = self._selectHistoryIndex
+			if index > 0 then
+				local arguments = cc.player.settings.PLAYER_OPEN_RECENTS[index].args
+				for _,v in ipairs(arguments) do
+					argumentVector:push_back(v)
+				end
+				projectConfig:parseCommandLine(argumentVector)
+				PlayerProtocol:getInstance():openNewPlayerWithProjectConfig(projectConfig)
+			end
+		end},
+		{"移除", display.top - 270, function()
+			local index = self._selectHistoryIndex
+			self._historyListView:removeItem(index - 1)
+			if index > 0 then
+				table.remove(cc.player.settings.PLAYER_OPEN_RECENTS, index)
+				cc.player:saveSetting()
+			end
 
-    cc.ui.UIPushButton.new(images, {scale9 = true})
-    :setButtonSize(buttonWidth, buttonHeight)
-    :setButtonLabel("normal", cc.ui.UILabel.new({
-		    UILabelType = 2,
-            text = "打开",
-            size = 18,
-        }))
-    :pos(display.width-padding, top)
-    :addTo(node)
-    :onButtonClicked(function()
-        local projectConfig = ProjectConfig:new()
-        local argumentVector = vector_string_:new_local()
-        local index = self.localProjectListView_:getCurrentIndex()
-        if index > 0 then
-            local arguments = cc.player.settings.PLAYER_OPEN_RECENTS[index].args
-            for _,v in ipairs(arguments) do
-                argumentVector:push_back(v)
-            end
-            projectConfig:parseCommandLine(argumentVector)
-            PlayerProtocol:getInstance():openNewPlayerWithProjectConfig(projectConfig)
-        end
-    end)
+			local count = #self._historyListView:getItems()
+			if self._selectHistoryIndex > count then
+				self._selectHistoryIndex = count
+			end
 
-    top = top - 68
-    cc.ui.UIPushButton.new({normal="#RedButtonNormal.png", pressed="#RedButtonPressed.png", disabled = "#ButtonDisabled.png",}, {scale9 = true})
-    :setButtonSize(buttonWidth, buttonHeight)
-    :setButtonLabel("normal", cc.ui.UILabel.new({
-		    UILabelType = 2,
-            text = "移除",
-            size = 18,
-        }))
-    :pos(display.width-padding, top)
-    :addTo(node)
-    :onButtonClicked(function()
-        local index = self.localProjectListView_:getCurrentIndex()
-        self.localProjectListView_:removeCurrentItem()
-        if index > 0 then
-            table.remove(cc.player.settings.PLAYER_OPEN_RECENTS, index)
-            cc.player:saveSetting()
-        end
-        local listCount = self.localProjectListView_:getItemCount()
-        if index > listCount then
-            index = listCount
-        end
-        self.localProjectListView_:setCurrentIndex(index)
-    end)
+			self._selectHistoryItem = self._historyListView:getItem(self._selectHistoryIndex - 1)
+			if self._selectHistoryItem then
+				self._selectHistoryItem.bg:setVisible(true)
+			end
+		end},
+		{"新建项目", display.top - 360, function()
+			require("app.scenes.CreateProjectUI"):new()
+				:addTo(self)
+		end},
+		{"导入项目", display.top - 440, function()
+			require("app.scenes.OpenProjectUI"):new()
+				:addTo(self)
+		end},
+	}
 
-    top = top - 248
-    cc.ui.UIPushButton.new(images, {scale9 = true})
-    :setButtonSize(buttonWidth, buttonHeight)
-    :setButtonLabel("normal", cc.ui.UILabel.new({
-		    UILabelType = 2,
-            text = "新建项目",
-            size = 18,
-        }))
-    :pos(display.width-padding, top)
-    :addTo(node)
-    :onButtonClicked(function()
-        require("app.scenes.CreateProjectUI"):new()
-        :addTo(self)
-    end)
+	self._rightBtns = {}
+	for _, info in ipairs(buttns) do
+		local btn = ccui.Button:create("ButtonNormal.png",
+			"ButtonPressed.png", "ButtonDisabled.png", 1)
+		btn:setScale9Enabled(true)
+		btn:setContentSize(cc.size(buttonWidth, buttonHeight))
+		btn:setTitleText(info[1])
+		btn:setTitleFontSize(24)
+		btn:addTouchEventListener(function(sender, eventType)
+			if 2 == eventType then
+				info[3]()
+			end
+		end)
+		btn:pos(display.width - padding, info[2])
+		btn:addTo(node)
 
-    top = top - 68
-    cc.ui.UIPushButton.new(images, {scale9 = true})
-    :setButtonSize(buttonWidth, buttonHeight)
-    :setButtonLabel("normal", cc.ui.UILabel.new({
-		    UILabelType = 2,
-            text = "导入项目",
-            size = 18,
-        }))
-    :pos(display.width-padding, top)
-    :addTo(node)
-    :onButtonClicked(function()
-        require("app.scenes.OpenProjectUI"):new()
-        :addTo(self)
-    end)
+		table.insert(self._rightBtns, btn)
+	end
 end
 
-function WelcomeScene:createListItem(icon, title, path)
-    local container = display.newNode()
+function WelcomeScene:createTabWidget(node)
+    self:createOpenRecents(cc.player.settings.PLAYER_OPEN_RECENTS, node)
+    self:createSamples(node)
+    self:createHeaders(node)
+    self:createButtons(node)
+end
+
+function WelcomeScene:_createItem(icon, title, path, cb)
+    local container = ccui.Layout:create()
+	container:setTouchEnabled(true)
     container:setContentSize(40*16, 90)
     container.path = path
+	container:addTouchEventListener(function(sender, eventType)
+		if 2 == eventType then
+			cb(sender)
+		end
+	end)
+
+	-- bg
+	local bgItem = display.newScale9Sprite("#ItemSelected.png")
+	bgItem:setContentSize(cc.size(40*16, 90))
+	bgItem:setAnchorPoint(cc.p(0, 0))
+	bgItem:addTo(container)
+	bgItem:setVisible(false)
+	container.bg = bgItem
 
     -- icon
-    cc.ui.UIImage.new(icon, {scale9 = false})
-    :setLayoutSize(48, 48)
-    :pos(20, 20)
-    :addTo(container)
+    display.newSprite(icon)
+		:pos(40, 40)
+		:addTo(container)
 
     -- title
     title = title:splitBySep('/')
-    local titleLabel = cc.ui.UILabel.new({
+    local titleLabel = display.newTTFLabel({
             text = title[#title],
             size = 26,
             color = display.COLOR_WHITE})
@@ -166,7 +152,7 @@ function WelcomeScene:createListItem(icon, title, path)
     titleLabel:addTo(container)
 
     -- path
-    cc.ui.UILabel.new({
+    display.newTTFLabel({
         text = stripPath(path, 80),
         size = 12,
         color = display.COLOR_WHITE,
@@ -181,121 +167,101 @@ function WelcomeScene:createListItem(icon, title, path)
     return container
 end
 
-
-function WelcomeScene:createTabWidget(node)
-    self.tabWidget = {}
-    self.tabWidget.headers_ = {}
-    self.tabWidget.widgets_ = {}
-
-    self:createOpenRecents(cc.player.settings.PLAYER_OPEN_RECENTS, node)
-    self:createButtons(node)
-    self:createSamples(node)
-    self:createHeaders(node)
-
-    function self.tabWidget.setCurrentIndex(index)
-        self.tabWidget.currentWidget.header:setButtonSelected(false)
-        if self.tabWidget.currentWidget.widget then
-            self.tabWidget.currentWidget.widget:setVisible(false)
-        end
-
-        self.tabWidget.currentWidget = {
-            index = index,
-            header = self.tabWidget.headers_[index],
-            widget = self.tabWidget.widgets_[index],
-        }
-
-        self.tabWidget.currentWidget.header:setButtonSelected(true)
-        if self.tabWidget.currentWidget.widget then
-            if self.tabWidget.currentWidget.widget.hasItemLoaded == false then
-                self:loadSampleItems()
-                self.tabWidget.currentWidget.widget.hasItemLoaded = true
-            end
-            self.tabWidget.currentWidget.widget:setVisible(true)
-        end
-    end
-
-    local index = (#cc.player.settings.PLAYER_OPEN_RECENTS < 1 and 2) or 1 or (#cc.player.settings.PLAYER_OPEN_RECENTS < 1 and 3) 
-    self.tabWidget.setCurrentIndex(index)
-
-end
-
 function WelcomeScene:createOpenRecents(recents, node)
-    local localProjectListView = require("app.scenes.ListViewEx").new {
-            bg = "#TabButtonSelected.png",
-            viewRect = cc.rect(40,92, 40*17, 40*9+28),
-            direction = cc.ui.UIScrollView.DIRECTION_VERTICAL,
-            scrollbarImgV = "#ScrollBarHandler.png"
-        }
-        :addTo(node)
+	local listView = ccui.ListView:create()
+	listView:setContentSize(40*17, 40*9+28)
+	listView:setPosition(40,92)
+    listView:setDirection(1)
+	listView:addTo(node)
 
-    -- hightlight item
-    local bgItem = cc.ui.UIImage.new("#ItemSelected.png", {scale9 = true})
-    bgItem:setLayoutSize(40*16-20, 87)
-    bgItem:pos(70, 5)
-
-    local highlightNode = display.newNode()
-    highlightNode:setVisible(false)
-    highlightNode:pos(0, 0)
-    highlightNode:addChild(bgItem)
-    localProjectListView:setHighlightNode(highlightNode)
-
+	local cb = function(sender)
+		self._historyListView:getItem(self._selectHistoryIndex - 1).bg:setVisible(false)
+		self._selectHistoryIndex = self._historyListView:getIndex(sender) + 1
+		sender.bg:setVisible(true)
+	end
     -- add items
     for i,v in ipairs(recents) do
-        local container = self:createListItem("#Logo.png", v.title, v.title)
-
-        local item = localProjectListView:newItem()
-        item:addContent(container)
-        item:setItemSize(40*16, 96)
-
-        localProjectListView:addItem(item)
+        local item = self:_createItem("#Logo.png", v.title, v.title, cb)
+		item.index = i
+        listView:pushBackCustomItem(item)
+		if 1 == i then
+			item.bg:setVisible(true)
+		end
     end
-    localProjectListView:reload()
-    localProjectListView:setCurrentIndex(1)
+	self._selectHistoryIndex = 1
+	self._historyListView = listView
+end
 
-    self.tabWidget.widgets_[#self.tabWidget.widgets_ +1] = localProjectListView
-    self.localProjectListView_ = localProjectListView
+function WelcomeScene:createSamples(node)
+	self.samples = dofile(cc.player.quickRootPath .. "quick/samples/samples.lua")
 
+	local listView = ccui.ListView:create()
+	listView:setContentSize(40*17, 40*9+28)
+	listView:setPosition(40,92)
+    listView:setDirection(1)
+	listView:addTo(node)
+
+    -- add items
+    for i,v in ipairs(self.samples) do
+		local cb = function (sender)
+			self:openDemoWithPath(v.path)
+		end
+        local item = self:_createItem(v.image, v.title, v.description, cb)
+        listView:pushBackCustomItem(item)
+    end
+	listView:setVisible(false)
+	self._demoListView = listView
 end
 
 function WelcomeScene:createHeaders(node)
-    local left = display.left + 130
+	local left = display.left + 130
     local top  = display.top - 136
 
     local buttonWidth = 150
     local buttonHeight = 48
-    local images = {
-        on = "#TabButtonSelected.png",
-        off = "#TabButtonNormal.png",
-    }
 
-    local headers = {{title="我的项目",widget=self.localProjectListView_}, 
-        {title="示例",widget=self.lvGrid}
-    }
-    for i,v in ipairs(headers) do
+	local buttons = {
+		{"我的项目", function ()
+			self._demoListView:setVisible(false)
+			self._historyListView:setVisible(true)
+			for i = 2, #self._rightBtns do
+				self._rightBtns[i]:setVisible(true)
+			end
+		end},
+		{"示例", function ()
+			self._demoListView:setVisible(true)
+			self._historyListView:setVisible(false)
+			for i = 2, #self._rightBtns do
+				self._rightBtns[i]:setVisible(false)
+			end
+		end},
+	}
 
-        local header =
-        cc.ui.UICheckBoxButton.new(images, {scale9 = true})
-        :setButtonLabel(cc.ui.UILabel.new({text = v.title, size = 18}))
-        :setButtonSize(buttonWidth, buttonHeight)
-        :setButtonLabelAlignment(display.CENTER)
-        :pos(left, top)
+	for index, info in ipairs(buttons) do
+		local btn = ccui.Button:create("TabButtonNormal.png", "TabButtonSelected.png", nil, 1)
+		btn:pos(left, top)
+		btn:addTo(node)
+		btn:setScale9Enabled(true)
+		btn:setContentSize(cc.size(buttonWidth, buttonHeight))
+		btn:setTitleText(info[1])
+		btn:setTitleFontSize(24)
+		btn:addTouchEventListener(function(sender, eventType)
+			if 2 == eventType then
+				info[2]()
+				-- change select stat
+				self._selectTab:setBrightStyle(0)
+				self._selectTab = btn
+				btn:setBrightStyle(1)
+			end
+		end)
+		left = left + 170
 
-        header.index = i
-        header.widget = v.widget
-        header:onButtonClicked(function()
-            self.tabWidget.setCurrentIndex(header.index)
-        end)
-
-        node:addChild(header)
-        self.tabWidget.headers_[#self.tabWidget.headers_+1] = header
-        left = left + 170
-    end
-
-
-    self.tabWidget.currentWidget = {index = 1,
-                                          header = self.tabWidget.headers_[1],
-                                          widget = self.tabWidget.widgets_[1]}
-    self.tabWidget.currentWidget.header:setButtonSelected(true)
+		-- init select stat
+		if 1 == index then
+			btn:setBrightStyle(1)
+			self._selectTab = btn
+		end
+	end
 end
 
 function WelcomeScene:createCopyright(node)
@@ -303,7 +269,7 @@ function WelcomeScene:createCopyright(node)
     bg:setContentSize(cc.size(display.width, 48))
     node:addChild(bg)
 
-    local label = cc.ui.UILabel.new({
+    local label = display.newTTFLabel({
 		UILabelType = 2,
         text = "Copyright (c) 2016 cocos2d-lua.org, Powered by Quick-Cocos2dx-Community",
         size = 15,
@@ -314,7 +280,7 @@ function WelcomeScene:createCopyright(node)
     label:align(display.LEFT_CENTER)
     node:addChild(label)
 
-    label = cc.ui.UILabel.new({
+    label = display.newTTFLabel({
 		UILabelType = 2,
         text = "QQ群:361920466",
         size = 15,
@@ -326,182 +292,7 @@ function WelcomeScene:createCopyright(node)
     node:addChild(label)
 end
 
-function WelcomeScene:createTitleBar(node)
-    local bar = display.newNode()
-    bar:pos(0, display.height - 28)
-    node:addChild(bar)
-
-    cc.ui.UIPushButton.new("#SettingsIcon.png", {scale9 = true})
-    :pos(display.width-48, 0)
-    :addTo(bar)
-    :onButtonClicked(function()
-        print("open settings")
-    end)
-
-    cc.ui.UILabel.new({
-        text = "0",
-        align = cc.ui.TEXT_ALIGN_LEFT,
-        color = cc.c3b(255,255,255,255),
-        size = 18,
-    })
-    :align(display.LEFT_TOP, display.width-80, 10)
-    :addTo(bar)
-
-    cc.ui.UIPushButton.new("#MessagesIcon.png", {scale9 = true})
-    :pos(display.width-48*2, 0)
-    :addTo(bar)
-    :onButtonClicked(function()
-        print("show message here")
-    end)
-
-    cc.ui.UILabel.new({
-        text = stripPath("<user>", 9),
-        color = cc.c3b(255,255,255,255),
-        size = 18,
-    })
-    :align(display.LEFT_TOP, display.width-170, 10)
-    :addTo(bar)
-
-    cc.ui.UIPushButton.new("#UserIcon.png", {scale9 = true})
-    :pos(display.width-48*4, 0)
-    :addTo(bar)
-    :onButtonClicked(function()
-        print("user icon")
-    end)
-end
-
-function WelcomeScene:createSamples(node)
-    self.samples = dofile(cc.player.quickRootPath .. "quick/samples/samples.lua")
-    self.lvGrid = cc.ui.UIListView.new {
-        bg = "#TabButtonSelected.png",
-        bgScale9 = true,
-        viewRect = cc.rect(40,92, 40*17, 40*9+28),
-        direction = cc.ui.UIScrollView.DIRECTION_VERTICAL,
-        scrollbarImgV = "#ScrollBarHandler.png"}
-
-    self.lvGrid:onTouch(function(event)
-        if not event.listView:isItemInViewRect(event.itemPos) then
-            return
-        end
-
-        local listView = event.listView
-        if "clicked" == event.name then
-            self.lvGrid.currentItem = event.item
-        end
-    end)
-
-
-    self.lvGrid:setTouchSwallowEnabled(false)
-    self.lvGrid:setVisible(false)
-    self.lvGrid:addTo(node)
-    self.lvGrid.hasItemLoaded = false
-    self.tabWidget.widgets_[#self.tabWidget.widgets_ +1] = self.lvGrid
-end
-
-function WelcomeScene:loadSampleItems()
-    for i=1,#self.samples,3 do
-        local item = self.lvGrid:newItem()
-        local content = display.newNode()
-
-        local left = 20
-        local lenght = i + 2
-        if lenght > #self.samples then lenght = #self.samples end
-        for k=i,lenght do
-            local sample = self.samples[k]
-
-            self:createOneSampleUI(sample, item)
-                :addTo(content)
-                :pos(left, 0)
-
-            left = left + 220
-        end
-
-        content:setContentSize(40*17, 190)
-        item:addContent(content)
-        item:setItemSize(40*17, 190)
-        self.lvGrid:addItem(item)
-    end
-    self.lvGrid:reload()
-end
-
-function WelcomeScene:createOneSampleUI(sample, item)
-    local node = display.newNode()
-
-    self:createDemoTitle(sample)
-        :addTo(node)
-
-    self:createDemoDescription(sample)
-        :addTo(node)
-
-    local button = self:createDemoButton(sample)
-    button.listItem = item
-
-    button:addTo(node)
-
-    return node
-end
-
-function WelcomeScene:createDemoTitle(sample)
-    local label = cc.ui.UILabel.new({
-		UILabelType = 2,
-        text = sample.title,
-        align = cc.ui.TEXT_ALIGNMENT_CENTER,
-        color = cc.c3b(144,144,144),
-        size = 14,
-    })
-    label:setAnchorPoint(0.5, 0.5)
-    label:setPosition(100, 160)
-    return label
-end
-
-function WelcomeScene:createDemoDescription(sample)
-    local title =  sample.description
-    local color = cc.c3b(50,144,144)
-
-    local sampleAbsPath = cc.player.quickRootPath .. "quick/" .. sample.path
-    if not cc.FileUtils:getInstance():isDirectoryExist(sampleAbsPath) then
-        title = title .. " (unfinished)"
-        color = cc.c3b(255,0,0)
-    end
-
-    local label = cc.ui.UILabel.new({
-        UILabelType = 2,
-        text        = title,
-        align       = cc.ui.TEXT_ALIGNMENT_CENTER,
-        color       = color,
-        size        = 12,
-    })
-    label:setAnchorPoint(0.5, 0.5)
-    label:setPosition(100, 145)
-    return label
-end
-
-function WelcomeScene:createDemoButton(sample)
-    local demoImage = sample.image or "#ItemSelected.png"
-    local button = cc.ui.UIPushButton.new(demoImage, {scale9 = true})
-    button.isTouchMoved_ = false
-    button:setTouchSwallowEnabled(false)
-    button:pos(100, 65)
-    button:setButtonSize(188, 130)
-    button:addNodeEventListener(cc.NODE_TOUCH_EVENT, function ( event )
-            if event.name == "began" then
-                return true
-
-            elseif event.name == "moved" then
-                button.isTouchMoved_ = true
-
-            elseif event.name == "ended" then
-                if button.isTouchMoved_ == false then
-                    self:openProjectWithPath(sample.path)
-                end
-                button.isTouchMoved_ = false
-            end
-        end)
-
-    return button
-end
-
-function WelcomeScene:openProjectWithPath(path)
+function WelcomeScene:openDemoWithPath(path)
     local configPath = cc.player.quickRootPath .. "quick/" .. path .. "/src/config.lua"
     local projectConfig = ProjectConfig:new()
     projectConfig:setProjectDir(cc.player.quickRootPath .. "quick/" .. path)
