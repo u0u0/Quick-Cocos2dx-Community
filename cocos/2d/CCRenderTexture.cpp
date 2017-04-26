@@ -592,8 +592,8 @@ Image* RenderTexture::newImage(bool fliimage)
 
 void RenderTexture::onBegin()
 {
-    //
     Director *director = Director::getInstance();
+    director->getOpenGLView()->setRenderTextureMode(true);
     
     _oldProjMatrix = director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION, _projectionMatrix);
@@ -650,6 +650,7 @@ void RenderTexture::onBegin()
 void RenderTexture::onEnd()
 {
     Director *director = Director::getInstance();
+    director->getOpenGLView()->setRenderTextureMode(false);
 
     glBindFramebuffer(GL_FRAMEBUFFER, _oldFBO);
 

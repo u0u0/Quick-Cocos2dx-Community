@@ -605,10 +605,14 @@ void GLViewImpl::setViewPortInPoints(float x , float y , float w , float h)
 
 void GLViewImpl::setScissorInPoints(float x , float y , float w , float h)
 {
+    if (_isRenderTextureMode) {
+        glScissor(x, y, w, h);
+        return;
+    }
     glScissor((GLint)(x * _scaleX * _retinaFactor * _frameZoomFactor + _viewPortRect.origin.x * _retinaFactor * _frameZoomFactor),
-               (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
-               (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
-               (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
+              (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
+              (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
+              (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
 }
 
 void GLViewImpl::onGLFWError(int errorID, const char* errorDesc)
