@@ -239,7 +239,9 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     if (self.didFinishLoading) {
         NSString *url = [[webView.request URL] absoluteString];
-        self.didFinishLoading([url UTF8String]);
+        if (url) {
+            self.didFinishLoading([url UTF8String]);
+        }
     }
 }
 
