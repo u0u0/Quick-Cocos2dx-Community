@@ -117,6 +117,49 @@ function Node:removeSelf()
     self:removeFromParent(true)
 end
 
+-- override me for setNodeEventEnabled(true)
+function Node:onEnter()
+end
+
+-- override me for setNodeEventEnabled(true)
+function Node:onExit()
+end
+
+-- override me for setNodeEventEnabled(true)
+function Node:onEnterTransitionFinish()
+end
+
+-- override me for setNodeEventEnabled(true)
+function Node:onExitTransitionStart()
+end
+
+-- override me for setNodeEventEnabled(true)
+function Node:onCleanup()
+end
+
+function Node:setNodeEventEnabled(enabled)
+	if enabled then
+		local listener = function(event)
+			local name = event.name
+			if name == "enter" then
+				self:onEnter()
+			elseif name == "exit" then
+				self:onExit()
+			elseif name == "enterTransitionFinish" then
+				self:onEnterTransitionFinish()
+			elseif name == "exitTransitionStart" then
+				self:onExitTransitionStart()
+			elseif name == "cleanup" then
+				self:onCleanup()
+			end
+		end
+		self:addNodeEventListener(c.NODE_EVENT, listener)
+	else
+		self:removeNodeEventListener(c.NODE_EVENT)
+	end
+	return self
+end
+
 local function KeypadEventCodeConvert(code)
     local key
     if code == 6 then

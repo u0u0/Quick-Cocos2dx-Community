@@ -30,7 +30,6 @@ function WelcomeScene:createLogo(node)
         :addTo(node)
 
     local label = display.newTTFLabel({
-		UILabelType = 2,
         text = __VERSION__,
         size = 30,
         color = display.COLOR_WHITE,
@@ -83,10 +82,6 @@ function WelcomeScene:createButtons(node)
 		end},
 		{"新建项目", display.top - 360, function()
 			require("app.scenes.CreateProjectUI"):new()
-				:addTo(self)
-		end},
-		{"导入项目", display.top - 440, function()
-			require("app.scenes.OpenProjectUI"):new()
 				:addTo(self)
 		end},
 	}
@@ -206,7 +201,8 @@ function WelcomeScene:createSamples(node)
 		local cb = function (sender)
 			self:openDemoWithPath(v.path)
 		end
-        local item = self:_createItem(v.image, v.title, v.description, cb)
+		local image = cc.player.quickRootPath .. "quick/" .. v.path .. "/logo.png"
+        local item = self:_createItem(image, v.title, v.description, cb)
         listView:pushBackCustomItem(item)
     end
 	listView:setVisible(false)
@@ -270,7 +266,6 @@ function WelcomeScene:createCopyright(node)
     node:addChild(bg)
 
     local label = display.newTTFLabel({
-		UILabelType = 2,
         text = "Copyright (c) 2016 cocos2d-lua.org, Powered by Quick-Cocos2dx-Community",
         size = 15,
         color = cc.c3b(128, 128, 128),
@@ -281,7 +276,6 @@ function WelcomeScene:createCopyright(node)
     node:addChild(label)
 
     label = display.newTTFLabel({
-		UILabelType = 2,
         text = "QQ群:361920466",
         size = 15,
         color = cc.c3b(128, 128, 128),

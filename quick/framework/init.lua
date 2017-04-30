@@ -109,7 +109,7 @@ filter     = require(cc.PACKAGE_NAME .. ".filter")
 audio      = require(cc.PACKAGE_NAME .. ".audio")
 network    = require(cc.PACKAGE_NAME .. ".network")
 crypto     = require(cc.PACKAGE_NAME .. ".crypto")
-require(cc.PACKAGE_NAME .. ".json")
+json       = require(cc.PACKAGE_NAME .. ".json")
 require(cc.PACKAGE_NAME .. ".shortcodes")
 require(cc.PACKAGE_NAME .. ".NodeEx")
 
