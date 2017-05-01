@@ -32,12 +32,10 @@ local c = cc
 local Node = c.Node
 
 -- cocos2dx events
-c.NODE_EVENT                 = 0
-c.NODE_ENTER_FRAME_EVENT     = 1
-c.NODE_TOUCH_EVENT           = 2
-c.MENU_ITEM_CLICKED_EVENT    = 3
-c.ACCELERATE_EVENT           = 4
-c.KEYPAD_EVENT               = 5
+c.NODE_EVENT                 = 1
+c.NODE_ENTER_FRAME_EVENT     = 2
+c.NODE_TOUCH_EVENT           = 3
+c.KEYPAD_EVENT               = 4
 
 -- touch
 c.TOUCH_MODE_ALL_AT_ONCE              = cc.TOUCHES_ALL_AT_ONCE
@@ -184,7 +182,7 @@ function Node:setKeypadEnabled(enable)
 				-- call listener
 				self._LuaListeners[c.KEYPAD_EVENT]{
 					code = keycode,
-					key = KeypadEventCodeConvert(code),
+					key = KeypadEventCodeConvert(keycode),
 					type = "Pressed"
 				}
 			end
@@ -195,7 +193,7 @@ function Node:setKeypadEnabled(enable)
 				-- call listener
 				self._LuaListeners[c.KEYPAD_EVENT]{
 					code = keycode,
-					key = KeypadEventCodeConvert(code),
+					key = KeypadEventCodeConvert(keycode),
 					type = "Released"
 				}
 			end
@@ -236,13 +234,15 @@ end
 function Node:addNodeEventListener(evt, hdl)
     if not self._LuaListeners then
         self._LuaListeners = {}
-		self._baseNodeEventListener = function(evt)
-			-- call listener
-			if self._LuaListeners[c.NODE_EVENT] then
-				self._LuaListeners[c.NODE_EVENT]{name = evt}
+		if evt == c.NODE_EVENT then
+			self._baseNodeEventListener = function(evt)
+				-- call listener
+				if self._LuaListeners[c.NODE_EVENT] then
+					self._LuaListeners[c.NODE_EVENT]{name = evt}
+				end
 			end
+			self:registerScriptHandler(self._baseNodeEventListener)
 		end
-		self:registerScriptHandler(self._baseNodeEventListener)
     end
 
 	self._LuaListeners[evt] = hdl
