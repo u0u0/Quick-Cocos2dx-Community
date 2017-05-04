@@ -201,13 +201,13 @@ void Scene::doCaptureScreen(void)
     }
     CC_SAFE_FREE(buffer);
     
-    // image release by caller
     Image *image = new (std::nothrow) Image();
     image->initWithRawData(flippedBuffer, dataLen, width, height, 8);
     
     // callback
     _onCaptured(image);
     _onCaptured = NULL;
+    image->release();
 }
 
 void Scene::captureScreen(CaptureCB onCaptured)

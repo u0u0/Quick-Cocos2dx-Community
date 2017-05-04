@@ -1812,7 +1812,6 @@ function display.captureScreen(callback, fileName)
 		if image then
 			local path = cc.FileUtils:getInstance():getWritablePath() .. fileName
 			image:saveToFile(path)
-			image:release()
 			callback(true, path)
 		else
 			callback(false)
