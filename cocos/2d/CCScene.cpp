@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "base/CCEventListenerCustom.h"
 #include "renderer/CCRenderer.h"
 #include "deprecated/CCString.h"
+#include "platform/CCImage.h"
 
 #if CC_USE_PHYSICS
 #include "physics/CCPhysicsWorld.h"
@@ -42,8 +43,9 @@ int g_physicsSceneCount = 0;
 NS_CC_BEGIN
 
 Scene::Scene()
+: _onCaptured(NULL)
 #if CC_USE_PHYSICS
-: _physicsWorld(nullptr)
+, _physicsWorld(nullptr)
 #endif
 {
     _ignoreAnchorPointForPosition = true;
@@ -162,6 +164,55 @@ void Scene::render(Renderer* renderer)
         director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     }
     Camera::_visitingCamera = nullptr;
+    
+    if (_onCaptured) {
+        doCaptureScreen();
+    }
+}
+
+void Scene::doCaptureScreen(void)
+{
+    auto glView = Director::getInstance()->getOpenGLView();
+    auto frameSize = glView->getFrameSize();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+    frameSize = frameSize * glView->getFrameZoomFactor() * glView->getRetinaFactor();
+#endif
+    
+    int width = (int)frameSize.width;
+    int height = (int)frameSize.height;
+    
+    ssize_t dataLen = width * height * 4;
+    GLubyte *buffer = (GLubyte *)malloc(dataLen);
+    GLubyte *flippedBuffer = (GLubyte *)malloc(dataLen);//free by Image
+    if (!buffer || !flippedBuffer){
+        _onCaptured(NULL);
+        _onCaptured = NULL;
+        CC_SAFE_FREE(buffer);
+        CC_SAFE_FREE(flippedBuffer);
+        return;
+    }
+    
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    
+    // do flip
+    for (int row = 0; row < height; ++row) {
+        memcpy(flippedBuffer + (height - row - 1) * width * 4, buffer + row * width * 4, width * 4);
+    }
+    CC_SAFE_FREE(buffer);
+    
+    // image release by caller
+    Image *image = new (std::nothrow) Image();
+    image->initWithRawData(flippedBuffer, dataLen, width, height, 8);
+    
+    // callback
+    _onCaptured(image);
+    _onCaptured = NULL;
+}
+
+void Scene::captureScreen(CaptureCB onCaptured)
+{
+    _onCaptured = onCaptured;
 }
 
 #if CC_USE_PHYSICS

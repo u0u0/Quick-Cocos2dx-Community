@@ -4777,6 +4777,57 @@ tolua_lerror:
 }
 #endif  //CC_USE_PHYSICS
 
+int lua_cocos2dx_Scene_captureScreen(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::Scene* cobj = nullptr;
+    bool ok  = true;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"cc.Scene",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (cocos2d::Scene*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_Scene_captureScreen'", nullptr);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        int handler = toluafix_ref_function(tolua_S,2,0);
+        cobj->captureScreen([=](Image *image){
+            if (image) {
+                object_to_luaval<Image>(tolua_S, "cc.Image", image);
+            } else {
+                lua_pushnil(tolua_S);
+            }
+            LuaEngine::getInstance()->getLuaStack()->executeFunctionByHandler(handler, 1);
+            LuaEngine::getInstance()->removeScriptHandler(handler);
+        });
+        
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.Scene:captureScreen",argc, 1);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Scene_captureScreen'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
 static void extendScene(lua_State* tolua_S)
 {
     lua_pushstring(tolua_S,"cc.Scene");
@@ -4791,6 +4842,9 @@ static void extendScene(lua_State* tolua_S)
         lua_pushcfunction(tolua_S, lua_cocos2dx_Scene_createWithPhysics);
         lua_rawset(tolua_S, -3);
 #endif
+        lua_pushstring(tolua_S, "captureScreen");
+        lua_pushcfunction(tolua_S, lua_cocos2dx_Scene_captureScreen);
+        lua_rawset(tolua_S, -3);
     }
     lua_pop(tolua_S, 1);
 }
@@ -7378,37 +7432,6 @@ int register_all_cocos2dx_manual(lua_State* tolua_S)
     return 0;
 }
 
-static int tolua_cocos2d_utils_captureScreen(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_istable(tolua_S,1,0, &tolua_err) ||
-        !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err) ||
-        !tolua_isstring(tolua_S, 3, 0, &tolua_err)
-        )
-        goto tolua_lerror;
-    else
-#endif
-    {
-        LUA_FUNCTION handler = toluafix_ref_function(tolua_S,2,0);
-        std::string  fileName = tolua_tocppstring(tolua_S, 3, "");
-        cocos2d::utils::captureScreen([=](bool succeed, const std::string& name ){
-            
-            tolua_pushboolean(tolua_S, succeed);
-            tolua_pushstring(tolua_S, name.c_str());
-            LuaEngine::getInstance()->getLuaStack()->executeFunctionByHandler(handler, 2);
-            LuaEngine::getInstance()->removeScriptHandler(handler);
-        }, fileName);
-        
-        return 0;
-    }
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'tolua_cocos2d_utils_captureScreen'.",&tolua_err);
-    return 0;
-#endif
-}
-
 static int tolua_cocos2d_utils_findChildren(lua_State* tolua_S)
 {
 #if COCOS2D_DEBUG >= 1
@@ -7457,7 +7480,6 @@ int register_all_cocos2dx_module_manual(lua_State* tolua_S)
     tolua_beginmodule(tolua_S, "cc");
         tolua_module(tolua_S, "utils", 0);
         tolua_beginmodule(tolua_S,"utils");
-            tolua_function(tolua_S, "captureScreen", tolua_cocos2d_utils_captureScreen);
             tolua_function(tolua_S, "findChildren", tolua_cocos2d_utils_findChildren);
         tolua_endmodule(tolua_S);
     tolua_endmodule(tolua_S);

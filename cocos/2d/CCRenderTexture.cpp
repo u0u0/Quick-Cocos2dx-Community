@@ -58,7 +58,6 @@ RenderTexture::RenderTexture()
 , _clearStencil(0)
 , _autoDraw(false)
 , _sprite(nullptr)
-, _saveFileCallback(nullptr)
 {
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     // Listen this event to save render texture before come to background.
@@ -461,60 +460,8 @@ void RenderTexture::visit(Renderer *renderer, const Mat4 &parentTransform, uint3
     // setOrderOfArrival(0);
 }
 
-bool RenderTexture::saveToFile(const std::string& filename, bool isRGBA, std::function<void (RenderTexture*, const std::string&)> callback)
-{
-    std::string basename(filename);
-    std::transform(basename.begin(), basename.end(), basename.begin(), ::tolower);
-    
-    if (basename.find(".png") != std::string::npos)
-    {
-        return saveToFile(filename, Image::Format::PNG, isRGBA, callback);
-    }
-    else if (basename.find(".jpg") != std::string::npos)
-    {
-        if (isRGBA) CCLOG("RGBA is not supported for JPG format.");
-        return saveToFile(filename, Image::Format::JPG, false, callback);
-    }
-    else
-    {
-        CCLOG("Only PNG and JPG format are supported now!");
-    }
-    
-    return saveToFile(filename, Image::Format::JPG, false, callback);
-}
-
-bool RenderTexture::saveToFile(const std::string& fileName, Image::Format format, bool isRGBA, std::function<void (RenderTexture*, const std::string&)> callback)
-{
-    CCASSERT(format == Image::Format::JPG || format == Image::Format::PNG,
-             "the image can only be saved as JPG or PNG format");
-    if (isRGBA && format == Image::Format::JPG) CCLOG("RGBA is not supported for JPG format");
-    
-    _saveFileCallback = callback;
-    
-    std::string fullpath = FileUtils::getInstance()->getWritablePath() + fileName;
-    _saveToFileCommand.init(_globalZOrder);
-    _saveToFileCommand.func = CC_CALLBACK_0(RenderTexture::onSaveToFile, this, fullpath, isRGBA);
-    
-    Director::getInstance()->getRenderer()->addCommand(&_saveToFileCommand);
-    return true;
-}
-
-void RenderTexture::onSaveToFile(const std::string& filename, bool isRGBA)
-{
-    Image *image = newImage(true);
-    if (image)
-    {
-        image->saveToFile(filename, !isRGBA);
-    }
-    if(_saveFileCallback)
-    {
-        _saveFileCallback(this, filename);
-    }
-    CC_SAFE_DELETE(image);
-}
-
 /* get buffer as Image */
-Image* RenderTexture::newImage(bool fliimage)
+Image* RenderTexture::newImage(bool flipImage)
 {
     CCASSERT(_pixelFormat == Texture2D::PixelFormat::RGBA8888, "only RGBA8888 can be saved as image");
 
@@ -524,69 +471,47 @@ Image* RenderTexture::newImage(bool fliimage)
     }
 
     const Size& s = _texture->getContentSizeInPixels();
-
-    // to get the image size to save
-    //        if the saving image domain exceeds the buffer texture domain,
-    //        it should be cut
+    // must float -> int
     int savedBufferWidth = (int)s.width;
     int savedBufferHeight = (int)s.height;
 
-    GLubyte *buffer = nullptr;
-    GLubyte *tempData = nullptr;
-    Image *image = new (std::nothrow) Image();
+    ssize_t dataLen = savedBufferWidth * savedBufferHeight * 4;
+    GLubyte *buffer = (GLubyte *)malloc(dataLen);
+    if (!buffer){
+        return nullptr;
+    }
 
-    do
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &_oldFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
+
+    // TODO: move this to configuration, so we don't check it every time
+    /*  Certain Qualcomm Adreno GPU's will retain data in memory after a frame buffer switch which corrupts the render to the texture. The solution is to clear the frame buffer before rendering to the texture. However, calling glClear has the unintended result of clearing the current texture. Create a temporary texture to overcome this. At the end of RenderTexture::begin(), switch the attached texture to the second one, call glClear, and then switch back to the original texture. This solution is unnecessary for other devices as they don't have the same issue with switching frame buffers.
+     */
+    if (Configuration::getInstance()->checkForGLExtension("GL_QCOM"))
     {
-        CC_BREAK_IF(! (buffer = new (std::nothrow) GLubyte[savedBufferWidth * savedBufferHeight * 4]));
-
-        if(! (tempData = new (std::nothrow) GLubyte[savedBufferWidth * savedBufferHeight * 4]))
-        {
-            delete[] buffer;
-            buffer = nullptr;
-            break;
+        // -- bind a temporary texture so we can clear the render buffer without losing our texture
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _textureCopy->getName(), 0);
+        CHECK_GL_ERROR_DEBUG();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _texture->getName(), 0);
+    }
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    glReadPixels(0, 0, savedBufferWidth, savedBufferHeight, GL_RGBA,GL_UNSIGNED_BYTE, buffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, _oldFBO);
+    
+    if (flipImage) {
+        GLubyte *flippedBuffer = (GLubyte *)malloc(dataLen);
+        for (int row = 0; row < savedBufferHeight; ++row) {
+            memcpy(flippedBuffer + (savedBufferHeight - row - 1) * savedBufferWidth * 4,
+                   buffer + row * savedBufferWidth * 4,
+                   savedBufferWidth * 4);
         }
+        free(buffer);
+        buffer = flippedBuffer;
+    }
 
-        glGetIntegerv(GL_FRAMEBUFFER_BINDING, &_oldFBO);
-        glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
-
-        // TODO: move this to configuration, so we don't check it every time
-        /*  Certain Qualcomm Adreno GPU's will retain data in memory after a frame buffer switch which corrupts the render to the texture. The solution is to clear the frame buffer before rendering to the texture. However, calling glClear has the unintended result of clearing the current texture. Create a temporary texture to overcome this. At the end of RenderTexture::begin(), switch the attached texture to the second one, call glClear, and then switch back to the original texture. This solution is unnecessary for other devices as they don't have the same issue with switching frame buffers.
-         */
-        if (Configuration::getInstance()->checkForGLExtension("GL_QCOM"))
-        {
-            // -- bind a temporary texture so we can clear the render buffer without losing our texture
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _textureCopy->getName(), 0);
-            CHECK_GL_ERROR_DEBUG();
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _texture->getName(), 0);
-        }
-        glPixelStorei(GL_PACK_ALIGNMENT, 1);
-        glReadPixels(0,0,savedBufferWidth, savedBufferHeight,GL_RGBA,GL_UNSIGNED_BYTE, tempData);
-        glBindFramebuffer(GL_FRAMEBUFFER, _oldFBO);
-
-        if ( fliimage ) // -- flip is only required when saving image to file
-        {
-            // to get the actual texture data
-            // #640 the image read from rendertexture is dirty
-            for (int i = 0; i < savedBufferHeight; ++i)
-            {
-                memcpy(&buffer[i * savedBufferWidth * 4],
-                       &tempData[(savedBufferHeight - i - 1) * savedBufferWidth * 4],
-                       savedBufferWidth * 4);
-            }
-
-            image->initWithRawData(buffer, savedBufferWidth * savedBufferHeight * 4, savedBufferWidth, savedBufferHeight, 8);
-        }
-        else
-        {
-            image->initWithRawData(tempData, savedBufferWidth * savedBufferHeight * 4, savedBufferWidth, savedBufferHeight, 8);
-        }
-        
-    } while (0);
-
-    CC_SAFE_DELETE_ARRAY(buffer);
-    CC_SAFE_DELETE_ARRAY(tempData);
-
+    Image *image = new (std::nothrow) Image();
+    image->initWithRawData(buffer, dataLen, savedBufferWidth, savedBufferHeight, 8);
     return image;
 }
 

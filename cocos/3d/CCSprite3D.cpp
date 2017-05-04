@@ -523,11 +523,11 @@ void Sprite3D::removeAllAttachNode()
 static Texture2D * getDummyTexture()
 {
     auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("/dummyTexture");
-    if(!texture)
-    {
-        unsigned char data[] ={255,0,0,255};//1*1 pure red picture
-        Image * image =new (std::nothrow) Image();
-        image->initWithRawData(data,sizeof(data),1,1,sizeof(unsigned char));
+    if(!texture) {
+        unsigned char *data = (unsigned char *)malloc(4);
+        data[0] = 255; data[1] = 0; data[2] = 0; data[3] = 255;//1*1 pure red picture
+        Image * image = new (std::nothrow) Image();
+        image->initWithRawData(data, 4, 1, 1, sizeof(unsigned char));
         texture=Director::getInstance()->getTextureCache()->addImage(image,"/dummyTexture");
         image->release();
     }
