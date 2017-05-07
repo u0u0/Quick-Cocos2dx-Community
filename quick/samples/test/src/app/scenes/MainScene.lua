@@ -7,6 +7,7 @@ function MainScene:ctor()
 		"Test_NodeFrameEvent",
 		"Test_NodeEvent",
 		"Test_KeypadEvent",
+		"Test_NodeTouchEvent",
 	}
 
 	local scrollView = ccui.ScrollView:create()

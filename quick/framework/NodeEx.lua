@@ -42,8 +42,8 @@ c.TOUCH_MODE_ALL_AT_ONCE              = cc.TOUCHES_ALL_AT_ONCE
 c.TOUCH_MODE_ONE_BY_ONE               = cc.TOUCHES_ONE_BY_ONE
 
 local function isPointIn( rc, pt )
-    local rect = cc.rect(rc.x, rc.y, rc.width, rc.height)
-    return cc.rectContainsPoint(rect, pt)
+    local rect = c.rect(rc.x, rc.y, rc.width, rc.height)
+    return c.rectContainsPoint(rect, pt)
 end
 
 function Node:align(anchorPoint, x, y)
@@ -54,18 +54,18 @@ end
 
 function Node:schedule(callback, interval)
     local seq = transition.sequence({
-        cc.DelayTime:create(interval),
-        cc.CallFunc:create(callback),
+        c.DelayTime:create(interval),
+        c.CallFunc:create(callback),
     })
-    local action = cc.RepeatForever:create(seq)
+    local action = c.RepeatForever:create(seq)
     self:runAction(action)
     return action
 end
 
 function Node:performWithDelay(callback, delay)
     local action = transition.sequence({
-        cc.DelayTime:create(delay),
-        cc.CallFunc:create(callback),
+        c.DelayTime:create(delay),
+        c.CallFunc:create(callback),
     })
     self:runAction(action)
     return action
@@ -89,23 +89,15 @@ end
 测试一个点是否在当前结点区域中
 
 @param tabel point cc.p的点位置,世界坐标
-@param boolean isCascade 是否用结点的所有子结点共同区域计算还是只用本身的区域
-
 @return boolean 是否在结点区域中
 
 ]]
-function Node:hitTest(point, isCascade)
+function Node:hitTest(point)
     local nsp = self:convertToNodeSpace(point)
-    local rect
-    if isCascade then
-        rect = self:getCascadeBoundingBox()
-    else
-        rect = self:getBoundingBox()
-    end
+    local rect = self:getContentSize()
     rect.x = 0
     rect.y = 0
-
-    if cc.rectContainsPoint(rect, nsp) then
+    if c.rectContainsPoint(rect, nsp) then
         return true
     end
     return false
@@ -178,30 +170,26 @@ function Node:setKeypadEnabled(enable)
 	local eventDispatcher = self:getEventDispatcher()
     if enable then
         local onKeyPressed = function(keycode, event)
-			if self._LuaListeners[c.KEYPAD_EVENT] then
-				-- call listener
-				self._LuaListeners[c.KEYPAD_EVENT]{
-					code = keycode,
-					key = KeypadEventCodeConvert(keycode),
-					type = "Pressed"
-				}
-			end
+			-- call listener
+			self._LuaListeners[c.KEYPAD_EVENT]{
+				code = keycode,
+				key = KeypadEventCodeConvert(keycode),
+				type = "Pressed"
+			}
         end
 
         local onKeyReleased = function(keycode, event)
-			if self._LuaListeners[c.KEYPAD_EVENT] then
-				-- call listener
-				self._LuaListeners[c.KEYPAD_EVENT]{
-					code = keycode,
-					key = KeypadEventCodeConvert(keycode),
-					type = "Released"
-				}
-			end
+			-- call listener
+			self._LuaListeners[c.KEYPAD_EVENT]{
+				code = keycode,
+				key = KeypadEventCodeConvert(keycode),
+				type = "Released"
+			}
         end
 
-        local listener = cc.EventListenerKeyboard:create()
-        listener:registerScriptHandler(onKeyPressed, cc.Handler.EVENT_KEYBOARD_PRESSED )
-        listener:registerScriptHandler(onKeyReleased, cc.Handler.EVENT_KEYBOARD_RELEASED )
+        local listener = c.EventListenerKeyboard:create()
+        listener:registerScriptHandler(onKeyPressed, c.Handler.EVENT_KEYBOARD_PRESSED)
+        listener:registerScriptHandler(onKeyReleased, c.Handler.EVENT_KEYBOARD_RELEASED)
         eventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
         self.__key_event_handle__ = listener
 	else
@@ -222,13 +210,108 @@ end
 function Node:scheduleUpdate()
     local listener = function (dt)
 		-- call listener
-		if self._LuaListeners[c.NODE_ENTER_FRAME_EVENT] then
-			self._LuaListeners[c.NODE_ENTER_FRAME_EVENT](dt)
-		end
+		self._LuaListeners[c.NODE_ENTER_FRAME_EVENT](dt)
     end
 
     self:scheduleUpdateWithPriorityLua(listener, 0)
     return self
+end
+
+function Node:setTouchMode(mode)
+	if mode ~= c.TOUCH_MODE_ALL_AT_ONCE and mode ~= c.TOUCHES_ONE_BY_ONE then
+		print("== wrong mode", mode)
+		return
+	end
+	self._luaTouchMode = mode
+end
+
+function Node:setTouchEnabled()
+	local isSingle = true
+	if self._luaTouchMode and self._luaTouchMode == c.TOUCH_MODE_ALL_AT_ONCE then
+		isSingle = false
+	end
+
+	-- remove old
+	local eventDispatcher = self:getEventDispatcher()
+	if self._luaTouchListener then
+		eventDispatcher:removeEventListener(self._luaTouchListener)
+	end
+
+	-- add new
+	if isSingle then
+		self._luaTouchListener = c.EventListenerTouchOneByOne:create()
+		local dealFunc = function(touch, name)
+			local tp = touch:getLocation()
+			local pp = touch:getPreviousLocation()
+
+			if name == "began" then
+				if not self:hitTest(tp) then
+					return false
+				end
+			end
+
+			-- call listener
+			return self._LuaListeners[c.NODE_TOUCH_EVENT]{
+				name = name,
+				x = tp.x,
+				y = tp.y,
+				prevX = pp.x,
+				prevY = pp.y,
+			}
+		end
+		self._luaTouchListener:registerScriptHandler(function(touch, event)
+			return dealFunc(touch, "began")
+		end, c.Handler.EVENT_TOUCH_BEGAN)
+		self._luaTouchListener:registerScriptHandler(function(touch, event)
+			dealFunc(touch, "moved")
+		end, c.Handler.EVENT_TOUCH_MOVED)
+		self._luaTouchListener:registerScriptHandler(function(touch, event)
+			dealFunc(touch, "ended")
+		end, c.Handler.EVENT_TOUCH_ENDED)
+		self._luaTouchListener:registerScriptHandler(function(touch, event)
+			dealFunc(touch, "cancelled")
+		end, c.Handler.EVENT_TOUCH_CANCELLED)
+	else
+		self._luaTouchListener = c.EventListenerTouchAllAtOnce:create()
+		local dealFunc = function(touchs, name)
+			local points = {}
+			for _, touch in pairs(touchs) do
+				local tp = touch:getLocation()
+				local pp = touch:getPreviousLocation()
+				points[touch:getId()] = {
+					x = tp.x,
+					y = tp.y,
+					prevX = pp.x,
+					prevY = pp.y,
+				}
+			end
+
+			-- call listener
+			self._LuaListeners[c.NODE_TOUCH_EVENT]{
+				name = name,
+				points = points,
+			}
+		end
+		self._luaTouchListener:registerScriptHandler(function(touchs, event)
+			dealFunc(touchs, "began")
+		end, c.Handler.EVENT_TOUCHES_BEGAN)
+		self._luaTouchListener:registerScriptHandler(function(touchs, event)
+			dealFunc(touchs, "moved")
+		end, c.Handler.EVENT_TOUCHES_MOVED)
+		self._luaTouchListener:registerScriptHandler(function(touchs, event)
+			dealFunc(touchs, "ended")
+		end, c.Handler.EVENT_TOUCHES_ENDED)
+		self._luaTouchListener:registerScriptHandler(function(touchs, event)
+			dealFunc(touchs, "cancelled")
+		end, c.Handler.EVENT_TOUCHES_CANCELLED)
+	end
+	eventDispatcher:addEventListenerWithSceneGraphPriority(self._luaTouchListener, self)
+end
+
+function Node:setTouchSwallowEnabled(enable)
+	if self._luaTouchListener then
+		self._luaTouchListener:setSwallowTouches(enable)
+	end
 end
 
 function Node:addNodeEventListener(evt, hdl)
@@ -237,9 +320,7 @@ function Node:addNodeEventListener(evt, hdl)
 		if evt == c.NODE_EVENT then
 			self._baseNodeEventListener = function(evt)
 				-- call listener
-				if self._LuaListeners[c.NODE_EVENT] then
-					self._LuaListeners[c.NODE_EVENT]{name = evt}
-				end
+				self._LuaListeners[c.NODE_EVENT]{name = evt}
 			end
 			self:registerScriptHandler(self._baseNodeEventListener)
 		end
