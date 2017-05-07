@@ -27,7 +27,6 @@ extern "C" {
 }
 #include "Lua_web_socket.h"
 
-#include "lua_xml_http_request.h"
 #include "CCLuaEngine.h"
 
 
@@ -41,10 +40,6 @@ int register_network_module(lua_State* L)
 #if (CC_USE_WEBSOCKET)
         tolua_web_socket_open(L);
         register_web_socket_manual(L);
-#endif
-
-#if CC_USE_CURL        
-        register_xml_http_request(L);
 #endif
     }
     lua_pop(L, 1);
