@@ -1656,7 +1656,6 @@
 		503DD8EB1926736A00CD74DD /* CCGL-ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 503DD8D91926736A00CD74DD /* CCGL-ios.h */; };
 		503DD8EC1926736A00CD74DD /* CCGLViewImpl-ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 503DD8DA1926736A00CD74DD /* CCGLViewImpl-ios.h */; };
 		503DD8ED1926736A00CD74DD /* CCGLViewImpl-ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503DD8DB1926736A00CD74DD /* CCGLViewImpl-ios.mm */; };
-		503DD8EE1926736A00CD74DD /* CCImage-ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503DD8DC1926736A00CD74DD /* CCImage-ios.mm */; };
 		503DD8EF1926736A00CD74DD /* CCPlatformDefine-ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 503DD8DD1926736A00CD74DD /* CCPlatformDefine-ios.h */; };
 		503DD8F01926736A00CD74DD /* CCStdC-ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 503DD8DE1926736A00CD74DD /* CCStdC-ios.h */; };
 		503DD8F11926736A00CD74DD /* OpenGL_Internal-ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 503DD8DF1926736A00CD74DD /* OpenGL_Internal-ios.h */; };
@@ -2931,7 +2930,6 @@
 		503DD8D91926736A00CD74DD /* CCGL-ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCGL-ios.h"; sourceTree = "<group>"; };
 		503DD8DA1926736A00CD74DD /* CCGLViewImpl-ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCGLViewImpl-ios.h"; sourceTree = "<group>"; };
 		503DD8DB1926736A00CD74DD /* CCGLViewImpl-ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "CCGLViewImpl-ios.mm"; sourceTree = "<group>"; };
-		503DD8DC1926736A00CD74DD /* CCImage-ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "CCImage-ios.mm"; sourceTree = "<group>"; };
 		503DD8DD1926736A00CD74DD /* CCPlatformDefine-ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCPlatformDefine-ios.h"; sourceTree = "<group>"; };
 		503DD8DE1926736A00CD74DD /* CCStdC-ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCStdC-ios.h"; sourceTree = "<group>"; };
 		503DD8DF1926736A00CD74DD /* OpenGL_Internal-ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenGL_Internal-ios.h"; sourceTree = "<group>"; };
@@ -5182,7 +5180,6 @@
 				503DD8D91926736A00CD74DD /* CCGL-ios.h */,
 				503DD8DA1926736A00CD74DD /* CCGLViewImpl-ios.h */,
 				503DD8DB1926736A00CD74DD /* CCGLViewImpl-ios.mm */,
-				503DD8DC1926736A00CD74DD /* CCImage-ios.mm */,
 				503DD8DD1926736A00CD74DD /* CCPlatformDefine-ios.h */,
 				503DD8DE1926736A00CD74DD /* CCStdC-ios.h */,
 				503DD8DF1926736A00CD74DD /* OpenGL_Internal-ios.h */,
@@ -7167,7 +7164,6 @@
 				38B8E2E219E671D2002D7CE7 /* UILayoutComponent.cpp in Sources */,
 				B2165EEA19921124000BE3E6 /* CCPrimitiveCommand.cpp in Sources */,
 				15AE182519AAD2F700C27E9E /* CCMesh.cpp in Sources */,
-				503DD8EE1926736A00CD74DD /* CCImage-ios.mm in Sources */,
 				0AFC98C81E91487A00F3D63F /* lpc.c in Sources */,
 				B37510811823ACA100B3BA6A /* CCPhysicsJointInfo_chipmunk.cpp in Sources */,
 				46A170FC1807CECB005B8026 /* CCPhysicsBody.cpp in Sources */,

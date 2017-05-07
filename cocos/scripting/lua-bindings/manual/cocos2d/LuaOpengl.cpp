@@ -2694,67 +2694,6 @@ tolua_lerror:
 }
 #endif //#ifndef TOLUA_DISABLE
 
-
-/* function: glReadPixels  */
-#ifndef TOLUA_DISABLE_tolua_Cocos2d_glReadPixels00
-static int tolua_Cocos2d_glReadPixels00(lua_State* tolua_S)
-{
-#ifndef TOLUA_RELEASE
-    tolua_Error tolua_err;
-    if (
-        !tolua_isnumber(tolua_S,1,0,&tolua_err)            ||
-        !tolua_isnumber(tolua_S,2,0,&tolua_err)            ||
-        !tolua_isnumber(tolua_S,3,0,&tolua_err)            ||
-        !tolua_isnumber(tolua_S,4,0,&tolua_err)            ||
-        !tolua_isnumber(tolua_S,5,0,&tolua_err)            ||
-        !tolua_isnumber(tolua_S,6,0,&tolua_err)            ||
-        !tolua_isnumber(tolua_S,7, 0, &tolua_err)          ||
-        !tolua_isnoobj(tolua_S,8, &tolua_err)
-        )
-        goto tolua_lerror;
-    else
-#endif
-    {
-        int arg0  = (int)tolua_tonumber(tolua_S, 1, 0);
-        int arg1  = (int)tolua_tonumber(tolua_S, 2, 0);
-        int arg2  = (int)tolua_tonumber(tolua_S, 3, 0);
-        int arg3  = (int)tolua_tonumber(tolua_S, 4, 0);
-        unsigned int arg4  = (unsigned int)tolua_tonumber(tolua_S, 5, 0);
-        unsigned int arg5  = (unsigned int)tolua_tonumber(tolua_S, 6, 0);
-        
-        long length   = (long)tolua_tonumber(tolua_S,7,0);
-        unsigned char* unit8Array     = new unsigned char[length];
-        if (NULL == unit8Array)
-        {
-            return  0;
-        }
-        for (int i = 0; i < length; i++)
-        {
-            unit8Array[i] = 0;
-        }
-
-        glReadPixels((GLint)arg0 , (GLint)arg1 , (GLsizei)arg2 , (GLsizei)arg3 , (GLenum)arg4 , (GLenum)arg5 , (GLvoid*)unit8Array);
-        
-        lua_newtable(tolua_S);                                              /* L: table */
-        int index = 1;
-        for (int i = 0; i < length; i++)
-        {
-            lua_pushnumber(tolua_S, unit8Array[i]);                   /* L: unit8 value */
-            lua_rawseti(tolua_S, -2, index);                          /* table[index] = value, L: table */
-            ++index;
-        }
-        
-        CC_SAFE_DELETE_ARRAY(unit8Array);
-    }
-    return 1;
-#ifndef TOLUA_RELEASE
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'glReadPixels'.",&tolua_err);
-    return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
 /* function: glReleaseShaderCompiler  */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_glReleaseShaderCompiler00
 static int tolua_Cocos2d_glReleaseShaderCompiler00(lua_State* tolua_S)
@@ -5183,7 +5122,6 @@ TOLUA_API int tolua_opengl_open(lua_State* tolua_S)
         tolua_function(tolua_S, "_linkProgram", tolua_Cocos2d_glLinkProgram00);
         tolua_function(tolua_S, "pixelStorei", tolua_Cocos2d_glPixelStorei00);
         tolua_function(tolua_S, "polygonOffset", tolua_Cocos2d_glPolygonOffset00);
-        tolua_function(tolua_S, "readPixels", tolua_Cocos2d_glReadPixels00);
         tolua_function(tolua_S, "releaseShaderCompiler", tolua_Cocos2d_glReleaseShaderCompiler00);
         tolua_function(tolua_S, "renderbufferStorage", tolua_Cocos2d_glRenderbufferStorage00);
         tolua_function(tolua_S, "sampleCoverage", tolua_Cocos2d_glSampleCoverage00);

@@ -148,32 +148,6 @@ public:
      */
     Image* newImage(bool flipImage = true);
     
-    CC_DEPRECATED_ATTRIBUTE Image* newCCImage(bool flipImage = true) { return newImage(flipImage); };
-
-    /** Saves the texture into a file using JPEG format. The file will be saved in the Documents folder.
-     * Returns true if the operation is successful.
-     *
-     * @param filename The file name.
-     * @param isRGBA The file is RGBA or not.
-     * @param callback When the file is save finished,it will callback this function.
-     * @return Returns true if the operation is successful.
-     */
-    bool saveToFile(const std::string& filename, bool isRGBA = true, std::function<void (RenderTexture*, const std::string&)> callback = nullptr);
-
-    /** saves the texture into a file. The format could be JPG or PNG. The file will be saved in the Documents folder.
-        Returns true if the operation is successful.
-     * Notes: since v3.x, saveToFile will generate a custom command, which will be called in the following render->render().
-     * So if this function is called in a event handler, the actual save file will be called in the next frame. If we switch to a different scene, the game will crash.
-     * To solve this, add Director::getInstance()->getRenderer()->render(); after this function.
-     *
-     * @param filename The file name.
-     * @param format The image format.
-     * @param isRGBA The file is RGBA or not.
-     * @param callback When the file is save finished,it will callback this function.
-     * @return Returns true if the operation is successful.
-     */
-    bool saveToFile(const std::string& filename, Image::Format format, bool isRGBA = true, std::function<void (RenderTexture*, const std::string&)> callback = nullptr);
-    
     /** Listen "come to background" message, and save render texture.
      * It only has effect on Android.
      * 
@@ -347,12 +321,6 @@ protected:
     CustomCommand _clearCommand;
     CustomCommand _beginCommand;
     CustomCommand _endCommand;
-    /*this command is used to encapsulate saveToFile,
-     call saveToFile twice will overwrite this command and callback
-     and the command and callback will be executed twice.
-    */
-    CustomCommand _saveToFileCommand;
-    std::function<void (RenderTexture*, const std::string&)> _saveFileCallback;
 protected:
     //renderer caches and callbacks
     void onBegin();
@@ -360,8 +328,6 @@ protected:
 
     void onClear();
     void onClearDepth();
-
-    void onSaveToFile(const std::string& fileName, bool isRGBA = true);
     
     Mat4 _oldTransMatrix, _oldProjMatrix;
     Mat4 _transformMatrix, _projectionMatrix;

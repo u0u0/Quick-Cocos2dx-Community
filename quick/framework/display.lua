@@ -1773,7 +1773,15 @@ display.captureScreen(
 -- end --
 
 function display.captureScreen(callback, fileName)
-    cc.utils:captureScreen(callback, fileName)
+	sharedDirector:getRunningScene():captureScreen(function(image)
+		if image then
+			local path = cc.FileUtils:getInstance():getWritablePath() .. fileName
+			image:saveToFile(path)
+			callback(true, path)
+		else
+			callback(false)
+		end
+	end)
 end
 
 return display

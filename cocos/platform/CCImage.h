@@ -113,7 +113,7 @@ public:
     bool initWithImageData(const unsigned char * data, ssize_t dataLen);
 
     // @warning kFmtRawData only support RGBA8888
-    bool initWithRawData(const unsigned char * data, ssize_t dataLen, int width, int height, int bitsPerComponent, bool preMulti = false);
+    bool initWithRawData(unsigned char * data, ssize_t dataLen, int width, int height, int bitsPerComponent, bool preMulti = false);
 
     // Getters
     inline unsigned char *   getData()               { return _data; }
@@ -137,7 +137,7 @@ public:
      @param    filePath        the file's absolute path, including file suffix.
      @param    isToRGB        whether the image is saved as RGB format.
      */
-    bool saveToFile(const std::string &filename, bool isToRGB = true);
+    bool saveToFile(const std::string &filename);
     
     
     /** treats (or not) PVR files as if they have alpha premultiplied.
@@ -162,7 +162,7 @@ protected:
     typedef struct sImageTGA tImageTGA;
     bool initWithTGAData(tImageTGA* tgaData);
 
-    bool saveImageToPNG(const std::string& filePath, bool isToRGB = true);
+    bool saveImageToPNG(const std::string& filePath);
     bool saveImageToJPG(const std::string& filePath);
     
     void premultipliedAlpha();
