@@ -7121,6 +7121,49 @@ int lua_cocos2dx_ui_Button_getTitleColor(lua_State* tolua_S)
 
     return 0;
 }
+
+int lua_cocos2dx_ui_Button_setTitleOffset(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::ui::Button* cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccui.Button",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (cocos2d::ui::Button*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ui_Button_setTitleOffset'", nullptr);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2)
+    {
+        lua_Number x = lua_tonumber(tolua_S, 2);
+        lua_Number y = lua_tonumber(tolua_S, 3);
+        cobj->setTitleOffset(x, y);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccui.Button:setTitleOffset",argc, 2);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ui_Button_setTitleOffset'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
 int lua_cocos2dx_ui_Button_setPressedActionEnabled(lua_State* tolua_S)
 {
     int argc = 0;
@@ -7430,6 +7473,7 @@ int lua_register_cocos2dx_ui_Button(lua_State* tolua_S)
         tolua_function(tolua_S,"getTitleFontSize",lua_cocos2dx_ui_Button_getTitleFontSize);
         tolua_function(tolua_S,"getTitleFontName",lua_cocos2dx_ui_Button_getTitleFontName);
         tolua_function(tolua_S,"getTitleColor",lua_cocos2dx_ui_Button_getTitleColor);
+        tolua_function(tolua_S,"setTitleOffset",lua_cocos2dx_ui_Button_setTitleOffset);
         tolua_function(tolua_S,"setPressedActionEnabled",lua_cocos2dx_ui_Button_setPressedActionEnabled);
         tolua_function(tolua_S,"setZoomScale",lua_cocos2dx_ui_Button_setZoomScale);
         tolua_function(tolua_S,"create", lua_cocos2dx_ui_Button_create);
