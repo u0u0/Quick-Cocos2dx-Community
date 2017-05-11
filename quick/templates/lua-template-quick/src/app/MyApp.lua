@@ -3,7 +3,8 @@ require("config")
 require("cocos.init")
 require("framework.init")
 
-local MyApp = class("MyApp", cc.mvc.AppBase)
+local AppBase = require("framework.AppBase")
+local MyApp = class("MyApp", AppBase)
 
 function MyApp:ctor()
     MyApp.super.ctor(self)
