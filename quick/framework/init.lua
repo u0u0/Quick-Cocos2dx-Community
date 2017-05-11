@@ -67,7 +67,6 @@ quick framework 初始化
 -   cocos2dx: 对 cocos2d-x C++ 接口的封装和扩展
 -   device: 针对设备接口的扩展
 -   display: 创建场景、图像、动画的接口
--   filter: 具备过滤器渲染的 Sprite 接口
 -   audio: 音乐和音效的接口
 -   network: 网络相关的接口
 -   crypto: 加密相关的接口
@@ -103,7 +102,6 @@ printInfo("#")
 
 device     = require(cc.PACKAGE_NAME .. ".device")
 display    = require(cc.PACKAGE_NAME .. ".display")
-filter     = require(cc.PACKAGE_NAME .. ".filter")
 audio      = require(cc.PACKAGE_NAME .. ".audio")
 network    = require(cc.PACKAGE_NAME .. ".network")
 crypto     = require(cc.PACKAGE_NAME .. ".crypto")
