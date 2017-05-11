@@ -50,7 +50,6 @@ class Acceleration;
 enum ccScriptType {
     kScriptTypeNone = 0,
     kScriptTypeLua,
-    kScriptTypeJavascript
 };
 
 class ScriptHandlerEntry : public Ref
@@ -202,16 +201,9 @@ private:
 enum ScriptEventType
 {
     kNodeEvent = 0,
-    kMenuClickedEvent,
     kCallFuncEvent,
     kScheduleEvent,
-    kTouchEvent,
-    kTouchesEvent,
-    kKeypadEvent,
-    kAccelerometerEvent,
-    kControlEvent,
     kCommonEvent,
-    kComponentEvent
 };
 
 struct BasicScriptData
@@ -491,16 +483,6 @@ public:
      * @lua NA
      */
     static void destroyInstance();
-    /**
-     * @js NA
-     * @lua NA
-     */
-    static bool sendNodeEventToJS(Node* node, int action);
-    /**
-     * @js NA
-     * @lua NA
-     */
-    static bool sendNodeEventToJSExtended(Node* node, int action);
     /**
      * @js NA
      * @lua NA

@@ -53,20 +53,20 @@ function Node:align(anchorPoint, x, y)
 end
 
 function Node:schedule(callback, interval)
-    local seq = transition.sequence({
+    local seq = c.Sequence:create(
         c.DelayTime:create(interval),
-        c.CallFunc:create(callback),
-    })
+        c.CallFunc:create(callback)
+    )
     local action = c.RepeatForever:create(seq)
     self:runAction(action)
     return action
 end
 
 function Node:performWithDelay(callback, delay)
-    local action = transition.sequence({
+    local action = c.Sequence:create(
         c.DelayTime:create(delay),
-        c.CallFunc:create(callback),
-    })
+        c.CallFunc:create(callback)
+    )
     self:runAction(action)
     return action
 end

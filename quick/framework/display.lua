@@ -456,7 +456,9 @@ end
 -- end --
 
 function display.newLayer()
-    return cc.Layer:create()
+    local node = cc.Node:create()
+	node:setContentSize(cc.size(display.width, display.height))
+	return node
 end
 
 -- start --
@@ -494,9 +496,6 @@ Node 对象并不能显示对象，但可以作为其他显示对象的容器（
 local group = display.newNode()     -- 创建一个容器
 group:addChild(sprite1)             -- 添加显示对象到容器中
 group:addChild(sprite2)             -- 添加显示对象到容器中
-
--- 移动容器时，其中包含的子对象也会同时移动
-transition.moveBy(group, {time = 2.0, x = 100})
 
 ~~~
 

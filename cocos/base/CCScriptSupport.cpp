@@ -163,41 +163,6 @@ void ScriptEngineManager::destroyInstance()
     }
 }
 
-bool ScriptEngineManager::sendNodeEventToJS(Node* node, int action)
-{
-    auto scriptEngine = getInstance()->getScriptEngine();
-    
-    if (scriptEngine->isCalledFromScript())
-    {
-        // Should only be invoked at root class Node
-        scriptEngine->setCalledFromScript(false);
-    }
-    else
-    {
-        BasicScriptData data(node,(void*)&action);
-        ScriptEvent scriptEvent(kNodeEvent,(void*)&data);
-        if (scriptEngine->sendEvent(&scriptEvent))
-            return true;
-    }
-    
-    return false;
-}
-
-bool ScriptEngineManager::sendNodeEventToJSExtended(Node* node, int action)
-{
-    auto scriptEngine = getInstance()->getScriptEngine();
-    
-    if (!scriptEngine->isCalledFromScript())
-    {
-        BasicScriptData data(node,(void*)&action);
-        ScriptEvent scriptEvent(kNodeEvent,(void*)&data);
-        if (scriptEngine->sendEvent(&scriptEvent))
-            return true;
-    }
-    
-    return false;
-}
-
 void ScriptEngineManager::sendNodeEventToLua(Node* node, int action)
 {
     auto scriptEngine = getInstance()->getScriptEngine();

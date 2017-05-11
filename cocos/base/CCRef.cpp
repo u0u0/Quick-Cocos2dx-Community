@@ -62,14 +62,6 @@ Ref::~Ref()
     {
         ScriptEngineManager::getInstance()->getScriptEngine()->removeScriptObjectByObject(this);
     }
-    else
-    {
-        ScriptEngineProtocol* pEngine = ScriptEngineManager::getInstance()->getScriptEngine();
-        if (pEngine != nullptr && pEngine->getScriptType() == kScriptTypeJavascript)
-        {
-            pEngine->removeScriptObjectByObject(this);
-        }
-    }
 #endif
 
 

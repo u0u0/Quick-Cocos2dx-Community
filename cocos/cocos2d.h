@@ -121,8 +121,6 @@ THE SOFTWARE.
 #include "2d/CCTransition.h"
 #include "2d/CCTransitionPageTurn.h"
 #include "2d/CCTransitionProgress.h"
-#include "2d/CCMenu.h"
-#include "2d/CCMenuItem.h"
 #include "2d/CCClippingNode.h"
 #include "2d/CCClippingRectangleNode.h"
 #include "2d/CCMotionStreak.h"

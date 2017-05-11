@@ -1095,13 +1095,6 @@ y+=ytranslate;         \
     
     void Scale9Sprite::onEnter()
     {
-#if CC_ENABLE_SCRIPT_BINDING
-        if (_scriptType == kScriptTypeJavascript)
-        {
-            if (ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnEnter))
-                return;
-        }
-#endif
         Node::onEnter();
         for( const auto &child: _protectedChildren)
             child->onEnter();

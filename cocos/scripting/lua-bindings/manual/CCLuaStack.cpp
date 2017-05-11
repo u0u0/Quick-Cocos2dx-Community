@@ -48,7 +48,6 @@ extern "C" {
 #include "lua_cocos2dx_auto.hpp"
 #include "lua_cocos2dx_manual.hpp"
 #include "LuaBasicConversions.h"
-#include "lua_cocos2dx_deprecated.h"
 #include "lua_cocos2dx_physics_auto.hpp"
 #include "lua_cocos2dx_physics_manual.hpp"
 #include "lua_cocos2dx_experimental_auto.hpp"
@@ -160,8 +159,6 @@ bool LuaStack::init(void)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     LuaJavaBridge::luaopen_luaj(_state);
 #endif
-    register_all_cocos2dx_deprecated(_state);
-    register_all_cocos2dx_manual_deprecated(_state);
     
     tolua_script_handler_mgr_open(_state);
 

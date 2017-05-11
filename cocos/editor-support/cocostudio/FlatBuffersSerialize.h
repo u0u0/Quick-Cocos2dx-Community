@@ -26,7 +26,6 @@
 #define __cocos2d_libs__FlatBuffersSerialize__
 
 #include "cocos2d.h"
-#include "ExtensionMacros.h"
 #include "cocostudio/CocosStudioExport.h"
 
 namespace flatbuffers

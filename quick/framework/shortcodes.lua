@@ -209,184 +209,6 @@ function Node:zorder(z)
     return self
 end
 
-
---------------------------------
--- @module Sprite
-
-local Sprite = c.Sprite
-
-Sprite.playOnce = Sprite.playAnimationOnce
-Sprite.playForever = Sprite.playAnimationForever
-
--- start --
-
---------------------------------
--- 设置当前精灵的显示帧
--- @function [parent=#Sprite] displayFrame
--- @param mixed frame 要显示的图片名或图片帧的frame
--- @return Sprite#Sprite  当前精灵
-
--- end --
-
-function Sprite:displayFrame(frame)
-    self:setSpriteFrame(frame)
-    return self
-end
-
--- start --
-
---------------------------------
--- 在X方向上翻转当前精灵
--- @function [parent=#Sprite] flipX
--- @param boolean b 是否翻转
--- @return Sprite#Sprite  当前精灵
-
--- end --
-
-function Sprite:flipX(b)
-    self:setFlippedX(b)
-    return self
-end
-
--- start --
-
---------------------------------
--- 在Y方向上翻转当前精灵
--- @function [parent=#Sprite] flipY
--- @param boolean b 是否翻转
--- @return Sprite#Sprite  当前精灵
-
--- end --
-
-function Sprite:flipY(b)
-    self:setFlippedY(b)
-    return self
-end
-
-
---------------------------------
--- @module Layer
-
--- Layer
-
-local Layer = c.Layer
-
--- start --
-
---------------------------------
--- 在层上注册触摸监听
--- @function [parent=#Layer] onTouch
--- @param function listener 监听函数
--- @return Layer#Layer  当前层
-
---[[--
-
-在层上注册触摸监听
-
-]]
--- end --
-
-function Layer:onTouch(listener)
-    if USE_DEPRECATED_EVENT_ARGUMENTS then
-        self:addNodeEventListener(c.NODE_TOUCH_EVENT, function(event)
-            return listener(event.name, event.x, event.y, event.prevX, event.prevY)
-        end)
-    else
-        self:addNodeEventListener(c.NODE_TOUCH_EVENT, listener)
-    end
-    return self
-end
-
--- start --
-
---------------------------------
--- 设置层的触摸是否打开
--- @function [parent=#Layer] enableTouch
--- @param boolean enabled 是否打开触摸
--- @return Layer#Layer  当前层
-
--- end --
-
-function Layer:enableTouch(enabled)
-    self:setTouchEnabled(enabled)
-    return self
-end
-
--- start --
-
---------------------------------
--- 在层上注册键盘监听
--- @function [parent=#Layer] onKeypad
--- @param function listener 监听函数
--- @return Layer#Layer  当前层
-
--- end --
-
-function Layer:onKeypad(listener)
-    if USE_DEPRECATED_EVENT_ARGUMENTS then
-        self:addNodeEventListener(c.KEYPAD_EVENT, function(event)
-            return listener(event.name)
-        end)
-    else
-        self:addNodeEventListener(c.KEYPAD_EVENT, listener)
-    end
-    return self
-end
-
--- start --
-
---------------------------------
--- 设置层的键盘事件是否打开
--- @function [parent=#Layer] enableKeypad
--- @param boolean enabled 是否打开键盘事件
--- @return Layer#Layer  当前层
-
--- end --
-
-function Layer:enableKeypad(enabled)
-    self:setKeypadEnabled(enabled)
-    return self
-end
-
--- start --
-
---------------------------------
--- 在层上注册重力感应监听
--- @function [parent=#Layer] onAccelerate
--- @param function listener 监听函数
--- @return Layer#Layer  当前层
-
--- end --
-
-function Layer:onAccelerate(listener)
-    if USE_DEPRECATED_EVENT_ARGUMENTS then
-        self:addNodeEventListener(c.ACCELERATE_EVENT, function(event)
-            return listener(event.x, event.y, event.z, event.timestamp)
-        end)
-    else
-        self:addNodeEventListener(c.ACCELERATE_EVENT, listener)
-    end
-    return self
-end
-
--- start --
-
---------------------------------
--- 设置层的重力感应事件是否打开
--- @function [parent=#Layer] enableAccelerometer
--- @param boolean enabled 是否打开加速度事件
--- @return Layer#Layer  当前层
-
--- end --
-
-function Layer:enableAccelerometer(enabled)
-    self:setAccelerometerEnabled(enabled)
-    return self
-end
-
-
--- actions
-
 -- start --
 
 --------------------------------
@@ -614,4 +436,54 @@ end
 function Node:tintBy(time, r, g, b)
     self:runAction(cc.TintBy:create(time, r or 0, g or 0, b or 0))
     return self
+end
+
+--------------------------------
+-- @module Sprite
+
+local Sprite = c.Sprite
+
+-- start --
+
+--------------------------------
+-- 设置当前精灵的显示帧
+-- @function [parent=#Sprite] displayFrame
+-- @param mixed frame 要显示的图片名或图片帧的frame
+-- @return Sprite#Sprite  当前精灵
+
+-- end --
+
+function Sprite:displayFrame(frame)
+	self:setSpriteFrame(frame)
+	return self
+end
+
+-- start --
+
+--------------------------------
+-- 在X方向上翻转当前精灵
+-- @function [parent=#Sprite] flipX
+-- @param boolean b 是否翻转
+-- @return Sprite#Sprite  当前精灵
+
+-- end --
+
+function Sprite:flipX(b)
+	self:setFlippedX(b)
+	return self
+end
+
+-- start --
+
+--------------------------------
+-- 在Y方向上翻转当前精灵
+-- @function [parent=#Sprite] flipY
+-- @param boolean b 是否翻转
+-- @return Sprite#Sprite  当前精灵
+
+-- end --
+
+function Sprite:flipY(b)
+	self:setFlippedY(b)
+	return self
 end
