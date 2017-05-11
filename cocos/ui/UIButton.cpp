@@ -74,7 +74,8 @@ _pressedTextureAdaptDirty(true),
 _disabledTextureAdaptDirty(true),
 _fontName("Thonburi"),
 _fontSize(10),
-_type(FontType::SYSTEM)
+_type(FontType::SYSTEM),
+_titleOffset(0, 0)
 {
     setTouchEnabled(true);
 }
@@ -94,7 +95,7 @@ Button* Button::create()
     CC_SAFE_DELETE(widget);
     return nullptr;
 }
-    
+
 Button* Button::create(const std::string &normalImage,
                        const std::string& selectedImage ,
                        const std::string& disableImage,
@@ -536,9 +537,17 @@ void Button::onPressStateChangedToDisabled()
     _buttonClickedRenderer->setScale(_pressedTextureScaleXInSize, _pressedTextureScaleYInSize);
 }
     
+void Button::setTitleOffset(float x, float y)
+{
+    _titleOffset.x = x;
+    _titleOffset.y = y;
+    updateTitleLocation();
+}
+    
 void Button::updateTitleLocation()
 {
-    _titleRenderer->setPosition(_contentSize.width * 0.5f, _contentSize.height * 0.5f);
+    _titleRenderer->setPosition(_contentSize.width * 0.5f + _titleOffset.x,
+                                _contentSize.height * 0.5f + _titleOffset.y);
 }
 
 void Button::updateContentSize()

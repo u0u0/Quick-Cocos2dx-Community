@@ -194,6 +194,7 @@ public:
     float getTitleFontSize() const;
     void setTitleFontName(const std::string& fontName);
     const std::string& getTitleFontName() const;
+    void setTitleOffset(float x, float y);
     /** When user pressed the button, the button will zoom to a scale.
      * The final scale of the button  equals (button original scale + _zoomScale)
      * @since v3.3
@@ -237,6 +238,7 @@ protected:
     Scale9Sprite* _buttonClickedRenderer;
     Scale9Sprite* _buttonDisableRenderer;
     Label* _titleRenderer;
+    Point _titleOffset;
    
     float _zoomScale;
     std::string _normalFileName;
