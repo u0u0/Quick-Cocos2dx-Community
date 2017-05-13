@@ -339,6 +339,41 @@ class ScriptsCompiler
             $zip->addFile($module['tempFilePath'], $this->config['prefix'] . $module['moduleName']);
         }
         $zip->close();
+	    
+	// hack code begin
+        // 原理：因为通过 addFromString 添加的压缩包会导致压缩包内的文件的修改时间为当前运行时的时间，从而导致每次即使相同的文件打出的包也会造成MD5 hash值的不一致，不利于做热更新(依赖于md5值)
+        // 以下代码将原先打出的包解压缩到临时文件并修改文件的最后修改时间为一个固定的时间并重新打包
+        if (!$zip->open($zipfile, $flag))
+        {
+            printf("can not open zipfile: %s", $zipfile);
+            return false;
+        }
+
+        $tempDir = sys_get_temp_dir() . "/gamescript_" . md5($zipfile);
+        $tempFiles = array();
+        for($i = 0; $i < $zip->numFiles; $i++) {
+            $filename = $zip->getNameIndex($i);
+            $fileinfo = pathinfo($filename);
+            $zip->extractTo($tempDir, $filename);
+            $fixtime = 1465164366;
+            $tmpFilePath = $tempDir."/".$filename;
+            touch($tmpFilePath, $fixtime);
+            printf("zn:%s\n", $tmpFilePath);
+            $tempFiles[$i] = $tmpFilePath;
+        }
+        $zip->close();
+
+        if (!$zip->open($zipfile, $flag))
+        {
+            printf("can not open zipfile: %s", $zipfile);
+            return false;
+        }
+
+        foreach($tempFiles as $tmpFile) {
+            $zip->addFile($tmpFile, basename($tmpFile));
+        }
+        $zip->close();
+        // hack code end
 
         if ($this->config['encrypt'] == self::ENCRYPT_XXTEA_ZIP)
         {
