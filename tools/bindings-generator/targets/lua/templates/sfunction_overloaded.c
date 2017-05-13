@@ -63,7 +63,8 @@ int ${signature_name}(lua_State* tolua_S)
             return 1;
             #else
             ${namespaced_class_name}::${func.func_name}($arg_list);
-            return 0;
+            lua_settop(tolua_S, 1);
+            return 1;
             #end if
         }
     } while (0);
