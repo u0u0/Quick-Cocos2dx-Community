@@ -217,16 +217,6 @@ To enable set it to a value different than 0. Disabled by default.
 #define CC_SPRITEBATCHNODE_DEBUG_DRAW 0
 #endif
 
-/** @def CC_LABELBMFONT_DEBUG_DRAW
-If enabled, all subclasses of LabelBMFont will draw a bounding box
-Useful for debugging purposes only. It is recommended to leave it disabled.
-
-To enable set it to a value different than 0. Disabled by default.
-*/
-#ifndef CC_LABELBMFONT_DEBUG_DRAW
-#define CC_LABELBMFONT_DEBUG_DRAW 0
-#endif
-
 /** @def CC_LABELATLAS_DEBUG_DRAW
  If enabled, all subclasses of LabeltAtlas will draw a bounding box
  Useful for debugging purposes only. It is recommended to leave it disabled.
