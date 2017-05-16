@@ -42,8 +42,6 @@ typedef struct lua_State lua_State;
 NS_CC_BEGIN
 
 class TimerScriptHandler;
-class Layer;
-class MenuItem;
 class CallFunc;
 class Acceleration;
 

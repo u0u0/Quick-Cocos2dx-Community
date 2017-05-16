@@ -150,21 +150,21 @@ bool ComRender::serialize(void* r)
 		{
 			if (strcmp(className, "CCSprite") == 0 && (filePath.find(".png") != filePath.npos || filePath.find(".pvr.ccz") != filePath.npos))
 			{
-				_render = CCSprite::create(filePath.c_str());
+				_render = Sprite::create(filePath.c_str());
 				_render->retain();
                 
                 ret = true;
 			}
 			else if(strcmp(className, "CCTMXTiledMap") == 0 && filePath.find(".tmx") != filePath.npos)
 			{
-				_render = CCTMXTiledMap::create(filePath.c_str());
+				_render = TMXTiledMap::create(filePath.c_str());
 				_render->retain();
                 
                 ret = true;
 			}
 			else if(strcmp(className, "CCParticleSystemQuad") == 0 && filePath.find(".plist") != filePath.npos)
 			{
-				_render = CCParticleSystemQuad::create(filePath.c_str());
+				_render = ParticleSystemQuad::create(filePath.c_str());
 				_render->setPosition(0.0f, 0.0f);
 				_render->retain();
                 
@@ -246,7 +246,7 @@ bool ComRender::serialize(void* r)
                                             if (str1 != nullptr)
                                             {
                                                 ArmatureDataManager::getInstance()->addArmatureFileInfo(filePath.c_str());
-                                                Armature *pAr = CCArmature::create(str1);
+                                                Armature *pAr = Armature::create(str1);
                                                 _render = pAr;
                                                 _render->retain();
                                                 const char *actionName = nullptr;
@@ -323,7 +323,7 @@ bool ComRender::serialize(void* r)
 				}
 				strPngFile.replace(pos, strPngFile.length(), ".png");
 				SpriteFrameCache::getInstance()->addSpriteFramesWithFile(plistPath.c_str(), strPngFile.c_str());
-				_render = CCSprite::createWithSpriteFrameName(filePath.c_str());
+				_render = Sprite::createWithSpriteFrameName(filePath.c_str());
 				_render->retain();
                 
                 ret = true;

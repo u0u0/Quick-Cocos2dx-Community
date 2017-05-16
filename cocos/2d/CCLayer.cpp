@@ -35,7 +35,7 @@ THE SOFTWARE.
 #include "base/CCDirector.h"
 
 
-#include "deprecated/CCString.h"
+#include "base/ccUTF8.h"
 
 #if CC_USE_PHYSICS
 #include "physics/CCPhysicsBody.h"

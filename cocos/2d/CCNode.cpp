@@ -46,7 +46,7 @@ THE SOFTWARE.
 #include "renderer/CCGLProgramState.h"
 #include "math/TransformUtils.h"
 
-#include "deprecated/CCString.h"
+#include "base/ccUTF8.h"
 
 #if CC_USE_PHYSICS
 #include "physics/CCPhysicsBody.h"

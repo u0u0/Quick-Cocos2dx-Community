@@ -44,7 +44,7 @@ THE SOFTWARE.
 #include "renderer/CCRenderer.h"
 #include "renderer/CCVertexIndexBuffer.h"
 #include "base/CCDirector.h"
-#include "deprecated/CCString.h" // For StringUtils::format
+#include "base/ccUTF8.h" // For StringUtils::format
 
 NS_CC_BEGIN
 namespace experimental {

@@ -42,7 +42,7 @@ THE SOFTWARE.
 #include "base/CCEventListenerCustom.h"
 #include "base/CCEventDispatcher.h"
 
-#include "deprecated/CCString.h"
+#include "base/ccUTF8.h"
 
 NS_CC_BEGIN
 

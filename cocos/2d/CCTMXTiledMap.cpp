@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include "2d/CCTMXXMLParser.h"
 #include "2d/CCTMXLayer.h"
 #include "2d/CCSprite.h"
-#include "deprecated/CCString.h" // For StringUtils::format
+#include "base/ccUTF8.h" // For StringUtils::format
 
 NS_CC_BEGIN
 

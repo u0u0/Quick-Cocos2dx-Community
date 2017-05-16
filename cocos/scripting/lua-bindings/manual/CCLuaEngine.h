@@ -111,10 +111,6 @@ public:
      */
     virtual int executeGlobalFunction(const char* functionName) override;
 
-    virtual int executeNodeEvent(Node* pNode, int nAction);
-    virtual int executeMenuItemEvent(MenuItem* pMenuItem);
-    virtual int executeNotificationEvent(__NotificationCenter* pNotificationCenter, const char* pszName);
-    virtual int executeCallFuncActionEvent(CallFunc* pAction, Ref* pTarget = NULL);
     virtual int executeSchedule(int nHandler, float dt, Node* pNode = NULL);
     /** execute a accelerometer event */
     virtual int executeEvent(int nHandler, const char* pEventName, Ref* pEventSource = NULL, const char* pEventSourceClassName = NULL);

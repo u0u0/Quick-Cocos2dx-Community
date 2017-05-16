@@ -33,7 +33,7 @@ THE SOFTWARE.
 #include "renderer/CCRenderer.h"
 #include "renderer/CCQuadCommand.h"
 
-#include "deprecated/CCString.h" // For StringUtils::format
+#include "base/ccUTF8.h" // For StringUtils::format
 
 
 NS_CC_BEGIN
