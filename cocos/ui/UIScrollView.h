@@ -419,6 +419,7 @@ protected:
     Vec2 _bounceDir;
     float _bounceOriginalSpeed;
     bool _inertiaScrollEnabled;
+    bool _isTouchMovedCancelHighlight;
     
     Ref* _scrollViewEventListener;
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
