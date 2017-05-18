@@ -43,7 +43,7 @@ THE SOFTWARE.
 #include "platform/CCGL.h"
 
 
-#include "deprecated/CCString.h"
+#include "base/ccUTF8.h"
 
 //According to some tests GL_TRIANGLE_STRIP is slower, MUCH slower. Probably I'm doing something very wrong
 

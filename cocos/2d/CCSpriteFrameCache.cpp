@@ -41,7 +41,7 @@ THE SOFTWARE.
 #include "renderer/CCTextureCache.h"
 
 
-#include "deprecated/CCString.h"
+#include "base/ccUTF8.h"
 
 
 using namespace std;

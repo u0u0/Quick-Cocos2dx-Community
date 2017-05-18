@@ -31,8 +31,7 @@ THE SOFTWARE.
 #include <stack>
 
 #include "base/CCDirector.h"
-#include "deprecated/CCString.h"
-#include "deprecated/CCDictionary.h"
+#include "base/ccUTF8.h"
 #include "platform/CCFileUtils.h"
 #include "platform/CCSAXParser.h"
 

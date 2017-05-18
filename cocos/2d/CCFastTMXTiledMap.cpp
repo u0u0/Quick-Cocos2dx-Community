@@ -26,7 +26,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "2d/CCFastTMXTiledMap.h"
 #include "2d/CCFastTMXLayer.h"
-#include "deprecated/CCString.h" // For StringUtils::format
+#include "base/ccUTF8.h" // For StringUtils::format
 
 NS_CC_BEGIN
 namespace experimental {

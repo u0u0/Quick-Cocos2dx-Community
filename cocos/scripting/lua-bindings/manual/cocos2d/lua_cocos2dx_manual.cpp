@@ -1879,7 +1879,6 @@ static int tolua_cocos2dx_FileUtils_getStringFromFile(lua_State* tolua_S)
     
     int argc = 0;
     FileUtils* self = nullptr;
-    bool ok = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -1897,22 +1896,12 @@ static int tolua_cocos2dx_FileUtils_getStringFromFile(lua_State* tolua_S)
 #endif
     
     argc = lua_gettop(tolua_S) - 1;
-    
     if (1 == argc)
     {
-        const char* arg0;
-        std::string arg0_tmp; ok &= luaval_to_std_string(tolua_S, 2, &arg0_tmp, "cc.FileUtils:getStringFromFile"); arg0 = arg0_tmp.c_str();
-        if (ok)
-        {
-            std::string fullPathName = FileUtils::getInstance()->fullPathForFilename(arg0);
-            __String* contentsOfFile = __String::createWithContentsOfFile(fullPathName.c_str());
-            if (nullptr != contentsOfFile)
-            {
-                const char* tolua_ret = contentsOfFile->getCString();
-                tolua_pushstring(tolua_S, tolua_ret);
-            }
-            return 1;
-        }
+        const char* arg0 = lua_tostring(tolua_S, 2);
+        std::string contentsOfFile = FileUtils::getInstance()->getStringFromFile(arg0);
+        tolua_pushstring(tolua_S, contentsOfFile.c_str());
+        return 1;
     }
     
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n", "cc.FileUtils:getStringFromFile", argc, 1);
@@ -1932,7 +1921,6 @@ static int tolua_cocos2dx_FileUtils_getDataFromFile(lua_State* tolua_S)
     
     int argc = 0;
     FileUtils* self = nullptr;
-    bool ok = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -1953,24 +1941,18 @@ static int tolua_cocos2dx_FileUtils_getDataFromFile(lua_State* tolua_S)
     
     if (1 == argc)
     {
-        const char* arg0;
-        std::string arg0_tmp; ok &= luaval_to_std_string(tolua_S, 2, &arg0_tmp, "cc.FileUtils:getDataFromFile"); arg0 = arg0_tmp.c_str();
-        if (ok)
-        {
-            std::string fullPathName = FileUtils::getInstance()->fullPathForFilename(arg0);
-            Data data = FileUtils::getInstance()->getDataFromFile(fullPathName);
-            if (data.isNull()) {
-                tolua_pushstring(tolua_S, "");
-            } else {
-                unsigned char* content = data.getBytes();
-                ssize_t contentLen = data.getSize();
-                LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
-                //the stack->_state and tolua_S is same
-                stack->pushString((const char*)content, (int)contentLen);
-            }
-
-            return 1;
+        const char* arg0 = lua_tostring(tolua_S, 2);
+        Data data = FileUtils::getInstance()->getDataFromFile(arg0);
+        if (data.isNull()) {
+            tolua_pushstring(tolua_S, "");
+        } else {
+            unsigned char* content = data.getBytes();
+            ssize_t contentLen = data.getSize();
+            LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
+            //the stack->_state and tolua_S is same
+            stack->pushString((const char*)content, (int)contentLen);
         }
+        return 1;
     }
     
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n", "cc.FileUtils:getDataFromFile", argc, 1);

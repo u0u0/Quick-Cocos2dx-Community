@@ -33,7 +33,7 @@
 #include "base/CCMap.h"
 #include "renderer/CCTextureCache.h"
 
-#include "deprecated/CCString.h"
+#include "base/ccUTF8.h"
 
 using namespace std;
 NS_CC_BEGIN

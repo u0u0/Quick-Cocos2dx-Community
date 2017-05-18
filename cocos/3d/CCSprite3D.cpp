@@ -34,14 +34,13 @@
 #include "2d/CCLight.h"
 #include "2d/CCCamera.h"
 #include "base/ccMacros.h"
+#include "base/ccUTF8.h"
 #include "platform/CCPlatformMacros.h"
 #include "platform/CCFileUtils.h"
 #include "renderer/CCTextureCache.h"
 #include "renderer/CCRenderer.h"
 #include "renderer/CCGLProgramState.h"
 #include "renderer/CCGLProgramCache.h"
-
-#include "deprecated/CCString.h" // For StringUtils::format
 
 NS_CC_BEGIN
 
