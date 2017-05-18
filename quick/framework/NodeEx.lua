@@ -240,6 +240,7 @@ function Node:setTouchEnabled()
 	-- add new
 	if isSingle then
 		self._luaTouchListener = c.EventListenerTouchOneByOne:create()
+		self._luaTouchListener:setSwallowTouches(true)
 		local dealFunc = function(touch, name)
 			local tp = touch:getLocation()
 			local pp = touch:getPreviousLocation()
