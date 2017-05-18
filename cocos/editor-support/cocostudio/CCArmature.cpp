@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "renderer/CCRenderer.h"
 #include "renderer/CCGroupCommand.h"
 #include "renderer/CCGLProgramState.h"
-#include "2d/CCDrawingPrimitives.h"
+#include "2d/CCDrawNode.h"
 #include "base/CCDirector.h"
 
 #if ENABLE_PHYSICS_BOX2D_DETECT
@@ -89,6 +89,9 @@ Armature::Armature()
     , _parentBone(nullptr)
     , _armatureTransformDirty(true)
     , _animation(nullptr)
+#if ENABLE_PHYSICS_SAVE_CALCULATED_VERTEX
+    , _debugDrawNode(nullptr)
+#endif
 {
 }
 
@@ -579,6 +582,12 @@ void Armature::setColliderFilter(ColliderFilter *filter)
 
 void Armature::drawContour()
 {
+    if (!_debugDrawNode) {
+        _debugDrawNode = DrawNode::create();
+        addChild(_debugDrawNode);
+    }
+    _debugDrawNode->clear();
+    
     for(auto& element : _boneDic)
     {
         Bone *bone = element.second;
@@ -602,22 +611,8 @@ void Armature::drawContour()
                 points[i].x = p.x;
                 points[i].y = p.y;
             }
-            
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#elif _MSC_VER >= 1400 //vs 2005 or higher
-#pragma warning (push)
-#pragma warning (disable: 4996)
-#endif
-            
-            DrawPrimitives::drawPoly( points, (unsigned int)length, true );
-
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-#pragma GCC diagnostic warning "-Wdeprecated-declarations"
-#elif _MSC_VER >= 1400 //vs 2005 or higher
-#pragma warning (pop)
-#endif
-            
+        
+            _debugDrawNode->drawPoly(points, (unsigned int)length, true, Color4F::RED);
             delete []points;
         }
     }

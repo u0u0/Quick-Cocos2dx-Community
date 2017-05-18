@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "cocostudio/CCArmatureDataManager.h"
 #include "cocostudio/CocosStudioExport.h"
 #include "math/CCMath.h"
+#include "2d/CCDrawNode.h"
 
 class b2Body;
 struct cpBody;
@@ -195,6 +196,7 @@ public:
 #if ENABLE_PHYSICS_BOX2D_DETECT || ENABLE_PHYSICS_CHIPMUNK_DETECT
     virtual void setColliderFilter(ColliderFilter *filter);
 #elif ENABLE_PHYSICS_SAVE_CALCULATED_VERTEX
+    cocos2d::DrawNode *_debugDrawNode;
     CC_DEPRECATED_ATTRIBUTE virtual void drawContour();
 #endif
 
