@@ -89,23 +89,11 @@ public:
      */
     Vec3 getVertex(const Vec2& position) const;
 
-    /** @deprecated Use getVertex() instead 
-     * @js NA
-     * @lua NA
-     */
-    CC_DEPRECATED_ATTRIBUTE inline Vec3 vertex(const Vec2& position) { return getVertex(position); }
-
     /** returns the non-transformed vertex than belongs to certain position in the grid 
      * @js NA
      * @lua NA
      */
     Vec3 getOriginalVertex(const Vec2& position) const;
-
-    /** @deprecated Use getOriginalVertex() instead 
-     * @js NA
-     * @lua NA
-     */
-    CC_DEPRECATED_ATTRIBUTE inline Vec3 originalVertex(const Vec2& position) { return getOriginalVertex(position); }
 
     /** sets a new vertex to a certain position of the grid 
      * @js NA
@@ -137,23 +125,11 @@ public:
      */
     Quad3 getTile(const Vec2& position) const;
 
-    /** @deprecated Use getTile() instead 
-     * @js NA
-     * @lua NA
-     */
-    CC_DEPRECATED_ATTRIBUTE Quad3 tile(const Vec2& position) { return getTile(position); }
-
     /** returns the non-transformed tile that belongs to a certain position of the grid 
      * @js NA
      * @lua NA
      */
     Quad3 getOriginalTile(const Vec2& position) const;
-
-    /** @deprecated Use getOriginalTile() instead 
-     * @js NA
-     * @lua NA
-     */
-    CC_DEPRECATED_ATTRIBUTE Quad3 originalTile(const Vec2& position) { return getOriginalTile(position); }
 
     /** sets a new tile to a certain position of the grid 
      * @js NA

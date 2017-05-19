@@ -271,34 +271,11 @@ public:
      * In lua:local create(local funcID)
      */
     static CallFunc * create(const std::function<void()>& func);
-
-    /** creates the action with the callback
-
-     typedef void (Ref::*SEL_CallFunc)();
-     @deprecated Use the std::function API instead.
-     * @js NA
-     * @lua NA
-     */
-    CC_DEPRECATED_ATTRIBUTE static CallFunc * create(Ref* target, SEL_CallFunc selector);
-
+    
 public:
     /** executes the callback */
     virtual void execute();
 
-    inline Ref* getTargetCallback()
-    {
-        return _selectorTarget;
-    }
-
-    inline void setTargetCallback(Ref* sel)
-    {
-        if (sel != _selectorTarget)
-        {
-            CC_SAFE_RETAIN(sel);
-            CC_SAFE_RELEASE(_selectorTarget);
-            _selectorTarget = sel;
-        }
-    }
     //
     // Overrides
     //
@@ -308,18 +285,11 @@ public:
     
 CC_CONSTRUCTOR_ACCESS:
     CallFunc()
-    : _selectorTarget(nullptr)
-    , _callFunc(nullptr)
+    : _callFunc(nullptr)
     , _function(nullptr)
     {
     }
     virtual ~CallFunc();
-
-    /** initializes the action with the callback
-     typedef void (Ref::*SEL_CallFunc)();
-     @deprecated Use the std::function API instead.
-     */
-    CC_DEPRECATED_ATTRIBUTE bool initWithTarget(Ref* target);
     
     /** initializes the action with the std::function<void()>
      * @js NA
@@ -328,9 +298,6 @@ CC_CONSTRUCTOR_ACCESS:
     bool initWithFunction(const std::function<void()>& func);
 
 protected:
-    /** Target that will be called */
-    Ref*   _selectorTarget;
-
     union
     {
         SEL_CallFunc    _callFunc;
@@ -356,13 +323,6 @@ public:
      */
     static CallFuncN * create(const std::function<void(Node*)>& func);
 
-    /** creates the action with the callback 
-
-    typedef void (Ref::*SEL_CallFuncN)(Node*);
-     @deprecated Use the std::function API instead.
-    */
-    CC_DEPRECATED_ATTRIBUTE static CallFuncN * create(Ref* target, SEL_CallFuncN selector);
-
     //
     // Overrides
     //
@@ -375,13 +335,6 @@ CC_CONSTRUCTOR_ACCESS:
 
     /** initializes the action with the std::function<void(Node*)> */
     bool initWithFunction(const std::function<void(Node*)>& func);
-    
-    /** initializes the action with the callback
-     
-     typedef void (Ref::*SEL_CallFuncN)(Node*);
-     @deprecated Use the std::function API instead.
-     */
-    CC_DEPRECATED_ATTRIBUTE bool initWithTarget(Ref* target, SEL_CallFuncN selector);
 
 protected:
     /** function that will be called with the "sender" as the 1st argument */
@@ -389,82 +342,6 @@ protected:
 
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(CallFuncN);
-};
-
-/**
- @deprecated Please use CallFuncN instead.
- @brief Calls a 'callback' with the node as the first argument and the 2nd argument is data
- * ND means: Node and Data. Data is void *, so it could be anything.
- */
-
-class CC_DLL  __CCCallFuncND : public CallFunc
-{
-public:
-    /** creates the action with the callback and the data to pass as an argument */
-    CC_DEPRECATED_ATTRIBUTE static __CCCallFuncND * create(Ref* target, SEL_CallFuncND selector, void* d);
-    
-    //
-    // Overrides
-    //
-    virtual __CCCallFuncND* clone() const override;
-    virtual void execute() override;
-    
-CC_CONSTRUCTOR_ACCESS:
-    __CCCallFuncND() {}
-    virtual ~__CCCallFuncND() {}
-    
-    /** initializes the action with the callback and the data to pass as an argument */
-    bool initWithTarget(Ref* target, SEL_CallFuncND selector, void* d);
-
-protected:
-    SEL_CallFuncND _callFuncND;
-    void* _data;
-
-private:
-    CC_DISALLOW_COPY_AND_ASSIGN(__CCCallFuncND);
-};
-
-
-/**
- @deprecated Please use CallFuncN instead.
- @brief Calls a 'callback' with an object as the first argument.
- O means Object.
- @since v0.99.5
- */
-
-class CC_DLL __CCCallFuncO : public CallFunc
-{
-public:
-    /** creates the action with the callback
-     
-     typedef void (Ref::*SEL_CallFuncO)(Ref*);
-     */
-    CC_DEPRECATED_ATTRIBUTE static __CCCallFuncO * create(Ref* target, SEL_CallFuncO selector, Ref* object);
-    //
-    // Overrides
-    //
-    virtual __CCCallFuncO* clone() const override;
-    virtual void execute() override;
-    
-    Ref* getObject() const;
-    void setObject(Ref* obj);
-    
-CC_CONSTRUCTOR_ACCESS:
-    __CCCallFuncO();
-    virtual ~__CCCallFuncO();
-    /** initializes the action with the callback
-
-     typedef void (Ref::*SEL_CallFuncO)(Ref*);
-     */
-    bool initWithTarget(Ref* target, SEL_CallFuncO selector, Ref* object);
-    
-protected:
-    /** object to be passed as argument */
-    Ref* _object;
-    SEL_CallFuncO _callFuncO;
-
-private:
-    CC_DISALLOW_COPY_AND_ASSIGN(__CCCallFuncO);
 };
 
 // end of actions group
