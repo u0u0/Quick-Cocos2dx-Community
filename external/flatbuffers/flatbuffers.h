@@ -249,9 +249,6 @@ public:
 
   uoffset_t size() const { return EndianScalar(length_); }
 
-  // Deprecated: use size(). Here for backwards compatibility.
-  uoffset_t Length() const { return size(); }
-
   typedef typename IndirectHelper<T>::return_type return_type;
 
   return_type Get(uoffset_t i) const {

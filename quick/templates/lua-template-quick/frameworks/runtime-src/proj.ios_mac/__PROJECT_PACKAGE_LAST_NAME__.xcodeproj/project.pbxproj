@@ -34,16 +34,6 @@
 		15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4171834BDA200142BE0 /* libcocos2d Mac.a */; };
 		15A8A4491834C64F00142BE0 /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810C17EBBCAC00990C9B /* Icon-114.png */; };
 		3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */; };
-		49C656541A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */; };
-		49C656551A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */; };
-		49C656561A39A1A200603AF5 /* NVGNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C6564A1A39A1A200603AF5 /* NVGNode.cpp */; };
-		49C656571A39A1A200603AF5 /* NVGNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C6564A1A39A1A200603AF5 /* NVGNode.cpp */; };
-		49C656581A39A1A200603AF5 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 49C6564E1A39A1A200603AF5 /* nanovg.c */; };
-		49C656591A39A1A200603AF5 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 49C6564E1A39A1A200603AF5 /* nanovg.c */; };
-		49C6565E1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C6565A1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp */; };
-		49C6565F1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C6565A1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp */; };
-		49C656601A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C6565C1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp */; };
-		49C656611A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C6565C1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp */; };
 		5023811817EBBCAC00990C9B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023810817EBBCAC00990C9B /* AppController.mm */; };
 		5023811917EBBCAC00990C9B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810917EBBCAC00990C9B /* Default-568h@2x.png */; };
 		5023811A17EBBCAC00990C9B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810A17EBBCAC00990C9B /* Default.png */; };
@@ -82,46 +72,6 @@
 		9F9106B519F5614900AD5CAB /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AC19F5614800AD5CAB /* libbase64.c */; };
 		9F9106B619F5614900AD5CAB /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */; };
 		9F9106B719F5614900AD5CAB /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */; };
-		9F9106BC19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */; };
-		9F9106BD19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */; };
-		9F9106BE19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B919F5614800AD5CAB /* CCBrightnessFilter.cpp */; };
-		9F9106BF19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105B919F5614800AD5CAB /* CCBrightnessFilter.cpp */; };
-		9F9106C019F5614900AD5CAB /* CCContrastFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105BB19F5614800AD5CAB /* CCContrastFilter.cpp */; };
-		9F9106C119F5614900AD5CAB /* CCContrastFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105BB19F5614800AD5CAB /* CCContrastFilter.cpp */; };
-		9F9106C219F5614900AD5CAB /* CCCustomFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105BD19F5614800AD5CAB /* CCCustomFilter.cpp */; };
-		9F9106C319F5614900AD5CAB /* CCCustomFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105BD19F5614800AD5CAB /* CCCustomFilter.cpp */; };
-		9F9106C419F5614900AD5CAB /* CCDropShadowFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105BF19F5614800AD5CAB /* CCDropShadowFilter.cpp */; };
-		9F9106C519F5614900AD5CAB /* CCDropShadowFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105BF19F5614800AD5CAB /* CCDropShadowFilter.cpp */; };
-		9F9106C619F5614900AD5CAB /* CCExposureFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C119F5614800AD5CAB /* CCExposureFilter.cpp */; };
-		9F9106C719F5614900AD5CAB /* CCExposureFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C119F5614800AD5CAB /* CCExposureFilter.cpp */; };
-		9F9106C819F5614900AD5CAB /* CCFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C319F5614800AD5CAB /* CCFilter.cpp */; };
-		9F9106C919F5614900AD5CAB /* CCFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C319F5614800AD5CAB /* CCFilter.cpp */; };
-		9F9106CA19F5614900AD5CAB /* CCGammaFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C519F5614800AD5CAB /* CCGammaFilter.cpp */; };
-		9F9106CB19F5614900AD5CAB /* CCGammaFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C519F5614800AD5CAB /* CCGammaFilter.cpp */; };
-		9F9106CC19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C719F5614800AD5CAB /* CCGrayFilter.cpp */; };
-		9F9106CD19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C719F5614800AD5CAB /* CCGrayFilter.cpp */; };
-		9F9106CE19F5614900AD5CAB /* CCHazeFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C919F5614800AD5CAB /* CCHazeFilter.cpp */; };
-		9F9106CF19F5614900AD5CAB /* CCHazeFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105C919F5614800AD5CAB /* CCHazeFilter.cpp */; };
-		9F9106D019F5614900AD5CAB /* CCHueFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105CB19F5614800AD5CAB /* CCHueFilter.cpp */; };
-		9F9106D119F5614900AD5CAB /* CCHueFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105CB19F5614800AD5CAB /* CCHueFilter.cpp */; };
-		9F9106D219F5614900AD5CAB /* CCMaskFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105CD19F5614800AD5CAB /* CCMaskFilter.cpp */; };
-		9F9106D319F5614900AD5CAB /* CCMaskFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105CD19F5614800AD5CAB /* CCMaskFilter.cpp */; };
-		9F9106D419F5614900AD5CAB /* CCRGBFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105CF19F5614800AD5CAB /* CCRGBFilter.cpp */; };
-		9F9106D519F5614900AD5CAB /* CCRGBFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105CF19F5614800AD5CAB /* CCRGBFilter.cpp */; };
-		9F9106D619F5614900AD5CAB /* CCSaturationFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D119F5614800AD5CAB /* CCSaturationFilter.cpp */; };
-		9F9106D719F5614900AD5CAB /* CCSaturationFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D119F5614800AD5CAB /* CCSaturationFilter.cpp */; };
-		9F9106D819F5614900AD5CAB /* CCSepiaFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D319F5614800AD5CAB /* CCSepiaFilter.cpp */; };
-		9F9106D919F5614900AD5CAB /* CCSepiaFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D319F5614800AD5CAB /* CCSepiaFilter.cpp */; };
-		9F9106DA19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D519F5614800AD5CAB /* CCSharpenFilter.cpp */; };
-		9F9106DB19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D519F5614800AD5CAB /* CCSharpenFilter.cpp */; };
-		9F9106DC19F5614900AD5CAB /* CCTestFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D719F5614800AD5CAB /* CCTestFilter.cpp */; };
-		9F9106DD19F5614900AD5CAB /* CCTestFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105D719F5614800AD5CAB /* CCTestFilter.cpp */; };
-		9F9106DE19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105DA19F5614800AD5CAB /* CCFilteredSprite.cpp */; };
-		9F9106DF19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105DA19F5614800AD5CAB /* CCFilteredSprite.cpp */; };
-		9F9106E019F5614900AD5CAB /* ccFilterShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105FA19F5614800AD5CAB /* ccFilterShaders.cpp */; };
-		9F9106E119F5614900AD5CAB /* ccFilterShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105FA19F5614800AD5CAB /* ccFilterShaders.cpp */; };
-		9F91070E19F5614900AD5CAB /* FilterShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061219F5614800AD5CAB /* FilterShaders.cpp */; };
-		9F91070F19F5614900AD5CAB /* FilterShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061219F5614800AD5CAB /* FilterShaders.cpp */; };
 		9F91071A19F5614900AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061A19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp */; };
 		9F91071E19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */; };
 		9F91071F19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */; };
@@ -179,8 +129,6 @@
 		9F91078619F561CD00AD5CAB /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105A719F5614800AD5CAB /* HelperFunc.cpp */; };
 		9F91078719F561CD00AD5CAB /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105A719F5614800AD5CAB /* HelperFunc.cpp */; };
 		9F91078919F5628A00AD5CAB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F91078819F5628A00AD5CAB /* SystemConfiguration.framework */; };
-		9F91078D19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91078B19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp */; };
-		9F91078E19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91078B19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp */; };
 		9F91079419F56A6600AD5CAB /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */; };
 		9F91079519F56A6600AD5CAB /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */; };
 		9F91079E19F5704400AD5CAB /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */; };
@@ -293,21 +241,6 @@
 		1AF4C402178663F200122817 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3EB51526195187AF006966AA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
-		49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NVGDrawNode.cpp; sourceTree = "<group>"; };
-		49C656491A39A1A200603AF5 /* NVGDrawNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGDrawNode.h; sourceTree = "<group>"; };
-		49C6564A1A39A1A200603AF5 /* NVGNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NVGNode.cpp; sourceTree = "<group>"; };
-		49C6564B1A39A1A200603AF5 /* NVGNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGNode.h; sourceTree = "<group>"; };
-		49C6564D1A39A1A200603AF5 /* fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fontstash.h; sourceTree = "<group>"; };
-		49C6564E1A39A1A200603AF5 /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanovg.c; sourceTree = "<group>"; };
-		49C6564F1A39A1A200603AF5 /* nanovg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg.h; sourceTree = "<group>"; };
-		49C656501A39A1A200603AF5 /* nanovg_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg_gl.h; sourceTree = "<group>"; };
-		49C656511A39A1A200603AF5 /* nanovg_gl_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg_gl_utils.h; sourceTree = "<group>"; };
-		49C656521A39A1A200603AF5 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
-		49C656531A39A1A200603AF5 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
-		49C6565A1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_cocos2dx_extension_nanovg_auto.cpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_nanovg_auto.cpp"; sourceTree = QUICK_V3_ROOT; };
-		49C6565B1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lua_cocos2dx_extension_nanovg_auto.hpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_nanovg_auto.hpp"; sourceTree = QUICK_V3_ROOT; };
-		49C6565C1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_cocos2dx_extension_nanovg_manual.cpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_nanovg_manual.cpp"; sourceTree = QUICK_V3_ROOT; };
-		49C6565D1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lua_cocos2dx_extension_nanovg_manual.hpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_nanovg_manual.hpp"; sourceTree = QUICK_V3_ROOT; };
 		5023810717EBBCAC00990C9B /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		5023810817EBBCAC00990C9B /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		5023810917EBBCAC00990C9B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -351,101 +284,6 @@
 		9F9105AD19F5614800AD5CAB /* libbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libbase64.h; path = "quick/lib/quick-src/extra/crypto/base64/libbase64.h"; sourceTree = QUICK_V3_ROOT; };
 		9F9105AE19F5614800AD5CAB /* CCCrypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCCrypto.cpp; path = "quick/lib/quick-src/extra/crypto/CCCrypto.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F9105AF19F5614800AD5CAB /* CCCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCCrypto.h; path = "quick/lib/quick-src/extra/crypto/CCCrypto.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105B519F5614800AD5CAB /* cocos2dFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cocos2dFilters.h; path = "quick/lib/quick-src/extra/filters/cocos2dFilters.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCBlurFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCBlurFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105B819F5614800AD5CAB /* CCBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCBlurFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCBlurFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105B919F5614800AD5CAB /* CCBrightnessFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCBrightnessFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCBrightnessFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105BA19F5614800AD5CAB /* CCBrightnessFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCBrightnessFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCBrightnessFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105BB19F5614800AD5CAB /* CCContrastFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCContrastFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCContrastFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105BC19F5614800AD5CAB /* CCContrastFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCContrastFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCContrastFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105BD19F5614800AD5CAB /* CCCustomFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCCustomFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCCustomFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105BE19F5614800AD5CAB /* CCCustomFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCCustomFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCCustomFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105BF19F5614800AD5CAB /* CCDropShadowFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCDropShadowFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCDropShadowFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C019F5614800AD5CAB /* CCDropShadowFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCDropShadowFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCDropShadowFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C119F5614800AD5CAB /* CCExposureFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCExposureFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCExposureFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C219F5614800AD5CAB /* CCExposureFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCExposureFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCExposureFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C319F5614800AD5CAB /* CCFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C419F5614800AD5CAB /* CCFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C519F5614800AD5CAB /* CCGammaFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCGammaFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCGammaFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C619F5614800AD5CAB /* CCGammaFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCGammaFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCGammaFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C719F5614800AD5CAB /* CCGrayFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCGrayFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCGrayFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C819F5614800AD5CAB /* CCGrayFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCGrayFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCGrayFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105C919F5614800AD5CAB /* CCHazeFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCHazeFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCHazeFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105CA19F5614800AD5CAB /* CCHazeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCHazeFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCHazeFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105CB19F5614800AD5CAB /* CCHueFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCHueFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCHueFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105CC19F5614800AD5CAB /* CCHueFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCHueFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCHueFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105CD19F5614800AD5CAB /* CCMaskFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCMaskFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCMaskFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105CE19F5614800AD5CAB /* CCMaskFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCMaskFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCMaskFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105CF19F5614800AD5CAB /* CCRGBFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCRGBFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCRGBFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D019F5614800AD5CAB /* CCRGBFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRGBFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCRGBFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D119F5614800AD5CAB /* CCSaturationFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCSaturationFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCSaturationFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D219F5614800AD5CAB /* CCSaturationFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSaturationFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCSaturationFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D319F5614800AD5CAB /* CCSepiaFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCSepiaFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCSepiaFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D419F5614800AD5CAB /* CCSepiaFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSepiaFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCSepiaFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D519F5614800AD5CAB /* CCSharpenFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCSharpenFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCSharpenFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D619F5614800AD5CAB /* CCSharpenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSharpenFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCSharpenFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D719F5614800AD5CAB /* CCTestFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCTestFilter.cpp; path = "quick/lib/quick-src/extra/filters/filters/CCTestFilter.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105D819F5614800AD5CAB /* CCTestFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCTestFilter.h; path = "quick/lib/quick-src/extra/filters/filters/CCTestFilter.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105DA19F5614800AD5CAB /* CCFilteredSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCFilteredSprite.cpp; path = "quick/lib/quick-src/extra/filters/nodes/CCFilteredSprite.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105DB19F5614800AD5CAB /* CCFilteredSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCFilteredSprite.h; path = "quick/lib/quick-src/extra/filters/nodes/CCFilteredSprite.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105DD19F5614800AD5CAB /* ccFilterShader_blur_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_blur_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_blur_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105DE19F5614800AD5CAB /* ccFilterShader_brightness_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_brightness_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_brightness_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105DF19F5614800AD5CAB /* ccFilterShader_colorramp_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_colorramp_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_colorramp_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E019F5614800AD5CAB /* ccFilterShader_contrast_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_contrast_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_contrast_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E119F5614800AD5CAB /* ccFilterShader_drop_shadow_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_drop_shadow_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_drop_shadow_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E219F5614800AD5CAB /* ccFilterShader_drop_shadow_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_drop_shadow_vert.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_drop_shadow_vert.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E319F5614800AD5CAB /* ccFilterShader_emboss_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_emboss_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_emboss_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E419F5614800AD5CAB /* ccFilterShader_embossmov_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_embossmov_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_embossmov_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E519F5614800AD5CAB /* ccFilterShader_exposure_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_exposure_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_exposure_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E619F5614800AD5CAB /* ccFilterShader_gamma_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_gamma_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_gamma_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E719F5614800AD5CAB /* ccFilterShader_gaussian_blur_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_gaussian_blur_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_gaussian_blur_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E819F5614800AD5CAB /* ccFilterShader_gaussian_hblur_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_gaussian_hblur_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_gaussian_hblur_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105E919F5614800AD5CAB /* ccFilterShader_gaussian_vblur_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_gaussian_vblur_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_gaussian_vblur_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105EA19F5614800AD5CAB /* ccFilterShader_grass_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_grass_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_grass_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105EB19F5614800AD5CAB /* ccFilterShader_gray_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_gray_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_gray_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105EC19F5614800AD5CAB /* ccFilterShader_haze_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_haze_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_haze_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105ED19F5614800AD5CAB /* ccFilterShader_hblur_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_hblur_vert.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_hblur_vert.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105EE19F5614800AD5CAB /* ccFilterShader_hue_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_hue_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_hue_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105EF19F5614800AD5CAB /* ccFilterShader_motion_blur_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_motion_blur_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_motion_blur_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F019F5614800AD5CAB /* ccFilterShader_motion_blur_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_motion_blur_vert.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_motion_blur_vert.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F119F5614800AD5CAB /* ccFilterShader_rgb_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_rgb_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_rgb_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F219F5614800AD5CAB /* ccFilterShader_saturation_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_saturation_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_saturation_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F319F5614800AD5CAB /* ccFilterShader_sepia_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_sepia_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_sepia_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F419F5614800AD5CAB /* ccFilterShader_sharpen_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_sharpen_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_sharpen_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F519F5614800AD5CAB /* ccFilterShader_sharpen_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_sharpen_vert.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_sharpen_vert.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F619F5614800AD5CAB /* ccFilterShader_test_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_test_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_test_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F719F5614800AD5CAB /* ccFilterShader_test_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_test_vert.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_test_vert.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F819F5614800AD5CAB /* ccFilterShader_vblur_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_vblur_vert.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_vblur_vert.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105F919F5614800AD5CAB /* ccFilterShader_zoom_blur_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShader_zoom_blur_frag.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShader_zoom_blur_frag.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105FA19F5614800AD5CAB /* ccFilterShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ccFilterShaders.cpp; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShaders.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105FB19F5614800AD5CAB /* ccFilterShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccFilterShaders.h; path = "quick/lib/quick-src/extra/filters/shaders/ccFilterShaders.h"; sourceTree = QUICK_V3_ROOT; };
-		9F9105FC19F5614800AD5CAB /* example_bloom.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_bloom.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_bloom.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F9105FD19F5614800AD5CAB /* example_Blur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Blur.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Blur.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F9105FE19F5614800AD5CAB /* example_celShading.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_celShading.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_celShading.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F9105FF19F5614800AD5CAB /* example_ColorBars.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_ColorBars.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_ColorBars.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060019F5614800AD5CAB /* example_ColorBars.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_ColorBars.vsh; path = "quick/lib/quick-src/extra/filters/shaders/example_ColorBars.vsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060119F5614800AD5CAB /* example_edgeDetection.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_edgeDetection.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_edgeDetection.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060219F5614800AD5CAB /* example_Flower.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Flower.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Flower.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060319F5614800AD5CAB /* example_greyScale.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_greyScale.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_greyScale.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060419F5614800AD5CAB /* example_Heart.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Heart.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Heart.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060519F5614800AD5CAB /* example_HorizontalColor.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_HorizontalColor.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_HorizontalColor.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060619F5614800AD5CAB /* example_Julia.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Julia.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Julia.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060719F5614800AD5CAB /* example_lensFlare.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_lensFlare.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_lensFlare.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060819F5614800AD5CAB /* example_Mandelbrot.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Mandelbrot.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Mandelbrot.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060919F5614800AD5CAB /* example_Monjori.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Monjori.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Monjori.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060A19F5614800AD5CAB /* example_MultiTexture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_MultiTexture.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_MultiTexture.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060B19F5614800AD5CAB /* example_MultiTexture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_MultiTexture.vsh; path = "quick/lib/quick-src/extra/filters/shaders/example_MultiTexture.vsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060C19F5614800AD5CAB /* example_Noisy.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Noisy.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Noisy.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060D19F5614800AD5CAB /* example_normal.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_normal.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_normal.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060E19F5614800AD5CAB /* example_outline.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_outline.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_outline.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91060F19F5614800AD5CAB /* example_Plasma.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Plasma.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Plasma.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91061019F5614800AD5CAB /* example_sepia.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_sepia.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_sepia.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91061119F5614800AD5CAB /* example_Twist.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = example_Twist.fsh; path = "quick/lib/quick-src/extra/filters/shaders/example_Twist.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91061219F5614800AD5CAB /* FilterShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilterShaders.cpp; path = "quick/lib/quick-src/extra/filters/shaders/FilterShaders.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F91061319F5614800AD5CAB /* FilterShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterShaders.h; path = "quick/lib/quick-src/extra/filters/shaders/FilterShaders.h"; sourceTree = QUICK_V3_ROOT; };
-		9F91061419F5614800AD5CAB /* shadertoy_FireBall.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadertoy_FireBall.fsh; path = "quick/lib/quick-src/extra/filters/shaders/shadertoy_FireBall.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91061519F5614800AD5CAB /* shadertoy_Glow.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadertoy_Glow.fsh; path = "quick/lib/quick-src/extra/filters/shaders/shadertoy_Glow.fsh"; sourceTree = QUICK_V3_ROOT; };
-		9F91061619F5614800AD5CAB /* shadertoy_LensFlare.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadertoy_LensFlare.fsh; path = "quick/lib/quick-src/extra/filters/shaders/shadertoy_LensFlare.fsh"; sourceTree = QUICK_V3_ROOT; };
 		9F91061A19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cocos2dx_extra_ios_iap_luabinding.cpp; path = "quick/lib/quick-src/extra/luabinding/cocos2dx_extra_ios_iap_luabinding.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F91061B19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cocos2dx_extra_ios_iap_luabinding.h; path = "quick/lib/quick-src/extra/luabinding/cocos2dx_extra_ios_iap_luabinding.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cocos2dx_extra_luabinding.cpp; path = "quick/lib/quick-src/extra/luabinding/cocos2dx_extra_luabinding.cpp"; sourceTree = QUICK_V3_ROOT; };
@@ -515,8 +353,6 @@
 		9F91068519F5614800AD5CAB /* lua_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_zlib.c; path = "quick/lib/quick-src/lua_extensions/zlib/lua_zlib.c"; sourceTree = QUICK_V3_ROOT; };
 		9F91068619F5614800AD5CAB /* lua_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_zlib.h; path = "quick/lib/quick-src/lua_extensions/zlib/lua_zlib.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91078819F5628A00AD5CAB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		9F91078B19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_cocos2dx_extension_filter_auto.cpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_filter_auto.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F91078C19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lua_cocos2dx_extension_filter_auto.hpp; path = "quick/lib/quick-src/extra/luabinding/lua_cocos2dx_extension_filter_auto.hpp"; sourceTree = QUICK_V3_ROOT; };
 		9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectConfig.cpp; path = "quick/lib/quick-src/ProjectConfig/ProjectConfig.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F91079119F56A6600AD5CAB /* ProjectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectConfig.h; path = "quick/lib/quick-src/ProjectConfig/ProjectConfig.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91079B19F5704400AD5CAB /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
@@ -644,41 +480,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		49C656441A39A1A200603AF5 /* nanovg */ = {
-			isa = PBXGroup;
-			children = (
-				49C656471A39A1A200603AF5 /* nanonode */,
-				49C6564C1A39A1A200603AF5 /* nanovg */,
-			);
-			name = nanovg;
-			path = "quick/lib/quick-src/extra/nanovg";
-			sourceTree = QUICK_V3_ROOT;
-		};
-		49C656471A39A1A200603AF5 /* nanonode */ = {
-			isa = PBXGroup;
-			children = (
-				49C656481A39A1A200603AF5 /* NVGDrawNode.cpp */,
-				49C656491A39A1A200603AF5 /* NVGDrawNode.h */,
-				49C6564A1A39A1A200603AF5 /* NVGNode.cpp */,
-				49C6564B1A39A1A200603AF5 /* NVGNode.h */,
-			);
-			path = nanonode;
-			sourceTree = "<group>";
-		};
-		49C6564C1A39A1A200603AF5 /* nanovg */ = {
-			isa = PBXGroup;
-			children = (
-				49C6564D1A39A1A200603AF5 /* fontstash.h */,
-				49C6564E1A39A1A200603AF5 /* nanovg.c */,
-				49C6564F1A39A1A200603AF5 /* nanovg.h */,
-				49C656501A39A1A200603AF5 /* nanovg_gl.h */,
-				49C656511A39A1A200603AF5 /* nanovg_gl_utils.h */,
-				49C656521A39A1A200603AF5 /* stb_image.h */,
-				49C656531A39A1A200603AF5 /* stb_truetype.h */,
-			);
-			path = nanovg;
-			sourceTree = "<group>";
-		};
 		5023810617EBBCAC00990C9B /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,11 +551,9 @@
 		9F91057519F5614700AD5CAB /* extra */ = {
 			isa = PBXGroup;
 			children = (
-				49C656441A39A1A200603AF5 /* nanovg */,
 				9F9105A619F5614800AD5CAB /* apptools */,
 				9F9105A919F5614800AD5CAB /* cocos2dx_extra.h */,
 				9F9105AA19F5614800AD5CAB /* crypto */,
-				9F9105B319F5614800AD5CAB /* filters */,
 				9F91061719F5614800AD5CAB /* luabinding */,
 				9F91062319F5614800AD5CAB /* native */,
 				9F91062619F5614800AD5CAB /* network */,
@@ -792,147 +591,15 @@
 			path = base64;
 			sourceTree = "<group>";
 		};
-		9F9105B319F5614800AD5CAB /* filters */ = {
-			isa = PBXGroup;
-			children = (
-				9F9105B519F5614800AD5CAB /* cocos2dFilters.h */,
-				9F9105B619F5614800AD5CAB /* filters */,
-				9F9105D919F5614800AD5CAB /* nodes */,
-				9F9105DC19F5614800AD5CAB /* shaders */,
-			);
-			path = filters;
-			sourceTree = "<group>";
-		};
-		9F9105B619F5614800AD5CAB /* filters */ = {
-			isa = PBXGroup;
-			children = (
-				9F9105B719F5614800AD5CAB /* CCBlurFilter.cpp */,
-				9F9105B819F5614800AD5CAB /* CCBlurFilter.h */,
-				9F9105B919F5614800AD5CAB /* CCBrightnessFilter.cpp */,
-				9F9105BA19F5614800AD5CAB /* CCBrightnessFilter.h */,
-				9F9105BB19F5614800AD5CAB /* CCContrastFilter.cpp */,
-				9F9105BC19F5614800AD5CAB /* CCContrastFilter.h */,
-				9F9105BD19F5614800AD5CAB /* CCCustomFilter.cpp */,
-				9F9105BE19F5614800AD5CAB /* CCCustomFilter.h */,
-				9F9105BF19F5614800AD5CAB /* CCDropShadowFilter.cpp */,
-				9F9105C019F5614800AD5CAB /* CCDropShadowFilter.h */,
-				9F9105C119F5614800AD5CAB /* CCExposureFilter.cpp */,
-				9F9105C219F5614800AD5CAB /* CCExposureFilter.h */,
-				9F9105C319F5614800AD5CAB /* CCFilter.cpp */,
-				9F9105C419F5614800AD5CAB /* CCFilter.h */,
-				9F9105C519F5614800AD5CAB /* CCGammaFilter.cpp */,
-				9F9105C619F5614800AD5CAB /* CCGammaFilter.h */,
-				9F9105C719F5614800AD5CAB /* CCGrayFilter.cpp */,
-				9F9105C819F5614800AD5CAB /* CCGrayFilter.h */,
-				9F9105C919F5614800AD5CAB /* CCHazeFilter.cpp */,
-				9F9105CA19F5614800AD5CAB /* CCHazeFilter.h */,
-				9F9105CB19F5614800AD5CAB /* CCHueFilter.cpp */,
-				9F9105CC19F5614800AD5CAB /* CCHueFilter.h */,
-				9F9105CD19F5614800AD5CAB /* CCMaskFilter.cpp */,
-				9F9105CE19F5614800AD5CAB /* CCMaskFilter.h */,
-				9F9105CF19F5614800AD5CAB /* CCRGBFilter.cpp */,
-				9F9105D019F5614800AD5CAB /* CCRGBFilter.h */,
-				9F9105D119F5614800AD5CAB /* CCSaturationFilter.cpp */,
-				9F9105D219F5614800AD5CAB /* CCSaturationFilter.h */,
-				9F9105D319F5614800AD5CAB /* CCSepiaFilter.cpp */,
-				9F9105D419F5614800AD5CAB /* CCSepiaFilter.h */,
-				9F9105D519F5614800AD5CAB /* CCSharpenFilter.cpp */,
-				9F9105D619F5614800AD5CAB /* CCSharpenFilter.h */,
-				9F9105D719F5614800AD5CAB /* CCTestFilter.cpp */,
-				9F9105D819F5614800AD5CAB /* CCTestFilter.h */,
-			);
-			path = filters;
-			sourceTree = "<group>";
-		};
-		9F9105D919F5614800AD5CAB /* nodes */ = {
-			isa = PBXGroup;
-			children = (
-				9F9105DA19F5614800AD5CAB /* CCFilteredSprite.cpp */,
-				9F9105DB19F5614800AD5CAB /* CCFilteredSprite.h */,
-			);
-			path = nodes;
-			sourceTree = "<group>";
-		};
-		9F9105DC19F5614800AD5CAB /* shaders */ = {
-			isa = PBXGroup;
-			children = (
-				9F9105DD19F5614800AD5CAB /* ccFilterShader_blur_frag.h */,
-				9F9105DE19F5614800AD5CAB /* ccFilterShader_brightness_frag.h */,
-				9F9105DF19F5614800AD5CAB /* ccFilterShader_colorramp_frag.h */,
-				9F9105E019F5614800AD5CAB /* ccFilterShader_contrast_frag.h */,
-				9F9105E119F5614800AD5CAB /* ccFilterShader_drop_shadow_frag.h */,
-				9F9105E219F5614800AD5CAB /* ccFilterShader_drop_shadow_vert.h */,
-				9F9105E319F5614800AD5CAB /* ccFilterShader_emboss_frag.h */,
-				9F9105E419F5614800AD5CAB /* ccFilterShader_embossmov_frag.h */,
-				9F9105E519F5614800AD5CAB /* ccFilterShader_exposure_frag.h */,
-				9F9105E619F5614800AD5CAB /* ccFilterShader_gamma_frag.h */,
-				9F9105E719F5614800AD5CAB /* ccFilterShader_gaussian_blur_frag.h */,
-				9F9105E819F5614800AD5CAB /* ccFilterShader_gaussian_hblur_frag.h */,
-				9F9105E919F5614800AD5CAB /* ccFilterShader_gaussian_vblur_frag.h */,
-				9F9105EA19F5614800AD5CAB /* ccFilterShader_grass_frag.h */,
-				9F9105EB19F5614800AD5CAB /* ccFilterShader_gray_frag.h */,
-				9F9105EC19F5614800AD5CAB /* ccFilterShader_haze_frag.h */,
-				9F9105ED19F5614800AD5CAB /* ccFilterShader_hblur_vert.h */,
-				9F9105EE19F5614800AD5CAB /* ccFilterShader_hue_frag.h */,
-				9F9105EF19F5614800AD5CAB /* ccFilterShader_motion_blur_frag.h */,
-				9F9105F019F5614800AD5CAB /* ccFilterShader_motion_blur_vert.h */,
-				9F9105F119F5614800AD5CAB /* ccFilterShader_rgb_frag.h */,
-				9F9105F219F5614800AD5CAB /* ccFilterShader_saturation_frag.h */,
-				9F9105F319F5614800AD5CAB /* ccFilterShader_sepia_frag.h */,
-				9F9105F419F5614800AD5CAB /* ccFilterShader_sharpen_frag.h */,
-				9F9105F519F5614800AD5CAB /* ccFilterShader_sharpen_vert.h */,
-				9F9105F619F5614800AD5CAB /* ccFilterShader_test_frag.h */,
-				9F9105F719F5614800AD5CAB /* ccFilterShader_test_vert.h */,
-				9F9105F819F5614800AD5CAB /* ccFilterShader_vblur_vert.h */,
-				9F9105F919F5614800AD5CAB /* ccFilterShader_zoom_blur_frag.h */,
-				9F9105FA19F5614800AD5CAB /* ccFilterShaders.cpp */,
-				9F9105FB19F5614800AD5CAB /* ccFilterShaders.h */,
-				9F9105FC19F5614800AD5CAB /* example_bloom.fsh */,
-				9F9105FD19F5614800AD5CAB /* example_Blur.fsh */,
-				9F9105FE19F5614800AD5CAB /* example_celShading.fsh */,
-				9F9105FF19F5614800AD5CAB /* example_ColorBars.fsh */,
-				9F91060019F5614800AD5CAB /* example_ColorBars.vsh */,
-				9F91060119F5614800AD5CAB /* example_edgeDetection.fsh */,
-				9F91060219F5614800AD5CAB /* example_Flower.fsh */,
-				9F91060319F5614800AD5CAB /* example_greyScale.fsh */,
-				9F91060419F5614800AD5CAB /* example_Heart.fsh */,
-				9F91060519F5614800AD5CAB /* example_HorizontalColor.fsh */,
-				9F91060619F5614800AD5CAB /* example_Julia.fsh */,
-				9F91060719F5614800AD5CAB /* example_lensFlare.fsh */,
-				9F91060819F5614800AD5CAB /* example_Mandelbrot.fsh */,
-				9F91060919F5614800AD5CAB /* example_Monjori.fsh */,
-				9F91060A19F5614800AD5CAB /* example_MultiTexture.fsh */,
-				9F91060B19F5614800AD5CAB /* example_MultiTexture.vsh */,
-				9F91060C19F5614800AD5CAB /* example_Noisy.fsh */,
-				9F91060D19F5614800AD5CAB /* example_normal.fsh */,
-				9F91060E19F5614800AD5CAB /* example_outline.fsh */,
-				9F91060F19F5614800AD5CAB /* example_Plasma.fsh */,
-				9F91061019F5614800AD5CAB /* example_sepia.fsh */,
-				9F91061119F5614800AD5CAB /* example_Twist.fsh */,
-				9F91061219F5614800AD5CAB /* FilterShaders.cpp */,
-				9F91061319F5614800AD5CAB /* FilterShaders.h */,
-				9F91061419F5614800AD5CAB /* shadertoy_FireBall.fsh */,
-				9F91061519F5614800AD5CAB /* shadertoy_Glow.fsh */,
-				9F91061619F5614800AD5CAB /* shadertoy_LensFlare.fsh */,
-			);
-			path = shaders;
-			sourceTree = "<group>";
-		};
 		9F91061719F5614800AD5CAB /* luabinding */ = {
 			isa = PBXGroup;
 			children = (
-				49C6565A1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp */,
-				49C6565B1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.hpp */,
-				49C6565C1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp */,
-				49C6565D1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.hpp */,
 				9F91061A19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp */,
 				9F91061B19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.h */,
 				9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */,
 				9F91061E19F5614800AD5CAB /* cocos2dx_extra_luabinding.h */,
 				9F91062019F5614800AD5CAB /* HelperFunc_luabinding.cpp */,
 				9F91062119F5614800AD5CAB /* HelperFunc_luabinding.h */,
-				9F91078B19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp */,
-				9F91078C19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.hpp */,
 			);
 			path = luabinding;
 			sourceTree = "<group>";
@@ -1393,73 +1060,47 @@
 			files = (
 				0A532A451E62F3D8004E2B32 /* sproto.c in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
-				49C656611A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
 				9F91079F19F5704400AD5CAB /* ConsoleWindowController.m in Sources */,
 				0A532A5F1E62FB06004E2B32 /* lpcode.c in Sources */,
 				0AC1AE941DB8B629006D4001 /* pb.c in Sources */,
 				0A85412A1E2B3139002A5473 /* unqlite.c in Sources */,
 				9F91076F19F5614900AD5CAB /* lua_cjson.c in Sources */,
-				9F91070F19F5614900AD5CAB /* FilterShaders.cpp in Sources */,
 				C033B51D191B337200D06937 /* VisibleRect.cpp in Sources */,
 				0A8541281E2B3139002A5473 /* lunqlite.c in Sources */,
 				9F91074519F5614900AD5CAB /* SBJsonParser.m in Sources */,
 				0A532A651E62FB06004E2B32 /* lpvm.c in Sources */,
 				9F91074D19F5614900AD5CAB /* ReachabilityIOSMac.m in Sources */,
-				9F9106D119F5614900AD5CAB /* CCHueFilter.cpp in Sources */,
-				49C656591A39A1A200603AF5 /* nanovg.c in Sources */,
 				9F91076D19F5614900AD5CAB /* fpconv.c in Sources */,
 				9F9106B719F5614900AD5CAB /* CCCrypto.cpp in Sources */,
 				9F91078619F561CD00AD5CAB /* HelperFunc.cpp in Sources */,
-				9F9106D719F5614900AD5CAB /* CCSaturationFilter.cpp in Sources */,
 				9F91079519F56A6600AD5CAB /* ProjectConfig.cpp in Sources */,
 				9F91077719F5614900AD5CAB /* lfs.c in Sources */,
 				9F91077B19F5614900AD5CAB /* lsqlite3.c in Sources */,
 				9F91072919F5614900AD5CAB /* CCNetwork.cpp in Sources */,
-				9F9106D919F5614900AD5CAB /* CCSepiaFilter.cpp in Sources */,
 				9F91074119F5614900AD5CAB /* SBJSON.m in Sources */,
 				9F91071F19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */,
 				9F91074319F5614900AD5CAB /* SBJsonBase.m in Sources */,
 				9F91074919F5614900AD5CAB /* OpenUDIDIOS.m in Sources */,
-				9F9106BD19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */,
-				9F9106DD19F5614900AD5CAB /* CCTestFilter.cpp in Sources */,
-				9F9106DF19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */,
-				9F9106C119F5614900AD5CAB /* CCContrastFilter.cpp in Sources */,
-				9F9106C719F5614900AD5CAB /* CCExposureFilter.cpp in Sources */,
 				9F91077919F5614900AD5CAB /* lpack.c in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
 				9F91074B19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
 				9F91072319F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				9F91077D19F5614900AD5CAB /* sqlite3.c in Sources */,
 				0A532A611E62FB06004E2B32 /* lpprint.c in Sources */,
-				49C656571A39A1A200603AF5 /* NVGNode.cpp in Sources */,
 				9F91075119F5614900AD5CAB /* CCNative.mm in Sources */,
 				9F9106B519F5614900AD5CAB /* libbase64.c in Sources */,
 				0A532A5D1E62FB06004E2B32 /* lpcap.c in Sources */,
-				49C6565F1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */,
 				0A532A431E62F3D8004E2B32 /* lsproto.c in Sources */,
-				49C656551A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */,
 				9F91075319F5614900AD5CAB /* CCNativeMac.mm in Sources */,
 				9F91075519F5614900AD5CAB /* OpenUDIDMac.m in Sources */,
 				9F91072719F5614900AD5CAB /* CCHTTPRequest.cpp in Sources */,
-				9F9106D519F5614900AD5CAB /* CCRGBFilter.cpp in Sources */,
-				9F9106C519F5614900AD5CAB /* CCDropShadowFilter.cpp in Sources */,
-				9F9106C319F5614900AD5CAB /* CCCustomFilter.cpp in Sources */,
 				9F91078119F5614900AD5CAB /* lua_zlib.c in Sources */,
-				9F9106CD19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */,
-				9F9106D319F5614900AD5CAB /* CCMaskFilter.cpp in Sources */,
 				9F91077119F5614900AD5CAB /* strbuf.c in Sources */,
-				9F9106BF19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */,
 				9F91077F19F5614900AD5CAB /* lua_extensions_more.c in Sources */,
 				9F91074F19F5614900AD5CAB /* CCCryptoMac.mm in Sources */,
-				9F9106C919F5614900AD5CAB /* CCFilter.cpp in Sources */,
 				9F91074719F5614900AD5CAB /* SBJsonWriter.m in Sources */,
 				0A532A631E62FB06004E2B32 /* lptree.c in Sources */,
-				9F91078E19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */,
-				9F9106E119F5614900AD5CAB /* ccFilterShaders.cpp in Sources */,
 				0A54F1641BC17DE60018E100 /* AppController.mm in Sources */,
-				9F9106CF19F5614900AD5CAB /* CCHazeFilter.cpp in Sources */,
-				9F9106CB19F5614900AD5CAB /* CCGammaFilter.cpp in Sources */,
-				9F9106DB19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,24 +1109,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F91074819F5614900AD5CAB /* OpenUDIDIOS.m in Sources */,
-				9F9106D619F5614900AD5CAB /* CCSaturationFilter.cpp in Sources */,
 				9F91073819F5614900AD5CAB /* CCStore.mm in Sources */,
 				0AC1AE931DB8B629006D4001 /* pb.c in Sources */,
 				9F91073619F5614900AD5CAB /* CCNativeIOS.mm in Sources */,
 				9F91074219F5614900AD5CAB /* SBJsonBase.m in Sources */,
-				9F9106E019F5614900AD5CAB /* ccFilterShaders.cpp in Sources */,
-				49C656541A39A1A200603AF5 /* NVGDrawNode.cpp in Sources */,
-				9F91078D19F5658D00AD5CAB /* lua_cocos2dx_extension_filter_auto.cpp in Sources */,
-				9F9106D819F5614900AD5CAB /* CCSepiaFilter.cpp in Sources */,
-				49C6565E1A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */,
-				9F9106DC19F5614900AD5CAB /* CCTestFilter.cpp in Sources */,
-				49C656601A39A22400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
 				9F91074A19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
 				0A532A441E62F3D8004E2B32 /* sproto.c in Sources */,
 				9F91071E19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */,
-				9F9106D219F5614900AD5CAB /* CCMaskFilter.cpp in Sources */,
-				9F9106DE19F5614900AD5CAB /* CCFilteredSprite.cpp in Sources */,
-				9F9106CC19F5614900AD5CAB /* CCGrayFilter.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				0A532A421E62F3D8004E2B32 /* lsproto.c in Sources */,
 				0A532A621E62FB06004E2B32 /* lptree.c in Sources */,
@@ -1496,9 +1126,6 @@
 				9F91076819F5614900AD5CAB /* CCStoreProduct.cpp in Sources */,
 				0A532A5C1E62FB06004E2B32 /* lpcap.c in Sources */,
 				9F91072619F5614900AD5CAB /* CCHTTPRequest.cpp in Sources */,
-				9F9106C219F5614900AD5CAB /* CCCustomFilter.cpp in Sources */,
-				9F9106BE19F5614900AD5CAB /* CCBrightnessFilter.cpp in Sources */,
-				9F9106CE19F5614900AD5CAB /* CCHazeFilter.cpp in Sources */,
 				9F91074419F5614900AD5CAB /* SBJsonParser.m in Sources */,
 				9F91074C19F5614900AD5CAB /* ReachabilityIOSMac.m in Sources */,
 				9F91077A19F5614900AD5CAB /* lsqlite3.c in Sources */,
@@ -1506,20 +1133,14 @@
 				9F91073419F5614900AD5CAB /* CCNative.mm in Sources */,
 				9F91077819F5614900AD5CAB /* lpack.c in Sources */,
 				9F91079419F56A6600AD5CAB /* ProjectConfig.cpp in Sources */,
-				9F9106C019F5614900AD5CAB /* CCContrastFilter.cpp in Sources */,
 				0A8541291E2B3139002A5473 /* unqlite.c in Sources */,
 				0A532A5E1E62FB06004E2B32 /* lpcode.c in Sources */,
-				49C656581A39A1A200603AF5 /* nanovg.c in Sources */,
-				49C656561A39A1A200603AF5 /* NVGNode.cpp in Sources */,
-				9F9106D419F5614900AD5CAB /* CCRGBFilter.cpp in Sources */,
 				9F91077019F5614900AD5CAB /* strbuf.c in Sources */,
 				9F91077619F5614900AD5CAB /* lfs.c in Sources */,
 				9F91077C19F5614900AD5CAB /* sqlite3.c in Sources */,
 				9F91076E19F5614900AD5CAB /* lua_cjson.c in Sources */,
-				9F9106D019F5614900AD5CAB /* CCHueFilter.cpp in Sources */,
 				9F9106B619F5614900AD5CAB /* CCCrypto.cpp in Sources */,
 				9F91074619F5614900AD5CAB /* SBJsonWriter.m in Sources */,
-				9F9106BC19F5614900AD5CAB /* CCBlurFilter.cpp in Sources */,
 				9F91078019F5614900AD5CAB /* lua_zlib.c in Sources */,
 				9F91073219F5614900AD5CAB /* CCCryptoIOS.mm in Sources */,
 				9F91076619F5614900AD5CAB /* CCStorePaymentTransaction.cpp in Sources */,
@@ -1528,20 +1149,14 @@
 				9F91078719F561CD00AD5CAB /* HelperFunc.cpp in Sources */,
 				9F91073C19F5614900AD5CAB /* CCStorePaymentTransactionWrapper.mm in Sources */,
 				0A532A641E62FB06004E2B32 /* lpvm.c in Sources */,
-				9F91070E19F5614900AD5CAB /* FilterShaders.cpp in Sources */,
-				9F9106C419F5614900AD5CAB /* CCDropShadowFilter.cpp in Sources */,
 				9F9106B419F5614900AD5CAB /* libbase64.c in Sources */,
 				C033B51C191B337200D06937 /* VisibleRect.cpp in Sources */,
 				9F91076C19F5614900AD5CAB /* fpconv.c in Sources */,
 				0A532A601E62FB06004E2B32 /* lpprint.c in Sources */,
-				9F9106C619F5614900AD5CAB /* CCExposureFilter.cpp in Sources */,
-				9F9106DA19F5614900AD5CAB /* CCSharpenFilter.cpp in Sources */,
 				0A8541271E2B3139002A5473 /* lunqlite.c in Sources */,
-				9F9106CA19F5614900AD5CAB /* CCGammaFilter.cpp in Sources */,
 				9F91071A19F5614900AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
 				9F91073A19F5614900AD5CAB /* CCStoreIOS.mm in Sources */,
-				9F9106C819F5614900AD5CAB /* CCFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

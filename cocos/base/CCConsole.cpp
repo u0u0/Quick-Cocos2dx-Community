@@ -248,15 +248,6 @@ static void _log(const char *format, va_list args)
     Director::getInstance()->getConsole()->log(buf);
 }
 
-// FIXME: Deprecated
-void CCLog(const char * format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    _log(format, args);
-    va_end(args);
-}
-
 void log(const char * format, ...)
 {
     va_list args;

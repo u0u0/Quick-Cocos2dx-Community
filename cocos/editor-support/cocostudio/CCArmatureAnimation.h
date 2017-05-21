@@ -115,11 +115,6 @@ public:
      */
     virtual void play(const std::string& animationName, int durationTo = -1,  int loop = -1);
 
-    /**
-     * Play animation by index, the other param is the same to play.
-     * @deprecated, please use playWithIndex
-     * @param  animationIndex  the animation index you want to play
-     */
     virtual void playWithIndex(int animationIndex,  int durationTo = -1, int loop = -1);
 
     virtual void playWithNames(const std::vector<std::string>& movementNames, int durationTo = -1, bool loop = true);

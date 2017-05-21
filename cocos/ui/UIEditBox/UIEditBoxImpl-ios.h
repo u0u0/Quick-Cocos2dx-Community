@@ -30,7 +30,6 @@
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 
-#include "extensions/ExtensionMacros.h"
 #include "UIEditBoxImpl.h"
 
 #import <Foundation/Foundation.h>
@@ -83,26 +82,26 @@ public:
      */
     virtual ~EditBoxImplIOS();
     
-    virtual bool initWithSize(const Size& size);
-    virtual void setFont(const char* pFontName, int fontSize);
-    virtual void setFontColor(const Color3B& color);
-    virtual void setPlaceholderFont(const char* pFontName, int fontSize);
-    virtual void setPlaceholderFontColor(const Color3B& color);
-    virtual void setInputMode(EditBox::InputMode inputMode);
-    virtual void setInputFlag(EditBox::InputFlag inputFlag);
-    virtual void setMaxLength(int maxLength);
-    virtual int  getMaxLength();
-    virtual void setReturnType(EditBox::KeyboardReturnType returnType);
-    virtual bool isEditing();
+    virtual bool initWithSize(const Size& size) override;
+    virtual void setFont(const char* pFontName, int fontSize) override;
+    virtual void setFontColor(const Color3B& color) override;
+    virtual void setPlaceholderFont(const char* pFontName, int fontSize) override;
+    virtual void setPlaceholderFontColor(const Color3B& color) override;
+    virtual void setInputMode(EditBox::InputMode inputMode) override;
+    virtual void setInputFlag(EditBox::InputFlag inputFlag) override;
+    virtual void setMaxLength(int maxLength) override;
+    virtual int  getMaxLength() override;
+    virtual void setReturnType(EditBox::KeyboardReturnType returnType) override;
+    virtual bool isEditing() override;
     
-    virtual void setText(const char* pText);
-    virtual const char* getText(void);
+    virtual void setText(const char* pText) override;
+    virtual const char* getText(void) override;
     virtual void refreshInactiveText();
-    virtual void setPlaceHolder(const char* pText);
-    virtual void setPosition(const Vec2& pos);
-    virtual void setVisible(bool visible);
-    virtual void setContentSize(const Size& size);
-	virtual void setAnchorPoint(const Vec2& anchorPoint);
+    virtual void setPlaceHolder(const char* pText) override;
+    virtual void setPosition(const Vec2& pos) override;
+    virtual void setVisible(bool visible) override;
+    virtual void setContentSize(const Size& size) override;
+	virtual void setAnchorPoint(const Vec2& anchorPoint) override;
     virtual void updatePosition(float dt) override;
     /**
      * @js NA
