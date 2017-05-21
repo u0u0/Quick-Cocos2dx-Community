@@ -103,9 +103,6 @@ public:
 	
     /** draw a triangle with color */
     void drawTriangle(const Vec2 &p1, const Vec2 &p2, const Vec2 &p3, const Color4F &color);
-
-    /** draw a quadratic bezier curve with color and number of segments, use drawQuadBezier instead*/
-    CC_DEPRECATED_ATTRIBUTE void drawQuadraticBezier(const Vec2& from, const Vec2& control, const Vec2& to, unsigned int segments, const Color4F &color);
     
     /** Clear the geometry in the node's buffer. */
     void clear();

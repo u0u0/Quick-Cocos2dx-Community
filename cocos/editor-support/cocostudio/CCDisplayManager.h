@@ -74,12 +74,6 @@ public:
     void removeDisplay(int index);
 
     const cocos2d::Vector<DecorativeDisplay*>& getDecorativeDisplayList() const;
-
-    /*
-     * @deprecated, please use changeDisplayWithIndex and changeDisplayWithName
-     */
-    CC_DEPRECATED_ATTRIBUTE void changeDisplayByIndex(int index, bool force);
-    CC_DEPRECATED_ATTRIBUTE void changeDisplayByName(const std::string& name, bool force);
     
     /**
      * Change display by index. You can just use this method to change display in the display list.

@@ -161,8 +161,6 @@ _flippedY(false),
 _layoutParameterType(LayoutParameter::Type::NONE),
 _focused(false),
 _focusEnabled(true),
-_touchEventListener(nullptr),
-_touchEventSelector(nullptr),
 _ccEventCallback(nullptr),
 _callbackType(""),
 _callbackName("")
@@ -308,11 +306,6 @@ void Widget::setContentSize(const cocos2d::Size &contentSize)
     onSizeChanged();
 }
 
-void Widget::setSize(const Size &size)
-{
-    this->setContentSize(size);
-}
-
 void Widget::setSizePercent(const Vec2 &percent)
 {
     _sizePercent = percent;
@@ -455,11 +448,6 @@ void Widget::ignoreContentAdaptWithSize(bool ignore)
 bool Widget::isIgnoreContentAdaptWithSize() const
 {
     return _ignoreSize;
-}
-
-const Size& Widget::getSize() const
-{
-    return this->getContentSize();
 }
     
 const Size& Widget::getCustomSize() const
@@ -804,11 +792,6 @@ void Widget::pushDownEvent()
     {
         _touchEventCallback(this, TouchEventType::BEGAN);
     }
-    
-    if (_touchEventListener && _touchEventSelector)
-    {
-        (_touchEventListener->*_touchEventSelector)(this,TOUCH_EVENT_BEGAN);
-    }
     this->release();
 }
 
@@ -819,11 +802,6 @@ void Widget::moveEvent()
     {
         _touchEventCallback(this, TouchEventType::MOVED);
     }
-    
-    if (_touchEventListener && _touchEventSelector)
-    {
-        (_touchEventListener->*_touchEventSelector)(this,TOUCH_EVENT_MOVED);
-    }
     this->release();
 }
 
@@ -833,11 +811,6 @@ void Widget::releaseUpEvent()
     if (_touchEventCallback)
     {
         _touchEventCallback(this, TouchEventType::ENDED);
-    }
-    
-    if (_touchEventListener && _touchEventSelector)
-    {
-        (_touchEventListener->*_touchEventSelector)(this,TOUCH_EVENT_ENDED);
     }
     
     if (_clickEventListener) {
@@ -853,18 +826,7 @@ void Widget::cancelUpEvent()
     {
         _touchEventCallback(this, TouchEventType::CANCELED);
     }
-   
-    if (_touchEventListener && _touchEventSelector)
-    {
-        (_touchEventListener->*_touchEventSelector)(this,TOUCH_EVENT_CANCELED);
-    }
     this->release();
-}
-
-void Widget::addTouchEventListener(Ref *target, SEL_TouchEvent selector)
-{
-    _touchEventListener = target;
-    _touchEventSelector = selector;
 }
     
 void Widget::addTouchEventListener(const ccWidgetTouchCallback& callback)
@@ -1055,11 +1017,6 @@ LayoutParameter* Widget::getLayoutParameter()const
 {
     return dynamic_cast<LayoutParameter*>(_layoutParameterDictionary.at((int)_layoutParameterType));
 }
-    
-LayoutParameter* Widget::getLayoutParameter(LayoutParameter::Type type)
-{
-    return dynamic_cast<LayoutParameter*>(_layoutParameterDictionary.at((int)type));
-}
 
 std::string Widget::getDescription() const
 {
@@ -1127,8 +1084,6 @@ void Widget::copyProperties(Widget *widget)
     setColor(widget->getColor());
     setOpacity(widget->getOpacity());
     _touchEventCallback = widget->_touchEventCallback;
-    _touchEventListener = widget->_touchEventListener;
-    _touchEventSelector = widget->_touchEventSelector;
     _clickEventListener = widget->_clickEventListener;
     _focused = widget->_focused;
     _focusEnabled = widget->_focusEnabled;

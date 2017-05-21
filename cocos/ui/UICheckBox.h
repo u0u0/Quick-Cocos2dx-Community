@@ -34,15 +34,6 @@ class Sprite;
 
 namespace ui {
 
-typedef enum
-{
-    CHECKBOX_STATE_EVENT_SELECTED,
-    CHECKBOX_STATE_EVENT_UNSELECTED
-}CheckBoxEventType;
-
-typedef void (Ref::*SEL_SelectedStateEvent)(Ref*,CheckBoxEventType);
-#define checkboxselectedeventselector(_SELECTOR) (SEL_SelectedStateEvent)(&_SELECTOR)
-
 /**
 *   @js NA
 *   @lua NA
@@ -161,25 +152,11 @@ public:
      */
     void loadTextureFrontCrossDisabled(const std::string& frontCrossDisabled,TextureResType texType = TextureResType::LOCAL);
 
-    /**
-     * Sets selcted state for checkbox.
-     *
-     * @param selected    true that checkbox is selected, false otherwise.
-     */
-    CC_DEPRECATED_ATTRIBUTE void setSelectedState(bool selected){this->setSelected(selected);}
-
-    /**
-     * Gets selcted state of checkbox.
-     *
-     * @return selected    true that checkbox is selected, false otherwise.
-     */
-    CC_DEPRECATED_ATTRIBUTE bool getSelectedState()const{return this->isSelected();}
     
     bool isSelected()const;
     void setSelected(bool selected);
 
     //add a call back function would called when checkbox is selected or unselected.
-    CC_DEPRECATED_ATTRIBUTE void addEventListenerCheckBox(Ref* target,SEL_SelectedStateEvent selector);
     void addEventListener(const ccCheckBoxCallback& callback);
 
 
@@ -232,21 +209,6 @@ protected:
     Sprite* _backGroundBoxDisabledRenderer;
     Sprite* _frontCrossDisabledRenderer;
     bool _isSelected;
-    //if you use the old event callback, it will retain the _checkBoxEventListener
-    Ref*       _checkBoxEventListener;
-    
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#elif _MSC_VER >= 1400 //vs 2005 or higher
-#pragma warning (push)
-#pragma warning (disable: 4996)
-#endif
-    SEL_SelectedStateEvent    _checkBoxEventSelector;
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-#pragma GCC diagnostic warning "-Wdeprecated-declarations"
-#elif _MSC_VER >= 1400 //vs 2005 or higher
-#pragma warning (pop)
-#endif
     
     ccCheckBoxCallback _checkBoxEventCallback;
 

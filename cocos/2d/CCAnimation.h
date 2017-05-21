@@ -171,10 +171,6 @@ public:
      Added to facilitate the migration from v0.8 to v0.9.
      */
     void addSpriteFrameWithFile(const std::string& filename);
-    /**
-     @deprecated. Use addSpriteFrameWithFile() instead
-     */
-    CC_DEPRECATED_ATTRIBUTE void addSpriteFrameWithFileName(const std::string& filename){ addSpriteFrameWithFile(filename);}
 
     /** Adds a frame with a texture and a rect. Internally it will create a SpriteFrame and it will add it.
      The frame will be added with one "delay unit".

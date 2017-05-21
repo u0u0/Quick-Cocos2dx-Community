@@ -37,18 +37,7 @@ class EventListenerTouchOneByOne;
 
 
 namespace ui {
-    class LayoutComponent;
-typedef enum
-{
-    TOUCH_EVENT_BEGAN,
-    TOUCH_EVENT_MOVED,
-    TOUCH_EVENT_ENDED,
-    TOUCH_EVENT_CANCELED
-}TouchEventType;
-    
-typedef void (Ref::*SEL_TouchEvent)(Ref*,TouchEventType);
-#define toucheventselector(_SELECTOR) (SEL_TouchEvent)(&_SELECTOR)
-
+class LayoutComponent;
 
 /**
 *   @js NA
@@ -198,7 +187,6 @@ public:
      *
      * @return The left boundary position of this widget.
      */
-    CC_DEPRECATED_ATTRIBUTE float getLeftInParent(){return this->getLeftBoundary();}
     float getLeftBoundary() const;
 
     /**
@@ -206,7 +194,6 @@ public:
      *
      * @return The bottom boundary position of this widget.
      */
-    CC_DEPRECATED_ATTRIBUTE float getBottomInParent(){return this->getBottomBoundary();}
     float getBottomBoundary() const;
 
     /**
@@ -214,7 +201,6 @@ public:
      *
      * @return The right boundary position of this widget.
      */
-    CC_DEPRECATED_ATTRIBUTE float getRightInParent(){return this->getRightBoundary();}
     float getRightBoundary() const;
 
     /**
@@ -222,7 +208,6 @@ public:
      *
      * @return The top boundary position of this widget.
      */
-    CC_DEPRECATED_ATTRIBUTE float getTopInParent(){return this->getTopBoundary();}
     float getTopBoundary() const;
 
     virtual void visit(cocos2d::Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags) override;
@@ -230,7 +215,6 @@ public:
     /**
      * Sets the touch event target/selector to the widget
      */
-    CC_DEPRECATED_ATTRIBUTE void addTouchEventListener(Ref* target,SEL_TouchEvent selector);
     void addTouchEventListener(const ccWidgetTouchCallback& callback);
     /**
      * Set a click event handler to the widget
@@ -324,15 +308,6 @@ public:
      */
     virtual bool isFlippedY()const{return _flippedY;};
 
-    /** @deprecated Use isFlippedX() instead */
-    CC_DEPRECATED_ATTRIBUTE bool isFlipX() { return isFlippedX(); };
-    /** @deprecated Use setFlippedX() instead */
-    CC_DEPRECATED_ATTRIBUTE void setFlipX(bool flipX) { setFlippedX(flipX); };
-    /** @deprecated Use isFlippedY() instead */
-    CC_DEPRECATED_ATTRIBUTE bool isFlipY() { return isFlippedY(); };
-    /** @deprecated Use setFlippedY() instead */
-    CC_DEPRECATED_ATTRIBUTE void setFlipY(bool flipY) { setFlippedY(flipY); };
-
     //override the setScale function of Node
     virtual void setScaleX(float scaleX) override;
     virtual void setScaleY(float scaleY) override;
@@ -351,7 +326,6 @@ public:
      *
      * @return true if the point is in parent's area, flase otherwise.
      */
-    CC_DEPRECATED_ATTRIBUTE bool clippingParentAreaContainPoint(const Vec2 &pt){return this->isClippingParentContainsPoint(pt);}
     bool isClippingParentContainsPoint(const Vec2& pt);
 
     /*
@@ -359,7 +333,6 @@ public:
      *
      * @return the touch began point.
      */
-    CC_DEPRECATED_ATTRIBUTE const Vec2& getTouchStartPos()const{return this->getTouchBeganPosition();}
     const Vec2& getTouchBeganPosition()const;
 
     /*
@@ -367,7 +340,6 @@ public:
      *
      * @return the touch move point.
      */
-    CC_DEPRECATED_ATTRIBUTE const Vec2& getTouchMovePos()const{ return this->getTouchMovePosition();}
     const Vec2& getTouchMovePosition()const;
 
     /*
@@ -375,7 +347,6 @@ public:
      *
      * @return the touch end point.
      */
-    CC_DEPRECATED_ATTRIBUTE const Vec2& getTouchEndPos()const{return this->getTouchEndPosition();}
     const Vec2& getTouchEndPosition()const;
 
     /**
@@ -383,7 +354,6 @@ public:
      *
      * @param size that is widget's size
      */
-    CC_DEPRECATED_ATTRIBUTE virtual void setSize(const Size &size);
     virtual void setContentSize(const Size& contentSize) override;
 
     /**
@@ -416,8 +386,6 @@ public:
      *
      * @return size
      */
-    CC_DEPRECATED_ATTRIBUTE const Size& getSize() const;
-    
     const Size& getCustomSize() const;
     
     virtual const Size& getLayoutSize() {return _contentSize;};
@@ -464,8 +432,6 @@ public:
      * @return LayoutParameter
      */
     LayoutParameter* getLayoutParameter()const override;
-    CC_DEPRECATED_ATTRIBUTE LayoutParameter* getLayoutParameter(LayoutParameter::Type type);
-
 
     /**
      *
@@ -586,12 +552,8 @@ public:
      * @param isWidget  if your set isWidget to true, it will return the _realFocusedWidget which is always a widget
      *                  otherwise, it will return a widget or a layout
      */
-    CC_DEPRECATED_ATTRIBUTE Widget* getCurrentFocusedWidget(bool isWidget){
-        CC_UNUSED_PARAM(isWidget);
-        return getCurrentFocusedWidget();
-    }
-
     Widget* getCurrentFocusedWidget()const;
+    
     /*
      *  call this method with parameter true to enable the Android Dpad focus navigation feature
      *@param enable  set true to enable dpad focus navigation, otherwise disenable dpad focus navigation
@@ -746,19 +708,6 @@ protected:
      */
     static Widget *_focusedWidget;  //both layout & widget will be stored in this variable
 
-    Ref*       _touchEventListener;
-    #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-    #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    #elif _MSC_VER >= 1400 //vs 2005 or higher
-    #pragma warning (push)
-    #pragma warning (disable: 4996)
-    #endif
-    SEL_TouchEvent    _touchEventSelector;
-    #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-    #pragma GCC diagnostic warning "-Wdeprecated-declarations"
-    #elif _MSC_VER >= 1400 //vs 2005 or higher
-    #pragma warning (pop)
-    #endif
     ccWidgetTouchCallback _touchEventCallback;
     ccWidgetClickCallback _clickEventListener;
     ccWidgetEventCallback _ccEventCallback;

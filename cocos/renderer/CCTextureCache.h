@@ -64,27 +64,6 @@ NS_CC_BEGIN
 class CC_DLL TextureCache : public Ref
 {
 public:
-    /** Returns the shared instance of the cache */
-    CC_DEPRECATED_ATTRIBUTE static TextureCache * getInstance();
-
-    /** @deprecated Use getInstance() instead */
-    CC_DEPRECATED_ATTRIBUTE static TextureCache * sharedTextureCache();
-
-    /** purges the cache. It releases the retained instance.
-     @since v0.99.0
-     */
-    CC_DEPRECATED_ATTRIBUTE static void destroyInstance();
-
-    /** @deprecated Use destroyInstance() instead */
-    CC_DEPRECATED_ATTRIBUTE static void purgeSharedTextureCache();
-
-    /** Reload all textures
-    should not call it, called by frame work
-    now the function do nothing, use VolatileTextureMgr::reloadAllTextures
-     */
-    CC_DEPRECATED_ATTRIBUTE static void reloadAllTextures();
-
-public:
     /**
      * @js ctor
      */
@@ -138,13 +117,11 @@ public:
     * If "key" is nil, then a new texture will be created each time.
     */
     Texture2D* addImage(Image *image, const std::string &key);
-    CC_DEPRECATED_ATTRIBUTE Texture2D* addUIImage(Image *image, const std::string& key) { return addImage(image,key); }
 
     /** Returns an already created texture. Returns nil if the texture doesn't exist.
     @since v0.99.5
     */
     Texture2D* getTextureForKey(const std::string& key) const;
-    CC_DEPRECATED_ATTRIBUTE Texture2D* textureForKey(const std::string& key) const { return getTextureForKey(key); }
 
     /** Reload texture from the image file
     * If the file image hasn't loaded before, load it.

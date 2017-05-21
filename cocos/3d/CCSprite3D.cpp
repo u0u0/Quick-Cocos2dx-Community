@@ -705,15 +705,6 @@ std::vector<Mesh*> Sprite3D::getMeshArrayByName(const std::string& name) const
     return meshes;
 }
 
-MeshSkin* Sprite3D::getSkin() const
-{
-    for (const auto& it : _meshes) {
-        if (it->getSkin())
-            return it->getSkin();
-    }
-    return nullptr;
-}
-
 ///////////////////////////////////////////////////////////////////////////////////
 Sprite3DCache* Sprite3DCache::_cacheInstance = nullptr;
 Sprite3DCache* Sprite3DCache::getInstance()

@@ -55,8 +55,6 @@ _slidBallPressedTextureFile(""),
 _slidBallDisabledTextureFile(""),
 _capInsetsBarRenderer(Rect::ZERO),
 _capInsetsProgressBarRenderer(Rect::ZERO),
-_sliderEventListener(nullptr),
-_sliderEventSelector(nullptr),
 _eventCallback(nullptr),
 _barTexType(TextureResType::LOCAL),
 _progressBarTexType(TextureResType::LOCAL),
@@ -71,8 +69,6 @@ _progressBarRendererDirty(true)
 
 Slider::~Slider()
 {
-    _sliderEventListener = nullptr;
-    _sliderEventSelector = nullptr;
 }
 
 Slider* Slider::create()
@@ -398,12 +394,6 @@ float Slider::getPercentWithBallPos(float px)const
 {
     return ((px/_barLength)*100.0f);
 }
-
-void Slider::addEventListenerSlider(Ref *target, SEL_SlidPercentChangedEvent selector)
-{
-    _sliderEventListener = target;
-    _sliderEventSelector = selector;
-}
     
 void Slider::addEventListener(const ccSliderCallback& callback)
 {
@@ -413,10 +403,6 @@ void Slider::addEventListener(const ccSliderCallback& callback)
 void Slider::percentChangedEvent()
 {
     this->retain();
-    if (_sliderEventListener && _sliderEventSelector)
-    {
-        (_sliderEventListener->*_sliderEventSelector)(this,SLIDER_PERCENTCHANGED);
-    }
     if (_eventCallback) {
         _eventCallback(this, EventType::ON_PERCENTAGE_CHANGED);
     }
@@ -587,8 +573,6 @@ void Slider::copySpecialProperties(Widget *widget)
         loadSlidBallTexturePressed(slider->_slidBallPressedTextureFile, slider->_ballPTexType);
         loadSlidBallTextureDisabled(slider->_slidBallDisabledTextureFile, slider->_ballDTexType);
         setPercent(slider->getPercent());
-        _sliderEventListener = slider->_sliderEventListener;
-        _sliderEventSelector = slider->_sliderEventSelector;
         _eventCallback = slider->_eventCallback;
         _ccEventCallback = slider->_ccEventCallback;
     }

@@ -53,11 +53,6 @@ NS_CC_BEGIN
 
 // implementation TextureCache
 
-TextureCache * TextureCache::getInstance()
-{
-    return Director::getInstance()->getTextureCache();
-}
-
 TextureCache::TextureCache()
 : _loadingThread(nullptr)
 , _asyncStructQueue(nullptr)
@@ -75,19 +70,6 @@ TextureCache::~TextureCache()
         (it->second)->release();
 
     CC_SAFE_DELETE(_loadingThread);
-}
-
-void TextureCache::destroyInstance()
-{
-}
-
-TextureCache * TextureCache::sharedTextureCache() 
-{
-    return Director::getInstance()->getTextureCache();
-}
-
-void TextureCache::purgeSharedTextureCache() 
-{ 
 }
 
 std::string TextureCache::getDescription() const
@@ -510,14 +492,6 @@ Texture2D* TextureCache::getTextureForKey(const std::string &textureKeyName) con
     if( it != _textures.end() )
         return it->second;
     return nullptr;
-}
-
-void TextureCache::reloadAllTextures()
-{
-//will do nothing
-// #if CC_ENABLE_CACHE_TEXTURE_DATA
-//     VolatileTextureMgr::reloadAllTextures();
-// #endif
 }
 
 void TextureCache::waitForQuit()

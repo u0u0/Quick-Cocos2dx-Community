@@ -113,12 +113,6 @@ public:
     static GLContextAttrs getGLContextAttrs();
     static GLContextAttrs _glContextAttrs;
 
-    /**
-     * Polls input events. Subclass must implement methods if platform
-     * does not provide event callbacks.
-     */
-    CC_DEPRECATED_ATTRIBUTE virtual void pollInputEvents();
-
     virtual void pollEvents();
 
     /**

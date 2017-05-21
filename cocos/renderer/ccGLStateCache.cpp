@@ -178,11 +178,6 @@ void deleteTexture(GLuint textureId)
 	glDeleteTextures(1, &textureId);
 }
 
-void deleteTextureN(GLuint textureUnit, GLuint textureId)
-{
-    deleteTexture(textureId);
-}
-
 void activeTexture(GLenum texture)
 {
 #if CC_ENABLE_GL_STATE_CACHE

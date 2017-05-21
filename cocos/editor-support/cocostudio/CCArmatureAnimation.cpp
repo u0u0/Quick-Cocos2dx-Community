@@ -31,7 +31,6 @@ THE SOFTWARE.
 
 using namespace cocos2d;
 
-
 namespace cocostudio {
 
 ArmatureAnimation *ArmatureAnimation::create(Armature *armature)
@@ -46,7 +45,6 @@ ArmatureAnimation *ArmatureAnimation::create(Armature *armature)
     return nullptr;
 }
 
-
 ArmatureAnimation::ArmatureAnimation()
     : _animationData(nullptr)
     , _speedScale(1)
@@ -59,16 +57,9 @@ ArmatureAnimation::ArmatureAnimation()
     , _movementListLoop(false)
     , _movementListDurationTo(-1)
     , _userObject(nullptr)
-
-    , _movementEventCallFunc(nullptr)
-    , _frameEventCallFunc(nullptr)
-    , _movementEventTarget(nullptr)
-    , _frameEventTarget(nullptr)
-    
     , _movementEventListener(nullptr)
     , _frameEventListener(nullptr)
 {
-
 }
 
 ArmatureAnimation::~ArmatureAnimation(void)
@@ -122,17 +113,6 @@ void ArmatureAnimation::stop()
     _tweenList.clear();
     ProcessBase::stop();
 }
-
-void ArmatureAnimation::setAnimationScale(float animationScale )
-{
-    setSpeedScale(animationScale);
-}
-
-float ArmatureAnimation::getAnimationScale() const
-{
-    return getSpeedScale();
-}
-
 
 void ArmatureAnimation::setSpeedScale(float speedScale)
 {
@@ -246,11 +226,6 @@ void ArmatureAnimation::play(const std::string& animationName, int durationTo,  
     _armature->update(0);
 }
 
-void ArmatureAnimation::playByIndex(int animationIndex, int durationTo, int loop)
-{
-    playWithIndex(animationIndex, durationTo, loop);
-}
-
 void ArmatureAnimation::playWithIndex(int animationIndex, int durationTo, int loop)
 {
     std::vector<std::string> &movName = _animationData->movementNames;
@@ -355,16 +330,10 @@ void ArmatureAnimation::update(float dt)
 
         _ignoreFrameEvent = true;
         
-        if(_frameEventTarget)
-        {
-            (_frameEventTarget->*_frameEventCallFunc)(event->bone, event->frameEventName, event->originFrameIndex, event->currentFrameIndex);
-        }
-        
         if (_frameEventListener)
         {
             _frameEventListener(event->bone, event->frameEventName, event->originFrameIndex, event->currentFrameIndex);
         }
-        
         
         _ignoreFrameEvent = false;
 
@@ -375,11 +344,6 @@ void ArmatureAnimation::update(float dt)
     {
         MovementEvent *event = _movementEventQueue.front();
         _movementEventQueue.pop();
-        
-        if(_movementEventTarget)
-        {
-            (_movementEventTarget->*_movementEventCallFunc)(event->armature, event->movementType, event->movementID);
-        }
         
         if (_movementEventListener)
         {
@@ -459,18 +423,6 @@ std::string ArmatureAnimation::getCurrentMovementID() const
     return _movementID;
 }
 
-void ArmatureAnimation::setMovementEventCallFunc(Ref *target, SEL_MovementEventCallFunc callFunc)
-{
-    _movementEventTarget = target;
-    _movementEventCallFunc = callFunc;
-}
-
-void ArmatureAnimation::setFrameEventCallFunc(Ref *target, SEL_FrameEventCallFunc callFunc)
-{
-    _frameEventTarget = target;
-    _frameEventCallFunc = callFunc;
-}
-
 void ArmatureAnimation::setMovementEventCallFunc(std::function<void(Armature *armature, MovementEventType movementType, const std::string& movementID)> listener)
 {
     _movementEventListener = listener;
@@ -489,7 +441,7 @@ void ArmatureAnimation::setUserObject(Ref *pUserObject)
 
 void ArmatureAnimation::frameEvent(Bone *bone, const std::string& frameEventName, int originFrameIndex, int currentFrameIndex)
 {
-    if ((_frameEventTarget && _frameEventCallFunc) || _frameEventListener)
+    if (_frameEventListener)
     {
         FrameEvent *frameEvent = new (std::nothrow) FrameEvent();
         frameEvent->bone = bone;
@@ -501,10 +453,9 @@ void ArmatureAnimation::frameEvent(Bone *bone, const std::string& frameEventName
     }
 }
 
-
 void ArmatureAnimation::movementEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)
 {
-    if ((_movementEventTarget && _movementEventCallFunc) || _movementEventListener)
+    if (_movementEventListener)
     {
         MovementEvent *movementEvent = new (std::nothrow) MovementEvent();
         movementEvent->armature = armature;
@@ -513,7 +464,6 @@ void ArmatureAnimation::movementEvent(Armature *armature, MovementEventType move
         _movementEventQueue.push(movementEvent);
     }
 }
-
 
 void ArmatureAnimation::updateMovementList()
 {

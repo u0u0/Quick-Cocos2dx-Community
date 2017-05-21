@@ -55,18 +55,6 @@ Label* Label::create()
     return ret;
 }
 
-Label* Label::create(const std::string& text, const std::string& font, float fontSize, const Size& dimensions /* = Size::ZERO */, TextHAlignment hAlignment /* = TextHAlignment::LEFT */, TextVAlignment vAlignment /* = TextVAlignment::TOP */)
-{
-    if (FileUtils::getInstance()->isFileExist(font))
-    {
-        return createWithTTF(text,font,fontSize,dimensions,hAlignment,vAlignment);
-    } 
-    else
-    {
-        return createWithSystemFont(text,font,fontSize,dimensions,hAlignment,vAlignment);
-    }
-}
-
 Label* Label::createWithSystemFont(const std::string& text, const std::string& font, float fontSize, const Size& dimensions /* = Size::ZERO */, TextHAlignment hAlignment /* = TextHAlignment::LEFT */, TextVAlignment vAlignment /* = TextVAlignment::TOP */)
 {
     auto ret = new (std::nothrow) Label(nullptr,hAlignment,vAlignment);
@@ -919,24 +907,6 @@ void Label::createSpriteWithFontDefinition()
 
     _textSprite->updateDisplayedColor(_displayedColor);
     _textSprite->updateDisplayedOpacity(_displayedOpacity);
-}
-
-void Label::setFontDefinition(const FontDefinition& textDefinition)
-{
-    _fontDefinition = textDefinition;
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) && (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
-    if (_fontDefinition._stroke._strokeEnabled)
-    {
-        CCLOGERROR("Currently only supported on iOS and Android!");
-    }
-    _fontDefinition._stroke._strokeEnabled = false;
-#endif
-    if (_fontDefinition._shadow._shadowEnabled)
-    {
-        _fontDefinition._shadow._shadowEnabled = false;
-        enableShadow(Color4B(0,0,0,255 * _fontDefinition._shadow._shadowOpacity),_fontDefinition._shadow._shadowOffset,_fontDefinition._shadow._shadowBlur);
-    }
-    _compatibleMode = true;
 }
 
 void Label::updateContent()

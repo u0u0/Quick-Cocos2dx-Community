@@ -89,9 +89,6 @@ Armature::Armature()
     , _parentBone(nullptr)
     , _armatureTransformDirty(true)
     , _animation(nullptr)
-#if ENABLE_PHYSICS_SAVE_CALCULATED_VERTEX
-    , _debugDrawNode(nullptr)
-#endif
 {
 }
 
@@ -570,7 +567,6 @@ Bone *Armature::getParentBone() const
 }
 
 #if ENABLE_PHYSICS_BOX2D_DETECT || ENABLE_PHYSICS_CHIPMUNK_DETECT
-
 void Armature::setColliderFilter(ColliderFilter *filter)
 {
     for (auto& element : _boneDic)
@@ -578,46 +574,6 @@ void Armature::setColliderFilter(ColliderFilter *filter)
         element.second->setColliderFilter(filter);
     }
 }
-#elif ENABLE_PHYSICS_SAVE_CALCULATED_VERTEX
-
-void Armature::drawContour()
-{
-    if (!_debugDrawNode) {
-        _debugDrawNode = DrawNode::create();
-        addChild(_debugDrawNode);
-    }
-    _debugDrawNode->clear();
-    
-    for(auto& element : _boneDic)
-    {
-        Bone *bone = element.second;
-        ColliderDetector *detector = bone->getColliderDetector();
-
-        if (!detector)
-            continue;
-
-        const cocos2d::Vector<ColliderBody*>& bodyList = detector->getColliderBodyList();
-
-        for (auto& object : bodyList)
-        {
-            ColliderBody *body = static_cast<ColliderBody*>(object);
-            const std::vector<Vec2> &vertexList = body->getCalculatedVertexList();
-
-            unsigned long length = vertexList.size();
-            Vec2 *points = new (std::nothrow) Vec2[length];
-            for (unsigned long i = 0; i<length; i++)
-            {
-                Vec2 p = vertexList.at(i);
-                points[i].x = p.x;
-                points[i].y = p.y;
-            }
-        
-            _debugDrawNode->drawPoly(points, (unsigned int)length, true, Color4F::RED);
-            delete []points;
-        }
-    }
-}
-
 #endif
 
 #if ENABLE_PHYSICS_BOX2D_DETECT

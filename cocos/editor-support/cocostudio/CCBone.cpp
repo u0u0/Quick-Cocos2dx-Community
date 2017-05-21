@@ -415,16 +415,6 @@ void Bone::removeDisplay(int index)
     _displayManager->removeDisplay(index);
 }
 
-void Bone::changeDisplayByIndex(int index, bool force)
-{
-    changeDisplayWithIndex(index, force);
-}
-
-void Bone::changeDisplayByName(const std::string &name, bool force)
-{
-    changeDisplayWithName(name, force);
-}
-
 void Bone::changeDisplayWithIndex(int index, bool force)
 {
     _displayManager->changeDisplayWithIndex(index, force);

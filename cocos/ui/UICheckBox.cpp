@@ -44,8 +44,6 @@ _frontCrossRenderer(nullptr),
 _backGroundBoxDisabledRenderer(nullptr),
 _frontCrossDisabledRenderer(nullptr),
 _isSelected(true),
-_checkBoxEventListener(nullptr),
-_checkBoxEventSelector(nullptr),
 _backGroundTexType(TextureResType::LOCAL),
 _backGroundSelectedTexType(TextureResType::LOCAL),
 _frontCrossTexType(TextureResType::LOCAL),
@@ -67,7 +65,6 @@ _frontCrossDisabledRendererAdaptDirty(true)
 
 CheckBox::~CheckBox()
 {
-    _checkBoxEventSelector = nullptr;
 }
 
 CheckBox* CheckBox::create()
@@ -364,11 +361,6 @@ void CheckBox::selectedEvent()
     {
         _ccEventCallback(this, static_cast<int>(EventType::SELECTED));
     }
-    
-    if (_checkBoxEventListener && _checkBoxEventSelector)
-    {
-        (_checkBoxEventListener->*_checkBoxEventSelector)(this,CHECKBOX_STATE_EVENT_SELECTED);
-    }
     this->release();
 }
 
@@ -382,17 +374,7 @@ void CheckBox::unSelectedEvent()
     {
         _ccEventCallback(this, static_cast<int>(EventType::UNSELECTED));
     }
-    if (_checkBoxEventListener && _checkBoxEventSelector)
-    {
-        (_checkBoxEventListener->*_checkBoxEventSelector)(this,CHECKBOX_STATE_EVENT_UNSELECTED);
-    }
     this->release();
-}
-
-void CheckBox::addEventListenerCheckBox(Ref *target, SEL_SelectedStateEvent selector)
-{
-    _checkBoxEventListener = target;
-    _checkBoxEventSelector = selector;
 }
 
 void CheckBox::addEventListener(const ccCheckBoxCallback& callback)
@@ -580,8 +562,6 @@ void CheckBox::copySpecialProperties(Widget *widget)
         loadTextureBackGroundDisabled(checkBox->_backGroundDisabledFileName, checkBox->_backGroundDisabledTexType);
         loadTextureFrontCrossDisabled(checkBox->_frontCrossDisabledFileName, checkBox->_frontCrossDisabledTexType);
         setSelected(checkBox->_isSelected);
-        _checkBoxEventListener = checkBox->_checkBoxEventListener;
-        _checkBoxEventSelector = checkBox->_checkBoxEventSelector;
         _checkBoxEventCallback = checkBox->_checkBoxEventCallback;
         _ccEventCallback = checkBox->_ccEventCallback;
     }

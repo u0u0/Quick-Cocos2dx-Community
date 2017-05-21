@@ -161,15 +161,6 @@ public:
      */
     static void destroyInstance();
 
-    /** deprecated. Use getInstace() instead 
-     * @js NA
-     * @lua NA
-     */
-    CC_DEPRECATED_ATTRIBUTE static UserDefault* sharedUserDefault();
-    /**
-     * @js NA
-     */
-    CC_DEPRECATED_ATTRIBUTE static void purgeSharedUserDefault();
     /**
      * @js NA
      */

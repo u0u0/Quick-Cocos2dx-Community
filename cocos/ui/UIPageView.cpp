@@ -44,8 +44,6 @@ _rightBoundary(0.0f),
 _customScrollThreshold(0.0),
 _usingCustomScrollThreshold(false),
 _childFocusCancelOffset(5.0f),
-_pageViewEventListener(nullptr),
-_pageViewEventSelector(nullptr),
 _eventCallback(nullptr)
 {
     this->setTouchEnabled(true);
@@ -53,8 +51,6 @@ _eventCallback(nullptr)
 
 PageView::~PageView()
 {
-    _pageViewEventListener = nullptr;
-    _pageViewEventSelector = nullptr;
 }
 
 PageView* PageView::create()
@@ -558,10 +554,6 @@ void PageView::interceptTouchEvent(TouchEventType event, Widget *sender, Touch *
 void PageView::pageTurningEvent()
 {
     this->retain();
-    if (_pageViewEventListener && _pageViewEventSelector)
-    {
-        (_pageViewEventListener->*_pageViewEventSelector)(this, PAGEVIEW_EVENT_TURNING);
-    }
     if (_eventCallback) {
         _eventCallback(this,EventType::TURNING);
     }
@@ -570,12 +562,6 @@ void PageView::pageTurningEvent()
         _ccEventCallback(this, static_cast<int>(EventType::TURNING));
     }
     this->release();
-}
-
-void PageView::addEventListenerPageView(Ref *target, SEL_PageViewEvent selector)
-{
-    _pageViewEventListener = target;
-    _pageViewEventSelector = selector;
 }
     
 void PageView::addEventListener(const ccPageViewCallback& callback)
@@ -629,8 +615,6 @@ void PageView::copySpecialProperties(Widget *widget)
         Layout::copySpecialProperties(widget);
         _eventCallback = pageView->_eventCallback;
         _ccEventCallback = pageView->_ccEventCallback;
-        _pageViewEventListener = pageView->_pageViewEventListener;
-        _pageViewEventSelector = pageView->_pageViewEventSelector;
         _usingCustomScrollThreshold = pageView->_usingCustomScrollThreshold;
         _customScrollThreshold = pageView->_customScrollThreshold;
     }

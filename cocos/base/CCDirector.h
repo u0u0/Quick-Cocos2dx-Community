@@ -117,8 +117,6 @@ public:
     /** returns a shared instance of the director */
     static Director* getInstance();
 
-    /** @deprecated Use getInstance() instead */
-    CC_DEPRECATED_ATTRIBUTE static Director* sharedDirector() { return Director::getInstance(); }
     /**
      * @js ctor
      */

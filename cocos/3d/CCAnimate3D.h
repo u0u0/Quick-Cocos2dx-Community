@@ -88,10 +88,6 @@ public:
     /** animate transition time */
     static float getTransitionTime() { return _transTime; }
     
-    /**get & set play reverse, these are deprecated, use set negative speed instead*/
-    CC_DEPRECATED_ATTRIBUTE bool getPlayBack() const { return _playReverse; }
-    CC_DEPRECATED_ATTRIBUTE void setPlayBack(bool reverse) { _playReverse = reverse; }
-    
 CC_CONSTRUCTOR_ACCESS:
     
     Animate3D();

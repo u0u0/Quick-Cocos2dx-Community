@@ -111,11 +111,6 @@ GLView::~GLView()
 
 }
 
-void GLView::pollInputEvents()
-{
-    pollEvents();
-}
-
 void GLView::pollEvents()
 {
 }

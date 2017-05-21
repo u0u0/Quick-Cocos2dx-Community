@@ -84,15 +84,6 @@ static inline bool luaval_to_point(lua_State* L,int lo,cocos2d::Vec2* outValue, 
     return luaval_to_vec2(L, lo, outValue);
 }
 
-CC_DEPRECATED_ATTRIBUTE static inline bool luaval_to_kmMat4(lua_State* L, int lo, cocos2d::Mat4* outValue , const char* funcName = "")
-{
-    return luaval_to_mat4(L, lo, outValue);
-}
-CC_DEPRECATED_ATTRIBUTE static inline bool luaval_to_array_of_Point(lua_State* L,int lo,cocos2d::Vec2 **points, int *numPoints, const char* funcName = "")
-{
-    return luaval_to_array_of_vec2(L, lo, points, numPoints);
-}
-
 
 template <class T>
 bool luavals_variadic_to_ccvector( lua_State* L, int argc, cocos2d::Vector<T>* ret)
@@ -262,11 +253,6 @@ extern void vertexattrib_to_luaval(lua_State* L, const cocos2d::VertexAttrib& ve
 static inline void point_to_luaval(lua_State* L,const cocos2d::Vec2& pt)
 {
     vec2_to_luaval(L, pt);
-}
-
-CC_DEPRECATED_ATTRIBUTE static inline void points_to_luaval(lua_State* L,const cocos2d::Vec2* points, int count)
-{
-    vec2_array_to_luaval(L, points, count);
 }
 
 template <class T>

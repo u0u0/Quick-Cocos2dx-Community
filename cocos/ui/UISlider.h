@@ -33,15 +33,7 @@ NS_CC_BEGIN
 class Sprite;
 
 namespace ui {
-    class Scale9Sprite;
-    
-typedef enum
-{
-    SLIDER_PERCENTCHANGED
-}SliderEventType;
-
-typedef void (Ref::*SEL_SlidPercentChangedEvent)(Ref*,SliderEventType);
-#define sliderpercentchangedselector(_SELECTOR) (SEL_SlidPercentChangedEvent)(&_SELECTOR)
+class Scale9Sprite;
 
 /**
 *   @js NA
@@ -185,7 +177,6 @@ public:
     /**
      * Add call back function called when slider's percent has changed to slider.
      */
-    CC_DEPRECATED_ATTRIBUTE void addEventListenerSlider(Ref* target,SEL_SlidPercentChangedEvent selector);
     void addEventListener(const ccSliderCallback& callback);
     
     virtual bool onTouchBegan(Touch *touch, Event *unusedEvent) override;
@@ -249,20 +240,6 @@ protected:
 
     Rect _capInsetsBarRenderer;
     Rect _capInsetsProgressBarRenderer;
-
-    Ref*       _sliderEventListener;
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#elif _MSC_VER >= 1400 //vs 2005 or higher
-#pragma warning (push)
-#pragma warning (disable: 4996)
-#endif
-    SEL_SlidPercentChangedEvent    _sliderEventSelector;
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-#pragma GCC diagnostic warning "-Wdeprecated-declarations"
-#elif _MSC_VER >= 1400 //vs 2005 or higher
-#pragma warning (pop)
-#endif
     
     ccSliderCallback  _eventCallback;
     
