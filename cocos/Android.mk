@@ -30,7 +30,6 @@ cocos2d.cpp \
 2d/CCComponent.cpp \
 2d/CCComponentContainer.cpp \
 2d/CCDrawNode.cpp \
-2d/CCDrawingPrimitives.cpp \
 2d/CCFont.cpp \
 2d/CCFontAtlas.cpp \
 2d/CCFontAtlasCache.cpp \
@@ -42,13 +41,9 @@ cocos2d.cpp \
 2d/CCGrid.cpp \
 2d/CCLabel.cpp \
 2d/CCLabelAtlas.cpp \
-2d/CCLabelBMFont.cpp \
-2d/CCLabelTTF.cpp \
 2d/CCLabelTextFormatter.cpp \
 2d/CCLayer.cpp \
 2d/CCLight.cpp \
-2d/CCMenu.cpp \
-2d/CCMenuItem.cpp \
 2d/CCMotionStreak.cpp \
 2d/CCNode.cpp \
 2d/CCNodeGrid.cpp \
@@ -96,7 +91,6 @@ base/CCAutoreleasePool.cpp \
 base/CCConfiguration.cpp \
 base/CCConsole.cpp \
 base/CCData.cpp \
-base/CCDataVisitor.cpp \
 base/CCDirector.cpp \
 base/CCEvent.cpp \
 base/CCEventAcceleration.cpp \
@@ -162,12 +156,6 @@ renderer/CCVertexIndexData.cpp \
 renderer/CCPrimitive.cpp \
 renderer/CCPrimitiveCommand.cpp \
 renderer/CCTrianglesCommand.cpp \
-deprecated/CCArray.cpp \
-deprecated/CCSet.cpp \
-deprecated/CCString.cpp \
-deprecated/CCDictionary.cpp \
-deprecated/CCDeprecated.cpp \
-deprecated/CCNotificationCenter.cpp \
 physics/CCPhysicsBody.cpp \
 physics/CCPhysicsContact.cpp \
 physics/CCPhysicsJoint.cpp \
@@ -247,7 +235,6 @@ LOCAL_MODULE := cocos2dx_static
 LOCAL_MODULE_FILENAME := libcocos2d
 
 LOCAL_STATIC_LIBRARIES := cocostudio_static
-LOCAL_STATIC_LIBRARIES += cocosbuilder_static
 LOCAL_STATIC_LIBRARIES += cocos3d_static
 LOCAL_STATIC_LIBRARIES += spine_static
 LOCAL_STATIC_LIBRARIES += cocos_network_static
@@ -264,12 +251,10 @@ $(call import-module,webp/prebuilt/android)
 $(call import-module,chipmunk/prebuilt/android)
 $(call import-module,3d)
 $(call import-module,audio)
-$(call import-module,editor-support/cocosbuilder)
 $(call import-module,editor-support/cocostudio)
 $(call import-module,editor-support/spine)
 $(call import-module,network)
 $(call import-module,ui)
-$(call import-module,extensions)
 $(call import-module,Box2D)
 $(call import-module,curl/prebuilt/android)
 $(call import-module,websockets/prebuilt/android)

@@ -169,7 +169,7 @@ void EditBoxImplAndroid::setText(const char* pText)
 			
             if (EditBox::InputFlag::PASSWORD == _editBoxInputFlag)
             {
-                long length = cc_utf8_strlen(_text.c_str(), -1);
+                long length = StringUtils::getCharacterCountInUTF8String(_text.c_str());
                 for (long i = 0; i < length; i++)
                 {
                     strToShow.append("*");

@@ -29,7 +29,6 @@ UIHBox.cpp \
 UIVBox.cpp \
 UIRelativeBox.cpp \
 UIVideoPlayer-android.cpp \
-UIDeprecated.cpp \
 UIScale9Sprite.cpp \
 UIWebView.cpp \
 UIWebViewImpl-android.cpp \
@@ -39,7 +38,8 @@ UILayoutComponent.cpp \
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../editor-support
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../editor-support
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/.. \
+	$(LOCAL_PATH)/../platform/android
 
 LOCAL_STATIC_LIBRARIES := cocos_extension_static
 

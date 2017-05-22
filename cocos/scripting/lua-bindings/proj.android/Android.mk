@@ -41,7 +41,6 @@ LOCAL_SRC_FILES := ../manual/CCLuaBridge.cpp \
           ../auto/lua_cocos2dx_auto.cpp \
           ../auto/lua_cocos2dx_physics_auto.cpp \
           ../auto/lua_cocos2dx_experimental_auto.cpp \
-          ../manual/cocos2d/lua_cocos2dx_deprecated.cpp \
           ../manual/cocos2d/lua_cocos2dx_experimental_manual.cpp \
           ../manual/cocos2d/lua_cocos2dx_manual.cpp \
           ../manual/cocos2d/lua_cocos2dx_physics_manual.cpp \
@@ -84,16 +83,6 @@ LOCAL_SRC_FILES += ../manual/network/lua_cocos2dx_network_manual.cpp \
                    ../../../../external/lua/luasocket/udp.c \
                    ../../../../external/lua/luasocket/unix.c \
                    ../../../../external/lua/luasocket/usocket.c
-ifeq ($(CC_USE_CURL),1)
-LOCAL_SRC_FILES += ../manual/network/lua_xml_http_request.cpp
-endif
-
-#cocosbuilder
-ifeq ($(CC_USE_CCBUILDER),1)
-LOCAL_SRC_FILES += ../manual/cocosbuilder/lua_cocos2dx_cocosbuilder_manual.cpp \
-                   ../manual/cocosbuilder/CCBProxy.cpp \
-                   ../auto/lua_cocos2dx_cocosbuilder_auto.cpp
-endif
 
 #cocostudio
 ifeq ($(CC_USE_CCSTUDIO),1)
@@ -121,19 +110,7 @@ LOCAL_SRC_FILES += ../manual/ui/lua_cocos2dx_experimental_webview_manual.cpp \
                    ../auto/lua_cocos2dx_experimental_webview_auto.cpp
 
 #quick
-LOCAL_SRC_FILES += ../../../../external/lua/quick/lua_cocos2dx_quick_manual.cpp \
-                   ../../../../external/lua/quick/LuaEventNode.cpp \
-                   ../../../../external/lua/quick/LuaNodeManager.cpp \
-                   ../../../../external/lua/quick/LuaTouchEventManager.cpp \
-                   ../../../../external/lua/quick/LuaTouchTargetNode.cpp
-
-#extension
-ifeq ($(CC_USE_CURL),1)
-LOCAL_SRC_FILES += \
-../auto/lua_cocos2dx_assetsmanager_auto.cpp
-endif
-LOCAL_SRC_FILES += ../manual/extension/lua_cocos2dx_extension_manual.cpp \
-                   ../auto/lua_cocos2dx_extension_auto.cpp \
+LOCAL_SRC_FILES += ../../../../external/lua/quick/lua_cocos2dx_quick_manual.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../../../../external/lua/luajit/include \
@@ -142,8 +119,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../../../audio \
                     $(LOCAL_PATH)/../../../../external/OpenAL/inc \
                     $(LOCAL_PATH)/../../../2d \
-                    $(LOCAL_PATH)/../../../network \
-                    $(LOCAL_PATH)/../../../editor-support/cocosbuilder \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio/ActionTimeline \
                     $(LOCAL_PATH)/../../../editor-support/spine \
@@ -154,10 +129,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../manual/cocos2d \
                     $(LOCAL_PATH)/../manual/3d \
                     $(LOCAL_PATH)/../manual/audio \
-                    $(LOCAL_PATH)/../manual/network \
-                    $(LOCAL_PATH)/../manual/extension \
                     $(LOCAL_PATH)/../manual/cocostudio \
-                    $(LOCAL_PATH)/../manual/cocosbuilder \
                     $(LOCAL_PATH)/../manual/spine \
                     $(LOCAL_PATH)/../manual/ui \
                     $(LOCAL_PATH)/../../../../external/xxtea \
@@ -172,11 +144,8 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                            $(LOCAL_PATH)/../manual/cocos2d \
                            $(LOCAL_PATH)/../manual/3d \
                            $(LOCAL_PATH)/../manual/audio \
-                           $(LOCAL_PATH)/../manual/network \
-                           $(LOCAL_PATH)/../manual/cocosbuilder \
                            $(LOCAL_PATH)/../manual/cocostudio \
                            $(LOCAL_PATH)/../manual/spine \
-                           $(LOCAL_PATH)/../manual/extension \
                            $(LOCAL_PATH)/../manual/ui \
                            $(LOCAL_PATH)/../../../../external/lua/quick \
                            $(LOCAL_PATH)/../../../..
