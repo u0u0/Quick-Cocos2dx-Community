@@ -20,14 +20,13 @@ using namespace std;
 #define kProjectConfigFrameSize                 32      // -size 960x640
 #define kProjectConfigFrameScale                64      // -scale 1.0
 #define kProjectConfigShowConsole               128     // -console, -disable-console
-#define kProjectConfigLoadPrecompiledFramework  256     // -load-framework, -disable-load-framework
 #define kProjectConfigWriteDebugLogToFile       512     // -write-debug-log, -disable-write-debug-log
 #define kProjectConfigWindowOffset              1024    // -offset {0,0}
 #define kProjectConfigDebugger                  2048    // -debugger-ldt, -debugger-codeide, -disable-debugger
 
 #define kProjectConfigOpenRecent (kProjectConfigProjectDir | kProjectConfigScriptFile | kProjectConfigPackagePath | kProjectConfigWritablePath | kProjectConfigFrameSize | kProjectConfigFrameScale | kProjectConfigShowConsole | kProjectConfigLoadPrecompiledFramework | kProjectConfigWriteDebugLogToFile)
 
-#define kProjectConfigAll (kProjectConfigQuickRootPath | kProjectConfigProjectDir | kProjectConfigScriptFile | kProjectConfigPackagePath | kProjectConfigWritablePath | kProjectConfigFrameSize | kProjectConfigFrameScale | kProjectConfigShowConsole | kProjectConfigLoadPrecompiledFramework | kProjectConfigWriteDebugLogToFile | kProjectConfigWindowOffset | kProjectConfigDebugger)
+#define kProjectConfigAll (kProjectConfigQuickRootPath | kProjectConfigProjectDir | kProjectConfigScriptFile | kProjectConfigPackagePath | kProjectConfigWritablePath | kProjectConfigFrameSize | kProjectConfigFrameScale | kProjectConfigShowConsole | kProjectConfigWriteDebugLogToFile | kProjectConfigWindowOffset | kProjectConfigDebugger)
 
 
 class ProjectConfig
@@ -73,9 +72,6 @@ public:
     bool isShowConsole() const;
     void setShowConsole(bool showConsole);
 
-    bool isLoadPrecompiledFramework() const;
-    void setLoadPrecompiledFramework(bool load);
-
     bool isWriteDebugLogToFile() const;
     void setWriteDebugLogToFile(bool writeDebugLogToFile);
     string getDebugLogFilePath() const;
@@ -100,9 +96,6 @@ public:
     void setQuickCocos2dxRootPath(const string &path);
     string getQuickCocos2dxRootPath() const;
     
-    // get precompiled framework path
-    string getPrecompiledFrameworkPath() const;
-    
     // helper
     static void makeNormalizePath(string *path, const char *directorySeparator = NULL);
 
@@ -116,7 +109,6 @@ private:
     cocos2d::Size _frameSize;
     float _frameScale;
     bool _showConsole;
-    bool _loadPrecompiledFramework;
     bool _writeDebugLogToFile;
 	bool _isMultiLogFiles;
     bool _restartProcess;

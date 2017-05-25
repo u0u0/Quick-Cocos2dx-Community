@@ -135,13 +135,6 @@ void StartupCall::startup()
         FileUtils::getInstance()->addSearchPath(workdir);
     }
     
-    // load framework
-    if (project.isLoadPrecompiledFramework())
-    {
-        const string precompiledFrameworkPath = project.getPrecompiledFrameworkPath();
-        stack->loadChunksFromZIP(precompiledFrameworkPath.c_str());
-    }
-    
     // load script
     string env = "__LUA_STARTUP_FILE__=\"";
     env.append(path);

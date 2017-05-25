@@ -23,7 +23,6 @@ ProjectConfig::ProjectConfig()
     , _frameSize(960, 640)
     , _frameScale(1.0f)
     , _showConsole(true)
-    , _loadPrecompiledFramework(false)
     , _writeDebugLogToFile(true)
 	, _isMultiLogFiles(false)
     , _windowOffset(0, 0)
@@ -52,7 +51,6 @@ void ProjectConfig::resetToWelcome()
     setScriptFile("$(PROJDIR)/src/main.lua");
     setFrameSize(cocos2d::Size(960, 640));
     setFrameScale(1.0f);
-    setLoadPrecompiledFramework(false);
     setPackagePath("");
     setShowConsole(false);
     setWindowOffset(cocos2d::Vec2::ZERO);
@@ -73,7 +71,6 @@ void ProjectConfig::resetToCreator()
     setScriptFile("$(PROJDIR)/src/main.lua");
     setFrameSize(cocos2d::Size(960, 640));
     setFrameScale(1.0f);
-    setLoadPrecompiledFramework(false);
     setPackagePath("");
     setShowConsole(false);
     setWindowOffset(cocos2d::Vec2::ZERO);
@@ -248,16 +245,6 @@ void ProjectConfig::setShowConsole(bool showConsole)
     _showConsole = showConsole;
 }
 
-bool ProjectConfig::isLoadPrecompiledFramework() const
-{
-    return _loadPrecompiledFramework;
-}
-
-void ProjectConfig::setLoadPrecompiledFramework(bool load)
-{
-    _loadPrecompiledFramework = load;
-}
-
 bool ProjectConfig::isWriteDebugLogToFile() const
 {
     return _writeDebugLogToFile;
@@ -394,14 +381,6 @@ void ProjectConfig::parseCommandLine(const vector<string> &args)
         {
             setShowConsole(false);
         }
-        else if (arg.compare("-load-framework") == 0)
-        {
-            setLoadPrecompiledFramework(true);
-        }
-        else if (arg.compare("-disable-load-framework") == 0)
-        {
-            setLoadPrecompiledFramework(false);
-        }
         else if (arg.compare("-offset") == 0)
         {
             ++it;
@@ -520,18 +499,6 @@ string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfigAll *
         else
         {
             buff << " -disable-console";
-        }
-    }
-
-    if (mask & kProjectConfigLoadPrecompiledFramework)
-    {
-        if (isLoadPrecompiledFramework())
-        {
-            buff << " -load-framework";
-        }
-        else
-        {
-            buff << " -disable-load-framework";
         }
     }
 
@@ -712,20 +679,6 @@ void ProjectConfig::setQuickCocos2dxRootPath(const string &path)
 string ProjectConfig::getQuickCocos2dxRootPath() const
 {
     return _quickCocos2dxRootPath;
-}
-
-// load framework
-string ProjectConfig::getPrecompiledFrameworkPath() const
-{
-    string path = _quickCocos2dxRootPath;
-    path.append("quick");
-    path.append(DIRECTORY_SEPARATOR);
-    path.append("lib");
-    path.append(DIRECTORY_SEPARATOR);
-    path.append("framework_precompiled");
-    path.append(DIRECTORY_SEPARATOR);
-    path.append("framework_precompiled.zip");
-    return path;
 }
 
 // helper

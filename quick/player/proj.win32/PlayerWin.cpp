@@ -1,4 +1,4 @@
-﻿
+
 #pragma comment(lib, "comctl32.lib")
 #pragma comment(linker, "\"/manifestdependency:type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='X86' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
@@ -279,21 +279,11 @@ int PlayerWin::run()
 
     if (_project.getProjectDir().empty())
     {
-        if (args.size() >= 2)
-        {
-            // for Code IDE before RC2
-            _project.setProjectDir(args.at(1));
-        }
-        else
-        {
-            _project.resetToWelcome();
-        }
+        _project.resetToWelcome();
     }
 
-    // set framework path
-    if (!_project.isLoadPrecompiledFramework())
-    {
-		FileUtils::getInstance()->addSearchPath(_project.getQuickCocos2dxRootPath() + "quick/");
+    if (!FileUtils::getInstance()->isDirectoryExist(_project.getProjectDir() + "src/framework")) {
+        FileUtils::getInstance()->addSearchPath(_project.getQuickCocos2dxRootPath() + "quick/");
     }
 
     // create the application instance

@@ -1225,71 +1225,6 @@ static int tolua_PlayerLuaCore_ProjectConfig_setShowConsole00(lua_State* tolua_S
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: isLoadPrecompiledFramework of class  ProjectConfig */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_ProjectConfig_isLoadPrecompiledFramework00
-static int tolua_PlayerLuaCore_ProjectConfig_isLoadPrecompiledFramework00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"const ProjectConfig",0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,2,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  const ProjectConfig* self = (const ProjectConfig*)  tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'isLoadPrecompiledFramework'", NULL);
-#endif
-  {
-   bool tolua_ret = (bool)  self->isLoadPrecompiledFramework();
-   tolua_pushboolean(tolua_S,(bool)tolua_ret);
-  }
- }
- return 1;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'isLoadPrecompiledFramework'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: setLoadPrecompiledFramework of class  ProjectConfig */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_ProjectConfig_setLoadPrecompiledFramework00
-static int tolua_PlayerLuaCore_ProjectConfig_setLoadPrecompiledFramework00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"ProjectConfig",0,&tolua_err) ||
-     !tolua_isboolean(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  ProjectConfig* self = (ProjectConfig*)  tolua_tousertype(tolua_S,1,0);
-  bool load = ((bool)  tolua_toboolean(tolua_S,2,0));
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setLoadPrecompiledFramework'", NULL);
-#endif
-  {
-   self->setLoadPrecompiledFramework(load);
-  }
- }
- return 0;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'setLoadPrecompiledFramework'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
 /* method: isWriteDebugLogToFile of class  ProjectConfig */
 #ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_ProjectConfig_isWriteDebugLogToFile00
 static int tolua_PlayerLuaCore_ProjectConfig_isWriteDebugLogToFile00(lua_State* tolua_S)
@@ -3913,8 +3848,6 @@ TOLUA_API int tolua_PlayerLuaCore_open (lua_State* tolua_S)
    tolua_function(tolua_S,"setFrameScale",tolua_PlayerLuaCore_ProjectConfig_setFrameScale00);
    tolua_function(tolua_S,"isShowConsole",tolua_PlayerLuaCore_ProjectConfig_isShowConsole00);
    tolua_function(tolua_S,"setShowConsole",tolua_PlayerLuaCore_ProjectConfig_setShowConsole00);
-   tolua_function(tolua_S,"isLoadPrecompiledFramework",tolua_PlayerLuaCore_ProjectConfig_isLoadPrecompiledFramework00);
-   tolua_function(tolua_S,"setLoadPrecompiledFramework",tolua_PlayerLuaCore_ProjectConfig_setLoadPrecompiledFramework00);
    tolua_function(tolua_S,"isWriteDebugLogToFile",tolua_PlayerLuaCore_ProjectConfig_isWriteDebugLogToFile00);
    tolua_function(tolua_S,"setWriteDebugLogToFile",tolua_PlayerLuaCore_ProjectConfig_setWriteDebugLogToFile00);
    tolua_function(tolua_S,"getDebugLogFilePath",tolua_PlayerLuaCore_ProjectConfig_getDebugLogFilePath00);

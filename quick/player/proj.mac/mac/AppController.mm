@@ -124,11 +124,6 @@ std::string getCurAppName(void)
             if (arg.length()) args.push_back(arg);
         }
 
-        if (args.size() && args.at(1).at(0) == '/')
-        {
-            // for Code IDE before RC2
-            config->setProjectDir(args.at(1));
-        }
         config->parseCommandLine(args);
     }
 
@@ -324,9 +319,7 @@ std::string getCurAppName(void)
         }
     }
     
-    // set framework path
-    if (!_project.isLoadPrecompiledFramework())
-    {
+    if (!FileUtils::getInstance()->isDirectoryExist(_project.getProjectDir() + "src/framework")) {
         FileUtils::getInstance()->addSearchPath(_project.getQuickCocos2dxRootPath() + "quick/");
     }
 
