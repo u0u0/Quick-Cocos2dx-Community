@@ -184,69 +184,8 @@
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\base64\libbase64.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\CCCrypto.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\md5\md5.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\cocos2dFilters.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBlurFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBrightnessFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCContrastFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCCustomFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCDropShadowFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCExposureFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGammaFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGrayFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHazeFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHueFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCMaskFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCRGBFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSaturationFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSepiaFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSharpenFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCTestFilter.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\nodes\CCFilteredSprite.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShaders.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_blur_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_brightness_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_colorramp_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_contrast_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_drop_shadow_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_drop_shadow_vert.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_embossmov_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_emboss_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_exposure_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gamma_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_blur_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_hblur_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_vblur_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_grass_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gray_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_haze_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_hblur_vert.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_hue_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_motion_blur_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_motion_blur_vert.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_rgb_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_saturation_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_sepia_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_sharpen_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_sharpen_vert.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_test_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_test_vert.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_vblur_vert.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_zoom_blur_frag.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\FilterShaders.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_filter_auto.hpp" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.hpp" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.hpp" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGNode.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\fontstash.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg_gl.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg_gl_utils.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\stb_image.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\native\CCAlertViewDelegate.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\native\CCNative.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCHTTPRequest.h" />
@@ -330,7 +269,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
-	<ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.cpp" />
+    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\lunqlite.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -364,34 +303,8 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBlurFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBrightnessFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCContrastFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCCustomFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCDropShadowFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCExposureFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGammaFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGrayFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHazeFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHueFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCMaskFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCRGBFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSaturationFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSepiaFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSharpenFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCTestFilter.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\nodes\CCFilteredSprite.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShaders.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\FilterShaders.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_filter_auto.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg.c" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCHTTPRequest.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCNetwork.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\platform\win32\CCCryptoWin32.cpp" />

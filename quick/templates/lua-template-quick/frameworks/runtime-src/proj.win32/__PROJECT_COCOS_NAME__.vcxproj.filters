@@ -46,9 +46,6 @@
     <Filter Include="Classes\quick-src\extra\crypto">
       <UniqueIdentifier>{7e3dbde2-df3c-4bbf-ab9e-34dd5bf5ef9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\quick-src\extra\filters">
-      <UniqueIdentifier>{6faab872-065b-4db7-a25d-2b80369f92f8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\quick-src\extra\luabinding">
       <UniqueIdentifier>{0103a6d5-696d-4bfa-a65f-d6e7e450961d}</UniqueIdentifier>
     </Filter>
@@ -64,29 +61,11 @@
     <Filter Include="Classes\quick-src\extra\crypto\md5">
       <UniqueIdentifier>{28265feb-9322-4a92-8284-4abc0eff2b4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\quick-src\extra\filters\filters">
-      <UniqueIdentifier>{26c18c3d-b960-4e0f-8800-481cfe493dc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\quick-src\extra\filters\nodes">
-      <UniqueIdentifier>{a48a1cea-c5ef-495b-86d9-2ebdf429c397}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\quick-src\extra\filters\shaders">
-      <UniqueIdentifier>{60bdd51e-c896-4df5-900e-ca406ff1eeb3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\quick-src\extra\platform\win32">
       <UniqueIdentifier>{b3d6a935-2621-49c5-8826-58b4ead63030}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\quick-src\extra\network">
       <UniqueIdentifier>{d59a0a12-68d3-4a43-8838-b3766f549d16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\quick-src\extra\nanovg">
-      <UniqueIdentifier>{742c72c8-4692-4432-9fd6-8c294632f1cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\quick-src\extra\nanovg\nanovg">
-      <UniqueIdentifier>{4fc7959d-3eb7-4afe-9bf6-fea3ba431707}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\quick-src\extra\nanovg\nanonode">
-      <UniqueIdentifier>{fa2bffea-5bf4-480a-a40f-2b3499c85bbb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\quick-src\lua_extensions\protobuf">
       <UniqueIdentifier>{8de054e7-cb4f-473d-ae26-e8cb1fa744c2}</UniqueIdentifier>
@@ -157,163 +136,10 @@
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\md5\md5.h">
       <Filter>Classes\quick-src\extra\crypto\md5</Filter>
     </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBlurFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBrightnessFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCContrastFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCCustomFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCDropShadowFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCExposureFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGammaFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGrayFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHazeFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHueFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCMaskFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCRGBFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSaturationFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSepiaFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSharpenFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCTestFilter.h">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_blur_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_brightness_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_colorramp_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_contrast_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_drop_shadow_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_drop_shadow_vert.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_emboss_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_embossmov_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_exposure_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gamma_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_blur_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_hblur_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_vblur_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_grass_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_gray_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_haze_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_hblur_vert.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_hue_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_motion_blur_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_motion_blur_vert.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_rgb_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_saturation_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_sepia_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_sharpen_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_sharpen_vert.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_test_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_test_vert.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_vblur_vert.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShader_zoom_blur_frag.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShaders.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\FilterShaders.h">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\nodes\CCFilteredSprite.h">
-      <Filter>Classes\quick-src\extra\filters\nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\cocos2dFilters.h">
-      <Filter>Classes\quick-src\extra\filters</Filter>
-    </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_filter_auto.hpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\native\CCAlertViewDelegate.h">
@@ -336,36 +162,6 @@
     </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCNetwork.h">
       <Filter>Classes\quick-src\extra\network</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\fontstash.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg_gl.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg_gl_utils.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\stb_image.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanonode</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGNode.h">
-      <Filter>Classes\quick-src\extra\nanovg\nanonode</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.hpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.hpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h">
@@ -460,73 +256,10 @@
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\md5\md5.c">
       <Filter>Classes\quick-src\extra\crypto\md5</Filter>
     </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBlurFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCBrightnessFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCContrastFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCCustomFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCDropShadowFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCExposureFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGammaFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCGrayFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHazeFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCHueFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCMaskFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCRGBFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSaturationFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSepiaFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCSharpenFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\filters\CCTestFilter.cpp">
-      <Filter>Classes\quick-src\extra\filters\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\ccFilterShaders.cpp">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\shaders\FilterShaders.cpp">
-      <Filter>Classes\quick-src\extra\filters\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\filters\nodes\CCFilteredSprite.cpp">
-      <Filter>Classes\quick-src\extra\filters\nodes</Filter>
-    </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_filter_auto.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\platform\win32\CCCryptoWin32.cpp">
@@ -546,21 +279,6 @@
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCNetwork.cpp">
       <Filter>Classes\quick-src\extra\network</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanovg\nanovg.c">
-      <Filter>Classes\quick-src\extra\nanovg\nanovg</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.cpp">
-      <Filter>Classes\quick-src\extra\nanovg\nanonode</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp">
-      <Filter>Classes\quick-src\extra\nanovg\nanonode</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.cpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\protobuf\pb.c">
       <Filter>Classes\quick-src\lua_extensions\protobuf</Filter>
