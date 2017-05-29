@@ -175,16 +175,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.hpp" />
-    <ClInclude Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.hpp" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGNode.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\fontstash.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg_gl.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg_gl_utils.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_image.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.h" />
@@ -213,59 +203,8 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\base64\libbase64.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\CCCrypto.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\md5\md5.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\cocos2dFilters.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCBlurFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCBrightnessFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCContrastFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCCustomFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCDropShadowFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCExposureFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCGammaFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCGrayFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCHazeFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCHueFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCMaskFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCRGBFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCSaturationFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCSepiaFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCSharpenFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\filters\CCTestFilter.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\nodes\CCFilteredSprite.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShaders.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_blur_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_brightness_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_colorramp_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_contrast_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_drop_shadow_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_drop_shadow_vert.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_embossmov_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_emboss_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_exposure_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_gamma_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_blur_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_hblur_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_gaussian_vblur_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_grass_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_gray_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_haze_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_hblur_vert.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_hue_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_motion_blur_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_motion_blur_vert.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_rgb_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_saturation_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_sepia_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_sharpen_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_sharpen_vert.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_test_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_test_vert.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_vblur_vert.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShader_zoom_blur_frag.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\filters\shaders\FilterShaders.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_filter_auto.hpp" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\cjson\fpconv.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\cjson\lua_cjson.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\cjson\strbuf.h" />
@@ -295,11 +234,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_auto.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_nanovg_manual.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg.c" />
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -407,29 +341,8 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCBlurFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCBrightnessFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCContrastFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCCustomFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCDropShadowFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCExposureFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCGammaFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCGrayFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCHazeFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCHueFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCMaskFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCRGBFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCSaturationFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCSepiaFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCSharpenFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\filters\CCTestFilter.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\nodes\CCFilteredSprite.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\shaders\ccFilterShaders.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\filters\shaders\FilterShaders.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\luabinding\lua_cocos2dx_extension_filter_auto.cpp" />
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\cjson\fpconv.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
