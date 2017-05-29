@@ -428,18 +428,6 @@ void UserDefault::destroyInstance()
     CC_SAFE_DELETE(_userDefault);
 }
 
-// FIXME:: deprecated
-UserDefault* UserDefault::sharedUserDefault()
-{
-    return UserDefault::getInstance();
-}
-
-// FIXME:: deprecated
-void UserDefault::purgeSharedUserDefault()
-{
-    return UserDefault::destroyInstance();
-}
-
 bool UserDefault::isXMLFileExist()
 {
     FILE *fp = fopen(_filePath.c_str(), "r");
