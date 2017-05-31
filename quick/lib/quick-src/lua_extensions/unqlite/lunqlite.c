@@ -131,7 +131,7 @@ static int lunqlite_rollback(lua_State* L){
 	return 1;
 }
 
-static const luaL_reg unqlitelib[] = {
+static const luaL_Reg unqlitelib[] = {
 	{"open",   lunqlite_open},
 	{"close",   lunqlite_close},
 	{"store",   lunqlite_store},

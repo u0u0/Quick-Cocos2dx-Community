@@ -20,30 +20,6 @@
 #define RD_AUDIO_BUFFER "Rapid2D_CAudioBuffer"
 #define RD_AUDIO_SOURCE "Rapid2D_CAudioPlayer"
 
-#if !defined(LUA_VERSION_NUM) || LUA_VERSION_NUM < 502
-/* Compatibility for Lua 5.1.
- *
- * luaL_setfuncs() is used to create a module table where the functions have
- * json_config_t as their first upvalue. Code borrowed from Lua 5.2 source. */
-static void luaL_setfuncs (lua_State *l, const luaL_Reg *reg, int nup)
-{
-    int i;
-    
-    luaL_checkstack(l, nup, "too many upvalues");
-    for (; reg->name != NULL; reg++) {  /* fill the table with given functions */
-        for (i = 0; i < nup; i++)  /* copy upvalues to the top */
-            lua_pushvalue(l, -nup);
-        lua_pushcclosure(l, reg->func, nup);  /* closure with those upvalues */
-        lua_setfield(l, -(nup + 2), reg->name);
-    }
-    lua_pop(l, nup);  /* remove upvalues */
-}
-
-#define luaL_newlib(L,f)	luaL_register(L,"Rapid2D_CAudio",f)
-
-#endif
-
-
 static void callback(int handler, ALuint bufferID)
 {
     lua_State * L = cocos2d::LuaEngine::getInstance()->getLuaStack()->getLuaState();
@@ -230,7 +206,7 @@ TOLUA_API int register_audio_module(lua_State* L)
         lua_pop(L, 1);  /* pop new metatable */
         
         // binding userdata to new metatable
-        luaL_newlib(L, audio_funcs);
+        luaL_register(L,"Rapid2D_CAudio", audio_funcs);
     }
     lua_pop(L, 1);
     
