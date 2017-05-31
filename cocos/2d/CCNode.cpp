@@ -1617,6 +1617,11 @@ void Node::pause()
 // override me
 void Node::update(float fDelta)
 {
+    if (_componentContainer && !_componentContainer->isEmpty())
+    {
+        _componentContainer->visit(fDelta);
+    }
+
 #if CC_ENABLE_SCRIPT_BINDING
     if (0 != _updateScriptHandler)
     {
@@ -1626,11 +1631,6 @@ void Node::update(float fDelta)
         ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&event);
     }
 #endif
-    
-    if (_componentContainer && !_componentContainer->isEmpty())
-    {
-        _componentContainer->visit(fDelta);
-    }
 }
 
 // MARK: coordinates
