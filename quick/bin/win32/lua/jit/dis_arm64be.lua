@@ -1,17 +1,12 @@
 ----------------------------------------------------------------------------
--- LuaJIT x64 disassembler wrapper module.
+-- LuaJIT ARM64BE disassembler wrapper module.
 --
 -- Copyright (C) 2005-2017 Mike Pall. All rights reserved.
 -- Released under the MIT license. See Copyright Notice in luajit.h
 ----------------------------------------------------------------------------
--- This module just exports the 64 bit functions from the combined
--- x86/x64 disassembler module. All the interesting stuff is there.
+-- ARM64 instructions are always little-endian. So just forward to the
+-- common ARM64 disassembler module. All the interesting stuff is there.
 ------------------------------------------------------------------------------
 
-local dis_x86 = require((string.match(..., ".*%.") or "").."dis_x86")
-return {
-  create = dis_x86.create64,
-  disass = dis_x86.disass64,
-  regname = dis_x86.regname64
-}
+return require((string.match(..., ".*%.") or "").."dis_arm64")
 
