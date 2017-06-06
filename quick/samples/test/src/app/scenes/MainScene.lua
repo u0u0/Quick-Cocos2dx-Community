@@ -8,6 +8,7 @@ function MainScene:ctor()
 		"Test_NodeEvent",
 		"Test_KeypadEvent",
 		"Test_NodeTouchEvent",
+		"Test_CocosStudio",
 	}
 
 	local scrollView = ccui.ScrollView:create()

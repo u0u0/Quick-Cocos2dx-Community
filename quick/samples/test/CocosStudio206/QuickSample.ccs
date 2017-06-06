@@ -1,0 +1,28 @@
+<Solution>
+  <PropertyGroup Name="QuickSample" Version="2.0.6.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="css">
+          <Folder Name="images">
+            <Image Name="BS01.png" />
+            <Image Name="BS02.png" />
+            <Image Name="BS03.png" />
+            <Image Name="BS04.png" />
+            <Image Name="BS05.png" />
+            <Image Name="BS06.png" />
+            <Image Name="BS08.png" />
+            <Image Name="BS09.png" />
+            <Image Name="BS10.png" />
+            <Image Name="BS11.png" />
+            <Image Name="BS12.png" />
+            <Image Name="BS13.png" />
+            <Image Name="BS14.png" />
+          </Folder>
+          <Project Name="NodeCell.csd" />
+          <Project Name="NodeFullScreen.csd" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
