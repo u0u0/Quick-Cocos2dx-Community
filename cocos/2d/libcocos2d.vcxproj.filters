@@ -358,9 +358,6 @@
     <ClCompile Include="CCNodeGrid.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="CCParallaxNode.cpp">
-      <Filter>2d</Filter>
-    </ClCompile>
     <ClCompile Include="CCParticleBatchNode.cpp">
       <Filter>2d</Filter>
     </ClCompile>
@@ -395,9 +392,6 @@
       <Filter>2d</Filter>
     </ClCompile>
     <ClCompile Include="CCTextFieldTTF.cpp">
-      <Filter>2d</Filter>
-    </ClCompile>
-    <ClCompile Include="CCTileMapAtlas.cpp">
       <Filter>2d</Filter>
     </ClCompile>
     <ClCompile Include="CCTMXLayer.cpp">
@@ -1288,9 +1282,6 @@
     <ClInclude Include="CCNodeGrid.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="CCParallaxNode.h">
-      <Filter>2d</Filter>
-    </ClInclude>
     <ClInclude Include="CCParticleBatchNode.h">
       <Filter>2d</Filter>
     </ClInclude>
@@ -1325,9 +1316,6 @@
       <Filter>2d</Filter>
     </ClInclude>
     <ClInclude Include="CCTextFieldTTF.h">
-      <Filter>2d</Filter>
-    </ClInclude>
-    <ClInclude Include="CCTileMapAtlas.h">
       <Filter>2d</Filter>
     </ClInclude>
     <ClInclude Include="CCTMXLayer.h">

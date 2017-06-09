@@ -47,7 +47,6 @@ cocos2d.cpp \
 2d/CCMotionStreak.cpp \
 2d/CCNode.cpp \
 2d/CCNodeGrid.cpp \
-2d/CCParallaxNode.cpp \
 2d/CCParticleBatchNode.cpp \
 2d/CCParticleExamples.cpp \
 2d/CCParticleSystem.cpp \
@@ -67,7 +66,6 @@ cocos2d.cpp \
 2d/CCFastTMXTiledMap.cpp \
 2d/CCTMXXMLParser.cpp \
 2d/CCTextFieldTTF.cpp \
-2d/CCTileMapAtlas.cpp \
 2d/CCTransition.cpp \
 2d/CCTransitionPageTurn.cpp \
 2d/CCTransitionProgress.cpp \

@@ -67,7 +67,6 @@ struct transformValues_;
  *
  *  - The Alias/Antialias property belongs to `SpriteBatchNode`, so you can't individually set the aliased property.
  *  - The Blending function property belongs to `SpriteBatchNode`, so you can't individually set the blending function property.
- *  - `ParallaxNode` is not supported, but can be simulated with a "proxy" sprite.
  *  - Sprites can only have other Sprites (or subclasses of Sprite) as children.
  *
  * The default anchorPoint in Sprite is (0.5, 0.5).

@@ -51,6 +51,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\auto\lua_cocos2dx_tmx_auto.cpp">
+      <Filter>auto</Filter>
+    </ClCompile>
     <ClCompile Include="..\auto\lua_cocos2dx_auto.cpp">
       <Filter>auto</Filter>
     </ClCompile>
@@ -218,6 +221,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\auto\lua_cocos2dx_tmx_auto.hpp">
+      <Filter>auto</Filter>
+    </ClInclude>
     <ClInclude Include="..\auto\lua_cocos2dx_auto.hpp">
       <Filter>auto</Filter>
     </ClInclude>

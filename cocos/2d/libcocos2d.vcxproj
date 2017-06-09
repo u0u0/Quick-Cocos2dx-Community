@@ -628,7 +628,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClCompile Include="CCMotionStreak.cpp" />
     <ClCompile Include="CCNode.cpp" />
     <ClCompile Include="CCNodeGrid.cpp" />
-    <ClCompile Include="CCParallaxNode.cpp" />
     <ClCompile Include="CCParticleBatchNode.cpp" />
     <ClCompile Include="CCParticleExamples.cpp" />
     <ClCompile Include="CCParticleSystem.cpp" />
@@ -642,7 +641,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClCompile Include="CCSpriteFrame.cpp" />
     <ClCompile Include="CCSpriteFrameCache.cpp" />
     <ClCompile Include="CCTextFieldTTF.cpp" />
-    <ClCompile Include="CCTileMapAtlas.cpp" />
     <ClCompile Include="CCTMXLayer.cpp" />
     <ClCompile Include="CCTMXObjectGroup.cpp" />
     <ClCompile Include="CCTMXTiledMap.cpp" />
@@ -998,7 +996,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="CCMotionStreak.h" />
     <ClInclude Include="CCNode.h" />
     <ClInclude Include="CCNodeGrid.h" />
-    <ClInclude Include="CCParallaxNode.h" />
     <ClInclude Include="CCParticleBatchNode.h" />
     <ClInclude Include="CCParticleExamples.h" />
     <ClInclude Include="CCParticleSystem.h" />
@@ -1012,7 +1009,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="CCSpriteFrame.h" />
     <ClInclude Include="CCSpriteFrameCache.h" />
     <ClInclude Include="CCTextFieldTTF.h" />
-    <ClInclude Include="CCTileMapAtlas.h" />
     <ClInclude Include="CCTMXLayer.h" />
     <ClInclude Include="CCTMXObjectGroup.h" />
     <ClInclude Include="CCTMXTiledMap.h" />
