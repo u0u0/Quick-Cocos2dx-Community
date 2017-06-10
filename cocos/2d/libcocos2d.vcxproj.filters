@@ -328,9 +328,6 @@
     <ClCompile Include="CCFontFreeType.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="CCGLBufferedNode.cpp">
-      <Filter>2d</Filter>
-    </ClCompile>
     <ClCompile Include="CCGrabber.cpp">
       <Filter>2d</Filter>
     </ClCompile>
@@ -1250,9 +1247,6 @@
       <Filter>2d</Filter>
     </ClInclude>
     <ClInclude Include="CCFontFreeType.h">
-      <Filter>2d</Filter>
-    </ClInclude>
-    <ClInclude Include="CCGLBufferedNode.h">
       <Filter>2d</Filter>
     </ClInclude>
     <ClInclude Include="CCGrabber.h">

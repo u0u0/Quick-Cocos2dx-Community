@@ -617,7 +617,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClCompile Include="CCFontCharMap.cpp" />
     <ClCompile Include="CCFontFNT.cpp" />
     <ClCompile Include="CCFontFreeType.cpp" />
-    <ClCompile Include="CCGLBufferedNode.cpp" />
     <ClCompile Include="CCGrabber.cpp" />
     <ClCompile Include="CCGrid.cpp" />
     <ClCompile Include="CCLabel.cpp" />
@@ -985,7 +984,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="CCFontCharMap.h" />
     <ClInclude Include="CCFontFNT.h" />
     <ClInclude Include="CCFontFreeType.h" />
-    <ClInclude Include="CCGLBufferedNode.h" />
     <ClInclude Include="CCGrabber.h" />
     <ClInclude Include="CCGrid.h" />
     <ClInclude Include="CCLabel.h" />
