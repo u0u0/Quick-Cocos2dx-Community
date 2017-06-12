@@ -30,11 +30,9 @@
 		50D7C96C17EBBEDF005D0B91 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96B17EBBEDF005D0B91 /* OpenGL.framework */; };
 		50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96D17EBBEE6005D0B91 /* AppKit.framework */; };
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
-		9F72892B1A24957700EE0234 /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288311A24957700EE0234 /* HelperFunc.cpp */; };
 		9F72892C1A24957700EE0234 /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288361A24957700EE0234 /* libbase64.c */; };
 		9F72892D1A24957700EE0234 /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288381A24957700EE0234 /* CCCrypto.cpp */; };
 		9F7289611A24957700EE0234 /* cocos2dx_extra_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288A71A24957700EE0234 /* cocos2dx_extra_luabinding.cpp */; };
-		9F7289631A24957700EE0234 /* HelperFunc_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288AA1A24957700EE0234 /* HelperFunc_luabinding.cpp */; };
 		9F7289661A24957700EE0234 /* CCHTTPRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288B31A24957700EE0234 /* CCHTTPRequest.cpp */; };
 		9F7289671A24957700EE0234 /* CCNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288B61A24957700EE0234 /* CCNetwork.cpp */; };
 		9F7289781A24957700EE0234 /* CCNetworkIOSMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288D61A24957700EE0234 /* CCNetworkIOSMac.mm */; };
@@ -163,8 +161,6 @@
 		50D7C96B17EBBEDF005D0B91 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		50D7C96D17EBBEE6005D0B91 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		9F7288311A24957700EE0234 /* HelperFunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunc.cpp; sourceTree = "<group>"; };
-		9F7288321A24957700EE0234 /* HelperFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunc.h; sourceTree = "<group>"; };
 		9F7288331A24957700EE0234 /* cocos2dx_extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dx_extra.h; sourceTree = "<group>"; };
 		9F7288361A24957700EE0234 /* libbase64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libbase64.c; sourceTree = "<group>"; };
 		9F7288371A24957700EE0234 /* libbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libbase64.h; sourceTree = "<group>"; };
@@ -172,8 +168,6 @@
 		9F7288391A24957700EE0234 /* CCCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCrypto.h; sourceTree = "<group>"; };
 		9F7288A71A24957700EE0234 /* cocos2dx_extra_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocos2dx_extra_luabinding.cpp; sourceTree = "<group>"; };
 		9F7288A81A24957700EE0234 /* cocos2dx_extra_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dx_extra_luabinding.h; sourceTree = "<group>"; };
-		9F7288AA1A24957700EE0234 /* HelperFunc_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunc_luabinding.cpp; sourceTree = "<group>"; };
-		9F7288AB1A24957700EE0234 /* HelperFunc_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunc_luabinding.h; sourceTree = "<group>"; };
 		9F7288B01A24957700EE0234 /* CCAlertViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAlertViewDelegate.h; sourceTree = "<group>"; };
 		9F7288B11A24957700EE0234 /* CCNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNative.h; sourceTree = "<group>"; };
 		9F7288B31A24957700EE0234 /* CCHTTPRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHTTPRequest.cpp; sourceTree = "<group>"; };
@@ -409,15 +403,6 @@
 			path = extra;
 			sourceTree = "<group>";
 		};
-		9F7288301A24957700EE0234 /* apptools */ = {
-			isa = PBXGroup;
-			children = (
-				9F7288311A24957700EE0234 /* HelperFunc.cpp */,
-				9F7288321A24957700EE0234 /* HelperFunc.h */,
-			);
-			path = apptools;
-			sourceTree = "<group>";
-		};
 		9F7288341A24957700EE0234 /* crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,8 +427,6 @@
 			children = (
 				9F7288A71A24957700EE0234 /* cocos2dx_extra_luabinding.cpp */,
 				9F7288A81A24957700EE0234 /* cocos2dx_extra_luabinding.h */,
-				9F7288AA1A24957700EE0234 /* HelperFunc_luabinding.cpp */,
-				9F7288AB1A24957700EE0234 /* HelperFunc_luabinding.h */,
 			);
 			path = luabinding;
 			sourceTree = "<group>";
@@ -813,7 +796,6 @@
 				0AA993221DAF389F002339DC /* pb.c in Sources */,
 				0450D5F51D05B05F00B9B05E /* lunqlite.c in Sources */,
 				9FD0193419F8C4D4005E0C49 /* PlayerTaskServiceProtocol.cpp in Sources */,
-				9F72892B1A24957700EE0234 /* HelperFunc.cpp in Sources */,
 				0450D5F61D05B05F00B9B05E /* unqlite.c in Sources */,
 				9FD01B2919F8C6A3005E0C49 /* PlayerMessageBoxServiceMac.mm in Sources */,
 				9FD01B2D19F8C6BA005E0C49 /* AppController.mm in Sources */,
@@ -836,7 +818,6 @@
 				9F72898A1A24957700EE0234 /* lua_cjson.c in Sources */,
 				0A532A8D1E62FE19004E2B32 /* lpcode.c in Sources */,
 				0A532A8C1E62FE19004E2B32 /* lpcap.c in Sources */,
-				9F7289631A24957700EE0234 /* HelperFunc_luabinding.cpp in Sources */,
 				9F72892C1A24957700EE0234 /* libbase64.c in Sources */,
 				9FD01B1219F8C69C005E0C49 /* ConsoleWindowController.m in Sources */,
 				9F7289661A24957700EE0234 /* CCHTTPRequest.cpp in Sources */,

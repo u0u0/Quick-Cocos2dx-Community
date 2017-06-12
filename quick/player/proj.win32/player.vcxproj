@@ -199,12 +199,10 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\Classes\PlayerSettings.h" />
     <ClInclude Include="..\Classes\PlayerTaskServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerUtils.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\apptools\HelperFunc.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\base64\libbase64.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\CCCrypto.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\md5\md5.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h" />
-    <ClInclude Include="..\..\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\cjson\fpconv.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\cjson\lua_cjson.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\cjson\strbuf.h" />
@@ -315,7 +313,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\Classes\PlayerSettings.cpp" />
     <ClCompile Include="..\Classes\PlayerTaskServiceProtocol.cpp" />
     <ClCompile Include="..\Classes\PlayerUtils.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\apptools\HelperFunc.cpp" />
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -342,7 +339,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp" />
-    <ClCompile Include="..\..\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp" />
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\cjson\fpconv.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

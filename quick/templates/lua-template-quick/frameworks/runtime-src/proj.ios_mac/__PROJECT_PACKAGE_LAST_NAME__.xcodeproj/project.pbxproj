@@ -75,8 +75,6 @@
 		9F91071A19F5614900AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061A19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.cpp */; };
 		9F91071E19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */; };
 		9F91071F19F5614900AD5CAB /* cocos2dx_extra_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */; };
-		9F91072219F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91062019F5614800AD5CAB /* HelperFunc_luabinding.cpp */; };
-		9F91072319F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91062019F5614800AD5CAB /* HelperFunc_luabinding.cpp */; };
 		9F91072619F5614900AD5CAB /* CCHTTPRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91062719F5614800AD5CAB /* CCHTTPRequest.cpp */; };
 		9F91072719F5614900AD5CAB /* CCHTTPRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91062719F5614800AD5CAB /* CCHTTPRequest.cpp */; };
 		9F91072819F5614900AD5CAB /* CCNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91062A19F5614800AD5CAB /* CCNetwork.cpp */; };
@@ -126,8 +124,6 @@
 		9F91077F19F5614900AD5CAB /* lua_extensions_more.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F91068219F5614800AD5CAB /* lua_extensions_more.c */; };
 		9F91078019F5614900AD5CAB /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F91068519F5614800AD5CAB /* lua_zlib.c */; };
 		9F91078119F5614900AD5CAB /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F91068519F5614800AD5CAB /* lua_zlib.c */; };
-		9F91078619F561CD00AD5CAB /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105A719F5614800AD5CAB /* HelperFunc.cpp */; };
-		9F91078719F561CD00AD5CAB /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F9105A719F5614800AD5CAB /* HelperFunc.cpp */; };
 		9F91078919F5628A00AD5CAB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F91078819F5628A00AD5CAB /* SystemConfiguration.framework */; };
 		9F91079419F56A6600AD5CAB /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */; };
 		9F91079519F56A6600AD5CAB /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F91079019F56A6600AD5CAB /* ProjectConfig.cpp */; };
@@ -277,8 +273,6 @@
 		521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		9F598A0719F5F3A6006015D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		9F598A0A19F5F4F4006015D6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
-		9F9105A719F5614800AD5CAB /* HelperFunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelperFunc.cpp; path = "quick/lib/quick-src/extra/apptools/HelperFunc.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F9105A819F5614800AD5CAB /* HelperFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelperFunc.h; path = "quick/lib/quick-src/extra/apptools/HelperFunc.h"; sourceTree = QUICK_V3_ROOT; };
 		9F9105A919F5614800AD5CAB /* cocos2dx_extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cocos2dx_extra.h; path = "quick/lib/quick-src/extra/cocos2dx_extra.h"; sourceTree = QUICK_V3_ROOT; };
 		9F9105AC19F5614800AD5CAB /* libbase64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libbase64.c; path = "quick/lib/quick-src/extra/crypto/base64/libbase64.c"; sourceTree = QUICK_V3_ROOT; };
 		9F9105AD19F5614800AD5CAB /* libbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libbase64.h; path = "quick/lib/quick-src/extra/crypto/base64/libbase64.h"; sourceTree = QUICK_V3_ROOT; };
@@ -288,8 +282,6 @@
 		9F91061B19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cocos2dx_extra_ios_iap_luabinding.h; path = "quick/lib/quick-src/extra/luabinding/cocos2dx_extra_ios_iap_luabinding.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cocos2dx_extra_luabinding.cpp; path = "quick/lib/quick-src/extra/luabinding/cocos2dx_extra_luabinding.cpp"; sourceTree = QUICK_V3_ROOT; };
 		9F91061E19F5614800AD5CAB /* cocos2dx_extra_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cocos2dx_extra_luabinding.h; path = "quick/lib/quick-src/extra/luabinding/cocos2dx_extra_luabinding.h"; sourceTree = QUICK_V3_ROOT; };
-		9F91062019F5614800AD5CAB /* HelperFunc_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelperFunc_luabinding.cpp; path = "quick/lib/quick-src/extra/luabinding/HelperFunc_luabinding.cpp"; sourceTree = QUICK_V3_ROOT; };
-		9F91062119F5614800AD5CAB /* HelperFunc_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelperFunc_luabinding.h; path = "quick/lib/quick-src/extra/luabinding/HelperFunc_luabinding.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91062419F5614800AD5CAB /* CCAlertViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAlertViewDelegate.h; path = "quick/lib/quick-src/extra/native/CCAlertViewDelegate.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91062519F5614800AD5CAB /* CCNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCNative.h; path = "quick/lib/quick-src/extra/native/CCNative.h"; sourceTree = QUICK_V3_ROOT; };
 		9F91062719F5614800AD5CAB /* CCHTTPRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCHTTPRequest.cpp; path = "quick/lib/quick-src/extra/network/CCHTTPRequest.cpp"; sourceTree = QUICK_V3_ROOT; };
@@ -563,15 +555,6 @@
 			path = extra;
 			sourceTree = "<group>";
 		};
-		9F9105A619F5614800AD5CAB /* apptools */ = {
-			isa = PBXGroup;
-			children = (
-				9F9105A719F5614800AD5CAB /* HelperFunc.cpp */,
-				9F9105A819F5614800AD5CAB /* HelperFunc.h */,
-			);
-			path = apptools;
-			sourceTree = "<group>";
-		};
 		9F9105AA19F5614800AD5CAB /* crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,8 +581,6 @@
 				9F91061B19F5614800AD5CAB /* cocos2dx_extra_ios_iap_luabinding.h */,
 				9F91061D19F5614800AD5CAB /* cocos2dx_extra_luabinding.cpp */,
 				9F91061E19F5614800AD5CAB /* cocos2dx_extra_luabinding.h */,
-				9F91062019F5614800AD5CAB /* HelperFunc_luabinding.cpp */,
-				9F91062119F5614800AD5CAB /* HelperFunc_luabinding.h */,
 			);
 			path = luabinding;
 			sourceTree = "<group>";
@@ -1072,7 +1053,6 @@
 				9F91074D19F5614900AD5CAB /* ReachabilityIOSMac.m in Sources */,
 				9F91076D19F5614900AD5CAB /* fpconv.c in Sources */,
 				9F9106B719F5614900AD5CAB /* CCCrypto.cpp in Sources */,
-				9F91078619F561CD00AD5CAB /* HelperFunc.cpp in Sources */,
 				9F91079519F56A6600AD5CAB /* ProjectConfig.cpp in Sources */,
 				9F91077719F5614900AD5CAB /* lfs.c in Sources */,
 				9F91077B19F5614900AD5CAB /* lsqlite3.c in Sources */,
@@ -1084,7 +1064,6 @@
 				9F91077919F5614900AD5CAB /* lpack.c in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
 				9F91074B19F5614900AD5CAB /* CCNetworkIOSMac.mm in Sources */,
-				9F91072319F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				9F91077D19F5614900AD5CAB /* sqlite3.c in Sources */,
 				0A532A611E62FB06004E2B32 /* lpprint.c in Sources */,
 				9F91075119F5614900AD5CAB /* CCNative.mm in Sources */,
@@ -1121,7 +1100,6 @@
 				0A532A621E62FB06004E2B32 /* lptree.c in Sources */,
 				9F91074019F5614900AD5CAB /* SBJSON.m in Sources */,
 				9F91073E19F5614900AD5CAB /* CCStoreReceiptVerifyRequestIOS.mm in Sources */,
-				9F91072219F5614900AD5CAB /* HelperFunc_luabinding.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				9F91076819F5614900AD5CAB /* CCStoreProduct.cpp in Sources */,
 				0A532A5C1E62FB06004E2B32 /* lpcap.c in Sources */,
@@ -1146,7 +1124,6 @@
 				9F91076619F5614900AD5CAB /* CCStorePaymentTransaction.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				9F91072819F5614900AD5CAB /* CCNetwork.cpp in Sources */,
-				9F91078719F561CD00AD5CAB /* HelperFunc.cpp in Sources */,
 				9F91073C19F5614900AD5CAB /* CCStorePaymentTransactionWrapper.mm in Sources */,
 				0A532A641E62FB06004E2B32 /* lpvm.c in Sources */,
 				9F9106B419F5614900AD5CAB /* libbase64.c in Sources */,

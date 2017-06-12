@@ -8,7 +8,6 @@
 #include "cocos2dx_extra.h"
 #include "lua_extensions/lua_extensions_more.h"
 #include "luabinding/cocos2dx_extra_luabinding.h"
-#include "luabinding/HelperFunc_luabinding.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "luabinding/cocos2dx_extra_ios_iap_luabinding.h"
 #endif
@@ -27,7 +26,6 @@ static void quick_module_register(lua_State *L)
         register_all_quick_manual(L);
         // extra
         luaopen_cocos2dx_extra_luabinding(L);
-        luaopen_HelperFunc_luabinding(L);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         luaopen_cocos2dx_extra_ios_iap_luabinding(L);
 #endif

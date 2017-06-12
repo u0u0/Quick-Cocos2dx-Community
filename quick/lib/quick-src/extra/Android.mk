@@ -7,8 +7,6 @@ LOCAL_MODULE_FILENAME := libextra
 
 LOCAL_SRC_FILES := \
     $(LOCAL_PATH)/luabinding/cocos2dx_extra_luabinding.cpp \
-    $(LOCAL_PATH)/luabinding/HelperFunc_luabinding.cpp \
-    $(LOCAL_PATH)/apptools/HelperFunc.cpp \
     $(LOCAL_PATH)/crypto/CCCrypto.cpp \
     $(LOCAL_PATH)/crypto/base64/libbase64.c \
     $(LOCAL_PATH)/network/CCNetwork.cpp \

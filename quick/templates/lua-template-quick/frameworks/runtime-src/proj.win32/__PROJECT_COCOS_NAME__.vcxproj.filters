@@ -40,9 +40,6 @@
     <Filter Include="Classes\quick-src\lua_extensions\zlib">
       <UniqueIdentifier>{86a62d16-c431-4d73-8ea6-16a36bc0d780}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\quick-src\extra\apptools">
-      <UniqueIdentifier>{0f4429db-4f7a-4b14-b930-0a05a705a7c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\quick-src\extra\crypto">
       <UniqueIdentifier>{7e3dbde2-df3c-4bbf-ab9e-34dd5bf5ef9b}</UniqueIdentifier>
     </Filter>
@@ -124,9 +121,6 @@
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\cjson\strbuf.h">
       <Filter>Classes\quick-src\lua_extensions\cjson</Filter>
     </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.h">
-      <Filter>Classes\quick-src\extra\apptools</Filter>
-    </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\CCCrypto.h">
       <Filter>Classes\quick-src\extra\crypto</Filter>
     </ClInclude>
@@ -137,9 +131,6 @@
       <Filter>Classes\quick-src\extra\crypto\md5</Filter>
     </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClInclude>
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\native\CCAlertViewDelegate.h">
@@ -244,9 +235,6 @@
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\cjson\strbuf.c">
       <Filter>Classes\quick-src\lua_extensions\cjson</Filter>
     </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.cpp">
-      <Filter>Classes\quick-src\extra\apptools</Filter>
-    </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\CCCrypto.cpp">
       <Filter>Classes\quick-src\extra\crypto</Filter>
     </ClCompile>
@@ -257,9 +245,6 @@
       <Filter>Classes\quick-src\extra\crypto\md5</Filter>
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\platform\win32\CCCryptoWin32.cpp">

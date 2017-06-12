@@ -180,12 +180,10 @@
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\sproto\sproto.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\lunqlite.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\unqlite.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\base64\libbase64.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\CCCrypto.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\crypto\md5\md5.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h" />
-    <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\native\CCAlertViewDelegate.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\native\CCNative.h" />
     <ClInclude Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCHTTPRequest.h" />
@@ -269,7 +267,6 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\apptools\HelperFunc.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\lua_extensions\unqlite\lunqlite.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -304,7 +301,6 @@
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp" />
-    <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCHTTPRequest.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\network\CCNetwork.cpp" />
     <ClCompile Include="$(QUICK_V3_ROOT)\quick\lib\quick-src\extra\platform\win32\CCCryptoWin32.cpp" />

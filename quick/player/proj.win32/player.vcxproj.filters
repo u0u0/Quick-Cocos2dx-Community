@@ -16,9 +16,6 @@
     <Filter Include="Classes\quick-src\extra">
       <UniqueIdentifier>{50a0a35c-3c28-4a41-8e4e-599902c49781}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\quick-src\extra\apptools">
-      <UniqueIdentifier>{954dc9d2-8ab6-40b2-a94f-0f41909a69f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\quick-src\extra\crypto">
       <UniqueIdentifier>{29868673-81d3-4b89-9cbb-013c4604ab3d}</UniqueIdentifier>
     </Filter>
@@ -90,9 +87,6 @@
     <ClInclude Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.h">
       <Filter>Classes\quick-src\ProjectConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lib\quick-src\extra\apptools\HelperFunc.h">
-      <Filter>Classes\quick-src\extra\apptools</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\lib\quick-src\extra\crypto\base64\libbase64.h">
       <Filter>Classes\quick-src\extra\crypto\base64</Filter>
     </ClInclude>
@@ -103,9 +97,6 @@
       <Filter>Classes\quick-src\extra\crypto</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.h">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\quick-src\extra\luabinding\HelperFunc_luabinding.h">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\quick-src\extra\platform\win32\CCNativeWin32.h">
@@ -263,9 +254,6 @@
     <ClCompile Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.cpp">
       <Filter>Classes\quick-src\ProjectConfig</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\extra\apptools\HelperFunc.cpp">
-      <Filter>Classes\quick-src\extra\apptools</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\extra\crypto\base64\libbase64.c">
       <Filter>Classes\quick-src\extra\crypto\base64</Filter>
     </ClCompile>
@@ -276,9 +264,6 @@
       <Filter>Classes\quick-src\extra\crypto</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\extra\luabinding\cocos2dx_extra_luabinding.cpp">
-      <Filter>Classes\quick-src\extra\luabinding</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\extra\luabinding\HelperFunc_luabinding.cpp">
       <Filter>Classes\quick-src\extra\luabinding</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\extra\platform\win32\CCCryptoWin32.cpp">
