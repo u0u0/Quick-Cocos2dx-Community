@@ -75,10 +75,9 @@ public class Cocos2dxHelper {
 
     private static boolean sInited = false;
     public static void init(final Activity activity) {
+        Cocos2dxHelper.sCocos2dxHelperListener = (Cocos2dxHelperListener)activity;
         if (!sInited) {
             final ApplicationInfo applicationInfo = activity.getApplicationInfo();
-            
-            Cocos2dxHelper.sCocos2dxHelperListener = (Cocos2dxHelperListener)activity;
                     
             Cocos2dxHelper.sPackageName = applicationInfo.packageName;
             Cocos2dxHelper.sFileDirectory = activity.getFilesDir().getAbsolutePath();
@@ -92,7 +91,6 @@ public class Cocos2dxHelper {
             sActivity = activity;
 
             sInited = true;
-
         }
     }
     
