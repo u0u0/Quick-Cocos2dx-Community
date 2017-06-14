@@ -346,7 +346,7 @@ void Sprite3D::genGLProgramState(bool useLight)
         if (shader)
             glProgram = GLProgramCache::getInstance()->getGLProgram(shader);
         
-        auto programstate = GLProgramState::create(glProgram);
+        auto programstate = GLProgramState::getOrCreateWithGLProgram(glProgram);
         long offset = 0;
         auto attributeCount = mesh->getMeshVertexAttribCount();
         for (auto k = 0; k < attributeCount; k++) {

@@ -1996,51 +1996,6 @@ tolua_lerror:
 #endif
 }
 
-static int tolua_cocos2dx_GLProgram_create(lua_State* tolua_S)
-{
-    if (nullptr == tolua_S)
-        return 0;
-    
-    int argc = 0;
-    bool ok = false;
-    
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertable(tolua_S,1,"cc.GLProgram",0,&tolua_err)) goto tolua_lerror;
-#endif
-    
-    argc = lua_gettop(tolua_S) - 1;
-    
-    if(2 == argc)
-    {
-        const char *arg0, *arg1;
-        std::string arg0_tmp; ok &= luaval_to_std_string(tolua_S, 2, &arg0_tmp, "cc.GLProgram:create"); arg0 = arg0_tmp.c_str();
-        std::string arg1_tmp; ok &= luaval_to_std_string(tolua_S, 3, &arg1_tmp, "cc.GLProgram:create"); arg1 = arg1_tmp.c_str();
-        
-        GLProgram* tolua_ret = new (std::nothrow) GLProgram();
-        if (nullptr == tolua_ret)
-            return 0;        
-
-        tolua_ret->autorelease();
-        tolua_ret->initWithFilenames(arg0, arg1);
-        int ID = (tolua_ret) ? (int)tolua_ret->_ID : -1;
-        int* luaID = (tolua_ret) ? &tolua_ret->_luaID : NULL;
-        toluafix_pushusertype_ccobject(tolua_S, ID, luaID, (void*)tolua_ret,"cc.GLProgram");
-        return 1;
-        
-    }
-    
-    luaL_error(tolua_S, "%s wrong number of arguments: %d, was expecting %d\n", "cc.GLProgram:create", argc, 2);
-    return 0;
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'tolua_cocos2dx_GLProgram_create'.",&tolua_err);
-    return 0;
-#endif
-}
-
-
 static int tolua_cocos2d_GLProgram_getProgram(lua_State* tolua_S)
 {
     if (nullptr == tolua_S)
@@ -2743,7 +2698,6 @@ static void extendGLProgram(lua_State* tolua_S)
     lua_rawget(tolua_S, LUA_REGISTRYINDEX);
     if (lua_istable(tolua_S,-1))
     {
-        tolua_function(tolua_S, "create", tolua_cocos2dx_GLProgram_create);
         tolua_function(tolua_S, "getProgram", tolua_cocos2d_GLProgram_getProgram);
         tolua_function(tolua_S, "setUniformLocationF32", tolua_cocos2dx_GLProgram_setUniformLocationF32);
         tolua_function(tolua_S, "getUniform", lua_cocos2dx_GLProgram_getUniform);

@@ -182,7 +182,7 @@ public:
      * @lua init
      */
     static GLProgram* createWithFilenames(const std::string& vShaderFilename, const std::string& fShaderFilename);
-    bool initWithFilenames(const std::string& vShaderFilename, const std::string& fShaderFilename);
+    bool initWithFilenames();
 
     //void bindUniform(std::string uniformName, int value);
     Uniform* getUniform(const std::string& name);
@@ -305,6 +305,9 @@ public:
     void reset();
     
     inline const GLuint getProgram() const { return _program; }
+
+    std::string _vShaderFilename;// for android GL reload
+    std::string _fShaderFilename;// for android GL reload
 
 protected:
     bool updateUniformLocation(GLint location, const GLvoid* data, unsigned int bytes);

@@ -65,14 +65,12 @@ void Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeInit(JNIEnv*  env, jobject thi
         glview->setFrameSize(w, h);
         director->setOpenGLView(glview);
 
-        //cocos_android_app_init(env, thiz);
-
         cocos2d::Application::getInstance()->run();
     }
     else
     {
         cocos2d::GL::invalidateStateCache();
-        cocos2d::GLProgramCache::getInstance()->reloadDefaultGLPrograms();
+        cocos2d::GLProgramCache::getInstance()->reloadAllGLPrograms();
         cocos2d::VolatileTextureMgr::reloadAllTextures();
 
         cocos2d::EventCustom recreatedEvent(EVENT_RENDERER_RECREATED);

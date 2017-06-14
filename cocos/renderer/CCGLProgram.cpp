@@ -110,7 +110,9 @@ GLProgram* GLProgram::createWithByteArrays(const GLchar* vShaderByteArray, const
 GLProgram* GLProgram::createWithFilenames(const std::string& vShaderFilename, const std::string& fShaderFilename)
 {
     auto ret = new (std::nothrow) GLProgram();
-    if(ret && ret->initWithFilenames(vShaderFilename, fShaderFilename)) {
+    ret->_vShaderFilename = vShaderFilename;
+    ret->_fShaderFilename = fShaderFilename;
+    if(ret && ret->initWithFilenames()) {
         ret->link();
         ret->updateUniforms();
         ret->autorelease();
@@ -126,6 +128,8 @@ GLProgram::GLProgram()
 , _vertShader(0)
 , _fragShader(0)
 , _flags()
+,_vShaderFilename("")
+,_fShaderFilename("")
 {
     _director = Director::getInstance();
     CCASSERT(nullptr != _director, "Director is null when init a GLProgram");
@@ -204,11 +208,11 @@ bool GLProgram::initWithByteArrays(const GLchar* vShaderByteArray, const GLchar*
     return true;
 }
 
-bool GLProgram::initWithFilenames(const std::string &vShaderFilename, const std::string &fShaderFilename)
+bool GLProgram::initWithFilenames()
 {
     auto fileUtils = FileUtils::getInstance();
-    std::string vertexSource = fileUtils->getStringFromFile(FileUtils::getInstance()->fullPathForFilename(vShaderFilename));
-    std::string fragmentSource = fileUtils->getStringFromFile(FileUtils::getInstance()->fullPathForFilename(fShaderFilename));
+    std::string vertexSource = fileUtils->getStringFromFile(_vShaderFilename);
+    std::string fragmentSource = fileUtils->getStringFromFile(_fShaderFilename);
 
     return initWithByteArrays(vertexSource.c_str(), fragmentSource.c_str());
 }

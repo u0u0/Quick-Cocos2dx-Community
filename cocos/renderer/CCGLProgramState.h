@@ -147,10 +147,6 @@ class CC_DLL GLProgramState : public Ref
 {
     friend class GLProgramStateCache;
 public:
-
-    /** returns a new instance of GLProgramState for a given GLProgram */
-    static GLProgramState* create(GLProgram* glprogram);
-
     /** gets-or-creates an instance of GLProgramState for a given GLProgram */
     static GLProgramState* getOrCreateWithGLProgram(GLProgram* glprogram);
 

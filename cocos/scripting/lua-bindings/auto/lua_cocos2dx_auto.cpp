@@ -35169,42 +35169,6 @@ int lua_cocos2dx_GLProgramState_getGLProgram(lua_State* tolua_S)
 
     return 0;
 }
-int lua_cocos2dx_GLProgramState_create(lua_State* tolua_S)
-{
-    int argc = 0;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertable(tolua_S,1,"cc.GLProgramState",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    argc = lua_gettop(tolua_S) - 1;
-
-    if (argc == 1)
-    {
-        cocos2d::GLProgram* arg0;
-        ok &= luaval_to_object<cocos2d::GLProgram>(tolua_S, 2, "cc.GLProgram",&arg0);
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgramState_create'", nullptr);
-            return 0;
-        }
-        cocos2d::GLProgramState* ret = cocos2d::GLProgramState::create(arg0);
-        object_to_luaval<cocos2d::GLProgramState>(tolua_S, "cc.GLProgramState",(cocos2d::GLProgramState*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "cc.GLProgramState:create",argc, 1);
-    return 0;
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgramState_create'.",&tolua_err);
-#endif
-    return 0;
-}
 int lua_cocos2dx_GLProgramState_getOrCreateWithGLProgramName(lua_State* tolua_S)
 {
     int argc = 0;
@@ -35277,11 +35241,6 @@ int lua_cocos2dx_GLProgramState_getOrCreateWithGLProgram(lua_State* tolua_S)
 #endif
     return 0;
 }
-static int lua_cocos2dx_GLProgramState_finalize(lua_State* tolua_S)
-{
-    printf("luabindings: finalizing LUA object (GLProgramState)");
-    return 0;
-}
 
 int lua_register_cocos2dx_GLProgramState(lua_State* tolua_S)
 {
@@ -35305,7 +35264,6 @@ int lua_register_cocos2dx_GLProgramState(lua_State* tolua_S)
         tolua_function(tolua_S,"getVertexAttribsFlags",lua_cocos2dx_GLProgramState_getVertexAttribsFlags);
         tolua_function(tolua_S,"apply",lua_cocos2dx_GLProgramState_apply);
         tolua_function(tolua_S,"getGLProgram",lua_cocos2dx_GLProgramState_getGLProgram);
-        tolua_function(tolua_S,"create", lua_cocos2dx_GLProgramState_create);
         tolua_function(tolua_S,"getOrCreateWithGLProgramName", lua_cocos2dx_GLProgramState_getOrCreateWithGLProgramName);
         tolua_function(tolua_S,"getOrCreateWithGLProgram", lua_cocos2dx_GLProgramState_getOrCreateWithGLProgram);
     tolua_endmodule(tolua_S);
@@ -60334,112 +60292,6 @@ int lua_cocos2dx_GLProgram_getFragmentShaderLog(lua_State* tolua_S)
 
     return 0;
 }
-int lua_cocos2dx_GLProgram_initWithByteArrays(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::GLProgram* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"cc.GLProgram",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (cocos2d::GLProgram*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_GLProgram_initWithByteArrays'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        const char* arg0;
-        const char* arg1;
-
-        std::string arg0_tmp; ok &= luaval_to_std_string(tolua_S, 2, &arg0_tmp, "cc.GLProgram:initWithByteArrays"); arg0 = arg0_tmp.c_str();
-
-        std::string arg1_tmp; ok &= luaval_to_std_string(tolua_S, 3, &arg1_tmp, "cc.GLProgram:initWithByteArrays"); arg1 = arg1_tmp.c_str();
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgram_initWithByteArrays'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->initWithByteArrays(arg0, arg1);
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.GLProgram:initWithByteArrays",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgram_initWithByteArrays'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_cocos2dx_GLProgram_initWithFilenames(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::GLProgram* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"cc.GLProgram",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (cocos2d::GLProgram*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_GLProgram_initWithFilenames'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        std::string arg0;
-        std::string arg1;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "cc.GLProgram:initWithFilenames");
-
-        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "cc.GLProgram:initWithFilenames");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgram_initWithFilenames'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->initWithFilenames(arg0, arg1);
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.GLProgram:initWithFilenames",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgram_initWithFilenames'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_cocos2dx_GLProgram_use(lua_State* tolua_S)
 {
     int argc = 0;
@@ -60958,48 +60810,6 @@ int lua_cocos2dx_GLProgram_createWithFilenames(lua_State* tolua_S)
 #endif
     return 0;
 }
-int lua_cocos2dx_GLProgram_constructor(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::GLProgram* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgram_constructor'", nullptr);
-            return 0;
-        }
-        cobj = new cocos2d::GLProgram();
-        cobj->autorelease();
-        int ID =  (int)cobj->_ID ;
-        int* luaID =  &cobj->_luaID ;
-        toluafix_pushusertype_ccobject(tolua_S, ID, luaID, (void*)cobj,"cc.GLProgram");
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.GLProgram:GLProgram",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgram_constructor'.",&tolua_err);
-#endif
-
-    return 0;
-}
-
-static int lua_cocos2dx_GLProgram_finalize(lua_State* tolua_S)
-{
-    printf("luabindings: finalizing LUA object (GLProgram)");
-    return 0;
-}
 
 int lua_register_cocos2dx_GLProgram(lua_State* tolua_S)
 {
@@ -61007,10 +60817,7 @@ int lua_register_cocos2dx_GLProgram(lua_State* tolua_S)
     tolua_cclass(tolua_S,"GLProgram","cc.GLProgram","cc.Ref",nullptr);
 
     tolua_beginmodule(tolua_S,"GLProgram");
-        tolua_function(tolua_S,"new",lua_cocos2dx_GLProgram_constructor);
         tolua_function(tolua_S,"getFragmentShaderLog",lua_cocos2dx_GLProgram_getFragmentShaderLog);
-        tolua_function(tolua_S,"initWithByteArrays",lua_cocos2dx_GLProgram_initWithByteArrays);
-        tolua_function(tolua_S,"initWithFilenames",lua_cocos2dx_GLProgram_initWithFilenames);
         tolua_function(tolua_S,"use",lua_cocos2dx_GLProgram_use);
         tolua_function(tolua_S,"getVertexShaderLog",lua_cocos2dx_GLProgram_getVertexShaderLog);
         tolua_function(tolua_S,"setUniformsForBuiltins",lua_cocos2dx_GLProgram_setUniformsForBuiltins);
@@ -61082,6 +60889,7 @@ int lua_cocos2dx_GLProgramCache_addGLProgram(lua_State* tolua_S)
 
     return 0;
 }
+
 int lua_cocos2dx_GLProgramCache_getGLProgram(lua_State* tolua_S)
 {
     int argc = 0;
@@ -61132,134 +60940,6 @@ int lua_cocos2dx_GLProgramCache_getGLProgram(lua_State* tolua_S)
 
     return 0;
 }
-int lua_cocos2dx_GLProgramCache_reloadDefaultGLPrograms(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::GLProgramCache* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"cc.GLProgramCache",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (cocos2d::GLProgramCache*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_GLProgramCache_reloadDefaultGLPrograms'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgramCache_reloadDefaultGLPrograms'", nullptr);
-            return 0;
-        }
-        cobj->reloadDefaultGLPrograms();
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.GLProgramCache:reloadDefaultGLPrograms",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgramCache_reloadDefaultGLPrograms'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_cocos2dx_GLProgramCache_loadDefaultGLPrograms(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::GLProgramCache* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"cc.GLProgramCache",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (cocos2d::GLProgramCache*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_GLProgramCache_loadDefaultGLPrograms'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgramCache_loadDefaultGLPrograms'", nullptr);
-            return 0;
-        }
-        cobj->loadDefaultGLPrograms();
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.GLProgramCache:loadDefaultGLPrograms",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgramCache_loadDefaultGLPrograms'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_cocos2dx_GLProgramCache_destroyInstance(lua_State* tolua_S)
-{
-    int argc = 0;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertable(tolua_S,1,"cc.GLProgramCache",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    argc = lua_gettop(tolua_S) - 1;
-
-    if (argc == 0)
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgramCache_destroyInstance'", nullptr);
-            return 0;
-        }
-        cocos2d::GLProgramCache::destroyInstance();
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "cc.GLProgramCache:destroyInstance",argc, 0);
-    return 0;
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgramCache_destroyInstance'.",&tolua_err);
-#endif
-    return 0;
-}
 int lua_cocos2dx_GLProgramCache_getInstance(lua_State* tolua_S)
 {
     int argc = 0;
@@ -61294,48 +60974,6 @@ int lua_cocos2dx_GLProgramCache_getInstance(lua_State* tolua_S)
 #endif
     return 0;
 }
-int lua_cocos2dx_GLProgramCache_constructor(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::GLProgramCache* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_GLProgramCache_constructor'", nullptr);
-            return 0;
-        }
-        cobj = new cocos2d::GLProgramCache();
-        cobj->autorelease();
-        int ID =  (int)cobj->_ID ;
-        int* luaID =  &cobj->_luaID ;
-        toluafix_pushusertype_ccobject(tolua_S, ID, luaID, (void*)cobj,"cc.GLProgramCache");
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.GLProgramCache:GLProgramCache",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_GLProgramCache_constructor'.",&tolua_err);
-#endif
-
-    return 0;
-}
-
-static int lua_cocos2dx_GLProgramCache_finalize(lua_State* tolua_S)
-{
-    printf("luabindings: finalizing LUA object (GLProgramCache)");
-    return 0;
-}
 
 int lua_register_cocos2dx_GLProgramCache(lua_State* tolua_S)
 {
@@ -61343,12 +60981,8 @@ int lua_register_cocos2dx_GLProgramCache(lua_State* tolua_S)
     tolua_cclass(tolua_S,"GLProgramCache","cc.GLProgramCache","cc.Ref",nullptr);
 
     tolua_beginmodule(tolua_S,"GLProgramCache");
-        tolua_function(tolua_S,"new",lua_cocos2dx_GLProgramCache_constructor);
         tolua_function(tolua_S,"addGLProgram",lua_cocos2dx_GLProgramCache_addGLProgram);
         tolua_function(tolua_S,"getGLProgram",lua_cocos2dx_GLProgramCache_getGLProgram);
-        tolua_function(tolua_S,"reloadDefaultGLPrograms",lua_cocos2dx_GLProgramCache_reloadDefaultGLPrograms);
-        tolua_function(tolua_S,"loadDefaultGLPrograms",lua_cocos2dx_GLProgramCache_loadDefaultGLPrograms);
-        tolua_function(tolua_S,"destroyInstance", lua_cocos2dx_GLProgramCache_destroyInstance);
         tolua_function(tolua_S,"getInstance", lua_cocos2dx_GLProgramCache_getInstance);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::GLProgramCache).name();
