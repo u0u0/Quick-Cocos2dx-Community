@@ -36,33 +36,27 @@ def joinDir(root, *dirs):
 def initJitPath(mode):
     global jitPath
     global new_env
-    LuaPath = ""
     sysstr = platform.system()
     if(sysstr =="Windows"):
         if "64" == mode:
             print "Error: mode 64 not support on win32"
             sys.exit(-1)
         jitPath = joinDir(scriptRoot, "win32", "luajit.exe")
-        LuaPath = joinDir(scriptRoot, "win32", "?.lua") 
     elif(sysstr == "Linux"):
         print "Liunux Support is coming sooooon"
         sys.exit(-1)
     elif(sysstr == "Darwin"):
         jitPath = joinDir(scriptRoot, "mac", "luajit")
-        LuaPath = joinDir(scriptRoot, "mac", "?.lua") 
         if "64" == mode:
             jitPath = jitPath + "64"
     else:
         print "Unsupport OS!"
         sys.exit(-1)
 
-    # TODO 所有luajit的lua文件只需要一份，去掉多余的
     # important, to find luajit lua
-    new_env['LUA_PATH'] = LuaPath
+    new_env['LUA_PATH'] = joinDir(scriptRoot, "?.lua")
 
-def doFile(path, zFile):
-    print "== compiling: %s" %(path)
-
+def doFile(path, luaRoot, zFile):
     tmp = path + ".tmp"
     jitcmd = '%s -bg "%s" "%s"' %(jitPath, path, tmp)
     # do shell cmd
@@ -71,9 +65,16 @@ def doFile(path, zFile):
     if os.path.exists(tmp) == False:
         print "Error: Fail to compile:%s" %(path)
         sys.exit(-1)
+
+    # remove perfix and suffix, replace / with .
+    modulePath = path[len(luaRoot) + 1:-4]
+    moduleName = re.sub(os.path.sep, ".",modulePath)
+    print "== compiling: %s" %(moduleName)
+    # fix the file modify time
+    os.utime(tmp, (1330712280, 1330712280))
     # add to zip file
-    # TODO change file time, change save name
-    zFile.write(tmp, path)
+    zFile.write(tmp, moduleName)
+    # remove temp file
     os.unlink(tmp)
 
 def listDir(d):
@@ -102,7 +103,7 @@ def packageScript(projectDir, outName, mode):
     outfile = joinDir(projectDir, "res", outName + mode + ".zip")
     zFile = zipfile.ZipFile(outfile, 'w')
     for item in luaFiles:
-        doFile(item, zFile)
+        doFile(item, luaRoot, zFile)
     zFile.close()
     print "====> Done, write to %s" %(outfile)
 

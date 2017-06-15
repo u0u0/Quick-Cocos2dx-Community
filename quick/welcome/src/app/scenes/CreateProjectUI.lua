@@ -55,7 +55,7 @@ function CreateProjectUI:onEnter()
 
     -- package name:
 	display.newTTFLabel({
-		text = "Project package name: (etc: com.mycomp.games.mygame)",
+		text = "Project package name: (etc: com.mycomp.mygame)",
 		size = 25,
 		color = display.COLOR_WHITE,
 	})
@@ -143,17 +143,14 @@ function CreateProjectUI:onEnter()
 					projectConfig:changeFrameOrientationToPortait()
 					self.projectConfig = projectConfig
 
-					local scriptPath = cc.player.quickRootPath .. "quick/bin/create_project.sh"
-					if device.platform == "windows" then
-						scriptPath = cc.player.quickRootPath .. "quick/bin/create_project.bat"
-					end
+					local scriptPath = cc.player.quickRootPath .. "quick/bin/CreateProject.py"
 
-					local screenDirection = " -r portrait "
+					local screenDirection = ""
 					if landscapeCheckBox:isSelected() then
 						projectConfig:changeFrameOrientationToLandscape()
-						screenDirection = " -r landscape "
+						screenDirection = " -l"
 					end
-					local arguments = " -p " .. packageEditbox:getText() .. " -f " .. " -o " .. self.projectFolder .. screenDirection
+					local arguments = " -p " .. packageEditbox:getText() .. " -o " .. locationEditbox:getText() .. screenDirection
 					local taskId = tostring(os.time())
 
 					print("Create Cmd:" .. scriptPath .. " " .. arguments)
