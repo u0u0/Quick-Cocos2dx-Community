@@ -576,69 +576,6 @@ int LuaStack::reload(const char* moduleFileName)
     return executeString(require.c_str());
 }
 
-void LuaStack::setXXTEAKeyAndSign(const char *key, const char *sign)
-{
-    int keyLen = (int)strlen(key);
-    int signLen = (int)strlen(sign);
-    
-    cleanupXXTEAKeyAndSign();
-    
-    if (key && keyLen && sign && signLen)
-    {
-        _xxteaKey = (char*)malloc(keyLen);
-        memcpy(_xxteaKey, key, keyLen);
-        _xxteaKeyLen = keyLen;
-        
-        _xxteaSign = (char*)malloc(signLen);
-        memcpy(_xxteaSign, sign, signLen);
-        _xxteaSignLen = signLen;
-        
-        _xxteaEnabled = true;
-    }
-    else
-    {
-        _xxteaEnabled = false;
-    }
-}
-
-void LuaStack::cleanupXXTEAKeyAndSign()
-{
-    if (_xxteaKey)
-    {
-        free(_xxteaKey);
-        _xxteaKey = nullptr;
-        _xxteaKeyLen = 0;
-    }
-    if (_xxteaSign)
-    {
-        free(_xxteaSign);
-        _xxteaSign = nullptr;
-        _xxteaSignLen = 0;
-    }
-}
-
-const char* LuaStack::getXXTEAKey(int *len)
-{
-    if (_xxteaEnabled && _xxteaKey) {
-        if (len) {
-            *len = _xxteaKeyLen;
-        }
-        return _xxteaKey;
-    }
-    return nullptr;
-}
-
-const char* LuaStack::getXXTEASign(int *len)
-{
-    if (_xxteaEnabled && _xxteaSign) {
-        if (len) {
-            *len = _xxteaSignLen;
-        }
-        return _xxteaSign;
-    }
-    return nullptr;
-}
-
 int LuaStack::loadChunksFromZIP(const char *zipFilePath)
 {
     pushString(zipFilePath);
@@ -657,126 +594,73 @@ int LuaStack::luaLoadChunksFromZIP(lua_State *L)
     
     const char *zipFilename = lua_tostring(L, -1);
     lua_settop(L, 0);
+    
     FileUtils *utils = FileUtils::getInstance();
     std::string zipFilePath = utils->fullPathForFilename(zipFilename);
+    Data fileData = utils->getDataFromFile(zipFilePath);
+    ZipFile *zip = ZipFile::createWithBuffer(fileData.getBytes(), fileData.getSize());
     
-    LuaStack *stack = this;
-    
-    do {
-        ssize_t size = 0;
-        void *buffer = nullptr;
-        unsigned char *zipFileData = utils->getFileData(zipFilePath.c_str(), "rb", &size);
-        ZipFile *zip = nullptr;
+    if (zip) {
+        CCLOG("lua_loadChunksFromZIP() - load zip file: %s*", zipFilePath.c_str());
         
-        bool isXXTEA = stack && stack->_xxteaEnabled && zipFileData;
-        for (int i = 0; isXXTEA && i < stack->_xxteaSignLen && i < size; ++i) {
-            isXXTEA = zipFileData[i] == stack->_xxteaSign[i];
-        }
+        lua_getglobal(L, "package");
+        lua_getfield(L, -1, "preload");
         
-        if (isXXTEA) { // decrypt XXTEA
-            xxtea_long len = 0;
-            buffer = xxtea_decrypt(zipFileData + stack->_xxteaSignLen,
-                                   (xxtea_long)size - (xxtea_long)stack->_xxteaSignLen,
-                                   (unsigned char*)stack->_xxteaKey,
-                                   (xxtea_long)stack->_xxteaKeyLen,
-                                   &len);
-            free(zipFileData);
-            zipFileData = nullptr;
-            zip = ZipFile::createWithBuffer(buffer, len);
-        } else {
-            if (zipFileData) {
-                zip = ZipFile::createWithBuffer(zipFileData, size);
-            }
-        }
-        
-        if (zip) {
-            CCLOG("lua_loadChunksFromZIP() - load zip file: %s%s", zipFilePath.c_str(), isXXTEA ? "*" : "");
-            lua_getglobal(L, "package");
-            lua_getfield(L, -1, "preload");
-            
-            int count = 0;
-            std::string filename = zip->getFirstFilename();
-            while (filename.length()) {
-                ssize_t bufferSize = 0;
-                unsigned char *zbuffer = zip->getFileData(filename.c_str(), &bufferSize);
-                if (bufferSize) {
-                    if (stack->luaLoadBuffer(L, (char*)zbuffer, (int)bufferSize, filename.c_str()) == 0) {
-                        
-                        // special fix for protobuf find path in zip.
-                        if (filename.find("framework.protobuf.") != std::string::npos) {
-                            lua_setfield(L, -2, filename.c_str() + 19);
-                        } else {
-                            lua_setfield(L, -2, filename.c_str());
-                        }
-                        ++count;
+        int count = 0;
+        std::string filename = zip->getFirstFilename();
+        while (filename.length()) {
+            ssize_t bufferSize = 0;
+            unsigned char *zbuffer = zip->getFileData(filename.c_str(), &bufferSize);
+            if (bufferSize) {
+                if (luaLoadBuffer(L, (char*)zbuffer, (int)bufferSize, filename.c_str()) == 0) {
+                    
+                    // special fix for protobuf find path in zip.
+                    if (filename.find("framework.protobuf.") != std::string::npos) {
+                        lua_setfield(L, -2, filename.c_str() + 19);
+                    } else {
+                        lua_setfield(L, -2, filename.c_str());
                     }
-                    free(zbuffer);
+                    ++count;
                 }
-                filename = zip->getNextFilename();
+                free(zbuffer);
             }
-            CCLOG("lua_loadChunksFromZIP() - loaded chunks count: %d", count);
-            lua_pop(L, 2);
-            lua_pushboolean(L, 1);
-            
-            delete zip;
-        } else {
-            CCLOG("lua_loadChunksFromZIP() - not found or invalid zip file: %s", zipFilePath.c_str());
-            lua_pushboolean(L, 0);
+            filename = zip->getNextFilename();
         }
+        CCLOG("lua_loadChunksFromZIP() - loaded chunks count: %d", count);
+        lua_pop(L, 2);
+        lua_pushboolean(L, 1);
         
-        if (zipFileData) {
-            free(zipFileData);
-        }
-        
-        if (buffer) {
-            free(buffer);
-        }
-    } while (0);
+        delete zip;
+    } else {
+        CCLOG("lua_loadChunksFromZIP() - not found or invalid zip file: %s", zipFilePath.c_str());
+        lua_pushboolean(L, 0);
+    }
     
     return 1;
 }
 
 int LuaStack::luaLoadBuffer(lua_State *L, const char *chunk, int chunkSize, const char *chunkName)
 {
-    int r = 0;
-    
-    if (_xxteaEnabled && strncmp(chunk, _xxteaSign, _xxteaSignLen) == 0)
-    {
-        // decrypt XXTEA
-        xxtea_long len = 0;
-        unsigned char* result = xxtea_decrypt((unsigned char*)chunk + _xxteaSignLen,
-                                              (xxtea_long)chunkSize - _xxteaSignLen,
-                                              (unsigned char*)_xxteaKey,
-                                              (xxtea_long)_xxteaKeyLen,
-                                              &len);
-        r = luaL_loadbuffer(L, (char*)result, len, chunkName);
-        free(result);
-    }
-    else
-    {
-        r = luaL_loadbuffer(L, chunk, chunkSize, chunkName);
-    }
+    int r = luaL_loadbuffer(L, chunk, chunkSize, chunkName);
     
 #if defined(COCOS2D_DEBUG) && COCOS2D_DEBUG > 0
-    if (r)
-    {
-        switch (r)
-        {
-            case LUA_ERRSYNTAX:
-                CCLOG("[LUA ERROR] load \"%s\", error: syntax error during pre-compilation.", chunkName);
-                break;
-                
-            case LUA_ERRMEM:
-                CCLOG("[LUA ERROR] load \"%s\", error: memory allocation error.", chunkName);
-                break;
-                
-            case LUA_ERRFILE:
-                CCLOG("[LUA ERROR] load \"%s\", error: cannot open/read file.", chunkName);
-                break;
-                
-            default:
-                CCLOG("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
-        }
+    switch (r) {
+        case LUA_OK:
+            break;
+        case LUA_ERRSYNTAX:
+            CCLOG("[LUA ERROR] load \"%s\", error: syntax error during pre-compilation.", chunkName);
+            break;
+            
+        case LUA_ERRMEM:
+            CCLOG("[LUA ERROR] load \"%s\", error: memory allocation error.", chunkName);
+            break;
+            
+        case LUA_ERRFILE:
+            CCLOG("[LUA ERROR] load \"%s\", error: cannot open/read file.", chunkName);
+            break;
+            
+        default:
+            CCLOG("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
     }
 #endif
     return r;

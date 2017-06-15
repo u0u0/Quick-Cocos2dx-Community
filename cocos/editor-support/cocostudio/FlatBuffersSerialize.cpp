@@ -148,8 +148,7 @@ std::string FlatBuffersSerialize::serializeFlatBuffersWithXMLFile(const std::str
         return ".csd file doesn not exists ";
     }
     
-    ssize_t size;
-    std::string content =(char*)FileUtils::getInstance()->getFileData(inFullpath, "r", &size);
+    std::string content = FileUtils::getInstance()->getStringFromFile(inFullpath);
     
     // xml parse
     tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();
@@ -964,8 +963,7 @@ FlatBufferBuilder* FlatBuffersSerialize::createFlatBuffersWithXMLFileForSimulato
 //        CCLOG(".csd file doesn not exists ");
     }
     
-    ssize_t size;
-    std::string content =(char*)FileUtils::getInstance()->getFileData(inFullpath, "r", &size);
+    std::string content = FileUtils::getInstance()->getStringFromFile(inFullpath);
     
     // xml parse
     tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();

@@ -2,7 +2,7 @@
 #include "CCLuaEngine.h"
 #include "cocos2d.h"
 #include "lua_module_register.h"
-
+#include "xxtea/xxtea.h"
 
 // extra lua module
 #include "cocos2dx_extra.h"
@@ -53,6 +53,41 @@ void AppDelegate::initGLContextAttrs()
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
+static void decoder(Data &data)
+{
+    unsigned char sign[] = "Xt";
+    unsigned char key[] = "aaa";
+    
+    // decrypt XXTEA
+    if (!data.isNull()) {
+        bool isEncoder = false;
+        unsigned char *buf = data.getBytes();
+        ssize_t size = data.getSize();
+        ssize_t len = strlen((char *)sign);
+        if (size <= len) {
+            return;
+        }
+        
+        for (int i = 0; i < len; ++i) {
+            isEncoder = buf[i] == sign[i];
+            if (!isEncoder) {
+                break;
+            }
+        }
+        
+        if (isEncoder) {
+            xxtea_long newLen = 0;
+            unsigned char* buffer = xxtea_decrypt(buf + len,
+                                                  (xxtea_long)(size - len),
+                                                  (unsigned char*)key,
+                                                  (xxtea_long)strlen((char *)key),
+                                                  &newLen);
+            data.clear();
+            data.fastSet(buffer, newLen);
+        }
+    }
+}
+
 bool AppDelegate::applicationDidFinishLaunching()
 {
     // initialize director
@@ -72,27 +107,21 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // use Quick-Cocos2d-X
     quick_module_register(L);
-
-    LuaStack* stack = engine->getLuaStack();
-
-    //register custom function
-    //LuaStack* stack = engine->getLuaStack();
-    //register_custom_function(stack->getLuaState());
     
-    //FileUtils::getInstance()->setResourceEncryptKeyAndSign("test", "XXTEA");
+    // resource decode, include game.zip
+    //FileUtils::getInstance()->setFileDataDecoder(decoder);
 #if 0
+    LuaStack* stack = engine->getLuaStack();
     // use luajit bytecode package
-    stack->setXXTEAKeyAndSign("2dxLua", "XXTEA");
-    
 #ifdef CC_TARGET_OS_IPHONE
     if (sizeof(long) == 4) {
-        stack->loadChunksFromZIP("res/game.zip");
+        stack->loadChunksFromZIP("res/game32.zip");
     } else {
         stack->loadChunksFromZIP("res/game64.zip");
     }
 #else
     // android, mac, win32, etc
-    stack->loadChunksFromZIP("res/game.zip");
+    stack->loadChunksFromZIP("res/game32.zip");
 #endif
     stack->executeString("require 'main'");
 #else // #if 0

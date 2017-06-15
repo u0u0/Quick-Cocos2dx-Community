@@ -61,8 +61,7 @@ extern "C"
         }
         
         // search file in package.path
-        unsigned char* chunk = nullptr;
-        ssize_t chunkSize = 0;
+        Data chunk;
         std::string chunkName;
         FileUtils* utils = FileUtils::getInstance();
         
@@ -87,7 +86,7 @@ extern "C"
             chunkName = prefix.substr(0, pos) + filename + BYTECODE_FILE_EXT;
             if (utils->isFileExist(chunkName))
             {
-                chunk = utils->getFileData(chunkName.c_str(), "rb", &chunkSize);
+                chunk = utils->getDataFromFile(chunkName);
                 break;
             }
             else
@@ -95,7 +94,7 @@ extern "C"
                 chunkName = prefix.substr(0, pos) + filename + NOT_BYTECODE_FILE_EXT;
                 if (utils->isFileExist(chunkName))
                 {
-                    chunk = utils->getFileData(chunkName.c_str(), "rb", &chunkSize);
+                    chunk = utils->getDataFromFile(chunkName);
                     break;
                 }
             }
@@ -104,11 +103,10 @@ extern "C"
             next = searchpath.find_first_of(";", begin);
         } while (begin < (int)searchpath.length());
         
-        if (chunk)
+        if (chunk.getSize() > 0)
         {
             LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
-            stack->luaLoadBuffer(L, (char*)chunk, (int)chunkSize, chunkName.c_str());
-            free(chunk);
+            stack->luaLoadBuffer(L, (const char *)chunk.getBytes(), (int)chunk.getSize(), chunkName.c_str());
         }
         else
         {
