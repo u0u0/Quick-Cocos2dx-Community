@@ -57,8 +57,6 @@ protected:
 
 	virtual Data getData(const std::string& filename, bool forString) override;
 
-	virtual unsigned char* getFileData(const std::string& filename, const char* mode, ssize_t * size) override;
-
     /**
      *  Gets full path for filename, resolution directory and search path.
      *

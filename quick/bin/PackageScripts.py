@@ -68,7 +68,10 @@ def doFile(path, luaRoot, zFile):
 
     # remove perfix and suffix, replace / with .
     modulePath = path[len(luaRoot) + 1:-4]
-    moduleName = re.sub(os.path.sep, ".",modulePath)
+    if os.sep == '\\':
+        moduleName = re.sub('\\\\', '.', modulePath)
+    else:
+        moduleName = re.sub('/', '.', modulePath)
     print "== compiling: %s" %(moduleName)
     # fix the file modify time
     os.utime(tmp, (1330712280, 1330712280))

@@ -207,50 +207,6 @@ Data FileUtilsWin32::getData(const std::string& filename, bool forString)
     return ret;
 }
 
-unsigned char* FileUtilsWin32::getFileData(const std::string& filename, const char* mode, ssize_t* size)
-{
-    unsigned char * pBuffer = nullptr;
-    *size = 0;
-    do
-    {
-        // read the file from hardware
-        std::string fullPath = fullPathForFilename(filename);
-
-        WCHAR wszBuf[CC_MAX_PATH] = {0};
-        MultiByteToWideChar(CP_UTF8, 0, fullPath.c_str(), -1, wszBuf, sizeof(wszBuf)/sizeof(wszBuf[0]));
-
-        HANDLE fileHandle = ::CreateFileW(wszBuf, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, nullptr);
-        CC_BREAK_IF(fileHandle == INVALID_HANDLE_VALUE);
-        
-        *size = ::GetFileSize(fileHandle, nullptr);
-
-        pBuffer = (unsigned char*) malloc(*size);
-        DWORD sizeRead = 0;
-        BOOL successed = FALSE;
-        successed = ::ReadFile(fileHandle, pBuffer, *size, &sizeRead, nullptr);
-        ::CloseHandle(fileHandle);
-
-        if (!successed)
-        {
-            free(pBuffer);
-            pBuffer = nullptr;
-        }
-    } while (0);
-    
-    if (! pBuffer)
-    {
-        std::string msg = "Get data from file(";
-        // Gets error code.
-        DWORD errorCode = ::GetLastError();
-        char errorCodeBuffer[20] = {0};
-        snprintf(errorCodeBuffer, sizeof(errorCodeBuffer), "%d", errorCode);
-
-        msg = msg + filename + ") failed, error code is " + errorCodeBuffer;
-        CCLOG("%s", msg.c_str());
-    }
-    return pBuffer;
-}
-
 std::string FileUtilsWin32::getPathForFilename(const std::string& filename, const std::string& resolutionDirectory, const std::string& searchPath)
 {
     std::string unixFileName = convertPathFormatToUnixStyle(filename);
