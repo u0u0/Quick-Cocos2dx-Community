@@ -67,14 +67,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // If you want to use Quick-Cocos2dx-Community, please uncomment below code
     quick_module_register(L);
-
-    LuaStack* stack = engine->getLuaStack();
-    stack->setXXTEAKeyAndSign("2dxLua", "XXTEA");
-    
     
     StartupCall *call = StartupCall::create(this);
     call->startup();
-    
     return true;
 }
 
