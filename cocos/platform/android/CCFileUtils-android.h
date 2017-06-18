@@ -64,9 +64,6 @@ public:
     virtual std::string getNewFilename(const std::string &filename) const override;
     virtual Data getData(const std::string& filename, bool forString) override;
 
-    /** @deprecated Please use FileUtils::getDataFromFile or FileUtils::getStringFromFile instead. */
-    CC_DEPRECATED_ATTRIBUTE virtual unsigned char* getFileData(const std::string& filename, const char* mode, ssize_t * size) override;
-
     virtual std::string getWritablePath() const;
     virtual bool isAbsolutePath(const std::string& strPath) const;
     
