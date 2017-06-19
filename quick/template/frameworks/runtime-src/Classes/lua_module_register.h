@@ -17,6 +17,7 @@ int lua_module_register(lua_State* L)
 #if CC_USE_CCSTUDIO
     register_cocostudio_module(L);
 #endif
+    register_ui_moudle(L);
 #if CC_USE_SPINE
     register_spine_module(L);
 #endif
