@@ -2,6 +2,7 @@
 #define __LUA_TEMPLATE_RUNTIME_FRAMEWORKS_RUNTIME_SRC_CLASSES_LUA_MODULE_REGISTER_H__
 
 #include "audio/lua_audio_manual.h"
+#include "network/lua_cocos2dx_network_manual.h"
 #include "cocostudio/lua_cocos2dx_coco_studio_manual.hpp"
 #include "ui/lua_cocos2dx_ui_manual.hpp"
 #include "spine/lua_cocos2dx_spine_manual.hpp"
@@ -12,6 +13,7 @@ int lua_module_register(lua_State* L)
 {
     //Dont' change the module register order unless you know what your are doing
 	register_audio_module(L);
+    register_network_module(L);
     register_cocostudio_module(L);
     register_ui_moudle(L);
     register_spine_module(L);
