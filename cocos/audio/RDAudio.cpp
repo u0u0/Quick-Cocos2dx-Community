@@ -65,14 +65,18 @@ void RDAudio::destroyInstance()
 
 void RDAudio::pause()
 {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     alcMakeContextCurrent(NULL);
     alcSuspendContext(_context);
+#endif
 }
 
 void RDAudio::resume()
 {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     alcMakeContextCurrent(_context);
     alcProcessContext(_context);
+#endif
 }
 
 void RDAudio::waitForQuit()
