@@ -21,6 +21,12 @@ audio._sources = {}
 audio._scheduler = nil -- global schedule hander
 -- pos 1 is for BGM
 audio._sources[1] = Rapid2D_CAudio.newSource()
+if not (audio._sources[1]) then
+	print("Error: init BGM source fail, check if have OpenAL init error above!")
+	audio = nil
+	return
+end
+
 audio._BGMVolume = 1.0
 audio._effectVolume = 1.0
 

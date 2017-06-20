@@ -57,6 +57,7 @@ THE SOFTWARE.
 #include "base/CCAutoreleasePool.h"
 #include "base/CCConfiguration.h"
 #include "platform/CCApplication.h"
+#include "audio/RDAudio.h"
 //#include "platform/CCGLViewImpl.h"
 
 /**
@@ -157,6 +158,8 @@ bool Director::init(void)
 
     _console = new (std::nothrow) Console;
 
+    // init OpenAL
+    RDAudio::getInstance();
     return true;
 }
 
@@ -1010,6 +1013,7 @@ void Director::pause()
     {
         return;
     }
+    RDAudio::getInstance()->pause();
 
     _oldAnimationInterval = _animationInterval;
 
@@ -1024,6 +1028,7 @@ void Director::resume()
     {
         return;
     }
+    RDAudio::getInstance()->resume();
 
     setAnimationInterval(_oldAnimationInterval);
 

@@ -55,7 +55,8 @@ static int lnewSource(lua_State * L)
     // grab a source ID from openAL
     alGenSources(1, &sourceID);
     if (alGetError() != AL_NO_ERROR) {
-        return luaL_error(L, "[Lua Error]: Rapid2D_CAudio.newSource() fail");
+        cocos2d::log("Rapid2D_CAudio.newSource() fail");
+        return 0;
     }
     
     // create userdata
@@ -182,10 +183,7 @@ static const struct luaL_Reg audio_funcs [] = {
 };
 
 TOLUA_API int register_audio_module(lua_State* L)
-{
-    // init OpenAL
-    RDAudio::getInstance();
-    
+{    
     lua_getglobal(L, "_G");
     if (lua_istable(L,-1))//stack:...,_G,
     {

@@ -24,6 +24,7 @@
  ****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "cocos2d.h"
 
 #import "AppController.h"
@@ -86,9 +87,34 @@ static AppDelegate s_sharedApplication;
     cocos2d::Director::getInstance()->setOpenGLView(glview);
 
     app->run();
+    
+    // audio interruption
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    // benbritten.com/2009/02/02/restarting-openal-after-application-interruption-on-the-iphone/
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AVAudioSessionInterruptionNotification:) name:AVAudioSessionInterruptionNotification object:audioSession];
     return YES;
 }
 
+- (void)AVAudioSessionInterruptionNotification:(NSNotification *)notification {
+    NSNumber *interruptionType = [[notification userInfo] objectForKey:AVAudioSessionInterruptionTypeKey];
+    switch (interruptionType.unsignedIntegerValue) {
+        case AVAudioSessionInterruptionTypeBegan:{
+            NSLog(@"AVAudioSessionInterruptionTypeBegan");
+            [[AVAudioSession sharedInstance] setActive:NO error:nil];
+            cocos2d::Director::getInstance()->pause();
+            break;
+        };
+        case AVAudioSessionInterruptionTypeEnded:{
+            NSLog(@"AVAudioSessionInterruptionTypeEnded");
+            // only AVAudioSessionCategoryPlayAndRecord work?
+            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [[AVAudioSession sharedInstance] setActive:YES error:nil];
+            cocos2d::Director::getInstance()->resume();
+            break;
+        };
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*

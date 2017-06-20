@@ -63,6 +63,18 @@ void RDAudio::destroyInstance()
     }
 }
 
+void RDAudio::pause()
+{
+    alcMakeContextCurrent(NULL);
+    alcSuspendContext(_context);
+}
+
+void RDAudio::resume()
+{
+    alcMakeContextCurrent(_context);
+    alcProcessContext(_context);
+}
+
 void RDAudio::waitForQuit()
 {
     // notify sub thread to quick
@@ -86,13 +98,7 @@ void RDAudio::init(void)
             cocos2d::log("Error: alcOpenDevice fail!");
             return;
         }
-        // Check for EAX 2.0 support
-        ALboolean g_bEAX = alIsExtensionPresent("EAX2.0");
-        if (g_bEAX == false) {
-            cocos2d::log("Worning: OpenAL can't support EAX2.0 on this platform");
-        }
         alGetError(); // clear error code
-        
         _thread = new std::thread(&RDAudio::threadLoop, this);
     }
 }

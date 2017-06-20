@@ -43,6 +43,8 @@ public:
     static RDAudio *getInstance();
     static void destroyInstance();
     
+    void pause();
+    void resume();
     void loadFileAsyn(const char *filename, int funcID, AudioCallback cb);
 private:
     struct AsyncStruct {
