@@ -786,6 +786,10 @@ int lua_cocos2dx_TMXTilesetInfo_getProperties(lua_State* tolua_S)
         lua_pushstring(tolua_S, "name");
         lua_pushstring(tolua_S, cobj->_name.c_str());
         lua_rawset(tolua_S, -3);    /* property.name */
+
+        lua_pushstring(tolua_S, "firstGid");
+        lua_pushinteger(tolua_S, cobj->_firstGid);
+        lua_rawset(tolua_S, -3);    /* property.firstGid */
         
         return 1;
     }
