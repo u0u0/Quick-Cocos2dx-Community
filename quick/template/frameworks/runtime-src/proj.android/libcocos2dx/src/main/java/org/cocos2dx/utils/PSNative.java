@@ -4,14 +4,18 @@ import java.util.Vector;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Vibrator;
+
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 
 public class PSNative {
@@ -202,6 +206,13 @@ public class PSNative {
 	}
 
 	public static String getOpenUDID() {
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE)) {
+				mContext.requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 1001);
+				return "PERMISSION_DENIED";
+			}
+		}
+
 		String id = null;
 		if (mTelephonyManager != null) {
 			id = mTelephonyManager.getDeviceId();

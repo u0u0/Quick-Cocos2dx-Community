@@ -31,12 +31,17 @@ import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 import org.cocos2dx.utils.PSNative;
 import org.cocos2dx.utils.PSNetwork;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,7 +50,7 @@ import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.opengl.GLSurfaceView;
+import android.provider.Settings;
 
 public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelperListener {
     // ===========================================================
@@ -122,7 +127,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 
     //native method,call GLViewImpl::getGLContextAttrs() to get the OpenGL ES context attributions
     private static native int[] getGLContextAttrs();
-    
+
     // ===========================================================
     // Getter & Setter
     // ===========================================================
@@ -368,6 +373,61 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
       return isEmulator;
    }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode){
+            case 1001: // request code define by me.
+                boolean isTip = shouldShowRequestPermissionRationale(permissions[0]);
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    if (isTip) {
+                        // 用户没有彻底禁止弹出权限请求
+                        sContext.requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 1001);
+                    } else {
+                        // 用户已经彻底禁止弹出权限请求
+
+                        // init Alert strings
+                        String title = "请在设置中，开启程序权限, 点击权限。";
+                        String conform = "确认";
+                        String cancel = "取消";
+                        if (Cocos2dxHelper.getCurrentLanguage() != "zh") {
+                            title = "Please grant the permissions in settings.";
+                            conform = "OK";
+                            cancel = "Cancel";
+                        }
+                        final String fTitle = title;
+                        final String fconform = conform;
+                        final String fcancel = cancel;
+
+                        // on clicked handler
+                        final DialogInterface.OnClickListener okHandler = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }
+                        };
+
+                        // new alert
+                        sContext.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                new AlertDialog.Builder(sContext)
+                                        .setMessage(fTitle)
+                                        .setPositiveButton(fconform, okHandler)
+                                        .setNegativeButton(fcancel, null)
+                                        .create()
+                                        .show();
+                            }
+                        });
+                    }
+                }
+        }
+    }
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
