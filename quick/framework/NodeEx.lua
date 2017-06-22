@@ -226,6 +226,9 @@ function Node:setTouchMode(mode)
 end
 
 function Node:setTouchEnabled()
+	assert(self._LuaListeners, "Error: addNodeEventListener(cc.NODE_TOUCH_EVENT, func) first!")
+	assert(self._LuaListeners[c.NODE_TOUCH_EVENT], "Error: addNodeEventListener(cc.NODE_TOUCH_EVENT, func) first!")
+
 	local isSingle = true
 	if self._luaTouchMode and self._luaTouchMode == c.TOUCH_MODE_ALL_AT_ONCE then
 		isSingle = false
