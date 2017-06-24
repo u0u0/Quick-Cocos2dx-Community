@@ -4,7 +4,7 @@ end)
 
 function BaseLayer:ctor()
 	self:setContentSize(cc.size(display.width, display.height))
-	self:setTouchEnabled(true)
+	self:setTouchEnabled(false)
 	self:setBackGroundColor(cc.c3b(0x3c, 0x3c, 0x3c))
 	self:setBackGroundColorType(1)
 
@@ -16,6 +16,7 @@ function BaseLayer:ctor()
 	btn:setTitleFontSize(26)
 	btn:addTouchEventListener(function(sender, eventType)
 		if 2 == eventType then
+			self:getParent():openScrollView()
 			self:removeSelf()
 		end
 	end)

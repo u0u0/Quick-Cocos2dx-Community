@@ -280,6 +280,24 @@ tolua_lerror:
     
 }
 
+static int tolua_cocos2d_Node_getCascadeBoundingBox(lua_State* tolua_S)
+{
+    if (NULL == tolua_S)
+        return 0;
+    
+    Node *self = static_cast<cocos2d::Node*>(tolua_tousertype(tolua_S,1,0));
+#if COCOS2D_DEBUG >= 1
+    if (nullptr == self) {
+        tolua_error(tolua_S,"invalid 'self' in function 'tolua_cocos2d_Node_getCascadeBoundingBox'\n", NULL);
+        return 0;
+    }
+#endif
+    
+    Rect rect = cocos2d::utils::getCascadeBoundingBox(self);
+    rect_to_luaval(tolua_S, rect);
+    return 1;
+}
+
 static int tolua_cocos2d_Node_registerScriptHandler(lua_State* tolua_S)
 {
     if (NULL == tolua_S)
@@ -2858,6 +2876,9 @@ static void extendNode(lua_State* tolua_S)
     lua_rawget(tolua_S,LUA_REGISTRYINDEX);
     if (lua_istable(tolua_S,-1))
     {
+        lua_pushstring(tolua_S,"getCascadeBoundingBox");
+        lua_pushcfunction(tolua_S,tolua_cocos2d_Node_getCascadeBoundingBox);
+        lua_rawset(tolua_S,-3);
         lua_pushstring(tolua_S,"registerScriptHandler");
         lua_pushcfunction(tolua_S,tolua_cocos2d_Node_registerScriptHandler);
         lua_rawset(tolua_S,-3);

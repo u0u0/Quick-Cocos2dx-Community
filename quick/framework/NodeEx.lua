@@ -71,19 +71,6 @@ function Node:performWithDelay(callback, delay)
     return action
 end
 
-function Node:getCascadeBoundingBox()
-    local rc
-    local func = tolua.getcfunction(self, "getCascadeBoundingBox")
-    if func then
-        rc = func(self)
-    end
-
-    rc.origin = {x=rc.x, y=rc.y}
-    rc.size = {width=rc.width, height=rc.height}
-    rc.containsPoint = isPointIn
-    return rc
-end
-
 --[[--
 
 测试一个点是否在当前结点区域中
@@ -225,19 +212,23 @@ function Node:setTouchMode(mode)
 	self._luaTouchMode = mode
 end
 
-function Node:setTouchEnabled()
+function Node:setTouchEnabled(enable)
+	-- remove old
+	local eventDispatcher = self:getEventDispatcher()
+	if self._luaTouchListener then
+		eventDispatcher:removeEventListener(self._luaTouchListener)
+	end
+
+	if not enable then
+		return
+	end
+
 	assert(self._LuaListeners, "Error: addNodeEventListener(cc.NODE_TOUCH_EVENT, func) first!")
 	assert(self._LuaListeners[c.NODE_TOUCH_EVENT], "Error: addNodeEventListener(cc.NODE_TOUCH_EVENT, func) first!")
 
 	local isSingle = true
 	if self._luaTouchMode and self._luaTouchMode == c.TOUCH_MODE_ALL_AT_ONCE then
 		isSingle = false
-	end
-
-	-- remove old
-	local eventDispatcher = self:getEventDispatcher()
-	if self._luaTouchListener then
-		eventDispatcher:removeEventListener(self._luaTouchListener)
 	end
 
 	-- add new

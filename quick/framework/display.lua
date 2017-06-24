@@ -263,6 +263,7 @@ display.DEFAULT_TTF_FONT_SIZE   = 24
 function display.newScene(name)
     local scene = cc.Scene:create()
     scene.name = name or "<unknown-scene>"
+	scene:setNodeEventEnabled(true)
     return scene
 end
 
@@ -279,12 +280,10 @@ end
 
 function display.newPhysicsScene(name)
     local scene = cc.Scene:createWithPhysics()
-    scene:setNodeEventEnabled(true)
-    scene:setAutoCleanupEnabled()
     scene.name = name or "<unknown-scene>"
+    scene:setNodeEventEnabled(true)
     return scene
 end
-
 
 -- start --
 

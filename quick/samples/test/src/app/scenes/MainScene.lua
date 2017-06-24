@@ -14,6 +14,7 @@ function MainScene:ctor()
 	local scrollView = ccui.ScrollView:create()
 	scrollView:addTo(self)
 	scrollView:align(display.TOP_CENTER, display.cx, display.top)
+	self.scrollView = scrollView
 
 	local total = 0
 	local btnSize = nil
@@ -23,6 +24,7 @@ function MainScene:ctor()
 		btn:setTitleFontSize(24)
 		btn:addTouchEventListener(function(sender, eventType)
 			if 2 == eventType then
+				scrollView:setVisible(false)
 				app:createView(tests[i]):addTo(self)
 			end
 		end)
@@ -45,10 +47,16 @@ function MainScene:ctor()
 	scrollView:setContentSize(cc.size(display.width, scrollHeight))
 end
 
+function MainScene:openScrollView()
+	self.scrollView:setVisible(true)
+end
+
 function MainScene:onEnter()
+	print("MainScene onEnter")
 end
 
 function MainScene:onExit()
+	print("MainScene onExit")
 end
 
 return MainScene

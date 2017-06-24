@@ -31,6 +31,7 @@ function TestCase:ctor()
 	ccui.Helper:seekWidgetByName(node, "Button_bottom")
 		:addTouchEventListener(function(sender, eventType)
 		if 2 == eventType then
+			self:getParent():openScrollView()
 			self:removeSelf()
 		end
 	end)
