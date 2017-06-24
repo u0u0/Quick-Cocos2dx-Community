@@ -50,6 +50,7 @@ def initDict(names, isLandscape):
         replacementDict["__SCREEN_ORIENTATION_IOS5__"] = "UIInterfaceOrientationIsLandscape"
         replacementDict["__SCREEN_ORIENTATION_IOS6__"] = "UIInterfaceOrientationMaskLandscape"
         replacementDict["__SCREEN_ORIENTATION_SHOULDAUTOROTATE__"] = "YES"
+        replacementDict["__SCREEN_ORIENTATION_ANDROID__"] = "sensorLandscape"
     else:
         replacementDict["__SCREEN_ORIENTATION_L__"] = "portrait"
         replacementDict["__SCREEN_WIDTH__"] = "640"
@@ -59,6 +60,7 @@ def initDict(names, isLandscape):
         replacementDict["__SCREEN_ORIENTATION_IOS5__"] = "UIInterfaceOrientationIsPortrait"
         replacementDict["__SCREEN_ORIENTATION_IOS6__"] = "UIInterfaceOrientationMaskPortraitUpsideDown"
         replacementDict["__SCREEN_ORIENTATION_SHOULDAUTOROTATE__"] = "NO"
+        replacementDict["__SCREEN_ORIENTATION_ANDROID__"] = "portrait"
 
 def stringReplace(s):
     for key in replacementDict:
