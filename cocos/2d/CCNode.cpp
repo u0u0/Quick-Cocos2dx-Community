@@ -642,9 +642,24 @@ ssize_t Node::getChildrenCount() const
 }
 
 /// isVisible getter
-bool Node::isVisible() const
+bool Node::isVisible(bool checkParent) const
 {
-    return _visible;
+    if (!checkParent) {
+        return _visible;
+    }
+    
+    // need check Parent
+    if (!_visible) {
+        return false;
+    }
+    const Node *p = _parent;
+    while (p) {
+        if (!p->isVisible(false)) {
+            return false;
+        }
+        p = p->getParent();
+    }
+    return true;
 }
 
 /// isVisible setter

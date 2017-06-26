@@ -5882,53 +5882,23 @@ int lua_cocos2dx_Node_updateTransform(lua_State* tolua_S)
 
     return 0;
 }
+
 int lua_cocos2dx_Node_isVisible(lua_State* tolua_S)
 {
-    int argc = 0;
-    cocos2d::Node* cobj = nullptr;
-    bool ok  = true;
-
+    cocos2d::Node* cobj = (cocos2d::Node*)tolua_tousertype(tolua_S, 1, 0);
 #if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"cc.Node",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (cocos2d::Node*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
+    if (!cobj) {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_Node_isVisible'", nullptr);
         return 0;
     }
 #endif
 
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_Node_isVisible'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->isVisible();
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.Node:isVisible",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Node_isVisible'.",&tolua_err);
-#endif
-
-    return 0;
+    int checkParent = lua_toboolean(tolua_S, 2);
+    bool ret = cobj->isVisible(checkParent);
+    tolua_pushboolean(tolua_S, (bool)ret);
+    return 1;
 }
+
 int lua_cocos2dx_Node_getChildrenCount(lua_State* tolua_S)
 {
     int argc = 0;

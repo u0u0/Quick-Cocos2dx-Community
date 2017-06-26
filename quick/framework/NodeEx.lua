@@ -240,7 +240,7 @@ function Node:setTouchEnabled(enable)
 			local pp = touch:getPreviousLocation()
 
 			if name == "began" then
-				if not self:isVisible() or not self:hitTest(tp) then
+				if not self:isVisible(true) or not self:hitTest(tp) then
 					return false
 				end
 			end

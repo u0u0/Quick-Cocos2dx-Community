@@ -123,7 +123,7 @@ public:
      *
      * @return true if the widget is enabled, false if the widget is disabled.
      */
-    bool isEnabled() const;
+    bool isEnabled(bool checkParent = false) const;
 
     /**
      * Sets whether the widget is bright
@@ -658,10 +658,6 @@ protected:
     
     Widget* getWidgetParent();
     void updateContentSizeWithTextureSize(const Size& size);
-    
-    bool isAncestorsEnabled();
-    Widget* getAncensterWidget(Node* node);
-    bool isAncestorsVisible(Node* node);
 
     void cleanupWidget();
     LayoutComponent* getOrCreateLayoutComponent();

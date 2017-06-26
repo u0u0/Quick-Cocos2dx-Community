@@ -618,60 +618,6 @@ void Widget::updateChildrenDisplayedRGBA()
     this->setColor(this->getColor());
     this->setOpacity(this->getOpacity());
 }
-
-    
-Widget* Widget::getAncensterWidget(Node* node)
-{
-    if (nullptr == node)
-    {
-        return nullptr;
-    }
-    
-    Node* parent = node->getParent();
-    if (nullptr == parent)
-    {
-        return nullptr;
-    }
-    Widget* parentWidget = dynamic_cast<Widget*>(parent);
-    if (parentWidget)
-    {
-        return parentWidget;
-    }
-    else
-    {
-        return this->getAncensterWidget(parent->getParent());
-    }
-}
-    
-bool Widget::isAncestorsVisible(Node* node)
-{
-    if (nullptr == node)
-    {
-        return true;
-    }
-    Node* parent = node->getParent();
-    
-    if (parent && !parent->isVisible())
-    {
-        return false;
-    }
-    return this->isAncestorsVisible(parent);
-}
-    
-bool Widget::isAncestorsEnabled()
-{
-    Widget* parentWidget = this->getAncensterWidget(this);
-    if (parentWidget == nullptr)
-    {
-        return true;
-    }
-    if (parentWidget && !parentWidget->isEnabled())
-    {
-        return false;
-    }
-    
-    return parentWidget->isAncestorsEnabled();
-}
     
 void Widget::setPropagateTouchEvents(bool isPropagate)
 {
@@ -703,7 +649,7 @@ bool Widget::isSwallowTouches()const
 bool Widget::onTouchBegan(Touch *touch, Event *unusedEvent)
 {
     _hitted = false;
-    if (isVisible() && isEnabled() && isAncestorsEnabled() && isAncestorsVisible(this) )
+    if (isVisible(true) && isEnabled(true))
     {
         _touchBeganPosition = touch->getLocation();
         if(hitTest(_touchBeganPosition) && isClippingParentContainsPoint(_touchBeganPosition))
@@ -964,9 +910,25 @@ bool Widget::isBright() const
     return _bright;
 }
 
-bool Widget::isEnabled() const
+bool Widget::isEnabled(bool checkParent) const
 {
-    return _enabled;
+    if (!checkParent) {
+        return _enabled;
+    }
+    
+    // need check Parent
+    if (!_enabled) {
+        return false;
+    }
+    Node *p = _parent;
+    while (p) {
+        Widget* widget = dynamic_cast<Widget *>(p);
+        if (widget && !widget->isEnabled(false)) {
+            return false;
+        }
+        p = p->getParent();
+    }
+    return true;
 }
 
 float Widget::getLeftBoundary() const
