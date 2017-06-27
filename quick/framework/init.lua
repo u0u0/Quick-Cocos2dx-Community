@@ -108,6 +108,7 @@ crypto     = require(cc.PACKAGE_NAME .. ".crypto")
 json       = require(cc.PACKAGE_NAME .. ".json")
 require(cc.PACKAGE_NAME .. ".shortcodes")
 require(cc.PACKAGE_NAME .. ".NodeEx")
+require(cc.PACKAGE_NAME .. ".WidgetEx")
 
 if device.platform == "android" then
     require(cc.PACKAGE_NAME .. ".platform.android")
