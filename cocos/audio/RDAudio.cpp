@@ -65,7 +65,7 @@ void RDAudio::destroyInstance()
 
 void RDAudio::pause()
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
     alcMakeContextCurrent(NULL);
     alcSuspendContext(_context);
 #endif
@@ -73,7 +73,7 @@ void RDAudio::pause()
 
 void RDAudio::resume()
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
     alcMakeContextCurrent(_context);
     alcProcessContext(_context);
 #endif

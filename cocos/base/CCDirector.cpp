@@ -1013,7 +1013,6 @@ void Director::pause()
     {
         return;
     }
-    RDAudio::getInstance()->pause();
 
     _oldAnimationInterval = _animationInterval;
 
@@ -1028,7 +1027,6 @@ void Director::resume()
     {
         return;
     }
-    RDAudio::getInstance()->resume();
 
     setAnimationInterval(_oldAnimationInterval);
 

@@ -26,6 +26,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "cocos2d.h"
+#import "audio/RDAudio.h"
 
 #import "AppController.h"
 #import "AppDelegate.h"
@@ -103,7 +104,7 @@ static AppDelegate s_sharedApplication;
         case AVAudioSessionInterruptionTypeBegan:{
             NSLog(@"AVAudioSessionInterruptionTypeBegan");
             [audioSession setActive:NO error:nil];
-            cocos2d::Director::getInstance()->pause();
+            RDAudio::getInstance()->pause();
             break;
         };
         case AVAudioSessionInterruptionTypeEnded:{
@@ -111,7 +112,7 @@ static AppDelegate s_sharedApplication;
             // background audio *must* mix with other sessions (or setActive will fail)
             [audioSession setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
             [audioSession setActive:YES error:nil];
-            cocos2d::Director::getInstance()->resume();
+            RDAudio::getInstance()->resume();
             break;
         };
     }
