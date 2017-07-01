@@ -1052,22 +1052,7 @@ function display.newPolygon(points, params, drawNode)
     end
 
     drawNode = drawNode or cc.DrawNode:create()
-    drawNode:drawPolygon(pts, {
-        fillColor = fillColor,
-        borderWidth = borderWidth,
-        borderColor = borderColor
-    })
-
-    if drawNode then
-        function drawNode:setLineStipple()
-        end
-
-        function drawNode:setLineStippleEnabled()
-        end
-
-        function drawNode:setLineColor(color)
-        end
-    end
+    drawNode:drawPolygon(pts, #pts, fillColor, borderWidth, borderColor)
     return drawNode
 end
 
