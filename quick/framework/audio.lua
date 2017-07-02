@@ -139,6 +139,7 @@ function audio.playEffect(path, isLoop)
 			audio._scheduler = scheduler.scheduleGlobal(update, 1.0)
 		end
 	end
+	return source
 end
 
 function audio.setEffectVolume(vol)
