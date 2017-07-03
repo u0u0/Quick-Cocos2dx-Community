@@ -20,14 +20,20 @@
 #define RD_AUDIO_BUFFER "Rapid2D_CAudioBuffer"
 #define RD_AUDIO_SOURCE "Rapid2D_CAudioPlayer"
 
+typedef struct _RDAudioItem {
+    ALuint id;
+    bool deleted;
+} RDAudioItem;
+
 static void callback(int handler, ALuint bufferID)
 {
     lua_State * L = cocos2d::LuaEngine::getInstance()->getLuaStack()->getLuaState();
     
     if (bufferID > 0) {
         // create userdata
-        ALuint *userdata = (ALuint *)lua_newuserdata(L, sizeof(ALuint));
-        *userdata = bufferID;
+        RDAudioItem *bufferItem = (RDAudioItem *)lua_newuserdata(L, sizeof(RDAudioItem));
+        bufferItem->id = bufferID;
+        bufferItem->deleted = false;
         // set metatable
         luaL_getmetatable(L, RD_AUDIO_BUFFER);
         lua_setmetatable(L, -2);
@@ -52,16 +58,20 @@ static int lnewBuffer(lua_State * L)
 static int lnewSource(lua_State * L)
 {
     ALuint sourceID;
+    // clear old error code.
+    alGetError();
     // grab a source ID from openAL
     alGenSources(1, &sourceID);
+    // check the error code.
     if (alGetError() != AL_NO_ERROR) {
         cocos2d::log("Rapid2D_CAudio.newSource() fail");
         return 0;
     }
     
     // create userdata
-    ALuint *userdata = (ALuint *)lua_newuserdata(L, sizeof(ALuint));
-    *userdata = sourceID;
+    RDAudioItem *sourceItem = (RDAudioItem *)lua_newuserdata(L, sizeof(RDAudioItem));
+    sourceItem->id = sourceID;
+    sourceItem->deleted = false;
     // set metatable
     luaL_getmetatable(L, RD_AUDIO_SOURCE);
     lua_setmetatable(L, -2);
@@ -71,8 +81,11 @@ static int lnewSource(lua_State * L)
 /******************** for buffer metatable ********************/
 static int lBufferGC(lua_State *L)
 {
-    ALuint *bufferID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_BUFFER);
-    alDeleteBuffers(1, bufferID);
+    RDAudioItem *bufferItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_BUFFER);
+    if (!bufferItem->deleted) {
+        alDeleteBuffers(1, &bufferItem->id);
+        bufferItem->deleted = true;
+    }
     return 0;// number of return values
 }
 
@@ -84,22 +97,30 @@ static const struct luaL_Reg meta_buffer [] = {
 /******************** for source metatable ********************/
 static int lSourceGC(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
-    alDeleteSources(1, sourceID);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    if (!sourceItem->deleted) {
+        alDeleteSources(1, &sourceItem->id);
+        sourceItem->deleted = true;
+    }
     return 0;// number of return values
 }
 
 static int lSourcePlay2d(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
-    ALuint *bufferID = (ALuint *)luaL_checkudata(L, 2, RD_AUDIO_BUFFER);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    RDAudioItem *bufferItem = (RDAudioItem *)luaL_checkudata(L, 2, RD_AUDIO_BUFFER);
     int isLoop = lua_toboolean(L, 3);
     
+    if (sourceItem->deleted || bufferItem->deleted) {
+        cocos2d::log("Rapid2D_CAudioBuffer.play2d() fail for deleted!");
+        return 0;
+    }
+    
     // attach the buffer to the source
-    alSourcei(*sourceID, AL_BUFFER, *bufferID);
+    alSourcei(sourceItem->id, AL_BUFFER, bufferItem->id);
     // set loop sound
-    alSourcei(*sourceID, AL_LOOPING, isLoop);
-    alSourcePlay(*sourceID);
+    alSourcei(sourceItem->id, AL_LOOPING, isLoop);
+    alSourcePlay(sourceItem->id);
     // clean error code
     alGetError();
     return 0;
@@ -107,28 +128,45 @@ static int lSourcePlay2d(lua_State *L)
 
 static int lSourcePause(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
-    alSourcePause(*sourceID);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    if (sourceItem->deleted) {
+        cocos2d::log("Rapid2D_CAudioBuffer.pause() fail for deleted!");
+        return 0;
+    }
+    alSourcePause(sourceItem->id);
     return 0;
 }
 
 static int lSourceResume(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
-    alSourcePlay(*sourceID);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    if (sourceItem->deleted) {
+        cocos2d::log("Rapid2D_CAudioBuffer.resume() fail for deleted!");
+        return 0;
+    }
+    alSourcePlay(sourceItem->id);
     return 0;
 }
 
 static int lSourceStop(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
-    alSourceStop(*sourceID);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    if (sourceItem->deleted) {
+        cocos2d::log("Rapid2D_CAudioBuffer.stop() fail for deleted!");
+        return 0;
+    }
+    alSourceStop(sourceItem->id);
     return 0;
 }
 
 static int lSourceSetVolume(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    if (sourceItem->deleted) {
+        cocos2d::log("Rapid2D_CAudioBuffer.setVolume() fail for deleted!");
+        return 0;
+    }
+    
     lua_Number volume = lua_tonumber(L, 2);
     if (volume < 0.0f) {
         volume = 0.0f;
@@ -136,15 +174,20 @@ static int lSourceSetVolume(lua_State *L)
     if (volume > 1.0f) {
         volume = 1.0f;
     }
-    alSourcef(*sourceID, AL_GAIN, volume);
+    alSourcef(sourceItem->id, AL_GAIN, volume);
     return 0;
 }
 
 static int lSourceGetStat(lua_State *L)
 {
-    ALuint *sourceID = (ALuint *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
+    if (sourceItem->deleted) {
+        cocos2d::log("Rapid2D_CAudioBuffer.getStat() fail for deleted!");
+        return 0;
+    }
+    
     ALint stat;
-    alGetSourcei(*sourceID, AL_SOURCE_STATE, &stat);
+    alGetSourcei(sourceItem->id, AL_SOURCE_STATE, &stat);
     switch (stat) {
         case AL_INITIAL:
             lua_pushinteger(L, 1);
@@ -159,8 +202,8 @@ static int lSourceGetStat(lua_State *L)
             lua_pushinteger(L, 4);
             break;
         default:
-            return luaL_error(L, "[Lua Error]: %s getStat() fail",
-                              RD_AUDIO_SOURCE);
+            cocos2d::log("Rapid2D_CAudioBuffer.getStat() failed!");
+            return 0;
     }
     return 1;
 }

@@ -34,26 +34,23 @@ local scheduler = require("framework.scheduler")
 
 -- INTERNAL API, recircle source from effects, call by director
 local function update(dt)
-	local isRemoved = false
-	local total = #audio._sources
+	local sources = audio._sources
+	local total = #sources
 	local index = 2
 	while index <= total do
-		local stat = audio._sources[index]:getStat()
+		local stat = sources[index]:getStat()
 		if 4 == stat then
-			table.remove(audio._sources, index)
+			sources[index]:__gc() -- free OpenAL resource
+			table.remove(sources, index)
 			total = total - 1
-			isRemoved = true
 		else
 			index = index + 1
 		end
 	end
 
-	if isRemoved then
-		if 1 == total then
-			scheduler.unscheduleGlobal(audio._scheduler)
-			audio._scheduler = nil
-		end
-		collectgarbage("collect")
+	if 1 == total then
+		scheduler.unscheduleGlobal(audio._scheduler)
+		audio._scheduler = nil
 	end
 end
 
