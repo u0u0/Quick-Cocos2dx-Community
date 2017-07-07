@@ -6,11 +6,20 @@
 
 local Widget = ccui.Widget
 
+--[[
+wapper ccui.Widget:setTouchEnabled to make it support Node:addNodeEventListener(cc.NODE_TOUCH_EVENT)
+Normally, ccui.Widget have it own touch dealing in cpp code.
+This wapper help you have chance to deal touch in lua code.
+]]--
 function Widget:setTouchEnabled(enable)
+	local cfunc = tolua.getcfunction(self, "setTouchEnabled")
 	if self._LuaListeners and self._LuaListeners[cc.NODE_TOUCH_EVENT] then
 		cc.Node.setTouchEnabled(self, enable)
+		-- widget's cpp listener may enable from csb setting.
+		-- In some cases, dispatch may not send to lua created listener
+		-- Remove cpp listener to avoid uncertain TouchEvent dispatch
+		cfunc(self, false)
 	else
-		local cfunc = tolua.getcfunction(self, "setTouchEnabled")
 		cfunc(self, enable)
 	end
 end
