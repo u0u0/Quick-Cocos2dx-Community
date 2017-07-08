@@ -82,12 +82,15 @@ function TestCase:loadBtns()
 			audio.pauseAll()
 		end},
 		{"SingleEffect_vol0.5", function()
-			local effect = audio.playEffect("audio/effect.ogg", true)
-			if effect then
-				effect:setVolume(0.5) -- change volume just for this effect
-				self:performWithDelay(function()
-					effect:stop() -- stop looped effect
-				end, 3)
+			if not self._effect then
+				self._effect = audio.playEffect("audio/effect.ogg", true)
+				if self._effect then
+					self._effect:setVolume(0.5) -- change volume just for this effect
+					self:performWithDelay(function()
+						self._effect:stop() -- stop looped effect
+						self._effect = nil
+					end, 3)
+				end
 			end
 		end},
 		{"ResumeAll", function()

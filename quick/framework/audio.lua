@@ -55,7 +55,9 @@ end
 
 --------------- buffer -------------------
 function audio.loadFile(path, callback)
-	if not audio._buffers[path] then
+	if audio._buffers[path] then
+		callback(path, true)
+	else
 		assert(callback, "ONLY support asyn load file, please set callback!")
 		Rapid2D_CAudio.newBuffer(path, function(buffID)
 			if buffID then

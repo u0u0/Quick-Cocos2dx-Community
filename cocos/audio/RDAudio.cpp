@@ -169,9 +169,12 @@ void RDAudio::scheduleLoop(float)
     // create OpenAL buffer
     ALuint bufferID = 0;
     if (asyncStruct->pcmData) {
+        // clear old error
+        alGetError();
         alGenBuffers(1, &bufferID);
         if (alGetError() != AL_NO_ERROR) {
             cocos2d::log("Error: RDAudio_LoadFile can't gen OpenAL Buffer");
+            bufferID = 0;
         } else {
             ALenum format = (asyncStruct->channels == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
             alBufferData(bufferID, format, asyncStruct->pcmData, asyncStruct->size, asyncStruct->rate);
