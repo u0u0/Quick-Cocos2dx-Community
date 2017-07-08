@@ -266,7 +266,7 @@ function WelcomeScene:createCopyright(node)
     node:addChild(bg)
 
     local label = display.newTTFLabel({
-        text = "Copyright (c) 2016 cocos2d-lua.org, Powered by Quick-Cocos2dx-Community",
+        text = "Copyright (c) 2017 cocos2d-lua.org, Powered by Quick-Cocos2dx-Community",
         size = 15,
         color = cc.c3b(128, 128, 128),
         x = 48,

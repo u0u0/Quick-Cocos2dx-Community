@@ -78,6 +78,9 @@ function player:loadSetting(fileName)
 
     local data = file:read("*all")
     local func = loadstring("local settings = {" .. data .. "} return settings")
+	if not func then
+		return "Error!"
+	end
     self.settings = func()
     self.settings.PLAYER_OPEN_RECENTS = self.settings.PLAYER_OPEN_RECENTS or {}
     file:close()
@@ -312,12 +315,9 @@ end
 function player:readSettings()
     self.userHomeDir = __USER_HOME__
     self.configFilePath = player.userHomeDir .. ".quick_player.lua"
-	-- do not use cc.FileUtils:getInstance():isFileExist
-	-- "__USER_HOME__" is ANSI encoding, while cocos engine use UTF8.
-    if not self:isFileExist(player.configFilePath) then
+    if self:loadSetting(player.configFilePath) then
         self:restorDefaultSettings()
-    end
-    self:loadSetting(player.configFilePath)
+	end
 
     -- get QUICK_V3_ROOT path
     self:setQuickRootPath()

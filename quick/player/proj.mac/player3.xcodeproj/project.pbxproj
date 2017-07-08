@@ -392,7 +392,6 @@
 		9F7287FF1A24957700EE0234 /* extra */ = {
 			isa = PBXGroup;
 			children = (
-				9F7288301A24957700EE0234 /* apptools */,
 				9F7288331A24957700EE0234 /* cocos2dx_extra.h */,
 				9F7288341A24957700EE0234 /* crypto */,
 				9F7288A11A24957700EE0234 /* luabinding */,
@@ -892,6 +891,7 @@
 					"-pagezero_size",
 					10000,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "player3.cocos2d-lua.org";
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac";
 			};
@@ -922,6 +922,7 @@
 					"-pagezero_size",
 					10000,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "player3.cocos2d-lua.org";
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac";
 			};
