@@ -23,7 +23,6 @@ audio._scheduler = nil -- global schedule hander
 audio._sources[1] = Rapid2D_CAudio.newSource()
 if not (audio._sources[1]) then
 	print("Error: init BGM source fail, check if have OpenAL init error above!")
-	audio = nil
 	return
 end
 
@@ -70,13 +69,18 @@ function audio.loadFile(path, callback)
 end
 
 function audio.unloadFile(path)
+	local buffer = audio._buffers[path]
+	if buffer then
+		buffer:__gc()
+	end
 	audio._buffers[path] = nil
-	collectgarbage("collect")
 end
 
 function audio.unloadAllFile()
+	for path, buffer in pairs(audio._buffers) do
+		buffer:__gc()
+	end
 	audio._buffers = {}
-	collectgarbage("collect")
 end
 
 --[[
@@ -91,14 +95,15 @@ function for CSource
 
 --------------- BGM 2D API -------------------
 function audio.playBGM(path, isLoop)
-	if not audio._buffers[path] then
+	local buffer = audio._buffers[path]
+	if not buffer then
 		print(path .. " have not loaded!!")
 		return
 	end
 
 	isLoop = isLoop or true
 	audio._sources[1]:stop()
-	audio._sources[1]:play2d(audio._buffers[path], isLoop)
+	audio._sources[1]:play2d(buffer, isLoop)
 	audio._sources[1]:setVolume(audio._BGMVolume)
 end
 
@@ -119,7 +124,8 @@ end
 
 --------------- Effect 2D API -------------------
 function audio.playEffect(path, isLoop)
-	if not audio._buffers[path] then
+	local buffer = audio._buffers[path]
+	if not buffer then
 		print(path .. " have not loaded!!")
 		return
 	end
@@ -129,11 +135,11 @@ function audio.playEffect(path, isLoop)
 		isLoop = isLoop or false
 		table.insert(audio._sources, source)
 		source:setVolume(audio._effectVolume)
-		source:play2d(audio._buffers[path], isLoop)
+		source:play2d(buffer, isLoop)
 
 		-- start recircle scheduler
 		if not audio._scheduler then
-			audio._scheduler = scheduler.scheduleGlobal(update, 1.0)
+			audio._scheduler = scheduler.scheduleGlobal(update, 0.1)
 		end
 	end
 	return source
@@ -150,6 +156,12 @@ function audio.setEffectVolume(vol)
 
 	for i = 2, #audio._sources do
 		audio._sources[i]:setVolume(vol)
+	end
+end
+
+function audio.stopEffect()
+	for i = 2, #audio._sources do
+		audio._sources[i]:stop()
 	end
 end
 

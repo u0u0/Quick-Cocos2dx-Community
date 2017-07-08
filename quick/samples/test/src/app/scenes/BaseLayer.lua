@@ -18,6 +18,7 @@ function BaseLayer:ctor()
 		if 2 == eventType then
 			self:getParent():openScrollView()
 			self:removeSelf()
+			audio.stopAll()
 		end
 	end)
 end

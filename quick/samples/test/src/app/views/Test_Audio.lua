@@ -41,6 +41,10 @@ function TestCase:ctor()
 				playWay(fn)
 			end
 		end)
+
+		if channelCount == 2 then
+			self:loadBtns()
+		end
 	end
 
 	-- load audio sync
@@ -55,34 +59,71 @@ function TestCase:ctor()
 		if 2 == eventType then
 			audio.loadFile("audio/bgm.ogg", loadedCB)
 			audio.loadFile("audio/effect.ogg", loadedCB)
+			btn:setVisible(false)
 		end
 	end)
+end
 
-	local btn = ccui.Button:create()
-		:pos(display.cx - 100, 60)
-		:addTo(self)
-
-	btn:setTitleText("PauseAll")
-	btn:setTitleFontSize(30)
-	btn:setTitleColor(cc.c3b(255, 255, 0))
-	btn:addTouchEventListener(function(sender, eventType)
-		if 2 == eventType then
+function TestCase:loadBtns()
+	local btns = {
+		{"Down_BGMVolume", function()
+			audio.setBGMVolume(0.3)
+		end},
+		{"Up_BGMVolume", function()
+			audio.setBGMVolume(1)
+		end},
+		{"Down_EffectVolume", function()
+			audio.setEffectVolume(0.3)
+		end},
+		{"Up_EffectVolume", function()
+			audio.setEffectVolume(1)
+		end},
+		{"PauseAll", function()
 			audio.pauseAll()
-		end
-	end)
-
-	local btn = ccui.Button:create()
-		:pos(display.cx + 100, 60)
-		:addTo(self)
-
-	btn:setTitleText("ResumeAll")
-	btn:setTitleFontSize(30)
-	btn:setTitleColor(cc.c3b(255, 255, 0))
-	btn:addTouchEventListener(function(sender, eventType)
-		if 2 == eventType then
+		end},
+		{"SingleEffect_vol0.5", function()
+			local effect = audio.playEffect("audio/effect.ogg", true)
+			if effect then
+				effect:setVolume(0.5) -- change volume just for this effect
+				self:performWithDelay(function()
+					effect:stop() -- stop looped effect
+				end, 3)
+			end
+		end},
+		{"ResumeAll", function()
 			audio.resumeAll()
+		end},
+		{"StopAll", function()
+			audio.stopAll()
+		end},
+		{"unloadFile", function()
+			audio.unloadFile("audio/effect.ogg")
+		end},
+		{"unloadAllFile", function()
+			audio.unloadAllFile()
+		end},
+	}
+
+	for index, info in ipairs(btns) do
+		local isOdd = index % 2 == 1
+		local posX = display.cx + 150
+		if isOdd then
+			posX = display.cx - 150
 		end
-	end)
+		local posY = math.floor((index - 1) / 2) * 50 + 50
+		local btn = ccui.Button:create()
+			:pos(posX, posY)
+			:addTo(self)
+
+		btn:setTitleText(info[1])
+		btn:setTitleFontSize(30)
+		btn:setTitleColor(cc.c3b(255, 255, 0))
+		btn:addTouchEventListener(function(sender, eventType)
+			if 2 == eventType then
+				info[2]()
+			end
+		end)
+	end
 end
 
 return TestCase
