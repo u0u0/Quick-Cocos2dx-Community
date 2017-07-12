@@ -533,7 +533,7 @@ local rect = cc.rect(display.left + 100,
                     display.bottom + 100,
                     display.width - 200,
                     display.height - 200)
-local clipnode = display.newClippingRegionNode(rect)
+local clipnode = display.newClippingRectangleNode(rect)
 
 clipnode:addChild(sprite1)
 clipnode:addChild(sprite2)
@@ -548,27 +548,8 @@ scene:addChild(clipnode)
 -- end --
 
 function display.newClippingRectangleNode(rect)
-    if rect then
-        return cc.ClippingRegionNode:create(rect)
-    else
-        return cc.ClippingRegionNode:create()
-    end
+	return cc.ClippingRegionNode:create(rect)
 end
-
--- start --
-
---------------------------------
--- 创建并返回一个 ClippingRectangleNode 对象。
--- @function [parent=#display] newClippingRegionNode
--- @param table rect 指定的区域
--- @return ClippingRectangleNode#ClippingRectangleNode ret (return value: cc.ClippingRectangleNode)  ClippingRectangleNode
-
---[[--
-旧接口,建议用display.newClippingRectangleNode代替
-]]
--- end --
-
-display.newClippingRegionNode = display.newClippingRectangleNode
 
 -- start --
 
