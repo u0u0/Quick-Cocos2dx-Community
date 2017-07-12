@@ -37,7 +37,6 @@ NS_CC_BEGIN
 class CC_DLL ClippingRectangleNode : public Node
 {    
 public:
-    static ClippingRectangleNode* create(const Rect& clippingRegion);
     static ClippingRectangleNode* create();
     
     const Rect& getClippingRegion() const {

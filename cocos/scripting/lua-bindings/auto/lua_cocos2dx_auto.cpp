@@ -45279,55 +45279,28 @@ int lua_cocos2dx_ClippingRectangleNode_setClippingRegion(lua_State* tolua_S)
 
     return 0;
 }
+
 int lua_cocos2dx_ClippingRectangleNode_create(lua_State* tolua_S)
 {
-    int argc = 0;
-    bool ok  = true;
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
+    if (!tolua_isusertable(tolua_S,1,"cc.ClippingRectangleNode",0,&tolua_err)) {
+        tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ClippingRectangleNode_create'.",&tolua_err);
+    };
 #endif
 
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertable(tolua_S,1,"cc.ClippingRectangleNode",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-
-    do 
-    {
-        if (argc == 0)
-        {
-            cocos2d::ClippingRectangleNode* ret = cocos2d::ClippingRectangleNode::create();
-            object_to_luaval<cocos2d::ClippingRectangleNode>(tolua_S, "cc.ClippingRectangleNode",(cocos2d::ClippingRectangleNode*)ret);
-            return 1;
+    cocos2d::ClippingRectangleNode *ret = cocos2d::ClippingRectangleNode::create();
+    if (lua_gettop(tolua_S) == 2) {
+        cocos2d::Rect rect;
+        if(luaval_to_rect(tolua_S, 2, &rect, "cc.ClippingRectangleNode:create")) {
+            ret->setClippingRegion(rect);
+        } else {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_ClippingRectangleNode_create'", nullptr);
+            return 0;
         }
-    } while (0);
-    ok  = true;
-    do 
-    {
-        if (argc == 1)
-        {
-            cocos2d::Rect arg0;
-            ok &= luaval_to_rect(tolua_S, 2, &arg0, "cc.ClippingRectangleNode:create");
-            if (!ok) { break; }
-            cocos2d::ClippingRectangleNode* ret = cocos2d::ClippingRectangleNode::create(arg0);
-            object_to_luaval<cocos2d::ClippingRectangleNode>(tolua_S, "cc.ClippingRectangleNode",(cocos2d::ClippingRectangleNode*)ret);
-            return 1;
-        }
-    } while (0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d", "cc.ClippingRectangleNode:create",argc, 1);
-    return 0;
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ClippingRectangleNode_create'.",&tolua_err);
-#endif
-    return 0;
-}
-static int lua_cocos2dx_ClippingRectangleNode_finalize(lua_State* tolua_S)
-{
-    printf("luabindings: finalizing LUA object (ClippingRectangleNode)");
-    return 0;
+    }
+    object_to_luaval<cocos2d::ClippingRectangleNode>(tolua_S, "cc.ClippingRectangleNode",(cocos2d::ClippingRectangleNode*)ret);
+    return 1;
 }
 
 int lua_register_cocos2dx_ClippingRectangleNode(lua_State* tolua_S)

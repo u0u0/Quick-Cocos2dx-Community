@@ -7,23 +7,13 @@
 
 NS_CC_BEGIN
 
-ClippingRectangleNode* ClippingRectangleNode::create(const Rect& clippingRegion)
-{
-    ClippingRectangleNode* node = new (std::nothrow) ClippingRectangleNode();
-    if (node && node->init()) {
-        node->setClippingRegion(clippingRegion);
-        node->autorelease();
-    } else {
-        CC_SAFE_DELETE(node);
-    }
-    
-    return node;
-}
-
 ClippingRectangleNode* ClippingRectangleNode::create()
 {
     ClippingRectangleNode* node = new (std::nothrow) ClippingRectangleNode();
     if (node && node->init()) {
+        // ClippingRectangleNode mostly use for UI, enable below two attributes.
+        node->setCascadeColorEnabled(true);
+        node->setCascadeOpacityEnabled(true);
         node->autorelease();
     } else {
         CC_SAFE_DELETE(node);
@@ -86,15 +76,23 @@ void ClippingRectangleNode::onAfterVisitScissor()
 
 void ClippingRectangleNode::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags)
 {
-    _beforeVisitCmdScissor.init(_globalZOrder);
-    _beforeVisitCmdScissor.func = CC_CALLBACK_0(ClippingRectangleNode::onBeforeVisitScissor, this);
-    renderer->addCommand(&_beforeVisitCmdScissor);
+    if (!_visible)
+    {
+        return;
+    }
     
-    Node::visit(renderer, parentTransform, parentFlags);
-    
-    _afterVisitCmdScissor.init(_globalZOrder);
-    _afterVisitCmdScissor.func = CC_CALLBACK_0(ClippingRectangleNode::onAfterVisitScissor, this);
-    renderer->addCommand(&_afterVisitCmdScissor);
+    if (isVisitableByVisitingCamera())
+    {
+        _beforeVisitCmdScissor.init(_globalZOrder);
+        _beforeVisitCmdScissor.func = CC_CALLBACK_0(ClippingRectangleNode::onBeforeVisitScissor, this);
+        renderer->addCommand(&_beforeVisitCmdScissor);
+        
+        Node::visit(renderer, parentTransform, parentFlags);
+        
+        _afterVisitCmdScissor.init(_globalZOrder);
+        _afterVisitCmdScissor.func = CC_CALLBACK_0(ClippingRectangleNode::onAfterVisitScissor, this);
+        renderer->addCommand(&_afterVisitCmdScissor);
+    }
 }
 
 NS_CC_END
