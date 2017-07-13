@@ -1,1 +1,1 @@
-luaoc = require(cc.PACKAGE_NAME .. ".luaoc")
+luaoc = require(cc.PACKAGE_NAME .. ".platform.luaoc")
