@@ -217,6 +217,7 @@ function Node:setTouchEnabled(enable)
 	local eventDispatcher = self:getEventDispatcher()
 	if self._luaTouchListener then
 		eventDispatcher:removeEventListener(self._luaTouchListener)
+		self._luaTouchListener = nil
 	end
 
 	if not enable then
