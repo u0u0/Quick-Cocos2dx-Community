@@ -1,3 +1,54 @@
+Quick-Cocos2dx-Community v3.7.0 release
+
+[新增]	全新的OpenAL音频播放引擎。
+[新增]	合并ian me@iany.me提供的lable outline改进。
+[新增]	ccui.Listview改进。
+[新增]	xxtea 加解密逻辑调整，现在只对资源加密，而game.zip也算一种资源。同时解密接口暴露给项目自行定制，模版工程提供范例。
+[新增]	添加接口 ccui.Button:setTitleOffset(x, y)，可自定义button字体位置。
+[新增]	cc.Image添加像素点获取接口。
+[新增]	lpack 扩展 g 来识别 long long。
+[新增]	TMXTilesetInfo添加getProperties封装。
+
+[更新]	Luajit 更新到 2.1.0-beta3，iOS 模拟器可以正常启动了。
+[更新]	tiledmap相关模块同步为3.14最新代码。
+[更新]	RenderTexture同步为3.14代码。
+[更新]	重写 player 的 welcome 代码。
+[更新]	重写 sample。
+[更新]	用3.x事件系统重写 quick 的事件封装代码。
+[更新]	Tiledmap lua 绑定代码分离，感谢：逐梦流云。
+[更新]	所有php脚本由python重写。
+[更新]	Player优先加载项目下的framework，便于framework自定义的开发测试。
+
+[删除]	去掉2.x的事件机制。
+[删除]	去掉quick的事件机制（只保留3.x的事件机制）。
+[删除]	去掉2.x的UI控件。
+[删除]	去掉quick的UI控件（只保留ccui）。
+[删除]	去掉Layer。
+[删除]	精简quick framework，删除大量低质量的 Lua 模块。
+[删除]	去掉了AssetsManagerEx，它的事件过于复杂，纯Lua的热更新方案更灵活。
+[删除]	去掉了httpclient（只保留quick的http）。
+[删除]	去掉physicsSprite。
+[删除]	去掉extensions，包含cocosbuilder（它依赖2.x的事件系统）。
+[删除]	去掉filter，自定义shader更灵活。
+[删除]	去掉lableTTF 和 LabelBMF。
+[删除]	去掉所有deprecated模块与函数。
+[删除]	去掉DrawPrimitives。
+[删除]	去掉EMSCRIPTEN相关代码。
+[删除]	去掉tools文件夹。
+
+[修正]	修正了多摄像机的渲染，截图等bug。
+[修正]	spine事件注销的错误修正。
+[修正]	引擎中异步线程的信号量bug修正。
+[修正]	CilpingRectangle 嵌套 bug 修正。
+[修正]	现在 ccui.Helper:seekWidgetByName() 不被非 widget 节点打断。
+[修正]	Mac 的 NSConcreteAttributedString initWithString:: nil value 错误保护。
+[修正]	device.getOpenUDID android权限请求处理。
+[修正]	Rendertexture 导致 ClippingRectangleNode 区域错误的修正。
+[修正]	修正ccui.listview滚动时，内部的button反复经过热点会高亮闪烁。
+[修正]	修正当node在update中删除自己的时候，会导win32访问非法指针。
+[修正]	修正ccui.LoadingBar在loadTexture后不刷新进度条的bug。
+[修正]	修正ccui.widget在setEnabled(false)之后不更新图片状体的bug。
+
 Quick-Cocos2dx-Community v3.6.5 release
 
 [新增]	Win32 平台升级到 VS 2015 编译，放弃 VS 2013 支持。
