@@ -78,10 +78,6 @@ public:
     /** render the scene */
     void render(Renderer* renderer);
     
-    typedef std::function<void(Image *)> CaptureCB;
-    /** capture screen from GL buffer */
-    void captureScreen(CaptureCB onCaptured);
-    
 CC_CONSTRUCTOR_ACCESS:
     Scene();
     virtual ~Scene();
@@ -107,8 +103,6 @@ protected:
     
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Scene);
-    void doCaptureScreen(void);
-    CaptureCB _onCaptured;
     
 #if CC_USE_PHYSICS
 public:
