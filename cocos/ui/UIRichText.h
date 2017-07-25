@@ -39,11 +39,14 @@ public:
     {
         TEXT,
         IMAGE,
-        CUSTOM
+        CUSTOM,
+        NEWLINE
     };
     RichElement(){};
     virtual ~RichElement(){};
     bool init(int tag, const Color3B& color, GLubyte opacity);
+    Type getType() {return _type;};
+    int getTag() {return _tag;};
 protected:
     Type _type;
     int _tag;
@@ -92,7 +95,17 @@ protected:
     Node* _customNode;
     friend class RichText;
 };
-    
+  
+class CC_GUI_DLL RichElementNewLine : public RichElement
+{
+public:
+    RichElementNewLine() { _type = Type::NEWLINE; };
+    virtual ~RichElementNewLine() {};
+    static RichElementNewLine* create(int tag, const Color3B& color, GLubyte opacity);
+protected:
+    friend class RichText;
+};
+
 class CC_GUI_DLL RichText : public Widget
 {
 public:
@@ -105,8 +118,6 @@ public:
     void removeElement(RichElement* element);
 
     void setVerticalSpace(float space);
-    virtual void setAnchorPoint(const Vec2 &pt) override;
-    virtual Size getVirtualRendererSize() const override;
     void formatText();
     virtual void ignoreContentAdaptWithSize(bool ignore) override;
     virtual std::string getDescription() const override;
@@ -117,10 +128,9 @@ CC_CONSTRUCTOR_ACCESS:
 protected:
     virtual void adaptRenderers() override;
 
-    virtual void initRenderer() override;
     void pushToContainer(Node* renderer);
     void handleTextRenderer(const std::string& text, const std::string& fontName, float fontSize, const Color3B& color, GLubyte opacity);
-    void handleImageRenderer(const std::string& fileParh, const Color3B& color, GLubyte opacity);
+    void handleImageRenderer(const std::string& filePath, const Color3B& color, GLubyte opacity);
     void handleCustomRenderer(Node* renderer);
     void formarRenderers();
     void addNewLine();
@@ -130,7 +140,6 @@ protected:
     std::vector<Vector<Node*>*> _elementRenders;
     float _leftSpaceWidth;
     float _verticalSpace;
-    Node* _elementRenderersContainer;
 };
     
 }

@@ -42,7 +42,6 @@ bool RichElement::init(int tag, const Color3B &color, GLubyte opacity)
     return true;
 }
     
-    
 RichElementText* RichElementText::create(int tag, const Color3B &color, GLubyte opacity, const std::string& text, const std::string& fontName, float fontSize)
 {
     RichElementText* element = new (std::nothrow) RichElementText();
@@ -111,12 +110,23 @@ bool RichElementCustomNode::init(int tag, const Color3B &color, GLubyte opacity,
     }
     return false;
 }
-    
+
+RichElementNewLine* RichElementNewLine::create(int tag, const Color3B& color, GLubyte opacity)
+{
+    RichElementNewLine* element = new (std::nothrow) RichElementNewLine();
+    if (element && element->init(tag, color, opacity))
+    {
+        element->autorelease();
+        return element;
+    }
+    CC_SAFE_DELETE(element);
+    return nullptr;
+}
+
 RichText::RichText():
 _formatTextDirty(true),
 _leftSpaceWidth(0.0f),
-_verticalSpace(0.0f),
-_elementRenderersContainer(nullptr)
+_verticalSpace(0.0f)
 {
     
 }
@@ -145,13 +155,6 @@ bool RichText::init()
         return true;
     }
     return false;
-}
-    
-void RichText::initRenderer()
-{
-    _elementRenderersContainer = Node::create();
-    _elementRenderersContainer->setAnchorPoint(Vec2(0.5f, 0.5f));
-    addProtectedChild(_elementRenderersContainer, 0, -1);
 }
 
 void RichText::insertElement(RichElement *element, int index)
@@ -182,12 +185,12 @@ void RichText::formatText()
 {
     if (_formatTextDirty)
     {
-        _elementRenderersContainer->removeAllChildren();
+        this->removeAllProtectedChildren();
         _elementRenders.clear();
         if (_ignoreSize)
         {
             addNewLine();
-            for (ssize_t i=0; i<_richElements.size(); i++)
+            for (ssize_t i=0, size = _richElements.size(); i<size; ++i)
             {
                 RichElement* element = _richElements.at(i);
                 Node* elementRenderer = nullptr;
@@ -218,20 +221,28 @@ void RichText::formatText()
                         elementRenderer = elmtCustom->_customNode;
                         break;
                     }
+                    case RichElement::Type::NEWLINE:
+                    {
+                        addNewLine();
+                        break;
+                    }
                     default:
                         break;
                 }
-                elementRenderer->setColor(element->_color);
-                elementRenderer->setOpacity(element->_opacity);
-                pushToContainer(elementRenderer);
+
+                if (elementRenderer)
+                {
+                    elementRenderer->setColor(element->_color);
+                    elementRenderer->setOpacity(element->_opacity);
+                    pushToContainer(elementRenderer);
+                }
             }
         }
         else
         {
             addNewLine();
-            for (ssize_t i=0; i<_richElements.size(); i++)
+            for (ssize_t i=0, size = _richElements.size(); i<size; ++i)
             {
-                
                 RichElement* element = static_cast<RichElement*>(_richElements.at(i));
                 switch (element->_type)
                 {
@@ -251,6 +262,11 @@ void RichText::formatText()
                     {
                         RichElementCustomNode* elmtCustom = static_cast<RichElementCustomNode*>(element);
                         handleCustomRenderer(elmtCustom->_customNode);
+                        break;
+                    }
+                    case RichElement::Type::NEWLINE:
+                    {
+                        addNewLine();
                         break;
                     }
                     default:
@@ -315,9 +331,9 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
     }
 }
     
-void RichText::handleImageRenderer(const std::string& fileParh, const Color3B &color, GLubyte opacity)
+void RichText::handleImageRenderer(const std::string& filePath, const Color3B &color, GLubyte opacity)
 {
-    Sprite* imageRenderer = Sprite::create(fileParh);
+    Sprite* imageRenderer = Sprite::create(filePath);
     handleCustomRenderer(imageRenderer);
 }
     
@@ -348,69 +364,66 @@ void RichText::formarRenderers()
     if (_ignoreSize)
     {
         float newContentSizeWidth = 0.0f;
-        float newContentSizeHeight = 0.0f;
-        
-        Vector<Node*>* row = (_elementRenders[0]);
-        float nextPosX = 0.0f;
-        for (ssize_t j=0; j<row->size(); j++)
+        float nextPosY = 0.0f;
+        for (auto& element: _elementRenders)
         {
-            Node* l = row->at(j);
-            l->setAnchorPoint(Vec2::ZERO);
-            l->setPosition(nextPosX, 0.0f);
-            _elementRenderersContainer->addChild(l, 1);
-            Size iSize = l->getContentSize();
-            newContentSizeWidth += iSize.width;
-            newContentSizeHeight = MAX(newContentSizeHeight, iSize.height);
-            nextPosX += iSize.width;
+            Vector<Node*>* row = element;
+            float nextPosX = 0.0f;
+            float maxY = 0.0f;
+            for (auto& iter : *row)
+            {
+                iter->setAnchorPoint(Vec2::ZERO);
+                iter->setPosition(nextPosX, nextPosY);
+                this->addProtectedChild(iter, 1);
+                Size iSize = iter->getContentSize();
+                newContentSizeWidth += iSize.width;
+                nextPosX += iSize.width;
+                maxY = MAX(maxY, iSize.height);
+            }
+            nextPosY -= maxY;
         }
-        _elementRenderersContainer->setContentSize(Size(newContentSizeWidth, newContentSizeHeight));
+        this->setContentSize(Size(newContentSizeWidth, -nextPosY));
     }
     else
     {
         float newContentSizeHeight = 0.0f;
-        float *maxHeights = new float[_elementRenders.size()];
+        float *maxHeights = new (std::nothrow) float[_elementRenders.size()];
         
-        for (size_t i=0; i<_elementRenders.size(); i++)
+        for (size_t i=0, size = _elementRenders.size(); i<size; i++)
         {
             Vector<Node*>* row = (_elementRenders[i]);
             float maxHeight = 0.0f;
-            for (ssize_t j=0; j<row->size(); j++)
+            for (auto& iter : *row)
             {
-                Node* l = row->at(j);
-                maxHeight = MAX(l->getContentSize().height, maxHeight);
+                maxHeight = MAX(iter->getContentSize().height, maxHeight);
             }
             maxHeights[i] = maxHeight;
             newContentSizeHeight += maxHeights[i];
         }
         
-        
         float nextPosY = _customSize.height;
-        for (size_t i=0; i<_elementRenders.size(); i++)
+        for (size_t i=0, size = _elementRenders.size(); i<size; i++)
         {
             Vector<Node*>* row = (_elementRenders[i]);
             float nextPosX = 0.0f;
             nextPosY -= (maxHeights[i] + _verticalSpace);
             
-            for (ssize_t j=0; j<row->size(); j++)
+            for (auto& iter : *row)
             {
-                Node* l = row->at(j);
-                l->setAnchorPoint(Vec2::ZERO);
-                l->setPosition(nextPosX, nextPosY);
-                _elementRenderersContainer->addChild(l, 1);
-                nextPosX += l->getContentSize().width;
+                iter->setAnchorPoint(Vec2::ZERO);
+                iter->setPosition(nextPosX, nextPosY);
+                this->addProtectedChild(iter, 1);
+                nextPosX += iter->getContentSize().width;
             }
         }
-        _elementRenderersContainer->setContentSize(_contentSize);
         delete [] maxHeights;
     }
     
-    size_t length = _elementRenders.size();
-    for (size_t i = 0; i<length; i++)
-	{
-        Vector<Node*>* l = _elementRenders[i];
-        l->clear();
-        delete l;
-	}    
+    for (auto& iter : _elementRenders)
+    {
+        iter->clear();
+        delete iter;
+    }
     _elementRenders.clear();
     
     if (_ignoreSize)
@@ -423,14 +436,13 @@ void RichText::formarRenderers()
         this->setContentSize(_customSize);
     }
     updateContentSizeWithTextureSize(_contentSize);
-    _elementRenderersContainer->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
 }
-    
+
 void RichText::adaptRenderers()
 {
     this->formatText();
 }
-    
+
 void RichText::pushToContainer(cocos2d::Node *renderer)
 {
     if (_elementRenders.size() <= 0)
@@ -439,23 +451,12 @@ void RichText::pushToContainer(cocos2d::Node *renderer)
     }
     _elementRenders[_elementRenders.size()-1]->pushBack(renderer);
 }
-    
+
 void RichText::setVerticalSpace(float space)
 {
     _verticalSpace = space;
 }
-    
-void RichText::setAnchorPoint(const Vec2 &pt)
-{
-    Widget::setAnchorPoint(pt);
-    _elementRenderersContainer->setAnchorPoint(pt);
-}
-    
-Size RichText::getVirtualRendererSize() const
-{
-    return _elementRenderersContainer->getContentSize();
-}
-    
+
 void RichText::ignoreContentAdaptWithSize(bool ignore)
 {
     if (_ignoreSize != ignore)
@@ -464,7 +465,7 @@ void RichText::ignoreContentAdaptWithSize(bool ignore)
         Widget::ignoreContentAdaptWithSize(ignore);
     }
 }
-    
+
 std::string RichText::getDescription() const
 {
     return "RichText";
