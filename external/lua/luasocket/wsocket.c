@@ -259,6 +259,8 @@ int socket_recv(p_socket ps, char *data, size_t count, size_t *got,
         if (err != WSAEWOULDBLOCK) {
             if (err != WSAECONNRESET || prev == WSAECONNRESET) return err;
             prev = err;
+			//Bugfix: tcp settimeout(0) can't receive close
+			if (timeout_iszero(tm)) continue;
         }
         if ((err = socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
     }
