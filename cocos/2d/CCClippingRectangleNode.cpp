@@ -1,9 +1,7 @@
-
 #include "CCClippingRectangleNode.h"
 #include "base/CCDirector.h"
 #include "renderer/CCRenderer.h"
 #include "math/Vec2.h"
-#include "CCGLView.h"
 
 NS_CC_BEGIN
 
@@ -33,7 +31,9 @@ void ClippingRectangleNode::onBeforeVisitScissor()
         // record old ClipRegion
         GLView* glView = Director::getInstance()->getOpenGLView();
         if (glView->isScissorEnabled()) {
-            _preClipRegion = glView->getScissorRect();
+            GLfloat params[4];
+            glGetFloatv(GL_SCISSOR_BOX, params);
+            _preClipRegion = Rect(params[0], params[1], params[2], params[3]);
         } else {
             _preClipRegion = Rect::ZERO;
         }
@@ -63,11 +63,10 @@ void ClippingRectangleNode::onAfterVisitScissor()
     {
         // rollback to old ClipRegion
         if (_preClipRegion.size.width > 0) {
-            GLView* glView = Director::getInstance()->getOpenGLView();
-            glView->setScissorInPoints(_preClipRegion.origin.x,
-                                       _preClipRegion.origin.y,
-                                       _preClipRegion.size.width,
-                                       _preClipRegion.size.height);
+            glScissor(_preClipRegion.origin.x,
+                      _preClipRegion.origin.y,
+                      _preClipRegion.size.width,
+                      _preClipRegion.size.height);
         } else {
             glDisable(GL_SCISSOR_TEST);
         }
