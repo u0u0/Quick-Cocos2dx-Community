@@ -1,8 +1,3 @@
---
--- FILE: CreateProjectUI.lua
--- DATE: 2014-08-21
---
-
 local eventDispatcher = cc.Director:getInstance():getEventDispatcher()
 
 local CreateProjectUI = class("CreateProjectUI", function()
