@@ -145,12 +145,12 @@ function SimpleTCP:_update(dt)
 			-- if close from server, safty free LuaSocket resource
 			self.tcp:close()
 			self.tcp = nil
-			-- notification
-			self.stat = SimpleTCP.STAT_CLOSED
-			self.callback(SimpleTCP.EVENT_CLOSED)
 			-- stop scheduler
 			scheduler.unscheduleGlobal(self.globalUpdateHandler)
 			self.globalUpdateHandler = nil
+			-- notification
+			self.stat = SimpleTCP.STAT_CLOSED
+			self.callback(SimpleTCP.EVENT_CLOSED)
 		end
 		return
 	end
