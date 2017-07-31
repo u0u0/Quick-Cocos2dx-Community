@@ -163,11 +163,12 @@ function SimpleTCP:_update(dt)
 		else
 			self.connectingTime = self.connectingTime + dt
 			if self.connectingTime >= SimpleTCP.CONNECT_TIMEOUT then
-				self.stat = SimpleTCP.STAT_FAILED
-				self.callback(SimpleTCP.EVENT_FAILED)
 				-- stop scheduler
 				scheduler.unscheduleGlobal(self.globalUpdateHandler)
 				self.globalUpdateHandler = nil
+				-- notification
+				self.stat = SimpleTCP.STAT_FAILED
+				self.callback(SimpleTCP.EVENT_FAILED)
 			end
 			return
 		end
