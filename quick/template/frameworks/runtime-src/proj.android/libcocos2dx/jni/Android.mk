@@ -16,9 +16,9 @@ $(COCOS2DX_ROOT)/external \
 $(COCOS2DX_ROOT)/quick/lib/quick-src \
 $(COCOS2DX_ROOT)/quick/lib/quick-src/extra
 
-LOCAL_STATIC_LIBRARIES := cocos2d_lua_static
+LOCAL_STATIC_LIBRARIES := extra_static
+LOCAL_STATIC_LIBRARIES += cocos2d_lua_static
 LOCAL_STATIC_LIBRARIES += lua_extensions_static
-LOCAL_STATIC_LIBRARIES += extra_static
 
 include $(BUILD_SHARED_LIBRARY)
 
