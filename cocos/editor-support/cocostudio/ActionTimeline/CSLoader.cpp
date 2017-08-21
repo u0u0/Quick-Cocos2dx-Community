@@ -767,7 +767,7 @@ Node* CSLoader::nodeWithFlatBuffers(const flatbuffers::NodeTree *nodetree)
             if(action)
             {
                 node->runAction(action);
-                action->gotoFrameAndPlay(0);
+                action->gotoFrameAndPlay(0, false);
             }
         }
     }
