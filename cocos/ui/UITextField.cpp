@@ -372,8 +372,13 @@ bool TextField::hitTest(const Vec2 &pt)
 {
     if (_useTouchArea)
     {
+        Size size = getContentSize();
+        Rect bb = Rect((size.width - _touchWidth) * _anchorPoint.x,
+                       (size.height - _touchHeight) * _anchorPoint.y, 
+                       _touchWidth, 
+                       _touchHeight);
+        
         Vec2 nsp = convertToNodeSpace(pt);
-        Rect bb = Rect(-_touchWidth * _anchorPoint.x, -_touchHeight * _anchorPoint.y, _touchWidth, _touchHeight);
         if (nsp.x >= bb.origin.x && nsp.x <= bb.origin.x + bb.size.width && nsp.y >= bb.origin.y && nsp.y <= bb.origin.y + bb.size.height)
         {
             return true;
