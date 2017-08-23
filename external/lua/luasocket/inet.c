@@ -184,6 +184,7 @@ static int inet_global_getaddrinfo(lua_State *L)
             hbuf, (socklen_t) sizeof(hbuf), NULL, 0, NI_NUMERICHOST);
         if (ret){
           freeaddrinfo(resolved);
+          lua_pop(L, 1);// pop table
           lua_pushnil(L);
           lua_pushstring(L, socket_gaistrerror(ret));
           return 2;
