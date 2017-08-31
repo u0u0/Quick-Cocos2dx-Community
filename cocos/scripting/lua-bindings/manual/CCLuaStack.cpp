@@ -589,7 +589,8 @@ int LuaStack::luaLoadChunksFromZIP(lua_State *L)
 {
     if (lua_gettop(L) < 1) {
         CCLOG("luaLoadChunksFromZIP() - invalid arguments");
-        return 0;
+        lua_pushboolean(L, 0);
+        return 1;
     }
     
     const char *zipFilename = lua_tostring(L, -1);
@@ -605,6 +606,7 @@ int LuaStack::luaLoadChunksFromZIP(lua_State *L)
         
         lua_getglobal(L, "package");
         lua_getfield(L, -1, "preload");
+        lua_getfield(L, -2, "loaded");
         
         int count = 0;
         std::string filename = zip->getFirstFilename();
@@ -613,13 +615,15 @@ int LuaStack::luaLoadChunksFromZIP(lua_State *L)
             unsigned char *zbuffer = zip->getFileData(filename.c_str(), &bufferSize);
             if (bufferSize) {
                 if (luaLoadBuffer(L, (char*)zbuffer, (int)bufferSize, filename.c_str()) == 0) {
-                    
                     // special fix for protobuf find path in zip.
+                    int offset = 0;
                     if (filename.find("framework.protobuf.") != std::string::npos) {
-                        lua_setfield(L, -2, filename.c_str() + 19);
-                    } else {
-                        lua_setfield(L, -2, filename.c_str());
+                        offset = 19;
                     }
+                    lua_setfield(L, -3, filename.c_str() + offset);
+                    // clear loaded, make the next require run the new module.
+                    lua_pushnil(L);
+                    lua_setfield(L, -2, filename.c_str() + offset);
                     ++count;
                 }
                 free(zbuffer);
@@ -627,7 +631,7 @@ int LuaStack::luaLoadChunksFromZIP(lua_State *L)
             filename = zip->getNextFilename();
         }
         CCLOG("lua_loadChunksFromZIP() - loaded chunks count: %d", count);
-        lua_pop(L, 2);
+        lua_pop(L, 3);
         lua_pushboolean(L, 1);
         
         delete zip;
