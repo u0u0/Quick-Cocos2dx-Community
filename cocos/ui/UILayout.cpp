@@ -72,7 +72,7 @@ _clippingType(ClippingType::STENCIL),
 _clippingStencil(nullptr),
 _scissorRectDirty(false),
 _clippingRect(Rect::ZERO),
-_clippingParent(nullptr),
+_clippingOldRect(Rect::ZERO),
 _clippingRectDirty(true),
 _currentStencilEnabled(GL_FALSE),
 _currentStencilWriteMask(~0),
@@ -401,24 +401,50 @@ void Layout::onAfterVisitStencil()
     
 void Layout::onBeforeVisitScissor()
 {
-    Rect clippingRect = getClippingRect();
-    glEnable(GL_SCISSOR_TEST);
     auto glview = Director::getInstance()->getOpenGLView();
+    if (glview->isScissorEnabled())
+    {
+        GLfloat params[4];
+        glGetFloatv(GL_SCISSOR_BOX, params);
+        _clippingOldRect = Rect(params[0], params[1], params[2], params[3]);
+    } else {
+        glEnable(GL_SCISSOR_TEST);
+    }
+    
+    Rect clippingRect = getClippingRect();
     glview->setScissorInPoints(clippingRect.origin.x, clippingRect.origin.y, clippingRect.size.width, clippingRect.size.height);
 }
 
 void Layout::onAfterVisitScissor()
 {
-    glDisable(GL_SCISSOR_TEST);
+    // revert scissor box
+    if (!_clippingOldRect.equals(Rect::ZERO)) {
+        glScissor(_clippingOldRect.origin.x,
+                  _clippingOldRect.origin.y,
+                  _clippingOldRect.size.width,
+                  _clippingOldRect.size.height);
+    } else {
+        glDisable(GL_SCISSOR_TEST);
+    }
 }
     
 void Layout::scissorClippingVisit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags)
 {
+    if(!_visible)
+        return;
+    
+    // check if self was dirty, not only parent
+    uint32_t flags = processParentFlags(parentTransform, parentFlags);
+    if (flags & FLAGS_DIRTY_MASK)
+    {
+        _clippingRectDirty = true;
+    }
+    
     _beforeVisitCmdScissor.init(_globalZOrder);
     _beforeVisitCmdScissor.func = CC_CALLBACK_0(Layout::onBeforeVisitScissor, this);
     renderer->addCommand(&_beforeVisitCmdScissor);
 
-    ProtectedNode::visit(renderer, parentTransform, parentFlags);
+    ProtectedNode::visit(renderer, parentTransform, flags);
     
     _afterVisitCmdScissor.init(_globalZOrder);
     _afterVisitCmdScissor.func = CC_CALLBACK_0(Layout::onAfterVisitScissor, this);
@@ -510,9 +536,9 @@ const Rect& Layout::getClippingRect()
         AffineTransform t = getNodeToWorldAffineTransform();
         float scissorWidth = _contentSize.width*t.a;
         float scissorHeight = _contentSize.height*t.d;
-        Rect parentClippingRect;
+        
+        Rect pRect = Rect::ZERO;
         Layout* parent = this;
-
         while (parent)
         {
             parent = dynamic_cast<Layout*>(parent->getParent());
@@ -520,59 +546,32 @@ const Rect& Layout::getClippingRect()
             {
                 if (parent->isClippingEnabled())
                 {
-                    _clippingParent = parent;
+                    pRect = parent->getClippingRect();
                     break;
                 }
             }
         }
         
-        if (_clippingParent)
-        {
-            parentClippingRect = _clippingParent->getClippingRect();
-            float finalX = worldPos.x - (scissorWidth * _anchorPoint.x);
-            float finalY = worldPos.y - (scissorHeight * _anchorPoint.y);
-            float finalWidth = scissorWidth;
-            float finalHeight = scissorHeight;
-            
-            float leftOffset = worldPos.x - parentClippingRect.origin.x;
-            if (leftOffset < 0.0f)
+        if (!pRect.equals(Rect::ZERO)) {
+            // check collision
+            float centerXdelta = (scissorWidth * pRect.size.width) / 2;
+            float centerYdelta = (scissorHeight * pRect.size.height) / 2;
+            if (std::abs((worldPos.x + scissorWidth / 2) - (pRect.origin.x + pRect.size.width / 2)) <= centerXdelta
+                && std::abs((worldPos.y + scissorHeight / 2) - (pRect.origin.y + pRect.size.height / 2)) <= centerYdelta)
             {
-                finalX = parentClippingRect.origin.x;
-                finalWidth += leftOffset;
+                // get Intersecting rectangle
+                _clippingRect.origin.x = std::max(worldPos.x, pRect.origin.x);
+                _clippingRect.origin.y = std::max(worldPos.y, pRect.origin.y);
+                _clippingRect.size.width = std::min(worldPos.x + scissorWidth - _clippingRect.origin.x,
+                                            pRect.origin.x + pRect.size.width - _clippingRect.origin.x);
+                _clippingRect.size.height = std::min(worldPos.y + scissorHeight - _clippingRect.origin.y,
+                                            pRect.origin.y + pRect.size.height - _clippingRect.origin.y);
+            } else {
+                _clippingRect = Rect::ZERO;
             }
-            float rightOffset = (worldPos.x + scissorWidth) - (parentClippingRect.origin.x + parentClippingRect.size.width);
-            if (rightOffset > 0.0f)
-            {
-                finalWidth -= rightOffset;
-            }
-            float topOffset = (worldPos.y + scissorHeight) - (parentClippingRect.origin.y + parentClippingRect.size.height);
-            if (topOffset > 0.0f)
-            {
-                finalHeight -= topOffset;
-            }
-            float bottomOffset = worldPos.y - parentClippingRect.origin.y;
-            if (bottomOffset < 0.0f)
-            {
-                finalY = parentClippingRect.origin.x;
-                finalHeight += bottomOffset;
-            }
-            if (finalWidth < 0.0f)
-            {
-                finalWidth = 0.0f;
-            }
-            if (finalHeight < 0.0f)
-            {
-                finalHeight = 0.0f;
-            }
-            _clippingRect.origin.x = finalX;
-            _clippingRect.origin.y = finalY;
-            _clippingRect.size.width = finalWidth;
-            _clippingRect.size.height = finalHeight;
-        }
-        else
-        {
-            _clippingRect.origin.x = worldPos.x - (scissorWidth * _anchorPoint.x);
-            _clippingRect.origin.y = worldPos.y - (scissorHeight * _anchorPoint.y);
+        } else {
+            _clippingRect.origin.x = worldPos.x;
+            _clippingRect.origin.y = worldPos.y;
             _clippingRect.size.width = scissorWidth;
             _clippingRect.size.height = scissorHeight;
         }
@@ -668,7 +667,7 @@ void Layout::setBackGroundImageCapInsets(const Rect &capInsets)
         _backGroundImage->setCapInsets(capInsets);
     }
 }
-    
+
 const Rect& Layout::getBackGroundImageCapInsets()const
 {
     return _backGroundImageCapInsets;

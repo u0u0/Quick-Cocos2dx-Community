@@ -62,7 +62,7 @@ void ClippingRectangleNode::onAfterVisitScissor()
     if (_clippingEnabled)
     {
         // rollback to old ClipRegion
-        if (_preClipRegion.size.width > 0) {
+        if (!_preClipRegion.equals(Rect::ZERO)) {
             glScissor(_preClipRegion.origin.x,
                       _preClipRegion.origin.y,
                       _preClipRegion.size.width,

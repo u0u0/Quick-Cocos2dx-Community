@@ -487,7 +487,7 @@ protected:
     DrawNode* _clippingStencil;
     bool _scissorRectDirty;
     Rect _clippingRect;
-    Layout* _clippingParent;
+    Rect _clippingOldRect;
     bool _clippingRectDirty;
     
     //clipping
