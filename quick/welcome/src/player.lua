@@ -157,6 +157,7 @@ function player:buildUI()
     local viewSize = {{title = "iPhone 3Gs",w=320,h=480},
                       {title = "iPhone 4",  w=640,h=960},
                       {title = "iPhone 5",  w=640,h=1136},
+                      {title = "iPhone 7",  w=750,h=1334},
                       {title = "iPad",      w=768,h=1024},
                       {title = "iPad Retina", w=1536,h=2048},
                       {title = "Android",   w=480,h=800},
@@ -166,6 +167,7 @@ function player:buildUI()
                       {title = "Android",   w=720,h=1280},
                       {title = "Android",   w=800,h=1280},
                       {title = "Android",   w=1080,h=1920},
+                      {title = "Android",   w=1400,h=2960},
 	}
     self.screenSizeList = {}
     local s = self.projectConfig_:getFrameSize()
