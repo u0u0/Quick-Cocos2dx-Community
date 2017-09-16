@@ -36,6 +36,7 @@ c.NODE_EVENT                 = 1
 c.NODE_ENTER_FRAME_EVENT     = 2
 c.NODE_TOUCH_EVENT           = 3
 c.KEYPAD_EVENT               = 4
+c.ACCELEROMETER_EVENT        = 5
 
 -- touch
 c.TOUCH_MODE_ALL_AT_ONCE              = cc.TOUCHES_ALL_AT_ONCE
@@ -112,6 +113,24 @@ end
 
 -- override me for setNodeEventEnabled(true)
 function Node:onCleanup()
+end
+
+function Node:setAccelerometerEnabled(enabled)
+	cc.Device:setAccelerometerEnabled(enabled)
+	if not enabled then
+		return
+	end
+
+	local listener = cc.EventListenerAcceleration:create(function(event, x, y, z, timestamp)
+		-- call listener
+		self._LuaListeners[c.ACCELEROMETER_EVENT]{
+			x = x,
+			y = y,
+			z = z,
+			timestamp = timestamp
+		}
+	end)
+	self:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self)
 end
 
 function Node:setNodeEventEnabled(enabled)
@@ -336,6 +355,8 @@ function Node:removeNodeEventListener(evt)
 		self:unscheduleUpdate()
 	elseif evt == c.NODE_TOUCH_EVENT then
 		self:setTouchEnabled(false)
+	elseif evt == c.ACCELEROMETER_EVENT then
+		cc.Device:setAccelerometerEnabled(false)
 	end
 
 	self._LuaListeners[evt] = nil
@@ -346,4 +367,5 @@ function Node:removeAllNodeEventListeners()
     self:removeNodeEventListener(c.NODE_ENTER_FRAME_EVENT)
     self:removeNodeEventListener(c.NODE_TOUCH_EVENT)
     self:removeNodeEventListener(c.KEYPAD_EVENT)
+    self:removeNodeEventListener(c.ACCELEROMETER_EVENT)
 end

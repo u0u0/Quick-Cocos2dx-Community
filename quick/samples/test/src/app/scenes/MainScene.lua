@@ -8,6 +8,7 @@ function MainScene:ctor()
 		"Test_NodeEvent",
 		"Test_KeypadEvent",
 		"Test_NodeTouchEvent",
+		"Test_AccelerometerEvent",
 		"Test_CocosStudio",
 		"Test_Audio",
 	}

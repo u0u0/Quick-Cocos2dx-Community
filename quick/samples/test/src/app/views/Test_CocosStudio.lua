@@ -1,6 +1,6 @@
 local BaseLayer = require("app.scenes.BaseLayer")
 
-local TestCase = class("Test_NodeTouchEvent", BaseLayer)
+local TestCase = class("Test_CocosStudio", BaseLayer)
 
 function TestCase:ctor()
 	self.super.ctor(self)
