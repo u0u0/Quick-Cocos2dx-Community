@@ -413,6 +413,7 @@ void Layout::onBeforeVisitScissor()
     
     Rect clippingRect = getClippingRect();
     glview->setScissorInPoints(clippingRect.origin.x, clippingRect.origin.y, clippingRect.size.width, clippingRect.size.height);
+    CHECK_GL_ERROR_DEBUG();
 }
 
 void Layout::onAfterVisitScissor()
@@ -554,8 +555,8 @@ const Rect& Layout::getClippingRect()
         
         if (!pRect.equals(Rect::ZERO)) {
             // check collision
-            float centerXdelta = (scissorWidth * pRect.size.width) / 2;
-            float centerYdelta = (scissorHeight * pRect.size.height) / 2;
+            float centerXdelta = (scissorWidth + pRect.size.width) / 2;
+            float centerYdelta = (scissorHeight + pRect.size.height) / 2;
             if (std::abs((worldPos.x + scissorWidth / 2) - (pRect.origin.x + pRect.size.width / 2)) <= centerXdelta
                 && std::abs((worldPos.y + scissorHeight / 2) - (pRect.origin.y + pRect.size.height / 2)) <= centerYdelta)
             {
