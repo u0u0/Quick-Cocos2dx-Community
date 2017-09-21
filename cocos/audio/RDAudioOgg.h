@@ -22,8 +22,8 @@ extern "C" {
 int decodeOgg(unsigned char *oggData,
               int oggSize,
               unsigned char **pcmData,
-              int32_t *pcmChannels,
-              int32_t *pcmRate,
+              int *pcmChannels,
+              int *pcmRate,
               int *pcmSize);
 
 #ifdef __cplusplus

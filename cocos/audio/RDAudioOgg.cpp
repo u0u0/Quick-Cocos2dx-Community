@@ -79,8 +79,8 @@ static long tellOgg(void *fh)
 int decodeOgg(unsigned char *oggData,
               int oggSize,
               unsigned char **pcmData,
-              int32_t *pcmChannels,
-              int32_t *pcmRate,
+              int *pcmChannels,
+              int *pcmRate,
               int *pcmSize)
 {
     ov_callbacks callbacks;
@@ -105,10 +105,10 @@ int decodeOgg(unsigned char *oggData,
         return -1;
     }
     
-    *pcmSize = ov_pcm_total(&ov, -1) * vi->channels * 2;
+    *pcmSize = (int)(ov_pcm_total(&ov, -1) * vi->channels * 2);
     *pcmData = (unsigned char *)malloc(*pcmSize);
     *pcmChannels = vi->channels;
-    *pcmRate = vi->rate;
+    *pcmRate = (int)(vi->rate);
     
     int size = 0;
     int section = 0;

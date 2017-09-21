@@ -67,8 +67,8 @@ private:
         AudioCallback cb;
         int funcID;
         unsigned char *pcmData;
-        int32_t channels;
-        int32_t rate;
+        int channels;
+        int rate;
         int size;
     };
     
