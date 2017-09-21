@@ -84,17 +84,6 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         });
     }
     
-    protected void onLoadNativeLibraries() {
-        try {
-            ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
-            Bundle bundle = ai.metaData;
-            String libName = bundle.getString("android.app.lib_name");
-            System.loadLibrary(libName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -103,7 +92,8 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        onLoadNativeLibraries();
+        System.loadLibrary("ogg");
+        System.loadLibrary("cocos2dlua");
 
         sContext = this;
         this.mHandler = new Cocos2dxHandler(this);
