@@ -365,24 +365,27 @@ void RichText::formarRenderers()
     {
         float newContentSizeWidth = 0.0f;
         float nextPosY = 0.0f;
-        for (auto& element: _elementRenders)
+        int rowSize = (int)_elementRenders.size();
+        for (int i = rowSize - 1; i >= 0; i--)
         {
-            Vector<Node*>* row = element;
+            float rowWidth = 0.0f;
             float nextPosX = 0.0f;
             float maxY = 0.0f;
+            Vector<Node *> *row = _elementRenders.at(i);
             for (auto& iter : *row)
             {
                 iter->setAnchorPoint(Vec2::ZERO);
                 iter->setPosition(nextPosX, nextPosY);
                 this->addProtectedChild(iter, 1);
                 Size iSize = iter->getContentSize();
-                newContentSizeWidth += iSize.width;
+                rowWidth += iSize.width;
                 nextPosX += iSize.width;
                 maxY = MAX(maxY, iSize.height);
             }
-            nextPosY -= maxY;
+            nextPosY += maxY;
+            newContentSizeWidth = MAX(newContentSizeWidth, rowWidth);
         }
-        this->setContentSize(Size(newContentSizeWidth, -nextPosY));
+        this->setContentSize(Size(newContentSizeWidth, nextPosY));
     }
     else
     {
