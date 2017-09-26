@@ -35,6 +35,7 @@
 #include "base/CCEventListenerController.h"
 #endif
 #include "2d/CCScene.h"
+#include "2d/CCProtectedNode.h"
 #include "base/CCDirector.h"
 #include "base/CCEventType.h"
 
@@ -221,64 +222,69 @@ EventDispatcher::~EventDispatcher()
 }
 
 void EventDispatcher::visitTarget(Node* node, bool isRootNode)
-{    
-    int i = 0;
-    auto& children = node->getChildren();
+{
+    ProtectedNode *pNode = dynamic_cast<ProtectedNode *>(node);
+    Node* child = nullptr;
     
-    auto childrenCount = children.size();
+    // visit children zOrder < 0
+    for (int i = 0; i < node->getChildren().size(); i++ ) {
+        child = node->getChildren().at(i);
+        if (child && child->getLocalZOrder() < 0) {
+            visitTarget(child, false);
+        } else {
+            break;
+        }
+    }
     
-    if(childrenCount > 0)
-    {
-        Node* child = nullptr;
-        // visit children zOrder < 0
-        for( ; i < childrenCount; i++ )
-        {
-            child = children.at(i);
-            
-            if ( child && child->getLocalZOrder() < 0 )
+	// visit Protected children zOrder < 0
+    if (pNode) {
+        for (int i = 0; i < pNode->getProtectedChildren().size(); i++ ) {
+            child = pNode->getProtectedChildren().at(i);
+            if (child && child->getLocalZOrder() < 0) {
                 visitTarget(child, false);
-            else
+            } else {
                 break;
-        }
-        
-        if (_nodeListenersMap.find(node) != _nodeListenersMap.end())
-        {
-            _globalZOrderNodeMap[node->getGlobalZOrder()].push_back(node);
-        }
-        
-        for( ; i < childrenCount; i++ )
-        {
-            child = children.at(i);
-            if (child)
-                visitTarget(child, false);
+            }
         }
     }
-    else
-    {
-        if (_nodeListenersMap.find(node) != _nodeListenersMap.end())
-        {
-            _globalZOrderNodeMap[node->getGlobalZOrder()].push_back(node);
+
+    // deal self
+    if (_nodeListenersMap.find(node) != _nodeListenersMap.end()) {
+        _globalZOrderNodeMap[node->getGlobalZOrder()].push_back(node);
+    }
+    
+    // visit Protected children zOrder >= 0
+    if (pNode) {
+        for (int i = 0; i < pNode->getProtectedChildren().size(); i++) {
+            child = pNode->getProtectedChildren().at(i);
+            if (child) {
+                visitTarget(child, false);
+            }
         }
     }
     
-    if (isRootNode)
-    {
+    // visit children zOrder >= 0
+    for (int i = 0; i < node->getChildren().size(); i++) {
+        child = node->getChildren().at(i);
+        if (child) {
+            visitTarget(child, false);
+        }
+    }
+
+    if (isRootNode) {
         std::vector<float> globalZOrders;
         globalZOrders.reserve(_globalZOrderNodeMap.size());
         
-        for (const auto& e : _globalZOrderNodeMap)
-        {
+        for (const auto& e : _globalZOrderNodeMap) {
             globalZOrders.push_back(e.first);
         }
         
-        std::sort(globalZOrders.begin(), globalZOrders.end(), [](const float a, const float b){
+        std::stable_sort(globalZOrders.begin(), globalZOrders.end(), [](const float a, const float b) {
             return a < b;
         });
         
-        for (const auto& globalZ : globalZOrders)
-        {
-            for (const auto& n : _globalZOrderNodeMap[globalZ])
-            {
+        for (const auto& globalZ : globalZOrders) {
+            for (const auto& n : _globalZOrderNodeMap[globalZ]) {
                 _nodePriorityMap[n] = ++_nodePriorityIndex;
             }
         }
