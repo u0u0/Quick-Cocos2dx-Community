@@ -1267,4 +1267,18 @@ y+=ytranslate;         \
         return this->getScaleX();
     }
     
+    void Scale9Sprite::setCameraMask(unsigned short mask, bool applyChildren)
+    {
+        Node::setCameraMask(mask, applyChildren);
+        if (applyChildren)
+        {
+            if (_scale9Image) {
+                _scale9Image->setCameraMask(mask);
+            }
+            for (auto& iter: _protectedChildren)
+            {
+                iter->setCameraMask(mask);
+            }
+        }
+    }
 }}

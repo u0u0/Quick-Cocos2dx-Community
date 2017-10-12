@@ -350,7 +350,7 @@ namespace ui {
          * @return true if the widget is flipped vertically, flase otherwise.
          */
         virtual bool isFlippedY()const;
-        
+        virtual void setCameraMask(unsigned short mask, bool applyChildren = true) override;
         //override the setScale function of Node
         virtual void setScaleX(float scaleX) override;
         virtual void setScaleY(float scaleY) override;
