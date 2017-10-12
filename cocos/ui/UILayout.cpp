@@ -338,7 +338,7 @@ void Layout::onBeforeVisitStencil()
     glStencilFunc(GL_NEVER, mask_layer, mask_layer);
     glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP);
 }
-    
+
 void Layout::drawFullScreenQuadClearStencil()
 {
     Director* director = Director::getInstance();
@@ -568,7 +568,8 @@ const Rect& Layout::getClippingRect()
                 _clippingRect.size.height = std::min(worldPos.y + scissorHeight - _clippingRect.origin.y,
                                             pRect.origin.y + pRect.size.height - _clippingRect.origin.y);
             } else {
-                _clippingRect = Rect::ZERO;
+                //ZERO rect will auto disable Scissor clip, cheat with below code.
+                _clippingRect = Rect(-1,-1,1,1);
             }
         } else {
             _clippingRect.origin.x = worldPos.x;
