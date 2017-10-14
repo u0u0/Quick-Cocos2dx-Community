@@ -1,3 +1,31 @@
+Quick-Cocos2dx-Community v3.7.1 release
+
+[新增]	setup.sh 适配zsh，csh，运行完需重启terminal。
+[新增]	RichText添加RichElementNewLine, RichElement添加getType和getTag，相关绑定去垃圾。
+[新增]	Player恢复Open Project功能
+[新增]	lua_loadChunksFromZIP 自动处理package.loaded,服务于热更新.
+[新增]	Player新增iphone7和note 8的分辨率配置
+[新增]	Accelerometer 封装到lua层的node事件机制中。
+
+[修正]	csb引用的csb的动画默认不循环.
+[修正]	ClippingRectangleNode 默认开启 setCascadeColorEnabled和setCascadeOpacityEnabled
+[修正]	ClippingRectangleNode 正确处理裁剪嵌套
+[修正]	恢复Store.lua文件，调整平台相关的lua存放路径
+[修正]	3.7触摸事件封装bug修正。
+[修正]	Rendertexture即时渲染，不再延迟到下一帧
+[修正]	CaptureScreen逻辑移动到Director中，可完整截图到NotificationNode和fps
+[修正]	修正win32下png写文件导致的死机.
+[修正]	修复luasocket在window上设置settime(0)时不能收到close事件。
+[修正]	SimpleTCP bug修正。
+[修正]	Android 编译相关错误修正
+[修正]	TextField histTest fixed.
+[修正]	socket.dns.getaddrinfo 遇到异常时，lua栈平衡修复。
+[修正]	ccui.Layout的Scissor裁剪bugfix,并默认使用Scissor，裁剪渲染性能大幅提升。
+[修正]	libogg so库分离，优化android release编译下的ogg解码性能。
+[修正]	事件分发正确处理protected node 的事件监听。
+[修正]	RichText修正ContentSize计算和子节点坐标计算。
+[修正]	Scale9Sprite 正确在自定义摄像机下渲染。
+
 Quick-Cocos2dx-Community v3.7.0 release
 
 [新增]	全新的OpenAL音频播放引擎。

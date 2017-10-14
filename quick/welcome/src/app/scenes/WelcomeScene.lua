@@ -84,7 +84,7 @@ function WelcomeScene:createButtons(node)
 			require("app.scenes.CreateProjectUI"):new()
 				:addTo(self)
 		end},
-		{"打开项目", display.top - 440, function()
+		{"导入项目", display.top - 440, function()
 			require("app.scenes.OpenProjectUI"):new()
 				:addTo(self)
 		end},
