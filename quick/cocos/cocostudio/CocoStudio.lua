@@ -383,7 +383,7 @@ function ccs.TriggerMng:remove(event, obj)
     for i = 1, table.getn(triObjects) do
         local triObject = triggers[i]
         if nil ~= triObject then
-            triObject:remvoeAll()
+            triObject:removeAll()
         end
     end
 
@@ -405,7 +405,7 @@ function ccs.TriggerMng:removeObjByEvent(event, obj)
     for i = 1,table.getn(triObjects) do
         local triObject = triObjects[i]
         if  nil ~= triObject and triObject == obj then
-            triObject:remvoeAll()
+            triObject:removeAll()
             table.remove(triObjects, i)
             return true
         end
