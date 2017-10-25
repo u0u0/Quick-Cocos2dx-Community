@@ -531,23 +531,20 @@ void Layout::setStencilClippingSize(const Size &size)
     
 const Rect& Layout::getClippingRect() 
 {
-    if (_clippingRectDirty)
-    {
+    if (_clippingRectDirty) {
         Vec2 worldPos = convertToWorldSpace(Vec2::ZERO);
         AffineTransform t = getNodeToWorldAffineTransform();
         float scissorWidth = _contentSize.width*t.a;
         float scissorHeight = _contentSize.height*t.d;
         
         Rect pRect = Rect::ZERO;
-        Layout* parent = this;
-        while (parent)
-        {
-            parent = dynamic_cast<Layout*>(parent->getParent());
-            if(parent)
-            {
-                if (parent->isClippingEnabled())
-                {
-                    pRect = parent->getClippingRect();
+        Node* parent = this;
+        while (parent) {
+            parent = parent->getParent();
+            Layout *layout = dynamic_cast<Layout*>(parent);
+            if(layout) {
+                if (layout->isClippingEnabled()) {
+                    pRect = layout->getClippingRect();
                     break;
                 }
             }
