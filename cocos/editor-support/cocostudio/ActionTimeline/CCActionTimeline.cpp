@@ -164,7 +164,7 @@ ActionTimeline* ActionTimeline::clone() const
     for (auto timelines : _timelineMap)
     {
         for(auto timeline : timelines.second)
-        {      
+        {
             Timeline* newTimeline = timeline->clone();
             newAction->addTimeline(newTimeline);
         }
@@ -180,23 +180,28 @@ void ActionTimeline::step(float delta)
         return;
     }
 
-    _time += delta * _timeSpeed;
+    bool isEnd = false;
+    if (_startFrame > _endFrame) { // play reversed
+        _time -= delta * _timeSpeed;
+        isEnd = _time < _endFrame * _frameInternal;
+    } else {
+        _time += delta * _timeSpeed;
+        isEnd = _time > _endFrame * _frameInternal;
+    }
     _currentFrame = (int)(_time / _frameInternal);
 
     stepToFrame(_currentFrame);
 
-    if(_time > _endFrame * _frameInternal)
-    {
+    if (isEnd) {
         if(_lastFrameListener != nullptr)
             _lastFrameListener();
 
         _playing = _loop;
         if(!_playing)
             _time = _endFrame * _frameInternal;
-        else           
+        else
             gotoFrameAndPlay(_startFrame, _endFrame, _loop);
     }
-
 }
 
 typedef std::function<void(Node*)> tCallBack;
@@ -301,7 +306,7 @@ void ActionTimeline::gotoFrame(int frameIndex)
 
     ssize_t size = _timelineList.size();
     for(ssize_t i = 0; i < size; i++)
-    {      
+    {
         _timelineList.at(i)->gotoFrame(frameIndex);
     }
 }
@@ -310,7 +315,7 @@ void ActionTimeline::stepToFrame(int frameIndex)
 {
     ssize_t size = _timelineList.size();
     for(ssize_t i = 0; i < size; i++)
-    {      
+    {
         _timelineList.at(i)->stepToFrame(frameIndex);
     }
 }
