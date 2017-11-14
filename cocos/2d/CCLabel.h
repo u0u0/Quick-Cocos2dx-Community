@@ -238,6 +238,8 @@ public:
     // string related stuff
     int getStringNumLines() const;
     int getStringLength() const;
+    // get line at num of rendered string
+    std::string getStringOfLine(int num);
 
     FontAtlas* getFontAtlas() { return _fontAtlas; }
     
@@ -379,7 +381,7 @@ protected:
 
     GLuint _uniformEffectColor;
     GLuint _uniformTextColor;
-    CustomCommand _customCommand;   
+    CustomCommand _customCommand;
 
     bool    _shadowDirty;
     bool    _shadowEnabled;

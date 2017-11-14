@@ -56,7 +56,7 @@ bool LabelTextFormatter::multilineText(Label *theLabel)
     Label::LetterInfo* info = nullptr;
 
     for (int j = 0; j+skip < limit; j++)
-    {            
+    {
         info = & theLabel->_lettersInfo.at(j+skip);
 
         unsigned int justSkipped = 0;
