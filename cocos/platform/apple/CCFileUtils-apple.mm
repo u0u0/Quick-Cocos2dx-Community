@@ -320,7 +320,7 @@ void FileUtilsApple::checkFilePathWithCaseSensitive(const std::string& filePath)
     
     if ([[realFilePathName lastPathComponent] compare:[filePathName lastPathComponent]] != NSOrderedSame)
     {
-        CCLOG("WARNING: File case-sensitive.\n%s\n%s\n\n", filePath.c_str(), [realFilePathName UTF8String]);
+        cocos2d::log("WARNING: File case-sensitive.\n%s\n%s\n\n", filePath.c_str(), [realFilePathName UTF8String]);
     }
 }
 

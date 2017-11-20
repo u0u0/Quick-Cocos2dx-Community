@@ -193,22 +193,12 @@ void LuaStack::addLuaLoader(lua_CFunction func)
     lua_getglobal(_state, "package");                                  /* L: package */
     lua_getfield(_state, -1, "loaders");                               /* L: package, loaders */
     
-    // insert loader into index 2
+    //lua Default loader was Case-insensitive, so do DO REPLACE here, NOT INSERT.
     lua_pushcfunction(_state, func);                                   /* L: package, loaders, func */
-    for (int i = (int)(lua_objlen(_state, -2) + 1); i > 2; --i)
-    {
-        lua_rawgeti(_state, -2, i - 1);                                /* L: package, loaders, func, function */
-        // we call lua_rawgeti, so the loader table now is at -3
-        lua_rawseti(_state, -3, i);                                    /* L: package, loaders, func */
-    }
     lua_rawseti(_state, -2, 2);                                        /* L: package, loaders */
     
-    // set loaders into package
-    lua_setfield(_state, -2, "loaders");                               /* L: package */
-    
-    lua_pop(_state, 1);
+    lua_pop(_state, 2);
 }
-
 
 void LuaStack::removeScriptObjectByObject(Ref* pObj)
 {
