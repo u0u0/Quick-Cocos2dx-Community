@@ -129,7 +129,7 @@ void ImageView::loadTexture(const std::string& fileName, TextureResType texType)
         default:
             break;
     }
-    
+    setCapInsets(_capInsets);// keep old setting while reloadTexture
     _imageTextureSize = _imageRenderer->getContentSize();
   
     this->updateChildrenDisplayedRGBA();
