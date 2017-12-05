@@ -26,42 +26,14 @@
 #ifndef __UIEditBoxIMPLIOS_H__
 #define __UIEditBoxIMPLIOS_H__
 
-#include "platform/CCPlatformConfig.h"
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 
-#include "UIEditBoxImpl.h"
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
-@interface UICustomUITextField : UITextField
-{
-}
-
-@end
+#include "ui/UIEditBox/UIEditBoxImpl-common.h"
 
 
-@interface UIEditBoxImplIOS_objc : NSObject <UITextFieldDelegate>
-{
-    UICustomUITextField* textField_;
-    void* editBox_;
-    BOOL editState_;
-}
 
-@property(nonatomic, retain) UITextField* textField;
-@property(nonatomic, readonly, getter = isEditState) BOOL editState;
-@property(nonatomic, assign) void* editBox;
-
--(id) initWithFrame: (CGRect) frameRect editBox: (void*) editBox;
--(void) doAnimationWhenKeyboardMoveWithDuration:(float)duration distance:(float)distance;
--(void) setPosition:(CGPoint) pos;
--(void) setContentSize:(CGSize) size;
--(void) visit;
--(void) openKeyboard;
--(void) closeKeyboard;
-
-@end
+@class UIEditBoxImplIOS_objc;
+@class UIFont;
 
 NS_CC_BEGIN
 
@@ -69,7 +41,7 @@ namespace ui {
 
 class EditBox;
 
-class EditBoxImplIOS : public EditBoxImpl
+class EditBoxImplIOS : public EditBoxImplCommon
 {
 public:
     /**
@@ -82,55 +54,32 @@ public:
      */
     virtual ~EditBoxImplIOS();
     
-    virtual bool initWithSize(const Size& size) override;
-    virtual void setFont(const char* pFontName, int fontSize) override;
-    virtual void setFontColor(const Color3B& color) override;
-    virtual void setPlaceholderFont(const char* pFontName, int fontSize) override;
-    virtual void setPlaceholderFontColor(const Color3B& color) override;
-    virtual void setInputMode(EditBox::InputMode inputMode) override;
-    virtual void setInputFlag(EditBox::InputFlag inputFlag) override;
-    virtual void setMaxLength(int maxLength) override;
-    virtual int  getMaxLength() override;
-    virtual void setReturnType(EditBox::KeyboardReturnType returnType) override;
     virtual bool isEditing() override;
+    virtual void createNativeControl(const Rect& frame) override;
+    virtual void setNativeFont(const char* pFontName, int fontSize) override;
+    virtual void setNativeFontColor(const Color4B& color) override;
+    virtual void setNativePlaceholderFont(const char* pFontName, int fontSize) override;
+    virtual void setNativePlaceholderFontColor(const Color4B& color) override;
+    virtual void setNativeInputMode(EditBox::InputMode inputMode) override;
+    virtual void setNativeInputFlag(EditBox::InputFlag inputFlag) override;
+    virtual void setNativeReturnType(EditBox::KeyboardReturnType returnType)override;
+    virtual void setNativeTextHorizontalAlignment(cocos2d::TextHAlignment alignment) override;
+    virtual void setNativeText(const char* pText) override;
+    virtual void setNativePlaceHolder(const char* pText) override;
+    virtual void setNativeVisible(bool visible) override;
+    virtual void updateNativeFrame(const Rect& rect) override;
+    virtual const char* getNativeDefaultFontName() override;
+    virtual void nativeOpenKeyboard() override;
+    virtual void nativeCloseKeyboard() override;
     
-    virtual void setText(const char* pText) override;
-    virtual const char* getText(void) override;
-    virtual void refreshInactiveText();
-    virtual void setPlaceHolder(const char* pText) override;
-    virtual void setPosition(const Vec2& pos) override;
-    virtual void setVisible(bool visible) override;
-    virtual void setContentSize(const Size& size) override;
-	virtual void setAnchorPoint(const Vec2& anchorPoint) override;
-    virtual void updatePosition(float dt) override;
-    /**
-     * @js NA
-     * @lua NA
-     */
-    virtual void visit(void);
-    /**
-     * @js NA
-     * @lua NA
-     */
-	virtual void onEnter(void);
-    virtual void doAnimationWhenKeyboardMove(float duration, float distance);
-    virtual void openKeyboard();
-    virtual void closeKeyboard();
-	
-	virtual void onEndEditing();
+    //need to remove siri text
+    virtual const char* getText(void)override;
+
+    virtual void doAnimationWhenKeyboardMove(float duration, float distance) override;
 private:
-	void			initInactiveLabels(const Size& size);
-	void			setInactiveText(const char* pText);
-	void			adjustTextFieldPosition();
-    void            placeInactiveLabels();
-	
-    Label*     _label;
-    Label*     _labelPlaceHolder;
-    Size          _contentSize;
-    Vec2         _position;
-    Vec2         _anchorPoint;
+    UIFont*         constructFont(const char* fontName, int fontSize);
+    
     UIEditBoxImplIOS_objc* _systemControl;
-    int             _maxTextLength;
 };
 
 
