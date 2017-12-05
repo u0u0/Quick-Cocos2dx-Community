@@ -1126,6 +1126,12 @@
     <ClCompile Include="..\audio\libvorbis\lib\window.c">
       <Filter>audio\libvorbis</Filter>
     </ClCompile>
+    <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-stub.cpp">
+      <Filter>ui\UIWidgets\EditBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-common.cpp">
+      <Filter>ui\UIWidgets\EditBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">
@@ -2220,6 +2226,9 @@
     </ClInclude>
     <ClInclude Include="..\audio\libvorbis\vorbis\vorbisfile.h">
       <Filter>audio\libvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui\UIEditBox\UIEditBoxImpl-common.h">
+      <Filter>ui\UIWidgets\EditBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

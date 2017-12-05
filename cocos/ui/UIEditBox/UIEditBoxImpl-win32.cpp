@@ -909,7 +909,6 @@ void EditBoxImplWin::onWin32InputBoxClose(INT_PTR buttonId)
     if (_delegate != nullptr)
     {
         _delegate->editBoxTextChanged(_editBox, getText());
-        _delegate->editBoxEditingDidEnd(_editBox);
         _delegate->editBoxReturn(_editBox);
     }
 

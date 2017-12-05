@@ -564,6 +564,8 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClCompile Include="..\ui\UIButton.cpp" />
     <ClCompile Include="..\ui\UICheckBox.cpp" />
     <ClCompile Include="..\ui\UIEditBox\UIEditBox.cpp" />
+    <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-common.cpp" />
+    <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-stub.cpp" />
     <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-win32.cpp" />
     <ClCompile Include="..\ui\UIHBox.cpp" />
     <ClCompile Include="..\ui\UIHelper.cpp" />
@@ -929,6 +931,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="..\ui\UIButton.h" />
     <ClInclude Include="..\ui\UICheckBox.h" />
     <ClInclude Include="..\ui\UIEditBox\UIEditBox.h" />
+    <ClInclude Include="..\ui\UIEditBox\UIEditBoxImpl-common.h" />
     <ClInclude Include="..\ui\UIEditBox\UIEditBoxImpl-win32.h" />
     <ClInclude Include="..\ui\UIEditBox\UIEditBoxImpl.h" />
     <ClInclude Include="..\ui\UIHBox.h" />
