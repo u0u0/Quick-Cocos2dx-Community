@@ -1637,11 +1637,10 @@ print(string.utf8len(input))
 -- end --
 
 function string.utf8len(input)
-    local len  = string.len(input)
-    local left = len
+    local left = string.len(input)
     local cnt  = 0
     local arr  = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc}
-    while left ~= 0 do
+    while left > 0 do
         local tmp = string.byte(input, -left)
         local i   = #arr
         while arr[i] do
