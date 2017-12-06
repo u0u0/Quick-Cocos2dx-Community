@@ -23,20 +23,19 @@ THE SOFTWARE.
  ****************************************************************************/
 package org.cocos2dx.lib;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLSurfaceView;
 
-import org.cocos2dx.lib.Cocos2dxHelper;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 public class Cocos2dxRenderer implements GLSurfaceView.Renderer {
     // ===========================================================
     // Constants
     // ===========================================================
 
     private final static long NANOSECONDSPERSECOND = 1000000000L;
-    private final static long NANOSECONDSPERMICROSECOND = 1000000;
+    private final static long NANOSECONDSPERMICROSECOND = 1000000L;
 
+    // The final animation interval which is used in 'onDrawFrame'
     private static long sAnimationInterval = (long) (1.0 / 60 * Cocos2dxRenderer.NANOSECONDSPERSECOND);
 
     // ===========================================================
@@ -115,7 +114,7 @@ public class Cocos2dxRenderer implements GLSurfaceView.Renderer {
     private static native void nativeTouchesEnd(final int id, final float x, final float y);
     private static native void nativeTouchesMove(final int[] ids, final float[] xs, final float[] ys);
     private static native void nativeTouchesCancel(final int[] ids, final float[] xs, final float[] ys);
-    private static native boolean nativeKeyDown(final int keyCode);
+    private static native boolean nativeKeyEvent(final int keyCode,boolean isPressed);
     private static native void nativeRender();
     private static native void nativeInit(final int width, final int height);
     private static native void nativeOnSurfaceChanged(final int width, final int height);
@@ -139,7 +138,11 @@ public class Cocos2dxRenderer implements GLSurfaceView.Renderer {
     }
 
     public void handleKeyDown(final int keyCode) {
-        Cocos2dxRenderer.nativeKeyDown(keyCode);
+        Cocos2dxRenderer.nativeKeyEvent(keyCode, true);
+    }
+
+    public void handleKeyUp(final int keyCode) {
+        Cocos2dxRenderer.nativeKeyEvent(keyCode, false);
     }
 
     public void handleOnPause() {
