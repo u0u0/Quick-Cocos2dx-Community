@@ -336,9 +336,10 @@ void Widget::setSizePercent(const Vec2 &percent)
 
 void Widget::updateSizeAndPosition()
 {
-    Size pSize = _parent->getContentSize();
-    
-    updateSizeAndPosition(pSize);
+    if (_parent) {
+        Size pSize = _parent->getContentSize();
+        updateSizeAndPosition(pSize);
+    }
 }
     
 void Widget::updateSizeAndPosition(const cocos2d::Size &parentSize)

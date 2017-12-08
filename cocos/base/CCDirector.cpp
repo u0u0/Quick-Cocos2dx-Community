@@ -1,4 +1,4 @@
-﻿/****************************************************************************
+/****************************************************************************
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2013 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
@@ -978,6 +978,14 @@ void Director::purgeDirector()
     
     _runningScene = nullptr;
     _nextScene = nullptr;
+    
+    if(_notificationNode)
+    {
+        _notificationNode->onExit();
+        _notificationNode->cleanup();
+        _notificationNode->release();
+        _notificationNode = nullptr;
+    }
 
     // remove all objects, but don't release it.
     // runWithScene might be executed after 'end'.
@@ -1246,9 +1254,18 @@ void Director::setContentScaleFactor(float scaleFactor)
 
 void Director::setNotificationNode(Node *node)
 {
-    CC_SAFE_RELEASE(_notificationNode);
-    _notificationNode = node;
-    CC_SAFE_RETAIN(_notificationNode);
+    if (_notificationNode) { // remove old
+        _notificationNode->onExitTransitionDidStart();
+        _notificationNode->onExit();
+        _notificationNode->cleanup();
+        _notificationNode->release();
+    }
+    _notificationNode = node; // update
+    if (_notificationNode) { // init new
+        _notificationNode->onEnter();
+        _notificationNode->onEnterTransitionDidFinish();
+        _notificationNode->retain();
+    }
 }
 
 void Director::setScheduler(Scheduler* scheduler)
