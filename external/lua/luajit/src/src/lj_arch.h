@@ -544,9 +544,8 @@
 #if defined(__symbian__) || LJ_TARGET_WINDOWS
 #define LUAJIT_NO_EXP2
 #endif
-#if LJ_TARGET_CONSOLE || (LJ_TARGET_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0)
+// iOS NO system(), so close for all platform
 #define LJ_NO_SYSTEM		1
-#endif
 
 #if !defined(LUAJIT_NO_UNWIND) && __GNU_COMPACT_EH__
 /* NYI: no support for compact unwind specification, yet. */
