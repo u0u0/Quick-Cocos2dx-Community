@@ -51,7 +51,19 @@ static AppDelegate s_sharedApplication;
     // Override point for customization after application launch.
 
     // Add the view controller's view to the window and display.
-    window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+    CGRect winRect = [[UIScreen mainScreen] bounds];
+    // iPhoneX special fix, is there a better method?
+    CGSize screenSize = [[UIScreen mainScreen] currentMode].size;
+    if (CGSizeEqualToSize(CGSizeMake(1125, 2436), screenSize)) {
+        if (winRect.size.height == 812) { // Portrait
+            winRect.origin.y = 44;
+            winRect.size.height = 812 - 44 - 34;
+        } else { // landscape
+            winRect.origin.x = 44;
+            winRect.size.width = 812 - 44 - 34;
+        }
+    }
+    window = [[UIWindow alloc] initWithFrame: winRect];
     CCEAGLView *eaglView = [CCEAGLView viewWithFrame: [window bounds]
                                      pixelFormat: (NSString*)cocos2d::GLViewImpl::_pixelFormat
                                      depthFormat: cocos2d::GLViewImpl::_depthFormat
