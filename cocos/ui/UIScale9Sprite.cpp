@@ -27,6 +27,7 @@
 #include "2d/CCSpriteFrameCache.h"
 #include "base/CCVector.h"
 #include "base/CCDirector.h"
+#include "base/ccUTF8.h"
 
 NS_CC_BEGIN
 namespace ui {
@@ -721,7 +722,7 @@ y+=ytranslate;         \
         CCASSERT((SpriteFrameCache::getInstance()) != NULL, "SpriteFrameCache::getInstance() must be non-NULL");
         
         SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-        CCASSERT(frame != NULL, "CCSpriteFrame must be non-NULL");
+        CCASSERT(frame != NULL, StringUtils::format("Scale9Sprite Can't load Frame:%s", spriteFrameName.c_str()).c_str());
         
         if (NULL == frame) return false;
         
