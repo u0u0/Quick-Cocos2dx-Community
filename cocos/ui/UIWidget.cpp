@@ -141,7 +141,6 @@ _enabled(true),
 _bright(true),
 _touchEnabled(false),
 _highlight(false),
-_affectByClipping(false),
 _ignoreSize(false),
 _propagateTouchEvents(true),
 _brightStyle(BrightStyle::NONE),
@@ -186,7 +185,6 @@ void Widget::cleanupWidget()
         CC_SAFE_DELETE(_focusNavigationController);
         _focusedWidget = nullptr;
     }
-
 }
 
 Widget* Widget::create()
@@ -678,11 +676,7 @@ bool Widget::onTouchBegan(Touch *touch, Event *unusedEvent)
     
 void Widget::propagateTouchEvent(cocos2d::ui::Widget::TouchEventType event, cocos2d::ui::Widget *sender, cocos2d::Touch *touch)
 {
-    Widget* widgetParent = getWidgetParent();
-    if (widgetParent)
-    {
-        widgetParent->interceptTouchEvent(event, sender, touch);
-    }
+    interceptTouchEvent(event, sender, touch);
 }
 
 void Widget::onTouchMoved(Touch *touch, Event *unusedEvent)
@@ -806,54 +800,32 @@ bool Widget::hitTest(const Vec2 &pt)
 
 bool Widget::isClippingParentContainsPoint(const Vec2 &pt)
 {
-    _affectByClipping = false;
-    Widget* parent = getWidgetParent();
-    Widget* clippingParent = nullptr;
-    while (parent)
-    {
-        Layout* layoutParent = dynamic_cast<Layout*>(parent);
-        if (layoutParent)
-        {
-            if (layoutParent->isClippingEnabled())
-            {
-                _affectByClipping = true;
-                clippingParent = layoutParent;
-                break;
+    // make sure check not break by non-Layout node.
+    Node *parent = this;
+    while (parent) {
+        parent = parent->getParent();
+        Layout *layout = dynamic_cast<Layout*>(parent);
+        if (layout && layout->isClippingEnabled()) {
+            if (!layout->hitTest(pt)) {
+                return false;
             }
         }
-        parent = parent->getWidgetParent();
-    }
-
-    if (!_affectByClipping)
-    {
-        return true;
-    }
-
-
-    if (clippingParent)
-    {
-        bool bRet = false;
-        if (clippingParent->hitTest(pt))
-        {
-            bRet = true;
-        }
-        if (bRet)
-        {
-            return clippingParent->isClippingParentContainsPoint(pt);
-        }
-        return false;
     }
     return true;
 }
 
 void Widget::interceptTouchEvent(cocos2d::ui::Widget::TouchEventType event, cocos2d::ui::Widget *sender, Touch *touch)
 {
-    Widget* widgetParent = getWidgetParent();
-    if (widgetParent)
-    {
-        widgetParent->interceptTouchEvent(event,sender,touch);
+    // make sure check not break by non-Widget node.
+    Node *parent = this;
+    while (parent) {
+        parent = parent->getParent();
+        Widget *widget = dynamic_cast<Widget *>(parent);
+        if (widget) {
+            widget->interceptTouchEvent(event, sender, touch);
+            break;
+        }
     }
-
 }
 
 void Widget::setPosition(const Vec2 &pos)
