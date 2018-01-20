@@ -77,7 +77,7 @@ public:
 
     /** Deletes a Animation from the cache. default delete all Animation.
      */
-    void removeAnimation(const std::string& name == "");
+    void removeAnimation(const std::string& name = "");
     
     /** Returns a Animation that was previously added.
     If the name is not found it will return nil.
