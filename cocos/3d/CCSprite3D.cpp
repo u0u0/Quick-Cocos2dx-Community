@@ -606,8 +606,35 @@ void Sprite3D::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
 void Sprite3D::setGLProgramState(GLProgramState *glProgramState)
 {
     Node::setGLProgramState(glProgramState);
-    for (auto& state : _meshes) {
-        state->setGLProgramState(glProgramState);
+    for (auto& it : _meshes) {
+        auto mesh = it->getMeshIndexData()->getMeshVertexData();
+        
+        bool meshHasSkin = mesh->hasVertexAttrib(GLProgram::VERTEX_ATTRIB_BLEND_INDEX)
+                        && mesh->hasVertexAttrib(GLProgram::VERTEX_ATTRIB_BLEND_WEIGHT);
+        bool meshHasNormal = mesh->hasVertexAttrib(GLProgram::VERTEX_ATTRIB_NORMAL);
+        
+        bool programHasSkin =  glProgramState->getGLProgram()->getVertexAttrib(s_attributeNames[GLProgram::VERTEX_ATTRIB_BLEND_INDEX])
+                            && glProgramState->getGLProgram()->getVertexAttrib(s_attributeNames[GLProgram::VERTEX_ATTRIB_BLEND_WEIGHT]);
+        bool programHasNormal = glProgramState->getGLProgram()->getVertexAttrib(s_attributeNames[GLProgram::VERTEX_ATTRIB_NORMAL]);
+        
+        if (meshHasSkin != programHasSkin || meshHasNormal != programHasNormal) {
+            break;
+        }
+        
+        long offset = 0;
+        auto attributeCount = mesh->getMeshVertexAttribCount();
+        for (auto k = 0; k < attributeCount; k++) {
+            auto meshattribute = mesh->getMeshVertexAttrib(k);
+            glProgramState->setVertexAttribPointer(s_attributeNames[meshattribute.vertexAttrib],
+                                                   meshattribute.size,
+                                                   meshattribute.type,
+                                                   GL_FALSE,
+                                                   mesh->getVertexBuffer()->getSizePerVertex(),
+                                                   (GLvoid*)offset);
+            offset += meshattribute.attribSizeBytes;
+        }
+
+        it->setGLProgramState(glProgramState);
     }
 }
 void Sprite3D::setGLProgram(GLProgram *glprogram)
