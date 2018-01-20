@@ -551,6 +551,90 @@ function display.newClippingRectangleNode(rect)
 	return cc.ClippingRegionNode:create(rect)
 end
 
+
+-- start --
+
+--------------------------------
+-- 创建并返回一个 cc.ClippingNode 的 Stencil 对象。
+-- @function [parent=#display] newStencil
+-- @param table size 尺寸大小
+-- @param number radius 圆角尺寸或将圆角分解成几段
+-- @return DrawNode#DrawNode ret (return value: cc.DrawNode)  DrawNode
+
+
+--[[--
+
+创建并返回一个 cc.ClippingNode 的 Stencil 对象。 需要配合 cc.ClippingNode 使用。
+
+~~~ lua
+
+-- 创建一个大小100， 圆角为20 的图片
+
+local clipSize = cc.size(100, 100)
+local clipNode = cc.ClippingNode:create(display.newStencil(clipSize, 20))
+    :align(display.CENTER, display.cx, display.cy)
+    :addTo(scene)
+
+local avater = display.newSprite("avater.png")
+    :align(display.CENTER, 0, 0)
+    :addTo(clipNode)
+~~~
+
+注意： ClippingNode 的正中心坐标为 0, 0。
+
+]]
+-- end --
+function display.newStencil(size, radius)
+    local radius = radius or 1
+    local segments = radius
+    local radianPerSegment = math.pi * 0.5 / segments
+    local radianVertices = {}
+
+    for i = 0, segments do
+        local radian = i * radianPerSegment
+        radianVertices[i] = cc.p(math.round(math.cos(radian) * radius * 10) / 10, math.round(math.sin(radian) * radius * 10) / 10)
+    end
+
+    local points = {}
+    local tagCenter = cc.p(0, 0)
+
+    -- 左上角
+    tagCenter = cc.p(radius, size.height - radius)
+    for i = 0, segments do
+        local ri = i
+        points[#points + 1] = cc.p(tagCenter.x - radianVertices[ri].x, tagCenter.y + radianVertices[ri].y)
+    end
+
+    -- 右上角
+    tagCenter = cc.p(size.width - radius, size.height - radius)
+    for i = 0, segments do
+        local ri = segments - i
+        points[#points + 1] = cc.p(tagCenter.x + radianVertices[ri].x, tagCenter.y + radianVertices[ri].y)
+    end
+
+    -- 右下角
+    tagCenter = cc.p(size.width - radius, radius)
+    for i = 0, segments do
+        local ri = i
+        points[#points + 1] = cc.p(tagCenter.x + radianVertices[ri].x, tagCenter.y - radianVertices[ri].y)
+    end
+
+    -- 左下角
+    tagCenter = cc.p(radius, radius)
+    for i = 0, segments do
+        local ri = segments - i
+        points[#points + 1] = cc.p(tagCenter.x - radianVertices[ri].x, tagCenter.y - radianVertices[ri].y)
+    end
+    points[#points + 1] = cc.p(points[1].x, points[1].y)
+
+    local drawNode = cc.DrawNode:create()
+    drawNode:drawPolygon(points)
+    drawNode:setContentSize(size)
+    drawNode:align(display.CENTER, 0, 0)
+
+    return drawNode
+end
+
 -- start --
 
 --------------------------------
