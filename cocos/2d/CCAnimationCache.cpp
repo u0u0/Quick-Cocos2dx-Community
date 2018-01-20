@@ -71,9 +71,10 @@ void AnimationCache::addAnimation(Animation *animation, const std::string& name)
 
 void AnimationCache::removeAnimation(const std::string& name)
 {
-    if (name.size()==0)
+    if (name.size()==0) {
+        _animations.clear();
         return;
-
+    }
     _animations.erase(name);
 }
 

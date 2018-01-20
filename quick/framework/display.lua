@@ -1603,6 +1603,19 @@ end
 -- start --
 
 --------------------------------
+-- 删除所有缓存的动画对象。
+-- @function [parent=#display] removeAllAnimationCache
+-- @param string name
+
+-- end --
+
+function display.removeAllAnimationCache(name)
+    sharedAnimationCache:removeAnimation()
+end
+
+-- start --
+
+--------------------------------
 -- 从内存中卸载没有使用 Sprite Sheets 材质
 -- @function [parent=#display] removeUnusedSpriteFrames
 
@@ -1611,6 +1624,20 @@ end
 function display.removeUnusedSpriteFrames()
     sharedSpriteFrameCache:removeUnusedSpriteFrames()
     sharedTextureCache:removeUnusedTextures()
+end
+
+-- start --
+
+--------------------------------
+-- 从内存中卸载所有 Sprite Sheets 材质
+-- @function [parent=#display] removeUnusedSpriteFrames
+
+-- end --
+
+function display.removeAllSpriteFrames()
+    sharedAnimationCache:removeAnimation()
+    sharedSpriteFrameCache:removeSpriteFrames()
+    sharedTextureCache:removeAllTextures()
 end
 
 -- start --
@@ -1671,16 +1698,18 @@ display.captureScreen(
 
 -- end --
 
-function display.captureScreen(callback, fileName)
-	sharedDirector:captureScreen(function(image)
-		if image then
-			local path = cc.FileUtils:getInstance():getWritablePath() .. fileName
-			image:saveToFile(path)
-			callback(true, path)
-		else
-			callback(false)
-		end
-	end)
+function display.captureScreen(callback, file)
+    sharedDirector:captureScreen(function(image)
+        if image then
+            if not cc.FileUtils:getInstance():isAbsolutePath(file) then
+                file = cc.FileUtils:getInstance():getWritablePath() .. file
+            end
+            image:saveToFile(file)
+            callback(true, file)
+        else
+            callback(false)
+        end
+    end)
 end
 
 return display

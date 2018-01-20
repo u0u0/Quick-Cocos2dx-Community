@@ -75,11 +75,10 @@ public:
     */
     void addAnimation(Animation *animation, const std::string& name);
 
-    /** Deletes a Animation from the cache.
-     
+    /** Deletes a Animation from the cache. default delete all Animation.
      */
-    void removeAnimation(const std::string& name);
-
+    void removeAnimation(const std::string& name == "");
+    
     /** Returns a Animation that was previously added.
     If the name is not found it will return nil.
     You should retain the returned copy if you are going to use it.
