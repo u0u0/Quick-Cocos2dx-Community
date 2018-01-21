@@ -934,6 +934,81 @@ function display.newRect(rect, params)
     return display.newPolygon(points, params)
 end
 
+--[[--
+
+创建并返回一个 DrawNode （圆角矩形）对象。
+
+~~~ lua
+
+-- 创建一个长200、宽100， 圆角为40 的矩形
+
+local clipSize = cc.size(200, 100)
+local node = display.newRoundedRect(clipSize, 40, {
+	fillColor = cc.c4f(1,0,0,1),
+	borderColor = cc.c4f(0,1,0,1),
+	borderWidth = 1
+})
+node:addTo(self)
+node:center()
+~~~
+
+]]--
+
+function display.newRoundedRect(size, radius, params)
+    local radius = radius or 1
+    local segments = math.ceil(radius)
+    local radianPerSegment = math.pi * 0.5 / segments
+    local radianVertices = {}
+
+    for i = 0, segments do
+        local radian = i * radianPerSegment
+        radianVertices[i] = cc.p(math.round(math.cos(radian) * radius * 10) / 10, math.round(math.sin(radian) * radius * 10) / 10)
+    end
+
+    local points = {}
+    local tagCenter = cc.p(0, 0)
+
+    -- left up
+    tagCenter = cc.p(radius, size.height - radius)
+    for i = 0, segments do
+        local ri = i
+        points[#points + 1] = cc.p(tagCenter.x - radianVertices[ri].x, tagCenter.y + radianVertices[ri].y)
+    end
+
+    -- right up
+    tagCenter = cc.p(size.width - radius, size.height - radius)
+    for i = 0, segments do
+        local ri = segments - i
+        points[#points + 1] = cc.p(tagCenter.x + radianVertices[ri].x, tagCenter.y + radianVertices[ri].y)
+    end
+
+    -- right bottom
+    tagCenter = cc.p(size.width - radius, radius)
+    for i = 0, segments do
+        local ri = i
+        points[#points + 1] = cc.p(tagCenter.x + radianVertices[ri].x, tagCenter.y - radianVertices[ri].y)
+    end
+
+    -- left bottom
+    tagCenter = cc.p(radius, radius)
+    for i = 0, segments do
+        local ri = segments - i
+        points[#points + 1] = cc.p(tagCenter.x - radianVertices[ri].x, tagCenter.y - radianVertices[ri].y)
+    end
+    points[#points + 1] = cc.p(points[1].x, points[1].y)
+
+	params = checktable(params)
+    local borderWidth = params.borderWidth or 0.5
+    local fillColor = params.fillColor or cc.c4f(1, 1, 1, 1)
+    local borderColor = params.borderColor or cc.c4f(1, 1, 1, 1)
+    local drawNode = cc.DrawNode:create()
+    drawNode:drawPolygon(points, #points, fillColor, borderWidth, borderColor)
+    drawNode:setContentSize(size)
+	drawNode:setAnchorPoint(cc.p(0.5, 0.5))
+
+    return drawNode
+end
+
 -- start --
 
 --------------------------------
