@@ -7,5 +7,4 @@ function __G__TRACKBACK__(errorMessage)
 end
 
 package.path = package.path .. ";src/?.lua"
-cc.FileUtils:getInstance():setPopupNotify(false)
 require("app.MyApp").new():run()

@@ -286,12 +286,6 @@ public:
      *  Set writable/cache path (for debug).
      */
     virtual void setWritablePath(const char *writablePath);
-    
-    /**
-     *  Sets/Gets whether to pop-up a message box when failed to load an image.
-     */
-    virtual void setPopupNotify(bool notify);
-    virtual bool isPopupNotify();
 
     /**
      *  Converts the contents of a file to a ValueMap.

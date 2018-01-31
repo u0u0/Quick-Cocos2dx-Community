@@ -744,12 +744,7 @@ std::string FileUtils::fullPathForFilename(const std::string &filename)
                 _fullPathCache.insert(std::make_pair(filename, fullpath));
                 return fullpath;
             }
-            
         }
-    }
-    
-    if(isPopupNotify()){
-        CCLOG("cocos2d: fullPathForFilename: No file found at %s. Possible missing file.", filename.c_str());
     }
 
     // FIXME: Should it return nullptr ? or an empty string ?
@@ -1232,21 +1227,6 @@ long FileUtils::getFileSize(const std::string &filepath)
     {
         return (long)(info.st_size);
     }
-}
-
-//////////////////////////////////////////////////////////////////////////
-// Notification support when getFileData from invalid file path.
-//////////////////////////////////////////////////////////////////////////
-static bool s_popupNotify = true;
-
-void FileUtils::setPopupNotify(bool notify)
-{
-    s_popupNotify = notify;
-}
-
-bool FileUtils::isPopupNotify()
-{
-    return s_popupNotify;
 }
 
 NS_CC_END

@@ -306,8 +306,6 @@ std::string getCurAppName(void)
 
 - (void) startup
 {
-    FileUtils::getInstance()->setPopupNotify(false);
-    
     std::string path = _project.getQuickCocos2dxRootPath();
     const string projectDir = _project.getProjectDir();
     if (projectDir.length())

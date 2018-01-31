@@ -371,12 +371,7 @@ bool ParticleSystem::initWithDictionary(ValueMap& dictionary, const std::string&
                 
                 if (textureName.length() > 0)
                 {
-                    // set not pop-up message box when load image failed
-                    bool notify = FileUtils::getInstance()->isPopupNotify();
-                    FileUtils::getInstance()->setPopupNotify(false);
                     tex = Director::getInstance()->getTextureCache()->addImage(textureName);
-                    // reset the value of UIImage notify
-                    FileUtils::getInstance()->setPopupNotify(notify);
                 }
                 
                 if (tex)
