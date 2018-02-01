@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':libcocos2dx')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':libcocos2dx')
 }
 
