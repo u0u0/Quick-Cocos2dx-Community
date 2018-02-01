@@ -65,7 +65,7 @@ def buildNative(isRelease):
         shutil.rmtree(jniLibsDir)
     shutil.move(libsDir, jniLibsDir)
 
-    print "====> Copying src,res to Android asserts\n"
+    print "====> Copying res to Android asserts\n"
     androidAssertsDir = joinDir(projectRoot, "app", "src", "main", "assets")
     resDir = joinDir(appRoot, "res")
     resTargetDir = joinDir(androidAssertsDir, "res")
@@ -77,7 +77,9 @@ def buildNative(isRelease):
     resTargetDir = joinDir(androidAssertsDir, "src")
     if os.path.exists(resTargetDir):
         shutil.rmtree(resTargetDir)
-    shutil.copytree(srcDir, resTargetDir)
+    if isRelease == False: # no copy src for release mode
+        print "====> Copying src to Android asserts\n"
+        shutil.copytree(srcDir, resTargetDir)
 
     print "====> Build Done\n"
 
