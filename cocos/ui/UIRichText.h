@@ -132,7 +132,7 @@ protected:
     void handleTextRenderer(const std::string& text, const std::string& fontName, float fontSize, const Color3B& color, GLubyte opacity);
     void handleImageRenderer(const std::string& filePath, const Color3B& color, GLubyte opacity);
     void handleCustomRenderer(Node* renderer);
-    void formarRenderers();
+    void formatRenderers();
     void addNewLine();
 protected:
     bool _formatTextDirty;

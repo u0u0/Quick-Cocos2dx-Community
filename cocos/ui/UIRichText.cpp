@@ -128,7 +128,7 @@ _formatTextDirty(true),
 _leftSpaceWidth(0.0f),
 _verticalSpace(0.0f)
 {
-    
+    setCascadeOpacityEnabled(true);
 }
     
 RichText::~RichText()
@@ -232,6 +232,7 @@ void RichText::formatText()
 
                 if (elementRenderer)
                 {
+                    elementRenderer->setCascadeOpacityEnabled(true);
                     elementRenderer->setColor(element->_color);
                     elementRenderer->setOpacity(element->_opacity);
                     pushToContainer(elementRenderer);
@@ -274,7 +275,7 @@ void RichText::formatText()
                 }
             }
         }
-        formarRenderers();
+        formatRenderers();
         _formatTextDirty = false;
     }
 }
@@ -359,7 +360,7 @@ void RichText::addNewLine()
     _elementRenders.push_back(new Vector<Node*>());
 }
     
-void RichText::formarRenderers()
+void RichText::formatRenderers()
 {
     if (_ignoreSize)
     {
