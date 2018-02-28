@@ -676,7 +676,17 @@ bool Widget::onTouchBegan(Touch *touch, Event *unusedEvent)
     
 void Widget::propagateTouchEvent(cocos2d::ui::Widget::TouchEventType event, cocos2d::ui::Widget *sender, cocos2d::Touch *touch)
 {
-    interceptTouchEvent(event, sender, touch);
+    // interceptTouchEvent was override by PageView,ListView,ScrollView
+    // must find a parent to call, otherwise it will be dealed twice.
+    Node *parent = this;
+    while (parent) {
+        parent = parent->getParent();
+        Widget *widget = dynamic_cast<Widget *>(parent);
+        if (widget) {
+            widget->interceptTouchEvent(event, sender, touch);
+            break;
+        }
+    }
 }
 
 void Widget::onTouchMoved(Touch *touch, Event *unusedEvent)
