@@ -140,6 +140,14 @@ public class Cocos2dxEditBoxHelper {
                         // Note that we must to copy a string to prevent string content is modified
                         // on UI thread while 's.toString' is invoked at the same time.
                         final String text = new String(s.toString());
+                        if ((editBox.getInputType() & InputType.TYPE_TEXT_FLAG_MULTI_LINE) != InputType.TYPE_TEXT_FLAG_MULTI_LINE) {
+                            // huawei editbox not response to setOnKeyListener, do it here.
+                            if (text.indexOf('\n') >= 0) {
+                                editBox.setText(text.replaceAll("\n", ""));
+                                Cocos2dxEditBoxHelper.closeKeyboardOnUiThread(index);
+                                return;
+                            }
+                        }
                         mCocos2dxActivity.runOnGLThread(new Runnable() {
                             @Override
                             public void run() {
