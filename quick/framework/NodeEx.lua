@@ -333,11 +333,10 @@ function Node:addNodeEventListener(evt, hdl)
     if not self._LuaListeners then
         self._LuaListeners = {}
 		if evt == c.NODE_EVENT then
-			self._baseNodeEventListener = function(evt)
+			self:registerScriptHandler(function(evt)
 				-- call listener
 				self._LuaListeners[c.NODE_EVENT]{name = evt}
-			end
-			self:registerScriptHandler(self._baseNodeEventListener)
+			end)
 		end
     end
 
@@ -350,7 +349,7 @@ function Node:removeNodeEventListener(evt)
 	if evt == c.KEYPAD_EVENT then
 		self:setKeypadEnabled(false)
 	elseif evt == c.NODE_EVENT then
-		self:unregisterScriptHandler(self._baseNodeEventListener)
+		self:unregisterScriptHandler()
 	elseif evt == c.NODE_ENTER_FRAME_EVENT then
 		self:unscheduleUpdate()
 	elseif evt == c.NODE_TOUCH_EVENT then
