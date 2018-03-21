@@ -108,6 +108,11 @@ public:
                return false;
            }
 
+		   if (fontSize <= 0) {
+			   CCLOG("%s %d: fontSize must be greater than 0", __FILE__, __LINE__);
+			   return false;
+		   }
+
            // Do a full lookup for the font path using FileUtils in case the given font name is a relative path to a font file asset,
            // or the path has been mapped to a different location in the app package:
            std::string fullPathOrFontName = FileUtils::getInstance()->fullPathForFilename(pFontName);
