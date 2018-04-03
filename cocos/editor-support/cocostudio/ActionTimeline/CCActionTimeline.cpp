@@ -190,6 +190,9 @@ void ActionTimeline::step(float delta)
     }
     _currentFrame = (int)(_time / _frameInternal);
 
+    if (_currentFrame > _endFrame) { // stop at the last frame
+        _currentFrame = _endFrame;
+    }
     stepToFrame(_currentFrame);
 
     if (isEnd) {
