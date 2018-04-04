@@ -104,35 +104,11 @@ bool LabelTextFormatter::multilineText(Label *theLabel)
             isStartOfLine  = true;
         }
         
-        // 1) Whitespace.
-        // 2) This character is non-CJK, but the last character is CJK
-        bool isspace = StringUtils::isUnicodeSpace(character);
-        bool isCJK = false;
-        if(!isspace)
-        {
-            isCJK = StringUtils::isCJKUnicode(character);
-        }
-
-        if (isspace ||
-            (!last_word.empty() && StringUtils::isCJKUnicode(last_word.back()) && !isCJK))
-        {
-            // if current character is white space, put it into the current word
-            if (isspace) last_word.push_back(character);
-            multiline_string.insert(multiline_string.end(), last_word.begin(), last_word.end());
-            last_word.clear();
-            isStartOfWord = false;
-            startOfWord = -1;
-            // put the CJK character in the last word
-            // and put the non-CJK(ASCII) character in the current word
-            if (!isspace) last_word.push_back(character);
-            continue;
-        }
-        
         float posRight = (info->position.x + info->contentSize.width) * scalsX;
         // Out of bounds.
         if (posRight - startOfLine > lineWidth)
         {
-            if (!breakLineWithoutSpace && !isCJK)
+            if (!breakLineWithoutSpace && !StringUtils::isCJKUnicode(character))
             {
                 last_word.push_back(character);
                 
