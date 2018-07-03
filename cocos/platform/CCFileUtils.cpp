@@ -50,13 +50,9 @@ THE SOFTWARE.
 #include <ftw.h>
 #endif
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <sys/types.h>
 #include <errno.h>
 #include <dirent.h>
-#endif
-
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC)
 
 NS_CC_BEGIN
 
@@ -496,17 +492,6 @@ static tinyxml2::XMLElement* generateElementForArray(const ValueVector& array, t
     }
     return rootNode;
 }
-
-#else
-NS_CC_BEGIN
-
-/* The subclass FileUtilsApple should override these two method. */
-ValueMap FileUtils::getValueMapFromFile(const std::string& filename) {return ValueMap();}
-ValueMap FileUtils::getValueMapFromData(const char* filedata, int filesize) {return ValueMap();}
-ValueVector FileUtils::getValueVectorFromFile(const std::string& filename) {return ValueVector();}
-bool FileUtils::writeToFile(ValueMap& dict, const std::string &fullPath) {return false;}
-
-#endif /* (CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC) */
 
 FileUtils* FileUtils::s_sharedFileUtils = nullptr;
 
