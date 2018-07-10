@@ -58,7 +58,7 @@ bool HTTPRequest::initWithUrl(const char *url, int method)
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
     curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "libcurl");
-    curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT, DEFAULT_TIMEOUT);
+    curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT, DEFAULT_CONNECTTIMEOUT);
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, DEFAULT_TIMEOUT);
     curl_easy_setopt(m_curl, CURLOPT_NOSIGNAL, 1L);
 
@@ -202,10 +202,9 @@ void HTTPRequest::setAcceptEncoding(int acceptEncoding)
 
 void HTTPRequest::setTimeout(int timeout)
 {
-    long to = timeout;
     CCAssert(m_state == kCCHTTPRequestStateIdle, "HTTPRequest::setTimeout() - request not idle");
-    curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT, to);
-    curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, to);
+    // CURLOPT_CONNECTTIMEOUT is ok, Only change data timeout.
+    curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, timeout);
 }
 
 bool HTTPRequest::start(void)
