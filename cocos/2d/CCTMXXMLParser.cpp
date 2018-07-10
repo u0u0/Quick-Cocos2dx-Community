@@ -128,9 +128,8 @@ TMXMapInfo * TMXMapInfo::createWithXML(const std::string& tmxString, const std::
 
 void TMXMapInfo::internalInit(const std::string& tmxFileName, const std::string& resourcePath)
 {
-    if (!tmxFileName.empty())
-    {
-        _TMXFileName = FileUtils::getInstance()->fullPathForFilename(tmxFileName);
+    if (!tmxFileName.empty()) {
+        _TMXFileName = tmxFileName;
     }
     
     if (!resourcePath.empty())
@@ -289,64 +288,34 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
     } 
     else if (elementName == "tileset") 
     {
-        // If this is an external tileset then start parsing that
-        std::string externalTilesetFilename = attributeDict["source"].asString();
-        if (externalTilesetFilename != "")
+        TMXTilesetInfo *tileset = new (std::nothrow) TMXTilesetInfo();
+        tileset->_name = attributeDict["name"].asString();
+        
+        if (_recordFirstGID)
         {
-            _externalTilesetFilename = externalTilesetFilename;
-
-            // Tileset file will be relative to the map file. So we need to convert it to an absolute path
-            if (_TMXFileName.find_last_of("/") != string::npos)
-            {
-                string dir = _TMXFileName.substr(0, _TMXFileName.find_last_of("/") + 1);
-                externalTilesetFilename = dir + externalTilesetFilename;
-            }
-            else 
-            {
-                externalTilesetFilename = _resources + "/" + externalTilesetFilename;
-            }
-            externalTilesetFilename = FileUtils::getInstance()->fullPathForFilename(externalTilesetFilename);
+            // unset before, so this is tmx file.
+            tileset->_firstGid = attributeDict["firstgid"].asInt();
             
-            _currentFirstGID = attributeDict["firstgid"].asInt();
-            if (_currentFirstGID < 0)
+            if (tileset->_firstGid < 0)
             {
-                _currentFirstGID = 0;
+                tileset->_firstGid = 0;
             }
-            _recordFirstGID = false;
-            
-            tmxMapInfo->parseXMLFile(externalTilesetFilename);
         }
         else
         {
-            TMXTilesetInfo *tileset = new (std::nothrow) TMXTilesetInfo();
-            tileset->_name = attributeDict["name"].asString();
-            
-            if (_recordFirstGID)
-            {
-                // unset before, so this is tmx file.
-                tileset->_firstGid = attributeDict["firstgid"].asInt();
-                
-                if (tileset->_firstGid < 0)
-                {
-                    tileset->_firstGid = 0;
-                }
-            }
-            else
-            {
-                tileset->_firstGid = _currentFirstGID;
-                _currentFirstGID = 0;
-            }
-            
-            tileset->_spacing = attributeDict["spacing"].asInt();
-            tileset->_margin = attributeDict["margin"].asInt();
-            Size s;
-            s.width = attributeDict["tilewidth"].asFloat();
-            s.height = attributeDict["tileheight"].asFloat();
-            tileset->_tileSize = s;
-
-            tmxMapInfo->getTilesets().pushBack(tileset);
-            tileset->release();
+            tileset->_firstGid = _currentFirstGID;
+            _currentFirstGID = 0;
         }
+        
+        tileset->_spacing = attributeDict["spacing"].asInt();
+        tileset->_margin = attributeDict["margin"].asInt();
+        Size s;
+        s.width = attributeDict["tilewidth"].asFloat();
+        s.height = attributeDict["tileheight"].asFloat();
+        tileset->_tileSize = s;
+        
+        tmxMapInfo->getTilesets().pushBack(tileset);
+        tileset->release();
     }
     else if (elementName == "tile")
     {
@@ -430,14 +399,12 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         std::string imagename = attributeDict["source"].asString();
         tileset->_originSourceImage = imagename;
 
-        if (_TMXFileName.find_last_of("/") != string::npos)
-        {
+        // image file is relative to the map file. Also use relative path here to make hot update happey.
+        if (_TMXFileName.size() > 0) {
             string dir = _TMXFileName.substr(0, _TMXFileName.find_last_of("/") + 1);
             tileset->_sourceImage = dir + imagename;
-        }
-        else 
-        {
-            tileset->_sourceImage = _resources + (_resources.size() ? "/" : "") + imagename;
+        } else {
+            tileset->_sourceImage = _resources + "/" + imagename;
         }
     } 
     else if (elementName == "data")

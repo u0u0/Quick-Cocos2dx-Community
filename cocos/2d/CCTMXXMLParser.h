@@ -290,7 +290,6 @@ public:
     void setCurrentString(const std::string& currentString){ _currentString = currentString; }
     const std::string& getTMXFileName() const { return _TMXFileName; }
     void setTMXFileName(const std::string& fileName){ _TMXFileName = fileName; }
-    const std::string& getExternalTilesetFileName() const { return _externalTilesetFilename; }
 
 protected:
     void internalInit(const std::string& tmxFileName, const std::string& resourcePath);
@@ -336,7 +335,6 @@ protected:
     ValueMapIntKey _tileProperties;
     int _currentFirstGID;
     bool _recordFirstGID;
-    std::string _externalTilesetFilename;
 };
 
 // end of tilemap_parallax_nodes group
