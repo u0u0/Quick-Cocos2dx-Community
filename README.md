@@ -38,3 +38,25 @@ QQ 群：361920466
 
 	 Mac 系统在 Applications 文件夹(或系统应用列表)中 player.app 。
 	 Windows 系统在桌面上的 player.exe 快捷方式。
+	 
+## 创建新工程	 
+
+目前支持两种方式：
+
+1. player 中新建按纽
+
+2. python 脚本 quick/bin/CreateProject.py:
+
+	```shell
+    CreateProject [-h]
+
+    -h 显示帮助
+    -p 包ID
+    -o 输出目录
+    -l 设置为横屏，默认不设置为竖屏
+    --deep-copy 拷贝cocos2d源码至新工程中，默认不设置为使用全局的 QUICK_V3_ROOT 下的代码
+	
+	如:
+	
+	quick/bin/CreateProject.py  -p com.yygame.helloworld -o /tmp --deep-copy
+	```
