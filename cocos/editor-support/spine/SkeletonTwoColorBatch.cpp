@@ -51,7 +51,7 @@ void TwoColorTrianglesCommand::init(float globalOrder, GLuint textureID, GLProgr
 	CCASSERT(glProgramState, "Invalid GLProgramState");
 	CCASSERT(glProgramState->getVertexAttribsFlags() == 0, "No custom attributes are supported in QuadCommand");
 
-	RenderCommand::init(globalOrder, mv, flags);
+	CustomCommand::init(globalOrder);
 
 	_triangles = triangles;
 	if(_triangles.indexCount % 3 != 0) {
@@ -80,7 +80,6 @@ void TwoColorTrianglesCommand::generateMaterialID() {
 	// do not batch if using custom uniforms (since we cannot batch) it
 	if(_glProgramState->getUniformCount() > 0) {
 		_materialID = Renderer::MATERIAL_ID_DO_NOT_BATCH;
-		setSkipBatching(true);
 	}
 	else {
 		int glProgram = (int)_glProgram->getProgram();		

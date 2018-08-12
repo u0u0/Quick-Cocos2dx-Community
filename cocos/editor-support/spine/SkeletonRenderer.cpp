@@ -111,31 +111,7 @@ void SkeletonRenderer::setupGLProgramState (bool twoColorTintEnabled) {
 		setGLProgramState(SkeletonTwoColorBatch::getInstance()->getTwoColorTintProgramState());
 		return;
 	}
-	
-	Texture2D *texture = nullptr;
-	for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
-		spSlot* slot = _skeleton->drawOrder[i];
-		if (!slot->attachment) continue;
-		switch (slot->attachment->type) {
-			case SP_ATTACHMENT_REGION: {
-				spRegionAttachment* attachment = (spRegionAttachment*)slot->attachment;
-				texture = static_cast<AttachmentVertices*>(attachment->rendererObject)->_texture;
-				break;
-			}
-			case SP_ATTACHMENT_MESH: {
-				spMeshAttachment* attachment = (spMeshAttachment*)slot->attachment;
-				texture = static_cast<AttachmentVertices*>(attachment->rendererObject)->_texture;
-				break;
-			}
-			default:
-				continue;
-		}
-		
-		if (texture != nullptr) {
-			break;
-		}
-	}
-	setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, texture));
+    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
 }
 
 void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsSkeletonData) {
@@ -860,17 +836,11 @@ bool SkeletonRenderer::getDebugMeshesEnabled () const {
 }
 
 void SkeletonRenderer::onEnter () {
-#if CC_ENABLE_SCRIPT_BINDING
-	if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnEnter)) return;
-#endif
 	Node::onEnter();
 	scheduleUpdate();
 }
 
 void SkeletonRenderer::onExit () {
-#if CC_ENABLE_SCRIPT_BINDING
-	if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnExit)) return;
-#endif
 	Node::onExit();
 	unscheduleUpdate();
 }

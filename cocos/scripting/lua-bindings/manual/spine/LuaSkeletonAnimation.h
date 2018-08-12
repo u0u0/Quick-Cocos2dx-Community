@@ -29,12 +29,6 @@
 
 class LuaSkeletonAnimation: public spine::SkeletonAnimation {
 public:
-    static LuaSkeletonAnimation* createWithFile (const char* skeletonDataFile, const char* atlasFile, float scale = 1);
-    static LuaSkeletonAnimation* createWithData (spSkeletonData *data);
-
-    LuaSkeletonAnimation (const char* skeletonDataFile, const char* atlasFile, float scale = 1);
-    LuaSkeletonAnimation (spSkeletonData *data);
-
     virtual ~LuaSkeletonAnimation();
 };
 
