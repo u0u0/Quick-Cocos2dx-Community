@@ -50,9 +50,11 @@ THE SOFTWARE.
 #include <ftw.h>
 #endif
 
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <sys/types.h>
 #include <errno.h>
 #include <dirent.h>
+#endif
 
 NS_CC_BEGIN
 
