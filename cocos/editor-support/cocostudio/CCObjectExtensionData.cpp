@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014 cocos2d-x.org
+ Copyright (c) 2015 cocos2d-x.org
  
  http://www.cocos2d-x.org
  
@@ -22,32 +22,55 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __cocos2d_libs__ProjectNodeReader__
-#define __cocos2d_libs__ProjectNodeReader__
+#include "CCObjectExtensionData.h"
 
-#include "cocos2d.h"
-#include "cocostudio/CocosStudioExport.h"
-#include "cocostudio/WidgetReader/NodeReaderProtocol.h"
+#include "cocostudio/ActionTimeline/CCActionTimeline.h"
 
 
 namespace cocostudio
 {
-    class CC_STUDIO_DLL ProjectNodeReader : public cocos2d::Ref, public NodeReaderProtocol
+    
+    ObjectExtensionData* ObjectExtensionData::create()
     {
+        ObjectExtensionData * ret = new (std::nothrow) ObjectExtensionData();
+        if (ret && ret->init())
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_DELETE(ret);
+        }
+        return ret;
+    }
+    
+    ObjectExtensionData::ObjectExtensionData()
+    : _customProperty("")
+    , _timelineData(nullptr)
+    {
+    }
+    
+    ObjectExtensionData::~ObjectExtensionData()
+    {
+        CC_SAFE_RELEASE(_timelineData);
+    }
+    
+    bool ObjectExtensionData::init()
+    {
+        _timelineData = cocostudio::timeline::ActionTimelineData::create(0);
+        CC_SAFE_RETAIN(_timelineData);
         
-    public:
-        ProjectNodeReader();
-        ~ProjectNodeReader();
-        
-        static ProjectNodeReader* getInstance();
-        static void purge();
-        
-        flatbuffers::Offset<flatbuffers::Table> createOptionsWithFlatBuffers(const tinyxml2::XMLElement* objectData,
-                                                                             flatbuffers::FlatBufferBuilder* builder);
-
-        void setPropsWithFlatBuffers(cocos2d::Node* node, const flatbuffers::Table* projectNodeOptions);
-        cocos2d::Node* createNodeWithFlatBuffers(const flatbuffers::Table* nodeOptions) { return nullptr; };
-    };
+        return true;
+    }
+    
+    void ObjectExtensionData::setActionTag(int actionTag)
+    {
+        _timelineData->setActionTag(actionTag);
+    }
+    
+    const int ObjectExtensionData::getActionTag() const
+    {
+        return _timelineData->getActionTag();
+    }
+    
 }
-
-#endif /* defined(__cocos2d_libs__ProjectNodeReader__) */

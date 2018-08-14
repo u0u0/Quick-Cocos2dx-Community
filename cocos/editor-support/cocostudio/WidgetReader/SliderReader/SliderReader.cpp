@@ -492,7 +492,7 @@ namespace cocostudio
         std::string progressBarFileName = progressBarDic->path()->c_str();
         slider->loadProgressBarTexture(progressBarFileName, (Widget::TextureResType)progressBarType);
         
-        bool displaystate = options->displaystate();
+        bool displaystate = options->displaystate() != 0;
         slider->setBright(displaystate);
         slider->setEnabled(displaystate);
         

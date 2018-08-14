@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014 cocos2d-x.org
+ Copyright (c) 2015 cocos2d-x.org
  
  http://www.cocos2d-x.org
  
@@ -22,32 +22,47 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __cocos2d_libs__ProjectNodeReader__
-#define __cocos2d_libs__ProjectNodeReader__
+#ifndef __cocos2d_libs__CCObjectExtensionData__
+#define __cocos2d_libs__CCObjectExtensionData__
 
-#include "cocos2d.h"
+#include <string>
+
+#include "base/CCRef.h"
+
 #include "cocostudio/CocosStudioExport.h"
-#include "cocostudio/WidgetReader/NodeReaderProtocol.h"
-
 
 namespace cocostudio
 {
-    class CC_STUDIO_DLL ProjectNodeReader : public cocos2d::Ref, public NodeReaderProtocol
+    namespace timeline
+    {
+        class ActionTimelineData;
+    }
+}
+
+namespace cocostudio
+{
+    class CC_STUDIO_DLL ObjectExtensionData : public cocos2d::Ref
     {
         
     public:
-        ProjectNodeReader();
-        ~ProjectNodeReader();
+        static ObjectExtensionData* create();
         
-        static ProjectNodeReader* getInstance();
-        static void purge();
+        virtual void setCustomProperty(const std::string& customProperty) { _customProperty = customProperty; }
+        virtual std::string getCustomProperty() const { return _customProperty; };
         
-        flatbuffers::Offset<flatbuffers::Table> createOptionsWithFlatBuffers(const tinyxml2::XMLElement* objectData,
-                                                                             flatbuffers::FlatBufferBuilder* builder);
-
-        void setPropsWithFlatBuffers(cocos2d::Node* node, const flatbuffers::Table* projectNodeOptions);
-        cocos2d::Node* createNodeWithFlatBuffers(const flatbuffers::Table* nodeOptions) { return nullptr; };
+        virtual void setActionTag(int actionTag);
+        virtual const int getActionTag() const;
+        
+    CC_CONSTRUCTOR_ACCESS:
+        ObjectExtensionData();
+        ~ObjectExtensionData();
+        virtual bool init();
+        
+    protected:
+        std::string _customProperty;
+        cocostudio::timeline::ActionTimelineData* _timelineData;
     };
 }
 
-#endif /* defined(__cocos2d_libs__ProjectNodeReader__) */
+
+#endif /* defined(__cocos2d_libs__CCObjectExtensionData__) */

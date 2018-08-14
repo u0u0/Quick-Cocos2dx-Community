@@ -43,6 +43,7 @@ TriggerBase.cpp \
 TriggerMng.cpp \
 TriggerObj.cpp \
 CocoLoader.cpp \
+WidgetReader/ArmatureNodeReader/ArmatureNodeReader.cpp \
 WidgetReader/NodeReader/NodeReader.cpp \
 WidgetReader/SingleNodeReader/SingleNodeReader.cpp \
 WidgetReader/SpriteReader/SpriteReader.cpp \
@@ -68,7 +69,10 @@ ActionTimeline/CCFrame.cpp \
 ActionTimeline/CCTimeLine.cpp \
 ActionTimeline/CCActionTimeline.cpp \
 ActionTimeline/CSLoader.cpp \
+ActionTimeline/CCActionTimelineNode.cpp \
+ActionTimeline/CCNodeReader.cpp \
 FlatBuffersSerialize.cpp \
+CCObjectExtensionData.cpp \
 WidgetCallBackHandlerProtocol.cpp
 endif
 

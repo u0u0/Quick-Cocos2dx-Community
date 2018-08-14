@@ -544,7 +544,7 @@ namespace cocostudio
         Button* button = static_cast<Button*>(node);
         auto options = (ButtonOptions*)buttonOptions;
         
-        bool scale9Enabled = options->scale9Enabled();
+        bool scale9Enabled = options->scale9Enabled() != 0;
         button->setScale9Enabled(scale9Enabled);
         
         
@@ -583,10 +583,10 @@ namespace cocostudio
             button->setTitleFontName(path);
         }
         
-        bool displaystate = options->displaystate();
+        bool displaystate = options->displaystate() != 0;
         button->setBright(displaystate);
         button->setEnabled(displaystate);
-
+        
         auto widgetReader = WidgetReader::getInstance();
         widgetReader->setPropsWithFlatBuffers(node, (Table*)options->widgetOptions());
         
@@ -601,6 +601,11 @@ namespace cocostudio
             
             Size scale9Size(options->scale9Size()->width(), options->scale9Size()->height());
             button->setContentSize(scale9Size);
+        }
+        else
+        {
+            Size contentSize(options->widgetOptions()->size()->width(), options->widgetOptions()->size()->height());
+            button->setContentSize(contentSize);
         }
     }
     
