@@ -79,7 +79,7 @@ namespace cocostudio
         return _instanceNodeReader;
     }
     
-    void NodeReader::purge()
+    void NodeReader::destroyInstance()
     {
         CC_SAFE_DELETE(_instanceNodeReader);
     }
@@ -89,17 +89,17 @@ namespace cocostudio
     {
         std::string name = "";
         long actionTag = 0;
-        Vec2 rotationSkew = Vec2::ZERO;
+        Vec2 rotationSkew;
         int zOrder = 0;
         bool visible = true;
         GLubyte alpha = 255;
         int tag = 0;
-        Vec2 position = Vec2::ZERO;
-        Vec2 scale = Vec2(1.0f, 1.0f);
-        Vec2 anchorPoint = Vec2::ZERO;
+        Vec2 position;
+        Vec2 scale(1.0f, 1.0f);
+        Vec2 anchorPoint;
         Color4B color(255, 255, 255, 255);
 
-        Vec2 size = Vec2::ZERO;
+        Vec2 size;
         bool flipX = false;
         bool flipY = false;
         bool ignoreSize = false;
@@ -247,11 +247,7 @@ namespace cocostudio
         while (child)
         {
             std::string attriname = child->Name();
-            if (attriname == "Children")
-            {
-                break;
-            }
-            else if (attriname == "Position")
+            if (attriname == "Position")
             {
                 attribute = child->FirstAttribute();
                 
@@ -474,7 +470,7 @@ namespace cocostudio
         float rotationSkewY      = options->rotationSkew()->rotationSkewY();
         float anchorx       = options->anchorPoint()->scaleX();
         float anchory       = options->anchorPoint()->scaleY();
-        int zorder		    = options->zOrder();
+        int zorder            = options->zOrder();
         int tag             = options->tag();
         int actionTag       = options->actionTag();
         bool visible        = options->visible() != 0;
@@ -527,7 +523,6 @@ namespace cocostudio
 
     void NodeReader::setLayoutComponentPropsWithFlatBuffers(cocos2d::Node* node, const flatbuffers::Table* nodeOptions)
     {
-
         auto layoutComponentTable = ((WidgetOptions*)nodeOptions)->layoutComponent();
         if (!layoutComponentTable) return;
 

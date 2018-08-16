@@ -212,7 +212,7 @@ Bone *Armature::createBone(const std::string& boneName)
 
     Bone *bone = nullptr;
 
-    if( parentName.length() != 0 )
+    if( !parentName.empty())
     {
         createBone(parentName.c_str());
         bone = Bone::create(boneName);
@@ -329,7 +329,7 @@ void Armature::updateOffsetPoint()
     // Set contentsize and Calculate anchor point.
     Rect rect = getBoundingBox();
     setContentSize(rect.size);
-    _offsetPoint = Vec2(-rect.origin.x,  -rect.origin.y);
+    _offsetPoint.set(-rect.origin.x, -rect.origin.y);
     if (rect.size.width != 0 && rect.size.height != 0)
     {
         setAnchorPoint(Vec2(_offsetPoint.x / rect.size.width, _offsetPoint.y / rect.size.height));
@@ -341,8 +341,8 @@ void Armature::setAnchorPoint(const Vec2& point)
     if( ! point.equals(_anchorPoint))
     {
         _anchorPoint = point;
-        _anchorPointInPoints = Vec2(_contentSize.width * _anchorPoint.x - _offsetPoint.x, _contentSize.height * _anchorPoint.y - _offsetPoint.y);
-        _realAnchorPointInPoints = Vec2(_contentSize.width * _anchorPoint.x, _contentSize.height * _anchorPoint.y);
+        _anchorPointInPoints.set(_contentSize.width * _anchorPoint.x - _offsetPoint.x, _contentSize.height * _anchorPoint.y - _offsetPoint.y);
+        _realAnchorPointInPoints.set(_contentSize.width * _anchorPoint.x, _contentSize.height * _anchorPoint.y);
         _transformDirty = _inverseDirty = true;
     }
 }
@@ -468,16 +468,16 @@ void Armature::visit(cocos2d::Renderer *renderer, const Mat4 &parentTransform, u
     {
         return;
     }
-    
+
     uint32_t flags = processParentFlags(parentTransform, parentFlags);
-    
+
     if (isVisitableByVisitingCamera())
     {
         // IMPORTANT:
         // To ease the migration to v3.0, we still support the Mat4 stack,
         // but it is deprecated and your code should not rely on it
         Director* director = Director::getInstance();
-        CCASSERT(nullptr != director, "Director is null when seting matrix stack");
+        CCASSERT(nullptr != director, "Director is null when setting matrix stack");
         director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
         director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
         

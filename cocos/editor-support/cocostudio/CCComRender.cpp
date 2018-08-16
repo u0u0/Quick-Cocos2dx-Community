@@ -30,7 +30,7 @@ using namespace cocos2d;
 namespace cocostudio {
 
 IMPLEMENT_CLASS_COMPONENT_INFO(ComRender)
-ComRender::ComRender(void)
+ComRender::ComRender()
 : _render(nullptr)
 {
     _name = "CCComRender";
@@ -47,7 +47,7 @@ ComRender::ComRender(cocos2d::Node *node, const char *comName)
     _name.assign(comName);
 }
 
-ComRender::~ComRender(void)
+ComRender::~ComRender()
 {
     CC_SAFE_RELEASE_NULL(_render);
 }
@@ -342,7 +342,7 @@ bool ComRender::serialize(void* r)
     return ret;
 }
 
-ComRender* ComRender::create(void)
+ComRender* ComRender::create()
 {
     ComRender * ret = new (std::nothrow) ComRender();
     if (ret != nullptr && ret->init())

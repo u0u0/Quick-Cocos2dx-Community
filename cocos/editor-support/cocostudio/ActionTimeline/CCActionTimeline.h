@@ -145,7 +145,7 @@ public:
     virtual void addAnimationInfo(const AnimationInfo& animationInfo);
     virtual void removeAnimationInfo(std::string animationName);
     virtual bool IsAnimationInfoExists(const std::string& animationName);
-    virtual AnimationInfo getAnimationInfo(const std::string& animationName);
+    virtual const AnimationInfo& getAnimationInfo(const std::string& animationName);
 
     /** Set ActionTimeline's frame event callback function */
     void setFrameEventCallFunc(std::function<void(Frame *)> listener);

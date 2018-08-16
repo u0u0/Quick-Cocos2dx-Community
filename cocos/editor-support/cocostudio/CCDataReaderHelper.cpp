@@ -160,20 +160,27 @@ void DataReaderHelper::loadData()
     while (true)
     {
         std::queue<AsyncStruct *> *pQueue = _asyncStructQueue;
-        std::unique_lock<std::mutex> lock(_asyncStructQueueMutex);
-        // deal with fade notify
-        while (pQueue->empty()) {
-            // ONLY exit while the queue is empty
-            if (need_quit) {
-                lock.unlock();
-                return;
+        _asyncStructQueueMutex.lock(); // get async struct from queue
+        if (pQueue->empty())
+        {
+            _asyncStructQueueMutex.unlock();
+            if (need_quit)
+            {
+                break;
             }
-            _sleepCondition.wait(lock);
+            else
+            {
+				std::unique_lock<std::mutex> lk(_sleepMutex);
+				_sleepCondition.wait(lk);
+                continue;
+            }
         }
-
-        pAsyncStruct = pQueue->front();
-        pQueue->pop();
-        lock.unlock();
+        else
+        {
+            pAsyncStruct = pQueue->front();
+            pQueue->pop();
+            _asyncStructQueueMutex.unlock();
+        }
 
         // generate data info
         DataInfo *pDataInfo = new (std::nothrow) DataInfo();
@@ -423,10 +430,11 @@ void DataReaderHelper::addDataFromFileAsync(const std::string& imagePath, const 
         data->configType = CocoStudio_Binary;
     }
 
+
     // add async struct into queue
-    std::unique_lock<std::mutex> lock(_asyncStructQueueMutex);
+    _asyncStructQueueMutex.lock();
     _asyncStructQueue->push(data);
-    lock.unlock();
+    _asyncStructQueueMutex.unlock();
 
     _sleepCondition.notify_one();
 }
@@ -789,7 +797,7 @@ MovementData *DataReaderHelper::decodeMovement(tinyxml2::XMLElement *movementXML
 
 
         tinyxml2::XMLElement *parentXml = nullptr;
-        if (parentName.length() != 0)
+        if (!parentName.empty())
         {
             parentXml = movementXML->FirstChildElement(BONE);
 
@@ -1308,8 +1316,13 @@ void DataReaderHelper::addDataFromJsonCache(const std::string& fileContent, Data
             {
                 std::string plistPath = filePath + ".plist";
                 std::string pngPath =  filePath + ".png";
+                if (FileUtils::getInstance()->isFileExist(dataInfo->baseFilePath + plistPath) && FileUtils::getInstance()->isFileExist(dataInfo->baseFilePath + pngPath))
+                {
+                    ValueMap dict = FileUtils::getInstance()->getValueMapFromFile(dataInfo->baseFilePath + plistPath);
+                    if (dict.find("particleLifespan") != dict.end()) continue;
 
-                ArmatureDataManager::getInstance()->addSpriteFrameFromFile((dataInfo->baseFilePath + plistPath).c_str(), (dataInfo->baseFilePath + pngPath).c_str(), dataInfo->filename.c_str());
+                    ArmatureDataManager::getInstance()->addSpriteFrameFromFile((dataInfo->baseFilePath + plistPath).c_str(), (dataInfo->baseFilePath + pngPath).c_str(), dataInfo->filename.c_str());
+                }
             }
         }
     }
@@ -1386,7 +1399,7 @@ DisplayData *DataReaderHelper::decodeBoneDisplay(const rapidjson::Value& json, D
     {
         displayData = new (std::nothrow) SpriteDisplayData();
 
-		const char *name =  DICTOOL->getStringValue_json(json, A_NAME);
+        const char *name =  DICTOOL->getStringValue_json(json, A_NAME);
         if(name != nullptr)
         {
             ((SpriteDisplayData *)displayData)->displayName = name;

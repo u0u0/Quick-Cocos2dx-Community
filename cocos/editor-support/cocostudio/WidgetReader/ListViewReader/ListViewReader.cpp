@@ -42,6 +42,11 @@ namespace cocostudio
         return instanceListViewReader;
     }
     
+    void ListViewReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceListViewReader);
+    }
+
     void ListViewReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode* cocoNode)
     {
         ScrollViewReader::setPropsFromBinary(widget, cocoLoader, cocoNode);
@@ -442,7 +447,7 @@ namespace cocostudio
         auto f_innerSize = options->innerSize();
         Size innerSize(f_innerSize->width(), f_innerSize->height());
         listView->setInnerContainerSize(innerSize);
-        bool bounceEnabled = options->bounceEnabled();
+        bool bounceEnabled = options->bounceEnabled() != 0;
         listView->setBounceEnabled(bounceEnabled);
         
         std::string directionType = options->directionType()->c_str();

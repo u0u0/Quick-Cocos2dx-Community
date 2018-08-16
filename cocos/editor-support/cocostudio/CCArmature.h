@@ -148,7 +148,6 @@ public:
      *  @lua NA
      */
     inline const cocos2d::BlendFunc &getBlendFunc(void) const override{ return _blendFunc; }
-	
 
     /**
      * Set contentsize and Calculate anchor point.

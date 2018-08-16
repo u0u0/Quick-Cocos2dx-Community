@@ -320,7 +320,7 @@ bool ActionTimeline::IsAnimationInfoExists(const std::string& animationName)
     return _animationInfos.find(animationName) != _animationInfos.end();
 }
 
-AnimationInfo ActionTimeline::getAnimationInfo(const std::string &animationName)
+const AnimationInfo& ActionTimeline::getAnimationInfo(const std::string &animationName)
 {
     return _animationInfos.find(animationName)->second;
 }

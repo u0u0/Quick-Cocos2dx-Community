@@ -45,6 +45,11 @@ namespace cocostudio
         return instanceCheckBoxReader;
     }
     
+    void CheckBoxReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceCheckBoxReader);
+    }
+    
     void CheckBoxReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode *cocoNode)
     {
         
@@ -458,7 +463,7 @@ namespace cocostudio
         std::string frontCrossDisabledFileName = frontCrossDisabledDic->path()->c_str();
         checkBox->loadTextureFrontCrossDisabled(frontCrossDisabledFileName, (Widget::TextureResType)frontCrossDisabledType);
         
-        bool selectedstate = options->selectedState();
+        bool selectedstate = options->selectedState() != 0;
         checkBox->setSelected(selectedstate);
         
         bool displaystate = options->displaystate() != 0;
