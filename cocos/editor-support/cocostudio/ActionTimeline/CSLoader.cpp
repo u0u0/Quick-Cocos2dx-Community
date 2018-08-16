@@ -1289,7 +1289,7 @@ Node* CSLoader::nodeWithFlatBuffersForSimulator(const flatbuffers::NodeTree *nod
         {
             action->setTimeSpeed(projectNodeOptions->innerActionSpeed());
             node->runAction(action);
-            action->gotoFrameAndPause(0);
+            action->gotoFrameAndPlay(0, false);
         }
     }
     else if (classname == "SimpleAudio")
