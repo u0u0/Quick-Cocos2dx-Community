@@ -1083,10 +1083,7 @@ bool CSLoader::bindCallback(const std::string &callbackName,
         }
     }
     
-    CCLOG("callBackName %s cannot be found", callbackName.c_str());
-    
     return false;
-    
 }
 
 bool CSLoader::isWidget(const std::string &type)
