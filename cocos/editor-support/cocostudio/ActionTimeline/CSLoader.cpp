@@ -954,7 +954,7 @@ Node* CSLoader::nodeWithFlatBuffers(const flatbuffers::NodeTree *nodetree, const
             {
                 action->setTimeSpeed(projectNodeOptions->innerActionSpeed());
                 node->runAction(action);
-                action->gotoFrameAndPause(0);
+                action->gotoFrameAndPlay(0, false);
             }
         }
         else if (classname == "SimpleAudio")
