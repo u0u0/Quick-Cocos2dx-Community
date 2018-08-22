@@ -676,6 +676,52 @@ tolua_lerror:
     return 0;
 }
 
+static int lua_cocos2dx_spine_SkeletonAnimation_setFlippedX(lua_State* tolua_S)
+{
+    spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_setFlippedX'", nullptr);
+        return 0;
+    }
+#endif
+    
+    int argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        int arg0 = lua_toboolean(tolua_S, 2);
+        cobj->setFlippedX(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "setFlippedX has wrong number of arguments: %d, was expecting %d \n", argc, 1);
+    return 0;
+}
+
+static int lua_cocos2dx_spine_SkeletonAnimation_setFlippedY(lua_State* tolua_S)
+{
+    spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_setFlippedY'", nullptr);
+        return 0;
+    }
+#endif
+    
+    int argc = lua_gettop(tolua_S)-1;
+    if (argc == 1)
+    {
+        int arg0 = lua_toboolean(tolua_S, 2);
+        cobj->setFlippedY(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "setFlippedY has wrong number of arguments: %d, was expecting %d \n", argc, 1);
+    return 0;
+}
+
 static int lua_cocos2dx_spine_SkeletonAnimation_findAnimation(lua_State* tolua_S)
 {
     spine::SkeletonAnimation* cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
@@ -749,6 +795,8 @@ static void extendCCSkeletonAnimation(lua_State* L)
         tolua_function(L, "setAnimation", lua_cocos2dx_spine_SkeletonAnimation_setAnimation);
         tolua_function(L, "setAttachment", lua_cocos2dx_spine_SkeletonAnimation_setAttachment);
         tolua_function(L, "findBone", lua_cocos2dx_spine_SkeletonAnimation_findBone);
+        tolua_function(L, "setFlippedX", lua_cocos2dx_spine_SkeletonAnimation_setFlippedX);
+        tolua_function(L, "setFlippedY", lua_cocos2dx_spine_SkeletonAnimation_setFlippedY);
         tolua_function(L, "findAnimation", lua_cocos2dx_spine_SkeletonAnimation_findAnimation);
         tolua_function(L, "getBoundingBox", lua_cocos2dx_spine_SkeletonAnimation_getBoundingBox);
     }

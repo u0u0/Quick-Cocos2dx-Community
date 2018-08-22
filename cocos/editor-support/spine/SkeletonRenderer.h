@@ -107,6 +107,9 @@ public:
 	/* Sets the range of slots that should be rendered. Use -1, -1 to clear the range */
 	void setSlotsRange(int startSlotIndex, int endSlotIndex);
 
+    void setFlippedX(int flippedX);
+    void setFlippedY(int flippedY);
+
     // --- BlendProtocol
 	virtual void setBlendFunc (const cocos2d::BlendFunc& blendFunc)override;
 	virtual const cocos2d::BlendFunc& getBlendFunc () const override;
