@@ -656,6 +656,12 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findBone(lua_State* tolua_S)
         lua_pushstring(tolua_S, "scaleY");
         lua_pushnumber(tolua_S, bone->scaleY);
         lua_rawset(tolua_S, -3);    /* bone.scaleY */
+        lua_pushstring(tolua_S, "shearX");
+        lua_pushnumber(tolua_S, bone->shearX);
+        lua_rawset(tolua_S, -3);    /* bone.shearX */
+        lua_pushstring(tolua_S, "shearY");
+        lua_pushnumber(tolua_S, bone->shearY);
+        lua_rawset(tolua_S, -3);    /* bone.shearY */
         lua_pushstring(tolua_S, "worldX");
         lua_pushnumber(tolua_S, bone->worldX);
         lua_rawset(tolua_S, -3);    /* bone.worldX */
@@ -671,6 +677,116 @@ static int lua_cocos2dx_spine_SkeletonAnimation_findBone(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_findBone'.",&tolua_err);
+#endif
+    
+    return 0;
+}
+
+static int lua_cocos2dx_spine_SkeletonAnimation_updateBone(lua_State* tolua_S)
+{
+    int argc = 0;
+    spine::SkeletonAnimation* cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(tolua_S,1,"sp.SkeletonAnimation",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (spine::SkeletonAnimation*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_spine_SkeletonAnimation_updateBone'", nullptr);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2)
+    {
+        const char *arg0 = lua_tostring(tolua_S, 2);
+        if(!arg0) {
+            tolua_error(tolua_S, "sp.SkeletonAnimation:updateBone arg 1 must string", nullptr);
+            return 0;
+        }
+        
+        spBone *bone = cobj->findBone(arg0);
+#if COCOS2D_DEBUG >= 1
+        if (NULL == bone) {
+            tolua_error(tolua_S,"sp.SkeletonAnimation:updateBone can not find bone", nullptr);
+            return 0;
+        }
+#endif
+
+        if(!lua_istable(tolua_S, 3)) {
+            tolua_error(tolua_S, "sp.SkeletonAnimation:updateBone arg 1 must table", nullptr);
+            return 0;
+        }
+        // try update x
+        lua_pushstring(tolua_S, "x");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->x = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+        
+        // try update y
+        lua_pushstring(tolua_S, "y");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->y = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+        
+        // try update rotation
+        lua_pushstring(tolua_S, "rotation");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->rotation = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+        
+        // try update scaleX
+        lua_pushstring(tolua_S, "scaleX");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->scaleX = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+        
+        // try update scaleY
+        lua_pushstring(tolua_S, "scaleY");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->scaleY = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+        
+        // try update shearX
+        lua_pushstring(tolua_S, "shearX");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->shearX = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+        
+        // try update shearY
+        lua_pushstring(tolua_S, "shearY");
+        lua_rawget(tolua_S, 3);
+        if (!lua_isnil(tolua_S, -1)) {
+            bone->shearY = lua_tonumber(tolua_S, -1);
+        }
+        lua_pop(tolua_S, 1);
+
+        return 0;
+    }
+    luaL_error(tolua_S, "updateBone has wrong number of arguments: %d, was expecting %d \n", argc, 2);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_spine_SkeletonAnimation_updateBone'.",&tolua_err);
 #endif
     
     return 0;
@@ -795,6 +911,7 @@ static void extendCCSkeletonAnimation(lua_State* L)
         tolua_function(L, "setAnimation", lua_cocos2dx_spine_SkeletonAnimation_setAnimation);
         tolua_function(L, "setAttachment", lua_cocos2dx_spine_SkeletonAnimation_setAttachment);
         tolua_function(L, "findBone", lua_cocos2dx_spine_SkeletonAnimation_findBone);
+        tolua_function(L, "updateBone", lua_cocos2dx_spine_SkeletonAnimation_updateBone);
         tolua_function(L, "setFlippedX", lua_cocos2dx_spine_SkeletonAnimation_setFlippedX);
         tolua_function(L, "setFlippedY", lua_cocos2dx_spine_SkeletonAnimation_setFlippedY);
         tolua_function(L, "findAnimation", lua_cocos2dx_spine_SkeletonAnimation_findAnimation);
