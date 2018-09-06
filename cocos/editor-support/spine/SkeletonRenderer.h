@@ -69,6 +69,15 @@ public:
 	void setDebugMeshesEnabled(bool enabled);
 	bool getDebugMeshesEnabled() const;
 
+	void setDebugPointEnabled(bool enabled);
+	bool getDebugPointEnabled() const;
+
+	void setDebugBoundingBoxEnabled(bool enabled);
+	bool getDebugBoundingBoxEnabled() const;
+
+	void setDebugPathEnabled(bool enabled);
+	bool getDebugPathEnabled() const;
+
 	// --- Convenience methods for common Skeleton_* functions.
 	void updateWorldTransform ();
 
@@ -155,6 +164,9 @@ protected:
 	bool _debugSlots;
 	bool _debugBones;
 	bool _debugMeshes;
+	bool _debugPoint;
+	bool _debugBoundingBox;
+	bool _debugPath;
 	spSkeletonClipping* _clipper;
 	spVertexEffect* _effect;
 	

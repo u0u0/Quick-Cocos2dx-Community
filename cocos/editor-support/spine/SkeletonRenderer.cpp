@@ -120,26 +120,26 @@ void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsS
 }
 
 SkeletonRenderer::SkeletonRenderer ()
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _debugPoint(false), _debugBoundingBox(false), _debugPath(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
 }
 	
 SkeletonRenderer::SkeletonRenderer(spSkeleton* skeleton, bool ownsSkeleton, bool ownsSkeletonData)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _debugPoint(false), _debugBoundingBox(false), _debugPath(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
 	initWithSkeleton(skeleton, ownsSkeleton, ownsSkeletonData);
 }
 
 SkeletonRenderer::SkeletonRenderer (spSkeletonData *skeletonData, bool ownsSkeletonData)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _debugPoint(false), _debugBoundingBox(false), _debugPath(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
 	initWithData(skeletonData, ownsSkeletonData);
 }
 
 SkeletonRenderer::SkeletonRenderer (const std::string& skeletonDataFile, spAtlas* atlas, float scale)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _debugPoint(false), _debugBoundingBox(false), _debugPath(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
 	initWithJsonFile(skeletonDataFile, atlas, scale);
 }
 
 SkeletonRenderer::SkeletonRenderer (const std::string& skeletonDataFile, const std::string& atlasFile, float scale)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _debugPoint(false), _debugBoundingBox(false), _debugPath(false), _timeScale(1), _effect(nullptr), _startSlotIndex(-1), _endSlotIndex(-1) {
 	initWithJsonFile(skeletonDataFile, atlasFile, scale);
 }
 
@@ -632,7 +632,7 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 	
 	if (_effect) _effect->end(_effect);
 
-	if (_debugSlots || _debugBones || _debugMeshes) {
+	if (_debugSlots || _debugBones || _debugMeshes || _debugPoint || _debugBoundingBox || _debugPath) {
         drawDebug(renderer, transform, transformFlags);
 	}
 }
@@ -646,11 +646,8 @@ void SkeletonRenderer::drawDebug (Renderer* renderer, const Mat4 &transform, uin
     DrawNode* drawNode = DrawNode::create();
     
     if (_debugSlots) {
-        // Slots.
-        // DrawPrimitives::setDrawColor4B(0, 0, 255, 255);
         glLineWidth(1);
         Vec2 points[4];
-        V3F_C4B_T2F_Quad quad;
         for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
             spSlot* slot = _skeleton->drawOrder[i];
             if (!slot->attachment || slot->attachment->type != SP_ATTACHMENT_REGION) continue;
@@ -663,6 +660,26 @@ void SkeletonRenderer::drawDebug (Renderer* renderer, const Mat4 &transform, uin
             drawNode->drawPoly(points, 4, true, Color4F::BLUE);
         }
     }
+    
+    if (_debugBoundingBox) {
+        glLineWidth(1);
+        for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
+            spSlot* slot = _skeleton->drawOrder[i];
+            if (!slot->attachment || slot->attachment->type != SP_ATTACHMENT_BOUNDING_BOX) continue;
+            spBoundingBoxAttachment* attachment = (spBoundingBoxAttachment*)slot->attachment;
+            ensureWorldVerticesCapacity(attachment->super.worldVerticesLength);
+            spVertexAttachment_computeWorldVertices(SUPER(attachment), slot, 0, attachment->super.worldVerticesLength, worldVertices, 0, 2);
+            const int length = attachment->super.worldVerticesLength;
+            Vec2* points = (Vec2*)malloc(sizeof(Vec2) * length);
+            for (int index = 0; index < length; index++ ){
+                int worldVerticesIndex = index << 1;
+                points[index] = Vec2(worldVertices[worldVerticesIndex], worldVertices[worldVerticesIndex + 1]);
+            }
+            drawNode->drawPoly(points, length >> 1, true, Color4F::GREEN);
+            CC_SAFE_FREE(points);
+        }
+    }
+    
     if (_debugBones) {
         // Bone lengths.
         glLineWidth(2);
@@ -680,27 +697,56 @@ void SkeletonRenderer::drawDebug (Renderer* renderer, const Mat4 &transform, uin
             if (i == 0) color = Color4F::GREEN;
         }
     }
-	
-	if (_debugMeshes) {
-		// Meshes.
-		glLineWidth(1);
-		for (int i = 0, n = _skeleton->slotsCount; i < n; ++i) {
-			spSlot* slot = _skeleton->drawOrder[i];
-			if (!slot->attachment || slot->attachment->type != SP_ATTACHMENT_MESH) continue;
-			spMeshAttachment* attachment = (spMeshAttachment*)slot->attachment;
-			ensureWorldVerticesCapacity(attachment->super.worldVerticesLength);
-			spVertexAttachment_computeWorldVertices(SUPER(attachment), slot, 0, attachment->super.worldVerticesLength, worldVertices, 0, 2);
-			for (int ii = 0; ii < attachment->trianglesCount;) {
-				Vec2 v1(worldVertices + (attachment->triangles[ii++] * 2));
-				Vec2 v2(worldVertices + (attachment->triangles[ii++] * 2));
-				Vec2 v3(worldVertices + (attachment->triangles[ii++] * 2));
-				drawNode->drawLine(v1, v2, Color4F::YELLOW);
-				drawNode->drawLine(v2, v3, Color4F::YELLOW);
-				drawNode->drawLine(v3, v1, Color4F::YELLOW);
-			}
-		}
-		
-	}
+    
+    if (_debugPoint) {
+        glLineWidth(1);
+        float x, y;
+        for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
+            spSlot* slot = _skeleton->drawOrder[i];
+            if (!slot->attachment || slot->attachment->type != SP_ATTACHMENT_POINT) continue;
+            spPointAttachment* attachment = (spPointAttachment*)slot->attachment;
+            spPointAttachment_computeWorldPosition(attachment, slot->bone, &x, &y);
+            drawNode->drawPoint(Vec2(x, y), 1, Color4F(attachment->color.r, attachment->color.g, attachment->color.b, attachment->color.a));
+        }
+    }
+    
+    if (_debugPath) {
+        glLineWidth(1);
+        for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
+            spSlot* slot = _skeleton->drawOrder[i];
+            if (!slot->attachment || slot->attachment->type != SP_ATTACHMENT_PATH) continue;
+            spPathAttachment* attachment = (spPathAttachment*)slot->attachment;
+            ensureWorldVerticesCapacity(attachment->super.worldVerticesLength);
+            spVertexAttachment_computeWorldVertices(SUPER(attachment), slot, 0, attachment->super.worldVerticesLength, worldVertices, 0, 2);
+            const int length = attachment->super.worldVerticesLength;
+            Vec2* points = (Vec2*)malloc(sizeof(Vec2) * length);
+            for (int index = 0; index < length; index++) {
+                int worldVerticesIndex = index << 1;
+                points[index] = Vec2(worldVertices[worldVerticesIndex], worldVertices[worldVerticesIndex + 1]);
+            }
+            drawNode->drawPoly(points, length >> 1, attachment->closed ? true : false, Color4F::ORANGE);
+            CC_SAFE_FREE(points);
+        }
+    }
+    
+    if (_debugMeshes) {
+        glLineWidth(1);
+        for (int i = 0, n = _skeleton->slotsCount; i < n; ++i) {
+            spSlot* slot = _skeleton->drawOrder[i];
+            if (!slot->attachment || slot->attachment->type != SP_ATTACHMENT_MESH) continue;
+            spMeshAttachment* attachment = (spMeshAttachment*)slot->attachment;
+            ensureWorldVerticesCapacity(attachment->super.worldVerticesLength);
+            spVertexAttachment_computeWorldVertices(SUPER(attachment), slot, 0, attachment->super.worldVerticesLength, worldVertices, 0, 2);
+            for (int ii = 0; ii < attachment->trianglesCount;) {
+                Vec2 v1(worldVertices + (attachment->triangles[ii++] * 2));
+                Vec2 v2(worldVertices + (attachment->triangles[ii++] * 2));
+                Vec2 v3(worldVertices + (attachment->triangles[ii++] * 2));
+                drawNode->drawLine(v1, v2, Color4F::YELLOW);
+                drawNode->drawLine(v2, v3, Color4F::YELLOW);
+                drawNode->drawLine(v3, v1, Color4F::YELLOW);
+            }
+        }
+    }
     
     drawNode->draw(renderer, transform, transformFlags);
     director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
@@ -779,6 +825,7 @@ bool SkeletonRenderer::setSkin (const char* skinName) {
 spAttachment* SkeletonRenderer::getAttachment (const std::string& slotName, const std::string& attachmentName) const {
 	return spSkeleton_getAttachmentForSlotName(_skeleton, slotName.c_str(), attachmentName.c_str());
 }
+
 bool SkeletonRenderer::setAttachment (const std::string& slotName, const std::string& attachmentName) {
 	return spSkeleton_setAttachment(_skeleton, slotName.c_str(), attachmentName.empty() ? 0 : attachmentName.c_str()) ? true : false;
 }
@@ -843,6 +890,30 @@ void SkeletonRenderer::setDebugMeshesEnabled (bool enabled) {
 }
 bool SkeletonRenderer::getDebugMeshesEnabled () const {
 	return _debugMeshes;
+}
+
+void SkeletonRenderer::setDebugPointEnabled(bool enabled) {
+	_debugPoint = enabled;
+}
+
+bool SkeletonRenderer::getDebugPointEnabled() const {
+	return _debugPoint;
+}
+
+void SkeletonRenderer::setDebugBoundingBoxEnabled(bool enabled) {
+	_debugBoundingBox = enabled;
+}
+
+bool SkeletonRenderer::getDebugBoundingBoxEnabled() const {
+	return _debugBoundingBox;
+}
+
+void SkeletonRenderer::setDebugPathEnabled(bool enabled) {
+	_debugPath = enabled;
+}
+
+bool SkeletonRenderer::getDebugPathEnabled() const {
+	return _debugPath;
 }
 
 void SkeletonRenderer::onEnter () {
