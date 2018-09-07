@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="QuickSample" Version="2.0.6.0" Type="CocosStudio" />
+  <PropertyGroup Name="QuickSample" Version="3.10.0.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -19,8 +19,8 @@
             <Image Name="BS13.png" />
             <Image Name="BS14.png" />
           </Folder>
-          <Project Name="NodeCell.csd" />
-          <Project Name="NodeFullScreen.csd" />
+          <Project Name="NodeCell.csd" Type="Node" />
+          <Project Name="NodeFullScreen.csd" Type="Node" />
         </Folder>
       </RootFolder>
     </Group>
