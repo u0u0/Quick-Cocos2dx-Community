@@ -1,3 +1,45 @@
+Quick-Cocos2dx-Community v3.7.3 Release
+
+[新增]	创建新工程python脚本中添加 --deep-copy 选项，可导出cocos2d源码至新工程中。（感谢 guolihui112@gmail.com）。
+[新增]	iOS 模拟器中默认开启 -pagezero_size 10000 -image_base 100000000 链接选项。（感谢 guolihui112@gmail.com）
+[新增]	Spine runtime 更新到 3.6。
+[新增]	Spine Lua binding 新增updateBone 、getAttachment、setDebugMeshesEnabled、setDebugPointEnabled、setDebugBoundingBoxEnabled、setDebugPathEnabled。(感谢 马超)
+[新增]	CocosStudio 支持到3.10 （感谢 1066535716@qq.com ）。
+
+[修正]	http 链接超时和数据超时分开。setTimeout只处理数据超时。
+[修正]	tmx中的tileset image，处理为相对路径，热更友好。
+[修正]	OpanAL audio 初始化异常处理。
+[修正]	iOS mac使用和win32，android一致的plist读写接口，确保加密的plist可以正确被解密。
+[修正]	Lable % 无法正确被统计长度进行自动换行。
+[修正]	ActionTimeline 正确停在最后一帧。
+[修正]	NodeEx.lua 中的 Node:unregisterScriptHandler() 修正。
+[修正]	fix display.newTTFLabel({text = “x”, size = 0}), crash java code.
+
+Quick-Cocos2dx-Community v3.7.2 release
+
+[改进]	editbox 实现更新为 cocos2d-x 3.15.1 版本的实现。
+[改进]	css的gotoFrameAndPlay支持倒放动画，例如gotoFrameAndPlay(100, 50, false)。
+[改进]	动作Repeat的update同步到3.15.
+[改进]	cc.Lable添加getStringOfLine()，用户获取自动换行后的某一行字符串。
+[改进]	notificationNode支持使用动作。
+[改进]	iPhoneX 适配模版更新。使用限制OpenGL viewrect的方式来避免Lua代码修改。
+[改进]	新加display.newRoundedRect，感谢Shine Wu提供。
+[改进]	删除setPopupNotify 和 isPopupNotify。注意修改项目的main.lua，去掉对应行。
+[改进]	Android Studio 模版工程改进。
+[改进]	build_native.py改进，release模式不拷贝src文件夹。（IMPROTANT）
+[改进]	EncodeRes.py现在加密xml和plist文件。
+[改进]	RichText 默认透明穿透。
+
+[修正]	Xcode9文件夹红名修正。
+[修正]	UILayout正确获取嵌套下的父节点裁剪区域。
+[修正]	ccui.Image reloadTexture不清空9枚设置。
+[修正]	ccui.Button图标状态代码修正。
+[修正]	string.utf8len 避免错误的utf8流导致的死循环。
+[修正]	iOS真机CODESIGNING, Code 0x2错误修正。（IMPORTANT，替换luajit.a库）
+[修正]	luaoc 类型判断改进。
+[修正]	ccui.Widget的propagateTouchEvent和isClippingParentContainsPoint改进，不再被非widget节点打断导致判断失效。
+[修正]	修正华为手机输入法单行输入不响应换行键的bug。
+
 Quick-Cocos2dx-Community v3.7.1 release
 
 [新增]	setup.sh 适配zsh，csh，运行完需重启terminal。
