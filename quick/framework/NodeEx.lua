@@ -330,15 +330,13 @@ function Node:setTouchSwallowEnabled(enable)
 end
 
 function Node:addNodeEventListener(evt, hdl)
-    if not self._LuaListeners then
-        self._LuaListeners = {}
-		if evt == c.NODE_EVENT then
-			self:registerScriptHandler(function(evt)
-				-- call listener
-				self._LuaListeners[c.NODE_EVENT]{name = evt}
-			end)
-		end
-    end
+	self._LuaListeners = self._LuaListeners or {}
+	if evt == c.NODE_EVENT then
+		self:registerScriptHandler(function(evt)
+			-- call listener
+			self._LuaListeners[c.NODE_EVENT]{name = evt}
+		end)
+	end
 
 	self._LuaListeners[evt] = hdl
 end
