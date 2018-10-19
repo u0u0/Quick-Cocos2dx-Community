@@ -219,6 +219,9 @@
     <ClCompile Include="..\manual\audio\lua_audio_manual.cpp">
       <Filter>manual\audio</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\external\lua\luasocket\asynconnect.cpp">
+      <Filter>luasocket</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\auto\lua_cocos2dx_tmx_auto.hpp">

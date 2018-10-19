@@ -26,6 +26,7 @@ typedef struct t_tcp_ {
     t_buffer buf;
     t_timeout tm;
     int family;
+    int asynConnStat;
 } t_tcp;
 
 typedef t_tcp *p_tcp;

@@ -68,6 +68,7 @@ LOCAL_SRC_FILES += ../manual/audio/lua_audio_manual.cpp
 LOCAL_SRC_FILES += ../manual/network/lua_cocos2dx_network_manual.cpp \
                    ../manual/network/lua_extensions.c \
                    ../manual/network/Lua_web_socket.cpp \
+                   ../../../../external/lua/luasocket/asynconnect.cpp \
                    ../../../../external/lua/luasocket/auxiliar.c \
                    ../../../../external/lua/luasocket/buffer.c \
                    ../../../../external/lua/luasocket/except.c \
