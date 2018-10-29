@@ -225,20 +225,8 @@ bool HTTPRequest::start(void)
     curl_easy_setopt(m_curl, CURLOPT_PROGRESSDATA, this);
     curl_easy_setopt(m_curl, CURLOPT_COOKIEFILE, "");
 
-#ifdef _WINDOWS_
-
-    CreateThread(NULL,          // default security attributes
-                 0,             // use default stack size
-                 requestCURL,   // thread function name
-                 this,          // argument to thread function
-                 0,             // use default creation flags
-                 NULL);
-
-#else
-    pthread_create(&m_thread, NULL, requestCURL, this);
-    pthread_detach(m_thread);
-#endif
-
+    std::thread th(requestCURL, this);
+    th.detach();//exit from main thread, auto exit
     
     Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
     // CCLOG("HTTPRequest[0x%04x] - request start", s_id);

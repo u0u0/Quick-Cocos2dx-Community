@@ -10,12 +10,6 @@
 #include "CCLuaEngine.h"
 #endif
 
-#ifdef _WINDOWS_
-#include <Windows.h>
-#else
-#include <pthread.h>
-#endif
-
 #include <stdio.h>
 #include <vector>
 #include <map>
