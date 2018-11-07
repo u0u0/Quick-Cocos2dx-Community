@@ -351,6 +351,7 @@ namespace ui {
          */
         virtual bool isFlippedY()const;
         virtual void setCameraMask(unsigned short mask, bool applyChildren = true) override;
+		virtual void setGLProgramState(GLProgramState *glProgramState) override;
         //override the setScale function of Node
         virtual void setScaleX(float scaleX) override;
         virtual void setScaleY(float scaleY) override;
