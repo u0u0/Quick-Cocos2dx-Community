@@ -943,7 +943,7 @@ Node* CSLoader::nodeWithFlatBuffers(const flatbuffers::NodeTree *nodetree, const
             {
                 Data buf = FileUtils::getInstance()->getDataFromFile(filePath);
                 node = createNode(buf, callback);
-                action = timeline::ActionTimelineCache::getInstance()->loadAnimationWithDataBuffer(buf, filePath);
+                action = timeline::ActionTimelineCache::getInstance()->createActionWithFlatBuffersFile(filePath);
             }
             else
             {
