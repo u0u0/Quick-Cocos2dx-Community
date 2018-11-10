@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A45CE0721970F1D001AF806 /* Icon-167.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A45CE0621970F1D001AF806 /* Icon-167.png */; };
+		0A45CE0921970F28001AF806 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 0A45CE0821970F28001AF806 /* iTunesArtwork */; };
 		0A532A421E62F3D8004E2B32 /* lsproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A3E1E62F3D8004E2B32 /* lsproto.c */; };
 		0A532A431E62F3D8004E2B32 /* lsproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A3E1E62F3D8004E2B32 /* lsproto.c */; };
 		0A532A441E62F3D8004E2B32 /* sproto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A532A401E62F3D8004E2B32 /* sproto.c */; };
@@ -203,6 +205,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A45CE0621970F1D001AF806 /* Icon-167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-167.png"; sourceTree = "<group>"; };
+		0A45CE0821970F28001AF806 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		0A532A3E1E62F3D8004E2B32 /* lsproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lsproto.c; path = "quick/lib/quick-src/lua_extensions/sproto/lsproto.c"; sourceTree = QUICK_V3_ROOT; };
 		0A532A3F1E62F3D8004E2B32 /* msvcint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = msvcint.h; path = "quick/lib/quick-src/lua_extensions/sproto/msvcint.h"; sourceTree = QUICK_V3_ROOT; };
 		0A532A401E62F3D8004E2B32 /* sproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sproto.c; path = "quick/lib/quick-src/lua_extensions/sproto/sproto.c"; sourceTree = QUICK_V3_ROOT; };
@@ -471,6 +475,7 @@
 				5023810817EBBCAC00990C9B /* AppController.mm */,
 				5091734A17ECE18300D62437 /* Icons */,
 				5023811317EBBCAC00990C9B /* Info.plist */,
+				0A45CE0821970F28001AF806 /* iTunesArtwork */,
 				5023811417EBBCAC00990C9B /* main.m */,
 				5023811517EBBCAC00990C9B /* Prefix.pch */,
 				5023811617EBBCAC00990C9B /* RootViewController.h */,
@@ -513,6 +518,7 @@
 				5023811017EBBCAC00990C9B /* Icon-57.png */,
 				5023811117EBBCAC00990C9B /* Icon-72.png */,
 				5023811217EBBCAC00990C9B /* Icon-76.png */,
+				0A45CE0621970F1D001AF806 /* Icon-167.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -981,6 +987,7 @@
 				15A8A4491834C64F00142BE0 /* Icon-114.png in Resources */,
 				5023811D17EBBCAC00990C9B /* Icon-120.png in Resources */,
 				5091733B17ECE17A00D62437 /* Icon-100.png in Resources */,
+				0A45CE0721970F1D001AF806 /* Icon-167.png in Resources */,
 				5091733617ECE17A00D62437 /* Icon-29.png in Resources */,
 				5091733917ECE17A00D62437 /* Icon-58.png in Resources */,
 				5023811F17EBBCAC00990C9B /* Icon-152.png in Resources */,
@@ -990,6 +997,7 @@
 				0AF3802C1FE66404002A4A3B /* LaunchScreen.storyboard in Resources */,
 				5091733A17ECE17A00D62437 /* Icon-80.png in Resources */,
 				5091733717ECE17A00D62437 /* Icon-40.png in Resources */,
+				0A45CE0921970F28001AF806 /* iTunesArtwork in Resources */,
 				5023811E17EBBCAC00990C9B /* Icon-144.png in Resources */,
 				C03781BB18BF655400FE4F13 /* src in Resources */,
 				5091733817ECE17A00D62437 /* Icon-50.png in Resources */,
