@@ -81,3 +81,5 @@ project.properties
 *.iml
 quick/player/win32/
 quick/player/player3.app
+quick/player/proj.mac/player3.xcodeproj/project.xcworkspace
+quick/template/frameworks/runtime-src/proj.ios_mac/__PROJECT_PACKAGE_LAST_NAME__.xcodeproj/project.xcworkspace
