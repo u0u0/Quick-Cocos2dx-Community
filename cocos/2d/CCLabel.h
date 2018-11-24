@@ -268,6 +268,7 @@ public:
     virtual void visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags) override;
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
     virtual void setCameraMask(unsigned short mask, bool applyChildren = true) override;
+    virtual void setGlobalZOrder(float globalZOrder) override;
 
 CC_CONSTRUCTOR_ACCESS:
     /**

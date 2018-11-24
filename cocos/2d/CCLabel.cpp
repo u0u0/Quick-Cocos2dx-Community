@@ -1009,7 +1009,17 @@ void Label::drawTextSprite(Renderer *renderer, uint32_t parentFlags)
     
     if (_shadowEnabled && _shadowNode == nullptr)
     {
-        _shadowNode = Sprite::createWithTexture(_textSprite->getTexture());
+        FontDefinition shadowFontDefinition = _fontDefinition;
+        shadowFontDefinition._fontFillColor.r = _shadowColor.r;
+        shadowFontDefinition._fontFillColor.g = _shadowColor.g;
+        shadowFontDefinition._fontFillColor.b = _shadowColor.b;
+        shadowFontDefinition._stroke._strokeColor = shadowFontDefinition._fontFillColor;
+        
+        auto texture = new (std::nothrow) Texture2D;
+        texture->initWithString(_originalUTF8String.c_str(), shadowFontDefinition);
+        _shadowNode = Sprite::createWithTexture(texture);
+        texture->release();
+        
         if (_shadowNode)
         {
             if (_blendFuncDirty)
@@ -1019,10 +1029,10 @@ void Label::drawTextSprite(Renderer *renderer, uint32_t parentFlags)
             _shadowNode->setCameraMask(getCameraMask());
             _shadowNode->setGlobalZOrder(getGlobalZOrder());
             _shadowNode->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-            _shadowNode->setColor(_shadowColor);
-            _shadowNode->setOpacity(_shadowOpacity * _displayedOpacity);
+            _shadowNode->updateDisplayedColor(_shadowColor);
+            _shadowNode->updateDisplayedOpacity(_shadowOpacity * _displayedOpacity);
             _shadowNode->setPosition(_shadowOffset.width, _shadowOffset.height);
-            Node::addChild(_shadowNode,0,Node::INVALID_TAG);
+            Node::addChild(_shadowNode, 0, Node::INVALID_TAG);
         }
     }
     if (_shadowNode)
@@ -1290,18 +1300,16 @@ void Label::setOpacityModifyRGB(bool isOpacityModifyRGB)
 
 void Label::updateDisplayedColor(const Color3B& parentColor)
 {
-    _displayedColor.r = _realColor.r * parentColor.r/255.0;
-    _displayedColor.g = _realColor.g * parentColor.g/255.0;
-    _displayedColor.b = _realColor.b * parentColor.b/255.0;
-    updateColor();
-
+    Node::updateDisplayedColor(parentColor);
+    
     if (_textSprite)
     {
         _textSprite->updateDisplayedColor(_displayedColor);
-        if (_shadowNode)
-        {
-            _shadowNode->updateDisplayedColor(_displayedColor);
-        }
+    }
+    
+    if (_shadowNode)
+    {
+        _shadowNode->updateDisplayedColor(_displayedColor);
     }
 }
 
@@ -1404,6 +1412,19 @@ void Label::setBlendFunc(const BlendFunc &blendFunc)
         if (_shadowNode)
         {
             _shadowNode->setBlendFunc(blendFunc);
+        }
+    }
+}
+
+void Label::setGlobalZOrder(float globalZOrder)
+{
+    Node::setGlobalZOrder(globalZOrder);
+    if (_textSprite)
+    {
+        _textSprite->setGlobalZOrder(globalZOrder);
+        if (_shadowNode)
+        {
+            _shadowNode->setGlobalZOrder(globalZOrder);
         }
     }
 }
