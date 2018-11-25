@@ -320,8 +320,6 @@ protected:
 
     virtual void updateShaderProgram();
 
-    void drawShadowWithoutBlur();
-
     void drawTextSprite(Renderer *renderer, uint32_t parentFlags);
 
     void createSpriteWithFontDefinition();
@@ -389,6 +387,7 @@ protected:
     Size    _shadowOffset;
     int     _shadowBlurRadius;
     Mat4  _shadowTransform;
+    Color4F _shadowColorF;
     Color3B _shadowColor;
     float   _shadowOpacity;
     Sprite*   _shadowNode;
