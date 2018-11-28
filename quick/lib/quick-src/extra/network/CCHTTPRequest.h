@@ -10,12 +10,6 @@
 #include "CCLuaEngine.h"
 #endif
 
-#ifdef _WINDOWS_
-#include <Windows.h>
-#else
-#include <pthread.h>
-#endif
-
 #include <stdio.h>
 #include <vector>
 #include <map>
@@ -176,7 +170,10 @@ private:
     bool initWithUrl(const char *url, int method);
 
     enum {
-        DEFAULT_TIMEOUT = 10, // 10 seconds
+        // how long to wait to make a successful connection to the server before starting to buffer the output
+        DEFAULT_CONNECTTIMEOUT = 10, // seconds
+        // how long to wait to receive a completely buffered output from the server
+        DEFAULT_TIMEOUT = 30, // seconds
         BUFFER_CHUNK_SIZE = 32768, // 32 KB
     };
 

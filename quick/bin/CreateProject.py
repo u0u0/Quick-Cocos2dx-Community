@@ -11,6 +11,7 @@ SYNOPSIS
     -p package name
     -o output dir
     -l set screen orientation to landscape, default if portrait.
+    --deep-copy will copy cocos2d sources, default will use QUICK_V3_ROOT env
 """
 
 import os
@@ -18,6 +19,7 @@ import sys
 import getopt
 import shutil
 import re
+import glob
 
 scriptRoot = os.path.split(os.path.realpath(__file__))[0]
 engineRoot = os.environ.get('QUICK_V3_ROOT')
@@ -117,7 +119,19 @@ def copyDir(src, dest):
                 os.mkdir(nDest)
             copyDir(nSrc, nDest)
 
-def createProject(packageName, outputDir, isLandscape):
+def replaceFileContent(filePath, replaceItems):
+    fileContent = None
+    with open(filePath) as f:
+        fileContent = f.read()
+
+    for old, new in replaceItems.items():
+        fileContent = fileContent.replace(old, new)
+
+    with open(filePath, "w") as f:
+        f.write(fileContent)
+
+
+def createProject(packageName, outputDir, isLandscape, needCopyCocos2d):
     names = checkPackageName(packageName)
     lastName = names[2]
     initDict(names, isLandscape)
@@ -132,12 +146,36 @@ def createProject(packageName, outputDir, isLandscape):
     shutil.copytree(joinDir(engineRoot, "quick", "framework"), joinDir(outputDir, "src", "framework"))
     print "====> Copying cocos."
     shutil.copytree(joinDir(engineRoot, "quick", "cocos"), joinDir(outputDir, "src", "cocos"))
+    if needCopyCocos2d:
+        print "====> Copying cocos sources."
+        os.mkdir(joinDir(outputDir, "frameworks", "cocos2d-x"))
+        for dirName in ["cocos", "external", "build"]:
+            shutil.copytree(joinDir(engineRoot, dirName), joinDir(outputDir, "frameworks", "cocos2d-x", dirName))
+        os.mkdir(joinDir(outputDir, "frameworks", "cocos2d-x", "quick"))
+        shutil.copytree(joinDir(engineRoot, "quick", "lib"), joinDir(outputDir, "frameworks", "cocos2d-x", "quick", "lib"))
+        print "====> Removing QUICK_V3_ROOT env."
+        # ios/mac: 
+        xcodeprojFilePath = joinDir(glob.glob(joinDir(outputDir, "frameworks", "runtime-src", "proj.ios_mac", "*.xcodeproj"))[0], "project.pbxproj")
+        replaceFileContent(xcodeprojFilePath, {"path = \"quick/lib/quick-src": "path = \"../../cocos2d-x/quick/lib/quick-src",
+                                               "sourceTree = QUICK_V3_ROOT;": "sourceTree = \"<group>\";",
+                                               "$(QUICK_V3_ROOT)": "$(PROJECT_DIR)/../../cocos2d-x",
+                                               "path = build/cocos2d_libs.xcodeproj": "path = \"../../cocos2d-x/build/cocos2d_libs.xcodeproj\"",
+                                               "path = \"cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj": "path = \"../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"})
+        # android:
+        androidBuildFilePath = joinDir(outputDir, "frameworks", "runtime-src", "proj.android", "build_native.py")
+        replaceFileContent(androidBuildFilePath, {"engineRoot = os.environ.get('QUICK_V3_ROOT')": "engineRoot = os.path.join(frameworksRoot, 'cocos2d-x')"})
+        # sln: %QUICK_V3_ROOT% -> ..\..\cocos2d-x
+        replaceFileContent(glob.glob(joinDir(outputDir, "frameworks", "runtime-src", "proj.win32", "*.sln"))[0], {"%QUICK_V3_ROOT%":"..\..\cocos2d-x"})
+        # vcxproj: $(QUICK_V3_ROOT) -> $(ProjectDir)..\..\cocos2d-x
+        replaceFileContent(glob.glob(joinDir(outputDir, "frameworks", "runtime-src", "proj.win32", "*.vcxproj"))[0], {"$(QUICK_V3_ROOT)":"$(ProjectDir)..\..\cocos2d-x"})
+        # vcxproj.filters: $(QUICK_V3_ROOT) -> $(ProjectDir)..\..\cocos2d-x
+        replaceFileContent(glob.glob(joinDir(outputDir, "frameworks", "runtime-src", "proj.win32", "*.vcxproj.filters"))[0], {"$(QUICK_V3_ROOT)":"$(ProjectDir)..\..\cocos2d-x"})
     print "====> Done."
 
 if __name__ == "__main__":
     # ===== parse args =====
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hp:o:l")
+        opts, args = getopt.getopt(sys.argv[1:], "hp:o:l", ["deep-copy"])
     except getopt.GetoptError:
         # print help information and exit:
         print __doc__
@@ -146,6 +184,7 @@ if __name__ == "__main__":
     packageName = ""
     outputDir = ""
     isLandscape = False
+    needCopyCocos2d = False
     for o, a in opts:
         if o == "-h":
             # print help information and exit:
@@ -157,6 +196,8 @@ if __name__ == "__main__":
             outputDir = a
         if o == "-l":
             isLandscape = True
+        if o == "--deep-copy":
+            needCopyCocos2d = True
 
     if len(packageName) == 0:
         print "Error: use -p xxx.xxx.xxx to set package name"
@@ -167,4 +208,4 @@ if __name__ == "__main__":
 
     # info printing
     print "== engineRoot: %s" %(engineRoot)
-    createProject(packageName, outputDir, isLandscape)
+    createProject(packageName, outputDir, isLandscape, needCopyCocos2d)

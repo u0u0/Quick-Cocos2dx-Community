@@ -59,7 +59,7 @@ namespace cocostudio
         return _instanceTMXTiledMapReader;
     }
     
-    void GameMapReader::purge()
+    void GameMapReader::destroyInstance()
     {
         CC_SAFE_DELETE(_instanceTMXTiledMapReader);
     }

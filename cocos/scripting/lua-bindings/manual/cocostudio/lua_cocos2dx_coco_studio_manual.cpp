@@ -519,7 +519,7 @@ static void extendActionTimeline(lua_State* L)
     if (lua_istable(L,-1))
     {
         tolua_function(L, "setFrameEventCallFunc", lua_cocos2dx_ActionTimeline_setFrameEventCallFunc);
-		tolua_function(L, "setLastFrameCallFunc", lua_cocos2dx_studio_ActionTimeline_setLastFrameCallFunc);
+        tolua_function(L, "setLastFrameCallFunc", lua_cocos2dx_studio_ActionTimeline_setLastFrameCallFunc);
     }
     lua_pop(L, 1);
 }

@@ -49,6 +49,11 @@ namespace cocostudio
         return instanceImageViewReader;
     }
     
+    void ImageViewReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceImageViewReader);
+    }
+    
     void ImageViewReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode *cocoNode)
     {
         WidgetReader::setPropsFromBinary(widget, cocoLoader, cocoNode);
@@ -296,7 +301,7 @@ namespace cocostudio
         std::string imageFileName = imageFileNameDic->path()->c_str();
         imageView->loadTexture(imageFileName, (Widget::TextureResType)imageFileNameType);
         
-        bool scale9Enabled = options->scale9Enabled();
+        bool scale9Enabled = options->scale9Enabled() != 0;
         imageView->setScale9Enabled(scale9Enabled);
         
         auto widgetReader = WidgetReader::getInstance();
@@ -316,7 +321,11 @@ namespace cocostudio
             Rect capInsets(f_capInset->x(), f_capInset->y(), f_capInset->width(), f_capInset->height());
             imageView->setCapInsets(capInsets);
         }
-        
+        else
+        {
+            Size contentSize(options->widgetOptions()->size()->width(), options->widgetOptions()->size()->height());
+            imageView->setContentSize(contentSize);
+        }
     }
     
     Node* ImageViewReader::createNodeWithFlatBuffers(const flatbuffers::Table *imageViewOptions)

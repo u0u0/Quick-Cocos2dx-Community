@@ -1282,4 +1282,15 @@ y+=ytranslate;         \
             }
         }
     }
+
+	void Scale9Sprite::setGLProgramState(GLProgramState *glProgramState)
+	{
+		if (_scale9Image) {
+			_scale9Image->setGLProgramState(glProgramState);
+		}
+		for (auto& iter : _protectedChildren)
+		{
+			iter->setGLProgramState(glProgramState);
+		}
+	}
 }}

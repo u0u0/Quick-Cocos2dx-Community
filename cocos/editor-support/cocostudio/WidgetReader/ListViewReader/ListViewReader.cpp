@@ -42,6 +42,11 @@ namespace cocostudio
         return instanceListViewReader;
     }
     
+    void ListViewReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceListViewReader);
+    }
+
     void ListViewReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode* cocoNode)
     {
         ScrollViewReader::setPropsFromBinary(widget, cocoLoader, cocoNode);
@@ -185,11 +190,11 @@ namespace cocostudio
             
             if (name == "InnerNodeSize")
             {
-                auto attribute = child->FirstAttribute();
-                while (attribute)
+                auto attributeInnerNodeSize = child->FirstAttribute();
+                while (attributeInnerNodeSize)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeInnerNodeSize->Name();
+                    std::string value = attributeInnerNodeSize->Value();
                     
                     if (name == "Width")
                     {
@@ -200,17 +205,17 @@ namespace cocostudio
                         innerSize.height = atof(value.c_str());
                     }
                     
-                    attribute = attribute->Next();
+                    attributeInnerNodeSize = attributeInnerNodeSize->Next();
                 }
             }
             else if (name == "Size" && backGroundScale9Enabled)
             {
-                auto attribute = child->FirstAttribute();
+                auto attributeSize = child->FirstAttribute();
                 
-                while (attribute)
+                while (attributeSize)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeSize->Name();
+                    std::string value = attributeSize->Value();
                     
                     if (name == "X")
                     {
@@ -221,17 +226,17 @@ namespace cocostudio
                         scale9Size.height = atof(value.c_str());
                     }
                     
-                    attribute = attribute->Next();
+                    attributeSize = attributeSize->Next();
                 }
             }
             else if (name == "SingleColor")
             {
-                auto attribute = child->FirstAttribute();
+                auto attributeSingleColor = child->FirstAttribute();
                 
-                while (attribute)
+                while (attributeSingleColor)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeSingleColor->Name();
+                    std::string value = attributeSingleColor->Value();
                     
                     if (name == "R")
                     {
@@ -246,17 +251,17 @@ namespace cocostudio
                         bgColor.b = atoi(value.c_str());
                     }
                     
-                    attribute = attribute->Next();
+                    attributeSingleColor = attributeSingleColor->Next();
                 }
             }
             else if (name == "EndColor")
             {
-                auto attribute = child->FirstAttribute();
+                auto attributeEndColor = child->FirstAttribute();
                 
-                while (attribute)
+                while (attributeEndColor)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeEndColor->Name();
+                    std::string value = attributeEndColor->Value();
                     
                     if (name == "R")
                     {
@@ -271,17 +276,17 @@ namespace cocostudio
                         bgEndColor.b = atoi(value.c_str());
                     }
                     
-                    attribute = attribute->Next();
+                    attributeEndColor = attributeEndColor->Next();
                 }
             }
             else if (name == "FirstColor")
             {
-                auto attribute = child->FirstAttribute();
+                auto attributeFirstColor = child->FirstAttribute();
                 
-                while (attribute)
+                while (attributeFirstColor)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeFirstColor->Name();
+                    std::string value = attributeFirstColor->Value();
                     
                     if (name == "R")
                     {
@@ -296,16 +301,16 @@ namespace cocostudio
                         bgStartColor.b = atoi(value.c_str());
                     }
                     
-                    attribute = attribute->Next();
+                    attributeFirstColor = attributeFirstColor->Next();
                 }
             }
             else if (name == "ColorVector")
             {
-                auto attribute = child->FirstAttribute();
-                while (attribute)
+                auto attributeColorVector = child->FirstAttribute();
+                while (attributeColorVector)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeColorVector->Name();
+                    std::string value = attributeColorVector->Value();
                     
                     if (name == "ScaleX")
                     {
@@ -316,7 +321,7 @@ namespace cocostudio
                         colorVector.y = atof(value.c_str());
                     }
                     
-                    attribute = attribute->Next();
+                    attributeColorVector = attributeColorVector->Next();
                 }
             }
             else if (name == "FileData")
@@ -324,12 +329,12 @@ namespace cocostudio
                 std::string texture;
                 std::string texturePng;
                 
-                auto attribute = child->FirstAttribute();
+                auto attributeFileData = child->FirstAttribute();
                 
-                while (attribute)
+                while (attributeFileData)
                 {
-                    name = attribute->Name();
-                    std::string value = attribute->Value();
+                    name = attributeFileData->Name();
+                    std::string value = attributeFileData->Value();
                     
                     if (name == "Path")
                     {
@@ -345,7 +350,7 @@ namespace cocostudio
                         texture = value;
                     }
                     
-                    attribute = attribute->Next();
+                    attributeFileData = attributeFileData->Next();
                 }
                 
                 if (resourceType == 1)
@@ -398,10 +403,10 @@ namespace cocostudio
         ListView* listView = static_cast<ListView*>(node);
         auto options = (ListViewOptions*)listViewOptions;
         
-        bool clipEnabled = options->clipEnabled();
+        bool clipEnabled = options->clipEnabled() != 0;
         listView->setClippingEnabled(clipEnabled);
         
-        bool backGroundScale9Enabled = options->backGroundScale9Enabled();
+        bool backGroundScale9Enabled = options->backGroundScale9Enabled() != 0;
         listView->setBackGroundImageScale9Enabled(backGroundScale9Enabled);
         
         
@@ -442,7 +447,7 @@ namespace cocostudio
         auto f_innerSize = options->innerSize();
         Size innerSize(f_innerSize->width(), f_innerSize->height());
         listView->setInnerContainerSize(innerSize);
-        bool bounceEnabled = options->bounceEnabled();
+        bool bounceEnabled = options->bounceEnabled() != 0;
         listView->setBounceEnabled(bounceEnabled);
         
         std::string directionType = options->directionType()->c_str();
@@ -453,7 +458,7 @@ namespace cocostudio
             if (verticalType == "")
             {
                 listView->setGravity(ListView::Gravity::TOP);
-            } 
+            }
             else if (verticalType == "Align_Bottom")
             {
                 listView->setGravity(ListView::Gravity::BOTTOM);
@@ -462,7 +467,7 @@ namespace cocostudio
             {
                 listView->setGravity(ListView::Gravity::CENTER_VERTICAL);
             }
-        } 
+        }
         else if (directionType == "Vertical")
         {
             listView->setDirection(ListView::Direction::VERTICAL);
@@ -483,7 +488,7 @@ namespace cocostudio
         
         float itemMargin = options->itemMargin();
         listView->setItemsMargin(itemMargin);
-
+        
         auto widgetReader = WidgetReader::getInstance();
         widgetReader->setPropsWithFlatBuffers(node, (Table*)options->widgetOptions());
         
@@ -499,7 +504,6 @@ namespace cocostudio
         }
         else
         {
-            auto widgetOptions = options->widgetOptions();
             if (!listView->isIgnoreContentAdaptWithSize())
             {
                 Size contentSize(widgetOptions->size()->width(), widgetOptions->size()->height());

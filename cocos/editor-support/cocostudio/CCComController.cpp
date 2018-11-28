@@ -28,12 +28,12 @@ THE SOFTWARE.
 namespace cocostudio {
 
 IMPLEMENT_CLASS_COMPONENT_INFO(ComController)
-ComController::ComController(void)
+ComController::ComController()
 {
     _name = "CCComController";
 }
 
-ComController::~ComController(void)
+ComController::~ComController()
 {
 }
 
@@ -68,7 +68,7 @@ void ComController::setEnabled(bool b)
     _enabled = b;
 }
 
-ComController* ComController::create(void)
+ComController* ComController::create()
 {
     ComController * pRet = new (std::nothrow) ComController();
     if (pRet && pRet->init())

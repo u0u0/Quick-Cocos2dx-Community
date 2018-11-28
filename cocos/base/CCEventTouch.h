@@ -32,8 +32,6 @@ NS_CC_BEGIN
 
 class Touch;
 
-#define TOUCH_PERF_DEBUG 1
-
 class CC_DLL EventTouch : public Event
 {
 public:
@@ -52,10 +50,8 @@ public:
     inline EventCode getEventCode() const { return _eventCode; };
     inline const std::vector<Touch*>& getTouches() const { return _touches; };
 
-#if TOUCH_PERF_DEBUG
     void setEventCode(EventCode eventCode) { _eventCode = eventCode; };
-    void setTouches(const std::vector<Touch*>& touches) { _touches = touches; };
-#endif
+    void setTouches(const std::vector<Touch*>& touches);
     
 private:
     EventCode _eventCode;

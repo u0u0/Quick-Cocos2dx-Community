@@ -17,7 +17,7 @@ local assert = assert
 --------- class var and method --------------
 SimpleTCP._VERSION = socket._VERSION
 SimpleTCP._DEBUG = socket._DEBUG
-SimpleTCP.CONNECT_TIMEOUT = 3 -- second
+SimpleTCP.CONNECT_TIMEOUT = 15 -- second
 
 SimpleTCP.STAT_CONNECTING = 1
 SimpleTCP.STAT_FAILED = 2

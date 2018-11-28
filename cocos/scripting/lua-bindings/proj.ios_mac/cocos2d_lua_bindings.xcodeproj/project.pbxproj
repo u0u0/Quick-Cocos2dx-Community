@@ -213,6 +213,8 @@
 		15EFA64A198B3311000C57D3 /* tolua_to.c in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCA1FE18CD8F6E0087CE3A /* tolua_to.c */; };
 		15EFA64B198B3320000C57D3 /* tolua_event.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ABCA1FA18CD8F6E0087CE3A /* tolua_event.h */; };
 		15EFA64C198B3320000C57D3 /* tolua++.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ABCA1FF18CD8F6E0087CE3A /* tolua++.h */; };
+		269CBBDB21797A3B00039E9E /* asynconnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 269CBBD921797A3B00039E9E /* asynconnect.cpp */; };
+		269CBBDC21797A3B00039E9E /* asynconnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 269CBBD921797A3B00039E9E /* asynconnect.cpp */; };
 		3D598E6C1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */; };
 		3D598E6D1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */; };
 		3D598E6E1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3D598E6B1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.hpp */; };
@@ -349,6 +351,7 @@
 		1ABCA1FD18CD8F6E0087CE3A /* tolua_push.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tolua_push.c; path = ../../../../external/lua/tolua/tolua_push.c; sourceTree = "<group>"; };
 		1ABCA1FE18CD8F6E0087CE3A /* tolua_to.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tolua_to.c; path = ../../../../external/lua/tolua/tolua_to.c; sourceTree = "<group>"; };
 		1ABCA1FF18CD8F6E0087CE3A /* tolua++.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "tolua++.h"; path = "../../../../external/lua/tolua/tolua++.h"; sourceTree = "<group>"; };
+		269CBBD921797A3B00039E9E /* asynconnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = asynconnect.cpp; sourceTree = "<group>"; };
 		2905FACE18CF12E600240AA3 /* lua_cocos2dx_ui_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_ui_auto.cpp; sourceTree = "<group>"; };
 		2905FACF18CF12E600240AA3 /* lua_cocos2dx_ui_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_ui_auto.hpp; sourceTree = "<group>"; };
 		3D598E6A1E4436ED008676D4 /* lua_cocos2dx_experimental_webview_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_experimental_webview_auto.cpp; sourceTree = "<group>"; };
@@ -632,6 +635,7 @@
 				15415AA219A71A53004F1E71 /* unix.h */,
 				15415AA319A71A53004F1E71 /* usocket.c */,
 				15415AA419A71A53004F1E71 /* usocket.h */,
+				269CBBD921797A3B00039E9E /* asynconnect.cpp */,
 			);
 			name = luasocket;
 			path = ../../../../external/lua/luasocket;
@@ -894,6 +898,7 @@
 				15C1C2D11987498B00A46ACC /* lua_cocos2dx_manual.cpp in Sources */,
 				15C1C2D21987498B00A46ACC /* lua_cocos2dx_physics_manual.cpp in Sources */,
 				15C1C2D31987498B00A46ACC /* LuaScriptHandlerMgr.cpp in Sources */,
+				269CBBDB21797A3B00039E9E /* asynconnect.cpp in Sources */,
 				3D598E721E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp in Sources */,
 				15415AA919A71A53004F1E71 /* buffer.c in Sources */,
 				15C1C2CD1987495500A46ACC /* lua_cocos2dx_auto.cpp in Sources */,
@@ -962,6 +967,7 @@
 				15EFA629198B31FB000C57D3 /* lua_cocos2dx_physics_manual.cpp in Sources */,
 				15EFA62A198B31FB000C57D3 /* LuaScriptHandlerMgr.cpp in Sources */,
 				15EFA617198B2E2B000C57D3 /* lua_cocos2dx_experimental_auto.cpp in Sources */,
+				269CBBDC21797A3B00039E9E /* asynconnect.cpp in Sources */,
 				3D598E731E44370E008676D4 /* lua_cocos2dx_experimental_webview_manual.cpp in Sources */,
 				15EFA618198B2E2B000C57D3 /* lua_cocos2dx_auto.cpp in Sources */,
 				15EFA619198B2E2B000C57D3 /* lua_cocos2dx_physics_auto.cpp in Sources */,

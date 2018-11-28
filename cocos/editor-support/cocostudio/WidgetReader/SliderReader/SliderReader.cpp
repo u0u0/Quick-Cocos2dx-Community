@@ -48,6 +48,11 @@ namespace cocostudio
         return instanceSliderReader;
     }
     
+    void SliderReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceSliderReader);
+    }
+    
     void SliderReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode* cocoNode)
     {
         this->beginSetBasicProperties(widget);
@@ -461,7 +466,6 @@ namespace cocostudio
         auto options = (SliderOptions*)sliderOptions;
         
         int percent = options->percent();
-        slider->setPercent(percent);
         
         auto imageFileNameDic = options->barFileNameData();
         int imageFileNameType = imageFileNameDic->resourceType();
@@ -492,13 +496,13 @@ namespace cocostudio
         std::string progressBarFileName = progressBarDic->path()->c_str();
         slider->loadProgressBarTexture(progressBarFileName, (Widget::TextureResType)progressBarType);
         
-        bool displaystate = options->displaystate();
+        bool displaystate = options->displaystate() != 0;
         slider->setBright(displaystate);
         slider->setEnabled(displaystate);
         
         auto widgetReader = WidgetReader::getInstance();
         widgetReader->setPropsWithFlatBuffers(node, (Table*)options->widgetOptions());
-        
+        slider->setPercent(percent);
     }
     
     Node* SliderReader::createNodeWithFlatBuffers(const flatbuffers::Table *sliderOptions)

@@ -34,26 +34,28 @@ namespace cocostudio {
 
 class CC_STUDIO_DLL ComController : public cocos2d::Component, public InputDelegate
 {
-
     DECLARE_CLASS_COMPONENT_INFO
 public:
     /**
      *  @js ctor
      */
-    ComController(void);
+    ComController();
     
 public:
     /**
      * @js NA
      * @lua NA
      */
-    virtual ~ComController(void);
+    virtual ~ComController();
+
     virtual bool init() override;
+
     /**
      * @js NA
      * @lua NA
      */
     virtual void onEnter() override;
+
     /**
      * @js NA
      * @lua NA
@@ -63,9 +65,9 @@ public:
     virtual bool isEnabled() const override;
     virtual void setEnabled(bool b) override;
     
-    static ComController* create(void);
+    static ComController* create();
 };
 
 }
 
-#endif  // __FUNDATION__CCCOMPONENT_H__
+#endif  // __CC_EXTENTIONS_CCCOMCONTROLLER_H__

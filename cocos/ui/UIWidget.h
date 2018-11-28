@@ -590,6 +590,18 @@ public:
      */
     void setCallbackType(const std::string& callbackType) { _callbackType = callbackType; }
     const std::string& getCallbackType() const{ return _callbackType; }
+	/**
+	* Toggle layout component enable.
+	*@param enable Layout Component of a widget
+	*@return void
+	*/
+	void setLayoutComponentEnabled(bool enable);
+
+	/**
+	* Query whether layout component is enabled or not.
+	*@return true represent the widget use Layout Component, false represent the widget couldn't use Layout Component.
+	*/
+	bool isLayoutComponentEnabled()const;
 
 CC_CONSTRUCTOR_ACCESS:
 
@@ -663,6 +675,7 @@ protected:
     LayoutComponent* getOrCreateLayoutComponent();
 
 protected:
+    bool _usingLayoutComponent;
     bool _unifySize;
     bool _enabled;
     bool _bright;

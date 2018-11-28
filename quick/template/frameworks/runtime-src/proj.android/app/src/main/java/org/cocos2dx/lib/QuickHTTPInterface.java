@@ -31,6 +31,7 @@ public class QuickHTTPInterface {
             urlConnection = (HttpURLConnection)url.openConnection();
             urlConnection.setRequestProperty("Accept-Encoding", "identity");
             urlConnection.setDoInput(true);
+            urlConnection.setConnectTimeout(10 * 1000); // 10 second, same with curl
         } catch (Exception e) {
             Log.e("QuickHTTPInterface", e.toString());
             return null;
@@ -58,7 +59,6 @@ public class QuickHTTPInterface {
     }
 
     static void setTimeout(HttpURLConnection http, int msTime) {
-        http.setConnectTimeout(msTime);
         http.setReadTimeout(msTime);
     }
 

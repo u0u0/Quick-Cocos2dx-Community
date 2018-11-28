@@ -33,4 +33,13 @@ EventTouch::EventTouch()
     _touches.reserve(MAX_TOUCHES);
 }
 
+void EventTouch::setTouches(const std::vector<Touch*>& touches)
+{
+    for (auto& touch : _touches) {
+        // release the touch object.
+        touch->release();
+    }
+    _touches = touches;
+};
+
 NS_CC_END

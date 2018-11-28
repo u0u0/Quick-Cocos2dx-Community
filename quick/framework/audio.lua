@@ -23,7 +23,22 @@ audio._scheduler = nil -- global schedule hander
 audio._sources[1] = Rapid2D_CAudio.newSource()
 if not (audio._sources[1]) then
 	print("Error: init BGM source fail, check if have OpenAL init error above!")
-	return
+	-- fake function, disable audio output when init failed
+	audio.loadFile = function(path, callback)
+		callback(path, true)
+	end
+	audio.unloadFile = function(path) end
+	audio.unloadAllFile = function() end
+	audio.playBGM = function(path, isLoop) end
+	audio.stopBGM = function() end
+	audio.setBGMVolume = function(vol) end
+	audio.playEffect = function(path, isLoop) end
+	audio.setEffectVolume = function(vol) end
+	audio.stopEffect = function() end
+	audio.stopAll = function() end
+	audio.pauseAll = function() end
+	audio.resumeAll = function() end
+	return audio
 end
 
 audio._BGMVolume = 1.0

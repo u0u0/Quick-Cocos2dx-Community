@@ -1280,6 +1280,16 @@ void Widget::setUnifySizeEnabled(bool enable)
     _unifySize = enable;
 }
 
+void Widget::setLayoutComponentEnabled(bool enable)
+{
+	_usingLayoutComponent = enable;
+}
+
+bool Widget::isLayoutComponentEnabled()const
+{
+	return _usingLayoutComponent;
+}
+
 
 }
 NS_CC_END

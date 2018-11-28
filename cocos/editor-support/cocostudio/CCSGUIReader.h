@@ -152,7 +152,7 @@ public:
     //added for binary parsing
     virtual cocos2d::ui::Widget* createWidgetFromBinary(CocoLoader* cocoLoader,
                                                         stExpCocoNode*	pCocoNode,
-                                                        const char* fileName) override {return nullptr;}
+                                                        const char* fileName)override{return nullptr;}
     
     virtual cocos2d::ui::Widget* widgetFromBinary(CocoLoader* cocoLoader,
                                                   stExpCocoNode*	pCocoNode) override {return nullptr;}
@@ -200,7 +200,7 @@ public:
     //add bin parse support
     virtual cocos2d::ui::Widget* createWidgetFromBinary(CocoLoader* cocoLoader,
                                                         stExpCocoNode*	pCocoNode,
-                                                        const char* fileName) override;
+                                                        const char* fileName)override;
     
     virtual cocos2d::ui::Widget* widgetFromBinary(CocoLoader* cocoLoader,
                                                   stExpCocoNode*	pCocoNode) override;
@@ -225,7 +225,7 @@ public:
     
     virtual void setPropsForAllCustomWidgetFromJsonDictionary(const std::string& classType,
                                                               cocos2d::ui::Widget* widget,
-                                                              const rapidjson::Value& customOptions) override;
+                                                              const rapidjson::Value& customOptions) override;        
 };
 
 

@@ -2,6 +2,7 @@
 
 #include "TextBMFontReader.h"
 
+#include "2d/CCFontAtlasCache.h"
 #include "ui/UITextBMFont.h"
 #include "cocostudio/CocoLoader.h"
 #include "cocostudio/CSParseBinary_generated.h"
@@ -39,6 +40,11 @@ namespace cocostudio
             instanceTextBMFontReader = new (std::nothrow) TextBMFontReader();
         }
         return instanceTextBMFontReader;
+    }
+    
+    void TextBMFontReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceTextBMFontReader);
     }
     
     void TextBMFontReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode *cocoNode)
@@ -213,6 +219,8 @@ namespace cocostudio
         
         auto widgetReader = WidgetReader::getInstance();
         widgetReader->setPropsWithFlatBuffers(node, (Table*)options->widgetOptions());
+        
+        labelBMFont->ignoreContentAdaptWithSize(true);
     }
     
     Node* TextBMFontReader::createNodeWithFlatBuffers(const flatbuffers::Table *textBMFontOptions)

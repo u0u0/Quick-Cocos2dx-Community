@@ -238,6 +238,7 @@ void SpriteFrameCache::addSpriteFramesWithFile(const std::string& plist)
 
     if (_loadedFileNames->find(plist) == _loadedFileNames->end())
     {
+        
         std::string fullPath = FileUtils::getInstance()->fullPathForFilename(plist);
         ValueMap dict = FileUtils::getInstance()->getValueMapFromFile(fullPath);
 
