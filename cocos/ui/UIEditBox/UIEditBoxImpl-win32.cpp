@@ -142,7 +142,8 @@ namespace ui {
     void EditBoxImplWin::setNativeFont(const char* pFontName, int fontSize)
     {
         auto glView = Director::getInstance()->getOpenGLView();
-        HFONT hFont = ::CreateFontW(static_cast<int>(fontSize * glView->getScaleX()), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
+		fontSize = static_cast<int>(fontSize * glView->getScaleX() * glView->getFrameZoomFactor());
+        HFONT hFont = ::CreateFontW(fontSize, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
             CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, L"Arial");
 
         ::SendMessageW(_hwndEdit,             // Handle of edit control
@@ -270,13 +271,14 @@ namespace ui {
 
     void EditBoxImplWin::updateNativeFrame(const Rect& rect)
     {
+		auto frameScale = Director::getInstance()->getOpenGLView()->getFrameZoomFactor();
         ::SetWindowPos(
             _hwndEdit,
             HWND_NOTOPMOST,
-            rect.origin.x,
-            rect.origin.y,
-            rect.size.width,
-            rect.size.height,
+            rect.origin.x * frameScale,
+            rect.origin.y * frameScale,
+            rect.size.width * frameScale,
+            rect.size.height * frameScale,
             SWP_NOZORDER);
     }
 
@@ -291,8 +293,11 @@ namespace ui {
 //        s_previousFocusWnd = hwndEdit;
         this->editBoxEditingDidBegin();
 
+		// update show position.
         auto rect = ui::Helper::convertBoundingBoxToScreen(_editBox);
         this->updateNativeFrame(rect);
+		// update font size.
+		this->setNativeFont(this->getNativeDefaultFontName(), this->_fontSize);
     }
 
     void EditBoxImplWin::nativeCloseKeyboard()
