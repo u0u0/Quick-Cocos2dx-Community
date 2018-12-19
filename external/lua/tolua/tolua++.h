@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#define tolua_pushcppstring(x,y)                tolua_pushstring(x,y.c_str())
+#define tolua_pushcppstring(x,y)                lua_pushlstring(x, y.c_str(), y.length())
 #define tolua_iscppstring                       tolua_isstring
 
 #define tolua_iscppstringarray                  tolua_isstringarray

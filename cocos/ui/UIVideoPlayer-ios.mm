@@ -45,17 +45,16 @@ using namespace cocos2d::experimental::ui;
 - (void) resume;
 - (void) stop;
 - (void) seekTo:(float) sec;
-- (void) setVisible:(bool) visible;
-- (void) setKeepRatioEnabled:(bool) enabled;
-- (void) setFullScreenEnabled:(bool) enabled;
-- (bool) isFullScreenEnabled;
+- (void) setVisible:(BOOL) visible;
+- (void) setKeepRatioEnabled:(BOOL) enabled;
+- (void) setFullScreenEnabled:(BOOL) enabled;
+- (BOOL) isFullScreenEnabled;
 
 -(id) init:(void*) videoPlayer;
 
 -(void) videoFinished:(NSNotification*) notification;
 -(void) playStateChange;
 
-+(NSString*) fullPathFromRelativePath:(NSString*) relPath;
 
 @end
 
@@ -66,7 +65,7 @@ using namespace cocos2d::experimental::ui;
     int _width;
     int _height;
     bool _keepRatioEnabled;
-    
+
     VideoPlayer* _videoPlayer;
 }
 
@@ -77,7 +76,7 @@ using namespace cocos2d::experimental::ui;
         _videoPlayer = (VideoPlayer*)videoPlayer;
         _keepRatioEnabled = false;
     }
-    
+
     return self;
 }
 
@@ -86,7 +85,7 @@ using namespace cocos2d::experimental::ui;
     if (self.moviePlayer != nullptr) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.moviePlayer];
-        
+
         [self.moviePlayer stop];
         [self.moviePlayer.view removeFromSuperview];
         self.moviePlayer = nullptr;
@@ -106,19 +105,19 @@ using namespace cocos2d::experimental::ui;
     }
 }
 
--(void) setFullScreenEnabled:(bool) enabled
+-(void) setFullScreenEnabled:(BOOL) enabled
 {
     if (self.moviePlayer != nullptr) {
         [self.moviePlayer setFullscreen:enabled animated:(true)];
     }
 }
 
--(bool) isFullScreenEnabled
+-(BOOL) isFullScreenEnabled
 {
     if (self.moviePlayer != nullptr) {
         return [self.moviePlayer isFullscreen];
     }
-    
+
     return false;
 }
 
@@ -127,41 +126,41 @@ using namespace cocos2d::experimental::ui;
     if (self.moviePlayer != nullptr) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.moviePlayer];
-        
+
         [self.moviePlayer stop];
         [self.moviePlayer.view removeFromSuperview];
         self.moviePlayer = nullptr;
     }
-    
+
     if (videoSource == 1) {
-        self.moviePlayer = [[[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:@(videoUrl.c_str())]] autorelease];
+        self.moviePlayer = [[[MPMoviePlayerController alloc] init] autorelease];
         self.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
+        [self.moviePlayer setContentURL:[NSURL URLWithString:@(videoUrl.c_str())]];
     } else {
-        NSString *path = [UIVideoViewWrapperIos fullPathFromRelativePath:@(videoUrl.c_str())];
-        self.moviePlayer = [[[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:path]] autorelease];
+        self.moviePlayer = [[[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:@(videoUrl.c_str())]] autorelease];
         self.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
     }
     self.moviePlayer.allowsAirPlay = false;
     self.moviePlayer.controlStyle = MPMovieControlStyleEmbedded;
     self.moviePlayer.view.userInteractionEnabled = true;
-    
+
     auto clearColor = [UIColor clearColor];
     self.moviePlayer.backgroundView.backgroundColor = clearColor;
     self.moviePlayer.view.backgroundColor = clearColor;
     for (UIView * subView in self.moviePlayer.view.subviews) {
         subView.backgroundColor = clearColor;
     }
-    
+
     if (_keepRatioEnabled) {
         self.moviePlayer.scalingMode = MPMovieScalingModeAspectFit;
     } else {
         self.moviePlayer.scalingMode = MPMovieScalingModeFill;
     }
-    
+
     auto view = cocos2d::Director::getInstance()->getOpenGLView();
     auto eaglview = (CCEAGLView *) view->getEAGLView();
     [eaglview addSubview:self.moviePlayer.view];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playStateChange) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.moviePlayer];
 }
@@ -170,6 +169,11 @@ using namespace cocos2d::experimental::ui;
 {
     if(_videoPlayer != nullptr)
     {
+        //fix : ios 11.3 sends wrong notificaiton, ignore it
+        if ([self.moviePlayer playbackState] == MPMoviePlaybackStatePlaying)
+        {
+            return;
+        }
         if([self.moviePlayer playbackState] != MPMoviePlaybackStateStopped)
         {
             _videoPlayer->onPlayEvent((int)VideoPlayer::EventType::COMPLETED);
@@ -208,14 +212,14 @@ using namespace cocos2d::experimental::ui;
     }
 }
 
--(void) setVisible:(bool)visible
+-(void) setVisible:(BOOL)visible
 {
     if (self.moviePlayer != NULL) {
         [self.moviePlayer.view setHidden:!visible];
     }
 }
 
--(void) setKeepRatioEnabled:(bool)enabled
+-(void) setKeepRatioEnabled:(BOOL)enabled
 {
     _keepRatioEnabled = enabled;
     if (self.moviePlayer != NULL) {
@@ -259,20 +263,16 @@ using namespace cocos2d::experimental::ui;
     }
 }
 
-+(NSString*) fullPathFromRelativePath:(NSString*) relPath
-{
-    return [NSString stringWithCString: cocos2d::FileUtils::getInstance()->fullPathForFilename(std::string([relPath UTF8String])).c_str() encoding: [NSString defaultCStringEncoding]];
-}
 @end
 //------------------------------------------------------------------------------------------------------------
 
 VideoPlayer::VideoPlayer()
-: _videoPlayerIndex(-1)
-, _eventCallback(nullptr)
-, _fullScreenEnabled(false)
+: _isPlaying(false)
 , _fullScreenDirty(false)
+, _fullScreenEnabled(false)
 , _keepAspectRatioEnabled(false)
-, _isPlaying(false)
+, _videoPlayerIndex(-1)
+, _eventCallback(nullptr)
 {
     _videoView = [[UIVideoViewWrapperIos alloc] init:this];
 
@@ -292,7 +292,7 @@ VideoPlayer::~VideoPlayer()
 
 void VideoPlayer::setFileName(const std::string& fileName)
 {
-    _videoURL = fileName;
+    _videoURL = FileUtils::getInstance()->fullPathForFilename(fileName);
     _videoSource = VideoPlayer::Source::FILENAME;
     [((UIVideoViewWrapperIos*)_videoView) setURL:(int)_videoSource :_videoURL];
 }
@@ -307,27 +307,27 @@ void VideoPlayer::setURL(const std::string& videoUrl)
 void VideoPlayer::draw(Renderer* renderer, const Mat4 &transform, uint32_t flags)
 {
     cocos2d::ui::Widget::draw(renderer,transform,flags);
-    
+
     if (flags & FLAGS_TRANSFORM_DIRTY)
     {
         auto directorInstance = Director::getInstance();
         auto glView = directorInstance->getOpenGLView();
         auto frameSize = glView->getFrameSize();
         auto scaleFactor = [static_cast<CCEAGLView *>(glView->getEAGLView()) contentScaleFactor];
-        
+
         auto winSize = directorInstance->getWinSize();
-        
+
         auto leftBottom = convertToWorldSpace(Vec2::ZERO);
         auto rightTop = convertToWorldSpace(Vec2(_contentSize.width,_contentSize.height));
-        
+
         auto uiLeft = (frameSize.width / 2 + (leftBottom.x - winSize.width / 2 ) * glView->getScaleX()) / scaleFactor;
         auto uiTop = (frameSize.height /2 - (rightTop.y - winSize.height / 2) * glView->getScaleY()) / scaleFactor;
-        
+
         [((UIVideoViewWrapperIos*)_videoView) setFrame :uiLeft :uiTop
                                                           :(rightTop.x - leftBottom.x) * glView->getScaleX() / scaleFactor
                                                           :( (rightTop.y - leftBottom.y) * glView->getScaleY()/scaleFactor)];
     }
-    
+
 #if CC_VIDEOPLAYER_DEBUG_DRAW
     _debugDrawNode->clear();
     auto size = getContentSize();
@@ -409,11 +409,30 @@ bool VideoPlayer::isPlaying() const
 void VideoPlayer::setVisible(bool visible)
 {
     cocos2d::ui::Widget::setVisible(visible);
-    
-    if (! _videoURL.empty())
+
+    if (!visible)
     {
-        [((UIVideoViewWrapperIos*)_videoView) setVisible:visible];
+        [((UIVideoViewWrapperIos*)_videoView) setVisible:NO];
     }
+    else if(isRunning())
+    {
+        [((UIVideoViewWrapperIos*)_videoView) setVisible:YES];
+    }
+}
+
+void VideoPlayer::onEnter()
+{
+    Widget::onEnter();
+    if (isVisible())
+    {
+        [((UIVideoViewWrapperIos*)_videoView) setVisible: YES];
+    }
+}
+
+void VideoPlayer::onExit()
+{
+    Widget::onExit();
+    [((UIVideoViewWrapperIos*)_videoView) setVisible: NO];
 }
 
 void VideoPlayer::addEventListener(const VideoPlayer::ccVideoPlayerCallback& callback)
@@ -428,7 +447,7 @@ void VideoPlayer::onPlayEvent(int event)
     } else {
         _isPlaying = false;
     }
-    
+
     if (_eventCallback)
     {
         _eventCallback(this, (VideoPlayer::EventType)event);
