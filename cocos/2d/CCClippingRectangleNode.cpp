@@ -35,8 +35,12 @@ void ClippingRectangleNode::onBeforeVisitScissor()
 		float py = pos1.y;
 		float width = pos2.x - pos1.x;
 		float height = pos2.y - pos1.y;
-		assert(width > 0); //ClippingRectangle should not be rotated
-		assert(height > 0); //ClippingRectangle should not be rotated
+		if (width < 0) {
+			width = 0; //ClippingRectangle should not be rotated
+		}
+		if (height < 0) {
+			height = 0; //ClippingRectangle should not be rotated
+		}
 
         // record old ClipRegion
         GLView* glView = Director::getInstance()->getOpenGLView();
