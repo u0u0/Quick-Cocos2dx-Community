@@ -352,7 +352,7 @@ public class Cocos2dxEditBoxHelper {
                 Cocos2dxEditBox editBox = mEditBoxArray.get(index);
                 if (editBox != null) {
                     editBox.setText(text);
-                    editBox.setSelection(text.length());// cursor relocation
+                    editBox.setSelection(editBox.getText().length());// cursor relocation
                 }
             }
         });
