@@ -1,4 +1,4 @@
-/* Copyright (c) 2007 Scott Lembcke
+/* Copyright (c) 2013 Scott Lembcke and Howling Moon Software
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,30 +19,25 @@
  * SOFTWARE.
  */
 
-/// @defgroup cpRotaryLimitJoint cpRotaryLimitJoint
+/// @defgroup cpSimpleMotor cpSimpleMotor
 /// @{
 
-const cpConstraintClass *cpRotaryLimitJointGetClass(void);
+/// Opaque struct type for damped rotary springs.
+typedef struct cpSimpleMotor cpSimpleMotor;
 
-/// @private
-typedef struct cpRotaryLimitJoint {
-	cpConstraint constraint;
-	cpFloat min, max;
-	
-	cpFloat iSum;
-		
-	cpFloat bias;
-	cpFloat jAcc;
-} cpRotaryLimitJoint;
+/// Check if a constraint is a damped rotary springs.
+CP_EXPORT cpBool cpConstraintIsSimpleMotor(const cpConstraint *constraint);
 
-/// Allocate a damped rotary limit joint.
-cpRotaryLimitJoint* cpRotaryLimitJointAlloc(void);
-/// Initialize a damped rotary limit joint.
-cpRotaryLimitJoint* cpRotaryLimitJointInit(cpRotaryLimitJoint *joint, cpBody *a, cpBody *b, cpFloat min, cpFloat max);
-/// Allocate and initialize a damped rotary limit joint.
-cpConstraint* cpRotaryLimitJointNew(cpBody *a, cpBody *b, cpFloat min, cpFloat max);
+/// Allocate a simple motor.
+CP_EXPORT cpSimpleMotor* cpSimpleMotorAlloc(void);
+/// initialize a simple motor.
+CP_EXPORT cpSimpleMotor* cpSimpleMotorInit(cpSimpleMotor *joint, cpBody *a, cpBody *b, cpFloat rate);
+/// Allocate and initialize a simple motor.
+CP_EXPORT cpConstraint* cpSimpleMotorNew(cpBody *a, cpBody *b, cpFloat rate);
 
-CP_DefineConstraintProperty(cpRotaryLimitJoint, cpFloat, min, Min)
-CP_DefineConstraintProperty(cpRotaryLimitJoint, cpFloat, max, Max)
+/// Get the rate of the motor.
+CP_EXPORT cpFloat cpSimpleMotorGetRate(const cpConstraint *constraint);
+/// Set the rate of the motor.
+CP_EXPORT void cpSimpleMotorSetRate(cpConstraint *constraint, cpFloat rate);
 
 /// @}

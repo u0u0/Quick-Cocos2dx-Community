@@ -27,12 +27,7 @@
  ****************************************************************************/
 
 #include "CCProtectedNode.h"
-
 #include "base/CCDirector.h"
-
-#if CC_USE_PHYSICS
-#include "physics/CCPhysicsBody.h"
-#endif
 #include "2d/CCScene.h"
 
 NS_CC_BEGIN
@@ -100,19 +95,6 @@ void ProtectedNode::addProtectedChild(Node *child, int zOrder, int tag)
     child->setParent(this);
     child->setOrderOfArrival(s_globalOrderOfArrival++);
     
-#if CC_USE_PHYSICS
-    // Recursive add children with which have physics body.
-    for (Node* node = this; node != nullptr; node = node->getParent())
-    {
-        Scene* scene = dynamic_cast<Scene*>(node);
-        if (scene != nullptr && scene->getPhysicsWorld() != nullptr)
-        {
-            scene->addChildToPhysicsWorld(child);
-            break;
-        }
-    }
-#endif
-    
     if( _running )
     {
         child->onEnter();
@@ -170,13 +152,6 @@ void ProtectedNode::removeProtectedChild(cocos2d::Node *child, bool cleanup)
             child->onExit();
         }
         
-#if CC_USE_PHYSICS
-        if (child->getPhysicsBody() != nullptr)
-        {
-            child->getPhysicsBody()->removeFromWorld();
-        }
-        
-#endif
         // If you don't do cleanup, the child's actions will not get removed and the
         // its scheduledSelectors_ dict will not get released!
         if (cleanup)
@@ -209,13 +184,6 @@ void ProtectedNode::removeAllProtectedChildrenWithCleanup(bool cleanup)
             child->onExitTransitionDidStart();
             child->onExit();
         }
-        
-#if CC_USE_PHYSICS
-        if (child->getPhysicsBody() != nullptr)
-        {
-            child->getPhysicsBody()->removeFromWorld();
-        }
-#endif
         
         if (cleanup)
         {

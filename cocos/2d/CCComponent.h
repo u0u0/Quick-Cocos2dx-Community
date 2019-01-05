@@ -33,12 +33,6 @@ NS_CC_BEGIN
 
 class Node;
 
-enum {
-    kComponentOnEnter,
-    kComponentOnExit,
-    kComponentOnUpdate
-};
-
 class CC_DLL Component : public Ref
 {
 CC_CONSTRUCTOR_ACCESS:
@@ -56,6 +50,9 @@ public:
 
     virtual void onEnter();
     virtual void onExit();
+	virtual void onAdd();
+	virtual void onRemove();
+
     virtual void update(float delta);
     virtual bool serialize(void* r);
     virtual bool isEnabled() const;

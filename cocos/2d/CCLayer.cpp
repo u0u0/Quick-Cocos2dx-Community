@@ -37,10 +37,6 @@ THE SOFTWARE.
 
 #include "base/ccUTF8.h"
 
-#if CC_USE_PHYSICS
-#include "physics/CCPhysicsBody.h"
-#endif
-
 NS_CC_BEGIN
 
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))

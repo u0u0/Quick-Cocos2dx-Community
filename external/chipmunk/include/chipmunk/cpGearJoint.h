@@ -1,4 +1,4 @@
-/* Copyright (c) 2007 Scott Lembcke
+/* Copyright (c) 2013 Scott Lembcke and Howling Moon Software
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -18,35 +18,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- 
-/// @defgroup cpPinJoint cpPinJoint
+
+/// @defgroup cpGearJoint cpGearJoint
 /// @{
 
-const cpConstraintClass *cpPinJointGetClass(void);
+/// Check if a constraint is a damped rotary springs.
+CP_EXPORT cpBool cpConstraintIsGearJoint(const cpConstraint *constraint);
 
-/// @private
-typedef struct cpPinJoint {
-	cpConstraint constraint;
-	cpVect anchr1, anchr2;
-	cpFloat dist;
-	
-	cpVect r1, r2;
-	cpVect n;
-	cpFloat nMass;
-	
-	cpFloat jnAcc;
-	cpFloat bias;
-} cpPinJoint;
+/// Allocate a gear joint.
+CP_EXPORT cpGearJoint* cpGearJointAlloc(void);
+/// Initialize a gear joint.
+CP_EXPORT cpGearJoint* cpGearJointInit(cpGearJoint *joint, cpBody *a, cpBody *b, cpFloat phase, cpFloat ratio);
+/// Allocate and initialize a gear joint.
+CP_EXPORT cpConstraint* cpGearJointNew(cpBody *a, cpBody *b, cpFloat phase, cpFloat ratio);
 
-/// Allocate a pin joint.
-cpPinJoint* cpPinJointAlloc(void);
-/// Initialize a pin joint.
-cpPinJoint* cpPinJointInit(cpPinJoint *joint, cpBody *a, cpBody *b, cpVect anchr1, cpVect anchr2);
-/// Allocate and initialize a pin joint.
-cpConstraint* cpPinJointNew(cpBody *a, cpBody *b, cpVect anchr1, cpVect anchr2);
+/// Get the phase offset of the gears.
+CP_EXPORT cpFloat cpGearJointGetPhase(const cpConstraint *constraint);
+/// Set the phase offset of the gears.
+CP_EXPORT void cpGearJointSetPhase(cpConstraint *constraint, cpFloat phase);
 
-CP_DefineConstraintProperty(cpPinJoint, cpVect, anchr1, Anchr1)
-CP_DefineConstraintProperty(cpPinJoint, cpVect, anchr2, Anchr2)
-CP_DefineConstraintProperty(cpPinJoint, cpFloat, dist, Dist)
+/// Get the angular distance of each ratchet.
+CP_EXPORT cpFloat cpGearJointGetRatio(const cpConstraint *constraint);
+/// Set the ratio of a gear joint.
+CP_EXPORT void cpGearJointSetRatio(cpConstraint *constraint, cpFloat ratio);
 
-///@}
+/// @}

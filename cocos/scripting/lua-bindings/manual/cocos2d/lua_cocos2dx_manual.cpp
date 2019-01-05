@@ -806,50 +806,6 @@ tolua_lerror:
     
     return 0;
 }
-int lua_cocos2dx_Node_removeFromPhysicsWorld(lua_State* tolua_S)
-{
-    int argc = 0;
-    cocos2d::Node* cobj = nullptr;
-    bool ok  = true;
-    
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-    
-    
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"cc.Node",0,&tolua_err)) goto tolua_lerror;
-#endif
-    
-    cobj = (cocos2d::Node*)tolua_tousertype(tolua_S,1,0);
-    
-#if COCOS2D_DEBUG >= 1
-    if (!cobj)
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_Node_removeFromPhysicsWorld'", nullptr);
-        return 0;
-    }
-#endif
-    
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0)
-    {
-        if(!ok)
-            return 0;
-        cobj->removeFromPhysicsWorld();
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "cc.Node:removeFromPhysicsWorld",argc, 0);
-    return 0;
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_Node_removeFromPhysicsWorld'.",&tolua_err);
-#endif
-    
-    return 0;
-}
 int lua_cocos2dx_Node_getPhysicsBody(lua_State* tolua_S)
 {
     int argc = 0;
@@ -2909,9 +2865,6 @@ static void extendNode(lua_State* tolua_S)
 #if CC_USE_PHYSICS
         lua_pushstring(tolua_S, "setPhysicsBody");
         lua_pushcfunction(tolua_S, lua_cocos2dx_Node_setPhysicsBody);
-        lua_rawset(tolua_S, -3);
-        lua_pushstring(tolua_S, "removeFromPhysicsWorld");
-        lua_pushcfunction(tolua_S, lua_cocos2dx_Node_removeFromPhysicsWorld);
         lua_rawset(tolua_S, -3);
         lua_pushstring(tolua_S, "getPhysicsBody");
         lua_pushcfunction(tolua_S, lua_cocos2dx_Node_getPhysicsBody);

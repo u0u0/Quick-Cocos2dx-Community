@@ -1,4 +1,4 @@
-/* Copyright (c) 2007 Scott Lembcke
+/* Copyright (c) 2013 Scott Lembcke and Howling Moon Software
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,46 +19,43 @@
  * SOFTWARE.
  */
 
-#ifndef CHIPMUNK_HEADER
-#define CHIPMUNK_HEADER
-
-#ifdef _MSC_VER
-    #define _USE_MATH_DEFINES
-#endif
+#ifndef CHIPMUNK_H
+#define CHIPMUNK_H
 
 #include <stdlib.h>
 #include <math.h>
+
+#ifndef alloca
+	#ifdef _WIN32
+		#include <malloc.h>
+	#elif defined(__FreeBSD__)
+		/* already included in <stdlib.h> */
+	#else
+		#include <alloca.h>
+	#endif
+#endif
+
+#ifdef _WIN32
+	#define CP_EXPORT __declspec(dllexport)
+#else
+	#define CP_EXPORT
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#ifndef CP_ALLOW_PRIVATE_ACCESS
-	#define CP_ALLOW_PRIVATE_ACCESS 0
-#endif
-
-#if CP_ALLOW_PRIVATE_ACCESS == 1
-	#define CP_PRIVATE(__symbol__) __symbol__
-#else
-	#define CP_PRIVATE(__symbol__) __symbol__##_private
-#endif
-
-void cpMessage(const char *condition, const char *file, int line, int isError, int isHardError, const char *message, ...);
+CP_EXPORT void cpMessage(const char *condition, const char *file, int line, int isError, int isHardError, const char *message, ...);
 #ifdef NDEBUG
 	#define	cpAssertWarn(__condition__, ...)
+	#define	cpAssertSoft(__condition__, ...)
 #else
+	#define cpAssertSoft(__condition__, ...) if(!(__condition__)){cpMessage(#__condition__, __FILE__, __LINE__, 1, 0, __VA_ARGS__); abort();}
 	#define cpAssertWarn(__condition__, ...) if(!(__condition__)) cpMessage(#__condition__, __FILE__, __LINE__, 0, 0, __VA_ARGS__)
 #endif
 
-#ifdef NDEBUG
-	#define	cpAssertSoft(__condition__, ...)
-#else
-	#define cpAssertSoft(__condition__, ...) if(!(__condition__)) cpMessage(#__condition__, __FILE__, __LINE__, 1, 0, __VA_ARGS__)
-#endif
-
-// Hard assertions are important and cheap to execute. They are not disabled by compiling as debug.
-#define cpAssertHard(__condition__, ...) if(!(__condition__)) cpMessage(#__condition__, __FILE__, __LINE__, 1, 1, __VA_ARGS__)
-
+// Hard assertions are used in situations where the program definitely will crash anyway, and the reason is inexpensive to detect.
+#define cpAssertHard(__condition__, ...) if(!(__condition__)){cpMessage(#__condition__, __FILE__, __LINE__, 1, 1, __VA_ARGS__); abort();}
 
 #include "chipmunk_types.h"
 	
@@ -89,85 +86,89 @@ typedef struct cpArray cpArray;
 typedef struct cpHashSet cpHashSet;
 
 typedef struct cpBody cpBody;
+
 typedef struct cpShape cpShape;
+typedef struct cpCircleShape cpCircleShape;
+typedef struct cpSegmentShape cpSegmentShape;
+typedef struct cpPolyShape cpPolyShape;
+
 typedef struct cpConstraint cpConstraint;
+typedef struct cpPinJoint cpPinJoint;
+typedef struct cpSlideJoint cpSlideJoint;
+typedef struct cpPivotJoint cpPivotJoint;
+typedef struct cpGrooveJoint cpGrooveJoint;
+typedef struct cpDampedSpring cpDampedSpring;
+typedef struct cpDampedRotarySpring cpDampedRotarySpring;
+typedef struct cpRotaryLimitJoint cpRotaryLimitJoint;
+typedef struct cpRatchetJoint cpRatchetJoint;
+typedef struct cpGearJoint cpGearJoint;
+typedef struct cpSimpleMotorJoint cpSimpleMotorJoint;
 
 typedef struct cpCollisionHandler cpCollisionHandler;
+typedef struct cpContactPointSet cpContactPointSet;
 typedef struct cpArbiter cpArbiter;
 
 typedef struct cpSpace cpSpace;
 
 #include "cpVect.h"
 #include "cpBB.h"
+#include "cpTransform.h"
 #include "cpSpatialIndex.h"
+
+#include "cpArbiter.h"	
 
 #include "cpBody.h"
 #include "cpShape.h"
 #include "cpPolyShape.h"
 
-#include "cpArbiter.h"	
-#include "constraints/cpConstraint.h"
+#include "cpConstraint.h"
 
 #include "cpSpace.h"
 
-// Chipmunk 6.2.1
-#define CP_VERSION_MAJOR 6
-#define CP_VERSION_MINOR 2
-#define CP_VERSION_RELEASE 1
+// Chipmunk 7.0.2
+#define CP_VERSION_MAJOR 7
+#define CP_VERSION_MINOR 0
+#define CP_VERSION_RELEASE 2
 
 /// Version string.
-extern const char *cpVersionString;
-
-/// @deprecated
-void cpInitChipmunk(void);
-
-/// Enables segment to segment shape collisions.
-void cpEnableSegmentToSegmentCollisions(void);
-
+CP_EXPORT extern const char *cpVersionString;
 
 /// Calculate the moment of inertia for a circle.
 /// @c r1 and @c r2 are the inner and outer diameters. A solid circle has an inner diameter of 0.
-cpFloat cpMomentForCircle(cpFloat m, cpFloat r1, cpFloat r2, cpVect offset);
+CP_EXPORT cpFloat cpMomentForCircle(cpFloat m, cpFloat r1, cpFloat r2, cpVect offset);
 
 /// Calculate area of a hollow circle.
 /// @c r1 and @c r2 are the inner and outer diameters. A solid circle has an inner diameter of 0.
-cpFloat cpAreaForCircle(cpFloat r1, cpFloat r2);
+CP_EXPORT cpFloat cpAreaForCircle(cpFloat r1, cpFloat r2);
 
 /// Calculate the moment of inertia for a line segment.
 /// Beveling radius is not supported.
-cpFloat cpMomentForSegment(cpFloat m, cpVect a, cpVect b);
+CP_EXPORT cpFloat cpMomentForSegment(cpFloat m, cpVect a, cpVect b, cpFloat radius);
 
 /// Calculate the area of a fattened (capsule shaped) line segment.
-cpFloat cpAreaForSegment(cpVect a, cpVect b, cpFloat r);
+CP_EXPORT cpFloat cpAreaForSegment(cpVect a, cpVect b, cpFloat radius);
 
 /// Calculate the moment of inertia for a solid polygon shape assuming it's center of gravity is at it's centroid. The offset is added to each vertex.
-cpFloat cpMomentForPoly(cpFloat m, int numVerts, const cpVect *verts, cpVect offset);
+CP_EXPORT cpFloat cpMomentForPoly(cpFloat m, int count, const cpVect *verts, cpVect offset, cpFloat radius);
 
 /// Calculate the signed area of a polygon. A Clockwise winding gives positive area.
 /// This is probably backwards from what you expect, but matches Chipmunk's the winding for poly shapes.
-cpFloat cpAreaForPoly(const int numVerts, const cpVect *verts);
+CP_EXPORT cpFloat cpAreaForPoly(const int count, const cpVect *verts, cpFloat radius);
 
 /// Calculate the natural centroid of a polygon.
-cpVect cpCentroidForPoly(const int numVerts, const cpVect *verts);
-
-/// Center the polygon on the origin. (Subtracts the centroid of the polygon from each vertex)
-void cpRecenterPoly(const int numVerts, cpVect *verts);
+CP_EXPORT cpVect cpCentroidForPoly(const int count, const cpVect *verts);
 
 /// Calculate the moment of inertia for a solid box.
-cpFloat cpMomentForBox(cpFloat m, cpFloat width, cpFloat height);
+CP_EXPORT cpFloat cpMomentForBox(cpFloat m, cpFloat width, cpFloat height);
 
 /// Calculate the moment of inertia for a solid box.
-cpFloat cpMomentForBox2(cpFloat m, cpBB box);
+CP_EXPORT cpFloat cpMomentForBox2(cpFloat m, cpBB box);
 
 /// Calculate the convex hull of a given set of points. Returns the count of points in the hull.
-/// @c result must be a pointer to a @c cpVect array with at least @c count elements. If @c result is @c NULL, then @c verts will be reduced instead.
+/// @c result must be a pointer to a @c cpVect array with at least @c count elements. If @c verts == @c result, then @c verts will be reduced inplace.
 /// @c first is an optional pointer to an integer to store where the first vertex in the hull came from (i.e. verts[first] == result[0])
 /// @c tol is the allowed amount to shrink the hull when simplifying it. A tolerance of 0.0 creates an exact hull.
-int cpConvexHull(int count, cpVect *verts, cpVect *result, int *first, cpFloat tol);
-
-#ifdef _MSC_VER
-#include "malloc.h"
-#endif
+CP_EXPORT int cpConvexHull(int count, const cpVect *verts, cpVect *result, int *first, cpFloat tol);
 
 /// Convenience macro to work with cpConvexHull.
 /// @c count and @c verts is the input array passed to cpConvexHull().
@@ -176,6 +177,15 @@ int cpConvexHull(int count, cpVect *verts, cpVect *result, int *first, cpFloat t
 #define CP_CONVEX_HULL(__count__, __verts__, __count_var__, __verts_var__) \
 cpVect *__verts_var__ = (cpVect *)alloca(__count__*sizeof(cpVect)); \
 int __count_var__ = cpConvexHull(__count__, __verts__, __verts_var__, NULL, 0.0); \
+
+/// Returns the closest point on the line segment ab, to the point p.
+static inline cpVect
+cpClosetPointOnSegment(const cpVect p, const cpVect a, const cpVect b)
+{
+	cpVect delta = cpvsub(a, b);
+	cpFloat t = cpfclamp01(cpvdot(delta, cpvsub(p, b))/cpvlengthsq(delta));
+	return cpvadd(b, cpvmult(delta, t));
+}
 
 #if defined(__has_extension)
 #if __has_extension(blocks)
@@ -191,14 +201,14 @@ void cpBodyEachShape_b(cpBody *body, void (^block)(cpShape *shape));
 void cpBodyEachConstraint_b(cpBody *body, void (^block)(cpConstraint *constraint));
 void cpBodyEachArbiter_b(cpBody *body, void (^block)(cpArbiter *arbiter));
 
-typedef void (^cpSpaceNearestPointQueryBlock)(cpShape *shape, cpFloat distance, cpVect point);
-void cpSpaceNearestPointQuery_b(cpSpace *space, cpVect point, cpFloat maxDistance, cpLayers layers, cpGroup group, cpSpaceNearestPointQueryBlock block);
+typedef void (^cpSpacePointQueryBlock)(cpShape *shape, cpVect point, cpFloat distance, cpVect gradient);
+void cpSpacePointQuery_b(cpSpace *space, cpVect point, cpFloat maxDistance, cpShapeFilter filter, cpSpacePointQueryBlock block);
 
-typedef void (^cpSpaceSegmentQueryBlock)(cpShape *shape, cpFloat t, cpVect n);
-void cpSpaceSegmentQuery_b(cpSpace *space, cpVect start, cpVect end, cpLayers layers, cpGroup group, cpSpaceSegmentQueryBlock block);
+typedef void (^cpSpaceSegmentQueryBlock)(cpShape *shape, cpVect point, cpVect normal, cpFloat alpha);
+void cpSpaceSegmentQuery_b(cpSpace *space, cpVect start, cpVect end, cpFloat radius, cpShapeFilter filter, cpSpaceSegmentQueryBlock block);
 
 typedef void (^cpSpaceBBQueryBlock)(cpShape *shape);
-void cpSpaceBBQuery_b(cpSpace *space, cpBB bb, cpLayers layers, cpGroup group, cpSpaceBBQueryBlock block);
+void cpSpaceBBQuery_b(cpSpace *space, cpBB bb, cpShapeFilter filter, cpSpaceBBQueryBlock block);
 
 typedef void (^cpSpaceShapeQueryBlock)(cpShape *shape, cpContactPointSet *points);
 cpBool cpSpaceShapeQuery_b(cpSpace *space, cpShape *shape, cpSpaceShapeQueryBlock block);

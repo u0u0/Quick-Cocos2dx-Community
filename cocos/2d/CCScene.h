@@ -106,20 +106,25 @@ private:
     
 #if CC_USE_PHYSICS
 public:
-    virtual void addChild(Node* child, int zOrder, int tag) override;
-    virtual void addChild(Node* child, int zOrder, const std::string &name) override;
-    virtual void update(float delta) override;
-    inline PhysicsWorld* getPhysicsWorld() { return _physicsWorld; }
-    static Scene *createWithPhysics();
-    
-CC_CONSTRUCTOR_ACCESS:
-    bool initWithPhysics();
-    
-protected:
-    void addChildToPhysicsWorld(Node* child);
+	/** Get the physics world of the scene.
+	* @return The physics world of the scene.
+	* @js NA
+	*/
+	PhysicsWorld* getPhysicsWorld() const { return _physicsWorld; }
 
-    PhysicsWorld* _physicsWorld;
-#endif // CC_USE_PHYSICS
+	/** Create a scene with physics.
+	* @return An autoreleased Scene object with physics.
+	* @js NA
+	*/
+	static Scene *createWithPhysics();
+	void stepPhysicsAndNavigation(float deltaTime);
+
+CC_CONSTRUCTOR_ACCESS:
+	bool initWithPhysics();
+
+protected:
+	PhysicsWorld* _physicsWorld;
+#endif // (CC_USE_PHYSICS || CC_USE_3D_PHYSICS)
 };
 
 // end of scene group
