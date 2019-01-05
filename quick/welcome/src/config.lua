@@ -8,9 +8,6 @@ DEBUG_FPS = false
 -- dump memory info every 10 seconds
 DEBUG_MEM = false
 
--- screen orientation
-CONFIG_SCREEN_ORIENTATION = "landscape"
-
 -- design resolution
 CONFIG_SCREEN_WIDTH  = 960
 CONFIG_SCREEN_HEIGHT = 640
