@@ -1,3 +1,28 @@
+Quick-Cocos2dx-Community v3.7.4 Release
+
+[改进] chipmunk 更新到 7.0.2，physics intergate 改进。
+[改进] Player添加物理引擎demo。
+[改进] EncodeRes.py 去掉xxtea.pyd依赖，Win32上可以使用64位的python来加密了。
+[改进] 新接口，cc.EventTouch:setTouches{cc.p(x,y), cc.p(x,y), …}。可以用来模拟触摸事件。
+[改进] config.lua 中去掉无用的变量。
+[改进] luasocket 的 socket open 添加异步线程，让第一次open不至于在某些特定情况下卡死UI。
+[改进] 更新 OpenAL 到 1.19.1。
+[改进] Scale9Sprite 添加 setGLProgramState 支持自定义shader。
+[改进] pb int64 最大值改进（max 2^ 53）。
+[改进] player的log路径修改为可写路径。
+[改进] iOS 模版工程改进，添加新的icon尺寸格式。
+[改进] Android studio模版配置改进，支持3.2的 AS。
+[改进] 同步-x win32输入法改进，并修正缩放bug。
+[改进] 改进Label，正确显示阴影。
+[改进] ClippingRectangleNode嵌套再改进，算法同 ccui.Layout。
+[改进] VideoPlayer 改进。
+
+[修正] Node:addNodeEventListener 如果先注册触摸，再注册节点，节点事件将添加失败。
+[修正] iOS的 applicationDidReceiveMemoryWarning 去掉 purgeCachedData() 调用，其方式粗暴，并对plist不友好。
+[修正] 同一csb动画，在另一个csb中引用多次，只能播放一次。
+[修正] spine 3.6 runtime 的两个官方修正同步。
+[修正] Android editbox 在setText的时候，修正光标位置位到末尾。
+
 Quick-Cocos2dx-Community v3.7.3 Release
 
 [新增]	创建新工程python脚本中添加 --deep-copy 选项，可导出cocos2d源码至新工程中。（感谢 guolihui112@gmail.com）。
