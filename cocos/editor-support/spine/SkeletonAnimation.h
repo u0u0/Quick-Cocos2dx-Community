@@ -37,6 +37,7 @@
 
 namespace spine {
 
+typedef std::function<void(void)> UpdateHook;
 typedef std::function<void(spTrackEntry* entry)> StartListener;
 typedef std::function<void(spTrackEntry* entry)> InterruptListener;
 typedef std::function<void(spTrackEntry* entry)> EndListener;
@@ -81,17 +82,18 @@ public:
 	void clearTracks ();
 	void clearTrack (int trackIndex = 0);
 
+	void setUpdateHook(const UpdateHook& hook);
 	void setStartListener (const StartListener& listener);
-    void setInterruptListener (const InterruptListener& listener);
+	void setInterruptListener (const InterruptListener& listener);
 	void setEndListener (const EndListener& listener);
-    void setDisposeListener (const DisposeListener& listener);
+	void setDisposeListener (const DisposeListener& listener);
 	void setCompleteListener (const CompleteListener& listener);
 	void setEventListener (const EventListener& listener);
 
 	void setTrackStartListener (spTrackEntry* entry, const StartListener& listener);
-    void setTrackInterruptListener (spTrackEntry* entry, const InterruptListener& listener);
+	void setTrackInterruptListener (spTrackEntry* entry, const InterruptListener& listener);
 	void setTrackEndListener (spTrackEntry* entry, const EndListener& listener);
-    void setTrackDisposeListener (spTrackEntry* entry, const DisposeListener& listener);
+	void setTrackDisposeListener (spTrackEntry* entry, const DisposeListener& listener);
 	void setTrackCompleteListener (spTrackEntry* entry, const CompleteListener& listener);
 	void setTrackEventListener (spTrackEntry* entry, const EventListener& listener);
 
@@ -110,10 +112,11 @@ protected:
 
 	bool _ownsAnimationStateData;
 
+	UpdateHook _updateHook;
 	StartListener _startListener;
-    InterruptListener _interruptListener;
+	InterruptListener _interruptListener;
 	EndListener _endListener;
-    DisposeListener _disposeListener;
+	DisposeListener _disposeListener;
 	CompleteListener _completeListener;
 	EventListener _eventListener;
 

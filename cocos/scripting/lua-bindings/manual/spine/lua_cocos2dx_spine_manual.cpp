@@ -301,6 +301,27 @@ int executeSpineEvent(LuaSkeletonAnimation* skeletonAnimation, int handler, spEv
     return ret;
 }
 
+static int tolua_Cocos2d_CCSkeletonAnimation_registerSpineUpdateHook(lua_State* tolua_S)
+{
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+        !tolua_isusertype(tolua_S, 1, "sp.SkeletonAnimation", 0, &tolua_err) ||
+        !toluafix_isfunction(tolua_S, 2, "LUA_FUNCTION", 0, &tolua_err)
+        ) {
+        tolua_error(tolua_S, "#ferror in function 'registerSpineUpdateHook'.", &tolua_err);
+        return 0;
+    }
+#endif
+    LuaSkeletonAnimation* self = (LuaSkeletonAnimation*)tolua_tousertype(tolua_S, 1, 0);
+    int handler = (toluafix_ref_function(tolua_S, 2, 0));
+    self->setUpdateHook([=](void) {
+        LuaEngine::getInstance()->getLuaStack()->executeFunctionByHandler(handler, 0);
+    });
+    ScriptHandlerMgr::getInstance()->addCustomHandler((void*)self, handler);
+    return 0;
+}
+
 static int tolua_Cocos2d_CCSkeletonAnimation_registerSpineEventHandler(lua_State* tolua_S)
 {
 #if COCOS2D_DEBUG >= 1
@@ -1443,6 +1464,7 @@ static void extendCCSkeletonAnimation(lua_State* L)
         tolua_function(L, "createWithData", lua_cocos2dx_CCSkeletonAnimation_createWithData);
         tolua_function(L, "createWithJsonFile", lua_cocos2dx_CCSkeletonAnimation_createWithJsonFile);
         tolua_function(L, "createWithBinaryFile", lua_cocos2dx_CCSkeletonAnimation_createWithBinaryFile);
+        tolua_function(L, "registerSpineUpdateHook", tolua_Cocos2d_CCSkeletonAnimation_registerSpineUpdateHook);
         tolua_function(L, "registerSpineEventHandler", tolua_Cocos2d_CCSkeletonAnimation_registerSpineEventHandler);
         tolua_function(L, "unregisterSpineEventHandler", tolua_Cocos2d_CCSkeletonAnimation_unregisterSpineEventHandler);
         tolua_function(L, "setBlendFunc", tolua_spine_SkeletoneAnimation_setBlendFunc);

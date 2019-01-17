@@ -133,6 +133,7 @@ void SkeletonAnimation::update (float deltaTime) {
 	deltaTime *= _timeScale;
 	spAnimationState_update(_state, deltaTime);
 	spAnimationState_apply(_state, _skeleton);
+	if (_updateHook) _updateHook();
 	spSkeleton_updateWorldTransform(_skeleton);
 }
 
@@ -244,6 +245,10 @@ void SkeletonAnimation::onTrackEntryEvent (spTrackEntry* entry, spEventType type
 		if (listeners->eventListener) listeners->eventListener(entry, event);
 		break;
 	}
+}
+
+void SkeletonAnimation::setUpdateHook(const UpdateHook& hook) {
+	_updateHook = hook;
 }
 
 void SkeletonAnimation::setStartListener (const StartListener& listener) {
