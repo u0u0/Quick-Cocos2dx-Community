@@ -75,6 +75,15 @@ typedef struct{
     char buf[IOSTRING_BUF_LEN];
 } IOString;
 
+union IntOrDouble
+{
+    double d;
+    struct {
+        int32_t a;
+        int32_t b;
+    } i;
+};
+
 static void pack_varint(luaL_Buffer *b, uint64_t value)
 {
     if (value >= 0x80)
@@ -387,7 +396,12 @@ static int struct_unpack(lua_State *L)
             }
         case 'd':
             {
-                lua_pushnumber(L, (lua_Number)*(double*)unpack_fixed64(buffer, out));
+                // use union to avoid crash on Android (signal 7)
+                int32_t *buf = (int32_t *)unpack_fixed64(buffer, out);
+                union IntOrDouble intOrDouble;
+                intOrDouble.i.a = *buf;
+                intOrDouble.i.b = *(buf + 1);
+                lua_pushnumber(L, (lua_Number)intOrDouble.d);
                 break;
             }
         case 'I':
