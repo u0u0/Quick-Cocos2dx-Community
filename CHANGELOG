@@ -1,3 +1,17 @@
+Quick-Cocos2dx-Community v3.7.5 Release
+
+注：最后一个NDK r10d 版本。
+
+[改进] clone 可以拷贝 ccui.Text 的color。"clone不推荐使用"。
+[改进] sp.SkeletonAnimation 添加 registerSpineUpdateHook，支持程序动画。
+[改进] sp.SkeletonAnimation 添加 setEmptyAnimation, setEmptyAnimations, addEmptyAnimation 用于清理track上的残余信息。
+[改进] Android 默认 APP_ABI armeabi-v7a。
+[改进] 升级 OpenSSL 到 1.0.2q。
+[改进] 升级 Curl 到 7.52.1。
+
+[修正] PB bugfix: unpack double crash. use union to avoid crash on Android (signal 7)
+[修正] 修正 Mac 下 log 被截断的问题。
+
 Quick-Cocos2dx-Community v3.7.4 Release
 
 [改进] chipmunk 更新到 7.0.2，physics intergate 改进。
