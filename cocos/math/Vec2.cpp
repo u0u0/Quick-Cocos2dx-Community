@@ -242,8 +242,8 @@ void Vec2::scale(const Vec2& scale)
 
 void Vec2::rotate(const Vec2& point, float angle)
 {
-    double sinAngle = sin(angle);
-    double cosAngle = cos(angle);
+    float sinAngle = sin(angle);
+    float cosAngle = cos(angle);
 
     if (point.isZero())
     {

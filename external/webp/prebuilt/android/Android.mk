@@ -8,10 +8,6 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../include/android
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cpufeatures
 
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-    LOCAL_CFLAGS := -DHAVE_NEON=1
-endif
-
 include $(PREBUILT_STATIC_LIBRARY)
 
 $(call import-module, android/cpufeatures)
