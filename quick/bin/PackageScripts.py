@@ -38,10 +38,10 @@ def initJitPath(mode):
     global new_env
     sysstr = platform.system()
     if(sysstr =="Windows"):
-        if "64" == mode:
-            print "Error: mode 64 not support on win32"
-            sys.exit(-1)
-        jitPath = joinDir(scriptRoot, "win32", "luajit.exe")
+        if "32" == mode:
+            jitPath = joinDir(scriptRoot, "win32", "luajit.exe")
+        else:
+            jitPath = joinDir(scriptRoot, "win32", "64", "luajit.exe")
     elif(sysstr == "Linux"):
         print "Liunux Support is coming sooooon"
         sys.exit(-1)
