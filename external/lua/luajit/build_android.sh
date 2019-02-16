@@ -47,4 +47,18 @@ if [ -f $SRCDIR/src/libluajit.a ]; then
     mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
 fi;
 
+# Android/ARM64 arm64-v8a
+NDKABI=21
+DESTDIR=$DIR/prebuilt/android/arm64-v8a
+NDKVER=$NDK/toolchains/aarch64-linux-android-4.9
+NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/aarch64-linux-android-
+NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm64"
+rm "$DESTDIR"/*.a
+make clean
+make CC=gcc HOST_CC="gcc -m64" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
+
+if [ -f $SRCDIR/src/libluajit.a ]; then
+    mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
+fi;
+
 make clean

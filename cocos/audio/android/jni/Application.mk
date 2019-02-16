@@ -1,6 +1,7 @@
 # independent ogg so ,and build it in DEBUG mode to get float optimization
 # `ndk-build NDK_DEBUG=1`
 
+# APP_PLATFORM := android-21 for arm64-v8a
 APP_PLATFORM := android-10
 APP_STL := gnustl_static
 NDK_TOOLCHAIN_VERSION=4.9

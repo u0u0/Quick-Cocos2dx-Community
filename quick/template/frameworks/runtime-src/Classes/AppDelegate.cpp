@@ -113,14 +113,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if 0
     LuaStack* stack = engine->getLuaStack();
     // use luajit bytecode package
-#ifdef CC_TARGET_OS_IPHONE
-    if (sizeof(long) == 4) {
-        stack->loadChunksFromZIP("res/game32.zip");
-    } else {
-        stack->loadChunksFromZIP("res/game64.zip");
-    }
+#if defined(__aarch64__) || defined(__arm64__)
+    stack->loadChunksFromZIP("res/game64.zip");
 #else
-    // android, mac, win32, etc
     stack->loadChunksFromZIP("res/game32.zip");
 #endif
     stack->executeString("require 'main'");
