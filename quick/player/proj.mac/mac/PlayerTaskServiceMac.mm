@@ -139,8 +139,13 @@ void PlayerTaskMac::runInTerminal()
     NSString *s = [NSString stringWithFormat:
                    @"tell application \"Terminal\" to do script \"%s %s\"", _executePath.c_str(), _commandLineArguments.c_str()];
     
-    NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
-    [as executeAndReturnError:nil];
+    NSAppleScript *as = [[NSAppleScript alloc] initWithSource:s];
+    NSDictionary *error = [NSDictionary new];
+    if ([as executeAndReturnError:&error]) {
+        NSLog(@"Call Terminal sucessful");
+    } else {
+        NSLog(@"%@", error);
+    }
 }
 
 void PlayerTaskMac::stop()
