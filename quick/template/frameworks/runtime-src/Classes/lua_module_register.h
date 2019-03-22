@@ -8,6 +8,7 @@
 #include "spine/lua_cocos2dx_spine_manual.hpp"
 #include "3d/lua_cocos2dx_3d_manual.h"
 #include "lua/quick/lua_cocos2dx_quick_manual.hpp"
+#include "dragonBones/lua_dragonBones.hpp"
 
 int lua_module_register(lua_State* L)
 {
@@ -23,6 +24,9 @@ int lua_module_register(lua_State* L)
 #endif
 #if CC_USE_3D
     register_cocos3d_module(L);
+#endif
+#if CC_USE_DRAGONBONES
+    register_dragonBones_manual(L);
 #endif
     return 1;
 }

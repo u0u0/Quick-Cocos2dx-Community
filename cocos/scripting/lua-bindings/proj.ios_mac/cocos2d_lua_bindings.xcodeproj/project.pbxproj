@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0A54F1211BBFBFEA0018E100 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A54F1201BBFBFEA0018E100 /* libluajit.a */; };
 		0A54F1231BBFBFFC0018E100 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A54F1221BBFBFFC0018E100 /* libluajit.a */; };
+		0A767FEC2242888D00DF5418 /* lua_dragonBones.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0A767FEA2242888D00DF5418 /* lua_dragonBones.hpp */; };
+		0A767FED2242888D00DF5418 /* lua_dragonBones.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0A767FEA2242888D00DF5418 /* lua_dragonBones.hpp */; };
+		0A767FEE2242888D00DF5418 /* lua_dragonBones.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A767FEB2242888D00DF5418 /* lua_dragonBones.cpp */; };
+		0A767FEF2242888D00DF5418 /* lua_dragonBones.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A767FEB2242888D00DF5418 /* lua_dragonBones.cpp */; };
 		0ABBE48D1EEAE289009D155C /* lua_cocos2dx_tmx_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBE48B1EEAE289009D155C /* lua_cocos2dx_tmx_auto.cpp */; };
 		0ABBE48E1EEAE289009D155C /* lua_cocos2dx_tmx_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBE48B1EEAE289009D155C /* lua_cocos2dx_tmx_auto.cpp */; };
 		0ABBE48F1EEAE289009D155C /* lua_cocos2dx_tmx_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0ABBE48C1EEAE289009D155C /* lua_cocos2dx_tmx_auto.hpp */; };
@@ -244,6 +248,8 @@
 /* Begin PBXFileReference section */
 		0A54F1201BBFBFEA0018E100 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../../../../external/lua/luajit/prebuilt/mac/libluajit.a; sourceTree = "<group>"; };
 		0A54F1221BBFBFFC0018E100 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../../../../external/lua/luajit/prebuilt/ios/libluajit.a; sourceTree = "<group>"; };
+		0A767FEA2242888D00DF5418 /* lua_dragonBones.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_dragonBones.hpp; sourceTree = "<group>"; };
+		0A767FEB2242888D00DF5418 /* lua_dragonBones.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_dragonBones.cpp; sourceTree = "<group>"; };
 		0ABBE48B1EEAE289009D155C /* lua_cocos2dx_tmx_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_tmx_auto.cpp; sourceTree = "<group>"; };
 		0ABBE48C1EEAE289009D155C /* lua_cocos2dx_tmx_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_tmx_auto.hpp; sourceTree = "<group>"; };
 		0AF0F28F1A7F5871008A3021 /* lua_spSkeletonData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_spSkeletonData.cpp; sourceTree = "<group>"; };
@@ -388,6 +394,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A767FE92242888D00DF5418 /* dragonBones */ = {
+			isa = PBXGroup;
+			children = (
+				0A767FEA2242888D00DF5418 /* lua_dragonBones.hpp */,
+				0A767FEB2242888D00DF5418 /* lua_dragonBones.cpp */,
+			);
+			path = dragonBones;
+			sourceTree = "<group>";
+		};
 		0AFC99311E91F48C00F3D63F /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +549,7 @@
 				0AFC99311E91F48C00F3D63F /* audio */,
 				158C128419A0FA1300781A76 /* 3d */,
 				15EFA400198B2AB2000C57D3 /* cocostudio */,
+				0A767FE92242888D00DF5418 /* dragonBones */,
 				15C1BD001986526C00A46ACC /* network */,
 				15C1BD141986526C00A46ACC /* spine */,
 				15C1BD191986526C00A46ACC /* ui */,
@@ -658,6 +674,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A767FEC2242888D00DF5418 /* lua_dragonBones.hpp in Headers */,
 				15EFA1F71989E582000C57D3 /* lua_cocos2dx_experimental_auto.hpp in Headers */,
 				15415AA719A71A53004F1E71 /* auxiliar.h in Headers */,
 				155C7E1019A71C9D00F08B25 /* lua_extensions.h in Headers */,
@@ -718,6 +735,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A767FED2242888D00DF5418 /* lua_dragonBones.hpp in Headers */,
 				15415AA819A71A53004F1E71 /* auxiliar.h in Headers */,
 				155C7E1119A71C9F00F08B25 /* lua_extensions.h in Headers */,
 				15415AC019A71A53004F1E71 /* mime.h in Headers */,
@@ -855,6 +873,7 @@
 				15AC69DA1987710400D17520 /* tolua_is.c in Sources */,
 				15415ACD19A71A53004F1E71 /* tcp.c in Sources */,
 				15AC69DB1987710400D17520 /* tolua_map.c in Sources */,
+				0A767FEE2242888D00DF5418 /* lua_dragonBones.cpp in Sources */,
 				15415AD519A71A53004F1E71 /* udp.c in Sources */,
 				15415ADD19A71A53004F1E71 /* usocket.c in Sources */,
 				DA1769F71A1B1351006F5EA8 /* lua_cocos2dx_csloader_auto.cpp in Sources */,
@@ -924,6 +943,7 @@
 				15EFA64A198B3311000C57D3 /* tolua_to.c in Sources */,
 				15415AC219A71A53004F1E71 /* options.c in Sources */,
 				15EFA645198B32DB000C57D3 /* xxtea.cpp in Sources */,
+				0A767FEF2242888D00DF5418 /* lua_dragonBones.cpp in Sources */,
 				15EFA632198B328B000C57D3 /* CCLuaBridge.cpp in Sources */,
 				15EFA633198B328B000C57D3 /* CCLuaEngine.cpp in Sources */,
 				155C7DEE19A71BFC00F08B25 /* lua_cocos2dx_experimental_video_auto.cpp in Sources */,
@@ -1014,7 +1034,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../.. $(SRCROOT)/../../../base $(SRCROOT)/../../../3d $(SRCROOT)/../../../2d $(SRCROOT)/../../../physics $(SRCROOT)/../../../math/kazmath $(SRCROOT)/../../../2d/platform $(SRCROOT)/../../../audio/ $(SRCROOT)/../../../editor-support $(SRCROOT)/../../../editor-support/spine $(SRCROOT)/../../../editor-support/cocostudio $(SRCROOT)/../../../editor-support/cocosbuilder $(SRCROOT)/../../../ui $(SRCROOT)/../../../storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external/lua $(SRCROOT)/../../../../external/lua/luajit/include $(SRCROOT)/../../../../external/lua/tolua $(SRCROOT)/../../../editor-support/cocostudio/ActionTimeline";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../.. $(SRCROOT)/../../../base $(SRCROOT)/../../../3d $(SRCROOT)/../../../2d $(SRCROOT)/../../../physics $(SRCROOT)/../../../math/kazmath $(SRCROOT)/../../../2d/platform $(SRCROOT)/../../../audio/ $(SRCROOT)/../../../editor-support $(SRCROOT)/../../../editor-support/spine $(SRCROOT)/../../../editor-support/cocostudio $(SRCROOT)/../../../editor-support/dragonBones $(SRCROOT)/../../../ui $(SRCROOT)/../../../storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external/lua $(SRCROOT)/../../../../external/lua/luajit/include $(SRCROOT)/../../../../external/lua/tolua $(SRCROOT)/../../../editor-support/cocostudio/ActionTimeline";
 			};
 			name = Debug;
 		};
@@ -1047,7 +1067,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../.. $(SRCROOT)/../../../base $(SRCROOT)/../../../3d $(SRCROOT)/../../../2d $(SRCROOT)/../../../physics $(SRCROOT)/../../../math/kazmath $(SRCROOT)/../../../2d/platform $(SRCROOT)/../../../audio/ $(SRCROOT)/../../../editor-support $(SRCROOT)/../../../editor-support/spine $(SRCROOT)/../../../editor-support/cocostudio $(SRCROOT)/../../../editor-support/cocosbuilder $(SRCROOT)/../../../ui $(SRCROOT)/../../../storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external/lua $(SRCROOT)/../../../../external/lua/luajit/include $(SRCROOT)/../../../../external/lua/tolua $(SRCROOT)/../../../editor-support/cocostudio/ActionTimeline";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../.. $(SRCROOT)/../../../base $(SRCROOT)/../../../3d $(SRCROOT)/../../../2d $(SRCROOT)/../../../physics $(SRCROOT)/../../../math/kazmath $(SRCROOT)/../../../2d/platform $(SRCROOT)/../../../audio/ $(SRCROOT)/../../../editor-support $(SRCROOT)/../../../editor-support/spine $(SRCROOT)/../../../editor-support/cocostudio $(SRCROOT)/../../../editor-support/dragonBones $(SRCROOT)/../../../ui $(SRCROOT)/../../../storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external/lua $(SRCROOT)/../../../../external/lua/luajit/include $(SRCROOT)/../../../../external/lua/tolua $(SRCROOT)/../../../editor-support/cocostudio/ActionTimeline";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

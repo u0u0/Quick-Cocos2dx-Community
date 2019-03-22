@@ -301,6 +301,12 @@ To enable set it to a value different than 0. Disabled by default.
 #define CC_USE_SPINE  1
 #endif // CC_USE_SPINE
 
+/** Use dragonBones or not. If your application don't use dragonBones, you can undefine this macro to save package size.
+ */
+#ifndef CC_USE_DRAGONBONES
+#define CC_USE_DRAGONBONES  1
+#endif // CC_USE_DRAGONBONES
+
 /** Use 3d sprites or not. If your application don't use 3d, you can undefine this macro to save package size.
  */
 #ifndef CC_USE_3D
