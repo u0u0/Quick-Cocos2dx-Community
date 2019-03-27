@@ -130,6 +130,8 @@ protected:
     cocos2d::TrianglesCommand _command;
 public:
     virtual void draw(cocos2d::Renderer* renderer, const cocos2d::Mat4& transform, uint32_t flags) override;
+    virtual void updateDisplayedOpacity(GLubyte parentOpacity) override;
+    virtual void updateDisplayedColor(const cocos2d::Color3B& parentColor) override;
     /**
      * Modify for Quick-Cocos2dx-Community
      */
