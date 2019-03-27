@@ -55,7 +55,7 @@ public:
         setEventDispatcher(_dispatcher);
         _dispatcher->setEnabled(true);
     }
-    ~CCArmatureDisplay() { CC_SAFE_RELEASE(_dispatcher); }
+    ~CCArmatureDisplay() {}
 
 public:
     /**

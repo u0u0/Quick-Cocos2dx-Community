@@ -29,7 +29,7 @@ void CCArmatureDisplay::dbClear()
     setEventDispatcher(cocos2d::Director::getInstance()->getEventDispatcher());
 
     _armature = nullptr;
-    CC_SAFE_RELEASE(_dispatcher);
+    CC_SAFE_RELEASE_NULL(_dispatcher);
     release();
 }
 
