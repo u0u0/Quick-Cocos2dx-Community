@@ -135,6 +135,19 @@ DBCCSprite::~DBCCSprite()
     }
 }
 
+// MARK: RGBA protocol
+void DBCCSprite::updateColor(void)
+{
+    cocos2d::Sprite::updateColor();
+    if (_triangles) { // cc.Fade or cc.Tint fix for Mesh
+        // Sprite::updateColor has updated the color, just get it from _quad
+        cocos2d::Color4B color4 = _quad.bl.colors;
+        for (std::size_t i = 0; i < _triangles->vertCount; i++) {
+            _triangles->verts[i].colors = color4;
+        }
+    }
+}
+
 void DBCCSprite::draw(cocos2d::Renderer* renderer, const cocos2d::Mat4& transform, uint32_t flags)
 {
     if (_triangles) { // Mesh
@@ -164,34 +177,6 @@ void DBCCSprite::draw(cocos2d::Renderer* renderer, const cocos2d::Mat4& transfor
 #endif //CC_SPRITE_DEBUG_DRAW
     } else {
         cocos2d::Sprite::draw(renderer, transform, flags);
-    }
-}
-
-void DBCCSprite::updateDisplayedOpacity(GLubyte parentOpacity)
-{
-    cocos2d::Sprite::updateDisplayedOpacity(parentOpacity);
-    if (_triangles) { // cc.Fade or cc.Tint fix for Mesh
-        for (std::size_t i = 0; i < _triangles->vertCount; i++) {
-            cocos2d::Color4B &color = _triangles->verts[i].colors;
-            // do PREMULTIPLIED for sprite _blendFunc
-            color.r = color.r * _displayedOpacity / 255;
-            color.g = color.g * _displayedOpacity / 255;
-            color.b = color.b * _displayedOpacity / 255;
-            color.a = _displayedOpacity;
-        }
-    }
-}
-
-void DBCCSprite::updateDisplayedColor(const cocos2d::Color3B& parentColor)
-{
-    cocos2d::Sprite::updateDisplayedColor(parentColor);
-    if (_triangles) { // cc.Fade or cc.Tint fix for Mesh
-        for (std::size_t i = 0; i < _triangles->vertCount; i++) {
-            cocos2d::Color4B &color = _triangles->verts[i].colors;
-            color.r = _displayedColor.r;
-            color.g = _displayedColor.g;
-            color.b = _displayedColor.b;
-        }
     }
 }
 
