@@ -76,7 +76,7 @@ def doFile(path, luaRoot, zFile):
     # fix the file modify time
     os.utime(tmp, (1330712280, 1330712280))
     # add to zip file
-    zFile.write(tmp, moduleName)
+    zFile.write(tmp, moduleName, zipfile.ZIP_DEFLATED)
     # remove temp file
     os.unlink(tmp)
 
