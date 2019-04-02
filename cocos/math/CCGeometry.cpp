@@ -169,15 +169,10 @@ float Rect::getMinY() const
 
 bool Rect::containsPoint(const Vec2& point) const
 {
-    bool bRet = false;
-
-    if (point.x >= getMinX() && point.x <= getMaxX()
-        && point.y >= getMinY() && point.y <= getMaxY())
-    {
-        bRet = true;
-    }
-
-    return bRet;
+    return (point.x >= getMinX() &&
+            point.x <= getMaxX() &&
+            point.y >= getMinY() &&
+            point.y <= getMaxY());
 }
 
 bool Rect::intersectsRect(const Rect& rect) const
@@ -190,19 +185,11 @@ bool Rect::intersectsRect(const Rect& rect) const
 
 void Rect::merge(const Rect& rect)
 {
-    float top1    = getMaxY();
-    float left1   = getMinX();
-    float right1  = getMaxX();
-    float bottom1 = getMinY();
-    
-    float top2    = rect.getMaxY();
-    float left2   = rect.getMinX();
-    float right2  = rect.getMaxX();
-    float bottom2 = rect.getMinY();
-    origin.x = std::min(left1, left2);
-    origin.y = std::min(bottom1, bottom2);
-    size.width = std::max(right1, right2) - origin.x;
-    size.height = std::max(top1, top2) - origin.y;
+    float minX = std::min(getMinX(), rect.getMinX());
+    float minY = std::min(getMinY(), rect.getMinY());
+    float maxX = std::max(getMaxX(), rect.getMaxX());
+    float maxY = std::max(getMaxY(), rect.getMaxY());
+    setRect(minX, minY, maxX - minX, maxY - minY);
 }
 
 Rect Rect::unionWithRect(const Rect & rect) const

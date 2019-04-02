@@ -404,10 +404,9 @@ void Layout::onBeforeVisitScissor()
     auto glview = Director::getInstance()->getOpenGLView();
     if (glview->isScissorEnabled())
     {
-        GLfloat params[4];
-        glGetFloatv(GL_SCISSOR_BOX, params);
-        _clippingOldRect = Rect(params[0], params[1], params[2], params[3]);
+        _clippingOldRect = glview->getScissorRect();
     } else {
+        _clippingOldRect = Rect::ZERO;
         glEnable(GL_SCISSOR_TEST);
     }
     
@@ -420,10 +419,10 @@ void Layout::onAfterVisitScissor()
 {
     // revert scissor box
     if (!_clippingOldRect.equals(Rect::ZERO)) {
-        glScissor(_clippingOldRect.origin.x,
-                  _clippingOldRect.origin.y,
-                  _clippingOldRect.size.width,
-                  _clippingOldRect.size.height);
+        Director::getInstance()->getOpenGLView()->setScissorInPoints(_clippingOldRect.origin.x,
+                _clippingOldRect.origin.y,
+                _clippingOldRect.size.width,
+                _clippingOldRect.size.height);
     } else {
         glDisable(GL_SCISSOR_TEST);
     }

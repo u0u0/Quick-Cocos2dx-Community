@@ -597,10 +597,11 @@ void GLViewImpl::setFrameSize(float width, float height)
 
 void GLViewImpl::setViewPortInPoints(float x , float y , float w , float h)
 {
-    glViewport((GLint)(x * _scaleX * _retinaFactor * _frameZoomFactor + _viewPortRect.origin.x * _retinaFactor * _frameZoomFactor),
-               (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
-               (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
-               (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
+    float deskFactor = _retinaFactor * _frameZoomFactor;
+    glViewport((GLint)(x * _scaleX * deskFactor + _viewPortRect.origin.x * deskFactor),
+               (GLint)(y * _scaleY * deskFactor + _viewPortRect.origin.y * deskFactor),
+               (GLsizei)(w * _scaleX * deskFactor),
+               (GLsizei)(h * _scaleY * deskFactor));
 }
 
 void GLViewImpl::setScissorInPoints(float x , float y , float w , float h)
@@ -609,10 +610,28 @@ void GLViewImpl::setScissorInPoints(float x , float y , float w , float h)
         glScissor(x, y, w, h);
         return;
     }
-    glScissor((GLint)(x * _scaleX * _retinaFactor * _frameZoomFactor + _viewPortRect.origin.x * _retinaFactor * _frameZoomFactor),
-              (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
-              (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
-              (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
+    float deskFactor = _retinaFactor * _frameZoomFactor;
+    glScissor((GLint)(x * _scaleX * deskFactor + _viewPortRect.origin.x * deskFactor),
+              (GLint)(y * _scaleY * deskFactor + _viewPortRect.origin.y * deskFactor),
+              (GLsizei)(w * _scaleX * deskFactor),
+              (GLsizei)(h * _scaleY * deskFactor));
+}
+
+Rect GLViewImpl::getScissorRect() const
+{
+    GLfloat params[4];
+    glGetFloatv(GL_SCISSOR_BOX, params);
+
+    if (_isRenderTextureMode) {
+        return Rect(params[0], params[1], params[2], params[3]);
+    }
+
+    float deskFactor = _retinaFactor * _frameZoomFactor;
+    float x = (params[0] - _viewPortRect.origin.x) / _scaleX / deskFactor;
+    float y = (params[1] - _viewPortRect.origin.y) / _scaleY / deskFactor;
+    float w = params[2] / _scaleX / deskFactor;
+    float h = params[3] / _scaleY / deskFactor;
+    return Rect(x, y, w, h);
 }
 
 void GLViewImpl::onGLFWError(int errorID, const char* errorDesc)

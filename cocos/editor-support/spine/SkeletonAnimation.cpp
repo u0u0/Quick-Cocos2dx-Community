@@ -116,6 +116,7 @@ void SkeletonAnimation::initialize () {
 	_state->listener = animationCallback;
 
 	_spAnimationState* stateInternal = (_spAnimationState*)_state;
+	_firstDraw = true;
 }
 
 SkeletonAnimation::SkeletonAnimation ()
@@ -133,7 +134,16 @@ void SkeletonAnimation::update (float deltaTime) {
 	deltaTime *= _timeScale;
 	spAnimationState_update(_state, deltaTime);
 	spAnimationState_apply(_state, _skeleton);
+	if (_updateHook) _updateHook();
 	spSkeleton_updateWorldTransform(_skeleton);
+}
+
+void SkeletonAnimation::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t transformFlags) {
+	if (_firstDraw) {
+		_firstDraw = false;
+		update(0);
+	}
+	super::draw(renderer, transform, transformFlags);
 }
 
 void SkeletonAnimation::setAnimationStateData (spAnimationStateData* stateData) {
@@ -244,6 +254,10 @@ void SkeletonAnimation::onTrackEntryEvent (spTrackEntry* entry, spEventType type
 		if (listeners->eventListener) listeners->eventListener(entry, event);
 		break;
 	}
+}
+
+void SkeletonAnimation::setUpdateHook(const UpdateHook& hook) {
+	_updateHook = hook;
 }
 
 void SkeletonAnimation::setStartListener (const StartListener& listener) {

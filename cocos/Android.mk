@@ -158,11 +158,6 @@ physics/CCPhysicsContact.cpp \
 physics/CCPhysicsJoint.cpp \
 physics/CCPhysicsShape.cpp \
 physics/CCPhysicsWorld.cpp \
-physics/chipmunk/CCPhysicsBodyInfo_chipmunk.cpp \
-physics/chipmunk/CCPhysicsContactInfo_chipmunk.cpp \
-physics/chipmunk/CCPhysicsJointInfo_chipmunk.cpp \
-physics/chipmunk/CCPhysicsShapeInfo_chipmunk.cpp \
-physics/chipmunk/CCPhysicsWorldInfo_chipmunk.cpp \
 ../external/ConvertUTF/ConvertUTFWrapper.cpp \
 ../external/ConvertUTF/ConvertUTF.c \
 ../external/tinyxml2/tinyxml2.cpp \
@@ -181,7 +176,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
                     $(LOCAL_PATH)/../external/unzip \
-                    $(LOCAL_PATH)/../external/chipmunk/include/chipmunk \
+                    $(LOCAL_PATH)/../external/chipmunk/include \
                     $(LOCAL_PATH)/../external/xxhash
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
@@ -190,7 +185,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
                     $(LOCAL_PATH)/../external/unzip \
-                    $(LOCAL_PATH)/../external/chipmunk/include/chipmunk \
+                    $(LOCAL_PATH)/../external/chipmunk/include \
                     $(LOCAL_PATH)/../external/edtaa3func \
                     $(LOCAL_PATH)/../external/xxhash \
                     $(LOCAL_PATH)/../external/ConvertUTF \
@@ -217,10 +212,6 @@ LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API
 LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-LOCAL_ARM_NEON  := true
-endif
-
 include $(BUILD_STATIC_LIBRARY)
 
 #==============================================================
@@ -233,6 +224,7 @@ LOCAL_MODULE_FILENAME := libcocos2d
 LOCAL_STATIC_LIBRARIES := cocostudio_static
 LOCAL_STATIC_LIBRARIES += cocos3d_static
 LOCAL_STATIC_LIBRARIES += spine_static
+LOCAL_STATIC_LIBRARIES += dragonBones_static
 LOCAL_STATIC_LIBRARIES += cocos_network_static
 LOCAL_STATIC_LIBRARIES += static_Rapid2DAudio
 
@@ -249,6 +241,7 @@ $(call import-module,3d)
 $(call import-module,audio)
 $(call import-module,editor-support/cocostudio)
 $(call import-module,editor-support/spine)
+$(call import-module,editor-support/dragonBones)
 $(call import-module,network)
 $(call import-module,ui)
 $(call import-module,Box2D)

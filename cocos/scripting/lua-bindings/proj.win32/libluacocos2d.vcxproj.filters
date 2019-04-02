@@ -49,6 +49,9 @@
     <Filter Include="manual\audio">
       <UniqueIdentifier>{286acdc5-4efe-4fff-baf5-cbaca487abf9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="manual\dragonBones">
+      <UniqueIdentifier>{37f98dd4-f0f3-4622-a81b-e29259ec4453}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\auto\lua_cocos2dx_tmx_auto.cpp">
@@ -221,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\external\lua\luasocket\asynconnect.cpp">
       <Filter>luasocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\manual\dragonBones\lua_dragonBones.cpp">
+      <Filter>manual\dragonBones</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="..\manual\audio\lua_audio_manual.h">
       <Filter>manual\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\manual\dragonBones\lua_dragonBones.hpp">
+      <Filter>manual\dragonBones</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

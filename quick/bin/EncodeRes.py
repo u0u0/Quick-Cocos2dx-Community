@@ -18,24 +18,79 @@ import sys
 import getopt
 import shutil
 import re
-import platform
-# import subprocess
+
+############################################################
+#http://www.coolcode.org/archives/?article-307.html
+############################################################
+
+import struct
+
+_DELTA = 0x9E3779B9
+
+def _long2str(v, w):
+    n = (len(v) - 1) << 2
+    if w:
+        m = v[-1]
+        if (m < n - 3) or (m > n): return ''
+        n = m
+    s = struct.pack('<%iL' % len(v), *v)
+    return s[0:n] if w else s
+
+def _str2long(s, w):
+    n = len(s)
+    m = (4 - (n & 3) & 3) + n
+    s = s.ljust(m, "\0")
+    v = list(struct.unpack('<%iL' % (m >> 2), s))
+    if w: v.append(n)
+    return v
+
+def xxteaEncrypt(str, key):
+    if str == '': return str
+    v = _str2long(str, True)
+    k = _str2long(key.ljust(16, "\0"), False)
+    n = len(v) - 1
+    z = v[n]
+    y = v[0]
+    sum = 0
+    q = 6 + 52 // (n + 1)
+    while q > 0:
+        sum = (sum + _DELTA) & 0xffffffff
+        e = sum >> 2 & 3
+        for p in xrange(n):
+            y = v[p + 1]
+            v[p] = (v[p] + ((z >> 5 ^ y << 2) + (y >> 3 ^ z << 4) ^ (sum ^ y) + (k[p & 3 ^ e] ^ z))) & 0xffffffff
+            z = v[p]
+        y = v[0]
+        v[n] = (v[n] + ((z >> 5 ^ y << 2) + (y >> 3 ^ z << 4) ^ (sum ^ y) + (k[n & 3 ^ e] ^ z))) & 0xffffffff
+        z = v[n]
+        q -= 1
+    return _long2str(v, False)
+
+def xxteaDecrypt(str, key):
+    if str == '': return str
+    v = _str2long(str, False)
+    k = _str2long(key.ljust(16, "\0"), False)
+    n = len(v) - 1
+    z = v[n]
+    y = v[0]
+    q = 6 + 52 // (n + 1)
+    sum = (q * _DELTA) & 0xffffffff
+    while (sum != 0):
+        e = sum >> 2 & 3
+        for p in xrange(n, 0, -1):
+            z = v[p - 1]
+            v[p] = (v[p] - ((z >> 5 ^ y << 2) + (y >> 3 ^ z << 4) ^ (sum ^ y) + (k[p & 3 ^ e] ^ z))) & 0xffffffff
+            y = v[p]
+        z = v[n]
+        v[0] = (v[0] - ((z >> 5 ^ y << 2) + (y >> 3 ^ z << 4) ^ (sum ^ y) + (k[0 & 3 ^ e] ^ z))) & 0xffffffff
+        y = v[0]
+        sum = (sum - _DELTA) & 0xffffffff
+    return _long2str(v, True)
+
+##########################################
 
 scriptRoot = os.path.split(os.path.realpath(__file__))[0]
 engineRoot = os.environ.get('QUICK_V3_ROOT')
-
-# load xxtea
-sysstr = platform.system()
-if(sysstr =="Windows"):
-    from win32 import xxtea
-elif(sysstr == "Linux"):
-    print "Liunux Support is coming sooooon"
-    sys.exit(-1)
-elif(sysstr == "Darwin"):
-    from mac import xxtea
-else:
-    print "Unsupport OS!"
-    sys.exit(-1)
 
 # ----- function define --------
 def joinDir(root, *dirs):
@@ -44,7 +99,7 @@ def joinDir(root, *dirs):
     return root
 
 def checkFileExt(path):
-    binExt = [".zip", ".jpg", ".jpeg", ".png", ".pvr", ".ccz", ".bmp", ".tmx", ".plist"]
+    binExt = [".ogg", ".zip", ".jpg", ".jpeg", ".png", ".pvr", ".ccz", ".bmp", ".tmx", ".plist"]
     ext = os.path.splitext(path)[1]
     ext = ext.lower()
     return ext in binExt
@@ -58,7 +113,7 @@ def copyFile(src, dest, encodeSign, encodeKey):
 
     if checkFileExt(src):
         # xxtea encoder
-        buff = encodeSign + xxtea.encrypt(buff, encodeKey)
+        buff = encodeSign + xxteaEncrypt(buff, encodeKey)
 
     outFp = open(dest, 'wb')
     outFp.write(buff)

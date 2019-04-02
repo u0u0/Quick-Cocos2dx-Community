@@ -16,8 +16,6 @@ NS_CC_EXTRA_BEGIN
 class Network
 {
 public:
-#pragma mark -
-#pragma mark reachability
     
     /** @brief Checks whether a local wifi connection is available */
     static bool isLocalWiFiAvailable(void);
@@ -30,9 +28,6 @@ public:
     
     /** @brief Checks Internet connection reachability status */
     static int getInternetConnectionStatus(void);
-    
-#pragma mark -
-#pragma mark HTTP
     
     static HTTPRequest* createHTTPRequest(HTTPRequestDelegate* delegate,
                                             const char* url,

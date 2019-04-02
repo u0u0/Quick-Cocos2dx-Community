@@ -10,6 +10,7 @@ SYNOPSIS
     -h show help
     -r release mode
     -c clean binary files
+    -a specify a ABI: armeabi, armeabi-v7a, x86, arm64-v8a
 """
 
 import os
@@ -37,7 +38,7 @@ def joinDir(root, *dirs):
         root = os.path.join(root, item)
     return root
 
-def buildNative(isRelease):
+def buildNative(isRelease, abi):
     # check ndk env
     print "====> checking for ndk-build commond\n"
     cmd = subprocess.Popen('ndk-build -v', shell=True, stdout=subprocess.PIPE)
@@ -49,16 +50,16 @@ def buildNative(isRelease):
 
     # nkd-build
     print "====> start building library\n"
-    cmd = subprocess.Popen('ndk-build NDK_DEBUG=%s NDK_MODULE_PATH=%s' \
-            %((0 if isRelease else 1), ndkModulePath), shell=True, env=new_env)
+    cmd = subprocess.Popen('ndk-build NDK_DEBUG=%s BUILD_ABI=%s NDK_MODULE_PATH=%s' \
+            %((0 if isRelease else 1), abi, ndkModulePath), shell=True, env=new_env)
     cmd.wait()
     if cmd.returncode != 0:
         print "Error while building, check error above!"
         return
 
     # mv *.so to 'src/main/libcocos2dx'
-    libsDir = joinDir(projectRoot, "libcocos2dx", "libs")
-    jniLibsDir = joinDir(projectRoot, "libcocos2dx", "src", "main", "libcocos2dx")
+    libsDir = joinDir(projectRoot, "libcocos2dx", "libs", abi)
+    jniLibsDir = joinDir(projectRoot, "libcocos2dx", "src", "main", "libcocos2dx", abi)
 
     print "====> Moveing *.so to jniLibs\n"
     if os.path.exists(jniLibsDir):
@@ -93,18 +94,23 @@ def cleanNative():
         return
 
     objDir = joinDir(projectRoot, "libcocos2dx", "obj")
-    if os.path.exists(objDir):
-        shutil.rmtree(objDir)
+    libsDir = joinDir(projectRoot, "libcocos2dx", "libs")
+    jniLibsDir = joinDir(projectRoot, "libcocos2dx", "src", "main", "libcocos2dx")
+    toBeDel = [objDir, libsDir, jniLibsDir]
+    for d in toBeDel:
+        if os.path.exists(d):
+            shutil.rmtree(d)
 
     print "====> clean done\n"
 
 if __name__ == "__main__":
     isRelease = False
     isClean = False
+    abi = "armeabi-v7a" # default abi
 
     # ===== parse args =====
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hrc")
+        opts, args = getopt.getopt(sys.argv[1:], "hrca:")
     except getopt.GetoptError:
         # print help information and exit:
         print __doc__
@@ -119,6 +125,15 @@ if __name__ == "__main__":
             isRelease = True
         if o == "-c":
             isClean = True
+        if o == "-a":
+            abi = a
+
+    # check abi valided
+    support = ["armeabi", "armeabi-v7a", "x86", "arm64-v8a"]
+    isValid = abi in support
+    if not isValid:
+        print "Error: %s is not a support abi" %(abi)
+        sys.exit(-2)
 
     jniDir = joinDir(projectRoot, "libcocos2dx", "jni")
     if False == os.path.exists(jniDir):
@@ -134,4 +149,4 @@ if __name__ == "__main__":
     if isClean:
         cleanNative()
     else:
-        buildNative(isRelease)
+        buildNative(isRelease, abi)

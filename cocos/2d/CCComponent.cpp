@@ -50,6 +50,14 @@ void Component::onExit()
 {
 }
 
+void Component::onAdd()
+{
+}
+
+void Component::onRemove()
+{
+}
+
 void Component::update(float delta)
 {
 }

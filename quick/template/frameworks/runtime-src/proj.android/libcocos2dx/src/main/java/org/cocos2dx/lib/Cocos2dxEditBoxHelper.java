@@ -135,7 +135,7 @@ public class Cocos2dxEditBoxHelper {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         //The optimization can't be turn on due to unknown keyboard hide in some custom keyboard
-//                        mFrameLayout.setEnableForceDoLayout(false);
+                        //mFrameLayout.setEnableForceDoLayout(false);
 
                         // Note that we must to copy a string to prevent string content is modified
                         // on UI thread while 's.toString' is invoked at the same time.
@@ -352,6 +352,7 @@ public class Cocos2dxEditBoxHelper {
                 Cocos2dxEditBox editBox = mEditBoxArray.get(index);
                 if (editBox != null) {
                     editBox.setText(text);
+                    editBox.setSelection(editBox.getText().length());// cursor relocation
                 }
             }
         });

@@ -61,11 +61,7 @@ Scene::Scene()
 Scene::~Scene()
 {
 #if CC_USE_PHYSICS
-    if (_physicsWorld)
-    {
-        g_physicsSceneCount--;
-    }
-    CC_SAFE_DELETE(_physicsWorld);
+	delete _physicsWorld;
 #endif
     Director::getInstance()->getEventDispatcher()->removeEventListener(_event);
     CC_SAFE_RELEASE(_event);
@@ -166,83 +162,42 @@ void Scene::render(Renderer* renderer)
 }
 
 #if CC_USE_PHYSICS
-void Scene::addChild(Node* child, int zOrder, int tag)
-{
-    Node::addChild(child, zOrder, tag);
-    addChildToPhysicsWorld(child);
-}
-
-void Scene::addChild(Node* child, int zOrder, const std::string &name)
-{
-    Node::addChild(child, zOrder, name);
-    addChildToPhysicsWorld(child);
-}
-
-void Scene::update(float delta)
-{
-    Node::update(delta);
-    if (nullptr != _physicsWorld && _physicsWorld->isAutoStep())
-    {
-        _physicsWorld->update(delta);
-    }
-}
-
 Scene* Scene::createWithPhysics()
 {
-    Scene *ret = new (std::nothrow) Scene();
-    if (ret && ret->initWithPhysics())
-    {
-        ret->autorelease();
-        return ret;
-    }
-    else
-    {
-        CC_SAFE_DELETE(ret);
-        return nullptr;
-    }
+	Scene *ret = new (std::nothrow) Scene();
+	if (ret && ret->initWithPhysics())
+	{
+		ret->autorelease();
+		return ret;
+	}
+	else
+	{
+		CC_SAFE_DELETE(ret);
+		return nullptr;
+	}
 }
 
 bool Scene::initWithPhysics()
 {
-    bool ret = false;
-    do
-    {
-        Director * director;
-        CC_BREAK_IF( ! (director = Director::getInstance()) );
-        
-        this->setContentSize(director->getWinSize());
-        CC_BREAK_IF(! (_physicsWorld = PhysicsWorld::construct(*this)));
-        
-        this->scheduleUpdate();
-        // success
-        g_physicsSceneCount += 1;
-        ret = true;
-    } while (0);
-    return ret;
+	_physicsWorld = PhysicsWorld::construct(this);
+
+	bool ret = false;
+	do
+	{
+		Director * director;
+		CC_BREAK_IF(!(director = Director::getInstance()));
+		this->setContentSize(director->getWinSize());
+		// success
+		ret = true;
+	} while (0);
+	return ret;
 }
 
-void Scene::addChildToPhysicsWorld(Node* child)
+void Scene::stepPhysicsAndNavigation(float deltaTime)
 {
-    if (_physicsWorld)
-    {
-        std::function<void(Node*)> addToPhysicsWorldFunc = nullptr;
-        addToPhysicsWorldFunc = [this, &addToPhysicsWorldFunc](Node* node) -> void
-        {
-            if (node->getPhysicsBody())
-            {
-                _physicsWorld->addBody(node->getPhysicsBody());
-            }
-            
-            auto& children = node->getChildren();
-            for( const auto &n : children) {
-                addToPhysicsWorldFunc(n);
-            }
-        };
-        
-        addToPhysicsWorldFunc(child);
-    }
+	if (_physicsWorld && _physicsWorld->isAutoStep())
+		_physicsWorld->update(deltaTime);
 }
-
 #endif
 
 NS_CC_END

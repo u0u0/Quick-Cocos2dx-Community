@@ -830,12 +830,6 @@ void RotateTo::update(float time)
             }
             else
             {
-                // _startAngle.x != _startAngle.y || _diffAngle.x != _diffAngle.y
-                if (_target->getPhysicsBody() != nullptr)
-                {
-                    CCLOG("RotateTo WARNING: PhysicsBody doesn't support skew rotation");
-                }
-                
                 _target->setRotationSkewX(_startAngle.x + _diffAngle.x * time);
                 _target->setRotationSkewY(_startAngle.y + _diffAngle.y * time);
             }
@@ -973,12 +967,6 @@ void RotateBy::update(float time)
             }
             else
             {
-                // _startAngle.x != _startAngle.y || _deltaAngle.x != _deltaAngle.y
-                if (_target->getPhysicsBody() != nullptr)
-                {
-                    CCLOG("RotateBy WARNING: PhysicsBody doesn't support skew rotation");
-                }
-                
                 _target->setRotationSkewX(_startAngle.x + _deltaAngle.x * time);
                 _target->setRotationSkewY(_startAngle.y + _deltaAngle.y * time);
             }

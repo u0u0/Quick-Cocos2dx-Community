@@ -78,9 +78,6 @@ public:
 
     static const std::string MD5String(void* input, int inputLength);
     
-#pragma mark -
-#pragma mark for Lua
-    
 #if CC_LUA_ENGINE_ENABLED > 0
     
     /** @brief Encrypt data with AES256 algorithm, return ciphertext string, return nil if failed */
@@ -131,9 +128,6 @@ public:
     static LUA_STRING MD5FileLua(const char* path);
 
 #endif /* CC_LUA_ENGINE_ENABLED */
-    
-#pragma mark -
-#pragma mark private methods
     
 private:
     Crypto(void) {}

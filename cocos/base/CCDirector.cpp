@@ -286,6 +286,10 @@ void Director::drawScene()
     
     if (_runningScene)
     {
+#if CC_USE_PHYSICS
+		_runningScene->stepPhysicsAndNavigation(_deltaTime);
+#endif
+
         //clear draw stats
         _renderer->clearDrawStats();
         

@@ -1,4 +1,20 @@
+ifeq ($(BUILD_ABI),arm64-v8a)
+APP_PLATFORM := android-21
+APP_ABI := arm64-v8a
+endif
+ifeq ($(BUILD_ABI),armeabi)
 APP_PLATFORM := android-10
+APP_ABI := armeabi
+endif
+ifeq ($(BUILD_ABI),armeabi-v7a)
+APP_PLATFORM := android-10
+APP_ABI := armeabi-v7a
+endif
+ifeq ($(BUILD_ABI),x86)
+APP_PLATFORM := android-10
+APP_ABI := x86
+endif
+
 APP_STL := gnustl_static
 NDK_TOOLCHAIN_VERSION=4.9
 
@@ -19,6 +35,7 @@ endif
 CC_USE_CURL := 0
 CC_USE_CCSTUDIO := 1
 CC_USE_SPINE := 1
+CC_USE_DRAGONBONES := 1
 CC_USE_PHYSICS := 1
 CC_USE_TIFF := 1
 CC_USE_WEBP := 1
@@ -41,6 +58,9 @@ APP_CPPFLAGS += -DCC_USE_CCBUILDER=0
 endif
 ifeq ($(CC_USE_SPINE),0)
 APP_CPPFLAGS += -DCC_USE_SPINE=0
+endif
+ifeq ($(CC_USE_DRAGONBONES),0)
+APP_CPPFLAGS += -DCC_USE_DRAGONBONES=0
 endif
 ifeq ($(CC_USE_PHYSICS),0)
 APP_CPPFLAGS += -DCC_USE_PHYSICS=0

@@ -48,12 +48,6 @@ THE SOFTWARE.
 
 #include "base/ccUTF8.h"
 
-#if CC_USE_PHYSICS
-#include "physics/CCPhysicsBody.h"
-#include "physics/CCPhysicsWorld.h"
-#endif
-
-
 #if CC_NODE_RENDER_SUBPIXEL
 #define RENDER_IN_SUBPIXEL
 #else
@@ -122,8 +116,6 @@ Node::Node(void)
 , _componentContainer(nullptr)
 #if CC_USE_PHYSICS
 , _physicsBody(nullptr)
-, _physicsScaleStartX(1.0f)
-, _physicsScaleStartY(1.0f)
 #endif
 , _displayedOpacity(255)
 , _realOpacity(255)
@@ -190,11 +182,6 @@ Node::~Node()
     
     CC_SAFE_DELETE(_componentContainer);
     
-#if CC_USE_PHYSICS
-    setPhysicsBody(nullptr);
-
-#endif
-    
     CC_SAFE_RELEASE_NULL(_actionManager);
     CC_SAFE_RELEASE_NULL(_scheduler);
     
@@ -251,13 +238,6 @@ void Node::setSkewX(float skewX)
     if (_skewX == skewX)
         return;
     
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr)
-    {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setSkewX");
-    }
-#endif
-    
     _skewX = skewX;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
@@ -271,13 +251,6 @@ void Node::setSkewY(float skewY)
 {
     if (_skewY == skewY)
         return;
-    
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr)
-    {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setSkewY");
-    }
-#endif
     
     _skewY = skewY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
@@ -321,13 +294,6 @@ void Node::setRotation(float rotation)
     
     _rotationZ_X = _rotationZ_Y = rotation;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-
-#if CC_USE_PHYSICS
-    if (!_physicsBody || !_physicsBody->_rotationResetTag)
-    {
-        updatePhysicsBodyRotation(getScene());
-    }
-#endif
 }
 
 float Node::getRotationSkewX() const
@@ -349,13 +315,6 @@ void Node::setRotation3D(const Vec3& rotation)
 
     // rotation Z is decomposed in 2 to simulate Skew for Flash animations
     _rotationZ_Y = _rotationZ_X = rotation.z;
-
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr)
-    {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setRotation3D");
-    }
-#endif
 }
 
 Vec3 Node::getRotation3D() const
@@ -371,13 +330,6 @@ void Node::setRotationSkewX(float rotationX)
     if (_rotationZ_X == rotationX)
         return;
     
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr)
-    {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setRotationSkewX");
-    }
-#endif
-    
     _rotationZ_X = rotationX;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
@@ -391,13 +343,6 @@ void Node::setRotationSkewY(float rotationY)
 {
     if (_rotationZ_Y == rotationY)
         return;
-    
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr)
-    {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setRotationSkewY");
-    }
-#endif
     
     _rotationZ_Y = rotationY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
@@ -418,16 +363,6 @@ void Node::setScale(float scale)
     
     _scaleX = _scaleY = _scaleZ = scale;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-    
-#if CC_USE_PHYSICS
-    if(g_physicsSceneCount == 0)
-        return;
-    auto scene = getScene();
-    if (!scene || scene->getPhysicsWorld())
-    {
-        updatePhysicsBodyTransform(scene);
-    }
-#endif
 }
 
 /// scaleX getter
@@ -445,16 +380,6 @@ void Node::setScale(float scaleX,float scaleY)
     _scaleX = scaleX;
     _scaleY = scaleY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-    
-#if CC_USE_PHYSICS
-    if(g_physicsSceneCount == 0)
-        return;
-    auto scene = getScene();
-    if (!scene || scene->getPhysicsWorld())
-    {
-        updatePhysicsBodyTransform(scene);
-    }
-#endif
 }
 
 /// scaleX setter
@@ -465,16 +390,6 @@ void Node::setScaleX(float scaleX)
     
     _scaleX = scaleX;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-    
-#if CC_USE_PHYSICS
-    if(g_physicsSceneCount == 0)
-        return;
-    auto scene = getScene();
-    if (!scene || scene->getPhysicsWorld())
-    {
-        updatePhysicsBodyTransform(scene);
-    }
-#endif
 }
 
 /// scaleY getter
@@ -488,13 +403,6 @@ void Node::setScaleZ(float scaleZ)
 {
     if (_scaleZ == scaleZ)
         return;
-    
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr)
-    {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setScaleZ");
-    }
-#endif
     
     _scaleZ = scaleZ;
     _transformUpdated = _transformDirty = _inverseDirty = true;
@@ -514,16 +422,6 @@ void Node::setScaleY(float scaleY)
     
     _scaleY = scaleY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-    
-#if CC_USE_PHYSICS
-    if(g_physicsSceneCount == 0)
-        return;
-    auto scene = getScene();
-    if (!scene || scene->getPhysicsWorld())
-    {
-        updatePhysicsBodyTransform(scene);
-    }
-#endif
 }
 
 
@@ -555,13 +453,6 @@ void Node::setPosition(float x, float y)
     
     _transformUpdated = _transformDirty = _inverseDirty = true;
     _usingNormalizedPosition = false;
-    
-#if CC_USE_PHYSICS
-    if (!_physicsBody || !_physicsBody->_positionResetTag)
-    {
-        updatePhysicsBodyPosition(getScene());
-    }
-#endif
 }
 
 void Node::setPosition3D(const Vec3& position)
@@ -684,15 +575,7 @@ const Vec2& Node::getAnchorPoint() const
 }
 
 void Node::setAnchorPoint(const Vec2& point)
-{
-#if CC_USE_PHYSICS
-    if (_physicsBody != nullptr && !point.equals(Vec2::ANCHOR_MIDDLE))
-    {
-        CCLOG("Node warning: This node has a physics body, the anchor must be in the middle, you cann't change this to other value.");
-        return;
-    }
-#endif
-    
+{    
     if( ! point.equals(_anchorPoint))
     {
         _anchorPoint = point;
@@ -1031,16 +914,6 @@ void Node::addChildHelper(Node* child, int localZOrder, int tag, const std::stri
     child->setParent(this);
     child->setOrderOfArrival(s_globalOrderOfArrival++);
     
-#if CC_USE_PHYSICS
-    // Recursive add children with which have physics body.
-    auto scene = this->getScene();
-    if (scene && scene->getPhysicsWorld())
-    {
-        child->updatePhysicsBodyTransform(scene);
-        scene->addChildToPhysicsWorld(child);
-    }
-#endif
-    
     if( _running )
     {
         child->onEnter();
@@ -1140,21 +1013,6 @@ void Node::removeAllChildren()
     this->removeAllChildrenWithCleanup(true);
 }
 
-#if CC_USE_PHYSICS
-void Node::removeFromPhysicsWorld()
-{
-    if (_physicsBody != nullptr)
-    {
-        _physicsBody->removeFromWorld();
-    }
-
-    for (auto child : _children)
-    {
-        child->removeFromPhysicsWorld();
-    }
-}
-#endif
-
 void Node::removeAllChildrenWithCleanup(bool cleanup)
 {
     // not using detachChild improves speed here
@@ -1168,10 +1026,6 @@ void Node::removeAllChildrenWithCleanup(bool cleanup)
             child->onExitTransitionDidStart();
             child->onExit();
         }
-
-#if CC_USE_PHYSICS
-        child->removeFromPhysicsWorld();
-#endif
 
         if (cleanup)
         {
@@ -1194,10 +1048,6 @@ void Node::detachChild(Node *child, ssize_t childIndex, bool doCleanup)
         child->onExitTransitionDidStart();
         child->onExit();
     }
-    
-#if CC_USE_PHYSICS
-    child->removeFromPhysicsWorld();
-#endif
 
     // If you don't do cleanup, the child's actions will not get removed and the
     // its scheduledSelectors_ dict will not get released!
@@ -1363,6 +1213,11 @@ void Node::onEnter()
 {
     if (_onEnterCallback)
         _onEnterCallback();
+
+	if (_componentContainer && !_componentContainer->isEmpty())
+	{
+		_componentContainer->onEnter();
+	}
     
     _isTransitionFinished = false;
     
@@ -1418,6 +1273,11 @@ void Node::onExit()
 {
     if (_onExitCallback)
         _onExitCallback();
+
+	if (_componentContainer && !_componentContainer->isEmpty())
+	{
+		_componentContainer->onExit();
+	}
     
     this->pause();
     
@@ -1922,6 +1782,10 @@ bool Node::addComponent(Component *component)
     // lazy alloc
     if( !_componentContainer )
         _componentContainer = new (std::nothrow) ComponentContainer(this);
+
+	// should enable schedule update, then all components can receive this call back
+	scheduleUpdate();
+
     return _componentContainer->add(component);
 }
 
@@ -1945,163 +1809,6 @@ void Node::removeAllComponents()
     if( _componentContainer )
         _componentContainer->removeAll();
 }
-
-#if CC_USE_PHYSICS
-
-// MARK: Physics
-
-void Node::updatePhysicsBodyTransform(Scene* scene)
-{
-    updatePhysicsBodyScale(scene);
-    updatePhysicsBodyPosition(scene);
-    updatePhysicsBodyRotation(scene);
-}
-
-void Node::updatePhysicsBodyPosition(Scene* scene)
-{
-    if (_physicsBody != nullptr)
-    {
-        if (scene && scene->getPhysicsWorld())
-        {
-            Vec2 pos = _parent == scene ? _position : scene->convertToNodeSpace(_parent->convertToWorldSpace(_position));
-            _physicsBody->setPosition(pos);
-        }
-        else
-        {
-            _physicsBody->setPosition(_position);
-        }
-    }
-    
-    for (Node* child : _children)
-    {
-        child->updatePhysicsBodyPosition(scene);
-    }
-}
-
-void Node::updatePhysicsBodyRotation(Scene* scene)
-{
-    if (_physicsBody != nullptr)
-    {
-        if (scene != nullptr && scene->getPhysicsWorld() != nullptr)
-        {
-            float rotation = _rotationZ_X;
-            for (Node* parent = _parent; parent != scene; parent = parent->_parent)
-            {
-                rotation += parent->getRotation();
-            }
-            _physicsBody->setRotation(rotation);
-        }
-        else
-        {
-            _physicsBody->setRotation(_rotationZ_X);
-        }
-    }
-    
-    for (auto child : _children)
-    {
-        child->updatePhysicsBodyRotation(scene);
-        child->updatePhysicsBodyPosition(scene);
-    }
-}
-
-void Node::updatePhysicsBodyScale(Scene* scene)
-{
-    if (_physicsBody != nullptr)
-    {
-        if (scene != nullptr && scene->getPhysicsWorld() != nullptr)
-        {
-            float scaleX = _scaleX / _physicsScaleStartX;
-            float scaleY = _scaleY / _physicsScaleStartY;
-            for (Node* parent = _parent; parent != scene; parent = parent->_parent)
-            {
-                scaleX *= parent->_scaleX;
-                scaleY *= parent->_scaleY;
-            }
-            _physicsBody->setScale(scaleX, scaleY);
-        }
-        else
-        {
-            _physicsBody->setScale(_scaleX / _physicsScaleStartX, _scaleY / _physicsScaleStartY);
-        }
-    }
-    
-    for (auto child : _children)
-    {
-        child->updatePhysicsBodyScale(scene);
-    }
-}
-
-void Node::setPhysicsBody(PhysicsBody* body)
-{
-    if (_physicsBody == body)
-    {
-        return;
-    }
-    
-    if (body != nullptr)
-    {
-        if (body->getNode() != nullptr)
-        {
-            body->getNode()->setPhysicsBody(nullptr);
-        }
-        
-        body->_node = this;
-        body->retain();
-        
-        // physics rotation based on body position, but node rotation based on node anthor point
-        // it cann't support both of them, so I clear the anthor point to default.
-        if (!getAnchorPoint().equals(Vec2::ANCHOR_MIDDLE))
-        {
-            CCLOG("Node warning: setPhysicsBody sets anchor point to Vec2::ANCHOR_MIDDLE.");
-            setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-        }
-    }
-    
-    if (_physicsBody != nullptr)
-    {
-        PhysicsWorld* world = _physicsBody->getWorld();
-        _physicsBody->removeFromWorld();
-        _physicsBody->_node = nullptr;
-        _physicsBody->release();
-        
-        if (world != nullptr && body != nullptr)
-        {
-            world->addBody(body);
-        }
-    }
-    
-    _physicsBody = body;
-    _physicsScaleStartX = _scaleX;
-    _physicsScaleStartY = _scaleY;
-    
-    if (body != nullptr)
-    {
-        Node* node;
-        Scene* scene = nullptr;
-        for (node = this->getParent(); node != nullptr; node = node->getParent())
-        {
-            Scene* tmpScene = dynamic_cast<Scene*>(node);
-            if (tmpScene != nullptr && tmpScene->getPhysicsWorld() != nullptr)
-            {
-                scene = tmpScene;
-                break;
-            }
-        }
-        
-        if (scene != nullptr)
-        {
-            scene->getPhysicsWorld()->addBody(body);
-        }
-        
-        updatePhysicsBodyTransform(scene);
-    }
-}
-
-PhysicsBody* Node::getPhysicsBody() const
-{
-    return _physicsBody;
-}
-#endif //CC_USE_PHYSICS
 
 // MARK: Opacity and Color
 
