@@ -803,8 +803,14 @@ circle:addTo(scene)
 
 function display.newSolidCircle(radius, params)
     local circle = display.newDrawNode()
-    circle:drawDot(cc.p(params.x or 0, params.y or 0),
-        radius or 0, params.color or cc.c4f(0, 0, 0, 1))
+    circle:drawSolidCircle(cc.p(params.x or 0, params.y or 0),
+        radius or 0,
+        params.angle or 0,
+        params.segments or 50,
+        params.scaleX or 1.0,
+        params.scaleY or 1.0,
+        params.color or cc.c4f(0, 0, 0, 1)
+    )
     return circle
 end
 
