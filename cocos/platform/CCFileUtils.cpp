@@ -1099,14 +1099,22 @@ bool FileUtils::removeDirectory(const std::string& path)
     
     // Remove downloaded files
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	std::string command = "cmd /c rd /s /q ";
-	// Path may include space.
-	command += "\"" + path + "\"";
-
-	if (WinExec(command.c_str(), SW_HIDE) > 31)
-		return true;
-	else
-		return false;
+    std::string command = "cmd /c rd /s /q ";
+    std::string win32path = path;
+    int len = win32path.length();
+    for (int i = 0; i < len; ++i)
+    {
+        if (win32path[i] == '/')
+        {
+            win32path[i] = '\\';
+        }
+    }
+    command += win32path;
+    
+    if (WinExec(command.c_str(), SW_HIDE) > 31)
+        return true;
+    else
+        return false;
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     if (nftw(path.c_str(),unlink_cb, 64, FTW_DEPTH | FTW_PHYS))
         return false;
@@ -1126,7 +1134,6 @@ bool FileUtils::removeDirectory(const std::string& path)
 bool FileUtils::removeFile(const std::string &path)
 {
     // Remove downloaded file
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	std::string command = "cmd /c del /q ";
 	std::string win32path = path;
