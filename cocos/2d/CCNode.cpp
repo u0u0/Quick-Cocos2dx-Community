@@ -1083,7 +1083,7 @@ void Node::reorderChild(Node *child, int zOrder)
 void Node::sortAllChildren()
 {
     if( _reorderChildDirty ) {
-        std::sort( std::begin(_children), std::end(_children), nodeComparisonLess );
+        std::stable_sort( std::begin(_children), std::end(_children), nodeComparisonLess );
         _reorderChildDirty = false;
     }
 }
