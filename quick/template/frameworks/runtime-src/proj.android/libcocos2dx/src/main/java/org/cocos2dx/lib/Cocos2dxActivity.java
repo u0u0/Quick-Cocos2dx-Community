@@ -503,6 +503,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        this.hasFocus = true;
         switch(requestCode){
             case 1001: // request code define by me.
                 boolean isTip = shouldShowRequestPermissionRationale(permissions[0]);
