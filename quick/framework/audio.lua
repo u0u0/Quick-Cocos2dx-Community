@@ -111,6 +111,16 @@ function for CSource
 ]]--
 
 --------------- BGM 2D API -------------------
+-- no need preload file
+function audio.playBGMSync(path, isLoop)
+	audio.loadFile(path, function(pn, isSuccess)
+		if isSuccess then
+			audio.playBGM(pn, isLoop)
+		end
+	end)
+end
+
+-- need preload file
 function audio.playBGM(path, isLoop)
 	local buffer = audio._buffers[path]
 	if not buffer then
@@ -140,6 +150,16 @@ function audio.setBGMVolume(vol)
 end
 
 --------------- Effect 2D API -------------------
+-- no need preload file
+function audio.playEffectSync(path, isLoop)
+	audio.loadFile(path, function(pn, isSuccess)
+		if isSuccess then
+			audio.playEffect(pn, isLoop)
+		end
+	end)
+end
+
+-- need preload file
 function audio.playEffect(path, isLoop)
 	local buffer = audio._buffers[path]
 	if not buffer then
