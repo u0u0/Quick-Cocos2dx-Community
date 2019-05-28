@@ -450,6 +450,7 @@ bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& ima
     return true;
 }
 
+#define CC_LABEL_MAX_LENGTH ((1 << 16) / 2)
 void Label::setString(const std::string& text)
 {
     if (text.compare(_originalUTF8String))
@@ -461,6 +462,12 @@ void Label::setString(const std::string& text)
         if (StringUtils::UTF8ToUTF16(_originalUTF8String, utf16String))
         {
             _currentUTF16String  = utf16String;
+        }
+        
+        if (_currentUTF16String.length() > CC_LABEL_MAX_LENGTH)
+        {
+            cocos2d::log("Error: Label text is too long %lu > %d and it will be truncated!", _currentUTF16String.length(), CC_LABEL_MAX_LENGTH);
+            _currentUTF16String = _currentUTF16String.substr(0, CC_LABEL_MAX_LENGTH);
         }
     }
 }
