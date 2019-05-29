@@ -610,28 +610,28 @@ Data FileUtils::getDataFromFile(const std::string& filename)
     return data;
 }
 
-unsigned char* FileUtils::getFileDataFromZip(const std::string& zipFilePath, const std::string& filename, ssize_t *size)
+unsigned char* FileUtils::getFileDataFromZip(const char *zipFilePath, const char *filename, ssize_t *size)
 {
     unsigned char * buffer = nullptr;
     unzFile file = nullptr;
     *size = 0;
 
-    do 
-    {
-        CC_BREAK_IF(zipFilePath.empty());
+    do {
+        CC_BREAK_IF(zipFilePath == NULL);
 
-        file = unzOpen(zipFilePath.c_str());
+        Data data = getDataFromFile(zipFilePath);
+        file = unzOpenBuffer(data.getBytes(), data.getSize());
         CC_BREAK_IF(!file);
 
         // FIXME: Other platforms should use upstream minizip like mingw-w64  
         #ifdef MINIZIP_FROM_SYSTEM
-        int ret = unzLocateFile(file, filename.c_str(), NULL);
+        int ret = unzLocateFile(file, filename, NULL);
         #else
-        int ret = unzLocateFile(file, filename.c_str(), 1);
+        int ret = unzLocateFile(file, filename, 1);
         #endif
         CC_BREAK_IF(UNZ_OK != ret);
 
-        char filePathA[260];
+        char filePathA[256];
         unz_file_info fileInfo;
         ret = unzGetCurrentFileInfo(file, &fileInfo, filePathA, sizeof(filePathA), nullptr, 0, nullptr, 0);
         CC_BREAK_IF(UNZ_OK != ret);
@@ -653,6 +653,61 @@ unsigned char* FileUtils::getFileDataFromZip(const std::string& zipFilePath, con
     }
 
     return buffer;
+}
+
+bool FileUtils::unzipFile(const char *zipFilePath, const char *destDir)
+{
+    unzFile file = nullptr;
+    int err = UNZ_OK;
+    
+    do {
+        CC_BREAK_IF(NULL == zipFilePath);
+        CC_BREAK_IF(NULL == destDir);
+        
+        std::string prefix = destDir;
+        if (!isAbsolutePath(destDir)) {
+            prefix = getWritablePath() + destDir;
+        }
+        if (prefix[prefix.length() - 1] != '/') {
+            prefix = prefix + "/";
+        }
+        
+        Data data = getDataFromFile(zipFilePath);
+        file = unzOpenBuffer(data.getBytes(), data.getSize());
+        CC_BREAK_IF(!file);
+        
+        err = unzGoToFirstFile(file);
+        while (err != UNZ_END_OF_LIST_OF_FILE) {
+            unz_file_info fileInfo;
+            char fileName[256];
+            CC_BREAK_IF(UNZ_OK != unzGetCurrentFileInfo(file, &fileInfo, fileName, sizeof(fileName), NULL, 0, NULL, 0));
+            CC_BREAK_IF(UNZ_OK != unzOpenCurrentFile(file));
+            
+            std::string path = prefix + fileName;
+            if (path[path.length() - 1] == '/') {
+                // is a directory
+                createDirectory(path.c_str());
+            } else {
+                // is a file
+                unsigned char *buffer = (unsigned char *)malloc(fileInfo.uncompressed_size);
+                int readedSize = unzReadCurrentFile(file, buffer, static_cast<unsigned>(fileInfo.uncompressed_size));
+                CCASSERT(readedSize == 0 || readedSize == (int)fileInfo.uncompressed_size, "the file size is wrong");
+                
+                FILE *out = fopen(path.c_str(), "wb");
+                fwrite(buffer, readedSize, 1, out);
+                fclose(out);
+                free(buffer);
+            }
+            unzCloseCurrentFile(file);
+            err = unzGoToNextFile(file);
+        }
+    } while (0);
+    
+    if (file) {
+        unzClose(file);
+    }
+    
+    return err == UNZ_END_OF_LIST_OF_FILE;
 }
 
 std::string FileUtils::getNewFilename(const std::string &filename) const
