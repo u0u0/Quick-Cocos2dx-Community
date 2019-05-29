@@ -468,6 +468,7 @@ void Label::setString(const std::string& text)
         {
             cocos2d::log("Error: Label text is too long %lu > %d and it will be truncated!", _currentUTF16String.length(), CC_LABEL_MAX_LENGTH);
             _currentUTF16String = _currentUTF16String.substr(0, CC_LABEL_MAX_LENGTH);
+            StringUtils::UTF16ToUTF8(_currentUTF16String, _originalUTF8String);
         }
     }
 }
