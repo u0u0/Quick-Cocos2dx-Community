@@ -863,7 +863,15 @@ UIInterfaceOrientation getFixedOrientation(UIInterfaceOrientation statusBarOrien
     switch (getFixedOrientation([[UIApplication sharedApplication] statusBarOrientation]))
     {
         case UIInterfaceOrientationPortrait:
-            self.frame = CGRectMake(originalRect_.origin.x, originalRect_.origin.y - dis, originalRect_.size.width, originalRect_.size.height);
+            // fix: IOS >= 8.0, 横屏游戏勾选竖屏功能，弹出输入法后，界面显示异常！
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+            {
+                self.frame = CGRectMake(originalRect_.origin.x, originalRect_.origin.y - dis, self.frame.size.width, self.frame.size.height);
+            }
+            else
+            {
+                self.frame = CGRectMake(originalRect_.origin.x, originalRect_.origin.y - dis, originalRect_.size.width, originalRect_.size.height);
+            }
             break;
             
         case UIInterfaceOrientationPortraitUpsideDown:
