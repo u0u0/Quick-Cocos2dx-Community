@@ -471,4 +471,25 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
         sb.append("]");
         Log.d(Cocos2dxGLSurfaceView.TAG, sb.toString());
     }
+    
+    /**
+     * android 7 和 7.1上main线程初始化GL线程的时候会等待初始化完毕,cocos启动和加载时间，和启动第一个页面时间很容易造成anr
+     * 
+     * @param holder
+     */
+    @Override
+    public void surfaceRedrawNeeded(SurfaceHolder holder) {
+        // 特殊处理android 7 和 7.1 初始化时间过长时不产生ANR
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
+            try {
+                this.requestRender();
+            } catch (Exception e) {
+                // 如果出错, 就什么都不干了
+            } catch (Error e) {
+
+            }
+        } else {
+            super.surfaceRedrawNeeded(holder);
+        }
+    }
 }
