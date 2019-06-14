@@ -15,14 +15,6 @@
 #ifndef __LUA_ADUIO_MANUAL_H__
 #define __LUA_ADUIO_MANUAL_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include "tolua++.h"
-#ifdef __cplusplus
-}
-#endif
-
 TOLUA_API int register_audio_module(lua_State* L);
 
 #endif //#ifndef __LUA_ADUIO_MANUAL_H__

@@ -48,8 +48,8 @@ static luaL_Reg tcp_methods[] = {
     {"accept",      meth_accept},
     {"bind",        meth_bind},
     {"close",       meth_close},
-    //{"connect",     meth_connect}, //sync
-    {"connect",     asyn_connect},
+    {"connect",     meth_connect},
+    {"connectAsyn", asyn_connect},
     {"dirty",       meth_dirty},
     {"getfamily",   meth_getfamily},
     {"getfd",       meth_getfd},
