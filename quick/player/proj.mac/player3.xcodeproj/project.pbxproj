@@ -894,7 +894,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "player3.cocos2d-lua.org";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac $(SRCROOT)/../../../external/curl/include/mac";
 			};
 			name = Debug;
 		};
@@ -925,7 +925,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "player3.cocos2d-lua.org";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../cocos/platform/mac $(SRCROOT)/../../../external/glfw3/include/mac $(SRCROOT)/../../../external/curl/include/mac";
 			};
 			name = Release;
 		};

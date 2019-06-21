@@ -7601,7 +7601,7 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
 				);
 				MACH_O_TYPE = staticlib;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external/curl/include/mac/curl";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external/curl/include/mac";
 			};
 			name = Debug;
 		};
@@ -7636,7 +7636,7 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
 				);
 				MACH_O_TYPE = staticlib;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external/curl/include/mac/curl";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external/curl/include/mac";
 			};
 			name = Release;
 		};

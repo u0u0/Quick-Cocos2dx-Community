@@ -1,7 +1,12 @@
-#include "network/CCHTTPRequest.h"
 #include <stdio.h>
 #include <iostream>
 #include <thread>
+#include <mutex>
+#include <sstream>
+
+#include "network/CCHTTPRequest.h"
+#include "openssl/crypto.h"
+
 
 #if CC_LUA_ENGINE_ENABLED > 0
 extern "C" {
@@ -9,11 +14,10 @@ extern "C" {
 }
 #include "CCLuaEngine.h"
 #endif
-#include <sstream>
-
 
 NS_CC_EXTRA_BEGIN
 
+static std::mutex **mutexArray = nullptr;
 unsigned int HTTPRequest::s_id = 0;
 
 HTTPRequest *HTTPRequest::createWithUrl(HTTPRequestDelegate *delegate,
@@ -52,9 +56,30 @@ bool HTTPRequest::initWithListener(LUA_FUNCTION listener, const char *url, int m
 }
 #endif
 
+static void crypto_lock_cb(int mode, int type, const char *file, int line)
+{
+    if(mode & CRYPTO_LOCK) {
+        mutexArray[type]->lock();
+    } else {
+        mutexArray[type]->unlock();
+    }
+}
+
 bool HTTPRequest::initWithUrl(const char *url, int method)
 {
     CCAssert(url, "HTTPRequest::initWithUrl() - invalid url");
+    
+    // HTTPS thead safe for OpenSSL
+    if (!mutexArray) {
+        curl_global_init(CURL_GLOBAL_ALL);
+        
+        mutexArray = (std::mutex **)OPENSSL_malloc(CRYPTO_num_locks() * sizeof(std::mutex *));
+        for(int i = 0; i < CRYPTO_num_locks(); i++) {
+            mutexArray[i] = new std::mutex;
+        }
+        CRYPTO_set_locking_callback(crypto_lock_cb);
+    }
+    
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
     curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "libcurl");
