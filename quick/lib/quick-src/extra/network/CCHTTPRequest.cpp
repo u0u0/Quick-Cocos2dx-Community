@@ -566,20 +566,11 @@ void HTTPRequest::cleanup(void)
 }
 
 // curl callback
-
-#ifdef _WINDOWS_
-DWORD WINAPI HTTPRequest::requestCURL(LPVOID userdata)
-{
-    static_cast<HTTPRequest*>(userdata)->onRequest();
-    return 0;
-}
-#else // _WINDOWS_
 void *HTTPRequest::requestCURL(void *userdata)
 {
     static_cast<HTTPRequest*>(userdata)->onRequest();
     return NULL;
 }
-#endif // _WINDOWS_
 
 size_t HTTPRequest::writeDataCURL(void *buffer, size_t size, size_t nmemb, void *userdata)
 {
