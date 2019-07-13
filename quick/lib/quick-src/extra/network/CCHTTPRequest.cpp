@@ -18,6 +18,7 @@ extern "C" {
 NS_CC_EXTRA_BEGIN
 
 static std::mutex **mutexArray = nullptr;
+static bool isCurlInited = false;
 unsigned int HTTPRequest::s_id = 0;
 
 HTTPRequest *HTTPRequest::createWithUrl(HTTPRequestDelegate *delegate,
@@ -69,10 +70,13 @@ bool HTTPRequest::initWithUrl(const char *url, int method)
 {
     CCAssert(url, "HTTPRequest::initWithUrl() - invalid url");
     
-    // HTTPS thead safe for OpenSSL
-    if (!mutexArray) {
+    // init curl global once
+    if (!isCurlInited) {
         curl_global_init(CURL_GLOBAL_ALL);
-        
+        isCurlInited = true;
+    }
+    // HTTPS thread safe for OpenSSL
+    if (!CRYPTO_get_locking_callback()) {
         mutexArray = (std::mutex **)OPENSSL_malloc(CRYPTO_num_locks() * sizeof(std::mutex *));
         for(int i = 0; i < CRYPTO_num_locks(); i++) {
             mutexArray[i] = new std::mutex;
