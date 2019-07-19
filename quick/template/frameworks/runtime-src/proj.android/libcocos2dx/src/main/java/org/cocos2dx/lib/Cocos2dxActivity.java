@@ -506,8 +506,8 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         this.hasFocus = true;
         switch(requestCode){
             case 1001: // request code define by me.
-                boolean isTip = shouldShowRequestPermissionRationale(permissions[0]);
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                boolean isTip = permissions.length > 0 && shouldShowRequestPermissionRationale(permissions[0]);
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     if (isTip) {
                         // 用户没有彻底禁止弹出权限请求
                         sContext.requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 1001);
