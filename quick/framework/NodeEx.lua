@@ -263,6 +263,10 @@ function Node:setTouchEnabled(enable)
 				if not self:isVisible(true) or not self:hitTest(tp) then
 					return false
 				end
+			elseif name == "ended" then
+				if not self:hitTest(tp) then -- out of touch area
+					name = "cancelled"
+				end
 			end
 
 			-- call listener
