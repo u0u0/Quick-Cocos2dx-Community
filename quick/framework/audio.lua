@@ -169,7 +169,7 @@ function audio.playEffect(path, isLoop)
 	
 	local source = Rapid2D_CAudio.newSource()
 	if source then
-		isLoop = isLoop ~= false and true or false
+		isLoop = isLoop == true and true or false
 		table.insert(audio._sources, source)
 		source:setVolume(audio._effectVolume)
 		source:play2d(buffer, isLoop)
