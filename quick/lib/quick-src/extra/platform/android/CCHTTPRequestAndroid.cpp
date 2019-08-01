@@ -218,13 +218,8 @@ bool HTTPRequest::start(void)
         addRequestHeaderJava("Cookie", m_cookies, bBoundary);
     }
 
-    // memset(&m_thread, 0, sizeof(pthread_t));
-    // memset(&m_threadAttr, 0, sizeof(pthread_attr_t));
-    // pthread_attr_init (&m_threadAttr);
-    // pthread_attr_setdetachstate (&m_threadAttr,PTHREAD_CREATE_DETACHED);
-    // pthread_create(&m_thread, &m_threadAttr, requestCURL, this);
-    pthread_create(&m_thread, NULL, requestCURL, this);
-    // pthread_detach(m_thread);
+	std::thread th(requestCURL, this);
+	th.detach();//exit from main thread, auto exit
     
     Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
     // CCLOG("HTTPRequest[0x%04x] - request start", s_id);
@@ -584,8 +579,6 @@ void *HTTPRequest::requestCURL(void *userdata)
     if(jvm->DetachCurrentThread() != JNI_OK) {
         CCLOG("HTTPRequest - requestCURL DetachCurrentThread fail");
     }
-    // pthread_detach(pthread_self());
-    pthread_exit((void *)0);
     return NULL;
 }
 

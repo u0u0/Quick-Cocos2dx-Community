@@ -1,9 +1,59 @@
 #include "scripting/lua-bindings/auto/lua_cocos2dx_experimental_webview_auto.hpp"
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && !defined(CC_TARGET_OS_TVOS)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "ui/UIWebView.h"
 #include "scripting/lua-bindings/manual/tolua_fix.h"
 #include "scripting/lua-bindings/manual/LuaBasicConversions.h"
 
+int lua_cocos2dx_experimental_webview_WebView_setOpacityWebView(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::experimental::ui::WebView* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccexp.WebView",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::experimental::ui::WebView*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_experimental_webview_WebView_setOpacityWebView'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "ccexp.WebView:setOpacityWebView");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_experimental_webview_WebView_setOpacityWebView'", nullptr);
+            return 0;
+        }
+        cobj->setOpacityWebView(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccexp.WebView:setOpacityWebView",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_experimental_webview_WebView_setOpacityWebView'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_cocos2dx_experimental_webview_WebView_canGoBack(lua_State* tolua_S)
 {
     int argc = 0;
@@ -317,42 +367,51 @@ int lua_cocos2dx_experimental_webview_WebView_loadURL(lua_State* tolua_S)
     int argc = 0;
     cocos2d::experimental::ui::WebView* cobj = nullptr;
     bool ok  = true;
-
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
 
-
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"ccexp.WebView",0,&tolua_err)) goto tolua_lerror;
 #endif
-
     cobj = (cocos2d::experimental::ui::WebView*)tolua_tousertype(tolua_S,1,0);
-
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_experimental_webview_WebView_loadURL'", nullptr);
         return 0;
     }
 #endif
-
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        std::string arg0;
+    do{
+        if (argc == 2) {
+            std::string arg0;
+            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "ccexp.WebView:loadURL");
 
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "ccexp.WebView:loadURL");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_experimental_webview_WebView_loadURL'", nullptr);
-            return 0;
+            if (!ok) { break; }
+            bool arg1;
+            ok &= luaval_to_boolean(tolua_S, 3,&arg1, "ccexp.WebView:loadURL");
+
+            if (!ok) { break; }
+            cobj->loadURL(arg0, arg1);
+            lua_settop(tolua_S, 1);
+            return 1;
         }
-        cobj->loadURL(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccexp.WebView:loadURL",argc, 1);
+    }while(0);
+    ok  = true;
+    do{
+        if (argc == 1) {
+            std::string arg0;
+            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "ccexp.WebView:loadURL");
+
+            if (!ok) { break; }
+            cobj->loadURL(arg0);
+            lua_settop(tolua_S, 1);
+            return 1;
+        }
+    }while(0);
+    ok  = true;
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "ccexp.WebView:loadURL",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
@@ -462,6 +521,53 @@ int lua_cocos2dx_experimental_webview_WebView_evaluateJS(lua_State* tolua_S)
 
     return 0;
 }
+int lua_cocos2dx_experimental_webview_WebView_setBackgroundTransparent(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::experimental::ui::WebView* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccexp.WebView",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::experimental::ui::WebView*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_experimental_webview_WebView_setBackgroundTransparent'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_experimental_webview_WebView_setBackgroundTransparent'", nullptr);
+            return 0;
+        }
+        cobj->setBackgroundTransparent();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccexp.WebView:setBackgroundTransparent",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_experimental_webview_WebView_setBackgroundTransparent'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_cocos2dx_experimental_webview_WebView_canGoForward(lua_State* tolua_S)
 {
     int argc = 0;
@@ -552,6 +658,53 @@ int lua_cocos2dx_experimental_webview_WebView_stopLoading(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_experimental_webview_WebView_stopLoading'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_cocos2dx_experimental_webview_WebView_getOpacityWebView(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::experimental::ui::WebView* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccexp.WebView",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::experimental::ui::WebView*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_experimental_webview_WebView_getOpacityWebView'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_experimental_webview_WebView_getOpacityWebView'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getOpacityWebView();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccexp.WebView:getOpacityWebView",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_experimental_webview_WebView_getOpacityWebView'.",&tolua_err);
 #endif
 
     return 0;
@@ -694,6 +847,7 @@ int lua_register_cocos2dx_experimental_webview_WebView(lua_State* tolua_S)
     tolua_cclass(tolua_S,"WebView","ccexp.WebView","ccui.Widget",nullptr);
 
     tolua_beginmodule(tolua_S,"WebView");
+        tolua_function(tolua_S,"setOpacityWebView",lua_cocos2dx_experimental_webview_WebView_setOpacityWebView);
         tolua_function(tolua_S,"canGoBack",lua_cocos2dx_experimental_webview_WebView_canGoBack);
         tolua_function(tolua_S,"loadHTMLString",lua_cocos2dx_experimental_webview_WebView_loadHTMLString);
         tolua_function(tolua_S,"goForward",lua_cocos2dx_experimental_webview_WebView_goForward);
@@ -703,8 +857,10 @@ int lua_register_cocos2dx_experimental_webview_WebView(lua_State* tolua_S)
         tolua_function(tolua_S,"loadURL",lua_cocos2dx_experimental_webview_WebView_loadURL);
         tolua_function(tolua_S,"setBounces",lua_cocos2dx_experimental_webview_WebView_setBounces);
         tolua_function(tolua_S,"evaluateJS",lua_cocos2dx_experimental_webview_WebView_evaluateJS);
+        tolua_function(tolua_S,"setBackgroundTransparent",lua_cocos2dx_experimental_webview_WebView_setBackgroundTransparent);
         tolua_function(tolua_S,"canGoForward",lua_cocos2dx_experimental_webview_WebView_canGoForward);
         tolua_function(tolua_S,"stopLoading",lua_cocos2dx_experimental_webview_WebView_stopLoading);
+        tolua_function(tolua_S,"getOpacityWebView",lua_cocos2dx_experimental_webview_WebView_getOpacityWebView);
         tolua_function(tolua_S,"reload",lua_cocos2dx_experimental_webview_WebView_reload);
         tolua_function(tolua_S,"setJavascriptInterfaceScheme",lua_cocos2dx_experimental_webview_WebView_setJavascriptInterfaceScheme);
         tolua_function(tolua_S,"create", lua_cocos2dx_experimental_webview_WebView_create);

@@ -125,7 +125,6 @@ protected:
     int _fontAscender;
     EventListenerCustom* _rendererRecreatedListener;
     bool _antialiasEnabled;
-    bool _rendererRecreate;
 };
 
 

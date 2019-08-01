@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\animation\Animation.h" />
+    <ClInclude Include="..\animation\AnimationState.h" />
+    <ClInclude Include="..\animation\BaseTimelineState.h" />
+    <ClInclude Include="..\animation\IAnimatable.h" />
+    <ClInclude Include="..\animation\TimelineState.h" />
+    <ClInclude Include="..\animation\WorldClock.h" />
+    <ClInclude Include="..\armature\Armature.h" />
+    <ClInclude Include="..\armature\Bone.h" />
+    <ClInclude Include="..\armature\Constraint.h" />
+    <ClInclude Include="..\armature\DeformVertices.h" />
+    <ClInclude Include="..\armature\IArmatureProxy.h" />
+    <ClInclude Include="..\armature\Slot.h" />
+    <ClInclude Include="..\armature\TransformObject.h" />
+    <ClInclude Include="..\cocos2dx\CCArmatureDisplay.h" />
+    <ClInclude Include="..\cocos2dx\CCDragonBonesHeaders.h" />
+    <ClInclude Include="..\cocos2dx\CCFactory.h" />
+    <ClInclude Include="..\cocos2dx\CCSlot.h" />
+    <ClInclude Include="..\cocos2dx\CCTextureAtlasData.h" />
+    <ClInclude Include="..\core\BaseObject.h" />
+    <ClInclude Include="..\core\DragonBones.h" />
+    <ClInclude Include="..\DragonBonesHeaders.h" />
+    <ClInclude Include="..\event\EventObject.h" />
+    <ClInclude Include="..\event\IEventDispatcher.h" />
+    <ClInclude Include="..\factory\BaseFactory.h" />
+    <ClInclude Include="..\geom\ColorTransform.h" />
+    <ClInclude Include="..\geom\Matrix.h" />
+    <ClInclude Include="..\geom\Point.h" />
+    <ClInclude Include="..\geom\Rectangle.h" />
+    <ClInclude Include="..\geom\Transform.h" />
+    <ClInclude Include="..\model\AnimationConfig.h" />
+    <ClInclude Include="..\model\AnimationData.h" />
+    <ClInclude Include="..\model\ArmatureData.h" />
+    <ClInclude Include="..\model\BoundingBoxData.h" />
+    <ClInclude Include="..\model\CanvasData.h" />
+    <ClInclude Include="..\model\ConstraintData.h" />
+    <ClInclude Include="..\model\DisplayData.h" />
+    <ClInclude Include="..\model\DragonBonesData.h" />
+    <ClInclude Include="..\model\SkinData.h" />
+    <ClInclude Include="..\model\TextureAtlasData.h" />
+    <ClInclude Include="..\model\UserData.h" />
+    <ClInclude Include="..\parser\BinaryDataParser.h" />
+    <ClInclude Include="..\parser\DataParser.h" />
+    <ClInclude Include="..\parser\JSONDataParser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\animation\Animation.cpp" />
+    <ClCompile Include="..\animation\AnimationState.cpp" />
+    <ClCompile Include="..\animation\BaseTimelineState.cpp" />
+    <ClCompile Include="..\animation\TimelineState.cpp" />
+    <ClCompile Include="..\animation\WorldClock.cpp" />
+    <ClCompile Include="..\armature\Armature.cpp" />
+    <ClCompile Include="..\armature\Bone.cpp" />
+    <ClCompile Include="..\armature\Constraint.cpp" />
+    <ClCompile Include="..\armature\DeformVertices.cpp" />
+    <ClCompile Include="..\armature\Slot.cpp" />
+    <ClCompile Include="..\armature\TransformObject.cpp" />
+    <ClCompile Include="..\cocos2dx\CCArmatureDisplay.cpp" />
+    <ClCompile Include="..\cocos2dx\CCFactory.cpp" />
+    <ClCompile Include="..\cocos2dx\CCSlot.cpp" />
+    <ClCompile Include="..\cocos2dx\CCTextureAtlasData.cpp" />
+    <ClCompile Include="..\core\BaseObject.cpp" />
+    <ClCompile Include="..\core\DragonBones.cpp" />
+    <ClCompile Include="..\event\EventObject.cpp" />
+    <ClCompile Include="..\factory\BaseFactory.cpp" />
+    <ClCompile Include="..\geom\Point.cpp" />
+    <ClCompile Include="..\geom\Transform.cpp" />
+    <ClCompile Include="..\model\AnimationConfig.cpp" />
+    <ClCompile Include="..\model\AnimationData.cpp" />
+    <ClCompile Include="..\model\ArmatureData.cpp" />
+    <ClCompile Include="..\model\BoundingBoxData.cpp" />
+    <ClCompile Include="..\model\CanvasData.cpp" />
+    <ClCompile Include="..\model\ConstraintData.cpp" />
+    <ClCompile Include="..\model\DisplayData.cpp" />
+    <ClCompile Include="..\model\DragonBonesData.cpp" />
+    <ClCompile Include="..\model\SkinData.cpp" />
+    <ClCompile Include="..\model\TextureAtlasData.cpp" />
+    <ClCompile Include="..\model\UserData.cpp" />
+    <ClCompile Include="..\parser\BinaryDataParser.cpp" />
+    <ClCompile Include="..\parser\DataParser.cpp" />
+    <ClCompile Include="..\parser\JSONDataParser.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{766A9D40-F949-4DF4-B349-E8DE64B4D591}</ProjectGuid>
+    <RootNamespace>libdragonBones</RootNamespace>
+    <ProjectName>libdragonBones</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\2d\cocos2d_headers.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\2d\cocos2d_headers.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>
+      </SDLCheck>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos\editor-support;$(EngineRoot)external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_LIB;COCOS2DXWIN32_EXPORTS;GL_GLEXT_PROTOTYPES;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_LIB;COCOS2DXWIN32_EXPORTS;GL_GLEXT_PROTOTYPES;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos\editor-support;$(EngineRoot)external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <MinimalRebuild>true</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

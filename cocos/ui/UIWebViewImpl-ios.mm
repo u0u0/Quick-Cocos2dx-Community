@@ -1,5 +1,6 @@
 /****************************************************************************
- Copyright (c) 2014 Chukong Technologies Inc.
+ Copyright (c) 2014-2016 Chukong Technologies Inc.
+ Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
  
@@ -67,11 +68,17 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 @property(nonatomic, readonly, getter=canGoBack) BOOL canGoBack;
 @property(nonatomic, readonly, getter=canGoForward) BOOL canGoForward;
 
-+ (instancetype)webViewWrapper;
++ (instancetype)newWebViewWrapper;
 
 - (void)setVisible:(bool)visible;
 
 - (void)setBounces:(bool)bounces;
+
+- (void)setOpacityWebView:(float)opacity;
+
+- (float)getOpacityWebView;
+
+- (void)setBackgroundTransparent;
 
 - (void)setFrameWithX:(float)x y:(float)y width:(float)width height:(float)height;
 
@@ -81,7 +88,7 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 
 - (void)loadHTMLString:(const std::string &)string baseURL:(const std::string &)baseURL;
 
-- (void)loadUrl:(const std::string &)urlString;
+- (void)loadUrl:(const std::string &)urlString cleanCachedData:(BOOL) needCleanCachedData;
 
 - (void)loadFile:(const std::string &)filePath;
 
@@ -108,8 +115,8 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
     
 }
 
-+ (instancetype)webViewWrapper {
-    return [[[self alloc] init] autorelease];
++ (instancetype) newWebViewWrapper {
+    return [[self alloc] init];
 }
 
 - (instancetype)init {
@@ -126,6 +133,7 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 - (void)dealloc {
     self.uiWebView.delegate = nil;
     [self.uiWebView removeFromSuperview];
+    [self.uiWebView release];
     self.uiWebView = nil;
     self.jsScheme = nil;
     [super dealloc];
@@ -133,7 +141,7 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 
 - (void)setupWebView {
     if (!self.uiWebView) {
-        self.uiWebView = [[[UIWebView alloc] init] autorelease];
+        self.uiWebView = [[UIWebView alloc] init];
         self.uiWebView.delegate = self;
     }
     if (!self.uiWebView.superview) {
@@ -144,11 +152,28 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 }
 
 - (void)setVisible:(bool)visible {
+    if (!self.uiWebView) {[self setupWebView];}
     self.uiWebView.hidden = !visible;
 }
 
 - (void)setBounces:(bool)bounces {
   self.uiWebView.scrollView.bounces = bounces;
+}
+
+- (void)setOpacityWebView:(float)opacity {
+    if (!self.uiWebView) {[self setupWebView];}
+    self.uiWebView.alpha=opacity;
+    [self.uiWebView setOpaque:NO];
+}
+
+-(float) getOpacityWebView{
+    return self.uiWebView.alpha;
+}
+
+-(void) setBackgroundTransparent{
+    if (!self.uiWebView) {[self setupWebView];}
+    [self.uiWebView setOpaque:NO];
+    [self.uiWebView setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)setFrameWithX:(float)x y:(float)y width:(float)width height:(float)height {
@@ -175,12 +200,20 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
     [self.uiWebView loadHTMLString:@(string.c_str()) baseURL:[NSURL URLWithString:@(getFixedBaseUrl(baseURL).c_str())]];
 }
 
-- (void)loadUrl:(const std::string &)urlString {
+- (void)loadUrl:(const std::string &)urlString cleanCachedData:(BOOL) needCleanCachedData {
     if (!self.uiWebView) {[self setupWebView];}
     NSURL *url = [NSURL URLWithString:@(urlString.c_str())];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    NSURLRequest *request = nil;
+    if (needCleanCachedData)
+        request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    else
+        request = [NSURLRequest requestWithURL:url];
+
     [self.uiWebView loadRequest:request];
 }
+
+
 
 - (void)loadFile:(const std::string &)filePath {
     if (!self.uiWebView) {[self setupWebView];}
@@ -223,6 +256,8 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
     self.uiWebView.scalesPageToFit = scalesPageToFit;
 }
 
+
+
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString *url = [[request URL] absoluteString];
@@ -239,9 +274,7 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     if (self.didFinishLoading) {
         NSString *url = [[webView.request URL] absoluteString];
-        if (url) {
-            self.didFinishLoading([url UTF8String]);
-        }
+        self.didFinishLoading([url UTF8String]);
     }
 }
 
@@ -263,9 +296,8 @@ namespace experimental {
     namespace ui{
 
 WebViewImpl::WebViewImpl(WebView *webView)
-        : _uiWebViewWrapper([UIWebViewWrapper webViewWrapper]),
+        : _uiWebViewWrapper([UIWebViewWrapper newWebViewWrapper]),
         _webView(webView) {
-    [_uiWebViewWrapper retain];
             
     _uiWebViewWrapper.shouldStartLoading = [this](std::string url) {
         if (this->_webView->_onShouldStartLoading) {
@@ -313,7 +345,11 @@ void WebViewImpl::loadHTMLString(const std::string &string, const std::string &b
 }
 
 void WebViewImpl::loadURL(const std::string &url) {
-    [_uiWebViewWrapper loadUrl:url];
+    this->loadURL(url, false);
+}
+
+void WebViewImpl::loadURL(const std::string &url, bool cleanCachedData) {
+    [_uiWebViewWrapper loadUrl:url cleanCachedData:cleanCachedData];
 }
 
 void WebViewImpl::loadFile(const std::string &fileName) {
@@ -360,13 +396,13 @@ void WebViewImpl::setScalesPageToFit(const bool scalesPageToFit) {
 void WebViewImpl::draw(cocos2d::Renderer *renderer, cocos2d::Mat4 const &transform, uint32_t flags) {
     if (flags & cocos2d::Node::FLAGS_TRANSFORM_DIRTY) {
         
-        auto direcrot = cocos2d::Director::getInstance();
-        auto glView = direcrot->getOpenGLView();
+        auto director = cocos2d::Director::getInstance();
+        auto glView = director->getOpenGLView();
         auto frameSize = glView->getFrameSize();
         
         auto scaleFactor = [static_cast<CCEAGLView *>(glView->getEAGLView()) contentScaleFactor];
 
-        auto winSize = direcrot->getWinSize();
+        auto winSize = director->getWinSize();
 
         auto leftBottom = this->_webView->convertToWorldSpace(cocos2d::Vec2::ZERO);
         auto rightTop = this->_webView->convertToWorldSpace(cocos2d::Vec2(this->_webView->getContentSize().width, this->_webView->getContentSize().height));
@@ -386,6 +422,19 @@ void WebViewImpl::draw(cocos2d::Renderer *renderer, cocos2d::Mat4 const &transfo
 void WebViewImpl::setVisible(bool visible){
     [_uiWebViewWrapper setVisible:visible];
 }
+        
+void WebViewImpl::setOpacityWebView(float opacity){
+    [_uiWebViewWrapper setOpacityWebView: opacity];
+}
+        
+float WebViewImpl::getOpacityWebView() const{
+    return [_uiWebViewWrapper getOpacityWebView];
+}
+
+void WebViewImpl::setBackgroundTransparent(){
+    [_uiWebViewWrapper setBackgroundTransparent];
+}
+
         
     } // namespace ui
 } // namespace experimental

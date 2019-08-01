@@ -72,8 +72,8 @@ ssize_t RenderQueue::size() const
 void RenderQueue::sort()
 {
     // Don't sort _queue0, it already comes sorted
-    std::sort(std::begin(_queueNegZ), std::end(_queueNegZ), compareRenderCommand);
-    std::sort(std::begin(_queuePosZ), std::end(_queuePosZ), compareRenderCommand);
+    std::stable_sort(std::begin(_queueNegZ), std::end(_queueNegZ), compareRenderCommand);
+    std::stable_sort(std::begin(_queuePosZ), std::end(_queuePosZ), compareRenderCommand);
 }
 
 RenderCommand* RenderQueue::operator[](ssize_t index) const
@@ -115,7 +115,7 @@ void TransparentRenderQueue::push_back(RenderCommand* command)
 
 void TransparentRenderQueue::sort()
 {
-    std::sort(std::begin(_queueCmd), std::end(_queueCmd), compareTransparentRenderCommand);
+    std::stable_sort(std::begin(_queueCmd), std::end(_queueCmd), compareTransparentRenderCommand);
 }
 
 RenderCommand* TransparentRenderQueue::operator[](ssize_t index) const

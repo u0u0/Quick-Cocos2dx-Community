@@ -46,7 +46,6 @@ Ref::Ref()
     static unsigned int uObjectCount = 0;
     _luaID = 0;
     _ID = ++uObjectCount;
-    _scriptObject = nullptr;
 #endif
     
 #if CC_REF_LEAK_DETECTION

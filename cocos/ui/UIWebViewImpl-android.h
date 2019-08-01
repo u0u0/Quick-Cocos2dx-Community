@@ -1,5 +1,6 @@
 /****************************************************************************
- Copyright (c) 2014 Chukong Technologies Inc.
+ Copyright (c) 2014-2016 Chukong Technologies Inc.
+ Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
  
@@ -24,6 +25,7 @@
 
 #ifndef __COCOS2D__UI__WEBVIEWIMPL_ANDROID_H_
 #define __COCOS2D__UI__WEBVIEWIMPL_ANDROID_H_
+/// @cond DO_NOT_SHOW
 
 #ifdef __ANDROID__
 
@@ -59,6 +61,7 @@ namespace cocos2d {
                 void loadHTMLString(const std::string &string, const std::string &baseURL);
 
                 void loadURL(const std::string &url);
+                void loadURL(const std::string &url, bool cleanCachedData);
 
                 void loadFile(const std::string &fileName);
 
@@ -83,6 +86,12 @@ namespace cocos2d {
                 virtual void setVisible(bool visible);
 
                 void setBounces(bool bounces);
+                
+                void setOpacityWebView(float opacity);
+                
+                float getOpacityWebView()const;
+                
+                void setBackgroundTransparent();
 
                 static bool shouldStartLoading(const int viewTag, const std::string &url);
                 static void didFinishLoading(const int viewTag, const std::string &url);
@@ -100,4 +109,5 @@ namespace cocos2d {
 
 #endif // __ANDROID__
 
+/// @endcond
 #endif /* __COCOS2D__UI__WEBVIEWIMPL_ANDROID_H_ */

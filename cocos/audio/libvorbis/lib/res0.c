@@ -11,7 +11,6 @@
  ********************************************************************
 
  function: residue backend 0, 1 and 2 implementation
- last mod: $Id: res0.c 19441 2015-01-21 01:17:41Z xiphmont $
 
  ********************************************************************/
 
@@ -30,9 +29,6 @@
 #include "codebook.h"
 #include "misc.h"
 #include "os.h"
-
-//#define TRAIN_RES 1
-//#define TRAIN_RESAUX 1
 
 #if defined(TRAIN_RES) || defined (TRAIN_RESAUX)
 #include <stdio.h>

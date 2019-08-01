@@ -5,8 +5,6 @@
 
 @end
 
-#define SKIP_LINES_COUNT    3
-#define MAX_LINE_LEN        4096
 #define MAX_LINES_COUNT     200
 
 @implementation ConsoleWindowController
@@ -38,14 +36,9 @@
 
 - (void) trace:(NSString*)msg
 {
-    if (traceCount >= SKIP_LINES_COUNT && [msg length] > MAX_LINE_LEN)
-    {
-        msg = [NSString stringWithFormat:@"%@ ...", [msg substringToIndex:MAX_LINE_LEN - 4]];
-    }
-    traceCount++;
     NSFont *font = [NSFont fontWithName:@"Monaco" size:12.0];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
-    NSAttributedString *string = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+    NSAttributedString *string = [[[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary] autorelease];
     NSNumber *len = [NSNumber numberWithUnsignedInteger:[string length]];
     [linesCount addObject:len];
 

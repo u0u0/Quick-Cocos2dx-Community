@@ -33,6 +33,7 @@
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
 #include "CCFileUtils.h"
+#include "openssl/crypto.h"
 
 #include <thread>
 #include <mutex>
@@ -58,6 +59,17 @@
 #else
     #define  LOGD(...)
 #endif
+
+static std::mutex **mutexArray = nullptr;
+
+static void crypto_lock_cb(int mode, int type, const char *file, int line)
+{
+    if(mode & CRYPTO_LOCK) {
+        mutexArray[type]->lock();
+    } else {
+        mutexArray[type]->unlock();
+    }
+}
 
 static void printWebSocketLog(int level, const char *line)
 {
@@ -363,6 +375,15 @@ bool WebSocket::init(const Delegate& delegate,
                      const std::string& url,
                      const std::vector<std::string>* protocols/* = nullptr*/)
 {
+    // HTTPS thead safe for OpenSSL
+    if (!CRYPTO_get_locking_callback()) {
+        mutexArray = (std::mutex **)OPENSSL_malloc(CRYPTO_num_locks() * sizeof(std::mutex *));
+        for(int i = 0; i < CRYPTO_num_locks(); i++) {
+            mutexArray[i] = new std::mutex;
+        }
+        CRYPTO_set_locking_callback(crypto_lock_cb);
+    }
+    
     bool ret = false;
     bool useSSL = false;
     std::string host = url;

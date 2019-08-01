@@ -78,7 +78,7 @@ NSFont* EditBoxImplMac::constructFont(const char *fontName, int fontSize)
     fntName = [[fntName lastPathComponent] stringByDeletingPathExtension];
     float retinaFactor = _inRetinaMode ? 2.0f : 1.0f;
     auto glview = cocos2d::Director::getInstance()->getOpenGLView();
-    float scaleFactor = glview->getScaleX();
+    float scaleFactor = glview->getScaleX() * glview->getFrameZoomFactor();
     
     if (fontSize == -1)
     {
@@ -196,12 +196,13 @@ void EditBoxImplMac::updateNativeFrame(const cocos2d::Rect &rect)
 {
     GLView* eglView = Director::getInstance()->getOpenGLView();
     auto viewPortRect = eglView->getViewPortRect();
+    auto frameScale = eglView->getFrameZoomFactor();
     // Coordinate System on OSX has its origin at the lower left corner.
 //    https://developer.apple.com/library/ios/documentation/General/Conceptual/Devpedia-CocoaApp/CoordinateSystem.html
     auto screenPosY = viewPortRect.size.height - rect.origin.y - rect.size.height;
-    [_sysEdit updateFrame:CGRectMake(rect.origin.x,
-                                     screenPosY,
-                                     rect.size.width, rect.size.height)];
+    [_sysEdit updateFrame:CGRectMake(rect.origin.x * frameScale,
+                                     screenPosY * frameScale,
+                                     rect.size.width * frameScale, rect.size.height * frameScale)];
 }
     
 const char* EditBoxImplMac::getNativeDefaultFontName()

@@ -61,7 +61,7 @@ def buildNative(isRelease, abi):
     libsDir = joinDir(projectRoot, "libcocos2dx", "libs", abi)
     jniLibsDir = joinDir(projectRoot, "libcocos2dx", "src", "main", "libcocos2dx", abi)
 
-    print "====> Moveing *.so to jniLibs\n"
+    print "====> Moving *.so to jniLibs\n"
     if os.path.exists(jniLibsDir):
         shutil.rmtree(jniLibsDir)
     shutil.move(libsDir, jniLibsDir)

@@ -224,6 +224,7 @@ LOCAL_MODULE_FILENAME := libcocos2d
 LOCAL_STATIC_LIBRARIES := cocostudio_static
 LOCAL_STATIC_LIBRARIES += cocos3d_static
 LOCAL_STATIC_LIBRARIES += spine_static
+LOCAL_STATIC_LIBRARIES += dragonBones_static
 LOCAL_STATIC_LIBRARIES += cocos_network_static
 LOCAL_STATIC_LIBRARIES += static_Rapid2DAudio
 
@@ -240,6 +241,7 @@ $(call import-module,3d)
 $(call import-module,audio)
 $(call import-module,editor-support/cocostudio)
 $(call import-module,editor-support/spine)
+$(call import-module,editor-support/dragonBones)
 $(call import-module,network)
 $(call import-module,ui)
 $(call import-module,Box2D)
