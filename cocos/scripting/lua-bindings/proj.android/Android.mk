@@ -103,6 +103,11 @@ LOCAL_SRC_FILES += ../manual/spine/lua_cocos2dx_spine_manual.cpp \
                    ../auto/lua_cocos2dx_spine_auto.cpp
 endif
 
+#spine
+ifeq ($(CC_USE_DRAGONBONES),1)
+LOCAL_SRC_FILES += ../manual/dragonBones/lua_dragonBones.cpp
+endif
+
 #ui
 LOCAL_SRC_FILES += ../manual/ui/lua_cocos2dx_experimental_webview_manual.cpp \
                    ../manual/ui/lua_cocos2dx_experimental_video_manual.cpp \
@@ -120,10 +125,10 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../../../3d \
                     $(LOCAL_PATH)/../../../audio \
                     $(LOCAL_PATH)/../../../../external/OpenAL/inc \
-                    $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio/ActionTimeline \
                     $(LOCAL_PATH)/../../../editor-support/spine \
+                    $(LOCAL_PATH)/../../../editor-support/dragonBones \
                     $(LOCAL_PATH)/../../../ui \
                     $(LOCAL_PATH)/../../../../extensions \
                     $(LOCAL_PATH)/../auto \
@@ -133,6 +138,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../manual/audio \
                     $(LOCAL_PATH)/../manual/cocostudio \
                     $(LOCAL_PATH)/../manual/spine \
+                    $(LOCAL_PATH)/../manual/dragonBones \
                     $(LOCAL_PATH)/../manual/ui \
                     $(LOCAL_PATH)/../../../../external/xxtea \
                     $(LOCAL_PATH)/../../../.. \
@@ -148,6 +154,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                            $(LOCAL_PATH)/../manual/audio \
                            $(LOCAL_PATH)/../manual/cocostudio \
                            $(LOCAL_PATH)/../manual/spine \
+                           $(LOCAL_PATH)/../manual/dragonBones \
                            $(LOCAL_PATH)/../manual/ui \
                            $(LOCAL_PATH)/../../../../external/lua/quick \
                            $(LOCAL_PATH)/../../../..

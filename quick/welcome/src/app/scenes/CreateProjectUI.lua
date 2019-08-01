@@ -15,29 +15,28 @@ function CreateProjectUI:ctor()
 end
 
 function CreateProjectUI:onEnter()
-    -- project location:
-    display.newTTFLabel({
-        text = "Choose Project Location:",
-        size = 25,
-        color = display.COLOR_WHITE
+	-- project location:
+	display.newTTFLabel({
+		text = "Choose Project Location:",
+		size = 25,
+		color = display.COLOR_WHITE
 	})
-    :align(display.LEFT_CENTER, 40, display.top - 55)
-    :addTo(self)
+	:align(display.LEFT_CENTER, 40, display.top - 55)
+	:addTo(self)
 
 	local locationEditbox = ccui.EditBox:create(cc.size(display.width-250, 40), "ButtonNormal.png", 1)
-    locationEditbox:setAnchorPoint(0,0)
+	locationEditbox:setAnchorPoint(0,0)
 	locationEditbox:pos(40, display.top - 120)
-    self:addChild(locationEditbox)
-	
-	local selectButton = ccui.Button:create("ButtonNormal.png",
-			"ButtonPressed.png", "ButtonDisabled.png", 1)
+	self:addChild(locationEditbox)
+
+	local selectButton = ccui.Button:create("ButtonNormal.png", "ButtonPressed.png", "ButtonDisabled.png", 1)
 	selectButton:setScale9Enabled(true)
-    selectButton:setAnchorPoint(0,0)
-    selectButton:setContentSize(cc.size(150, 40))
+	selectButton:setAnchorPoint(0,0)
+	selectButton:setContentSize(cc.size(150, 40))
 	selectButton:setTitleText("Select")
-    selectButton:pos(display.right - 170, display.top - 120)
+	selectButton:pos(display.right - 170, display.top - 120)
 	selectButton:setTitleFontSize(25)
-    selectButton:addTo(self)
+	selectButton:addTo(self)
 	selectButton:addTouchEventListener(function(sender, eventType)
 		if 2 == eventType then
 			local filedialog = PlayerProtocol:getInstance():getFileDialogService()
@@ -48,45 +47,43 @@ function CreateProjectUI:onEnter()
 		end
 	end)
 
-    -- package name:
+	-- package name:
 	display.newTTFLabel({
 		text = "Project package name: (etc: com.mycomp.mygame)",
 		size = 25,
 		color = display.COLOR_WHITE,
 	})
-    :align(display.LEFT_CENTER, 40, display.top - 155)
-    :addTo(self)
+	:align(display.LEFT_CENTER, 40, display.top - 155)
+	:addTo(self)
 
 	local packageEditbox = ccui.EditBox:create(cc.size(display.width-250, 40), "ButtonNormal.png", 1)
-    packageEditbox:setAnchorPoint(0,0)
+	packageEditbox:setAnchorPoint(0,0)
 	packageEditbox:pos(40, display.top - 220)
-    self:addChild(packageEditbox)
+	self:addChild(packageEditbox)
 
-    -- screen direction:
+	-- screen direction:
 	display.newTTFLabel({
-        text = "Screen Direction:",
-        size = fontSize,
-        color = display.COLOR_WHITE,
+		text = "Screen Direction:",
+		size = fontSize,
+		color = display.COLOR_WHITE,
 	})
-    :align(display.LEFT_CENTER, 40, display.top - 255)
-    :addTo(self)
+	:align(display.LEFT_CENTER, 40, display.top - 255)
+	:addTo(self)
 
 	display.newTTFLabel({text = "Portrait", size = 25, color = display.COLOR_WHITE})
-        :align(display.LEFT_CENTER, 100, display.cy)
-		:addTo(self)
-	local portraitCheckBox = ccui.CheckBox:create("CheckBoxButton2Off.png", nil,
-		"CheckBoxButton2On.png", nil, nil)
-        :align(display.LEFT_CENTER, 40, display.cy)
-        :addTo(self)
+	:align(display.LEFT_CENTER, 100, display.cy)
+	:addTo(self)
+	local portraitCheckBox = ccui.CheckBox:create("CheckBoxButton2Off.png", nil, "CheckBoxButton2On.png", nil, nil)
+	:align(display.LEFT_CENTER, 40, display.cy)
+	:addTo(self)
 	portraitCheckBox:setSelected(true)
 
 	display.newTTFLabel({text = "Landscape", size = 25, color = display.COLOR_WHITE})
-        :align(display.LEFT_CENTER, 260, display.cy)
-		:addTo(self)
-	local landscapeCheckBox = ccui.CheckBox:create("CheckBoxButton2Off.png", nil,
-		"CheckBoxButton2On.png", nil, nil)
-        :align(display.LEFT_CENTER, 200, display.cy)
-        :addTo(self)
+	:align(display.LEFT_CENTER, 260, display.cy)
+	:addTo(self)
+	local landscapeCheckBox = ccui.CheckBox:create("CheckBoxButton2Off.png", nil, "CheckBoxButton2On.png", nil, nil)
+	:align(display.LEFT_CENTER, 200, display.cy)
+	:addTo(self)
 	landscapeCheckBox:setSelected(false)
 	landscapeCheckBox:addEventListener(function(sender, eventType)
 		if 0 == eventType then -- selected
@@ -103,9 +100,18 @@ function CreateProjectUI:onEnter()
 		end
 	end)
 
-    -- ok or cancel
+	-- copy engine src
+	display.newTTFLabel({text = "copy engine src", size = 25, color = display.COLOR_WHITE})
+	:align(display.LEFT_CENTER, 100, display.cy - 70)
+	:addTo(self)
+	local copySrcBox = ccui.CheckBox:create("CheckBoxButton2Off.png", nil, "CheckBoxButton2On.png", nil, nil)
+	:align(display.LEFT_CENTER, 40, display.cy - 70)
+	:addTo(self)
+	copySrcBox:setSelected(false)
+
+	-- ok or cancel
 	local button = ccui.Button:create("ButtonNormal.png",
-		"ButtonPressed.png", "ButtonDisabled.png", 1)
+	"ButtonPressed.png", "ButtonDisabled.png", 1)
 	button:setScale9Enabled(true)
 	button:setContentSize(cc.size(150, 40))
 	button:setTitleText("Cancel")
@@ -118,8 +124,7 @@ function CreateProjectUI:onEnter()
 	button:pos(display.right - 280, 30)
 	button:addTo(self)
 
-	local createProjectbutton = ccui.Button:create("ButtonNormal.png",
-		"ButtonPressed.png", "ButtonDisabled.png", 1)
+	local createProjectbutton = ccui.Button:create("ButtonNormal.png", "ButtonPressed.png", "ButtonDisabled.png", 1)
 	createProjectbutton.currState = 1
 	createProjectbutton:setScale9Enabled(true)
 	createProjectbutton:setContentSize(cc.size(150, 40))
@@ -146,6 +151,9 @@ function CreateProjectUI:onEnter()
 						screenDirection = " -l"
 					end
 					local arguments = " -p " .. packageEditbox:getText() .. " -o " .. locationEditbox:getText() .. screenDirection
+					if copySrcBox:isSelected() then
+						arguments = arguments .. " --deep-copy"
+					end
 					local taskId = tostring(os.time())
 
 					print("Create Cmd:" .. scriptPath .. " " .. arguments)
@@ -179,15 +187,15 @@ function CreateProjectUI:onEnter()
 	createProjectbutton:addTo(self)
 
 	-- keyboard event
-    local event = function(e)
-        local data = json.decode(e:getDataString())
-        if data == nil then return end
+	local event = function(e)
+		local data = json.decode(e:getDataString())
+		if data == nil then return end
 
-        -- esc keyc = 6
-        if data.data == 6 then self:removeFromParent(true) end
-    end
-    self.eventListenerCustom_ = cc.EventListenerCustom:create("APP.EVENT", event)
-    eventDispatcher:addEventListenerWithFixedPriority(self.eventListenerCustom_, 1)
+		-- esc keyc = 6
+		if data.data == 6 then self:removeFromParent(true) end
+	end
+	self.eventListenerCustom_ = cc.EventListenerCustom:create("APP.EVENT", event)
+	eventDispatcher:addEventListenerWithFixedPriority(self.eventListenerCustom_, 1)
 end
 
 return CreateProjectUI

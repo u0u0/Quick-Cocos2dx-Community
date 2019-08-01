@@ -34,18 +34,6 @@ function SimpleTCP.getTime()
 	return socket.gettime()
 end
 
-function SimpleTCP.isIpv6(domain)
-	local result = socket.dns.getaddrinfo(domain)
-	if result then
-		for k,v in pairs(result) do
-			if v.family == "inet6" then
-				return true
-			end
-		end
-	end
-	return false
-end
-
 -------- instant var and public method -------------
 function SimpleTCP:ctor(host, port, callback)
 	if not host then print("Worning SimpleTCP:ctor() host is nil") end
@@ -66,26 +54,34 @@ function SimpleTCP:connect()
 		return
 	end
 
-	-- if "closed", create a new LuaSocket
-	if not self.tcp then
-		-- get a master socket
-		if SimpleTCP.isIpv6(self.host) then
-			self.tcp = socket.tcp6()
-		else
-			self.tcp = socket.tcp()
-		end
-		-- make LuaSocket work like Asynchronously
-		self.tcp:settimeout(0)
-	end
-
 	self.stat = SimpleTCP.STAT_CONNECTING
 	self.callback(SimpleTCP.EVENT_CONNECTING)
 	self.connectingTime = 0
-	self:_connectAndCheck()
 
-	-- start global scheduler
-	assert(not self.globalUpdateHandler, "SimpleTCP:connect status wrong, need reviewing!")
-	self.globalUpdateHandler = scheduler.scheduleUpdateGlobal(handler(self, self._update))
+	if self.tcp then
+		self:_connectAndCheck()
+		-- start global scheduler
+		assert(not self.globalUpdateHandler, "SimpleTCP:connect status wrong, need reviewing!")
+		self.globalUpdateHandler = scheduler.scheduleUpdateGlobal(handler(self, self._update))
+	else
+		-- if "closed", create a new LuaSocket
+		socket.dns.isIpv6(self.host, function(err, isIpv6)
+			assert(err == nil, "Error in socket.dns.isIpv6")
+			-- get a master socket
+			if isIpv6 then
+				self.tcp = socket.tcp6()
+			else
+				self.tcp = socket.tcp()
+			end
+			-- make LuaSocket work like Asynchronously
+			self.tcp:settimeout(0)
+
+			self:_connectAndCheck()
+			-- start global scheduler
+			assert(not self.globalUpdateHandler, "SimpleTCP:connect status wrong, need reviewing!")
+			self.globalUpdateHandler = scheduler.scheduleUpdateGlobal(handler(self, self._update))
+		end)
+	end
 end
 
 --[[
@@ -119,7 +115,7 @@ In asynchronous LuaSocket useage, use connect() return for stat checking
 Return true for SimpleTCP.STAT_CONNECTED
 ]]
 function SimpleTCP:_connectAndCheck()
-	local rtn, err = self.tcp:connect(self.host, self.port)
+	local rtn, err = self.tcp:connectAsyn(self.host, self.port)
 	-- err in case of "already connected" is special fix for LuaSocket working on windows
 	-- refer to: http://lua-users.org/lists/lua-l/2009-10/msg00584.html
 	return rtn == 1 or err == "already connected"

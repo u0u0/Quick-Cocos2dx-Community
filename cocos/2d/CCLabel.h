@@ -401,6 +401,7 @@ protected:
     bool _blendFuncDirty;
     bool _insideBounds;                     /// whether or not the sprite was inside bounds the previous frame
 
+    EventListenerCustom* _purgeTextureListener;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
 

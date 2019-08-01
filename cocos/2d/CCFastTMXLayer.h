@@ -271,7 +271,8 @@ public:
     void removeChild(Node* child, bool cleanup = true) override;
 
 protected:
-
+    void updateColor(void) override;
+    
     bool initWithTilesetInfo(TMXTilesetInfo *tilesetInfo, TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo);
     void updateTiles(const Rect& culledRect);
     Vec2 calculateLayerOffset(const Vec2& offset);

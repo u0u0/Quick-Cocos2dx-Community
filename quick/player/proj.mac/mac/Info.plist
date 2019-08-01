@@ -17,20 +17,20 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.7.5 Release</string>
+	<string>3.7.6 Release</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Create Project needs to send Apple Events to Terminal.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright 2017 cocos2d-lua.org Licensed under MIT License.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSAppleEventsUsageDescription</key>
-	<string>Create Project needs to send Apple Events to Terminal.</string>
 </dict>
 </plist>

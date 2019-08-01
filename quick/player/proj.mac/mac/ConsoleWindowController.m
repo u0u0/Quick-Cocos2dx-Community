@@ -38,7 +38,7 @@
 {
     NSFont *font = [NSFont fontWithName:@"Monaco" size:12.0];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
-    NSAttributedString *string = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+    NSAttributedString *string = [[[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary] autorelease];
     NSNumber *len = [NSNumber numberWithUnsignedInteger:[string length]];
     [linesCount addObject:len];
 

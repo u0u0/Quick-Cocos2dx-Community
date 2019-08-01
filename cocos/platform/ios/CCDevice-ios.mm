@@ -392,7 +392,7 @@ static bool _initWithString(const char * text, cocos2d::Device::TextAlign align,
             {
                 NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
                 paragraphStyle.alignment = nsAlign;
-                paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
                 [str drawInRect:rect withAttributes:@{
                                                       NSFontAttributeName: font,
                                                       NSStrokeWidthAttributeName: [NSNumber numberWithFloat: info->strokeSize / size * 100 ],
@@ -416,14 +416,14 @@ static bool _initWithString(const char * text, cocos2d::Device::TextAlign align,
                 CGContextSetLineWidth(context, info->strokeSize);
                 
                 //original code that was not working in iOS 7
-                [str drawInRect: rect withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:nsAlign];
+                [str drawInRect: rect withFont:font lineBreakMode:NSLineBreakByCharWrapping alignment:nsAlign];
             }
         }
         
         CGContextSetTextDrawingMode(context, kCGTextFill);
         
         // actually draw the text in the context
-        [str drawInRect: rect withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:nsAlign];
+        [str drawInRect: rect withFont:font lineBreakMode:NSLineBreakByCharWrapping alignment:nsAlign];
         
         CGContextEndTransparencyLayer(context);
         

@@ -27,8 +27,6 @@ extern "C" {
 }
 #include "Lua_web_socket.h"
 
-#include "CCLuaEngine.h"
-
 
 int register_network_module(lua_State* L)
 {

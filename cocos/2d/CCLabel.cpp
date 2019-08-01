@@ -251,24 +251,19 @@ Label::Label(FontAtlas *atlas /* = nullptr */, TextHAlignment hAlignment /* = Te
     setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     reset();
 
-    auto purgeTextureListener = EventListenerCustom::create(FontAtlas::EVENT_PURGE_TEXTURES, [this](EventCustom* event){
+    _purgeTextureListener = EventListenerCustom::create(FontAtlas::EVENT_PURGE_TEXTURES, [this](EventCustom* event){
         if (_fontAtlas && _currentLabelType == LabelType::TTF && event->getUserData() == _fontAtlas)
         {
             Node::removeAllChildrenWithCleanup(true);
             _batchNodes.clear();
             _batchNodes.push_back(this);
 
-            if (_contentDirty)
-            {
-                updateContent();
-            }
-            else
-            {
-                alignText();
-            }
+            FontAtlasCache::releaseFontAtlas(_fontAtlas);
+            _fontAtlas = nullptr;
+            this->setTTFConfig(_fontConfig);
         }
     });
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(purgeTextureListener, this);
+    _eventDispatcher->addEventListenerWithFixedPriority(_purgeTextureListener, 1);
 }
 
 Label::~Label()
@@ -279,6 +274,8 @@ Label::~Label()
     {
         FontAtlasCache::releaseFontAtlas(_fontAtlas);
     }
+
+    _eventDispatcher->removeEventListener(_purgeTextureListener);
 
     CC_SAFE_RELEASE_NULL(_reusedLetter);
 }
@@ -453,6 +450,7 @@ bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& ima
     return true;
 }
 
+#define CC_LABEL_MAX_LENGTH ((1 << 16) / 2)
 void Label::setString(const std::string& text)
 {
     if (text.compare(_originalUTF8String))
@@ -464,6 +462,13 @@ void Label::setString(const std::string& text)
         if (StringUtils::UTF8ToUTF16(_originalUTF8String, utf16String))
         {
             _currentUTF16String  = utf16String;
+        }
+        
+        if (_currentUTF16String.length() > CC_LABEL_MAX_LENGTH)
+        {
+            cocos2d::log("Error: Label text is too long %lu > %d and it will be truncated!", _currentUTF16String.length(), CC_LABEL_MAX_LENGTH);
+            _currentUTF16String = _currentUTF16String.substr(0, CC_LABEL_MAX_LENGTH);
+            StringUtils::UTF16ToUTF8(_currentUTF16String, _originalUTF8String);
         }
     }
 }

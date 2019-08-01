@@ -1,6 +1,27 @@
-Quick-Cocos2dx-Community v3.7.5 Release
+Quick-Cocos2dx-Community v3.7.6 Release
 
-注：最后一个NDK r10d 版本。
+[新增] Android arm64 支持。
+[新增] 龙骨支持。
+[新增] Windows 添加 Luajit 64 执行程序，可在 Windows 上打包64位 bytecode 了。
+
+[改进] cc.pGetAngle() 实现优化。
+[改进] retain the sprite frame, do not removed by SpriteFrameCache::removeUnusedSpriteFrames.
+[改进] [luaoc] add conversion lua table to ObjC Dictionary.
+[改进] [luaj] Add missing default cases.
+[改进] [luaj] fix the return value to nil instead of empty string when java return null.
+[改进] Player创建项目，恢复 copy engine src 按钮。
+[改进] AndroidManifest.xml去掉minSdkVersion, build.gradle 中取代。
+[改进] PackageScripts.py开启ZIP_DEFLATED，减少zip包体积。
+
+[修正] csb解析 UIButton 时，在正确的位置初始化 setTitleFontSize。
+[修正] Mac Player 在最新系统上创建项目需要执行权限的问题修正。
+[修正] 修正 Java http 内存泄漏问题。
+[修正] Spine runtime 3.6 修正"Early exit if slot is invisible"，可能导致裁剪节点被忽略，渲染异常的问题。
+[修正] Spine runtime 3.6 同步官方的2处修正。
+[修正] Android applicationWillEnterForeground: don't invoke at first to keep the same logic as iOS.
+[修正] 某些情况下 android 切后台 label 变白块.
+
+Quick-Cocos2dx-Community v3.7.5 Release
 
 [改进] clone 可以拷贝 ccui.Text 的color。"clone不推荐使用"。
 [改进] sp.SkeletonAnimation 添加 registerSpineUpdateHook，支持程序动画。
@@ -39,7 +60,7 @@ Quick-Cocos2dx-Community v3.7.4 Release
 
 Quick-Cocos2dx-Community v3.7.3 Release
 
-[新增]	创建新工程python脚本中添加 --deep-copy 选项，可导出cocos2d源码至新工程中。（感谢 guolihui112@gmail.com）。
+[新增]	创建新工程python脚本中添加 --deep-copy 选项，可导出cocos2d源码至新工程中。（感谢 guolihui112@gmail.com）
 [新增]	iOS 模拟器中默认开启 -pagezero_size 10000 -image_base 100000000 链接选项。（感谢 guolihui112@gmail.com）
 [新增]	Spine runtime 更新到 3.6。
 [新增]	Spine Lua binding 新增updateBone 、getAttachment、setDebugMeshesEnabled、setDebugPointEnabled、setDebugBoundingBoxEnabled、setDebugPathEnabled。(感谢 马超)

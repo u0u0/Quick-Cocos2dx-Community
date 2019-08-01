@@ -1845,28 +1845,16 @@ static int tolua_cocos2dx_DrawNode_setBlendFunc(lua_State* tolua_S)
     return tolua_cocos2dx_setBlendFunc<DrawNode>(tolua_S,"cc.DrawNode");
 }
 
-
 static int tolua_cocos2dx_FileUtils_getStringFromFile(lua_State* tolua_S)
 {
     if (nullptr == tolua_S)
         return 0;
     
     int argc = 0;
-    FileUtils* self = nullptr;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (!tolua_isusertype(tolua_S,1,"cc.FileUtils",0,&tolua_err)) goto tolua_lerror;
-#endif
-    
-    self = static_cast<FileUtils *>(tolua_tousertype(tolua_S,1,0));
-    
-#if COCOS2D_DEBUG >= 1
-    if (nullptr == self)
-    {
-		tolua_error(tolua_S,"invalid 'self' in function 'tolua_cocos2dx_FileUtils_getStringFromFile'\n", nullptr);
-		return 0;
-	}
 #endif
     
     argc = lua_gettop(tolua_S) - 1;
@@ -1877,7 +1865,6 @@ static int tolua_cocos2dx_FileUtils_getStringFromFile(lua_State* tolua_S)
         tolua_pushstring(tolua_S, contentsOfFile.c_str());
         return 1;
     }
-    
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n", "cc.FileUtils:getStringFromFile", argc, 1);
     return 0;
     
@@ -1894,47 +1881,99 @@ static int tolua_cocos2dx_FileUtils_getDataFromFile(lua_State* tolua_S)
         return 0;
     
     int argc = 0;
-    FileUtils* self = nullptr;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (!tolua_isusertype(tolua_S,1,"cc.FileUtils",0,&tolua_err)) goto tolua_lerror;
 #endif
     
-    self = static_cast<FileUtils *>(tolua_tousertype(tolua_S,1,0));
-    
-#if COCOS2D_DEBUG >= 1
-    if (nullptr == self)
-    {
-        tolua_error(tolua_S,"invalid 'self' in function 'tolua_cocos2dx_FileUtils_getDataFromFile'\n", nullptr);
-        return 0;
-    }
-#endif
-    
     argc = lua_gettop(tolua_S) - 1;
-    
     if (1 == argc)
     {
         const char* arg0 = lua_tostring(tolua_S, 2);
         Data data = FileUtils::getInstance()->getDataFromFile(arg0);
         if (data.isNull()) {
-            tolua_pushstring(tolua_S, "");
+            lua_pushstring(tolua_S, "");
         } else {
-            unsigned char* content = data.getBytes();
-            ssize_t contentLen = data.getSize();
-            LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
-            //the stack->_state and tolua_S is same
-            stack->pushString((const char*)content, (int)contentLen);
+            lua_pushlstring(tolua_S, (const char *)data.getBytes(), data.getSize());
         }
         return 1;
     }
-    
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n", "cc.FileUtils:getDataFromFile", argc, 1);
     return 0;
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'tolua_cocos2dx_FileUtils_getDataFromFile'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int tolua_cocos2dx_FileUtils_getFileDataFromZip(lua_State* tolua_S)
+{
+    if (nullptr == tolua_S)
+        return 0;
+    
+    int argc = 0;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(tolua_S,1,"cc.FileUtils",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    if (argc == 2)
+    {
+        const char *zipFile = lua_tostring(tolua_S, 2);
+        const char *fileName = lua_tostring(tolua_S, 3);
+        ssize_t size;
+        unsigned char *buff = FileUtils::getInstance()->getFileDataFromZip(zipFile, fileName, &size);
+        if (buff) {
+            lua_pushlstring(tolua_S, (const char *)buff, size);
+            free(buff);
+            return 1;
+        } else {
+            luaL_error(tolua_S, "cc.FileUtils:getFileDataFromZip failed!");
+            return 0;
+        }
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting 2\n", "cc.FileUtils:getFileDataFromZip", argc);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'tolua_cocos2dx_FileUtils_getFileDataFromZip'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int tolua_cocos2dx_FileUtils_unzipFile(lua_State* tolua_S)
+{
+    if (nullptr == tolua_S)
+        return 0;
+    
+    int argc = 0;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(tolua_S,1,"cc.FileUtils",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    if (argc == 2)
+    {
+        const char *zipFile = lua_tostring(tolua_S, 2);
+        const char *destDir = lua_tostring(tolua_S, 3);
+        bool rtn = FileUtils::getInstance()->unzipFile(zipFile, destDir);
+        lua_pushboolean(tolua_S, rtn);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting 2\n", "cc.FileUtils:unzipFile", argc);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'tolua_cocos2dx_FileUtils_unzipFile'.",&tolua_err);
     return 0;
 #endif
 }
@@ -3186,11 +3225,19 @@ static void extendFileUtils(lua_State* tolua_S)
     if (lua_istable(tolua_S,-1))
     {
         lua_pushstring(tolua_S,"getStringFromFile");
-        lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_getStringFromFile );
+        lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_getStringFromFile);
         lua_rawset(tolua_S,-3);
 
         lua_pushstring(tolua_S,"getDataFromFile");
-        lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_getDataFromFile );
+        lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_getDataFromFile);
+        lua_rawset(tolua_S,-3);
+        
+        lua_pushstring(tolua_S,"getFileDataFromZip");
+        lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_getFileDataFromZip);
+        lua_rawset(tolua_S,-3);
+        
+        lua_pushstring(tolua_S,"unzipFile");
+        lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_unzipFile);
         lua_rawset(tolua_S,-3);
     }
     lua_pop(tolua_S, 1);
@@ -3203,7 +3250,7 @@ static void extendUserDefault(lua_State* tolua_S)
     if (lua_istable(tolua_S,-1))
     {
         lua_pushstring(tolua_S,"getInstance");
-        lua_pushcfunction(tolua_S,tolua_cocos2dx_UserDefault_getInstance );
+        lua_pushcfunction(tolua_S,tolua_cocos2dx_UserDefault_getInstance);
         lua_rawset(tolua_S,-3);
     }
     lua_pop(tolua_S, 1);
@@ -3216,7 +3263,7 @@ static void extendSpriteBatchNode(lua_State* tolua_S)
     if (lua_istable(tolua_S,-1))
     {
         lua_pushstring(tolua_S,"getDescendants");
-        lua_pushcfunction(tolua_S,tolua_cocos2dx_SpriteBatchNode_getDescendants );
+        lua_pushcfunction(tolua_S,tolua_cocos2dx_SpriteBatchNode_getDescendants);
         lua_rawset(tolua_S,-3);
 
         lua_pushstring(tolua_S,"setBlendFunc");
