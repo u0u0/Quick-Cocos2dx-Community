@@ -257,6 +257,7 @@ function Node:setTouchEnabled(enable)
 		self._luaTouchListener:setSwallowTouches(true)
 		local dealFunc = function(touch, name)
 			local tp = touch:getLocation()
+			local sp = touch:getStartLocation()
 			local pp = touch:getPreviousLocation()
 
 			if name == "began" then
@@ -274,6 +275,8 @@ function Node:setTouchEnabled(enable)
 				name = name,
 				x = tp.x,
 				y = tp.y,
+				startX = sp.x,
+				startY = sp.y,
 				prevX = pp.x,
 				prevY = pp.y,
 			}
@@ -296,10 +299,13 @@ function Node:setTouchEnabled(enable)
 			local points = {}
 			for _, touch in pairs(touchs) do
 				local tp = touch:getLocation()
+				local sp = touch:getStartLocation()
 				local pp = touch:getPreviousLocation()
 				points[touch:getId()] = {
 					x = tp.x,
 					y = tp.y,
+					startX = sp.x,
+					startY = sp.y,
 					prevX = pp.x,
 					prevY = pp.y,
 				}
