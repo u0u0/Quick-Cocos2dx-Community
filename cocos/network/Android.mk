@@ -13,6 +13,7 @@ LOCAL_STATIC_LIBRARIES := cocos2dx_internal_static
 
 ifeq ($(CC_USE_WEBSOCKET),1)
 LOCAL_STATIC_LIBRARIES += libwebsockets_static
+LOCAL_STATIC_LIBRARIES += cocos_curl_static
 endif
 
 include $(BUILD_STATIC_LIBRARY)
