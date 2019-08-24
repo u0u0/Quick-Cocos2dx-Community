@@ -315,37 +315,38 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     protected void onResume() {
     	Log.d(TAG, "onResume()");
         super.onResume();
-        this.hideVirtualButton();
-       	resumeIfHasFocus();
     }
     
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
     	Log.d(TAG, "onWindowFocusChanged() hasFocus=" + hasFocus);
         super.onWindowFocusChanged(hasFocus);
-        
-        this.hasFocus = hasFocus;
-        resumeIfHasFocus();
-    }
-    
-    private void resumeIfHasFocus() {
-        //It is possible for the app to receive the onWindowsFocusChanged(true) event
-        //even though it is locked or asleep
-        boolean readyToPlay = !isDeviceLocked() && !isDeviceAsleep();
 
-        if(hasFocus && readyToPlay) {
+        if (this.hasFocus == hasFocus) {
+            return;
+        }
+
+        if (hasFocus) {
+            //It is possible for the app to receive the onWindowsFocusChanged(true) event
+            //even though it is locked or asleep
+            boolean readyToPlay = !isDeviceLocked() && !isDeviceAsleep();
+            if (!readyToPlay) {
+                return;
+            }
             this.hideVirtualButton();
             Cocos2dxHelper.onResume();
             mGLSurfaceView.onResume();
+        } else {
+            Cocos2dxHelper.onPause();
+            mGLSurfaceView.onPause();
         }
+        this.hasFocus = hasFocus;
     }
 
     @Override
     protected void onPause() {
     	Log.d(TAG, "onPause()");
         super.onPause();
-        Cocos2dxHelper.onPause();
-        mGLSurfaceView.onPause();
     }
     
     @Override
