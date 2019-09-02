@@ -1,3 +1,40 @@
+Quick-Cocos2dx-Community v3.7.7 Beta
+
+[新增] FastTMXLayer 支持设置透明度和颜色。
+[新增] WebView同步最新实现，新增cleanCachedData,setOpacityWebView,setBackgroundTransparent方法。
+[新增] Android增加对虚拟按键隐藏的支持。
+[新增] audio添加playBGMSync,playEffectSync接口，但依然推荐在loading场景先预加载所有音频。
+[新增] cc.FileUtils新增绑定getFileDataFromZip和unzipFile
+[新增] Luasocket添加socket.dns.isIpv6()接口，以异步方式判断网络类型，同步优化SimpleTCP，解决可能柱塞UI的问题。
+[新增] display中新加FIXED_AUTO分辨率适配模式，自动选择 FIXED_WIDTH 或 FIXED_HEIGHT。
+
+[改进] display.newSolidCircle() 正确画圆，而不是点。
+[改进] zorder排序相关使用std::stable_sort，避免节点渲染顺序被打乱。
+[改进] iOS editbox小改进。
+[改进] Android editbox改进。
+[改进] Android Studio模版工程改进到AS 3.4 版本。
+[改进] Mac console窗口内存泄露修正，并正确显示所有log，不再以...省略。
+[改进] ogg解码库 libvorbis 升级到1.3.6。
+[改进] Label显示太长字符串时，自动裁切避免crash。
+[改进] AppController.mm中iOS刘海适配算法改进。
+[改进] 特殊优化android7.0和7.1上的ANR。
+[改进] debug.log输出路径，优先用WritablePath，未设置则用ProjectDir。
+[改进] 现在cc.NODE_TOUCH_EVENT如果超出触摸区域，返回cancel事件类型。并且在event中添加startX和startY数据。
+[改进] Android onPause 和onResume事件优化，统一通过onWindowFocusChanged来处理。
+
+[修正] ActionManager内存泄露修正：当node未被添加到父节点并runAction时，node能够正确被释放。
+[修正] FileUtils的removeDirectory在win32下的bug修正。
+[修正] cc.NODE_TOUCH_EVENT在3.7.6中错误的修改，导致不可见物体可点击，现再次修正。
+[修正] Mac editbox输入法窗口缩放bugfix。
+[修正] Spine 事件回调正确返回eventData数据。
+[修正] iOS >= 8.0, 横屏游戏勾选竖屏功能，弹出输入法后，界面显示异常！
+[修正] iOS下空格开头的英文串，换行时空格被自动去掉的问题。
+[修正] PB bugfix: unpack float crash. use union to avoid crash on Android (signal 7), 同double一个问题。
+[修正] OpenSSL多线程调用(curl或WebSocket)崩溃修正。
+[修正] audio.playBGM 和 audio.playEffect 正确响应isLoop参数。
+[修正] glfwGetVideoMode添加空判断保护，避免win 10 上可能存在的崩溃。
+[修正] Android 在已有一个申请中的权限时，申请 READ_PHONE_STATE 权限时的崩溃问题。
+
 Quick-Cocos2dx-Community v3.7.6 Release
 
 [新增] Android arm64 支持。
