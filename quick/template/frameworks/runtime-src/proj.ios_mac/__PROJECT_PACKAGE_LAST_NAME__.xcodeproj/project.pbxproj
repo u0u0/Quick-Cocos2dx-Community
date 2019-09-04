@@ -27,6 +27,7 @@
 		0A8541281E2B3139002A5473 /* lunqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A8541231E2B3139002A5473 /* lunqlite.c */; };
 		0A8541291E2B3139002A5473 /* unqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A8541251E2B3139002A5473 /* unqlite.c */; };
 		0A85412A1E2B3139002A5473 /* unqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A8541251E2B3139002A5473 /* unqlite.c */; };
+		0AAAFD4C231FC1CA00C7A98F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AAAFD4B231FC1C900C7A98F /* WebKit.framework */; };
 		0AC1AE931DB8B629006D4001 /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1AE911DB8B629006D4001 /* pb.c */; };
 		0AC1AE941DB8B629006D4001 /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1AE911DB8B629006D4001 /* pb.c */; };
 		0AF3802C1FE66404002A4A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF3802B1FE66404002A4A3B /* LaunchScreen.storyboard */; };
@@ -213,6 +214,7 @@
 		0A8541241E2B3139002A5473 /* lunqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lunqlite.h; path = "quick/lib/quick-src/lua_extensions/unqlite/lunqlite.h"; sourceTree = QUICK_V3_ROOT; };
 		0A8541251E2B3139002A5473 /* unqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unqlite.c; path = "quick/lib/quick-src/lua_extensions/unqlite/unqlite.c"; sourceTree = QUICK_V3_ROOT; };
 		0A8541261E2B3139002A5473 /* unqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unqlite.h; path = "quick/lib/quick-src/lua_extensions/unqlite/unqlite.h"; sourceTree = QUICK_V3_ROOT; };
+		0AAAFD4B231FC1C900C7A98F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.4.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		0AC1AE911DB8B629006D4001 /* pb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pb.c; path = "quick/lib/quick-src/lua_extensions/protobuf/pb.c"; sourceTree = QUICK_V3_ROOT; };
 		0AC1AE921DB8B629006D4001 /* pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pb.h; path = "quick/lib/quick-src/lua_extensions/protobuf/pb.h"; sourceTree = QUICK_V3_ROOT; };
 		0AF3802B1FE66404002A4A3B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AAAFD4C231FC1CA00C7A98F /* WebKit.framework in Frameworks */,
 				9F598A0B19F5F4F4006015D6 /* StoreKit.framework in Frameworks */,
 				9F598A0819F5F3A6006015D6 /* SystemConfiguration.framework in Frameworks */,
 				15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */,
@@ -759,6 +762,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AAAFD4B231FC1C900C7A98F /* WebKit.framework */,
 				9F598A0A19F5F4F4006015D6 /* StoreKit.framework */,
 				9F598A0719F5F3A6006015D6 /* SystemConfiguration.framework */,
 				9F91078819F5628A00AD5CAB /* SystemConfiguration.framework */,
@@ -863,6 +867,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = F293B3BD15EB7BE500256477;
