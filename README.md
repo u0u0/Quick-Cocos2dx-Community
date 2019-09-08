@@ -8,7 +8,9 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。
 
 [http://www.cocos2d-lua.org/](http://www.cocos2d-lua.org/)
 
-QQ 群：361920466
+**社区版 千人群(1群)号：361920466**
+
+**社区版 2群：138934064**
 
 ## 相关开源仓库地址
 
@@ -16,6 +18,7 @@ QQ 群：361920466
 * 第三方库编译框架: [Quick-3rd-party-libs](https://github.com/u0u0/Quick-3rd-party-libs)
 * vim开发插件: [vim-quick-community](https://github.com/u0u0/vim-quick-community)
 * sublime开发插件: [quick-comminuty-dev](https://github.com/u0u0/quick-comminuty-dev)
+* protoc-gen-lua: [protoc-gen-lua-bin](https://github.com/u0u0/protoc-gen-lua-bin)
 
 ## 快速安装指南
 

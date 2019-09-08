@@ -1,4 +1,4 @@
-Quick-Cocos2dx-Community v3.7.7 Beta
+Quick-Cocos2dx-Community v3.7.7 Release
 
 [新增] FastTMXLayer 支持设置透明度和颜色。
 [新增] WebView同步最新实现，新增cleanCachedData,setOpacityWebView,setBackgroundTransparent方法。
@@ -8,6 +8,7 @@ Quick-Cocos2dx-Community v3.7.7 Beta
 [新增] Luasocket添加socket.dns.isIpv6()接口，以异步方式判断网络类型，同步优化SimpleTCP，解决可能柱塞UI的问题。
 [新增] display中新加FIXED_AUTO分辨率适配模式，自动选择 FIXED_WIDTH 或 FIXED_HEIGHT。
 
+[改进] iOS的UIWebView替换为WKWebView, lua调用接口不变
 [改进] display.newSolidCircle() 正确画圆，而不是点。
 [改进] zorder排序相关使用std::stable_sort，避免节点渲染顺序被打乱。
 [改进] iOS editbox小改进。
