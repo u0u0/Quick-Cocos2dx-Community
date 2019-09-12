@@ -120,7 +120,10 @@ bool FileUtilsWin32::isFileExistInternal(const std::string& strFilePath) const
     else
     {
         WIN32_FIND_DATAA ffd;
-        HANDLE hFind = FindFirstFileA(strPath.c_str(), &ffd);  
+        HANDLE hFind = FindFirstFileA(strPath.c_str(), &ffd);
+		if (hFind != INVALID_HANDLE_VALUE) {
+			FindClose(hFind);
+		}
         std::string filename(ffd.cFileName);
         size_t pos = strFilePath.find(filename);
         if (pos + filename.length() != strFilePath.length())
