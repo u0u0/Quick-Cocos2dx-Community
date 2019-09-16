@@ -30,6 +30,7 @@
 #import <WebKit/WKWebView.h>
 #import <WebKit/WKUIDelegate.h>
 #import <WebKit/WKNavigationDelegate.h>
+#import <WebKit/WKNavigationAction.h>
 
 #include "UIWebViewImpl-ios.h"
 #include "renderer/CCRenderer.h"
@@ -250,8 +251,8 @@
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString *url = [webView.URL absoluteString];
-    if ([[webView.URL scheme] isEqualToString:self.jsScheme]) {
-        self.onJsCallback([url UTF8String]);
+    if ([navigationAction.request.URL.scheme isEqualToString:self.jsScheme]) {
+        self.onJsCallback([navigationAction.request.URL.absoluteString UTF8String]);
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
