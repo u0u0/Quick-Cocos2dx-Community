@@ -527,6 +527,15 @@ void Node::setNormalizedPosition(const Vec2& position)
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
 
+Vector<Node*>& Node::getChildren()
+{
+    // getChildren() right after addChild, order may not sorted
+    // In this case, eventdispatcher may sort listener in wrong order.
+    // force sort when getChildren
+    sortAllChildren();
+    return _children;
+}
+
 ssize_t Node::getChildrenCount() const
 {
     return _children.size();
