@@ -164,10 +164,10 @@ TMXMapInfo::TMXMapInfo()
 , _staggerAxis(TMXStaggerAxis_Y)
 , _staggerIndex(TMXStaggerIndex_Even)
 , _hexSideLength(0)
-, _parentElement(0)
-, _parentGID(0)
 , _mapSize(Size::ZERO)
 , _tileSize(Size::ZERO)
+, _parentElement(0)
+, _parentGID(0)
 , _layerAttribs(0)
 , _storingCharacters(false)
 , _xmlTileIndex(0)
@@ -231,7 +231,7 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
     if (elementName == "map")
     {
         std::string version = attributeDict["version"].asString();
-        if ( version != "1.0")
+        if (version != "1.2")
         {
             CCLOG("cocos2d: TMXFormat: Unsupported TMX version: %s", version.c_str());
         }
@@ -281,41 +281,63 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         s.height = attributeDict["tileheight"].asFloat();
         tmxMapInfo->setTileSize(s);
 
-        
-
         // The parent element is now "map"
         tmxMapInfo->setParentElement(TMXPropertyMap);
     } 
     else if (elementName == "tileset") 
     {
-        TMXTilesetInfo *tileset = new (std::nothrow) TMXTilesetInfo();
-        tileset->_name = attributeDict["name"].asString();
-        
-        if (_recordFirstGID)
+        // If this is an external tileset then start parsing that
+        std::string extTilesetName = attributeDict["source"].asString();
+        if (extTilesetName != "")
         {
-            // unset before, so this is tmx file.
-            tileset->_firstGid = attributeDict["firstgid"].asInt();
-            
-            if (tileset->_firstGid < 0)
-            {
-                tileset->_firstGid = 0;
+            // image file is relative to the map file. Also use relative path here to make hot update happey.
+            if (_TMXFileName.size() > 0) {
+                string dir = _TMXFileName.substr(0, _TMXFileName.find_last_of("/") + 1);
+                extTilesetName = dir + extTilesetName;
+            } else {
+                extTilesetName = _resources + "/" + extTilesetName;
             }
+            
+            _currentFirstGID = attributeDict["firstgid"].asInt();
+            if (_currentFirstGID < 0)
+            {
+                _currentFirstGID = 0;
+            }
+            _recordFirstGID = false;
+            
+            tmxMapInfo->parseXMLFile(extTilesetName);
         }
         else
         {
-            tileset->_firstGid = _currentFirstGID;
-            _currentFirstGID = 0;
+            TMXTilesetInfo *tileset = new (std::nothrow) TMXTilesetInfo();
+            tileset->_name = attributeDict["name"].asString();
+            
+            if (_recordFirstGID)
+            {
+                // unset before, so this is tmx file.
+                tileset->_firstGid = attributeDict["firstgid"].asInt();
+                
+                if (tileset->_firstGid < 0)
+                {
+                    tileset->_firstGid = 0;
+                }
+            }
+            else
+            {
+                tileset->_firstGid = _currentFirstGID;
+                _currentFirstGID = 0;
+            }
+            
+            tileset->_spacing = attributeDict["spacing"].asInt();
+            tileset->_margin = attributeDict["margin"].asInt();
+            Size s;
+            s.width = attributeDict["tilewidth"].asFloat();
+            s.height = attributeDict["tileheight"].asFloat();
+            tileset->_tileSize = s;
+
+            tmxMapInfo->getTilesets().pushBack(tileset);
+            tileset->release();
         }
-        
-        tileset->_spacing = attributeDict["spacing"].asInt();
-        tileset->_margin = attributeDict["margin"].asInt();
-        Size s;
-        s.width = attributeDict["tilewidth"].asFloat();
-        s.height = attributeDict["tileheight"].asFloat();
-        tileset->_tileSize = s;
-        
-        tmxMapInfo->getTilesets().pushBack(tileset);
-        tileset->release();
     }
     else if (elementName == "tile")
     {
@@ -383,13 +405,9 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
     else if (elementName == "tileoffset")
     {
         TMXTilesetInfo* tileset = tmxMapInfo->getTilesets().back();
-        
-        double tileOffsetX = attributeDict["x"].asDouble();
-        
-        double tileOffsetY = attributeDict["y"].asDouble();
-        
+        float tileOffsetX = attributeDict["x"].asFloat();
+        float tileOffsetY = attributeDict["y"].asFloat();
         tileset->_tileOffset = Vec2(tileOffsetX, tileOffsetY);
-        
     }
     else if (elementName == "image")
     {
@@ -484,6 +502,7 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         s = CC_SIZE_PIXELS_TO_POINTS(s);
         dict["width"] = Value(s.width);
         dict["height"] = Value(s.height);
+        dict["rotation"] = attributeDict["rotation"].asDouble();
 
         // Add the object to the objectGroup
         objectGroup->getObjects().push_back(Value(dict));
@@ -710,7 +729,7 @@ void TMXMapInfo::endElement(void* /*ctx*/, const char *name)
             }
 
             uint32_t* bufferPtr = reinterpret_cast<uint32_t*>(buffer);
-            for(auto gidToken : gidTokens) {
+            for(const auto& gidToken : gidTokens) {
                 auto tileGid = (uint32_t)strtoul(gidToken.c_str(), nullptr, 10);
                 *bufferPtr = tileGid;
                 bufferPtr++;
