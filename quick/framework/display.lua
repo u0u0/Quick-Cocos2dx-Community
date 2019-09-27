@@ -186,11 +186,15 @@ printInfo(string.format("# display.c_top                = %0.2f", display.c_top)
 printInfo(string.format("# display.c_bottom             = %0.2f", display.c_bottom))
 printInfo("#")
 
-display.COLOR_WHITE = cc.c3b(255, 255, 255)
-display.COLOR_BLACK = cc.c3b(0, 0, 0)
-display.COLOR_RED   = cc.c3b(255, 0, 0)
-display.COLOR_GREEN = cc.c3b(0, 255, 0)
-display.COLOR_BLUE  = cc.c3b(0, 0, 255)
+display.COLOR_WHITE   = cc.c3b(255, 255, 255)
+display.COLOR_YELLOW  = cc.c3b(255, 255, 0)
+display.COLOR_GREEN   = cc.c3b(0, 255, 0)
+display.COLOR_BLUE    = cc.c3b(0, 0, 255)
+display.COLOR_RED     = cc.c3b(255, 0, 0)
+display.COLOR_MAGENTA = cc.c3b(255, 0, 255)
+display.COLOR_BLACK   = cc.c3b(0, 0, 0)
+display.COLOR_ORANGE  = cc.c3b(255, 127, 0)
+display.COLOR_GRAY    = cc.c3b(166, 166, 166)
 
 display.AUTO_SIZE      = 0
 display.FIXED_SIZE     = 1
