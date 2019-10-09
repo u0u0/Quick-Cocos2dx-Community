@@ -54,6 +54,7 @@
     }
 
 	[storage endEditing];
+    [textView setTextColor:[NSColor systemBlueColor]];// log text color
     [self changeScroll];
 }
 
