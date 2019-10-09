@@ -64,7 +64,6 @@
 		9FD01B1219F8C69C005E0C49 /* ConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1019F8C69C005E0C49 /* ConsoleWindowController.m */; };
 		9FD01B2319F8C6A3005E0C49 /* NSApplication+SheetAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1419F8C6A3005E0C49 /* NSApplication+SheetAdditions.m */; };
 		9FD01B2419F8C6A3005E0C49 /* NumberFormater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1619F8C6A3005E0C49 /* NumberFormater.m */; };
-		9FD01B2519F8C6A3005E0C49 /* PlayerEditBoxServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1819F8C6A3005E0C49 /* PlayerEditBoxServiceMac.mm */; };
 		9FD01B2619F8C6A3005E0C49 /* PlayerFileDialogServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1A19F8C6A3005E0C49 /* PlayerFileDialogServiceMac.mm */; };
 		9FD01B2719F8C6A3005E0C49 /* PlayerMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1C19F8C6A3005E0C49 /* PlayerMac.mm */; };
 		9FD01B2819F8C6A3005E0C49 /* PlayerMenuServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD01B1E19F8C6A3005E0C49 /* PlayerMenuServiceMac.mm */; };
@@ -204,7 +203,6 @@
 		9F7289121A24957700EE0234 /* lua_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_zlib.h; sourceTree = "<group>"; };
 		9F7289141A24957700EE0234 /* ProjectConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectConfig.cpp; sourceTree = "<group>"; };
 		9F7289151A24957700EE0234 /* ProjectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectConfig.h; sourceTree = "<group>"; };
-		9FD0191A19F8C4D4005E0C49 /* PlayerEditBoxServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerEditBoxServiceProtocol.h; path = ../Classes/PlayerEditBoxServiceProtocol.h; sourceTree = "<group>"; };
 		9FD0191B19F8C4D4005E0C49 /* PlayerFileDialogServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerFileDialogServiceProtocol.h; path = ../Classes/PlayerFileDialogServiceProtocol.h; sourceTree = "<group>"; };
 		9FD0191C19F8C4D4005E0C49 /* PlayerLuaCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerLuaCore.cpp; path = ../Classes/PlayerLuaCore.cpp; sourceTree = "<group>"; };
 		9FD0191D19F8C4D4005E0C49 /* PlayerLuaCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerLuaCore.h; path = ../Classes/PlayerLuaCore.h; sourceTree = "<group>"; };
@@ -232,8 +230,6 @@
 		9FD01B1419F8C6A3005E0C49 /* NSApplication+SheetAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+SheetAdditions.m"; sourceTree = "<group>"; };
 		9FD01B1519F8C6A3005E0C49 /* NumberFormater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFormater.h; sourceTree = "<group>"; };
 		9FD01B1619F8C6A3005E0C49 /* NumberFormater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFormater.m; sourceTree = "<group>"; };
-		9FD01B1719F8C6A3005E0C49 /* PlayerEditBoxServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEditBoxServiceMac.h; sourceTree = "<group>"; };
-		9FD01B1819F8C6A3005E0C49 /* PlayerEditBoxServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEditBoxServiceMac.mm; sourceTree = "<group>"; };
 		9FD01B1919F8C6A3005E0C49 /* PlayerFileDialogServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerFileDialogServiceMac.h; sourceTree = "<group>"; };
 		9FD01B1A19F8C6A3005E0C49 /* PlayerFileDialogServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerFileDialogServiceMac.mm; sourceTree = "<group>"; };
 		9FD01B1B19F8C6A3005E0C49 /* PlayerMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMac.h; sourceTree = "<group>"; };
@@ -354,8 +350,6 @@
 				9FD01B1419F8C6A3005E0C49 /* NSApplication+SheetAdditions.m */,
 				9FD01B1519F8C6A3005E0C49 /* NumberFormater.h */,
 				9FD01B1619F8C6A3005E0C49 /* NumberFormater.m */,
-				9FD01B1719F8C6A3005E0C49 /* PlayerEditBoxServiceMac.h */,
-				9FD01B1819F8C6A3005E0C49 /* PlayerEditBoxServiceMac.mm */,
 				9FD01B1919F8C6A3005E0C49 /* PlayerFileDialogServiceMac.h */,
 				9FD01B1A19F8C6A3005E0C49 /* PlayerFileDialogServiceMac.mm */,
 				9FD01B1B19F8C6A3005E0C49 /* PlayerMac.h */,
@@ -572,7 +566,6 @@
 		9FD0191519F8C4C6005E0C49 /* player */ = {
 			isa = PBXGroup;
 			children = (
-				9FD0191A19F8C4D4005E0C49 /* PlayerEditBoxServiceProtocol.h */,
 				9FD0191B19F8C4D4005E0C49 /* PlayerFileDialogServiceProtocol.h */,
 				9FD0191C19F8C4D4005E0C49 /* PlayerLuaCore.cpp */,
 				9FD0191D19F8C4D4005E0C49 /* PlayerLuaCore.h */,
@@ -783,7 +776,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FD01B2519F8C6A3005E0C49 /* PlayerEditBoxServiceMac.mm in Sources */,
 				9FD01B2319F8C6A3005E0C49 /* NSApplication+SheetAdditions.m in Sources */,
 				9F7289791A24957700EE0234 /* ReachabilityIOSMac.m in Sources */,
 				9FD0193319F8C4D4005E0C49 /* PlayerSettings.cpp in Sources */,

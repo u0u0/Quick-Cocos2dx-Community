@@ -56,8 +56,6 @@ static int tolua_collect_std__vector_std__string_ (lua_State* tolua_S)
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
- 
- tolua_usertype(tolua_S,"PlayerEditBoxServiceProtocol");
  tolua_usertype(tolua_S,"cocos2d::Ref");
  tolua_usertype(tolua_S,"PlayerSettings");
  tolua_usertype(tolua_S,"PlayerTask");
@@ -2020,38 +2018,6 @@ static int tolua_PlayerLuaCore_PlayerProtocol_getMenuService00(lua_State* tolua_
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getEditBoxService of class  PlayerProtocol */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerProtocol_getEditBoxService00
-static int tolua_PlayerLuaCore_PlayerProtocol_getEditBoxService00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"PlayerProtocol",0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,2,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  PlayerProtocol* self = (PlayerProtocol*)  tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getEditBoxService'", NULL);
-#endif
-  {
-   PlayerEditBoxServiceProtocol* tolua_ret = (PlayerEditBoxServiceProtocol*)  self->getEditBoxService();
-    tolua_pushusertype(tolua_S,(void*)tolua_ret,"PlayerEditBoxServiceProtocol");
-  }
- }
- return 1;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getEditBoxService'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
 /* method: getTaskService of class  PlayerProtocol */
 #ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerProtocol_getTaskService00
 static int tolua_PlayerLuaCore_PlayerProtocol_getTaskService00(lua_State* tolua_S)
@@ -3622,175 +3588,8 @@ static int tolua_PlayerLuaCore_PlayerTaskServiceProtocol_removeTask00(lua_State*
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: hide of class  PlayerEditBoxServiceProtocol */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_hide00
-static int tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_hide00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"PlayerEditBoxServiceProtocol",0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,2,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  PlayerEditBoxServiceProtocol* self = (PlayerEditBoxServiceProtocol*)  tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'hide'", NULL);
-#endif
-  {
-   self->hide();
-  }
- }
- return 0;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'hide'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: setText of class  PlayerEditBoxServiceProtocol */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setText00
-static int tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setText00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"PlayerEditBoxServiceProtocol",0,&tolua_err) ||
-     !tolua_iscppstring(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  PlayerEditBoxServiceProtocol* self = (PlayerEditBoxServiceProtocol*)  tolua_tousertype(tolua_S,1,0);
-  const std::string text = ((const std::string)  tolua_tocppstring(tolua_S,2,0));
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setText'", NULL);
-#endif
-  {
-   self->setText(text);
-   tolua_pushcppstring(tolua_S, text);
-  }
- }
- return 1;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'setText'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: setFont of class  PlayerEditBoxServiceProtocol */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setFont00
-static int tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setFont00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"PlayerEditBoxServiceProtocol",0,&tolua_err) ||
-     !tolua_iscppstring(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,4,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  PlayerEditBoxServiceProtocol* self = (PlayerEditBoxServiceProtocol*)  tolua_tousertype(tolua_S,1,0);
-  const std::string name = ((const std::string)  tolua_tocppstring(tolua_S,2,0));
-  int size = ((int)  tolua_tonumber(tolua_S,3,0));
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setFont'", NULL);
-#endif
-  {
-   self->setFont(name,size);
-   tolua_pushcppstring(tolua_S, name);
-  }
- }
- return 1;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'setFont'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: setFormator of class  PlayerEditBoxServiceProtocol */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setFormator00
-static int tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setFormator00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"PlayerEditBoxServiceProtocol",0,&tolua_err) ||
-     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  PlayerEditBoxServiceProtocol* self = (PlayerEditBoxServiceProtocol*)  tolua_tousertype(tolua_S,1,0);
-  int formator = ((int)  tolua_tonumber(tolua_S,2,0));
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setFormator'", NULL);
-#endif
-  {
-   self->setFormator(formator);
-  }
- }
- return 0;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'setFormator'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: registerHandler of class  PlayerEditBoxServiceProtocol */
-#ifndef TOLUA_DISABLE_tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_registerHandler00
-static int tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_registerHandler00(lua_State* tolua_S)
-{
-#if COCOS2D_DEBUG >= 1
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"PlayerEditBoxServiceProtocol",0,&tolua_err) ||
-     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  PlayerEditBoxServiceProtocol* self = (PlayerEditBoxServiceProtocol*)  tolua_tousertype(tolua_S,1,0);
-  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
-#if COCOS2D_DEBUG >= 1
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'registerHandler'", NULL);
-#endif
-  {
-   self->registerHandler(handler);
-  }
- }
- return 0;
-#if COCOS2D_DEBUG >= 1
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'registerHandler'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
 /* Open function */
-TOLUA_API int tolua_PlayerLuaCore_open (lua_State* tolua_S)
+TOLUA_API int tolua_PlayerLuaCore_open(lua_State* tolua_S)
 {
  tolua_open(tolua_S);
  tolua_reg_types(tolua_S);
@@ -3883,7 +3682,6 @@ TOLUA_API int tolua_PlayerLuaCore_open (lua_State* tolua_S)
    tolua_function(tolua_S,"getFileDialogService",tolua_PlayerLuaCore_PlayerProtocol_getFileDialogService00);
    tolua_function(tolua_S,"getMessageBoxService",tolua_PlayerLuaCore_PlayerProtocol_getMessageBoxService00);
    tolua_function(tolua_S,"getMenuService",tolua_PlayerLuaCore_PlayerProtocol_getMenuService00);
-   tolua_function(tolua_S,"getEditBoxService",tolua_PlayerLuaCore_PlayerProtocol_getEditBoxService00);
    tolua_function(tolua_S,"getTaskService",tolua_PlayerLuaCore_PlayerProtocol_getTaskService00);
    tolua_function(tolua_S,"quit",tolua_PlayerLuaCore_PlayerProtocol_quit00);
    tolua_function(tolua_S,"relaunch",tolua_PlayerLuaCore_PlayerProtocol_relaunch00);
@@ -3948,14 +3746,6 @@ TOLUA_API int tolua_PlayerLuaCore_open (lua_State* tolua_S)
    tolua_function(tolua_S,"createTask",tolua_PlayerLuaCore_PlayerTaskServiceProtocol_createTask00);
    tolua_function(tolua_S,"getTask",tolua_PlayerLuaCore_PlayerTaskServiceProtocol_getTask00);
    tolua_function(tolua_S,"removeTask",tolua_PlayerLuaCore_PlayerTaskServiceProtocol_removeTask00);
-  tolua_endmodule(tolua_S);
-  tolua_cclass(tolua_S,"PlayerEditBoxServiceProtocol","PlayerEditBoxServiceProtocol","PlayerServiceProtocol",NULL);
-  tolua_beginmodule(tolua_S,"PlayerEditBoxServiceProtocol");
-   tolua_function(tolua_S,"hide",tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_hide00);
-   tolua_function(tolua_S,"setText",tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setText00);
-   tolua_function(tolua_S,"setFont",tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setFont00);
-   tolua_function(tolua_S,"setFormator",tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_setFormator00);
-   tolua_function(tolua_S,"registerHandler",tolua_PlayerLuaCore_PlayerEditBoxServiceProtocol_registerHandler00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

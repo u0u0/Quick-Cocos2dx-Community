@@ -60,7 +60,6 @@ PlayerWin::PlayerWin()
     , _writeDebugLogFile(nullptr)
     , _messageBoxService(nullptr)
     , _menuService(nullptr)
-    , _editboxService(nullptr)
     , _taskService(nullptr)
 {
 }
@@ -101,11 +100,6 @@ PlayerMessageBoxServiceProtocol *PlayerWin::getMessageBoxService()
 PlayerMenuServiceProtocol *PlayerWin::getMenuService()
 {
     return _menuService;
-}
-
-PlayerEditBoxServiceProtocol *PlayerWin::getEditBoxService()
-{
-    return _editboxService;
 }
 
 PlayerTaskServiceProtocol *PlayerWin::getTaskService()
@@ -447,7 +441,6 @@ void PlayerWin::initServices()
     _menuService = new PlayerMenuServiceWin(_hwnd);
     _messageBoxService = new PlayerMessageBoxServiceWin(_hwnd);
     _fileDialogService = new PlayerFileDialogServiceWin(_hwnd);
-    _editboxService = new PlayerEditBoxServiceWin(_hwnd);
     _taskService = new PlayerTaskServiceWin(_hwnd);
 
     if (!_project.isAppMenu())

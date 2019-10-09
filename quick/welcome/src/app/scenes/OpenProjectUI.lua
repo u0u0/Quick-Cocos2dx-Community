@@ -101,7 +101,7 @@ function OpenProjectUI:onEnter()
 		"ButtonPressed.png", "ButtonDisabled.png", 1)
 	OpenProjectBtn:setScale9Enabled(true)
 	OpenProjectBtn:setContentSize(cc.size(150, 40))
-	OpenProjectBtn:setTitleText("Create")
+	OpenProjectBtn:setTitleText("Open")
 	OpenProjectBtn:setTitleFontSize(25)
 	OpenProjectBtn:addTouchEventListener(function(sender, eventType)
 		if 2 == eventType then

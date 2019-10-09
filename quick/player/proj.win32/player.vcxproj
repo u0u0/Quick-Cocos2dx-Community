@@ -187,7 +187,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\lunqlite.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\unqlite.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\PlayerEditBoxServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerFileDialogServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerLuaCore.h" />
     <ClInclude Include="..\Classes\PlayerLuaCoreManual.hpp" />
@@ -222,7 +221,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.h" />
     <ClInclude Include="..\Classes\UncaughtExceptionHandler.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
-    <ClInclude Include="PlayerEditBoxServiceWin.h" />
     <ClInclude Include="PlayerFileDialogServiceWin.h" />
     <ClInclude Include="PlayerMenuServiceWin.h" />
     <ClInclude Include="PlayerMessageBoxServiceWin.h" />
@@ -416,7 +414,6 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\..\lib\quick-src\extra\platform\win32\CCNetworkWin32.cpp" />
     <ClCompile Include="..\..\lib\quick-src\ProjectConfig\ProjectConfig.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
-    <ClCompile Include="PlayerEditBoxServiceWin.cpp" />
     <ClCompile Include="PlayerFileDialogServiceWin.cpp" />
     <ClCompile Include="PlayerMenuServiceWin.cpp" />
     <ClCompile Include="PlayerMessageBoxServiceWin.cpp" />
