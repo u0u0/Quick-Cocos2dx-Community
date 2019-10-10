@@ -29,9 +29,11 @@ if not (audio._sources[1]) then
 	end
 	audio.unloadFile = function(path) end
 	audio.unloadAllFile = function() end
+	audio.playBGMSync = function(path, isLoop) end
 	audio.playBGM = function(path, isLoop) end
 	audio.stopBGM = function() end
 	audio.setBGMVolume = function(vol) end
+	audio.playEffectSync = function(path, isLoop) end
 	audio.playEffect = function(path, isLoop) end
 	audio.setEffectVolume = function(vol) end
 	audio.stopEffect = function() end
