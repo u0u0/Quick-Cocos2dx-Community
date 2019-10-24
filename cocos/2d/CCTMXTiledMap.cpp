@@ -25,7 +25,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "2d/CCTMXTiledMap.h"
-#include "2d/CCTMXXMLParser.h"
 #include "2d/CCTMXLayer.h"
 #include "2d/CCSprite.h"
 #include "base/ccUTF8.h" // For StringUtils::format
@@ -105,82 +104,21 @@ TMXTiledMap::~TMXTiledMap()
 }
 
 // private
-TMXLayer * TMXTiledMap::parseLayer(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
-{
-    TMXTilesetInfo *tileset = tilesetForLayer(layerInfo, mapInfo);
-    if (tileset == nullptr)
-        return nullptr;
-    
-    TMXLayer *layer = TMXLayer::create(tileset, layerInfo, mapInfo);
-
-    if (nullptr != layer)
-    {
-        // tell the layerinfo to release the ownership of the tiles map.
-        layerInfo->_ownTiles = false;
-        layer->setupTiles();
-    }
-
-    return layer;
-}
-
-TMXTilesetInfo * TMXTiledMap::tilesetForLayer(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
-{
-    auto height = static_cast<uint32_t>(layerInfo->_layerSize.height);
-    auto width  = static_cast<uint32_t>(layerInfo->_layerSize.width);
-    auto& tilesets = mapInfo->getTilesets();
-
-    for (auto iter = tilesets.crbegin(), end = tilesets.crend(); iter != end; ++iter)
-    {
-        TMXTilesetInfo* tileset = *iter;
-
-        if (tileset)
-        {
-            for (uint32_t y = 0; y < height; y++)
-            {
-                for (uint32_t x = 0; x < width; x++)
-                {
-                    auto pos = x + width * y;
-                    auto gid = layerInfo->_tiles[ pos ];
-
-                    // FIXME:: gid == 0 --> empty tile
-                    if (gid != 0)
-                    {
-                        // Optimization: quick return
-                        // if the layer is invalid (more than 1 tileset per layer)
-                        // an CCAssert will be thrown later
-                        if (tileset->_firstGid < 0 ||
-                            (gid & kTMXFlippedMask) >= static_cast<uint32_t>(tileset->_firstGid))
-                            return tileset;
-                    }
-                }
-            }        
-        }
-    }
-
-    // If all the tiles are 0, return empty tileset
-    CCLOG("cocos2d: Warning: TMX Layer '%s' has no tiles", layerInfo->_name.c_str());
-
-    return nullptr;
-}
-
 void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
 {
     _mapSize = mapInfo->getMapSize();
     _tileSize = mapInfo->getTileSize();
     _mapOrientation = mapInfo->getOrientation();
-
     _objectGroups = mapInfo->getObjectGroups();
-
     _properties = mapInfo->getProperties();
-
     _tileProperties = mapInfo->getTileProperties();
-
+    
+    // load layer
     int idx = 0;
-
     auto& layers = mapInfo->getLayers();
     for (const auto &layerInfo : layers) {
         if (layerInfo->_visible) {
-            TMXLayer *child = parseLayer(layerInfo, mapInfo);
+            TMXLayer *child = TMXLayer::create(layerInfo, mapInfo);
             if (child == nullptr) {
                 idx++;
                 continue;
@@ -192,7 +130,6 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
             currentSize.width = std::max(currentSize.width, childSize.width);
             currentSize.height = std::max(currentSize.height, childSize.height);
             this->setContentSize(currentSize);
-
             idx++;
         }
     }
@@ -204,13 +141,10 @@ TMXLayer * TMXTiledMap::getLayer(const std::string& layerName) const
 {
     CCASSERT(layerName.size() > 0, "Invalid layer name!");
     
-    for (auto& child : _children)
-    {
+    for (auto& child : _children) {
         TMXLayer* layer = dynamic_cast<TMXLayer*>(child);
-        if(layer)
-        {
-            if(layerName.compare( layer->getLayerName()) == 0)
-            {
+        if(layer) {
+            if(layerName.compare(layer->getLayerName()) == 0) {
                 return layer;
             }
         }
@@ -224,10 +158,8 @@ TMXObjectGroup * TMXTiledMap::getObjectGroup(const std::string& groupName) const
 {
     CCASSERT(groupName.size() > 0, "Invalid group name!");
 
-    for (const auto objectGroup : _objectGroups)
-    {
-        if (objectGroup && objectGroup->getGroupName() == groupName)
-        {
+    for (const auto objectGroup : _objectGroups) {
+        if (objectGroup && objectGroup->getGroupName() == groupName) {
             return objectGroup;
         }
     }
@@ -250,16 +182,6 @@ Value TMXTiledMap::getPropertiesForGID(int GID) const
         return _tileProperties.at(GID);
     
     return Value();
-}
-
-bool TMXTiledMap::getPropertiesForGID(int GID, Value** value)
-{
-    if (_tileProperties.find(GID) != _tileProperties.end()) {
-        *value = &_tileProperties.at(GID);
-        return true;
-    } else {
-        return false;
-    }
 }
 
 std::string TMXTiledMap::getDescription() const

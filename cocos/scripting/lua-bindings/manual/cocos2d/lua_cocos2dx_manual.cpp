@@ -4667,8 +4667,11 @@ static int lua_cocos2dx_TMXTiledMap_getPropertiesForGID(lua_State* tolua_S)
         if (!ok)
             return 0;
         cocos2d::Value ret = cobj->getPropertiesForGID(arg0);
-        ccvalue_to_luaval(tolua_S, ret);
-        return 1;
+        if (ret.getType() != cocos2d::Value::Type::NONE) {
+            ccvalue_to_luaval(tolua_S, ret);
+            return 1;
+        }
+        return 0;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.TMXTiledMap:getPropertiesForGID",argc, 1);
     return 0;
