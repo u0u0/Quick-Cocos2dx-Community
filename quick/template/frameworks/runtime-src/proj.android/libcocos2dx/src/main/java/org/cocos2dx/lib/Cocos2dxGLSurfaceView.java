@@ -28,12 +28,14 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.view.SurfaceHolder;
 
 public class Cocos2dxGLSurfaceView extends GLSurfaceView {
     // ===========================================================
@@ -89,7 +91,7 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
 
     public Cocos2dxGLSurfaceView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        
+
         this.initView();
     }
 
@@ -124,6 +126,8 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
                             final InputMethodManager imm = (InputMethodManager) Cocos2dxGLSurfaceView.mCocos2dxGLSurfaceView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(Cocos2dxGLSurfaceView.this.mCocos2dxEditText.getWindowToken(), 0);
                             Cocos2dxGLSurfaceView.this.requestFocus();
+                            // can take effect after GLSurfaceView has focus
+                            ((Cocos2dxActivity)Cocos2dxGLSurfaceView.mCocos2dxGLSurfaceView.getContext()).hideVirtualButton();
                             Log.d("GLSurfaceView", "HideSoftInput");
                         }
                         break;
@@ -141,7 +145,7 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
        return mCocos2dxGLSurfaceView;
        }
 
-       public static void queueAccelerometer(final float x, final float y, final float z, final long timestamp) {   
+       public static void queueAccelerometer(final float x, final float y, final float z, final long timestamp) {
        mCocos2dxGLSurfaceView.queueEvent(new Runnable() {
         @Override
             public void run() {
@@ -468,5 +472,26 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
         }
         sb.append("]");
         Log.d(Cocos2dxGLSurfaceView.TAG, sb.toString());
+    }
+
+    /**
+     * android 7 和 7.1上main线程初始化GL线程的时候会等待初始化完毕,cocos启动和加载时间，和启动第一个页面时间很容易造成anr
+     *
+     * @param holder
+     */
+    @Override
+    public void surfaceRedrawNeeded(SurfaceHolder holder) {
+        // 特殊处理android 7 和 7.1 初始化时间过长时不产生ANR
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
+            try {
+                this.requestRender();
+            } catch (Exception e) {
+                // 如果出错, 就什么都不干了
+            } catch (Error e) {
+
+            }
+        } else {
+            super.surfaceRedrawNeeded(holder);
+        }
     }
 }

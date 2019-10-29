@@ -29,9 +29,11 @@ if not (audio._sources[1]) then
 	end
 	audio.unloadFile = function(path) end
 	audio.unloadAllFile = function() end
+	audio.playBGMSync = function(path, isLoop) end
 	audio.playBGM = function(path, isLoop) end
 	audio.stopBGM = function() end
 	audio.setBGMVolume = function(vol) end
+	audio.playEffectSync = function(path, isLoop) end
 	audio.playEffect = function(path, isLoop) end
 	audio.setEffectVolume = function(vol) end
 	audio.stopEffect = function() end
@@ -111,6 +113,16 @@ function for CSource
 ]]--
 
 --------------- BGM 2D API -------------------
+-- no need preload file
+function audio.playBGMSync(path, isLoop)
+	audio.loadFile(path, function(pn, isSuccess)
+		if isSuccess then
+			audio.playBGM(pn, isLoop)
+		end
+	end)
+end
+
+-- need preload file
 function audio.playBGM(path, isLoop)
 	local buffer = audio._buffers[path]
 	if not buffer then
@@ -118,7 +130,7 @@ function audio.playBGM(path, isLoop)
 		return
 	end
 
-	isLoop = isLoop or true
+	isLoop = isLoop ~= false and true or false
 	audio._sources[1]:stop()
 	audio._sources[1]:play2d(buffer, isLoop)
 	audio._sources[1]:setVolume(audio._BGMVolume)
@@ -140,6 +152,16 @@ function audio.setBGMVolume(vol)
 end
 
 --------------- Effect 2D API -------------------
+-- no need preload file
+function audio.playEffectSync(path, isLoop)
+	audio.loadFile(path, function(pn, isSuccess)
+		if isSuccess then
+			audio.playEffect(pn, isLoop)
+		end
+	end)
+end
+
+-- need preload file
 function audio.playEffect(path, isLoop)
 	local buffer = audio._buffers[path]
 	if not buffer then
@@ -149,7 +171,7 @@ function audio.playEffect(path, isLoop)
 	
 	local source = Rapid2D_CAudio.newSource()
 	if source then
-		isLoop = isLoop or false
+		isLoop = isLoop == true and true or false
 		table.insert(audio._sources, source)
 		source:setVolume(audio._effectVolume)
 		source:play2d(buffer, isLoop)

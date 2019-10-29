@@ -144,7 +144,11 @@ static int lSourceResume(lua_State *L)
         cocos2d::log("Rapid2D_CAudioBuffer.resume() fail for deleted!");
         return 0;
     }
-    alSourcePlay(sourceItem->id);
+    ALint stat;
+    alGetSourcei(sourceItem->id, AL_SOURCE_STATE, &stat);
+    if (stat == AL_PAUSED) { // only resume on pause state
+        alSourcePlay(sourceItem->id);
+    }
     return 0;
 }
 

@@ -11,7 +11,6 @@
  ********************************************************************
 
  function: stdio-based convenience library for opening/seeking/decoding
- last mod: $Id: vorbisfile.c 19457 2015-03-03 00:15:29Z giles $
 
  ********************************************************************/
 
@@ -265,6 +264,10 @@ static ogg_int64_t _get_prev_page_serial(OggVorbis_File *vf, ogg_int64_t begin,
         }
       }
     }
+    /*We started from the beginning of the stream and found nothing.
+      This should be impossible unless the contents of the stream changed out
+      from under us after we read from it.*/
+    if(!begin&&vf->offset<0)return OV_EBADLINK;
   }
 
   /* we're not interested in the page... just the serialno and granpos. */
@@ -1231,7 +1234,6 @@ double ov_time_total(OggVorbis_File *vf,int i){
 
 int ov_raw_seek(OggVorbis_File *vf,ogg_int64_t pos){
   ogg_stream_state work_os;
-  int ret;
 
   if(vf->ready_state<OPENED)return(OV_EINVAL);
   if(!vf->seekable)
@@ -1254,8 +1256,12 @@ int ov_raw_seek(OggVorbis_File *vf,ogg_int64_t pos){
                             vf->current_serialno); /* must set serialno */
   vorbis_synthesis_restart(&vf->vd);
 
-  ret=_seek_helper(vf,pos);
-  if(ret)goto seek_error;
+  if(_seek_helper(vf,pos)) {
+    /* dump the machine so we're in a known state */
+    vf->pcm_offset=-1;
+    _decode_clear(vf);
+    return OV_EBADLINK;
+  }
 
   /* we need to make sure the pcm_offset is set, but we don't want to
      advance the raw cursor past good packets just to get to the first
@@ -1389,13 +1395,6 @@ int ov_raw_seek(OggVorbis_File *vf,ogg_int64_t pos){
   vf->bittrack=0.f;
   vf->samptrack=0.f;
   return(0);
-
- seek_error:
-  /* dump the machine so we're in a known state */
-  vf->pcm_offset=-1;
-  ogg_stream_clear(&work_os);
-  _decode_clear(vf);
-  return OV_EBADLINK;
 }
 
 /* Page granularity seek (faster than sample granularity because we

@@ -234,19 +234,12 @@ private:
     int onProgress(double dltotal, double dlnow, double ultotal, double ulnow);
 
     // curl callback
-#ifdef _WINDOWS_
-    static DWORD WINAPI requestCURL(LPVOID userdata);
-#else
-    pthread_t m_thread;
     static void *requestCURL(void *userdata);
-#endif
     static size_t writeDataCURL(void *buffer, size_t size, size_t nmemb, void *userdata);
     static size_t writeHeaderCURL(void *buffer, size_t size, size_t nmemb, void *userdata);
     static int progressCURL(void *userdata, double dltotal, double dlnow, double ultotal, double ulnow);
 
 #if (!CC_USE_CURL)
-    pthread_attr_t m_threadAttr;
-
     bool isNeedBoundary();
 
     void createURLConnectJava();
@@ -271,7 +264,6 @@ private:
     int   getCStrFromJByteArray(jbyteArray jba, JNIEnv* env, char** ppData);
     char* getCStrFromJString(jstring jstr, JNIEnv* env);
 #endif
-
 };
 
 NS_CC_EXTRA_END

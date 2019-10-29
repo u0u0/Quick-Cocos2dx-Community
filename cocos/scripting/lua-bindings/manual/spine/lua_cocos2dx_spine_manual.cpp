@@ -288,11 +288,16 @@ int executeSpineEvent(LuaSkeletonAnimation* skeletonAnimation, int handler, spEv
     spineEvent.insert(spineEvent.end(), LuaValueDict::value_type("loopCount", LuaValue::intValue(entry->loop)));
     
     if (nullptr != event) {
-        LuaValueDict eventData;
+        LuaValueDict eventData; // cur value
+        LuaValueDict data;  // default value
         eventData.insert(eventData.end(), LuaValueDict::value_type("name", LuaValue::stringValue(event->data->name)));
         eventData.insert(eventData.end(), LuaValueDict::value_type("intValue", LuaValue::intValue(event->intValue)));
         eventData.insert(eventData.end(), LuaValueDict::value_type("floatValue", LuaValue::floatValue(event->floatValue)));
         eventData.insert(eventData.end(), LuaValueDict::value_type("stringValue", LuaValue::stringValue(event->stringValue)));
+        data.insert(data.end(), LuaValueDict::value_type("intValue", LuaValue::intValue(event->data->intValue)));
+        data.insert(data.end(), LuaValueDict::value_type("floatValue", LuaValue::floatValue(event->data->floatValue)));
+        data.insert(data.end(), LuaValueDict::value_type("stringValue", LuaValue::stringValue(event->data->stringValue)));
+        eventData.insert(eventData.end(), LuaValueDict::value_type("data", LuaValue::dictValue(data)));
         spineEvent.insert(spineEvent.end(), LuaValueDict::value_type("eventData", LuaValue::dictValue(eventData)));
     }
     

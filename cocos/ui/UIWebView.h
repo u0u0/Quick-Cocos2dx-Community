@@ -1,5 +1,6 @@
 /****************************************************************************
- Copyright (c) 2014 Chukong Technologies Inc.
+ Copyright (c) 2014-2016 Chukong Technologies Inc.
+ Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
  
@@ -27,13 +28,18 @@
 
 #include "platform/CCPlatformConfig.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_TIZEN)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 
 
 
 #include "ui/UIWidget.h"
 #include "ui/GUIExport.h"
 #include "base/CCData.h"
+
+/**
+ * @addtogroup ui
+ * @{
+ */
 
 NS_CC_BEGIN
 namespace experimental{
@@ -42,103 +48,110 @@ namespace experimental{
 class WebViewImpl;
 
 /**
-* @brief A View that displays web pages.
-*
-* @note WebView displays web pages base on system widget.
-* It's mean WebView displays web pages above all graphical elements of cocos2d-x.
-* @js NA
-*/
+ * @brief A View that displays web pages. 
+ *
+ * @note WebView displays web pages base on system widget.
+ * It's mean WebView displays web pages above all graphical elements of cocos2d-x.
+ * @js NA
+ */
 class CC_GUI_DLL WebView : public cocos2d::ui::Widget {
 public:
     /**
-    * Allocates and initializes a WebView.
-    */
+     * Allocates and initializes a WebView.
+     */
     static WebView *create();
 
     /**
-    * Set javascript interface scheme.
-    *
-    * @see WebView::setOnJSCallback()
-    */
+     * Set javascript interface scheme.
+     *
+     * @see WebView::setOnJSCallback()
+     */
     void setJavascriptInterfaceScheme(const std::string &scheme);
 
     /**
-    * Sets the main page contents, MIME type, content encoding, and base URL.
-    *
-    * @param data The content for the main page.
-    * @param MIMEType The MIME type of the data.
-    * @param encoding The encoding of the data.
-    * @param baseURL The base URL for the content.
-    */
+     * Sets the main page contents, MIME type, content encoding, and base URL.
+     *
+     * @param data The content for the main page.
+     * @param MIMEType The MIME type of the data.
+     * @param encoding The encoding of the data.
+     * @param baseURL The base URL for the content.
+     */
     void loadData(const cocos2d::Data &data,
                   const std::string &MIMEType,
                   const std::string &encoding,
                   const std::string &baseURL);
     
     /**
-    * Sets the main page content and base URL.
-    *
-    * @param string The content for the main page.
-    * @param baseURL The base URL for the content.
-    */
+     * Sets the main page content and base URL.
+     *
+     * @param string The content for the main page.
+     * @param baseURL The base URL for the content.
+     */
     void loadHTMLString(const std::string &string, const std::string &baseURL = "");
 
     /**
-    * Loads the given URL.
-    *
-    * @param url Content URL.
-    */
+     * Loads the given URL. It doesn't clean cached data.
+     *
+     * @param url Content URL.
+     */
     void loadURL(const std::string &url);
 
     /**
-    * Loads the given fileName.
-    *
-    * @param fileName Content fileName.
-    */
+     * Loads the given URL with cleaning cached data or not.
+     * @param url Content URL.
+     * @cleanCachedData Whether to clean cached data.
+     */
+    void loadURL(const std::string &url, bool cleanCachedData);
+
+    /**
+     * Loads the given fileName.
+     *
+     * @param fileName Content fileName.
+     */
     void loadFile(const std::string &fileName);
 
     /**
-    * Stops the current load.
-    */
+     * Stops the current load.
+     */
     void stopLoading();
 
     /**
-    * Reloads the current URL.
-    */
+     * Reloads the current URL.
+     */
     void reload();
 
     /**
-    * Gets whether this WebView has a back history item.
-    *
-    * @return WebView has a back history item.
-    */
+     * Gets whether this WebView has a back history item.
+     *
+     * @return WebView has a back history item.
+     */
     bool canGoBack();
 
     /**
-    * Gets whether this WebView has a forward history item.
-    *
-    * @return WebView has a forward history item.
-    */
+     * Gets whether this WebView has a forward history item.
+     *
+     * @return WebView has a forward history item.
+     */
     bool canGoForward();
 
     /**
-    * Goes back in the history.
-    */
+     * Goes back in the history.
+     */
     void goBack();
 
     /**
-    * Goes forward in the history.
-    */
+     * Goes forward in the history.
+     */
     void goForward();
 
     /**
-    * evaluates JavaScript in the context of the currently displayed page
-    */
+     * Evaluates JavaScript in the context of the currently displayed page.
+     */
     void evaluateJS(const std::string &js);
 
     /**
-    * Set WebView should support zooming. The default value is false.
-    */
+     * Set WebView should support zooming. The default value is false.
+     */
     void setScalesPageToFit(const bool scalesPageToFit);
     
     /**
@@ -204,6 +217,20 @@ public:
      * Toggle visibility of WebView.
      */
     virtual void setVisible(bool visible) override;
+    /**
+     * SetOpacity of webview.
+     */
+    virtual void setOpacityWebView(float opacity);
+    
+    /**
+     * getOpacity of webview.
+     */
+    virtual float getOpacityWebView() const;
+    
+    /**
+     * set the background transparent
+     */
+    virtual void setBackgroundTransparent();
     virtual void onEnter() override;
     virtual void onExit() override;
     
@@ -221,12 +248,12 @@ protected:
 
 CC_CONSTRUCTOR_ACCESS:
     /**
-     * Default constructor
+     * Default constructor.
      */
     WebView();
     
     /**
-     * Default destructor
+     * Default destructor.
      */
     virtual ~WebView();
 
@@ -240,5 +267,6 @@ private:
 }//namespace cocos2d
 
 #endif
-
+// end group
+/// @}
 #endif //__COCOS2D_UI_WEBVIEW_H

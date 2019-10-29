@@ -1,6 +1,6 @@
 # Quick-Cocos2dx-Community
 
-Quick-Cocos2dx-Community 发展自用户公认的最稳定版本 Quick-Cocos2d-x v3.3。由于官方疏于维护，并表示不在发布v3.5以后的版本。原作者因为公司战略调整和所属部门的变化，无法将精力投入到引擎上，导致引擎全部合并到c++仓库中。我们并不赞成Lua分支合并到Cocos2d-x主版本中，因为我们使用Lua作为主要开发语言，并不需要工程中包含js等部分。
+Quick-Cocos2dx-Community 发展自用户公认的最稳定版本 Quick-Cocos2d-x v3.3。作为 Cocos2d-x 的 Lua 用户，我们并不赞成 Lua 分支合并到Cocos2d-x主版本中，也不需要工程中包含js等部分。
 
 Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。并在 Quick-Cocos2d-x 基础上更新了最新的平台和第三方功能。让开发者可以用更低的成本、更高的开发效率、更省的人力成本创造高品质手游产品。
 
@@ -8,7 +8,9 @@ Quick-Cocos2dx-Community 具有 Cocos2d-x 和 Quick-Cocos2d-x 的所有优点。
 
 [http://www.cocos2d-lua.org/](http://www.cocos2d-lua.org/)
 
-QQ 群：361920466
+**社区版 千人群(1群)号：361920466**
+
+**社区版 2群：138934064**
 
 ## 相关开源仓库地址
 
@@ -16,6 +18,7 @@ QQ 群：361920466
 * 第三方库编译框架: [Quick-3rd-party-libs](https://github.com/u0u0/Quick-3rd-party-libs)
 * vim开发插件: [vim-quick-community](https://github.com/u0u0/vim-quick-community)
 * sublime开发插件: [quick-comminuty-dev](https://github.com/u0u0/quick-comminuty-dev)
+* protoc-gen-lua: [protoc-gen-lua-bin](https://github.com/u0u0/protoc-gen-lua-bin)
 
 ## 快速安装指南
 

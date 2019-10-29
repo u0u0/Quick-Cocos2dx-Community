@@ -177,15 +177,6 @@ public:
      */
     Value getPropertiesForGID(int GID) const;
 
-    /** Assigns properties to argument value, returns true if it did found properties 
-     * for that GID and did assigned a value, else it returns false.
-     *
-     * @param GID The tile GID.
-     * @param value Argument value.
-     * @return Return true if it did found properties for that GID and did assigned a value, else it returns false.
-     */
-    bool getPropertiesForGID(int GID, Value** value);
-
     /** The map's size property measured in tiles. 
      *
      * @return The map's size property measured in tiles.
@@ -277,8 +268,6 @@ CC_CONSTRUCTOR_ACCESS:
     bool initWithXML(const std::string& tmxString, const std::string& resourcePath);
 
 protected:
-    TMXLayer * parseLayer(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo);
-    TMXTilesetInfo * tilesetForLayer(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo);
     void buildWithMapInfo(TMXMapInfo* mapInfo);
 
     /** the map's size property measured in tiles */

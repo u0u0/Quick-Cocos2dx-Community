@@ -125,7 +125,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/lua/tolua \
                     $(LOCAL_PATH)/../../../3d \
                     $(LOCAL_PATH)/../../../audio \
                     $(LOCAL_PATH)/../../../../external/OpenAL/inc \
-                    $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio/ActionTimeline \
                     $(LOCAL_PATH)/../../../editor-support/spine \

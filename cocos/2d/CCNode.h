@@ -727,7 +727,7 @@ public:
      *
      * @return the array the node's children
      */
-    virtual Vector<Node*>& getChildren() { return _children; }
+    virtual Vector<Node*>& getChildren();
     virtual const Vector<Node*>& getChildren() const { return _children; }
     
     /** 

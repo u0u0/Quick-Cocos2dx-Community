@@ -6,4 +6,5 @@ ccexp.VideoPlayerEvent = {
     PAUSED = 1,
     STOPPED= 2,
     COMPLETED =3,
+    ERROR =4,
 }

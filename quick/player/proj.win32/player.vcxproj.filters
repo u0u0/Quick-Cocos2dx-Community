@@ -147,9 +147,6 @@
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\lua_extensions_more.h">
       <Filter>Classes\quick-src\lua_extensions</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerEditBoxServiceWin.h">
-      <Filter>win32</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerFileDialogServiceWin.h">
       <Filter>win32</Filter>
     </ClInclude>
@@ -161,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="PlayerTaskServiceWin.h">
       <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PlayerEditBoxServiceProtocol.h">
-      <Filter>Classes\player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PlayerFileDialogServiceProtocol.h">
       <Filter>Classes\player</Filter>
@@ -310,9 +304,6 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\quick-src\lua_extensions\lua_extensions_more.c">
       <Filter>Classes\quick-src\lua_extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerEditBoxServiceWin.cpp">
-      <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="PlayerFileDialogServiceWin.cpp">
       <Filter>win32</Filter>

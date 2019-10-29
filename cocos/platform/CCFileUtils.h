@@ -103,7 +103,9 @@ public:
      *  @return Upon success, a pointer to the data is returned, otherwise nullptr.
      *  @warning Recall: you are responsible for calling free() on any Non-nullptr pointer returned.
      */
-    virtual unsigned char* getFileDataFromZip(const std::string& zipFilePath, const std::string& filename, ssize_t *size);
+    unsigned char* getFileDataFromZip(const char *zipFilePath, const char *filename, ssize_t *size);
+    
+    bool unzipFile(const char *zipFilePath, const char *destDir);
 
     /** Returns the fullpath for a given filename.
      

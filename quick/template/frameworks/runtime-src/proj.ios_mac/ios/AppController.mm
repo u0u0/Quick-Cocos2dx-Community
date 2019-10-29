@@ -52,18 +52,23 @@ static AppDelegate s_sharedApplication;
 
     // Add the view controller's view to the window and display.
     CGRect winRect = [[UIScreen mainScreen] bounds];
-    // iPhoneX special fix, is there a better method?
-    CGSize screenSize = [[UIScreen mainScreen] currentMode].size;
-    if (CGSizeEqualToSize(CGSizeMake(1125, 2436), screenSize)) {
-        if (winRect.size.height == 812) { // Portrait
-            winRect.origin.y = 44;
-            winRect.size.height = 812 - 44 - 34;
-        } else { // landscape
-            winRect.origin.x = 44;
-            winRect.size.width = 812 - 44 - 34;
+    window = [[UIWindow alloc] initWithFrame: winRect];
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {//判断是否是手机
+        if (@available(iOS 11.0, *)) {
+            if (window.safeAreaInsets.bottom > 0.0) {
+                NSLog(@"top = %f,bottom = %f,left = %f,right = %f",window.safeAreaInsets.top, window.safeAreaInsets.bottom, window.safeAreaInsets.left, window.safeAreaInsets.right);
+                if (winRect.size.height > winRect.size.width) { // Portrait
+                    winRect.origin.y = window.safeAreaInsets.bottom;
+                    winRect.size.height = winRect.size.height - window.safeAreaInsets.bottom - window.safeAreaInsets.top;
+                } else { // landscape
+                    winRect.origin.x = window.safeAreaInsets.left;
+                    winRect.size.width = winRect.size.width - window.safeAreaInsets.left - window.safeAreaInsets.right;
+                    winRect.size.height = winRect.size.height - window.safeAreaInsets.bottom;
+                }
+            }
         }
     }
-    window = [[UIWindow alloc] initWithFrame: winRect];
+    [window setFrame:winRect];
     CCEAGLView *eaglView = [CCEAGLView viewWithFrame: [window bounds]
                                      pixelFormat: (NSString*)cocos2d::GLViewImpl::_pixelFormat
                                      depthFormat: cocos2d::GLViewImpl::_depthFormat

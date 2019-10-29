@@ -104,39 +104,47 @@ end
 local scale, scaleX, scaleY
 
 if CONFIG_SCREEN_AUTOSCALE and CONFIG_SCREEN_AUTOSCALE ~="NONE" then
-    if type(CONFIG_SCREEN_AUTOSCALE_CALLBACK) == "function" then
-        scaleX, scaleY = CONFIG_SCREEN_AUTOSCALE_CALLBACK(w, h, device.model)
-    end
+	if type(CONFIG_SCREEN_AUTOSCALE_CALLBACK) == "function" then
+		scaleX, scaleY = CONFIG_SCREEN_AUTOSCALE_CALLBACK(w, h, device.model)
+	end
 
-    if CONFIG_SCREEN_AUTOSCALE == "EXACT_FIT" then
-        scale = 1.0
-        glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.EXACT_FIT)
-    elseif CONFIG_SCREEN_AUTOSCALE == "FILL_ALL" then
-        CONFIG_SCREEN_WIDTH = w
-        CONFIG_SCREEN_HEIGHT = h
-        scale = 1.0
+	if CONFIG_SCREEN_AUTOSCALE == "EXACT_FIT" then
+		scale = 1.0
+		glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.EXACT_FIT)
+	elseif CONFIG_SCREEN_AUTOSCALE == "FILL_ALL" then
+		CONFIG_SCREEN_WIDTH = w
+		CONFIG_SCREEN_HEIGHT = h
+		scale = 1.0
 		glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.SHOW_ALL)
-    else
-        if not scaleX or not scaleY then
-            scaleX, scaleY = w / CONFIG_SCREEN_WIDTH, h / CONFIG_SCREEN_HEIGHT
-        end
+	else
+		if not scaleX or not scaleY then
+			scaleX, scaleY = w / CONFIG_SCREEN_WIDTH, h / CONFIG_SCREEN_HEIGHT
+		end
 
-        if CONFIG_SCREEN_AUTOSCALE == "FIXED_WIDTH" then
-            scale = scaleX
-            CONFIG_SCREEN_HEIGHT = h / scale
-        elseif CONFIG_SCREEN_AUTOSCALE == "FIXED_HEIGHT" then
-            scale = scaleY
-            CONFIG_SCREEN_WIDTH = w / scale
-        else
-            scale = 1.0
-            printError(string.format("display - invalid CONFIG_SCREEN_AUTOSCALE \"%s\"", CONFIG_SCREEN_AUTOSCALE))
-        end
-        glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.NO_BORDER)
-    end
+		if CONFIG_SCREEN_AUTOSCALE == "FIXED_WIDTH" then
+			scale = scaleX
+			CONFIG_SCREEN_HEIGHT = h / scale
+		elseif CONFIG_SCREEN_AUTOSCALE == "FIXED_HEIGHT" then
+			scale = scaleY
+			CONFIG_SCREEN_WIDTH = w / scale
+		elseif CONFIG_SCREEN_AUTOSCALE == "FIXED_AUTO" then
+			if scaleX < scaleY then
+				scale = scaleX
+				CONFIG_SCREEN_HEIGHT = h / scale
+			else
+				scale = scaleY
+				CONFIG_SCREEN_WIDTH  = w / scale
+			end
+		else
+			scale = 1.0
+			printError(string.format("display - invalid CONFIG_SCREEN_AUTOSCALE \"%s\"", CONFIG_SCREEN_AUTOSCALE))
+		end
+		glview:setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.NO_BORDER)
+	end
 else
-    CONFIG_SCREEN_WIDTH = w
-    CONFIG_SCREEN_HEIGHT = h
-    scale = 1.0
+	CONFIG_SCREEN_WIDTH = w
+	CONFIG_SCREEN_HEIGHT = h
+	scale = 1.0
 end
 
 local winSize = sharedDirector:getWinSize()
@@ -178,11 +186,15 @@ printInfo(string.format("# display.c_top                = %0.2f", display.c_top)
 printInfo(string.format("# display.c_bottom             = %0.2f", display.c_bottom))
 printInfo("#")
 
-display.COLOR_WHITE = cc.c3b(255, 255, 255)
-display.COLOR_BLACK = cc.c3b(0, 0, 0)
-display.COLOR_RED   = cc.c3b(255, 0, 0)
-display.COLOR_GREEN = cc.c3b(0, 255, 0)
-display.COLOR_BLUE  = cc.c3b(0, 0, 255)
+display.COLOR_WHITE   = cc.c3b(255, 255, 255)
+display.COLOR_YELLOW  = cc.c3b(255, 255, 0)
+display.COLOR_GREEN   = cc.c3b(0, 255, 0)
+display.COLOR_BLUE    = cc.c3b(0, 0, 255)
+display.COLOR_RED     = cc.c3b(255, 0, 0)
+display.COLOR_MAGENTA = cc.c3b(255, 0, 255)
+display.COLOR_BLACK   = cc.c3b(0, 0, 0)
+display.COLOR_ORANGE  = cc.c3b(255, 127, 0)
+display.COLOR_GRAY    = cc.c3b(166, 166, 166)
 
 display.AUTO_SIZE      = 0
 display.FIXED_SIZE     = 1
@@ -803,8 +815,14 @@ circle:addTo(scene)
 
 function display.newSolidCircle(radius, params)
     local circle = display.newDrawNode()
-    circle:drawDot(cc.p(params.x or 0, params.y or 0),
-        radius or 0, params.color or cc.c4f(0, 0, 0, 1))
+    circle:drawSolidCircle(cc.p(params.x or 0, params.y or 0),
+        radius or 0,
+        params.angle or 0,
+        params.segments or 50,
+        params.scaleX or 1.0,
+        params.scaleY or 1.0,
+        params.color or cc.c4f(0, 0, 0, 1)
+    )
     return circle
 end
 

@@ -400,11 +400,14 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
     glfwWindowHint(GLFW_STENCIL_BITS,_glContextAttrs.stencilBits);
 
     // bugfix: change windows size with Monitor size, make win32 touch event happy.
+    float scale = 1.0;
     GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode * mode = glfwGetVideoMode(pMonitor);
-    float scale = MIN((mode->width - 120) / rect.size.width, (mode->height - 120) / rect.size.height);
-    if (scale >= 1.0) {
-        scale = 1.0;
+    if (pMonitor != NULL) {
+        const GLFWvidmode* mode = glfwGetVideoMode(pMonitor);
+        scale = MIN((mode->width - 120) / rect.size.width, (mode->height - 120) / rect.size.height);
+        if (scale >= 1.0) {
+            scale = 1.0;
+        }
     }
     rect.size.width = scale * rect.size.width;
     rect.size.height = scale * rect.size.height;

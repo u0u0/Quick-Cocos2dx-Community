@@ -84,6 +84,12 @@ union IntOrDouble
     } i;
 };
 
+union IntOrFloat
+{
+    float f;
+    int32_t i;
+};
+
 static void pack_varint(luaL_Buffer *b, uint64_t value)
 {
     if (value >= 0x80)
@@ -391,7 +397,11 @@ static int struct_unpack(lua_State *L)
             }
         case 'f':
             {
-                lua_pushnumber(L, (lua_Number)*(float*)unpack_fixed32(buffer, out));
+                // use union to avoid crash on Android (signal 7)
+                int32_t *buf = (int32_t *)unpack_fixed32(buffer, out);
+                union IntOrFloat intOrFloat;
+                intOrFloat.i = *buf;
+                lua_pushnumber(L, (lua_Number)intOrFloat.f);
                 break;
             }
         case 'd':
