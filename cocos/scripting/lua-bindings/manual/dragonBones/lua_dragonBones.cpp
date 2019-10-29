@@ -1443,6 +1443,39 @@ tolua_lerror:
     return 0;
 }
 
+static int lua_dragonBones_AnimationState_setTimeScale(lua_State* L)
+{
+    int argc = 0;
+    dragonBones::AnimationState *obj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L, 1, "dragonBones.AnimationState", 0, &tolua_err)) goto tolua_lerror;
+#endif
+    obj = static_cast<dragonBones::AnimationState *>(tolua_tousertype(L, 1, 0));
+    
+    argc = lua_gettop(L) - 1;
+    if (argc == 1)
+    {
+#if COCOS2D_DEBUG >= 1
+        if (!tolua_isnumber(L, 2, 0, &tolua_err))
+        {
+            goto tolua_lerror;
+        }
+#endif
+        float timeScale = (float)tolua_tonumber(L, 2, true);
+        obj->timeScale = timeScale;
+        return 0;
+    }
+    luaL_error(L, "'setTimeScale' function of dragonBones.AnimationState has wrong number of arguments: %d, was expecting 1\n", argc);
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L, "#ferror in function 'setTimeScale'.", &tolua_err);
+#endif
+    return 0;
+}
+
 static int lua_dragonBones_AnimationState_isFadeIn(lua_State* L)
 {
     int argc = 0;
@@ -1726,6 +1759,7 @@ int lua_register_dragonBones_AnimationState(lua_State* tolua_S)
         tolua_function(tolua_S, "removeAllBoneMask", lua_dragonBones_AnimationState_removeAllBoneMask);
         tolua_function(tolua_S, "setResetToPose", lua_dragonBones_AnimationState_setResetToPose);
         tolua_function(tolua_S, "setAutoFadeOutTime", lua_dragonBones_AnimationState_setAutoFadeOutTime);
+        tolua_function(tolua_S, "setTimeScale", lua_dragonBones_AnimationState_setTimeScale);
         tolua_function(tolua_S, "isFadeIn", lua_dragonBones_AnimationState_isFadeIn);
         tolua_function(tolua_S, "isFadeOut", lua_dragonBones_AnimationState_isFadeOut);
         tolua_function(tolua_S, "isFadeComplete", lua_dragonBones_AnimationState_isFadeComplete);
