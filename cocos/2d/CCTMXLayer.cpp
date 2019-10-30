@@ -36,10 +36,18 @@ THE SOFTWARE.
 
 NS_CC_BEGIN
 
-TMXLayer * TMXLayer::create(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
+TileAnimationData::TileAnimationData()
+:leftTime(0.0)
+,frameIndex(0)
+{}
+
+TileAnimationData::~TileAnimationData()
+{}
+
+TMXLayer * TMXLayer::create(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap)
 {
 	TMXLayer *ret = new (std::nothrow) TMXLayer();
-	if (ret->initWithTilesetInfo(layerInfo, mapInfo))
+	if (ret->initWithTilesetInfo(layerInfo, tileMap))
 	{
 		ret->autorelease();
 		return ret;
@@ -48,7 +56,7 @@ TMXLayer * TMXLayer::create(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
 	return nullptr;
 }
 
-bool TMXLayer::initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
+bool TMXLayer::initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap)
 {
 	Size size = layerInfo->_layerSize;
 	// layerInfo
@@ -62,12 +70,12 @@ bool TMXLayer::initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
 	_contentScaleFactor = Director::getInstance()->getContentScaleFactor();
 
 	// mapInfo
-	_mapTileSize = mapInfo->getTileSize();
-	_layerOrientation = mapInfo->getOrientation();
-	_staggerAxis = mapInfo->getStaggerAxis();
-	_staggerIndex = mapInfo->getStaggerIndex();
-	_hexSideLength = mapInfo->getHexSideLength();
-	_tilesets = mapInfo->getTilesets();
+    _tileMap = tileMap;
+	_mapTileSize = tileMap->getTileSize();
+	_layerOrientation = tileMap->getMapOrientation();
+	_staggerAxis = tileMap->getStaggerAxis();
+	_staggerIndex = tileMap->getStaggerIndex();
+	_hexSideLength = tileMap->getHexSideLength();
 
 	// offset (after layer orientation is set);
 	Vec2 offset = calculateLayerOffset(layerInfo->_offset);
@@ -89,19 +97,6 @@ bool TMXLayer::initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo)
 	}
 	setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
 
-    // preload textures
-	for (auto iter = _tilesets.crbegin(), iterCrend = _tilesets.crend(); iter != iterCrend; ++iter) {
-		TMXTilesetInfo* tilesetInfo = *iter;
-		if (tilesetInfo) {
-			Texture2D *texture = Director::getInstance()->getTextureCache()->addImage(tilesetInfo->_sourceImage);
-            if (!texture) {
-                return false;
-            }
-			texture->setAliasTexParameters();
-			tilesetInfo->_imageSize = texture->getContentSizeInPixels();
-		}
-	}
-
     setupTiles();
 	return true;
 }
@@ -117,11 +112,15 @@ TMXLayer::TMXLayer()
 ,_staggerAxis(TMXStaggerAxis_Y)
 ,_staggerIndex(TMXStaggerIndex_Even)
 ,_hexSideLength(0)
+,_tileMap(nullptr)
 {}
 
 TMXLayer::~TMXLayer()
 {
 	CC_SAFE_FREE(_tiles);
+    for(auto it = _tilesAniData.begin(); it != _tilesAniData.end(); ++it) {
+        delete it->second;
+    }
 }
 
 // TMXLayer - setup Tiles
@@ -134,21 +133,10 @@ void TMXLayer::setupTiles()
 			int gid = _tiles[z]; // Only support little endian stored gid
 			if (gid != 0) {
 				Sprite *tile = createTileSprite(z, gid);
-				setupTileSprite(tile, pos, gid);
+                setupTileAnimation(tile, pos, gid);
 			}
 		}
 	}
-}
-
-TMXTilesetInfo *TMXLayer::getTilesetByGID(uint32_t gid) const
-{
-	for (auto iter = _tilesets.crbegin(), end = _tilesets.crend(); iter != end; ++iter) {
-		TMXTilesetInfo *tileset = *iter;
-		if (tileset->_firstGid < 0 || (gid & kTMXFlippedMask) >= static_cast<uint32_t>(tileset->_firstGid)) {
-			return tileset;
-		}
-	}
-	return nullptr;
 }
 
 // TMXLayer - Properties
@@ -162,13 +150,22 @@ Value TMXLayer::getProperty(const std::string& propertyName) const
 
 Sprite *TMXLayer::createTileSprite(intptr_t z, uint32_t gid)
 {
-	TMXTilesetInfo *tileset = getTilesetByGID(gid);
+	TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
 	Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
 	Rect rect = tileset->getRectForGID(gid);
 	Sprite *tile = Sprite::createWithTexture(texture, rect);
-	_tileSprites[z] = tile;
+    _tileSprites.insert(std::pair<intptr_t, Sprite *>(z, tile));
     addChild(tile);
 	return tile;
+}
+
+void TMXLayer::setTileTexture(Sprite* sprite, uint32_t gid)
+{
+    TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
+    Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
+    Rect rect = tileset->getRectForGID(gid);
+    sprite->setTexture(texture);
+    sprite->setTextureRect(rect, false, rect.size);
 }
 
 void TMXLayer::setupTileSprite(Sprite* sprite, const Vec2& pos, uint32_t gid)
@@ -215,13 +212,80 @@ void TMXLayer::setupTileSprite(Sprite* sprite, const Vec2& pos, uint32_t gid)
 	}
 }
 
+// init tile's animation
+void TMXLayer::setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid)
+{
+    intptr_t z = getZForPos(pos);
+    auto it = _tilesAniData.find(z);
+    if (it != _tilesAniData.end()) { // remove old data
+        delete it->second;
+        _tilesAniData.erase(z);
+    }
+    Value prop = _tileMap->getPropertiesForGID(gid);
+    if (prop.getType() == Value::Type::MAP) {
+        Value& ani = prop.asValueMap()["animation"];
+        if (ani.getType() == Value::Type::VECTOR) { // add new data
+            TileAnimationData *data = new TileAnimationData();
+            data->frameIndex = 0;
+            data->pos = pos;
+            data->tile = sprite;
+            ValueVector &vector = ani.asValueVector();
+            for (size_t i = 0; i < vector.size(); i = i + 2) {
+                uint32_t tileid = vector[i].asUnsignedInt();
+                float duration = vector[i + 1].asUnsignedInt() / 1000.0f;//ms => s
+                data->gids.push_back(tileid);
+                data->durations.push_back(duration);
+                // init texture to first frame
+                if (0 == i) {
+                    data->leftTime = duration;
+                    setTileTexture(sprite, tileid);
+                    gid = tileid; // real render gid
+                }
+            }
+            _tilesAniData.insert(std::pair<intptr_t, TileAnimationData *>(z, data));
+        }
+    }
+    setupTileSprite(sprite, pos, gid);// do for real gid
+    
+    // start or stop schedule
+    if (_tilesAniData.size() == 1) {
+        schedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate), 0);
+    } else if (_tilesAniData.size() == 0) {
+        unschedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate));
+    }
+}
+
+void TMXLayer::tilesUpdate(float dt)
+{
+    for(auto it = _tilesAniData.begin(); it != _tilesAniData.end(); ++it) {
+        TileAnimationData *data = it->second;
+        data->leftTime -= dt;
+        if (data->leftTime > 0) {
+            continue;
+        }
+        // display next frame
+        data->frameIndex++;
+        if (data->frameIndex == data->gids.size()) {
+            data->frameIndex = 0;
+        }
+        uint32_t gid = data->gids[data->frameIndex];
+        data->leftTime = data->durations[data->frameIndex];
+        setTileTexture(data->tile, gid);
+        setupTileSprite(data->tile, data->pos, gid);
+    }
+}
+
 // TMXLayer - obtaining tiles/gids
 Sprite * TMXLayer::getTileAt(const Vec2& pos)
 {
 	CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 	CCASSERT(_tiles, "TMXLayer: the tiles map has been released");
 
-	return _tileSprites[getZForPos(pos)];
+    auto it = _tileSprites.find(getZForPos(pos));
+    if (it != _tileSprites.end()) {
+        return it->second;
+    }
+    return nullptr;
 }
 
 uint32_t TMXLayer::getTileGIDAt(const Vec2& pos, TMXTileFlags* flags/* = nullptr*/)
@@ -281,17 +345,17 @@ void TMXLayer::setTileGID(uint32_t gid, const Vec2& pos, TMXTileFlags flags)
 	{
 		uint32_t gidAndFlags = gid | flags;
 		intptr_t z = getZForPos(pos);
-		Sprite *tile = _tileSprites[z];
+        Sprite *tile = nullptr;
+        auto it = _tileSprites.find(z);
+        if (it != _tileSprites.end()) {
+            tile = it->second;
+        }
 		if (tile) {
-			TMXTilesetInfo *tileset = getTilesetByGID(gidAndFlags);
-            Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
-            Rect rect = tileset->getRectForGID(gidAndFlags);
-            tile->setTexture(texture);
-            tile->setTextureRect(rect, false, rect.size);
+            setTileTexture(tile, gidAndFlags);
         } else {
             tile = createTileSprite(z, gidAndFlags);
         }
-		setupTileSprite(tile, pos, gid);
+        setupTileAnimation(tile, pos, gidAndFlags);
         _tiles[z] = gidAndFlags;
 	}
 }
@@ -302,11 +366,19 @@ void TMXLayer::removeTileAt(const Vec2& pos)
 	CCASSERT(_tiles, "TMXLayer: the tiles map has been released");
 
 	intptr_t z = getZForPos(pos);
-	Sprite *tile = _tileSprites[z];
-	if (tile) {
-		tile->removeFromParent();
-	}
-	_tileSprites[z] = nullptr;
+    auto it = _tileSprites.find(z);
+    if (it != _tileSprites.end()) {
+        it->second->removeFromParent();
+        _tileSprites.erase(z);
+    }
+    auto itdata = _tilesAniData.find(z);
+    if (itdata != _tilesAniData.end()) {
+        delete itdata->second;
+        _tilesAniData.erase(z);
+        if (_tilesAniData.size() == 0) {
+            unschedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate));
+        }
+    }
 	_tiles[z] = 0;
 }
 
@@ -402,7 +474,7 @@ Vec2 TMXLayer::getPositionForHexAt(const Vec2& pos)
 {
 	Vec2 xy;
 	uint32_t gid = getTileGIDAt(pos);
-	TMXTilesetInfo *tileset = getTilesetByGID(gid);
+	TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
 	Vec2 offset = tileset->_tileOffset;
 
 	int odd_even = (_staggerIndex == TMXStaggerIndex_Odd) ? 1 : -1;

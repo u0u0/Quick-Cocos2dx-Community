@@ -98,7 +98,6 @@ public:
      *
      * @return The list of properties stored in a dictionary.
      */
-    const ValueMap& getProperties() const { return _properties; }
     ValueMap& getProperties() { return _properties; }
     
     /** Sets the list of properties.
@@ -113,7 +112,6 @@ public:
      *
      * @return The array of the objects.
      */
-    const ValueVector& getObjects() const { return _objects; }
     ValueVector& getObjects() { return _objects; }
     
     /** Sets the array of the objects.

@@ -34,23 +34,36 @@ NS_CC_BEGIN
 
 class TMXLayerInfo;
 class TMXTilesetInfo;
+class TMXTiledMap;
 
 /**
  * @addtogroup _2d
  * @{
  */
 
+class TileAnimationData {
+public:
+    TileAnimationData();
+    ~TileAnimationData();
+    
+    float leftTime;
+    int frameIndex;
+    Vec2 pos;
+    Sprite *tile;
+    std::vector<uint32_t> gids;
+    std::vector<float> durations;
+};
+
 class CC_DLL TMXLayer : public Node
 {
 public:
     /** Creates a TMXLayer with an tileset info, a layer info and a map info.
      *
-     * @param tilesetInfo An tileset info.
      * @param layerInfo A layer info.
-     * @param mapInfo A map info.
+     * @param tileMap.
      * @return An autorelease object.
      */
-    static TMXLayer * create(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo);
+    static TMXLayer * create(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap);
     /**
      * @js ctor
      */
@@ -64,10 +77,10 @@ public:
     /** Initializes a TMXLayer with a tileset info, a layer info and a map info.
      *
      * @param layerInfo A layer info.
-     * @param mapInfo A map info.
+     * @param tileMap.
      * @return If initializes successfully, it will return true.
      */
-    bool initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXMapInfo *mapInfo);
+    bool initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap);
 
     /** Returns the tile (Sprite) at a given a tile coordinate.
      * The returned Sprite will be already added to the TMXLayer. Don't add it again.
@@ -202,18 +215,6 @@ public:
         _properties = properties;
     }
     
-    /** Tilesets.
-     *
-     * @return Tilesets.
-     */
-    const Vector<TMXTilesetInfo*>& getTilesets() const { return _tilesets; }
-    
-    /** Tilesets.
-     *
-     * @return Tilesets.
-     */
-    TMXTilesetInfo *getTilesetByGID(uint32_t gid) const;
-    
     /** get Tile's localZorder. */
     int getLocalZForPos(const Vec2& pos) const;
 
@@ -229,7 +230,11 @@ protected:
     void setupTiles();
     intptr_t getZForPos(const Vec2& pos) const;
     Sprite *createTileSprite(intptr_t z, uint32_t gid);
+    void setTileTexture(Sprite* sprite, uint32_t gid);
     void setupTileSprite(Sprite* sprite, const Vec2& pos, uint32_t gid);
+    void setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid);
+    // play tile's animation
+    void tilesUpdate(float dt);
 
     //! name of the layer
     std::string _layerName;
@@ -247,8 +252,8 @@ protected:
     uint32_t* _tiles;
     /** all tiles's sprite */
     std::map<intptr_t, Sprite *> _tileSprites;
-    /** tilesets info */
-    Vector<TMXTilesetInfo*> _tilesets;
+    /** tiles's doing animation */
+    std::map<intptr_t, TileAnimationData *> _tilesAniData;
     /** Layer orientation, which is the same as the map orientation */
     int _layerOrientation;
     /** Stagger Axis */
@@ -259,6 +264,8 @@ protected:
     int _hexSideLength;
     /** properties from the layer. They can be added using Tiled */
     ValueMap _properties;
+    // weak ref to parent node
+    TMXTiledMap *_tileMap;
 };
 
 // end of tilemap_parallax_nodes group

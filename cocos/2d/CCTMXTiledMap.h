@@ -177,70 +177,38 @@ public:
      */
     Value getPropertiesForGID(int GID) const;
 
-    /** The map's size property measured in tiles. 
-     *
-     * @return The map's size property measured in tiles.
-     */
+    /** The map's size property measured in tiles. */
     const Size& getMapSize() const { return _mapSize; }
-    
-    /** Set the map's size property measured in tiles. 
-     *
-     * @param mapSize The map's size property measured in tiles.
-     */
     void setMapSize(const Size& mapSize) { _mapSize = mapSize; }
 
-    /** The tiles's size property measured in pixels. 
-     *
-     * @return The tiles's size property measured in pixels.
-     */
+    /** The tiles's size property measured in pixels. */
     const Size& getTileSize() const { return _tileSize; }
-    
-    /** Set the tiles's size property measured in pixels. 
-     *
-     * @param tileSize The tiles's size property measured in pixels.
-     */
     void setTileSize(const Size& tileSize) { _tileSize = tileSize; }
 
-    /** Map orientation. 
-     *
-     * @return Map orientation.
-     */
+    /** Map orientation */
     int getMapOrientation() const { return _mapOrientation; }
-    
-    /** Set map orientation. 
-     *
-     * @param mapOrientation The map orientation.
-     */
     void setMapOrientation(int mapOrientation) { _mapOrientation = mapOrientation; }
+    /** Map staggerAxis */
+    int getStaggerAxis() const { return _staggerAxis; }
+    void setStaggerAxis(int staggerAxis) { _staggerAxis = staggerAxis; }
+    /** Map staggerIndex */
+    int getStaggerIndex() const { return _staggerIndex; }
+    void setStaggerIndex(int staggerIndex) { _staggerIndex = staggerIndex; }
+    /** Map hexSideLength */
+    int getHexSideLength() const { return _hexSideLength; }
+    void setHexSideLength(int hexSideLength) { _hexSideLength = hexSideLength; }
 
-    /** Get the Object groups. 
-     *
-     * @return The object groups.
-     */
-    const Vector<TMXObjectGroup*>& getObjectGroups() const { return _objectGroups; }
+    /** Get the Object groups */
     Vector<TMXObjectGroup*>& getObjectGroups() { return _objectGroups; }
+    void setObjectGroups(const Vector<TMXObjectGroup*>& groups) { _objectGroups = groups; }
     
-    /** Set the object groups. 
-     *
-     * @param groups The object groups.
-     */
-    void setObjectGroups(const Vector<TMXObjectGroup*>& groups) {
-        _objectGroups = groups;
-    }
-    
-    /** Properties. 
-     *
-     * @return Properties.
-     */
+    /** Properties */
     ValueMap& getProperties() { return _properties; }
+    void setProperties(const ValueMap& properties) { _properties = properties; }
     
-    /** Set the properties.
-     *
-     * @param properties A  Type of ValueMap to set the properties.
-     */
-    void setProperties(const ValueMap& properties) {
-        _properties = properties;
-    }
+    /** Tilesets */
+    const Vector<TMXTilesetInfo*>& getTilesets() const { return _tilesets; }
+    TMXTilesetInfo *getTilesetByGID(uint32_t gid) const;
     
     /** Get the description.
      * @js NA
@@ -276,12 +244,20 @@ protected:
     Size _tileSize;
     /** map orientation */
     int _mapOrientation;
+    /** Stagger Axis */
+    int _staggerAxis;
+    /** Stagger Index */
+    int _staggerIndex;
+    /** Hex side length*/
+    int _hexSideLength;
     /** object groups */
     Vector<TMXObjectGroup*> _objectGroups;
     /** properties */
     ValueMap _properties;
     
-    //! tile properties
+    /** tilesets info */
+    Vector<TMXTilesetInfo*> _tilesets;
+    /** tile properties */
     ValueMapIntKey _tileProperties;
 
     std::string _tmxFile;

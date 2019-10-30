@@ -226,21 +226,18 @@ public:
     void setTileSize(const Size& tileSize) { _tileSize = tileSize; }
     
     /// Layers
-    const Vector<TMXLayerInfo*>& getLayers() const { return _layers; }
     Vector<TMXLayerInfo*>& getLayers() { return _layers; }
     void setLayers(const Vector<TMXLayerInfo*>& layers) {
         _layers = layers;
     }
 
     /// tilesets
-    const Vector<TMXTilesetInfo*>& getTilesets() const { return _tilesets; }
     Vector<TMXTilesetInfo*>& getTilesets() { return _tilesets; }
     void setTilesets(const Vector<TMXTilesetInfo*>& tilesets) {
         _tilesets = tilesets;
     }
 
     /// ObjectGroups
-    const Vector<TMXObjectGroup*>& getObjectGroups() const { return _objectGroups; }
     Vector<TMXObjectGroup*>& getObjectGroups() { return _objectGroups; }
     void setObjectGroups(const Vector<TMXObjectGroup*>& groups) {
         _objectGroups = groups;
@@ -263,7 +260,6 @@ public:
     void setStoringCharacters(bool storingCharacters) { _storingCharacters = storingCharacters; }
 
     /// properties
-    const ValueMap& getProperties() const { return _properties; }
     ValueMap& getProperties() { return _properties; }
     void setProperties(const ValueMap& properties) {
         _properties = properties;

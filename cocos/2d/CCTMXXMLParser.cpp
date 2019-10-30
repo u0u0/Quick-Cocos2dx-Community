@@ -558,6 +558,24 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             dict[propertyName] = attributeDict["value"];
         }
     }
+    else if (elementName == "animation")
+    {
+        if (tmxMapInfo->getParentElement() == TMXPropertyTile) {
+            ValueMap& dict = tmxMapInfo->getTileProperties().at(tmxMapInfo->getParentGID()).asValueMap();
+            dict["animation"] = Value(ValueVector());
+        }
+    }
+    else if (elementName == "frame")
+    {
+        // parse tile animation belog to tile properties, auto add key "animation"
+        if (tmxMapInfo->getParentElement() == TMXPropertyTile) {
+            ValueMap& dict = tmxMapInfo->getTileProperties().at(tmxMapInfo->getParentGID()).asValueMap();
+            // one frame data hava two properites, make a pairs.
+            ValueVector& vector = dict["animation"].asValueVector();
+            vector.push_back(Value(attributeDict["tileid"].asUnsignedInt() + 1));// gid++
+            vector.push_back(attributeDict["duration"]);
+        }
+    }
     else if (elementName == "polygon") 
     {
         // find parent object's dict and add polygon-points to it

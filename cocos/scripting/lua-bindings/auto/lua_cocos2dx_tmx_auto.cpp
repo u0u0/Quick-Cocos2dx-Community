@@ -11,7 +11,6 @@ int lua_cocos2dx_TMXObjectGroup_setPositionOffset(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -61,7 +60,6 @@ int lua_cocos2dx_TMXObjectGroup_getProperty(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -108,12 +106,10 @@ int lua_cocos2dx_TMXObjectGroup_getPositionOffset(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXObjectGroup* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
@@ -132,11 +128,6 @@ int lua_cocos2dx_TMXObjectGroup_getPositionOffset(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXObjectGroup_getPositionOffset'", nullptr);
-            return 0;
-        }
         const cocos2d::Vec2& ret = cobj->getPositionOffset();
         vec2_to_luaval(tolua_S, ret);
         return 1;
@@ -160,7 +151,6 @@ int lua_cocos2dx_TMXObjectGroup_getObject(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
@@ -205,7 +195,7 @@ int lua_cocos2dx_TMXObjectGroup_getObjects(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXObjectGroup* cobj = nullptr;
-    bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -222,22 +212,11 @@ int lua_cocos2dx_TMXObjectGroup_getObjects(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::ValueVector& ret = cobj->getObjects();
-            ccvaluevector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::ValueVector& ret = cobj->getObjects();
-            ccvaluevector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        const cocos2d::ValueVector& ret = cobj->getObjects();
+        ccvaluevector_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXObjectGroup:getObjects",argc, 0);
     return 0;
     
@@ -257,7 +236,6 @@ int lua_cocos2dx_TMXObjectGroup_setGroupName(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
@@ -302,7 +280,7 @@ int lua_cocos2dx_TMXObjectGroup_getProperties(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXObjectGroup* cobj = nullptr;
-    bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -319,22 +297,11 @@ int lua_cocos2dx_TMXObjectGroup_getProperties(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::ValueMap& ret = cobj->getProperties();
-            ccvaluemap_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::ValueMap& ret = cobj->getProperties();
-            ccvaluemap_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        cocos2d::ValueMap& ret = cobj->getProperties();
+        ccvaluemap_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXObjectGroup:getProperties",argc, 0);
     return 0;
     
@@ -349,12 +316,10 @@ int lua_cocos2dx_TMXObjectGroup_getGroupName(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXObjectGroup* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
@@ -373,11 +338,6 @@ int lua_cocos2dx_TMXObjectGroup_getGroupName(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXObjectGroup_getGroupName'", nullptr);
-            return 0;
-        }
         const std::string& ret = cobj->getGroupName();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
@@ -401,7 +361,6 @@ int lua_cocos2dx_TMXObjectGroup_setProperties(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
@@ -452,7 +411,6 @@ int lua_cocos2dx_TMXObjectGroup_setObjects(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXObjectGroup",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -496,22 +454,14 @@ int lua_cocos2dx_TMXObjectGroup_constructor(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXObjectGroup* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
     
-    
-    
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXObjectGroup_constructor'", nullptr);
-            return 0;
-        }
         cobj = new cocos2d::TMXObjectGroup();
         cobj->autorelease();
         int ID =  (int)cobj->_ID ;
@@ -563,7 +513,6 @@ int lua_cocos2dx_TMXLayerInfo_setProperties(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayerInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -607,12 +556,10 @@ int lua_cocos2dx_TMXLayerInfo_getProperties(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXLayerInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayerInfo",0,&tolua_err)) goto tolua_lerror;
@@ -631,11 +578,6 @@ int lua_cocos2dx_TMXLayerInfo_getProperties(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayerInfo_getProperties'", nullptr);
-            return 0;
-        }
         cocos2d::ValueMap& ret = cobj->getProperties();
         ccvaluemap_to_luaval(tolua_S, ret);
         return 1;
@@ -654,22 +596,14 @@ int lua_cocos2dx_TMXLayerInfo_constructor(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXLayerInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
     
-    
-    
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayerInfo_constructor'", nullptr);
-            return 0;
-        }
         cobj = new cocos2d::TMXLayerInfo();
         cobj->autorelease();
         int ID =  (int)cobj->_ID ;
@@ -712,7 +646,6 @@ int lua_cocos2dx_TMXTilesetInfo_getRectForGID(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTilesetInfo",0,&tolua_err)) goto tolua_lerror;
@@ -811,22 +744,14 @@ int lua_cocos2dx_TMXTilesetInfo_constructor(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTilesetInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
     
-    
-    
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTilesetInfo_constructor'", nullptr);
-            return 0;
-        }
         cobj = new cocos2d::TMXTilesetInfo();
         cobj->autorelease();
         int ID =  (int)cobj->_ID ;
@@ -869,7 +794,6 @@ int lua_cocos2dx_TMXMapInfo_setCurrentString(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -914,12 +838,10 @@ int lua_cocos2dx_TMXMapInfo_getHexSideLength(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -938,11 +860,6 @@ int lua_cocos2dx_TMXMapInfo_getHexSideLength(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getHexSideLength'", nullptr);
-            return 0;
-        }
         int ret = cobj->getHexSideLength();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -966,7 +883,6 @@ int lua_cocos2dx_TMXMapInfo_setTileSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1012,12 +928,10 @@ int lua_cocos2dx_TMXMapInfo_getOrientation(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1036,11 +950,6 @@ int lua_cocos2dx_TMXMapInfo_getOrientation(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getOrientation'", nullptr);
-            return 0;
-        }
         int ret = cobj->getOrientation();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -1064,7 +973,6 @@ int lua_cocos2dx_TMXMapInfo_setObjectGroups(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1115,7 +1023,6 @@ int lua_cocos2dx_TMXMapInfo_setLayers(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -1165,7 +1072,6 @@ int lua_cocos2dx_TMXMapInfo_parseXMLFile(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -1209,12 +1115,10 @@ int lua_cocos2dx_TMXMapInfo_getParentElement(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1233,11 +1137,6 @@ int lua_cocos2dx_TMXMapInfo_getParentElement(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getParentElement'", nullptr);
-            return 0;
-        }
         int ret = cobj->getParentElement();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -1312,7 +1211,6 @@ int lua_cocos2dx_TMXMapInfo_parseXMLString(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -1356,7 +1254,7 @@ int lua_cocos2dx_TMXMapInfo_getLayers(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -1373,22 +1271,11 @@ int lua_cocos2dx_TMXMapInfo_getLayers(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::Vector<cocos2d::TMXLayerInfo *>& ret = cobj->getLayers();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::Vector<cocos2d::TMXLayerInfo *>& ret = cobj->getLayers();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        cocos2d::Vector<cocos2d::TMXLayerInfo *>& ret = cobj->getLayers();
+        ccvector_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXMapInfo:getLayers",argc, 0);
     return 0;
     
@@ -1408,7 +1295,6 @@ int lua_cocos2dx_TMXMapInfo_getStaggerAxis(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1456,7 +1342,6 @@ int lua_cocos2dx_TMXMapInfo_setHexSideLength(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -1500,7 +1385,6 @@ int lua_cocos2dx_TMXMapInfo_getTilesets(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -1517,22 +1401,11 @@ int lua_cocos2dx_TMXMapInfo_getTilesets(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::Vector<cocos2d::TMXTilesetInfo *>& ret = cobj->getTilesets();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::Vector<cocos2d::TMXTilesetInfo *>& ret = cobj->getTilesets();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        cocos2d::Vector<cocos2d::TMXTilesetInfo *>& ret = cobj->getTilesets();
+        ccvector_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXMapInfo:getTilesets",argc, 0);
     return 0;
     
@@ -1547,12 +1420,10 @@ int lua_cocos2dx_TMXMapInfo_getParentGID(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1571,11 +1442,6 @@ int lua_cocos2dx_TMXMapInfo_getParentGID(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getParentGID'", nullptr);
-            return 0;
-        }
         int ret = cobj->getParentGID();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -1599,7 +1465,6 @@ int lua_cocos2dx_TMXMapInfo_setParentElement(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1650,7 +1515,6 @@ int lua_cocos2dx_TMXMapInfo_setParentGID(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -1694,12 +1558,10 @@ int lua_cocos2dx_TMXMapInfo_getLayerAttribs(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1718,11 +1580,6 @@ int lua_cocos2dx_TMXMapInfo_getLayerAttribs(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getLayerAttribs'", nullptr);
-            return 0;
-        }
         int ret = cobj->getLayerAttribs();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -1741,12 +1598,10 @@ int lua_cocos2dx_TMXMapInfo_getTileSize(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1765,11 +1620,6 @@ int lua_cocos2dx_TMXMapInfo_getTileSize(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getTileSize'", nullptr);
-            return 0;
-        }
         const cocos2d::Size& ret = cobj->getTileSize();
         size_to_luaval(tolua_S, ret);
         return 1;
@@ -1788,12 +1638,10 @@ int lua_cocos2dx_TMXMapInfo_getTileProperties(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1812,11 +1660,6 @@ int lua_cocos2dx_TMXMapInfo_getTileProperties(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getTileProperties'", nullptr);
-            return 0;
-        }
         cocos2d::ValueMapIntKey& ret = cobj->getTileProperties();
         ccvaluemapintkey_to_luaval(tolua_S, ret);
         return 1;
@@ -1835,12 +1678,10 @@ int lua_cocos2dx_TMXMapInfo_isStoringCharacters(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1859,11 +1700,6 @@ int lua_cocos2dx_TMXMapInfo_isStoringCharacters(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_isStoringCharacters'", nullptr);
-            return 0;
-        }
         bool ret = cobj->isStoringCharacters();
         tolua_pushboolean(tolua_S,(bool)ret);
         return 1;
@@ -1882,7 +1718,6 @@ int lua_cocos2dx_TMXMapInfo_getObjectGroups(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -1899,22 +1734,11 @@ int lua_cocos2dx_TMXMapInfo_getObjectGroups(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::Vector<cocos2d::TMXObjectGroup *>& ret = cobj->getObjectGroups();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::Vector<cocos2d::TMXObjectGroup *>& ret = cobj->getObjectGroups();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        cocos2d::Vector<cocos2d::TMXObjectGroup *>& ret = cobj->getObjectGroups();
+        ccvector_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXMapInfo:getObjectGroups",argc, 0);
     return 0;
     
@@ -1929,12 +1753,10 @@ int lua_cocos2dx_TMXMapInfo_getTMXFileName(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -1953,11 +1775,6 @@ int lua_cocos2dx_TMXMapInfo_getTMXFileName(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getTMXFileName'", nullptr);
-            return 0;
-        }
         const std::string& ret = cobj->getTMXFileName();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
@@ -1981,7 +1798,6 @@ int lua_cocos2dx_TMXMapInfo_setStaggerIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2032,7 +1848,6 @@ int lua_cocos2dx_TMXMapInfo_setProperties(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -2082,7 +1897,6 @@ int lua_cocos2dx_TMXMapInfo_setOrientation(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -2131,7 +1945,6 @@ int lua_cocos2dx_TMXMapInfo_setTileProperties(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2226,12 +2039,10 @@ int lua_cocos2dx_TMXMapInfo_getCurrentString(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2250,11 +2061,6 @@ int lua_cocos2dx_TMXMapInfo_getCurrentString(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getCurrentString'", nullptr);
-            return 0;
-        }
         const std::string& ret = cobj->getCurrentString();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
@@ -2278,7 +2084,6 @@ int lua_cocos2dx_TMXMapInfo_setStoringCharacters(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2329,7 +2134,6 @@ int lua_cocos2dx_TMXMapInfo_setStaggerAxis(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -2373,12 +2177,10 @@ int lua_cocos2dx_TMXMapInfo_getMapSize(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2397,11 +2199,6 @@ int lua_cocos2dx_TMXMapInfo_getMapSize(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getMapSize'", nullptr);
-            return 0;
-        }
         const cocos2d::Size& ret = cobj->getMapSize();
         size_to_luaval(tolua_S, ret);
         return 1;
@@ -2425,7 +2222,6 @@ int lua_cocos2dx_TMXMapInfo_setTilesets(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2470,7 +2266,7 @@ int lua_cocos2dx_TMXMapInfo_getProperties(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -2487,22 +2283,11 @@ int lua_cocos2dx_TMXMapInfo_getProperties(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::ValueMap& ret = cobj->getProperties();
-            ccvaluemap_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::ValueMap& ret = cobj->getProperties();
-            ccvaluemap_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        cocos2d::ValueMap& ret = cobj->getProperties();
+        ccvaluemap_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXMapInfo:getProperties",argc, 0);
     return 0;
     
@@ -2517,12 +2302,10 @@ int lua_cocos2dx_TMXMapInfo_getStaggerIndex(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXMapInfo* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2541,11 +2324,6 @@ int lua_cocos2dx_TMXMapInfo_getStaggerIndex(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXMapInfo_getStaggerIndex'", nullptr);
-            return 0;
-        }
         int ret = cobj->getStaggerIndex();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -2569,7 +2347,6 @@ int lua_cocos2dx_TMXMapInfo_setLayerAttribs(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXMapInfo",0,&tolua_err)) goto tolua_lerror;
@@ -2796,7 +2573,6 @@ int lua_cocos2dx_TMXLayer_setLayerOrientation(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -2840,12 +2616,10 @@ int lua_cocos2dx_TMXLayer_getLayerSize(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXLayer* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -2864,11 +2638,6 @@ int lua_cocos2dx_TMXLayer_getLayerSize(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayer_getLayerSize'", nullptr);
-            return 0;
-        }
         const cocos2d::Size& ret = cobj->getLayerSize();
         size_to_luaval(tolua_S, ret);
         return 1;
@@ -2892,7 +2661,6 @@ int lua_cocos2dx_TMXLayer_setMapTileSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -2937,12 +2705,10 @@ int lua_cocos2dx_TMXLayer_getLayerOrientation(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXLayer* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -2961,11 +2727,6 @@ int lua_cocos2dx_TMXLayer_getLayerOrientation(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayer_getLayerOrientation'", nullptr);
-            return 0;
-        }
         int ret = cobj->getLayerOrientation();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -2989,7 +2750,6 @@ int lua_cocos2dx_TMXLayer_setProperties(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -3040,7 +2800,6 @@ int lua_cocos2dx_TMXLayer_setLayerName(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -3089,7 +2848,6 @@ int lua_cocos2dx_TMXLayer_removeTileAt(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -3151,43 +2909,26 @@ int lua_cocos2dx_TMXLayer_setTileGID(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 3) {
-            unsigned int arg0;
-            ok &= luaval_to_uint32(tolua_S, 2,&arg0, "cc.TMXLayer:setTileGID");
-            
-            if (!ok) { break; }
-            cocos2d::Vec2 arg1;
-            ok &= luaval_to_vec2(tolua_S, 3, &arg1, "cc.TMXLayer:setTileGID");
-            
-            if (!ok) { break; }
-            cocos2d::TMXTileFlags_ arg2;
+    if (argc > 1) {
+        unsigned int arg0;
+        cocos2d::Vec2 arg1;
+        cocos2d::TMXTileFlags arg2 = (cocos2d::TMXTileFlags)0;
+        ok &= luaval_to_uint32(tolua_S, 2,&arg0, "cc.TMXLayer:setTileGID");
+        ok &= luaval_to_vec2(tolua_S, 3, &arg1, "cc.TMXLayer:setTileGID");
+        if (argc > 2) {
             ok &= luaval_to_int32(tolua_S, 4,(int *)&arg2, "cc.TMXLayer:setTileGID");
-            
-            if (!ok) { break; }
-            cobj->setTileGID(arg0, arg1, arg2);
-            lua_settop(tolua_S, 1);
-            return 1;
         }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            unsigned int arg0;
-            ok &= luaval_to_uint32(tolua_S, 2,&arg0, "cc.TMXLayer:setTileGID");
-            
-            if (!ok) { break; }
-            cocos2d::Vec2 arg1;
-            ok &= luaval_to_vec2(tolua_S, 3, &arg1, "cc.TMXLayer:setTileGID");
-            
-            if (!ok) { break; }
-            cobj->setTileGID(arg0, arg1);
-            lua_settop(tolua_S, 1);
-            return 1;
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayer_setTileGID'", nullptr);
+            return 0;
         }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXLayer:setTileGID",argc, 2);
+
+        cobj->setTileGID(arg0, arg1, arg2);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting 2~3 \n",  "cc.TMXLayer:setTileGID",argc);
     return 0;
     
 #if COCOS2D_DEBUG >= 1
@@ -3201,12 +2942,10 @@ int lua_cocos2dx_TMXLayer_getMapTileSize(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXLayer* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -3225,11 +2964,6 @@ int lua_cocos2dx_TMXLayer_getMapTileSize(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayer_getMapTileSize'", nullptr);
-            return 0;
-        }
         const cocos2d::Size& ret = cobj->getMapTileSize();
         size_to_luaval(tolua_S, ret);
         return 1;
@@ -3253,7 +2987,6 @@ int lua_cocos2dx_TMXLayer_getProperty(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -3307,7 +3040,6 @@ int lua_cocos2dx_TMXLayer_setLayerSize(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -3355,7 +3087,6 @@ int lua_cocos2dx_TMXLayer_getLayerName(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
@@ -3477,7 +3208,6 @@ int lua_cocos2dx_TMXLayer_getTileAt(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -3535,9 +3265,9 @@ int lua_cocos2dx_TMXLayer_create(lua_State* tolua_S)
     if (argc == 2)
     {
         cocos2d::TMXLayerInfo* arg0;
-        cocos2d::TMXMapInfo* arg1;
+        cocos2d::TMXTiledMap* arg1;
         ok &= luaval_to_object<cocos2d::TMXLayerInfo>(tolua_S, 2, "cc.TMXLayerInfo",&arg0, "cc.TMXLayer:create");
-        ok &= luaval_to_object<cocos2d::TMXMapInfo>(tolua_S, 3, "cc.TMXMapInfo",&arg1, "cc.TMXLayer:create");
+        ok &= luaval_to_object<cocos2d::TMXTiledMap>(tolua_S, 3, "cc.TMXTiledMap",&arg1, "cc.TMXLayer:create");
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayer_create'", nullptr);
@@ -3596,7 +3326,6 @@ int lua_cocos2dx_TMXTiledMap_setObjectGroups(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -3647,7 +3376,6 @@ int lua_cocos2dx_TMXTiledMap_getProperty(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -3692,12 +3420,10 @@ int lua_cocos2dx_TMXTiledMap_getLayerNum(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -3716,11 +3442,6 @@ int lua_cocos2dx_TMXTiledMap_getLayerNum(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_getLayerNum'", nullptr);
-            return 0;
-        }
         int ret = cobj->getLayerNum();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -3745,7 +3466,6 @@ int lua_cocos2dx_TMXTiledMap_setMapSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -3842,7 +3562,7 @@ int lua_cocos2dx_TMXTiledMap_getObjectGroups(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
@@ -3859,22 +3579,11 @@ int lua_cocos2dx_TMXTiledMap_getObjectGroups(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 0) {
-            cocos2d::Vector<cocos2d::TMXObjectGroup *>& ret = cobj->getObjectGroups();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 0) {
-            const cocos2d::Vector<cocos2d::TMXObjectGroup *>& ret = cobj->getObjectGroups();
-            ccvector_to_luaval(tolua_S, ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+    if (argc == 0) {
+        cocos2d::Vector<cocos2d::TMXObjectGroup *>& ret = cobj->getObjectGroups();
+        ccvector_to_luaval(tolua_S, ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.TMXTiledMap:getObjectGroups",argc, 0);
     return 0;
     
@@ -3890,12 +3599,10 @@ int lua_cocos2dx_TMXTiledMap_getResourceFile(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -3914,11 +3621,6 @@ int lua_cocos2dx_TMXTiledMap_getResourceFile(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_getResourceFile'", nullptr);
-            return 0;
-        }
         const std::string& ret = cobj->getResourceFile();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
@@ -3938,12 +3640,10 @@ int lua_cocos2dx_TMXTiledMap_getTileSize(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -3962,11 +3662,6 @@ int lua_cocos2dx_TMXTiledMap_getTileSize(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_getTileSize'", nullptr);
-            return 0;
-        }
         const cocos2d::Size& ret = cobj->getTileSize();
         size_to_luaval(tolua_S, ret);
         return 1;
@@ -3986,7 +3681,6 @@ int lua_cocos2dx_TMXTiledMap_getMapSize(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -4010,11 +3704,6 @@ int lua_cocos2dx_TMXTiledMap_getMapSize(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_getMapSize'", nullptr);
-            return 0;
-        }
         const cocos2d::Size& ret = cobj->getMapSize();
         size_to_luaval(tolua_S, ret);
         return 1;
@@ -4034,12 +3723,10 @@ int lua_cocos2dx_TMXTiledMap_getProperties(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -4058,11 +3745,6 @@ int lua_cocos2dx_TMXTiledMap_getProperties(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_getProperties'", nullptr);
-            return 0;
-        }
         cocos2d::ValueMap& ret = cobj->getProperties();
         ccvaluemap_to_luaval(tolua_S, ret);
         return 1;
@@ -4087,7 +3769,6 @@ int lua_cocos2dx_TMXTiledMap_setTileSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -4139,7 +3820,6 @@ int lua_cocos2dx_TMXTiledMap_setProperties(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -4190,7 +3870,6 @@ int lua_cocos2dx_TMXTiledMap_getLayer(lua_State* tolua_S)
     tolua_Error tolua_err;
 #endif
     
-    
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
 #endif
@@ -4235,12 +3914,10 @@ int lua_cocos2dx_TMXTiledMap_getMapOrientation(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::TMXTiledMap* cobj = nullptr;
-    bool ok  = true;
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;
@@ -4259,11 +3936,6 @@ int lua_cocos2dx_TMXTiledMap_getMapOrientation(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0)
     {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_getMapOrientation'", nullptr);
-            return 0;
-        }
         int ret = cobj->getMapOrientation();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
@@ -4288,7 +3960,6 @@ int lua_cocos2dx_TMXTiledMap_setMapOrientation(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-    
     
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"cc.TMXTiledMap",0,&tolua_err)) goto tolua_lerror;

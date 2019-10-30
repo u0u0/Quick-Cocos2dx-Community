@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "2d/CCTMXLayer.h"
 #include "2d/CCSprite.h"
 #include "base/ccUTF8.h" // For StringUtils::format
+#include "base/CCDirector.h"
+#include "renderer/CCTextureCache.h"
 
 NS_CC_BEGIN
 
@@ -109,16 +111,33 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
     _mapSize = mapInfo->getMapSize();
     _tileSize = mapInfo->getTileSize();
     _mapOrientation = mapInfo->getOrientation();
+    _staggerAxis = mapInfo->getStaggerAxis();
+    _staggerIndex = mapInfo->getStaggerIndex();
+    _hexSideLength = mapInfo->getHexSideLength();
     _objectGroups = mapInfo->getObjectGroups();
     _properties = mapInfo->getProperties();
     _tileProperties = mapInfo->getTileProperties();
+    _tilesets = mapInfo->getTilesets();
+    
+    // preload textures
+    TextureCache *textureCache = Director::getInstance()->getTextureCache();
+    for (auto iter = _tilesets.crbegin(), iterCrend = _tilesets.crend(); iter != iterCrend; ++iter) {
+        TMXTilesetInfo* tilesetInfo = *iter;
+        if (tilesetInfo) {
+            Texture2D *texture = textureCache->addImage(tilesetInfo->_sourceImage);
+            CC_ASSERT(texture != nullptr);
+            // By default all the tiles are aliased, avoid black line.
+            texture->setAliasTexParameters();
+            tilesetInfo->_imageSize = texture->getContentSizeInPixels();
+        }
+    }
     
     // load layer
     int idx = 0;
     auto& layers = mapInfo->getLayers();
     for (const auto &layerInfo : layers) {
         if (layerInfo->_visible) {
-            TMXLayer *child = TMXLayer::create(layerInfo, mapInfo);
+            TMXLayer *child = TMXLayer::create(layerInfo, this);
             if (child == nullptr) {
                 idx++;
                 continue;
@@ -182,6 +201,17 @@ Value TMXTiledMap::getPropertiesForGID(int GID) const
         return _tileProperties.at(GID);
     
     return Value();
+}
+
+TMXTilesetInfo *TMXTiledMap::getTilesetByGID(uint32_t gid) const
+{
+    for (auto iter = _tilesets.crbegin(), end = _tilesets.crend(); iter != end; ++iter) {
+        TMXTilesetInfo *tileset = *iter;
+        if (tileset->_firstGid < 0 || (gid & kTMXFlippedMask) >= static_cast<uint32_t>(tileset->_firstGid)) {
+            return tileset;
+        }
+    }
+    return nullptr;
 }
 
 std::string TMXTiledMap::getDescription() const
