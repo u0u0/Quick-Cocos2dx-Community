@@ -126,9 +126,10 @@ public:
      *                      You can use a Texture2D object for many sprites.
      * @param   rect        Only the contents inside the rect of this texture will be applied for this sprite.
      * @param   rotated     Whether or not the rect is rotated
+     * @param   fixArtifacts Whether or not fix artifacts by streching texel
      * @return  An autoreleased sprite object
      */
-    static Sprite* createWithTexture(Texture2D *texture, const Rect& rect, bool rotated=false);
+    static Sprite* createWithTexture(Texture2D *texture, const Rect& rect, bool rotated = false, bool fixArtifacts = false);
 
     /**
      * Creates a sprite with an sprite frame.
@@ -545,6 +546,7 @@ protected:
     bool _flippedY;                         /// Whether the sprite is flipped vertically or not
 
     bool _insideBounds;                     /// whether or not the sprite was inside bounds the previous frame
+    bool _fixArtifacts;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Sprite);
 };

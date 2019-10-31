@@ -153,7 +153,7 @@ Sprite *TMXLayer::createTileSprite(intptr_t z, uint32_t gid)
 	TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
 	Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
 	Rect rect = tileset->getRectForGID(gid);
-	Sprite *tile = Sprite::createWithTexture(texture, rect);
+	Sprite *tile = Sprite::createWithTexture(texture, rect, false, true);
     _tileSprites.insert(std::pair<intptr_t, Sprite *>(z, tile));
     addChild(tile);
 	return tile;
