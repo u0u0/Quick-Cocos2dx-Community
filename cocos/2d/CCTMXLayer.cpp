@@ -97,7 +97,6 @@ bool TMXLayer::initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap
 	}
 	setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
 
-    setupTiles();
 	return true;
 }
 

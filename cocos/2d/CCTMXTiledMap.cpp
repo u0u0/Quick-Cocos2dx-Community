@@ -35,11 +35,11 @@ NS_CC_BEGIN
 
 // implementation TMXTiledMap
 
-TMXTiledMap * TMXTiledMap::create(const std::string& tmxFile)
+TMXTiledMap * TMXTiledMap::create(const std::string& tmxFile, bool setupTiles)
 {
     TMXTiledMap *ret = new (std::nothrow) TMXTiledMap();
-    if (ret->initWithTMXFile(tmxFile))
-    {
+    ret->_setupTiles = setupTiles;
+    if (ret->initWithTMXFile(tmxFile)) {
         ret->autorelease();
         return ret;
     }
@@ -47,11 +47,11 @@ TMXTiledMap * TMXTiledMap::create(const std::string& tmxFile)
     return nullptr;
 }
 
-TMXTiledMap* TMXTiledMap::createWithXML(const std::string& tmxString, const std::string& resourcePath)
+TMXTiledMap* TMXTiledMap::createWithXML(const std::string& tmxString, const std::string& resourcePath, bool setupTiles)
 {
     TMXTiledMap *ret = new (std::nothrow) TMXTiledMap();
-    if (ret->initWithXML(tmxString, resourcePath))
-    {
+    ret->_setupTiles = setupTiles;
+    if (ret->initWithXML(tmxString, resourcePath)) {
         ret->autorelease();
         return ret;
     }
@@ -64,40 +64,35 @@ bool TMXTiledMap::initWithTMXFile(const std::string& tmxFile)
     CCASSERT(tmxFile.size()>0, "TMXTiledMap: tmx file should not be empty");
 
     _tmxFile = tmxFile;
-
     setContentSize(Size::ZERO);
-
     TMXMapInfo *mapInfo = TMXMapInfo::create(tmxFile);
-
-    if (! mapInfo)
-    {
+    if (! mapInfo) {
         return false;
     }
     CCASSERT( !mapInfo->getTilesets().empty(), "TMXTiledMap: Map not found. Please check the filename.");
     buildWithMapInfo(mapInfo);
-
     return true;
 }
 
 bool TMXTiledMap::initWithXML(const std::string& tmxString, const std::string& resourcePath)
 {
     _tmxFile = tmxString;
-
     setContentSize(Size::ZERO);
-
     TMXMapInfo *mapInfo = TMXMapInfo::createWithXML(tmxString, resourcePath);
-
+    if (! mapInfo) {
+        return false;
+    }
     CCASSERT( !mapInfo->getTilesets().empty(), "TMXTiledMap: Map not found. Please check the filename.");
     buildWithMapInfo(mapInfo);
-
     return true;
 }
 
 TMXTiledMap::TMXTiledMap()
-    :_mapSize(Size::ZERO)
-    ,_tileSize(Size::ZERO)        
-    ,_tmxFile("")
-    , _tmxLayerNum(0)
+:_mapSize(Size::ZERO)
+,_tileSize(Size::ZERO)
+,_tmxFile("")
+,_tmxLayerNum(0)
+,_setupTiles(true)
 {
 }
 
@@ -143,6 +138,7 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
                 continue;
             }
             addChild(child, idx, idx);
+            if (_setupTiles) child->setupTiles();
             // update content size with the max size
             const Size& childSize = child->getContentSize();
             Size currentSize = this->getContentSize();

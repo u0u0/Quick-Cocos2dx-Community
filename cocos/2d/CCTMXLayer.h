@@ -134,6 +134,9 @@ public:
      */
 	Value getProperty(const std::string& propertyName) const;
     
+    /** Creates the tiles. */
+    void setupTiles();
+    
     /** Get the layer name. 
      *
      * @return The layer name.
@@ -227,7 +230,6 @@ protected:
     Vec2 getPositionForStaggeredAt(const Vec2& pos);
     Vec2 calculateLayerOffset(const Vec2& offset);
 
-    void setupTiles();
     intptr_t getZForPos(const Vec2& pos) const;
     Sprite *createTileSprite(intptr_t z, uint32_t gid);
     void setTileTexture(Sprite* sprite, uint32_t gid);

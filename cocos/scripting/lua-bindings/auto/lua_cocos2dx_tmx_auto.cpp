@@ -3247,6 +3247,45 @@ tolua_lerror:
     
     return 0;
 }
+int lua_cocos2dx_TMXLayer_setupTiles(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::TMXLayer* cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"cc.TMXLayer",0,&tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (cocos2d::TMXLayer*)tolua_tousertype(tolua_S,1,0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_TMXLayer_setupTiles'", nullptr);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) {
+        cobj->setupTiles();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.TMXLayer:setupTiles",argc, 0);
+    return 0;
+    
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_TMXLayer_setupTiles'.",&tolua_err);
+#endif
+    
+    return 0;
+}
 int lua_cocos2dx_TMXLayer_create(lua_State* tolua_S)
 {
     int argc = 0;
@@ -3308,6 +3347,7 @@ int lua_register_cocos2dx_TMXLayer(lua_State* tolua_S)
     tolua_function(tolua_S,"getLocalZForPos",lua_cocos2dx_TMXLayer_getLocalZForPos);
     tolua_function(tolua_S,"getProperties",lua_cocos2dx_TMXLayer_getProperties);
     tolua_function(tolua_S,"getTileAt",lua_cocos2dx_TMXLayer_getTileAt);
+    tolua_function(tolua_S,"setupTiles",lua_cocos2dx_TMXLayer_setupTiles);
     tolua_function(tolua_S,"create", lua_cocos2dx_TMXLayer_create);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::TMXLayer).name();
@@ -4015,21 +4055,22 @@ int lua_cocos2dx_TMXTiledMap_create(lua_State* tolua_S)
 #endif
     
     argc = lua_gettop(tolua_S) - 1;
-    
-    if (argc == 1)
-    {
+    if (argc > 0) {
         std::string arg0;
+        bool arg1 = true;
         ok &= luaval_to_std_string(tolua_S, 2,&arg0, "cc.TMXTiledMap:create");
-        if(!ok)
-        {
+        if (argc > 1) { // option arg
+            ok &= luaval_to_boolean(tolua_S, 3,&arg1, "cc.TMXTiledMap:create");
+        }
+        if (!ok) {
             tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_create'", nullptr);
             return 0;
         }
-        cocos2d::TMXTiledMap* ret = cocos2d::TMXTiledMap::create(arg0);
+        cocos2d::TMXTiledMap* ret = cocos2d::TMXTiledMap::create(arg0, arg1);
         object_to_luaval<cocos2d::TMXTiledMap>(tolua_S, "cc.TMXTiledMap",(cocos2d::TMXTiledMap*)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "cc.TMXTiledMap:create",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting 1~2\n ", "cc.TMXTiledMap:create",argc);
     return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
@@ -4052,23 +4093,24 @@ int lua_cocos2dx_TMXTiledMap_createWithXML(lua_State* tolua_S)
 #endif
     
     argc = lua_gettop(tolua_S) - 1;
-    
-    if (argc == 2)
-    {
+    if (argc > 1) {
         std::string arg0;
         std::string arg1;
+        bool arg2 = true;
         ok &= luaval_to_std_string(tolua_S, 2,&arg0, "cc.TMXTiledMap:createWithXML");
         ok &= luaval_to_std_string(tolua_S, 3,&arg1, "cc.TMXTiledMap:createWithXML");
-        if(!ok)
-        {
+        if (argc > 2) { // option arg
+            ok &= luaval_to_boolean(tolua_S, 4,&arg2, "cc.TMXTiledMap:createWithXML");
+        }
+        if (!ok) {
             tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXTiledMap_createWithXML'", nullptr);
             return 0;
         }
-        cocos2d::TMXTiledMap* ret = cocos2d::TMXTiledMap::createWithXML(arg0, arg1);
+        cocos2d::TMXTiledMap* ret = cocos2d::TMXTiledMap::createWithXML(arg0, arg1, arg2);
         object_to_luaval<cocos2d::TMXTiledMap>(tolua_S, "cc.TMXTiledMap",(cocos2d::TMXTiledMap*)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "cc.TMXTiledMap:createWithXML",argc, 2);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting 2~3\n ", "cc.TMXTiledMap:createWithXML",argc);
     return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:

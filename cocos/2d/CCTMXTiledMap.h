@@ -138,7 +138,7 @@ public:
      * @param tmxFile A TMX file.
      * @return An autorelease object.
      */
-    static TMXTiledMap* create(const std::string& tmxFile);
+    static TMXTiledMap* create(const std::string& tmxFile, bool setupTiles = true);
 
     /** Initializes a TMX Tiled Map with a TMX formatted XML string and a path to TMX resources. 
      *
@@ -147,7 +147,7 @@ public:
      * @return An autorelease object.
      * @js NA
      */
-    static TMXTiledMap* createWithXML(const std::string& tmxString, const std::string& resourcePath);
+    static TMXTiledMap* createWithXML(const std::string& tmxString, const std::string& resourcePath, bool setupTiles = true);
 
     /** Return the TMXLayer for the specific layer. 
      *
@@ -262,12 +262,9 @@ protected:
 
     std::string _tmxFile;
     int _tmxLayerNum;
-
-    static const int TMXLayerTag = 32768;
-
+    bool _setupTiles;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(TMXTiledMap);
-
 };
 
 // end of tilemap_parallax_nodes group
