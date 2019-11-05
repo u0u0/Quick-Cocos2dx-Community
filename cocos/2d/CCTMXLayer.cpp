@@ -153,6 +153,7 @@ Sprite *TMXLayer::createTileSprite(intptr_t z, uint32_t gid)
 	Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
 	Rect rect = tileset->getRectForGID(gid);
 	Sprite *tile = Sprite::createWithTexture(texture, rect, false, true);
+    tile->setCameraMask(getCameraMask());
     _tileSprites.insert(std::pair<intptr_t, Sprite *>(z, tile));
     addChild(tile);
 	return tile;
@@ -280,11 +281,18 @@ Sprite * TMXLayer::getTileAt(const Vec2& pos)
 	CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 	CCASSERT(_tiles, "TMXLayer: the tiles map has been released");
 
-    auto it = _tileSprites.find(getZForPos(pos));
-    if (it != _tileSprites.end()) {
-        return it->second;
+    intptr_t z = getZForPos(pos);
+    auto it = _tileSprites.find(z);
+    if (it == _tileSprites.end()) {
+        Sprite *tile = nullptr;
+        int gid = _tiles[z];
+        if (gid != 0) { // try create it
+            tile = createTileSprite(z, gid);
+            setupTileAnimation(tile, pos, gid);
+        }
+        return tile;
     }
-    return nullptr;
+    return it->second;
 }
 
 uint32_t TMXLayer::getTileGIDAt(const Vec2& pos, TMXTileFlags* flags/* = nullptr*/)

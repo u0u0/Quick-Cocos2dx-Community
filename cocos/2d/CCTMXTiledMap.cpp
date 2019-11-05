@@ -98,6 +98,17 @@ TMXTiledMap::TMXTiledMap()
 
 TMXTiledMap::~TMXTiledMap()
 {
+    // unload texture
+    TextureCache *textureCache = Director::getInstance()->getTextureCache();
+    for (auto iter = _tilesets.crbegin(), iterCrend = _tilesets.crend(); iter != iterCrend; ++iter) {
+        TMXTilesetInfo* tilesetInfo = *iter;
+        if (tilesetInfo) {
+            Texture2D *texture = textureCache->addImage(tilesetInfo->_sourceImage);
+            if (texture) {
+                texture->release();
+            }
+        }
+    }
 }
 
 // private
@@ -124,6 +135,7 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
             // By default all the tiles are aliased, avoid black line.
             texture->setAliasTexParameters();
             tilesetInfo->_imageSize = texture->getContentSizeInPixels();
+            texture->retain();
         }
     }
     
