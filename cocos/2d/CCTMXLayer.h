@@ -118,7 +118,7 @@ public:
      *
      * @param tileCoordinate The tile coordinate.
      */
-    void removeTileAt(const Vec2& tileCoordinate);
+    void removeTileAt(const Vec2& tileCoordinate, bool cleanGID = true);
 
     /** Returns the position in points of a given tile coordinate.
      *

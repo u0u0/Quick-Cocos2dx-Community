@@ -2864,17 +2864,18 @@ int lua_cocos2dx_TMXLayer_removeTileAt(lua_State* tolua_S)
 #endif
     
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1)
-    {
+    if (argc > 0) {
         cocos2d::Vec2 arg0;
-        
+        bool arg1 = true;
         ok &= luaval_to_vec2(tolua_S, 2, &arg0, "cc.TMXLayer:removeTileAt");
-        if(!ok)
-        {
+        if (argc > 1) {
+            ok &= luaval_to_boolean(tolua_S, 3, &arg1, "cc.TMXLayer:removeTileAt");
+        }
+        if(!ok) {
             tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_TMXLayer_removeTileAt'", nullptr);
             return 0;
         }
-        cobj->removeTileAt(arg0);
+        cobj->removeTileAt(arg0, arg1);
         lua_settop(tolua_S, 1);
         return 1;
     }

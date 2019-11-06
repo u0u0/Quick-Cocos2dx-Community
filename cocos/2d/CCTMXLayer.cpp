@@ -367,7 +367,7 @@ void TMXLayer::setTileGID(uint32_t gid, const Vec2& pos, TMXTileFlags flags)
 	}
 }
 
-void TMXLayer::removeTileAt(const Vec2& pos)
+void TMXLayer::removeTileAt(const Vec2& pos, bool cleanGID)
 {
 	CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 	CCASSERT(_tiles, "TMXLayer: the tiles map has been released");
@@ -386,7 +386,9 @@ void TMXLayer::removeTileAt(const Vec2& pos)
             unschedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate));
         }
     }
-	_tiles[z] = 0;
+    if (cleanGID) {
+        _tiles[z] = 0;
+    }
 }
 
 //CCTMXLayer - obtaining positions, offset
