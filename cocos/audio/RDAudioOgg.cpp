@@ -102,6 +102,7 @@ int decodeOgg(unsigned char *oggData,
     }
     vorbis_info *vi = ov_info(&ov, -1);
     if (!vi) {
+        ov_clear(&ov);
         return -1;
     }
     
@@ -118,14 +119,16 @@ int decodeOgg(unsigned char *oggData,
         if (status > 0) {
             size += status;
         } else if (status < 0) {
+            ov_clear(&ov);
             return -1;
         } else {
             break;
         }
     }
     if (size == 0) {
+        ov_clear(&ov);
         return -1;
     }
-    
+    ov_clear(&ov);
     return 0;
 }
