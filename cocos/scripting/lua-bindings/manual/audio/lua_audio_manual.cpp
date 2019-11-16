@@ -160,6 +160,8 @@ static int lSourceStop(lua_State *L)
         return 0;
     }
     alSourceStop(sourceItem->id);
+    // deattach buffer from the source
+    alSourcei(sourceItem->id, AL_BUFFER, 0);
     return 0;
 }
 
