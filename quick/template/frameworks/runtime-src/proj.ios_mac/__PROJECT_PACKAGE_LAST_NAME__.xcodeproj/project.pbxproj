@@ -32,6 +32,7 @@
 		0AAAFD4C231FC1CA00C7A98F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AAAFD4B231FC1C900C7A98F /* WebKit.framework */; };
 		0AC1AE931DB8B629006D4001 /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1AE911DB8B629006D4001 /* pb.c */; };
 		0AC1AE941DB8B629006D4001 /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1AE911DB8B629006D4001 /* pb.c */; };
+		0AEE1085237FDAAE00DFD2A6 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1084237FDAAE00DFD2A6 /* CoreAudio.framework */; };
 		0AF3802C1FE66404002A4A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF3802B1FE66404002A4A3B /* LaunchScreen.storyboard */; };
 		15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4251834BDA200142BE0 /* libcocos2d iOS.a */; };
 		15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CD2198F220600DC375D /* libluacocos2d iOS.a */; };
@@ -42,7 +43,6 @@
 		5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023811717EBBCAC00990C9B /* RootViewController.mm */; };
 		5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
 		5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
-		5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		5023814117EBBCE400990C9B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
 		5023814417EBBCE400990C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		5023814517EBBCE400990C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
@@ -124,7 +124,6 @@
 		C07828F818B4D72E00BD2287 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07828F418B4D72E00BD2287 /* main.m */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
-		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
 		F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D415EB7BE500256477 /* AVFoundation.framework */; };
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
@@ -220,6 +219,7 @@
 		0AAAFD4B231FC1C900C7A98F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.4.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		0AC1AE911DB8B629006D4001 /* pb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pb.c; path = "quick/lib/quick-src/lua_extensions/protobuf/pb.c"; sourceTree = QUICK_V3_ROOT; };
 		0AC1AE921DB8B629006D4001 /* pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pb.h; path = "quick/lib/quick-src/lua_extensions/protobuf/pb.h"; sourceTree = QUICK_V3_ROOT; };
+		0AEE1084237FDAAE00DFD2A6 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0AF3802B1FE66404002A4A3B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		15427CE2198F237300DC375D /* lua_module_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_module_register.h; path = ../Classes/lua_module_register.h; sourceTree = "<group>"; };
 		15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = build/cocos2d_libs.xcodeproj; sourceTree = QUICK_V3_ROOT; };
@@ -332,7 +332,6 @@
 		F293B3C815EB7BE500256477 /* __PROJECT_COCOS_NAME__ iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "__PROJECT_COCOS_NAME__ iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F293B3CE15EB7BE500256477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		F293B3D015EB7BE500256477 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		F293B3D215EB7BE500256477 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F293B3D415EB7BE500256477 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F293B3D615EB7BE500256477 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -348,6 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEE1085237FDAAE00DFD2A6 /* CoreAudio.framework in Frameworks */,
 				9F91078919F5628A00AD5CAB /* SystemConfiguration.framework in Frameworks */,
 				15427CEE198F24AF00DC375D /* libcocos2d Mac.a in Frameworks */,
 				15427CEC198F24A600DC375D /* libluacocos2d Mac.a in Frameworks */,
@@ -355,7 +355,6 @@
 				50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */,
 				50D7C96C17EBBEDF005D0B91 /* OpenGL.framework in Frameworks */,
 				5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */,
-				5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */,
 				5023814117EBBCE400990C9B /* AudioToolbox.framework in Frameworks */,
 				5023814417EBBCE400990C9B /* Foundation.framework in Frameworks */,
 				5023814517EBBCE400990C9B /* CoreGraphics.framework in Frameworks */,
@@ -377,7 +376,6 @@
 				50805AAF17EBBEAA004CFAD3 /* UIKit.framework in Frameworks */,
 				5023817A17EBBE8300990C9B /* OpenGLES.framework in Frameworks */,
 				F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */,
-				F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */,
 				F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */,
 				F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */,
 				F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */,
@@ -765,6 +763,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AEE1084237FDAAE00DFD2A6 /* CoreAudio.framework */,
 				0A30C8EC234ECD6C0041C35A /* CoreMedia.framework */,
 				0A30C8EA234ECD3C0041C35A /* AVKit.framework */,
 				0AAAFD4B231FC1C900C7A98F /* WebKit.framework */,
@@ -783,7 +782,6 @@
 				15C1568D1683131500D239F2 /* libcurl.a */,
 				F293B3CC15EB7BE500256477 /* QuartzCore.framework */,
 				F293B3CE15EB7BE500256477 /* OpenGLES.framework */,
-				F293B3D015EB7BE500256477 /* OpenAL.framework */,
 				F293B3D215EB7BE500256477 /* AudioToolbox.framework */,
 				F293B3D415EB7BE500256477 /* AVFoundation.framework */,
 				F293B3D615EB7BE500256477 /* UIKit.framework */,
@@ -1134,7 +1132,7 @@
 					10000,
 				);
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\" \"$(QUICK_V3_ROOT)/external/curl/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/curl/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"";
 			};
 			name = Debug;
 		};
@@ -1162,7 +1160,7 @@
 					10000,
 				);
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\" \"$(QUICK_V3_ROOT)/external/curl/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos\" \"$(QUICK_V3_ROOT)/cocos/base\" \"$(QUICK_V3_ROOT)/cocos/physics\" \"$(QUICK_V3_ROOT)/cocos/math/kazmath\" \"$(QUICK_V3_ROOT)/cocos/2d\" \"$(QUICK_V3_ROOT)/cocos/ui\" \"$(QUICK_V3_ROOT)/cocos/network\" \"$(QUICK_V3_ROOT)/cocos/audio/include\" \"$(QUICK_V3_ROOT)/cocos/editor-support\" \"$(QUICK_V3_ROOT)/extensions\" \"$(QUICK_V3_ROOT)/external\" \"$(QUICK_V3_ROOT)/external/curl/include/mac\" \"$(QUICK_V3_ROOT)/external/lua/luajit/include\" \"$(QUICK_V3_ROOT)/external/lua/tolua\" \"$(QUICK_V3_ROOT)/external/glfw3/include/mac\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\" \"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src\" \"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"";
 			};
 			name = Release;
 		};
@@ -1194,7 +1192,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(QUICK_V3_ROOT)/cocos\"",
-					"\"$(QUICK_V3_ROOT)/cocos\"",
 					"\"$(QUICK_V3_ROOT)/cocos/base\"",
 					"\"$(QUICK_V3_ROOT)/cocos/physics\"",
 					"\"$(QUICK_V3_ROOT)/cocos/math/kazmath\"",
@@ -1205,12 +1202,10 @@
 					"\"$(QUICK_V3_ROOT)/cocos/editor-support\"",
 					"\"$(QUICK_V3_ROOT)/extensions\"",
 					"\"$(QUICK_V3_ROOT)/external\"",
-					"\"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/tolua\"",
 					"\"$(QUICK_V3_ROOT)/external/glfw3/include/mac\"",
-					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
-					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
+					"\"$(QUICK_V3_ROOT)/external/OpenAL/inc\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
@@ -1244,7 +1239,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(QUICK_V3_ROOT)/cocos\"",
-					"\"$(QUICK_V3_ROOT)/cocos\"",
 					"\"$(QUICK_V3_ROOT)/cocos/base\"",
 					"\"$(QUICK_V3_ROOT)/cocos/physics\"",
 					"\"$(QUICK_V3_ROOT)/cocos/math/kazmath\"",
@@ -1255,12 +1249,10 @@
 					"\"$(QUICK_V3_ROOT)/cocos/editor-support\"",
 					"\"$(QUICK_V3_ROOT)/extensions\"",
 					"\"$(QUICK_V3_ROOT)/external\"",
-					"\"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/tolua\"",
 					"\"$(QUICK_V3_ROOT)/external/glfw3/include/mac\"",
-					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
-					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
+					"\"$(QUICK_V3_ROOT)/external/OpenAL/inc\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
@@ -1291,7 +1283,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(QUICK_V3_ROOT)/cocos\"",
-					"\"$(QUICK_V3_ROOT)/cocos\"",
 					"\"$(QUICK_V3_ROOT)/cocos/base\"",
 					"\"$(QUICK_V3_ROOT)/cocos/physics\"",
 					"\"$(QUICK_V3_ROOT)/cocos/math/kazmath\"",
@@ -1302,14 +1293,11 @@
 					"\"$(QUICK_V3_ROOT)/cocos/editor-support\"",
 					"\"$(QUICK_V3_ROOT)/extensions\"",
 					"\"$(QUICK_V3_ROOT)/external\"",
-					"\"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/tolua\"",
 					"\"$(QUICK_V3_ROOT)/external/glfw3/include/mac\"",
-					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\"",
-					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"",
 				);
@@ -1347,7 +1335,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(QUICK_V3_ROOT)/cocos\"",
-					"\"$(QUICK_V3_ROOT)/cocos\"",
 					"\"$(QUICK_V3_ROOT)/cocos/base\"",
 					"\"$(QUICK_V3_ROOT)/cocos/physics\"",
 					"\"$(QUICK_V3_ROOT)/cocos/math/kazmath\"",
@@ -1358,14 +1345,11 @@
 					"\"$(QUICK_V3_ROOT)/cocos/editor-support\"",
 					"\"$(QUICK_V3_ROOT)/extensions\"",
 					"\"$(QUICK_V3_ROOT)/external\"",
-					"\"$(QUICK_V3_ROOT)/external/chipmunk/include/chipmunk\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
 					"\"$(QUICK_V3_ROOT)/external/lua/tolua\"",
 					"\"$(QUICK_V3_ROOT)/external/glfw3/include/mac\"",
-					"\"$(QUICK_V3_ROOT)/external/lua/luajit/include\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/auto\"",
-					"\"$(QUICK_V3_ROOT)/cocos/scripting/lua-bindings/manual\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src\"",
 					"\"$(QUICK_V3_ROOT)/quick/lib/quick-src/extra\"",
 				);

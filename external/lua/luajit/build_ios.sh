@@ -25,11 +25,6 @@ make HOST_CC="gcc -m32 -arch i386" TARGET_FLAGS="$ISDKF" TARGET=armv7 TARGET_SYS
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-armv7.a
 
 make clean
-ISDKF="-arch armv7s -isysroot $ISDK/SDKs/$ISDKVER"
-make HOST_CC="gcc -m32 -arch i386" TARGET_FLAGS="$ISDKF" TARGET=armv7s TARGET_SYS=iOS
-mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-armv7s.a
-
-make clean
 ISDKF="-arch arm64 -isysroot $ISDK/SDKs/$ISDKVER"
 make HOST_CC="gcc" TARGET_FLAGS="$ISDKF" TARGET=arm64 TARGET_SYS=iOS
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-arm64.a

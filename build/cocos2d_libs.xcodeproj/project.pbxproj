@@ -741,6 +741,10 @@
 		0AE62CFE1C1036A700BF1BF4 /* stringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE62CE31C1036A700BF1BF4 /* stringbuffer.h */; };
 		0AE62CFF1C1036A700BF1BF4 /* writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE62CE41C1036A700BF1BF4 /* writer.h */; };
 		0AE62D001C1036A700BF1BF4 /* writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE62CE41C1036A700BF1BF4 /* writer.h */; };
+		0AEE1063237FD1D900DFD2A6 /* libopenal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE103F237FD1D900DFD2A6 /* libopenal.a */; };
+		0AEE1065237FD1D900DFD2A6 /* libcommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1040237FD1D900DFD2A6 /* libcommon.a */; };
+		0AEE1066237FD1D900DFD2A6 /* libopenal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1042237FD1D900DFD2A6 /* libopenal.a */; };
+		0AEE1068237FD1D900DFD2A6 /* libcommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1043237FD1D900DFD2A6 /* libcommon.a */; };
 		0AFC98931E91487A00F3D63F /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983C1E91487A00F3D63F /* ogg.h */; };
 		0AFC98941E91487A00F3D63F /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983C1E91487A00F3D63F /* ogg.h */; };
 		0AFC98951E91487A00F3D63F /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983D1E91487A00F3D63F /* os_types.h */; };
@@ -2427,6 +2431,10 @@
 		0AE62CE21C1036A700BF1BF4 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
 		0AE62CE31C1036A700BF1BF4 /* stringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringbuffer.h; sourceTree = "<group>"; };
 		0AE62CE41C1036A700BF1BF4 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		0AEE103F237FD1D900DFD2A6 /* libopenal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopenal.a; sourceTree = "<group>"; };
+		0AEE1040237FD1D900DFD2A6 /* libcommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcommon.a; sourceTree = "<group>"; };
+		0AEE1042237FD1D900DFD2A6 /* libopenal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopenal.a; sourceTree = "<group>"; };
+		0AEE1043237FD1D900DFD2A6 /* libcommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcommon.a; sourceTree = "<group>"; };
 		0AFC983C1E91487A00F3D63F /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
 		0AFC983D1E91487A00F3D63F /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
 		0AFC983F1E91487A00F3D63F /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitwise.c; sourceTree = "<group>"; };
@@ -3145,6 +3153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEE1068237FD1D900DFD2A6 /* libcommon.a in Frameworks */,
+				0AEE1066237FD1D900DFD2A6 /* libopenal.a in Frameworks */,
 				0A1183251C05BC9C00BAB07A /* libcrypto.a in Frameworks */,
 				0A1183241C05BC4B00BAB07A /* libcurl.a in Frameworks */,
 				0A1183231C05BB2900BAB07A /* libz.a in Frameworks */,
@@ -3179,7 +3189,9 @@
 				1A570378180BD1B40088DEC7 /* libjpeg.a in Frameworks */,
 				1A5703A4180BD2350088DEC7 /* libtiff.a in Frameworks */,
 				29031E0919BFE8DE00EFA1DF /* libchipmunk.a in Frameworks */,
+				0AEE1063237FD1D900DFD2A6 /* libopenal.a in Frameworks */,
 				1A5703BB180BD2800088DEC7 /* libwebp.a in Frameworks */,
+				0AEE1065237FD1D900DFD2A6 /* libcommon.a in Frameworks */,
 				1A57052E180BD3280088DEC7 /* libfreetype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3625,6 +3637,34 @@
 				0A767F4C2242880400DF5418 /* libdragonBones.vcxproj.filters */,
 			);
 			path = proj.win32;
+			sourceTree = "<group>";
+		};
+		0AEE1036237FD1D900DFD2A6 /* OpenAL */ = {
+			isa = PBXGroup;
+			children = (
+				0AEE103E237FD1D900DFD2A6 /* ios */,
+				0AEE1041237FD1D900DFD2A6 /* mac */,
+			);
+			name = OpenAL;
+			path = ../external/OpenAL;
+			sourceTree = "<group>";
+		};
+		0AEE103E237FD1D900DFD2A6 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				0AEE103F237FD1D900DFD2A6 /* libopenal.a */,
+				0AEE1040237FD1D900DFD2A6 /* libcommon.a */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		0AEE1041237FD1D900DFD2A6 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				0AEE1042237FD1D900DFD2A6 /* libopenal.a */,
+				0AEE1043237FD1D900DFD2A6 /* libcommon.a */,
+			);
+			path = mac;
 			sourceTree = "<group>";
 		};
 		0AFC983A1E91487A00F3D63F /* libogg */ = {
@@ -4174,6 +4214,7 @@
 		1A57033E180BD0490088DEC7 /* external */ = {
 			isa = PBXGroup;
 			children = (
+				0AEE1036237FD1D900DFD2A6 /* OpenAL */,
 				382383E11A258FA7002C4610 /* flatbuffers */,
 				1AC026971914068200FA920D /* ConvertUTF */,
 				46C02E0418E91123004B7456 /* xxhash */,
@@ -7528,7 +7569,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external $(SRCROOT)/../cocos/audio/libvorbis $(SRCROOT)/../cocos/audio/libvorbis/lib $(SRCROOT)/../cocos/audio/libogg";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external $(SRCROOT)/../cocos/audio/libvorbis $(SRCROOT)/../cocos/audio/libvorbis/lib $(SRCROOT)/../cocos/audio/libogg $(SRCROOT)/../external/OpenAL/inc";
 			};
 			name = Debug;
 		};
@@ -7565,7 +7606,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external $(SRCROOT)/../cocos/audio/libvorbis $(SRCROOT)/../cocos/audio/libvorbis/lib $(SRCROOT)/../cocos/audio/libogg";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/.. $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external $(SRCROOT)/../cocos/audio/libvorbis $(SRCROOT)/../cocos/audio/libvorbis/lib $(SRCROOT)/../cocos/audio/libogg $(SRCROOT)/../external/OpenAL/inc";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -7599,9 +7640,10 @@
 					"\"$(SRCROOT)/../external/websockets/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
+					"\"$(SRCROOT)/../external/OpenAL/mac\"",
 				);
 				MACH_O_TYPE = staticlib;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external/curl/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac";
 			};
 			name = Debug;
 		};
@@ -7634,9 +7676,10 @@
 					"\"$(SRCROOT)/../external/websockets/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
+					"\"$(SRCROOT)/../external/OpenAL/mac\"",
 				);
 				MACH_O_TYPE = staticlib;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include $(SRCROOT)/../external/curl/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac";
 			};
 			name = Release;
 		};
@@ -7664,10 +7707,11 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/websockets/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/ios\"",
+					"\"$(SRCROOT)/../external/OpenAL/ios\"",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -7697,10 +7741,11 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/websockets/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/ios\"",
+					"\"$(SRCROOT)/../external/OpenAL/ios\"",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
