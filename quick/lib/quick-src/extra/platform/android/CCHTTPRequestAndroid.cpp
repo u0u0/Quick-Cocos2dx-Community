@@ -265,7 +265,11 @@ const string HTTPRequest::getResponseHeadersString()
 const string HTTPRequest::getResponseString(void)
 {
     CCAssert(m_state == kCCHTTPRequestStateCompleted, "HTTPRequest::getResponseString() - request not completed");
-    return string(m_responseBuffer ? static_cast<char*>(m_responseBuffer) : "");
+    string rtn;
+    if (m_responseBuffer) {
+        rtn.assign(static_cast<char *>(m_responseBuffer), m_responseDataLength);
+    }
+    return rtn;
 }
 
 void *HTTPRequest::getResponseData(void)
