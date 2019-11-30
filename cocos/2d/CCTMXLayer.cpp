@@ -254,14 +254,56 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
             label->setUserData((void *)data);
         } else if ("rectangle" == objectType) {
             if (TMXOrientationIso == _layerOrientation) {
-                // TODO, It's a prism in cocos2d-x, need convert to polygon.
+                // It's a prism in cocos2d-x, need convert to polygon.
+                Vec2 zero = getPositionForObject(Vec2(0, 0));
+                Vec2 p2 = getPositionForObject(Vec2(objSize.width, 0));
+                Vec2 p3 = getPositionForObject(Vec2(objSize.width, objSize.height));
+                Vec2 p4 = getPositionForObject(Vec2(0, objSize.height));
+
+                ValueVector pointsArray;
+                pointsArray.reserve(4);
+                ValueMap pd1;
+                pd1["x"] = 0.0f;
+                pd1["y"] = 0.0f;
+                pointsArray.push_back(Value(pd1));
+                ValueMap pd2;
+                pd2["x"] = p2.x - zero.x;
+                pd2["y"] = p2.y - zero.y;
+                pointsArray.push_back(Value(pd2));
+                ValueMap pd3;
+                pd3["x"] = p3.x - zero.x;
+                pd3["y"] = p3.y - zero.y;
+                pointsArray.push_back(Value(pd3));
+                ValueMap pd4;
+                pd4["x"] = p4.x - zero.x;
+                pd4["y"] = p4.y - zero.y;
+                pointsArray.push_back(Value(pd4));
+                
+                dict["points"] = Value(pointsArray);
+                dict["objectType"] = "polygon";
             } else {
                 dict["y"] = xPos.y - objSize.height; // fix y for other _layerOrientation
             }
         } else if ("polygon" == objectType) {
-            // TODO fix points pos
+            // fix point position
+            ValueVector &pointsArray = dict["points"].asValueVector();
+            Vec2 zero = getPositionForObject(Vec2(0, 0));
+            for (auto& p : pointsArray) {
+                ValueMap &a = p.asValueMap();
+                Vec2 newP = getPositionForObject(Vec2(a["x"].asFloat(), a["y"].asFloat()));
+                a["x"] = newP.x - zero.x;
+                a["y"] = newP.y - zero.y;
+            }
         } else if ("polyline" == objectType) {
-            // TODO fix polyline pos
+            // fix point position
+            ValueVector &pointsArray = dict["polylinePoints"].asValueVector();
+            Vec2 zero = getPositionForObject(Vec2(0, 0));
+            for (auto& p : pointsArray) {
+                ValueMap &a = p.asValueMap();
+                Vec2 newP = getPositionForObject(Vec2(a["x"].asFloat(), a["y"].asFloat()));
+                a["x"] = newP.x - zero.x;
+                a["y"] = newP.y - zero.y;
+            }
         }
     }
     
