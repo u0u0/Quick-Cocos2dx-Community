@@ -122,6 +122,16 @@ public:
         _objects = objects;
     }
     
+    unsigned char getOpacity() { return _opacity; }
+    void setOpacity(unsigned char opacity) {
+        _opacity = opacity;
+    }
+    
+    bool isVisible() { return _visible; }
+    void setVisible(bool visible) {
+        _visible = visible;
+    }
+    
 protected:
     /** name of the group */
     std::string _groupName;
@@ -131,6 +141,8 @@ protected:
     ValueMap _properties;
     /** array of the objects */
     ValueVector _objects;
+    unsigned char _opacity;
+    bool _visible;
 };
 
 // end of tilemap_parallax_nodes group

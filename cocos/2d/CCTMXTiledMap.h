@@ -215,7 +215,6 @@ public:
      */
     virtual std::string getDescription() const override;
 
-    int  getLayerNum();
     const std::string& getResourceFile() const { return _tmxFile; }
 
 CC_CONSTRUCTOR_ACCESS:
@@ -237,6 +236,8 @@ CC_CONSTRUCTOR_ACCESS:
 
 protected:
     void buildWithMapInfo(TMXMapInfo* mapInfo);
+    Node *createChild(Ref *childInfo);
+    TMXLayer *findLayer(const Node *parent, const std::string& layerName) const;
 
     /** the map's size property measured in tiles */
     Size _mapSize;
@@ -261,7 +262,6 @@ protected:
     ValueMapIntKey _tileProperties;
 
     std::string _tmxFile;
-    int _tmxLayerNum;
     bool _setupTiles;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(TMXTiledMap);

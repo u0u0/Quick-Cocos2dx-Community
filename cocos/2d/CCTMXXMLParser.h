@@ -71,7 +71,9 @@ enum {
     TMXPropertyLayer,
     TMXPropertyObjectGroup,
     TMXPropertyObject,
-    TMXPropertyTile
+    TMXPropertyTile,
+    TMXPropertyGroup,
+    TMXPropertyImageLayer
 };
 
 typedef enum TMXTileFlags_ {
@@ -115,7 +117,44 @@ public:
     bool                _visible;
     unsigned char       _opacity;
     bool                _ownTiles;
-    Vec2               _offset;
+    Vec2                _offset;
+};
+
+class CC_DLL TMXImageLayerInfo : public Ref
+{
+public:
+    TMXImageLayerInfo();
+    virtual ~TMXImageLayerInfo();
+
+    void setProperties(ValueMap properties);
+    ValueMap& getProperties();
+
+    ValueMap            _properties;
+    std::string         _name;
+    bool                _visible;
+    unsigned char       _opacity;
+    Vec2                _offset;
+    std::string         _sourceImage;
+    //! size in pixels of the image
+    Size                _imageSize; // set on image loaded
+    std::string         _originSourceImage; // value in tmx
+};
+
+class CC_DLL TMXGroupInfo : public Ref
+{
+public:
+    TMXGroupInfo();
+    virtual ~TMXGroupInfo();
+
+    void setProperties(ValueMap properties);
+    ValueMap& getProperties();
+
+    ValueMap            _properties;
+    std::string         _name;
+    bool                _visible;
+    unsigned char       _opacity;
+    Vec2                _offset;
+    Vector<Ref*>        _children;
 };
 
 /** @brief TMXTilesetInfo contains the information about the tilesets like:
@@ -177,14 +216,7 @@ public:
     /** creates a TMX Format with an XML string and a TMX resource path */
     static TMXMapInfo * createWithXML(const std::string& tmxString, const std::string& resourcePath);
     
-    /**
-     * @js ctor
-     */
     TMXMapInfo();
-    /**
-     * @js NA
-     * @lua NA
-     */
     virtual ~TMXMapInfo();
     
     /** initializes a TMX format with a  tmx file */
@@ -203,87 +235,49 @@ public:
 
     /// map orientation
     int getOrientation() const { return _orientation; }
-    void setOrientation(int orientation) { _orientation = orientation; }
     
     /// map staggeraxis
     int getStaggerAxis() const { return _staggerAxis; }
-    void setStaggerAxis(int staggerAxis) { _staggerAxis = staggerAxis; }
-
+    
     /// map stagger index
     int getStaggerIndex() const { return _staggerIndex; }
-    void setStaggerIndex(int staggerIndex) { _staggerIndex = staggerIndex; }
 
     /// map hexsidelength
     int getHexSideLength() const { return _hexSideLength; }
-    void setHexSideLength(int hexSideLength) { _hexSideLength = hexSideLength; }
 
     /// map width & height
     const Size& getMapSize() const { return _mapSize; }
-    void setMapSize(const Size& mapSize) { _mapSize = mapSize; }
 
     /// tiles width & height
     const Size& getTileSize() const { return _tileSize; }
-    void setTileSize(const Size& tileSize) { _tileSize = tileSize; }
     
-    /// Layers
+    /// layers
     Vector<TMXLayerInfo*>& getLayers() { return _layers; }
-    void setLayers(const Vector<TMXLayerInfo*>& layers) {
-        _layers = layers;
-    }
 
     /// tilesets
     Vector<TMXTilesetInfo*>& getTilesets() { return _tilesets; }
-    void setTilesets(const Vector<TMXTilesetInfo*>& tilesets) {
-        _tilesets = tilesets;
-    }
 
-    /// ObjectGroups
+    /// objectGroups
     Vector<TMXObjectGroup*>& getObjectGroups() { return _objectGroups; }
-    void setObjectGroups(const Vector<TMXObjectGroup*>& groups) {
-        _objectGroups = groups;
-    }
-
-    /// parent element
-    int getParentElement() const { return _parentElement; }
-    void setParentElement(int element) { _parentElement = element; }
-
-    /// parent GID
-    int getParentGID() const { return _parentGID; }
-    void setParentGID(int gid) { _parentGID = gid; }
+    
+    /// children
+    Vector<Ref*>& getChildren() { return _children; }
 
     /// layer attribs
     int getLayerAttribs() const { return _layerAttribs; }
-    void setLayerAttribs(int layerAttribs) { _layerAttribs = layerAttribs; }
 
     /// is storing characters?
     bool isStoringCharacters() const { return _storingCharacters; }
-    void setStoringCharacters(bool storingCharacters) { _storingCharacters = storingCharacters; }
 
     /// properties
     ValueMap& getProperties() { return _properties; }
-    void setProperties(const ValueMap& properties) {
-        _properties = properties;
-    }
     
     // implement pure virtual methods of SAXDelegator
-    /**
-     * @js NA
-     * @lua NA
-     */
     void startElement(void *ctx, const char *name, const char **atts) override;
-    /**
-     * @js NA
-     * @lua NA
-     */
     void endElement(void *ctx, const char *name) override;
-    /**
-     * @js NA
-     * @lua NA
-     */
     void textHandler(void *ctx, const char *ch, size_t len) override;
     
     const std::string& getCurrentString() const { return _currentString; }
-    void setCurrentString(const std::string& currentString){ _currentString = currentString; }
     const std::string& getTMXFileName() const { return _TMXFileName; }
     void setTMXFileName(const std::string& fileName){ _TMXFileName = fileName; }
 
@@ -302,12 +296,18 @@ protected:
     Size _mapSize;
     /// tiles width & height
     Size _tileSize;
-    /// Layers
+    /// layers
     Vector<TMXLayerInfo*> _layers;
     /// tilesets
     Vector<TMXTilesetInfo*> _tilesets;
-    /// ObjectGroups
+    /// objectGroups
     Vector<TMXObjectGroup*> _objectGroups;
+    // internal use for setting group's children
+    Vector<TMXGroupInfo*> _groupStack;
+    // internal use for set property
+    TMXImageLayerInfo * _curImageLayer;
+    /// children
+    Vector<Ref*> _children;
     /// parent element
     int _parentElement;
     /// parent GID

@@ -32,14 +32,21 @@ THE SOFTWARE.
 #include "base/ccCArray.h"
 NS_CC_BEGIN
 
-class TMXLayerInfo;
-class TMXTilesetInfo;
 class TMXTiledMap;
 
 /**
  * @addtogroup _2d
  * @{
  */
+
+enum
+{
+    TMX_LAYER_UNDEFINED,
+    TMX_LAYER_TILE,
+    TMX_LAYER_OBJECT_GROUP,
+    TMX_LAYER_IMAGE,
+    TMX_LAYER_GROUP
+};
 
 class TileAnimationData {
 public:
@@ -64,6 +71,9 @@ public:
      * @return An autorelease object.
      */
     static TMXLayer * create(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap);
+    static TMXLayer * create(TMXImageLayerInfo *layerInfo, TMXTiledMap *tileMap);
+    static TMXLayer * create(TMXGroupInfo *layerInfo, TMXTiledMap *tileMap);
+    static TMXLayer * create(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap);
     /**
      * @js ctor
      */
@@ -80,7 +90,10 @@ public:
      * @param tileMap.
      * @return If initializes successfully, it will return true.
      */
-    bool initWithTilesetInfo(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap);
+    bool initWithLayerInfo(TMXLayerInfo *layerInfo, TMXTiledMap *tileMap);
+    bool initWithLayerInfo(TMXImageLayerInfo *layerInfo, TMXTiledMap *tileMap);
+    bool initWithLayerInfo(TMXGroupInfo *layerInfo, TMXTiledMap *tileMap);
+    bool initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap);
 
     /** Returns the tile (Sprite) at a given a tile coordinate.
      * The returned Sprite will be already added to the TMXLayer. Don't add it again.
@@ -123,9 +136,10 @@ public:
     /** Returns the position in points of a given tile coordinate.
      *
      * @param tileCoordinate The tile coordinate.
+     * @param gid if > 0, use to get tileset's offset.
      * @return The position in points of a given tile coordinate.
      */
-	Vec2 getPositionAt(const Vec2& tileCoordinate);
+	Vec2 getPositionAt(const Vec2& tileCoordinate, uint32_t gid = 0);
 
     /** Return the value for the specific property name.
      *
@@ -202,12 +216,6 @@ public:
      *
      * @return Properties from the layer. They can be added using Tiled.
      */
-    const ValueMap& getProperties() const { return _properties; }
-    
-    /** Properties from the layer. They can be added using Tiled.
-     *
-     * @return Properties from the layer. They can be added using Tiled.
-     */
     ValueMap& getProperties() { return _properties; }
     
     /** Set an Properties from to layer.
@@ -220,14 +228,19 @@ public:
     
     /** get Tile's localZorder. */
     int getLocalZForPos(const Vec2& pos) const;
+    
+    /** return Layer type */
+    int getLayerType() { return _layerType; };
 
     virtual std::string getDescription() const override;
 
 protected:
+    bool initCommon(Vec2 &layerOffset, TMXTiledMap *tileMap);
     Vec2 getPositionForIsoAt(const Vec2& pos);
     Vec2 getPositionForOrthoAt(const Vec2& pos);
     Vec2 getPositionForHexAt(const Vec2& pos);
     Vec2 getPositionForStaggeredAt(const Vec2& pos);
+    Vec2 getPositionForObject(const Vec2& pos);
     Vec2 calculateLayerOffset(const Vec2& offset);
 
     intptr_t getZForPos(const Vec2& pos) const;
@@ -268,6 +281,7 @@ protected:
     ValueMap _properties;
     // weak ref to parent node
     TMXTiledMap *_tileMap;
+    int _layerType;
 };
 
 // end of tilemap_parallax_nodes group

@@ -91,7 +91,6 @@ TMXTiledMap::TMXTiledMap()
 :_mapSize(Size::ZERO)
 ,_tileSize(Size::ZERO)
 ,_tmxFile("")
-,_tmxLayerNum(0)
 ,_setupTiles(true)
 {
 }
@@ -112,6 +111,57 @@ TMXTiledMap::~TMXTiledMap()
 }
 
 // private
+Node *TMXTiledMap::createChild(Ref *childInfo)
+{
+    TMXLayerInfo *layerInfo = dynamic_cast<TMXLayerInfo *>(childInfo);
+    if (layerInfo) {
+        TMXLayer *layer = TMXLayer::create(layerInfo, this);
+        if (layer == nullptr) return nullptr;
+        if (_setupTiles) {
+            layer->setupTiles();
+        }
+        layer->setVisible(layerInfo->_visible);
+        // update content size with the max size
+        const Size& childSize = layer->getContentSize();
+        Size currentSize = this->getContentSize();
+        currentSize.width = std::max(currentSize.width, childSize.width);
+        currentSize.height = std::max(currentSize.height, childSize.height);
+        this->setContentSize(currentSize);
+        return layer;
+    }
+    
+    TMXImageLayerInfo *imageLayerInfo = dynamic_cast<TMXImageLayerInfo *>(childInfo);
+    if (imageLayerInfo) {
+        TMXLayer *layer = TMXLayer::create(imageLayerInfo, this);
+        if (layer == nullptr) return nullptr;
+        layer->setVisible(imageLayerInfo->_visible);
+        return layer;
+    }
+    
+    TMXGroupInfo *groupInfo = dynamic_cast<TMXGroupInfo *>(childInfo);
+    if (groupInfo) {
+        TMXLayer *layer = TMXLayer::create(groupInfo, this);
+        if (layer == nullptr) return nullptr;
+        layer->setVisible(groupInfo->_visible);
+        for (const auto &child : groupInfo->_children) {
+            Node *n = createChild(child);
+            if (n) {
+                layer->addChild(n);
+            }
+        }
+        return layer;
+    }
+    
+    TMXObjectGroup *objectGroupInfo = dynamic_cast<TMXObjectGroup *>(childInfo);
+        if (objectGroupInfo) {
+        TMXLayer *layer = TMXLayer::create(objectGroupInfo, this);
+        if (layer == nullptr) return nullptr;
+        layer->setVisible(objectGroupInfo->isVisible());
+        return layer;
+    }
+    return nullptr;
+}
+
 void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
 {
     _mapSize = mapInfo->getMapSize();
@@ -139,46 +189,40 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
         }
     }
     
-    // load layer
-    int idx = 0;
-    auto& layers = mapInfo->getLayers();
-    for (const auto &layerInfo : layers) {
-        if (layerInfo->_visible) {
-            TMXLayer *child = TMXLayer::create(layerInfo, this);
-            if (child == nullptr) {
-                idx++;
-                continue;
-            }
-            addChild(child, idx, idx);
-            if (_setupTiles) child->setupTiles();
-            // update content size with the max size
-            const Size& childSize = child->getContentSize();
-            Size currentSize = this->getContentSize();
-            currentSize.width = std::max(currentSize.width, childSize.width);
-            currentSize.height = std::max(currentSize.height, childSize.height);
-            this->setContentSize(currentSize);
-            idx++;
+    // load children
+    auto& children = mapInfo->getChildren();
+    for (const auto &child : children) {
+        Node *n = createChild(child);
+        if (n) {
+            addChild(n);
         }
     }
-    _tmxLayerNum = idx;
+}
+
+TMXLayer *TMXTiledMap::findLayer(const Node *parent, const std::string& layerName) const
+{
+    for (auto& child : parent->getChildren()) {
+        TMXLayer* layer = dynamic_cast<TMXLayer*>(child);
+        if (layer) {
+            if (layerName.compare(layer->getLayerName()) == 0) {
+                return layer;
+            }
+            if (layer->getLayerType() == TMX_LAYER_GROUP) {
+                TMXLayer* find = findLayer(layer, layerName);
+                if (find) {
+                    return find;
+                }
+            }
+        }
+    }
+    return nullptr;
 }
 
 // public
-TMXLayer * TMXTiledMap::getLayer(const std::string& layerName) const
+TMXLayer *TMXTiledMap::getLayer(const std::string& layerName) const
 {
     CCASSERT(layerName.size() > 0, "Invalid layer name!");
-    
-    for (auto& child : _children) {
-        TMXLayer* layer = dynamic_cast<TMXLayer*>(child);
-        if(layer) {
-            if(layerName.compare(layer->getLayerName()) == 0) {
-                return layer;
-            }
-        }
-    }
-
-    // layer not found
-    return nullptr;
+    return findLayer(this, layerName);
 }
 
 TMXObjectGroup * TMXTiledMap::getObjectGroup(const std::string& groupName) const
@@ -225,11 +269,6 @@ TMXTilesetInfo *TMXTiledMap::getTilesetByGID(uint32_t gid) const
 std::string TMXTiledMap::getDescription() const
 {
     return StringUtils::format("<TMXTiledMap | Tag = %d, Layers = %d", _tag, static_cast<int>(_children.size()));
-}
-
-int TMXTiledMap::getLayerNum()
-{
-    return _tmxLayerNum;
 }
 
 NS_CC_END
