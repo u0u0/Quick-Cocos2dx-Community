@@ -343,17 +343,25 @@ bool TMXLayer::initCommon(Vec2 &layerOffset, TMXTiledMap *tileMap)
 
     float width = 0;
     float height = 0;
-    if (_layerOrientation == TMXOrientationHex) {
-        if (_staggerAxis == TMXStaggerAxis_X) {
-            height = _mapTileSize.height * (_layerSize.height + 0.5);
-            width = (_mapTileSize.width + _hexSideLength) * ((int)(_layerSize.width / 2)) + _mapTileSize.width * ((int)_layerSize.width % 2);
-        } else {
-            width = _mapTileSize.width * (_layerSize.width + 0.5);
-            height = (_mapTileSize.height + _hexSideLength) * ((int)(_layerSize.height / 2)) + _mapTileSize.height * ((int)_layerSize.height % 2);
-        }
-    } else {
-        width = _layerSize.width * _mapTileSize.width;
-        height = _layerSize.height * _mapTileSize.height;
+    switch (_layerOrientation) {
+        case TMXOrientationOrtho:
+        case TMXOrientationIso:
+            width = _layerSize.width * _mapTileSize.width;
+            height = _layerSize.height * _mapTileSize.height;
+            break;
+        case TMXOrientationHex:
+            if (_staggerAxis == TMXStaggerAxis_X) {
+                width = (_mapTileSize.width + _hexSideLength) * ((int)(_layerSize.width / 2)) + _mapTileSize.width * ((int)_layerSize.width % 2);
+                height = (_layerSize.height + 0.5) * _mapTileSize.height;
+            } else {
+                width = (_layerSize.width + 0.5) * _mapTileSize.width;
+                height = (_mapTileSize.height + _hexSideLength) * ((int)(_layerSize.height / 2)) + _mapTileSize.height * ((int)_layerSize.height % 2);
+            }
+            break;
+        case TMXOrientationStaggered:
+            width = (_layerSize.width + 0.5) * _mapTileSize.width;
+            height = (_layerSize.height + 1) * _mapTileSize.height / 2.0f;
+            break;
     }
     setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
 
