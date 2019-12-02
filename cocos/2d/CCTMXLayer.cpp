@@ -175,9 +175,7 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
             intptr_t z = getZForPos(pos);
             Sprite *tile = createTileSprite(z, gid);
             setupTileAnimation(tile, pos, gid);
-            // set data for sort
-            Vec2 *data = new Vec2(xPos);
-            tile->setUserData((void *)data);
+            tile->setUserData((void *)&dict); //for sort
             // fix size
             Size textureSize = tile->getContentSize();
             float scaleX = objSize.width / textureSize.width;
@@ -249,9 +247,7 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
             label->setColor(color);
             label->setRotation(rotation);
             label->setVisible(dict["visible"].asBool());
-            // set data for sort
-            Vec2 *data = new Vec2(xPos);
-            label->setUserData((void *)data);
+            label->setUserData((void *)&dict); // for sort
         } else if ("rectangle" == objectType) {
             if (TMXOrientationIso == _layerOrientation) {
                 // It's a prism in cocos2d-x, need convert to polygon.
@@ -310,17 +306,22 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
     // sort children
     _reorderChildDirty = false;
     std::stable_sort(std::begin(_children), std::end(_children), [](Node *a, Node *b) {
-        Vec2 *aP = (Vec2 *)a->getUserData();
-        Vec2 *bP = (Vec2 *)b->getUserData();
-        if (aP->y == bP->y) {
-            return aP->x < bP->x;
+        ValueMap *dicta = (ValueMap *)a->getUserData();
+        ValueMap *dictb = (ValueMap *)b->getUserData();
+        float ax = dicta->at("x").asFloat();
+        float ay = dicta->at("y").asFloat();
+        float bx = dictb->at("x").asFloat();
+        float by = dictb->at("y").asFloat();
+        if (ay == by) {
+            if (ax == bx) {
+                return dicta->at("id").asUnsignedInt() < dictb->at("id").asUnsignedInt();
+            }
+            return ax < bx;
         }
-        return aP->y > bP->y;
+        return ay > by;
     });
-    // release tmp data
+    // unref
     for(const auto &sp : _children) {
-        Vec2 *p = (Vec2 *)sp->getUserData();
-        delete p;
         sp->setUserData(nullptr);
     }
     return true;
@@ -849,30 +850,21 @@ Vec2 TMXLayer::getPositionForObject(const Vec2& pos)
 int TMXLayer::getLocalZForPos(const Vec2& pos) const
 {
     int ret = 0;
+    int maxVal = 0;
     switch (_layerOrientation) {
-        case TMXOrientationIso:
-            ret = static_cast<int>(pos.x + _layerSize.width * pos.y);
-            break;
         case TMXOrientationOrtho:
-            ret = static_cast<int>(pos.x + _layerSize.width * pos.y);
+            ret = static_cast<int>(-(_layerSize.height - pos.y));
+            break;
+        case TMXOrientationIso:
+            maxVal = static_cast<int>(_layerSize.width + _layerSize.height);
+            ret = static_cast<int>(-(maxVal - (pos.x + pos.y)));
             break;
         case TMXOrientationStaggered:
-            ret = static_cast<int>(pos.x + _layerSize.width * pos.y);
+            ret = static_cast<int>(-(_layerSize.height - pos.y));
             break;
         case TMXOrientationHex:
-        {
-            int newX = pos.x;
-            if (_staggerAxis == TMXStaggerAxis_X) {
-                int factor = _staggerIndex == TMXStaggerIndex_Even ? 1 : 0;
-                if (newX % 2 == factor) { // heigher(in pixel) tile of this row
-                    newX = newX - 1;
-                } else {
-                    newX = newX + 1;
-                }
-            }
-            ret = static_cast<int>(newX + _layerSize.width * pos.y) + 1;// above zero
+            ret = static_cast<int>(-(_layerSize.height - pos.y));
             break;
-        }
         default:
             CCASSERT(0, "TMX invalid value");
             break;
