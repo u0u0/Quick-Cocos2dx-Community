@@ -175,6 +175,7 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
             intptr_t z = getZForPos(pos);
             Sprite *tile = createTileSprite(z, gid);
             setupTileAnimation(tile, pos, gid);
+            tile->setTag(dict["id"].asUnsignedInt());
             tile->setUserData((void *)&dict); //for sort
             // fix size
             Size textureSize = tile->getContentSize();
@@ -247,6 +248,7 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
             label->setColor(color);
             label->setRotation(rotation);
             label->setVisible(dict["visible"].asBool());
+            label->setTag(dict["id"].asUnsignedInt());
             label->setUserData((void *)&dict); // for sort
         } else if ("rectangle" == objectType) {
             if (TMXOrientationIso == _layerOrientation) {
