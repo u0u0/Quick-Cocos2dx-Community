@@ -58,6 +58,16 @@ namespace ui {
          */
         virtual ~Scale9Sprite();
         
+        /**
+         * Builtin shader state.
+         * Currently support Normal and Gray state.
+         */
+        enum class State
+        {
+            NORMAL,
+            GRAY
+        };
+        
     public:
         static Scale9Sprite* create();
         
@@ -254,6 +264,8 @@ namespace ui {
         virtual void setContentSize(const Size & size) override;
         virtual void setAnchorPoint(const Vec2& anchorPoint) override;
         
+        void setState(State state);
+        State getState() const;
         Size getOriginalSize() const;
         void setPreferredSize(const Size& size);
         Size getPreferredSize() const;
@@ -269,8 +281,6 @@ namespace ui {
         float getInsetBottom()const;
         void setScale9Enabled(bool enabled);
         bool isScale9Enabled()const;
-        
-        
         
         /// @} end of Children and Parent
         
@@ -429,6 +439,7 @@ namespace ui {
         
         bool _flippedX;
         bool _flippedY;
+        State _brightState;
     };
     
 }}  //end of namespace

@@ -2334,6 +2334,7 @@
 		0A4FC6D021230D8D00BA1B48 /* CCComController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComController.h; sourceTree = "<group>"; };
 		0A4FC6D121230D8E00BA1B48 /* CCActionObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionObject.cpp; sourceTree = "<group>"; };
 		0A4FC6D221230D8E00BA1B48 /* TriggerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TriggerBase.cpp; sourceTree = "<group>"; };
+		0A7221D82398DA5100C4A518 /* ccShader_PositionGrayScale.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ccShader_PositionGrayScale.frag; sourceTree = "<group>"; };
 		0A767EF32242880400DF5418 /* DragonBonesHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonBonesHeaders.h; sourceTree = "<group>"; };
 		0A767EF52242880400DF5418 /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
 		0A767EF62242880400DF5418 /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
@@ -5282,6 +5283,7 @@
 				5034CA06191D591000CE6051 /* ccShader_PositionColorLengthTexture.vert */,
 				5034CA07191D591000CE6051 /* ccShader_PositionColorLengthTexture.frag */,
 				5034CA08191D591000CE6051 /* ccShader_PositionColor.vert */,
+				0A7221D82398DA5100C4A518 /* ccShader_PositionGrayScale.frag */,
 				5034CA09191D591000CE6051 /* ccShader_PositionColor.frag */,
 				5034CA0A191D591000CE6051 /* ccShader_Position_uColor.vert */,
 				5034CA0B191D591000CE6051 /* ccShader_Position_uColor.frag */,

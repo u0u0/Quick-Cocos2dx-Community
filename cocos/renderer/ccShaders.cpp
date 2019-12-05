@@ -68,6 +68,7 @@ NS_CC_BEGIN
 #include "ccShader_PositionColorLengthTexture.frag"
 #include "ccShader_PositionColorLengthTexture.vert"
 
+#include "ccShader_PositionGrayScale.frag"
 //
 #include "ccShader_Label.vert"
 #include "ccShader_Label_df.frag"

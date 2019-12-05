@@ -28,6 +28,7 @@
 #include "base/CCVector.h"
 #include "base/CCDirector.h"
 #include "base/ccUTF8.h"
+#include "renderer/CCGLProgram.h"
 
 NS_CC_BEGIN
 namespace ui {
@@ -51,9 +52,9 @@ namespace ui {
     , _insetTop(0)
     , _insetRight(0)
     , _insetBottom(0)
-    ,_flippedX(false)
-    ,_flippedY(false)
-
+    , _flippedX(false)
+    , _flippedY(false)
+    , _brightState(State::NORMAL)
     {
         this->setAnchorPoint(Vec2(0.5,0.5));
     }
@@ -959,11 +960,34 @@ y+=ytranslate;         \
         
     }
     
-    Size Scale9Sprite::getOriginalSize()const
+    Scale9Sprite::State Scale9Sprite::getState() const
+    {
+        return _brightState;
+    }
+
+    void Scale9Sprite::setState(Scale9Sprite::State state)
+    {
+        if (_brightState != state) {
+            GLProgramState *glState = nullptr;
+            switch (state) {
+                case State::NORMAL:
+                    glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP);
+                    break;
+                case State::GRAY:
+                    glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE);
+                default:
+                    break;
+            }
+
+            setGLProgramState(glState);
+            _brightState = state;
+        }
+    }
+
+    Size Scale9Sprite::getOriginalSize() const
     {
         return _originalSize;
     }
-    
     
     Size Scale9Sprite::getPreferredSize() const
     {

@@ -125,7 +125,7 @@ public:
     static const char* SHADER_NAME_POSITION_TEXTURE_A8_COLOR;
     static const char* SHADER_NAME_POSITION_U_COLOR;
     static const char* SHADER_NAME_POSITION_LENGTH_TEXTURE_COLOR;
-
+    static const char* SHADER_NAME_POSITION_GRAYSCALE;
     static const char* SHADER_NAME_LABEL_NORMAL;
     static const char* SHADER_NAME_LABEL_OUTLINE;
 

@@ -46,6 +46,7 @@ enum {
     kShaderType_PositionTextureA8Color,
     kShaderType_Position_uColor,
     kShaderType_PositionLengthTexureColor,
+    kShaderType_PositionGrayScale,
     kShaderType_LabelDistanceFieldNormal,
     kShaderType_LabelDistanceFieldGlow,
     kShaderType_LabelNormal,
@@ -168,6 +169,10 @@ void GLProgramCache::loadDefaultGLPrograms()
     p = new (std::nothrow) GLProgram();
     loadDefaultGLProgram(p, kShaderType_PositionLengthTexureColor);
     _programs.insert( std::make_pair(GLProgram::SHADER_NAME_POSITION_LENGTH_TEXTURE_COLOR, p) );
+    
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionGrayScale);
+    _programs.emplace(GLProgram::SHADER_NAME_POSITION_GRAYSCALE, p);
 
     p = new (std::nothrow) GLProgram();
     loadDefaultGLProgram(p, kShaderType_LabelDistanceFieldNormal);
@@ -295,6 +300,10 @@ void GLProgramCache::reloadDefaultGLPrograms()
     p = getGLProgram(GLProgram::SHADER_NAME_POSITION_LENGTH_TEXTURE_COLOR);
     p->reset();
     loadDefaultGLProgram(p, kShaderType_PositionLengthTexureColor);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_GRAYSCALE);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionGrayScale);
 
     p = getGLProgram(GLProgram::SHADER_NAME_LABEL_DISTANCEFIELD_NORMAL);
     p->reset();
@@ -303,6 +312,7 @@ void GLProgramCache::reloadDefaultGLPrograms()
     p = getGLProgram(GLProgram::SHADER_NAME_LABEL_DISTANCEFIELD_GLOW);
     p->reset();
     loadDefaultGLProgram(p, kShaderType_LabelDistanceFieldGlow);
+    
     p = getGLProgram(GLProgram::SHADER_NAME_LABEL_NORMAL);
     p->reset();
     loadDefaultGLProgram(p, kShaderType_LabelNormal);
@@ -373,6 +383,9 @@ void GLProgramCache::loadDefaultGLProgram(GLProgram *p, int type)
             break;
         case kShaderType_PositionLengthTexureColor:
             p->initWithByteArrays(ccPositionColorLengthTexture_vert, ccPositionColorLengthTexture_frag);
+            break;
+        case kShaderType_PositionGrayScale:
+            p->initWithByteArrays(ccPositionTextureColor_noMVP_vert, ccPositionGrayScale_frag);
             break;
         case kShaderType_LabelDistanceFieldNormal:
             p->initWithByteArrays(ccLabel_vert, ccLabelDistanceFieldNormal_frag);

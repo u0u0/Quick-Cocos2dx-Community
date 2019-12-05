@@ -421,10 +421,9 @@ void Button::onPressStateChangedToNormal()
     _buttonNormalRenderer->setVisible(true);
     _buttonClickedRenderer->setVisible(false);
     _buttonDisableRenderer->setVisible(false);
-    if (_pressedTextureLoaded)
-    {
-        if (_pressedActionEnabled)
-        {
+    _buttonNormalRenderer->setState(Scale9Sprite::State::NORMAL);
+    if (_pressedTextureLoaded) {
+        if (_pressedActionEnabled) {
             _buttonNormalRenderer->stopAllActions();
             _buttonClickedRenderer->stopAllActions();
             Action *zoomAction = ScaleTo::create(ZOOM_ACTION_TIME_STEP, _normalTextureScaleXInSize, _normalTextureScaleYInSize);
@@ -432,36 +431,25 @@ void Button::onPressStateChangedToNormal()
             _buttonClickedRenderer->setScale(_pressedTextureScaleXInSize, _pressedTextureScaleYInSize);
             
             _titleRenderer->stopAllActions();
-            if (_unifySize)
-            {
+            if (_unifySize) {
                 Action *zoomTitleAction = ScaleTo::create(ZOOM_ACTION_TIME_STEP, 1, 1);
                 _titleRenderer->runAction(zoomTitleAction);
-            }
-            else
-            {
+            } else {
                 _titleRenderer->runAction(zoomAction->clone());
             }
         }
-    }
-    else
-    {
-        if (_scale9Enabled)
-        {
+    } else {
+        if (_scale9Enabled) {
             _buttonNormalRenderer->setColor(Color3B::WHITE);
-        }
-        else
-        {
+        } else {
             _buttonNormalRenderer->stopAllActions();
             _buttonNormalRenderer->setScale(_normalTextureScaleXInSize, _normalTextureScaleYInSize);
             
             _titleRenderer->stopAllActions();
-            if (_unifySize)
-            {
+            if (_unifySize) {
                 _titleRenderer->setScaleX(1.0f);
                 _titleRenderer->setScaleY(1.0f);
-            }
-            else
-            {
+            } else {
                 _titleRenderer->setScaleX(_normalTextureScaleXInSize);
                 _titleRenderer->setScaleY(_normalTextureScaleYInSize);
             }
@@ -471,14 +459,13 @@ void Button::onPressStateChangedToNormal()
 
 void Button::onPressStateChangedToPressed()
 {
-    if (_pressedTextureLoaded)
-    {
+    _buttonNormalRenderer->setState(Scale9Sprite::State::NORMAL);
+    if (_pressedTextureLoaded) {
         _buttonNormalRenderer->setVisible(false);
         _buttonClickedRenderer->setVisible(true);
         _buttonDisableRenderer->setVisible(false);
         
-        if (_pressedActionEnabled)
-        {
+        if (_pressedActionEnabled) {
             _buttonNormalRenderer->stopAllActions();
             _buttonClickedRenderer->stopAllActions();
             Action *zoomAction = ScaleTo::create(ZOOM_ACTION_TIME_STEP, _pressedTextureScaleXInSize + _zoomScale, _pressedTextureScaleYInSize + _zoomScale);
@@ -488,39 +475,28 @@ void Button::onPressStateChangedToPressed()
             _titleRenderer->stopAllActions();
             //we must call zoomAction->clone here
             _titleRenderer->runAction(zoomAction->clone());
-            if (_unifySize)
-            {
+            if (_unifySize) {
                 Action *zoomTitleAction = ScaleTo::create(ZOOM_ACTION_TIME_STEP, 1 + _zoomScale, 1 + _zoomScale);
                 _titleRenderer->runAction(zoomTitleAction);
-            }
-            else
-            {
+            } else {
                 _titleRenderer->runAction(zoomAction->clone());
             }
         }
-    }
-    else
-    {
+    } else {
         _buttonNormalRenderer->setVisible(true);
         _buttonClickedRenderer->setVisible(false);
         _buttonDisableRenderer->setVisible(false);
-        if (_scale9Enabled)
-        {
+        if (_scale9Enabled) {
             _buttonNormalRenderer->setColor(Color3B::GRAY);
-        }
-        else
-        {
+        } else {
             _buttonNormalRenderer->stopAllActions();
             _buttonNormalRenderer->setScale(_normalTextureScaleXInSize +_zoomScale, _normalTextureScaleYInSize + _zoomScale);
             
             _titleRenderer->stopAllActions();
-            if (_unifySize)
-            {
+            if (_unifySize) {
                 _titleRenderer->setScaleX(1.0f + _zoomScale);
                 _titleRenderer->setScaleY(1.0f + _zoomScale);
-            }
-            else
-            {
+            } else {
                 _titleRenderer->setScaleX(_normalTextureScaleXInSize + _zoomScale);
                 _titleRenderer->setScaleY(_normalTextureScaleYInSize + _zoomScale);
             }
@@ -530,20 +506,26 @@ void Button::onPressStateChangedToPressed()
 
 void Button::onPressStateChangedToDisabled()
 {
-    _buttonNormalRenderer->setVisible(false);
+    if (!_disabledTextureLoaded) {
+        if (_normalTextureLoaded) {
+            _buttonNormalRenderer->setState(Scale9Sprite::State::GRAY);
+        }
+    } else {
+        _buttonNormalRenderer->setVisible(false);
+        _buttonDisableRenderer->setVisible(true);
+    }
     _buttonClickedRenderer->setVisible(false);
-    _buttonDisableRenderer->setVisible(true);
     _buttonNormalRenderer->setScale(_normalTextureScaleXInSize, _normalTextureScaleYInSize);
     _buttonClickedRenderer->setScale(_pressedTextureScaleXInSize, _pressedTextureScaleYInSize);
 }
-    
+
 void Button::setTitleOffset(float x, float y)
 {
     _titleOffset.x = x;
     _titleOffset.y = y;
     updateTitleLocation();
 }
-    
+
 void Button::updateTitleLocation()
 {
     _titleRenderer->setPosition(_contentSize.width * 0.5f + _titleOffset.x,
