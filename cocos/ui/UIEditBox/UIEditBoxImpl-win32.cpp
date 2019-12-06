@@ -71,6 +71,7 @@ namespace ui {
 
     EditBoxImplWin::EditBoxImplWin(EditBox* pEditText)
         : EditBoxImplCommon(pEditText),
+        _hwndEdit(NULL),
         _changedTextManually(false),
         _hasFocus(false),
         _endAction(EditBoxDelegate::EditBoxEndAction::UNKNOWN)
@@ -142,7 +143,7 @@ namespace ui {
     void EditBoxImplWin::setNativeFont(const char* pFontName, int fontSize)
     {
         auto glView = Director::getInstance()->getOpenGLView();
-		fontSize = static_cast<int>(fontSize * glView->getScaleX() * glView->getFrameZoomFactor());
+        fontSize = static_cast<int>(fontSize * glView->getScaleX() * glView->getFrameZoomFactor());
         HFONT hFont = ::CreateFontW(fontSize, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
             CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, L"Arial");
 
@@ -271,7 +272,7 @@ namespace ui {
 
     void EditBoxImplWin::updateNativeFrame(const Rect& rect)
     {
-		auto frameScale = Director::getInstance()->getOpenGLView()->getFrameZoomFactor();
+        auto frameScale = Director::getInstance()->getOpenGLView()->getFrameZoomFactor();
         ::SetWindowPos(
             _hwndEdit,
             HWND_NOTOPMOST,
@@ -293,11 +294,11 @@ namespace ui {
 //        s_previousFocusWnd = hwndEdit;
         this->editBoxEditingDidBegin();
 
-		// update show position.
+        // update show position.
         auto rect = ui::Helper::convertBoundingBoxToScreen(_editBox);
         this->updateNativeFrame(rect);
-		// update font size.
-		this->setNativeFont(this->getNativeDefaultFontName(), this->_fontSize);
+        // update font size.
+        this->setNativeFont(this->getNativeDefaultFontName(), this->_fontSize);
     }
 
     void EditBoxImplWin::nativeCloseKeyboard()

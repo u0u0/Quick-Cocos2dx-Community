@@ -22191,16 +22191,14 @@ int lua_cocos2dx_ui_EditBox_keyboardWillHide(lua_State* tolua_S)
 
     return 0;
 }
-int lua_cocos2dx_ui_EditBox_touchDownAction(lua_State* tolua_S)
+int lua_cocos2dx_ui_EditBox_openKeyboard(lua_State* tolua_S)
 {
     int argc = 0;
     cocos2d::ui::EditBox* cobj = nullptr;
-    bool ok  = true;
 
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
-
 
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"ccui.EditBox",0,&tolua_err)) goto tolua_lerror;
@@ -22211,35 +22209,23 @@ int lua_cocos2dx_ui_EditBox_touchDownAction(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ui_EditBox_touchDownAction'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ui_EditBox_openKeyboard'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        cocos2d::Ref* arg0;
-        cocos2d::ui::Widget::TouchEventType arg1;
-
-        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "ccui.EditBox:touchDownAction");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_ui_EditBox_touchDownAction'", nullptr);
-            return 0;
-        }
-        cobj->touchDownAction(arg0, arg1);
+    if (argc == 0) {
+        cobj->openKeyboard();
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccui.EditBox:touchDownAction",argc, 2);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccui.EditBox:openKeyboard",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ui_EditBox_touchDownAction'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ui_EditBox_openKeyboard'.",&tolua_err);
 #endif
 
     return 0;
@@ -22368,58 +22354,23 @@ int lua_cocos2dx_ui_EditBox_initWithSizeAndBackgroundSprite(lua_State* tolua_S)
     }
 #endif
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 2) {
-            cocos2d::Size arg0;
-            ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:initWithSizeAndBackgroundSprite");
-
-            if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg1;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 3, "ccui.Scale9Sprite",&arg1);
-
-            if (!ok) { break; }
-            bool ret = cobj->initWithSizeAndBackgroundSprite(arg0, arg1);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
+    if (argc == 3) {
+        cocos2d::Size arg0;
+        std::string arg1;
+        cocos2d::ui::Widget::TextureResType arg2;
+        
+        ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:initWithSizeAndBackgroundSprite");
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "ccui.EditBox:initWithSizeAndBackgroundSprite");
+        ok &= luaval_to_int32(tolua_S, 4,(int *)&arg2, "ccui.EditBox:initWithSizeAndBackgroundSprite");
+        if (!ok) {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_ui_EditBox_initWithSizeAndBackgroundSprite'", nullptr);
+            return 0;
         }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            cocos2d::Size arg0;
-            ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:initWithSizeAndBackgroundSprite");
-
-            if (!ok) { break; }
-            std::string arg1;
-            ok &= luaval_to_std_string(tolua_S, 3,&arg1, "ccui.EditBox:initWithSizeAndBackgroundSprite");
-
-            if (!ok) { break; }
-            bool ret = cobj->initWithSizeAndBackgroundSprite(arg0, arg1);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 3) {
-            cocos2d::Size arg0;
-            ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:initWithSizeAndBackgroundSprite");
-
-            if (!ok) { break; }
-            std::string arg1;
-            ok &= luaval_to_std_string(tolua_S, 3,&arg1, "ccui.EditBox:initWithSizeAndBackgroundSprite");
-
-            if (!ok) { break; }
-            cocos2d::ui::Widget::TextureResType arg2;
-            ok &= luaval_to_int32(tolua_S, 4,(int *)&arg2, "ccui.EditBox:initWithSizeAndBackgroundSprite");
-
-            if (!ok) { break; }
-            bool ret = cobj->initWithSizeAndBackgroundSprite(arg0, arg1, arg2);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
+        
+        bool ret = cobj->initWithSizeAndBackgroundSprite(arg0, arg1, arg2);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "ccui.EditBox:initWithSizeAndBackgroundSprite",argc, 2);
     return 0;
 
@@ -22796,22 +22747,6 @@ int lua_cocos2dx_ui_EditBox_create(lua_State* tolua_S)
 
     do 
     {
-        if (argc == 2)
-        {
-            cocos2d::Size arg0;
-            ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:create");
-            if (!ok) { break; }
-            std::string arg1;
-            ok &= luaval_to_std_string(tolua_S, 3,&arg1, "ccui.EditBox:create");
-            if (!ok) { break; }
-            cocos2d::ui::EditBox* ret = cocos2d::ui::EditBox::create(arg0, arg1);
-            object_to_luaval<cocos2d::ui::EditBox>(tolua_S, "ccui.EditBox",(cocos2d::ui::EditBox*)ret);
-            return 1;
-        }
-    } while (0);
-    ok  = true;
-    do 
-    {
         if (argc == 3)
         {
             cocos2d::Size arg0;
@@ -22829,64 +22764,32 @@ int lua_cocos2dx_ui_EditBox_create(lua_State* tolua_S)
         }
     } while (0);
     ok  = true;
-    do 
+    do
     {
-        if (argc == 2)
+        if (argc == 5)
         {
             cocos2d::Size arg0;
             ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:create");
             if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg1;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 3, "ccui.Scale9Sprite",&arg1);
+            std::string arg1;
+            ok &= luaval_to_std_string(tolua_S, 3,&arg1, "ccui.EditBox:create");
             if (!ok) { break; }
-            cocos2d::ui::EditBox* ret = cocos2d::ui::EditBox::create(arg0, arg1);
+            std::string arg2;
+            ok &= luaval_to_std_string(tolua_S, 4,&arg2, "ccui.EditBox:create");
+            if (!ok) { break; }
+            std::string arg3;
+            ok &= luaval_to_std_string(tolua_S, 5,&arg3, "ccui.EditBox:create");
+            if (!ok) { break; }
+            cocos2d::ui::Widget::TextureResType arg4;
+            ok &= luaval_to_int32(tolua_S, 6,(int *)&arg4, "ccui.EditBox:create");
+            if (!ok) { break; }
+            cocos2d::ui::EditBox* ret = cocos2d::ui::EditBox::create(arg0, arg1, arg2, arg3, arg4);
             object_to_luaval<cocos2d::ui::EditBox>(tolua_S, "ccui.EditBox",(cocos2d::ui::EditBox*)ret);
             return 1;
         }
     } while (0);
-    ok  = true;
-    do 
-    {
-        if (argc == 3)
-        {
-            cocos2d::Size arg0;
-            ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:create");
-            if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg1;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 3, "ccui.Scale9Sprite",&arg1);
-            if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg2;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 4, "ccui.Scale9Sprite",&arg2);
-            if (!ok) { break; }
-            cocos2d::ui::EditBox* ret = cocos2d::ui::EditBox::create(arg0, arg1, arg2);
-            object_to_luaval<cocos2d::ui::EditBox>(tolua_S, "ccui.EditBox",(cocos2d::ui::EditBox*)ret);
-            return 1;
-        }
-    } while (0);
-    ok  = true;
-    do 
-    {
-        if (argc == 4)
-        {
-            cocos2d::Size arg0;
-            ok &= luaval_to_size(tolua_S, 2, &arg0, "ccui.EditBox:create");
-            if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg1;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 3, "ccui.Scale9Sprite",&arg1);
-            if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg2;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 4, "ccui.Scale9Sprite",&arg2);
-            if (!ok) { break; }
-            cocos2d::ui::Scale9Sprite* arg3;
-            ok &= luaval_to_object<cocos2d::ui::Scale9Sprite>(tolua_S, 5, "ccui.Scale9Sprite",&arg3);
-            if (!ok) { break; }
-            cocos2d::ui::EditBox* ret = cocos2d::ui::EditBox::create(arg0, arg1, arg2, arg3);
-            object_to_luaval<cocos2d::ui::EditBox>(tolua_S, "ccui.EditBox",(cocos2d::ui::EditBox*)ret);
-            return 1;
-        }
-    } while (0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d", "ccui.EditBox:create",argc, 2);
+
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting 3 or 5", "ccui.EditBox:create",argc);
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
@@ -22959,7 +22862,7 @@ int lua_register_cocos2dx_ui_EditBox(lua_State* tolua_S)
         tolua_function(tolua_S,"setPlaceholderFontColor",lua_cocos2dx_ui_EditBox_setPlaceholderFontColor);
         tolua_function(tolua_S,"setFontColor",lua_cocos2dx_ui_EditBox_setFontColor);
         tolua_function(tolua_S,"keyboardWillHide",lua_cocos2dx_ui_EditBox_keyboardWillHide);
-        tolua_function(tolua_S,"touchDownAction",lua_cocos2dx_ui_EditBox_touchDownAction);
+        tolua_function(tolua_S,"openKeyboard",lua_cocos2dx_ui_EditBox_openKeyboard);
         tolua_function(tolua_S,"setPlaceholderFont",lua_cocos2dx_ui_EditBox_setPlaceholderFont);
         tolua_function(tolua_S,"setFontSize",lua_cocos2dx_ui_EditBox_setFontSize);
         tolua_function(tolua_S,"initWithSizeAndBackgroundSprite",lua_cocos2dx_ui_EditBox_initWithSizeAndBackgroundSprite);
