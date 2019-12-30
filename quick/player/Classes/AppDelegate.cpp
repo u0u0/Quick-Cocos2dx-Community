@@ -50,7 +50,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     // initialize director
     auto director = Director::getInstance();
-    director->setProjection(Director::Projection::_2D);
+//    director->setProjection(Director::Projection::_2D);
     
     // turn on display FPS
     director->setDisplayStats(true);
