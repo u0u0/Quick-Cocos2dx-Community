@@ -878,6 +878,7 @@
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MARKETING_VERSION = "3.7.8 Release";
 				OTHER_LDFLAGS = (
 					"-image_base",
 					100000000,
@@ -909,6 +910,7 @@
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MARKETING_VERSION = "3.7.8 Release";
 				OTHER_LDFLAGS = (
 					"-image_base",
 					100000000,

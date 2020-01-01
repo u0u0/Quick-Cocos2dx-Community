@@ -1,3 +1,30 @@
+Quick-Cocos2dx-Community v3.7.8 Release
+
+[新增] 重构TMXXMLParser、TMXMap与TMXLayer，实现对TiledMap 1.2以上新功能的支持。
+[新增] 添加GrayScale着色器，Lua层可使用。
+
+[改进] display增加颜色值常量定义。
+[改进] spine eventData 同时返回默认值和当前值，满足不同需求。
+[改进] Mac console 窗口中的字体修改为蓝色，避免在黑色主题下看不清字的问题。
+[改进] iOS VideoPlayer 改为 AVPlayerViewController, 迎合苹果新政策。
+[改进] 龙骨新增接口绑定: attackState:setTimeScale(scale)
+[改进] Xcode中OpenAL.framework标记为即DEPRECATED，使用开源openal库替代，内部使用CoreAudio驱动。
+[改进] Sqlite库更新到Version 3.30.1。
+[改进] network.HTTP getResponseString()可以正确处理二进制数据的情况。
+[改进] 同步editbox优化，touchDownAction改为openKeyboard。
+
+[删除] 去掉原来Player才使用的editbox封装，项目并未使用这层封装。
+
+[修正] audio.resume()只恢复暂停状态的source
+[修正] win32 FileUtils::isFileExistInternal() 内存泄漏修正
+[修正] iOS WKWebView 正确触发onJsCallback
+[修正] Node::getChildren()强制重拍节点，解决在当前帧添加触摸事件引发的事件分发层级错误问题
+[修正] MacOS Catalina 系统TTF字体显示错误修正。
+[修正] DecodeOGG 内存泄漏修正.
+[修正] audio.stop()主动释放buffer引用，便于buffer回收。
+[修正] display.newSprite 修正cc.Sprite.create的错误参数传递。
+[修正] setFrameSize不应该影响_designResolutionSize.
+
 Quick-Cocos2dx-Community v3.7.7 Release
 
 [新增] FastTMXLayer 支持设置透明度和颜色。
