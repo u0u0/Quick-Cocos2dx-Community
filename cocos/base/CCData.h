@@ -80,6 +80,27 @@ public:
     /** Check whether the data is null. */
     bool isNull() const;
     
+    /**
+     * Get the internal buffer of data and set data to empty state.
+     *
+     * The ownership of the buffer removed from the data object.
+     * That is the user have to free the returned buffer.
+     * The data object is set to empty state, that is internal buffer is set to nullptr
+     * and size is set to zero.
+     * Usage:
+     * @code
+     *  Data d;
+     *  // ...
+     *  ssize_t size;
+     *  unsigned char* buffer = d.takeBuffer(&size);
+     *  // use buffer and size
+     *  free(buffer);
+     * @endcode
+     *
+     * @param size Will fill with the data buffer size in bytes, if you do not care buffer size, pass nullptr.
+     * @return the internal data buffer, free it after use.
+     */
+    unsigned char* takeBuffer(ssize_t* size);
 private:
     void move(Data& other);
     

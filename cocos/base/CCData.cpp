@@ -121,4 +121,13 @@ void Data::clear()
     _size = 0;
 }
 
+unsigned char* Data::takeBuffer(ssize_t* size)
+{
+    auto buffer = getBytes();
+    if (size)
+        *size = getSize();
+    fastSet(nullptr, 0);
+    return buffer;
+}
+
 NS_CC_END
