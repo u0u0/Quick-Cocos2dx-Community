@@ -254,6 +254,7 @@ TOLUA_API int register_audio_module(lua_State* L)
         
         // binding userdata to new metatable
         luaL_register(L,"Rapid2D_CAudio", audio_funcs);
+        lua_pop(L, 1);  /* pop Rapid2D_CAudio */
     }
     lua_pop(L, 1);
     
