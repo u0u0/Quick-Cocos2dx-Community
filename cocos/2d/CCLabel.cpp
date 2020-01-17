@@ -591,6 +591,13 @@ void Label::alignText()
             _batchNodes.push_back(batchNode);
         }
     }
+    
+    // optimize for one-texture-only sceneario
+    // if multiple textures, then we should count how many chars
+    // are per texture
+    if (_batchNodes.size() == 1)
+        _batchNodes.at(0)->reserveCapacity(_currentUTF16String.size());
+    
     LabelTextFormatter::createStringSprites(this);    
     if(_maxLineWidth > 0 && _contentSize.width > _maxLineWidth && LabelTextFormatter::multilineText(this) )      
         LabelTextFormatter::createStringSprites(this);
