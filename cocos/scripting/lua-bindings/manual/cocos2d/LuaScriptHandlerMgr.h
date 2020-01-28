@@ -90,7 +90,6 @@ public:
     {
         NODE = 0,
         CALLFUNC,
-        ACCELEROMETER,
         
         WEBSOCKET_OPEN,
         WEBSOCKET_MESSAGE,
