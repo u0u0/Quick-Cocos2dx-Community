@@ -23,3 +23,12 @@ function Widget:setTouchEnabled(enable)
 		cfunc(self, enable)
 	end
 end
+
+-- The easiest way to support addClickEventListener
+function Widget:addClickEventListener(callback)
+	self:addTouchEventListener(function(ref, eventType)
+		if cc.EventCode.ENDED == eventType then
+			callback()
+		end
+	end)
+end
