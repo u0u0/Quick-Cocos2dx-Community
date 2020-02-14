@@ -1780,17 +1780,22 @@ int lua_register_dragonBones_AnimationState(lua_State* tolua_S)
 
 TOLUA_API int register_dragonBones_manual(lua_State* tolua_S)
 {
-    tolua_open(tolua_S);
+    lua_getglobal(tolua_S, "_G");
+    if (lua_istable(tolua_S, -1))//stack:...,_G,
+    {
+        tolua_open(tolua_S);
     
-    tolua_module(tolua_S, "dragonBones", 0);
-    tolua_beginmodule(tolua_S, "dragonBones");
+        tolua_module(tolua_S, "dragonBones", 0);
+        tolua_beginmodule(tolua_S, "dragonBones");
     
-    lua_register_dragonBones_AnimationState(tolua_S);
-    lua_register_dragonBones_Armature(tolua_S);
-    lua_register_dragonBones_Animation(tolua_S);
-    lua_register_dragonBones_CCArmatureDisplay(tolua_S);
-    lua_register_dragonBones_CCFactory(tolua_S);
+        lua_register_dragonBones_AnimationState(tolua_S);
+        lua_register_dragonBones_Armature(tolua_S);
+        lua_register_dragonBones_Animation(tolua_S);
+        lua_register_dragonBones_CCArmatureDisplay(tolua_S);
+        lua_register_dragonBones_CCFactory(tolua_S);
     
-    tolua_endmodule(tolua_S);
+        tolua_endmodule(tolua_S);
+    }
+    lua_pop(tolua_S, 1);
     return 1;
 }
