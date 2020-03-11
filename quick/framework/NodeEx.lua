@@ -240,7 +240,7 @@ function Node:setTouchEnabled(enable)
 	end
 
 	if not enable then
-		return
+		return self
 	end
 
 	assert(self._LuaListeners, "Error: addNodeEventListener(cc.NODE_TOUCH_EVENT, func) first!")
@@ -331,6 +331,7 @@ function Node:setTouchEnabled(enable)
 		end, c.Handler.EVENT_TOUCHES_CANCELLED)
 	end
 	eventDispatcher:addEventListenerWithSceneGraphPriority(self._luaTouchListener, self)
+	return self
 end
 
 function Node:setTouchSwallowEnabled(enable)

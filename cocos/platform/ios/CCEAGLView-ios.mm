@@ -250,6 +250,10 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 - (void) layoutSubviews
 {
+    if (cocos2d::Director::getInstance()->isPaused()) {
+        return;
+    }
+    
     [renderer_ resizeFromLayer:(CAEAGLLayer*)self.layer];
     size_ = [renderer_ backingSize];
 
