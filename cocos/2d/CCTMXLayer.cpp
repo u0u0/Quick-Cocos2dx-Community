@@ -3,6 +3,7 @@ Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2020 cocos2d-lua.org
 
 http://www.cocos2d-x.org
 
@@ -424,7 +425,8 @@ Value TMXLayer::getProperty(const std::string& propertyName) const
 Sprite *TMXLayer::createTileSprite(intptr_t z, uint32_t gid)
 {
 	TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
-	Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
+    TMXTilesetImage *tilesetImage = tileset->getImageForGID(gid);
+	Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tilesetImage->sourceImage);
 	Rect rect = tileset->getRectForGID(gid);
     rect = CC_RECT_PIXELS_TO_POINTS(rect);
     // only apply fixArtifacts on TMXOrientationOrtho
@@ -438,7 +440,8 @@ Sprite *TMXLayer::createTileSprite(intptr_t z, uint32_t gid)
 void TMXLayer::setTileTexture(Sprite* sprite, uint32_t gid)
 {
     TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
-    Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tileset->_sourceImage);
+    TMXTilesetImage *tilesetImage = tileset->getImageForGID(gid);
+    Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tilesetImage->sourceImage);
     Rect rect = tileset->getRectForGID(gid);
     sprite->setTexture(texture);
     sprite->setTextureRect(rect, false, rect.size);

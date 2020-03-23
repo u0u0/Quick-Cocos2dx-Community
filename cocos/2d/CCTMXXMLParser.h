@@ -3,6 +3,7 @@ Copyright (c) 2009-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2020 cocos2d-lua.org
 
 http://www.cocos2d-x.org
 
@@ -38,6 +39,7 @@ THE SOFTWARE.
 #include "2d/CCTMXObjectGroup.h" // needed for Vector<TMXObjectGroup*> for binding
 
 #include <string>
+#include <map>
 
 NS_CC_BEGIN
 
@@ -167,32 +169,31 @@ public:
 
 This information is obtained from the TMX file. 
 */
+class TMXTilesetImage
+{
+public:
+    std::string sourceImage;
+    Size imageSize;
+    std::string originSourceImage;
+};
+
 class CC_DLL TMXTilesetInfo : public Ref
 {
 public:
-    std::string     _name;
-    int             _firstGid;
-    Size            _tileSize;
-    int             _spacing;
-    int             _margin;
-    Vec2            _tileOffset;
-    //! filename containing the tiles (should be spritesheet / texture atlas)
-    std::string     _sourceImage;
-    //! size in pixels of the image
-    Size            _imageSize;
-    std::string     _originSourceImage;
+    std::string _name;
+    int _firstGid;
+    Size _tileSize;
+    int _spacing;
+    int _margin;
+    Vec2 _tileOffset;
+    std::map<int, TMXTilesetImage*> _images; // gid -> image
+    bool isCOI; // Collection of Images
 
 public:
-    /**
-     * @js ctor
-     */
     TMXTilesetInfo();
-    /**
-     * @js NA
-     * @lua NA
-     */
     virtual ~TMXTilesetInfo();
     Rect getRectForGID(uint32_t gid);
+    TMXTilesetImage *getImageForGID(uint32_t gid);
 };
 
 /** @brief TMXMapInfo contains the information about the map like:

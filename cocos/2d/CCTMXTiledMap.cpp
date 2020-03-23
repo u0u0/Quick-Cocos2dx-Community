@@ -3,6 +3,7 @@ Copyright (c) 2009-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2020 cocos2d-lua.org
 
 http://www.cocos2d-x.org
 
@@ -102,9 +103,9 @@ TMXTiledMap::~TMXTiledMap()
     for (auto iter = _tilesets.crbegin(), iterCrend = _tilesets.crend(); iter != iterCrend; ++iter) {
         TMXTilesetInfo* tilesetInfo = *iter;
         if (tilesetInfo) {
-            Texture2D *texture = textureCache->addImage(tilesetInfo->_sourceImage);
-            if (texture) {
-                texture->release();
+            for(auto it = tilesetInfo->_images.begin(); it != tilesetInfo->_images.end(); ++it) {
+                Texture2D *texture = textureCache->addImage(it->second->sourceImage);
+                CC_SAFE_RELEASE(texture);
             }
         }
     }
@@ -180,12 +181,14 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
     for (auto iter = _tilesets.crbegin(), iterCrend = _tilesets.crend(); iter != iterCrend; ++iter) {
         TMXTilesetInfo* tilesetInfo = *iter;
         if (tilesetInfo) {
-            Texture2D *texture = textureCache->addImage(tilesetInfo->_sourceImage);
-            CC_ASSERT(texture != nullptr);
-            // By default all the tiles are aliased, avoid black line.
-            texture->setAliasTexParameters();
-            tilesetInfo->_imageSize = texture->getContentSizeInPixels();
-            texture->retain();
+            for(auto it = tilesetInfo->_images.begin(); it != tilesetInfo->_images.end(); ++it) {
+                Texture2D *texture = textureCache->addImage(it->second->sourceImage);
+                CC_ASSERT(texture != nullptr);
+                // By default all the tiles are aliased, avoid black line.
+                texture->setAliasTexParameters();
+                it->second->imageSize = texture->getContentSizeInPixels();
+                texture->retain();
+            }
         }
     }
     

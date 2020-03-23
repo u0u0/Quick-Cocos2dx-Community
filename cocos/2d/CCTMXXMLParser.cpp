@@ -4,6 +4,7 @@ Copyright (c) 2009-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2020 cocos2d-lua.org
 
 http://www.cocos2d-x.org
 
@@ -115,17 +116,19 @@ void TMXGroupInfo::setProperties(ValueMap var)
 
 // implementation TMXTilesetInfo
 TMXTilesetInfo::TMXTilesetInfo()
-    :_firstGid(0)
-    ,_tileSize(Size::ZERO)
-    ,_spacing(0)
-    ,_margin(0)
-    ,_imageSize(Size::ZERO)
+: _firstGid(0)
+, _tileSize(Size::ZERO)
+, _spacing(0)
+, _margin(0)
+, isCOI(false)
 {
 }
 
 TMXTilesetInfo::~TMXTilesetInfo()
 {
-    CCLOGINFO("deallocing TMXTilesetInfo: %p", this);
+    for(auto it = _images.begin(); it != _images.end(); ++it) {
+        delete it->second;
+    }
 }
 
 Rect TMXTilesetInfo::getRectForGID(uint32_t gid)
@@ -134,16 +137,30 @@ Rect TMXTilesetInfo::getRectForGID(uint32_t gid)
     rect.size = _tileSize;
     gid &= kTMXFlippedMask;
     gid = gid - _firstGid;
+    if (isCOI) {
+        rect.size = _images.find(gid)->second->imageSize;
+        return rect;
+    }
     // max_x means the column count in tile map
     // in the origin:
     // max_x = (int)((_imageSize.width - _margin*2 + _spacing) / (_tileSize.width + _spacing));
     // but in editor "Tiled", _margin variable only effect the left side
     // for compatible with "Tiled", change the max_x calculation
-    int max_x = (int)((_imageSize.width - _margin + _spacing) / (_tileSize.width + _spacing));
+    int max_x = (int)((_images.find(0)->second->imageSize.width - _margin + _spacing) / (_tileSize.width + _spacing));
     
     rect.origin.x = (gid % max_x) * (_tileSize.width + _spacing) + _margin;
     rect.origin.y = (gid / max_x) * (_tileSize.height + _spacing) + _margin;
     return rect;
+}
+
+TMXTilesetImage *TMXTilesetInfo::getImageForGID(uint32_t gid)
+{
+    if (isCOI) {
+        gid &= kTMXFlippedMask;
+        gid = gid - _firstGid;
+        return _images.find(gid)->second;
+    }
+    return _images.find(0)->second; // Type of imageset
 }
 
 // implementation TMXMapInfo
@@ -361,6 +378,9 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             _tilesets.pushBack(tileset);
             tileset->release();
         }
+    } else if (elementName == "grid") {
+        TMXTilesetInfo* info = _tilesets.back();
+        info->isCOI = true; // Tileset type "Collection of image" has this tag
     } else if (elementName == "tile") {
         if (_parentElement == TMXPropertyLayer) {
             TMXLayerInfo* layer = _layers.back();
@@ -494,17 +514,25 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             } else {
                 _curImageLayer->_sourceImage = _resources + "/" + imagename;
             }
+            _curImageLayer->_imageSize.width = attributeDict["width"].asFloat();
+            _curImageLayer->_imageSize.height = attributeDict["height"].asFloat();
         } else {
-            TMXTilesetInfo* tileset = _tilesets.back();
+            TMXTilesetInfo* info = _tilesets.back();
+            int tileID = info->isCOI ? (_parentGID - info->_firstGid) : 0;
+            TMXTilesetImage *tilesetImage = new TMXTilesetImage();
+            info->_images.insert(std::pair<int, TMXTilesetImage *>(tileID, tilesetImage));
+            
             std::string imagename = attributeDict["source"].asString();
-            tileset->_originSourceImage = imagename;
+            tilesetImage->originSourceImage = imagename;
             // image file is relative to the map file. Also use relative path here to make hot update happey.
             if (_TMXFileName.size() > 0) {
                 string dir = _TMXFileName.substr(0, _TMXFileName.find_last_of("/") + 1);
-                tileset->_sourceImage = dir + imagename;
+                tilesetImage->sourceImage = dir + imagename;
             } else {
-                tileset->_sourceImage = _resources + "/" + imagename;
+                tilesetImage->sourceImage = _resources + "/" + imagename;
             }
+            tilesetImage->imageSize.width = attributeDict["width"].asFloat();
+            tilesetImage->imageSize.height = attributeDict["height"].asFloat();
         }
     } else if (elementName == "data") {
         std::string encoding = attributeDict["encoding"].asString();
