@@ -109,7 +109,7 @@ static AppDelegate s_sharedApplication;
     // audio interruption
     // benbritten.com/2009/02/02/restarting-openal-after-application-interruption-on-the-iphone/
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    [audioSession setCategory:AVAudioSessionCategorySoloAmbient withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AVAudioSessionInterruptionNotification:) name:AVAudioSessionInterruptionNotification object:audioSession];
     return YES;
 }

@@ -399,7 +399,6 @@ cc.mat4 = cc.mat4 or {}
 function cc.mat4.new(...)
     local params = {...}
     local size   = #params
-
     local obj = {}
 
     if 1 == size then
@@ -412,10 +411,8 @@ function cc.mat4.new(...)
             end
         end
     elseif 16 == size then
-        if params[i] ~= nil then
-            mat4[i] = params[i]
-        else
-            mat4[i] = 0
+        for i= 1, 16 do
+            obj[i] = params[i]
         end
     end
 

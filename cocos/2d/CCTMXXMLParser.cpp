@@ -791,6 +791,9 @@ void TMXMapInfo::endElement(void* /*ctx*/, const char *name)
             unsigned char *buffer;
             TMXLayerInfo* layer = _layers.back();
             _storingCharacters = false;
+            
+            // windows tilemap create with csv data, may have \r to ddo newline
+            _currentString.erase(std::remove(_currentString.begin(), _currentString.end(), '\r'), _currentString.end());
 
             vector<string> gidTokens;
             istringstream filestr(_currentString);
