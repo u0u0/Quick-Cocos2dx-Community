@@ -1377,105 +1377,6 @@ tolua_lerror:
     return 0;
 }
 
-static int lua_dragonBones_AnimationState_setResetToPose(lua_State* L)
-{
-    int argc = 0;
-    dragonBones::AnimationState *obj = nullptr;
-    
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertype(L, 1, "dragonBones.AnimationState", 0, &tolua_err)) goto tolua_lerror;
-#endif
-    obj = static_cast<dragonBones::AnimationState *>(tolua_tousertype(L, 1, 0));
-    
-    argc = lua_gettop(L) - 1;
-    if (argc == 1)
-    {
-#if COCOS2D_DEBUG >= 1
-        if (!tolua_isboolean(L, 2, 0, &tolua_err))
-        {
-            goto tolua_lerror;
-        }
-#endif
-        int resetToPose = tolua_toboolean(L, 2, true);
-        obj->resetToPose = resetToPose;
-        return 0;
-    }
-    luaL_error(L, "'setResetToPose' function of dragonBones.AnimationState has wrong number of arguments: %d, was expecting 1\n", argc);
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(L, "#ferror in function 'setResetToPose'.", &tolua_err);
-#endif
-    return 0;
-}
-
-static int lua_dragonBones_AnimationState_setAutoFadeOutTime(lua_State* L)
-{
-    int argc = 0;
-    dragonBones::AnimationState *obj = nullptr;
-    
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertype(L, 1, "dragonBones.AnimationState", 0, &tolua_err)) goto tolua_lerror;
-#endif
-    obj = static_cast<dragonBones::AnimationState *>(tolua_tousertype(L, 1, 0));
-    
-    argc = lua_gettop(L) - 1;
-    if (argc == 1)
-    {
-#if COCOS2D_DEBUG >= 1
-        if (!tolua_isnumber(L, 2, 0, &tolua_err))
-        {
-            goto tolua_lerror;
-        }
-#endif
-        float autoFadeOutTime = (float)tolua_tonumber(L, 2, true);
-        obj->autoFadeOutTime = autoFadeOutTime;
-        return 0;
-    }
-    luaL_error(L, "'setAutoFadeOutTime' function of dragonBones.AnimationState has wrong number of arguments: %d, was expecting 1\n", argc);
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(L, "#ferror in function 'setAutoFadeOutTime'.", &tolua_err);
-#endif
-    return 0;
-}
-
-static int lua_dragonBones_AnimationState_setTimeScale(lua_State* L)
-{
-    int argc = 0;
-    dragonBones::AnimationState *obj = nullptr;
-    
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertype(L, 1, "dragonBones.AnimationState", 0, &tolua_err)) goto tolua_lerror;
-#endif
-    obj = static_cast<dragonBones::AnimationState *>(tolua_tousertype(L, 1, 0));
-    
-    argc = lua_gettop(L) - 1;
-    if (argc == 1)
-    {
-#if COCOS2D_DEBUG >= 1
-        if (!tolua_isnumber(L, 2, 0, &tolua_err))
-        {
-            goto tolua_lerror;
-        }
-#endif
-        float timeScale = (float)tolua_tonumber(L, 2, true);
-        obj->timeScale = timeScale;
-        return 0;
-    }
-    luaL_error(L, "'setTimeScale' function of dragonBones.AnimationState has wrong number of arguments: %d, was expecting 1\n", argc);
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(L, "#ferror in function 'setTimeScale'.", &tolua_err);
-#endif
-    return 0;
-}
-
 static int lua_dragonBones_AnimationState_isFadeIn(lua_State* L)
 {
     int argc = 0;
@@ -1744,12 +1645,344 @@ tolua_lerror:
     return 0;
 }
 
+static int lua_dragonBones_get_displayControl(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_get_displayControl'", nullptr);
+        return 0;
+    }
+#endif
+
+    lua_pushboolean(L, cobj->displayControl);
+    return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_get_displayControl'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_set_displayControl(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_set_displayControl'", nullptr);
+    return 0;
+    }
+#endif
+
+    if lua_isboolean(L, 2) {
+        cobj->displayControl = lua_toboolean(L, 2);
+        return 0;
+    }
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_set_displayControl'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_get_resetToPose(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_get_resetToPose'", nullptr);
+        return 0;
+    }
+#endif
+
+    lua_pushboolean(L, cobj->resetToPose);
+    return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_get_resetToPose'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_set_resetToPose(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_set_resetToPose'", nullptr);
+    return 0;
+    }
+#endif
+
+    if lua_isboolean(L, 2) {
+        cobj->resetToPose = lua_toboolean(L, 2);
+        return 0;
+    }
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_set_resetToPose'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_get_playTimes(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_get_playTimes'", nullptr);
+        return 0;
+    }
+#endif
+
+    lua_pushinteger(L, cobj->playTimes);
+    return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_get_playTimes'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_set_playTimes(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_set_playTimes'", nullptr);
+    return 0;
+    }
+#endif
+
+    if (lua_isnumber(L, 2)) {
+        cobj->playTimes = (unsigned)lua_tointeger(L, 2);
+        return 0;
+    }
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_set_playTimes'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_get_timeScale(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_get_timeScale'", nullptr);
+        return 0;
+    }
+#endif
+
+    lua_pushnumber(L, cobj->timeScale);
+    return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_get_timeScale'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_set_timeScale(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_set_timeScale'", nullptr);
+    return 0;
+    }
+#endif
+
+    if (lua_isnumber(L, 2)) {
+        cobj->timeScale = lua_tonumber(L, 2);
+        return 0;
+    }
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_set_timeScale'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_get_weight(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_get_weight'", nullptr);
+        return 0;
+    }
+#endif
+
+    lua_pushnumber(L, cobj->weight);
+    return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_get_weight'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_set_weight(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_set_weight'", nullptr);
+    return 0;
+    }
+#endif
+
+    if (lua_isnumber(L, 2)) {
+        cobj->weight = lua_tonumber(L, 2);
+        return 0;
+    }
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_set_weight'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_get_autoFadeOutTime(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_get_autoFadeOutTime'", nullptr);
+        return 0;
+    }
+#endif
+
+    lua_pushnumber(L, cobj->autoFadeOutTime);
+    return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_get_autoFadeOutTime'.",&tolua_err);
+    return 0;
+#endif
+}
+
+static int lua_dragonBones_set_autoFadeOutTime(lua_State* L)
+{
+    dragonBones::AnimationState *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (!tolua_isusertype(L,1,"dragonBones.AnimationState",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (dragonBones::AnimationState *)tolua_tousertype(L,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) {
+        tolua_error(L,"invalid 'cobj' in function 'lua_dragonBones_set_autoFadeOutTime'", nullptr);
+    return 0;
+    }
+#endif
+
+    if (lua_isnumber(L, 2)) {
+        cobj->autoFadeOutTime = lua_tonumber(L, 2);
+        return 0;
+    }
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(L,"#ferror in function 'lua_dragonBones_set_autoFadeOutTime'.",&tolua_err);
+    return 0;
+#endif
+}
+
 int lua_register_dragonBones_AnimationState(lua_State* tolua_S)
 {
     tolua_usertype(tolua_S, "dragonBones.AnimationState");
     tolua_cclass(tolua_S, "AnimationState", "dragonBones.AnimationState", "", nullptr);
     
     tolua_beginmodule(tolua_S, "AnimationState");
+        // variables
+        tolua_variable(tolua_S, "displayControl", lua_dragonBones_get_displayControl, lua_dragonBones_set_displayControl);
+        tolua_variable(tolua_S, "resetToPose", lua_dragonBones_get_resetToPose, lua_dragonBones_set_resetToPose);
+        tolua_variable(tolua_S, "playTimes", lua_dragonBones_get_playTimes, lua_dragonBones_set_playTimes);
+        tolua_variable(tolua_S, "timeScale", lua_dragonBones_get_timeScale, lua_dragonBones_set_timeScale);
+        tolua_variable(tolua_S, "weight", lua_dragonBones_get_weight, lua_dragonBones_set_weight);
+        tolua_variable(tolua_S, "autoFadeOutTime", lua_dragonBones_get_autoFadeOutTime, lua_dragonBones_set_autoFadeOutTime);
+        // functions
         tolua_function(tolua_S, "play", lua_dragonBones_AnimationState_play);
         tolua_function(tolua_S, "stop", lua_dragonBones_AnimationState_stop);
         tolua_function(tolua_S, "fadeOut", lua_dragonBones_AnimationState_fadeOut);
@@ -1757,9 +1990,6 @@ int lua_register_dragonBones_AnimationState(lua_State* tolua_S)
         tolua_function(tolua_S, "addBoneMask", lua_dragonBones_AnimationState_addBoneMask);
         tolua_function(tolua_S, "removeBoneMask", lua_dragonBones_AnimationState_removeBoneMask);
         tolua_function(tolua_S, "removeAllBoneMask", lua_dragonBones_AnimationState_removeAllBoneMask);
-        tolua_function(tolua_S, "setResetToPose", lua_dragonBones_AnimationState_setResetToPose);
-        tolua_function(tolua_S, "setAutoFadeOutTime", lua_dragonBones_AnimationState_setAutoFadeOutTime);
-        tolua_function(tolua_S, "setTimeScale", lua_dragonBones_AnimationState_setTimeScale);
         tolua_function(tolua_S, "isFadeIn", lua_dragonBones_AnimationState_isFadeIn);
         tolua_function(tolua_S, "isFadeOut", lua_dragonBones_AnimationState_isFadeOut);
         tolua_function(tolua_S, "isFadeComplete", lua_dragonBones_AnimationState_isFadeComplete);
