@@ -1780,6 +1780,14 @@ static int tolua_cocos2dx_setBlendFunc(lua_State* tolua_S,const char* className)
     self = static_cast<T*>(tolua_tousertype(tolua_S,1,0));
     
     argc = lua_gettop(tolua_S) - 1;
+    if (argc == 1)
+    {
+        cocos2d::BlendFunc arg0;
+        if (!luaval_to_blendfunc(tolua_S, 2, &arg0, StringUtils::format("%s%s",className, ":setBlendFunc").c_str()))
+            return 0;
+        self->setBlendFunc(arg0);
+        return 0;
+    }
     if (2 == argc)
     {
         GLenum src, dst;
@@ -1793,7 +1801,6 @@ static int tolua_cocos2dx_setBlendFunc(lua_State* tolua_S,const char* className)
         self->setBlendFunc(blendFunc);
         return 0;
     }
-
     
     luaL_error(tolua_S, "'setBlendFunc' has wrong number of arguments: %d, was expecting %d\n", argc, 2);
     return 0;

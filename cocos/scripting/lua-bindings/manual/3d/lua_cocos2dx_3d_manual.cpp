@@ -51,6 +51,15 @@ int lua_cocos2dx_3d_Sprite3D_setBlendFunc(lua_State* L)
 #endif
     
     argc = lua_gettop(L)-1;
+    if (argc == 1)
+    {
+        cocos2d::BlendFunc arg0;
+        if (!luaval_to_blendfunc(L, 2, &arg0, "cc.Sprite3D:setBlendFunc"))
+            return 0;
+        cobj->setBlendFunc(arg0);
+        lua_settop(L, 1);
+        return 1;
+    }
     if (argc == 2)
     {
         GLenum src, dst;
