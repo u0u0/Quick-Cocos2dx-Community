@@ -1,3 +1,24 @@
+Quick-Cocos2dx-Community v3.7.9 Release
+
+[新增] ccui.Widget 添加 addClickEventListener 支持。
+[新增] ccui.ActionTimeline:IsAnimationInfoExists()。
+[新增] Tiledmap 添加  tileset: collection of images 的支持。
+[新增] setBlendFunc 添加table参数的支持。
+
+[改进] Mac target最小需求改为10.11， iOS 为 9.0 。
+[改进] openal 库 mac和iOS升级到1.20 , 原1.19库存在性能bug。
+[改进] Spine runtime 升级到 3.8。
+[改进] libpng 升级到 1.6.37。
+[改进] openssh 升级到 1.0.2u。
+[改进] 去无用的Lua事件，注意需要同步修改framework下的Cocos2dConstants.lua.
+[改进] iOS音频播放设置由AVAudioSessionCategoryPlayback 改为 AVAudioSessionCategorySoloAmbient。
+[改进] dragonBones 的public 变量改用变量的封装方式get\set，注意接口调用方式有变。
+
+[修正] lua_audio binding代码盏平衡修正。
+[修正] fix dragonBones binding 正确初始化，由上一条改进引发。 
+[修正] not resize textureatlas multiple times on Label::create(), https://github.com/cocos2d/cocos2d-x/pull/16358/。
+[修正] fix iOS 13.1 锁屏回游戏渲染卡死。
+
 Quick-Cocos2dx-Community v3.7.8 Release
 
 [新增] 重构TMXXMLParser、TMXMap与TMXLayer，实现对TiledMap 1.2以上新功能的支持。
