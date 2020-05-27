@@ -367,6 +367,7 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
                 tileset->_firstGid = _currentFirstGID;
                 _currentFirstGID = 0;
             }
+            _parentGID = tileset->_firstGid;
             
             tileset->_spacing = attributeDict["spacing"].asInt();
             tileset->_margin = attributeDict["margin"].asInt();
