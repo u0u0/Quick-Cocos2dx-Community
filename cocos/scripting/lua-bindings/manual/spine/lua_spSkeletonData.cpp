@@ -33,12 +33,13 @@ static int lua_cocos2dx_SkeletonData_create(lua_State* L)
         lua_spSkeletonData *luaSpData = new lua_spSkeletonData;
         Atlas *atlas = new (__FILE__, __LINE__) Atlas(atlasFile, &luaSpData->textureLoader, true);
         AttachmentLoader *attachmentLoader = new (__FILE__, __LINE__) Cocos2dAtlasAttachmentLoader(atlas);
-        SkeletonJson json(attachmentLoader);
+        SkeletonJson json(attachmentLoader);// SkeletonJson not own AttachmentLoader
         SkeletonData *skeletonData = json.readSkeletonDataFile(skeletonDataFile);
         CCASSERT(skeletonData, !json.getError().isEmpty() ? json.getError().buffer() : "Error reading skeleton data.");
         
         luaSpData->atlas = atlas;
         luaSpData->data = skeletonData;
+        luaSpData->attachmentLoader = attachmentLoader;
         
         tolua_pushusertype(L,(void*)luaSpData,"sp.SkeletonData");
         tolua_register_gc(L,lua_gettop(L));
@@ -58,6 +59,7 @@ int lua_cocos2dx_SkeletonData_finalize(lua_State* L)
     lua_spSkeletonData *luaSpData = static_cast<lua_spSkeletonData *>(tolua_tousertype(L, 1, 0));
     delete luaSpData->data;
     delete luaSpData->atlas;
+    delete luaSpData->attachmentLoader;
     delete luaSpData;
     CCLOG("sp.SkeletonData freed");
     return 0;

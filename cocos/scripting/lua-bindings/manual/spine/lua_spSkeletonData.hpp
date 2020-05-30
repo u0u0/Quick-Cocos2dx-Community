@@ -19,6 +19,7 @@ typedef struct{
     spine::Atlas *atlas;
     spine::SkeletonData *data;
     spine::Cocos2dTextureLoader textureLoader;
+    spine::AttachmentLoader *attachmentLoader;
 }lua_spSkeletonData;
 
 TOLUA_API int register_spSkeletonData_manual(lua_State* L);
