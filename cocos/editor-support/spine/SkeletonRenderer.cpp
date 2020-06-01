@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated May 1, 2019. Replaces all prior versions.
+ * Last updated January 1, 2020. Replaces all prior versions.
  *
- * Copyright (c) 2013-2019, Esoteric Software LLC
+ * Copyright (c) 2013-2020, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -15,16 +15,16 @@
  * Spine Editor license and redistribution of the Products in any form must
  * include this license and copyright notice.
  *
- * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE LLC "AS IS" AND ANY EXPRESS
- * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
- * NO EVENT SHALL ESOTERIC SOFTWARE LLC BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS
- * INTERRUPTION, OR LOSS OF USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THE SPINE RUNTIMES ARE PROVIDED BY ESOTERIC SOFTWARE LLC "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL ESOTERIC SOFTWARE LLC BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES,
+ * BUSINESS INTERRUPTION, OR LOSS OF USE, DATA, OR PROFITS) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THE SPINE RUNTIMES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
 #include <spine/spine-cocos2dx.h>
@@ -128,7 +128,7 @@ namespace spine {
 			}
 		}
 #if COCOS2D_VERSION < 0x00040000
-		setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
 #endif
 	}
 
@@ -641,6 +641,7 @@ namespace spine {
 #endif
 
 		DrawNode* drawNode = DrawNode::create();
+        drawNode->setGlobalZOrder(getGlobalZOrder()); 
 
 		// Draw bounding rectangle
 		if (_debugBoundingRect) {
@@ -1053,19 +1054,19 @@ namespace spine {
 			auto director = Director::getInstance();
 			auto scene = director->getRunningScene();
 						
-			if (!scene || (scene && CameraFlag::DEFAULT != Camera::getVisitingCamera()->getCameraFlag()))
-				return false;
+            if (!scene || (scene && CameraFlag::DEFAULT != Camera::getVisitingCamera()->getCameraFlag()))
+                return false;
 
             Vec2 visibleOrigin = director->getVisibleOrigin();
             Size visibleSize = director->getVisibleSize();
-			Rect visibleRect(visibleOrigin.x, visibleOrigin.y, visibleSize.width, visibleSize.height);
-			
-			// transform center point to screen space
-			float hSizeX = rect.size.width/2;
-			float hSizeY = rect.size.height/2;
-			Vec3 v3p(rect.origin.x + hSizeX, rect.origin.y + hSizeY, 0);
-			transform.transformPoint(&v3p);
-			//Vec2 v2p = Camera::getVisitingCamera()->projectGL(v3p);
+            Rect visibleRect(visibleOrigin.x, visibleOrigin.y, visibleSize.width, visibleSize.height);
+            
+            // transform center point to screen space
+            float hSizeX = rect.size.width/2;
+            float hSizeY = rect.size.height/2;
+            Vec3 v3p(rect.origin.x + hSizeX, rect.origin.y + hSizeY, 0);
+            transform.transformPoint(&v3p);
+            //Vec2 v2p = Camera::getVisitingCamera()->projectGL(v3p);
             Vec2 v2p(v3p.x, v3p.y);
 
 			// convert content size to world coordinates

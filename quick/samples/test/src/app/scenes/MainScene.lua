@@ -11,6 +11,7 @@ function MainScene:ctor()
 		"Test_AccelerometerEvent",
 		"Test_CocosStudio",
 		"Test_Audio",
+		"Test_Spine",
 	}
 
 	local scrollView = ccui.ScrollView:create()
