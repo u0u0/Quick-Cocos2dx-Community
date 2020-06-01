@@ -1,6 +1,6 @@
 /*
 ** Fast function call recorder.
-** Copyright (C) 2005-2017 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2020 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #define lj_ffrecord_c
@@ -866,6 +866,8 @@ static void LJ_FASTCALL recff_string_char(jit_State *J, RecordFFData *rd)
     for (i = 0; J->base[i] != 0; i++)
       tr = emitir(IRT(IR_BUFPUT, IRT_PGC), tr, J->base[i]);
     J->base[0] = emitir(IRT(IR_BUFSTR, IRT_STR), tr, hdr);
+  } else if (i == 0) {
+    J->base[0] = lj_ir_kstr(J, &J2G(J)->strempty);
   }
   UNUSED(rd);
 }
@@ -949,7 +951,8 @@ static void LJ_FASTCALL recff_string_find(jit_State *J, RecordFFData *rd)
 		    str->len-(MSize)start, pat->len)) {
       TRef pos;
       emitir(IRTG(IR_NE, IRT_PGC), tr, trp0);
-      pos = emitir(IRTI(IR_SUB), tr, emitir(IRT(IR_STRREF, IRT_PGC), trstr, tr0));
+      /* Recompute offset. trsptr may not point into trstr after folding. */
+      pos = emitir(IRTI(IR_ADD), emitir(IRTI(IR_SUB), tr, trsptr), trstart);
       J->base[0] = emitir(IRTI(IR_ADD), pos, lj_ir_kint(J, 1));
       J->base[1] = emitir(IRTI(IR_ADD), pos, trplen);
       rd->nres = 2;
@@ -1012,7 +1015,7 @@ static void LJ_FASTCALL recff_string_format(jit_State *J, RecordFFData *rd)
     handle_num:
       tra = lj_ir_tonum(J, tra);
       tr = lj_ir_call(J, id, tr, trsf, tra);
-      if (LJ_SOFTFP) lj_needsplit(J);
+      if (LJ_SOFTFP32) lj_needsplit(J);
       break;
     case STRFMT_STR:
       if (!tref_isstr(tra)) {

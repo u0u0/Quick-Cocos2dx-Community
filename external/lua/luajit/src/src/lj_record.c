@@ -1,6 +1,6 @@
 /*
 ** Trace recorder (bytecode -> SSA IR).
-** Copyright (C) 2005-2017 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2020 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #define lj_record_c
@@ -87,9 +87,9 @@ static void rec_check_slots(jit_State *J)
   BCReg s, nslots = J->baseslot + J->maxslot;
   int32_t depth = 0;
   cTValue *base = J->L->base - J->baseslot;
-  lua_assert(J->baseslot >= 1+LJ_FR2 && J->baseslot < LJ_MAX_JSLOTS);
+  lua_assert(J->baseslot >= 1+LJ_FR2);
   lua_assert(J->baseslot == 1+LJ_FR2 || (J->slot[J->baseslot-1] & TREF_FRAME));
-  lua_assert(nslots < LJ_MAX_JSLOTS);
+  lua_assert(nslots <= LJ_MAX_JSLOTS);
   for (s = 0; s < nslots; s++) {
     TRef tr = J->slot[s];
     if (tr) {
@@ -731,6 +731,8 @@ void lj_record_call(jit_State *J, BCReg func, ptrdiff_t nargs)
   J->framedepth++;
   J->base += func+1+LJ_FR2;
   J->baseslot += func+1+LJ_FR2;
+  if (J->baseslot + J->maxslot >= LJ_MAX_JSLOTS)
+    lj_trace_err(J, LJ_TRERR_STACKOV);
 }
 
 /* Record tail call. */
@@ -1858,6 +1860,8 @@ static void rec_varg(jit_State *J, BCReg dst, ptrdiff_t nresults)
       lj_trace_err_info(J, LJ_TRERR_NYIBC);
     }
   }
+  if (J->baseslot + J->maxslot >= LJ_MAX_JSLOTS)
+    lj_trace_err(J, LJ_TRERR_STACKOV);
 }
 
 /* -- Record allocations -------------------------------------------------- */
@@ -2468,8 +2472,9 @@ void lj_record_ins(jit_State *J)
 #undef rbv
 #undef rcv
 
-  /* Limit the number of recorded IR instructions. */
-  if (J->cur.nins > REF_FIRST+(IRRef)J->param[JIT_P_maxrecord])
+  /* Limit the number of recorded IR instructions and constants. */
+  if (J->cur.nins > REF_FIRST+(IRRef)J->param[JIT_P_maxrecord] ||
+      J->cur.nk < REF_BIAS-(IRRef)J->param[JIT_P_maxirconst])
     lj_trace_err(J, LJ_TRERR_TRACEOV);
 }
 

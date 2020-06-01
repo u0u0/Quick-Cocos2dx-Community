@@ -1,6 +1,6 @@
 /*
 ** x86/x64 IR assembler (SSA IR -> machine code).
-** Copyright (C) 2005-2017 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2020 Mike Pall. See Copyright Notice in luajit.h
 */
 
 /* -- Guard handling ------------------------------------------------------ */
@@ -387,6 +387,7 @@ static Reg asm_fuseloadk64(ASMState *as, IRIns *ir)
       ir->i = (int32_t)(as->mctop - as->mcbot);
       as->mcbot += 8;
       as->mclim = as->mcbot + MCLIM_REDZONE;
+      lj_mcode_commitbot(as->J, as->mcbot);
     }
     as->mrm.ofs = (int32_t)mcpofs(as, as->mctop - ir->i);
     as->mrm.base = RID_RIP;
@@ -1758,7 +1759,7 @@ static void asm_sload(ASMState *as, IRIns *ir)
       emit_i8(as, irt_toitype(t));
       emit_rr(as, XO_ARITHi8, XOg_CMP, tmp);
       emit_shifti(as, XOg_SAR|REX_64, tmp, 47);
-      emit_rmro(as, XO_MOV, tmp|REX_64, base, ofs+4);
+      emit_rmro(as, XO_MOV, tmp|REX_64, base, ofs);
 #else
     } else {
       emit_i8(as, irt_toitype(t));
@@ -2060,8 +2061,9 @@ static void asm_intarith(ASMState *as, IRIns *ir, x86Arith xa)
   int32_t k = 0;
   if (as->flagmcp == as->mcp) {  /* Drop test r,r instruction. */
     MCode *p = as->mcp + ((LJ_64 && *as->mcp < XI_TESTb) ? 3 : 2);
-    if ((p[1] & 15) < 14) {
-      if ((p[1] & 15) >= 12) p[1] -= 4;  /* L <->S, NL <-> NS */
+    MCode *q = p[0] == 0x0f ? p+1 : p;
+    if ((*q & 15) < 14) {
+      if ((*q & 15) >= 12) *q -= 4;  /* L <->S, NL <-> NS */
       as->flagmcp = NULL;
       as->mcp = p;
     }  /* else: cannot transform LE/NLE to cc without use of OF. */

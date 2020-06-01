@@ -1,6 +1,6 @@
 /*
 ** SPLIT: Split 64 bit IR instructions into 32 bit IR instructions.
-** Copyright (C) 2005-2017 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2020 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #define lj_opt_split_c
@@ -8,7 +8,7 @@
 
 #include "lj_obj.h"
 
-#if LJ_HASJIT && (LJ_SOFTFP || (LJ_32 && LJ_HASFFI))
+#if LJ_HASJIT && (LJ_SOFTFP32 || (LJ_32 && LJ_HASFFI))
 
 #include "lj_err.h"
 #include "lj_buf.h"

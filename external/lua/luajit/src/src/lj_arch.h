@@ -1,6 +1,6 @@
 /*
 ** Target architecture selection.
-** Copyright (C) 2005-2017 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2020 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #ifndef _LJ_ARCH_H
@@ -105,7 +105,7 @@
 #define LJ_TARGET_OSX		(LUAJIT_OS == LUAJIT_OS_OSX)
 #define LJ_TARGET_IOS		(LJ_TARGET_OSX && (LUAJIT_TARGET == LUAJIT_ARCH_ARM || LUAJIT_TARGET == LUAJIT_ARCH_ARM64))
 #define LJ_TARGET_POSIX		(LUAJIT_OS > LUAJIT_OS_WINDOWS)
-#define LJ_TARGET_DLOPEN	0 // iOS need remove dlopen()
+#define LJ_TARGET_DLOPEN	LJ_TARGET_POSIX
 
 #ifdef __CELLOS_LV2__
 #define LJ_TARGET_PS3		1
@@ -133,6 +133,13 @@
 #define LJ_TARGET_XBOXONE	1
 #define LJ_TARGET_CONSOLE	1
 #define LJ_TARGET_GC64		1
+#endif
+
+#ifdef _UWP
+#define LJ_TARGET_UWP		1
+#if LUAJIT_TARGET == LUAJIT_ARCH_X64
+#define LJ_TARGET_GC64		1
+#endif
 #endif
 
 #define LJ_NUMMODE_SINGLE	0	/* Single-number mode only. */
@@ -177,7 +184,7 @@
 #define LJ_TARGET_MASKROT	1
 #define LJ_TARGET_UNALIGNED	1
 #define LJ_ARCH_NUMMODE		LJ_NUMMODE_SINGLE_DUAL
-#ifdef LUAJIT_ENABLE_GC64
+#ifndef LUAJIT_DISABLE_GC64
 #define LJ_TARGET_GC64		1
 #endif
 
@@ -201,7 +208,7 @@
 #define LJ_TARGET_UNIFYROT	2	/* Want only IR_BROR. */
 #define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL
 
-#if __ARM_ARCH____ARM_ARCH_8__ || __ARM_ARCH_8A__
+#if __ARM_ARCH_8__ || __ARM_ARCH_8A__
 #define LJ_ARCH_VERSION		80
 #elif __ARM_ARCH_7__ || __ARM_ARCH_7A__ || __ARM_ARCH_7R__ || __ARM_ARCH_7S__ || __ARM_ARCH_7VE__
 #define LJ_ARCH_VERSION		70
@@ -254,6 +261,28 @@
 #else
 #define LJ_ARCH_BITS		32
 #define LJ_ARCH_NAME		"ppc"
+
+#if !defined(LJ_ARCH_HASFPU)
+#if defined(_SOFT_FLOAT) || defined(_SOFT_DOUBLE)
+#define LJ_ARCH_HASFPU		0
+#else
+#define LJ_ARCH_HASFPU		1
+#endif
+#endif
+
+#if !defined(LJ_ABI_SOFTFP)
+#if defined(_SOFT_FLOAT) || defined(_SOFT_DOUBLE)
+#define LJ_ABI_SOFTFP		1
+#else
+#define LJ_ABI_SOFTFP		0
+#endif
+#endif
+#endif
+
+#if LJ_ABI_SOFTFP
+#define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL
+#else
+#define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL_SINGLE
 #endif
 
 #define LJ_TARGET_PPC		1
@@ -262,15 +291,12 @@
 #define LJ_TARGET_MASKSHIFT	0
 #define LJ_TARGET_MASKROT	1
 #define LJ_TARGET_UNIFYROT	1	/* Want only IR_BROL. */
-#define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL_SINGLE
 
 #if LJ_TARGET_CONSOLE
 #define LJ_ARCH_PPC32ON64	1
 #define LJ_ARCH_NOFFI		1
 #elif LJ_ARCH_BITS == 64
-#define LJ_ARCH_PPC64		1
-#define LJ_TARGET_GC64		1
-#define LJ_ARCH_NOJIT		1	/* NYI */
+#error "No support for PPC64"
 #endif
 
 #if _ARCH_PWR7
@@ -302,17 +328,37 @@
 #elif LUAJIT_TARGET == LUAJIT_ARCH_MIPS32 || LUAJIT_TARGET == LUAJIT_ARCH_MIPS64
 
 #if defined(__MIPSEL__) || defined(__MIPSEL) || defined(_MIPSEL)
+#if __mips_isa_rev >= 6
+#define LJ_TARGET_MIPSR6	1
+#define LJ_TARGET_UNALIGNED	1
+#endif
 #if LUAJIT_TARGET == LUAJIT_ARCH_MIPS32
+#if LJ_TARGET_MIPSR6
+#define LJ_ARCH_NAME		"mips32r6el"
+#else
 #define LJ_ARCH_NAME		"mipsel"
+#endif
+#else
+#if LJ_TARGET_MIPSR6
+#define LJ_ARCH_NAME		"mips64r6el"
 #else
 #define LJ_ARCH_NAME		"mips64el"
+#endif
 #endif
 #define LJ_ARCH_ENDIAN		LUAJIT_LE
 #else
 #if LUAJIT_TARGET == LUAJIT_ARCH_MIPS32
+#if LJ_TARGET_MIPSR6
+#define LJ_ARCH_NAME		"mips32r6"
+#else
 #define LJ_ARCH_NAME		"mips"
+#endif
+#else
+#if LJ_TARGET_MIPSR6
+#define LJ_ARCH_NAME		"mips64r6"
 #else
 #define LJ_ARCH_NAME		"mips64"
+#endif
 #endif
 #define LJ_ARCH_ENDIAN		LUAJIT_BE
 #endif
@@ -337,9 +383,6 @@
 #define LJ_ARCH_BITS		32
 #define LJ_TARGET_MIPS32	1
 #else
-#if LJ_ABI_SOFTFP || !LJ_ARCH_HASFPU
-#define LJ_ARCH_NOJIT		1	/* NYI */
-#endif
 #define LJ_ARCH_BITS		64
 #define LJ_TARGET_MIPS64	1
 #define LJ_TARGET_GC64		1
@@ -352,7 +395,9 @@
 #define LJ_TARGET_UNIFYROT	2	/* Want only IR_BROR. */
 #define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL
 
-#if _MIPS_ARCH_MIPS32R2 || _MIPS_ARCH_MIPS64R2
+#if LJ_TARGET_MIPSR6
+#define LJ_ARCH_VERSION		60
+#elif _MIPS_ARCH_MIPS32R2 || _MIPS_ARCH_MIPS64R2
 #define LJ_ARCH_VERSION		20
 #else
 #define LJ_ARCH_VERSION		10
@@ -418,24 +463,23 @@
 #error "No support for ILP32 model on ARM64"
 #endif
 #elif LJ_TARGET_PPC
-#if defined(_SOFT_FLOAT) || defined(_SOFT_DOUBLE)
-#error "No support for PowerPC CPUs without double-precision FPU"
-#endif
-#if !LJ_ARCH_PPC64 && LJ_ARCH_ENDIAN == LUAJIT_LE
+#if defined(_LITTLE_ENDIAN) && (!defined(_BYTE_ORDER) || (_BYTE_ORDER == _LITTLE_ENDIAN))
 #error "No support for little-endian PPC32"
 #endif
-#if LJ_ARCH_PPC64
-#error "No support for PowerPC 64 bit mode (yet)"
-#endif
-#ifdef __NO_FPRS__
+#if defined(__NO_FPRS__) && !defined(_SOFT_FLOAT)
 #error "No support for PPC/e500 anymore (use LuaJIT 2.0)"
 #endif
 #elif LJ_TARGET_MIPS32
 #if !((defined(_MIPS_SIM_ABI32) && _MIPS_SIM == _MIPS_SIM_ABI32) || (defined(_ABIO32) && _MIPS_SIM == _ABIO32))
 #error "Only o32 ABI supported for MIPS32"
 #endif
+#if LJ_TARGET_MIPSR6
+/* Not that useful, since most available r6 CPUs are 64 bit. */
+#error "No support for MIPS32R6"
+#endif
 #elif LJ_TARGET_MIPS64
 #if !((defined(_MIPS_SIM_ABI64) && _MIPS_SIM == _MIPS_SIM_ABI64) || (defined(_ABI64) && _MIPS_SIM == _ABI64))
+/* MIPS32ON64 aka n32 ABI support might be desirable, but difficult. */
 #error "Only n64 ABI supported for MIPS64"
 #endif
 #endif
@@ -512,6 +556,7 @@
 #define LJ_ABI_SOFTFP		0
 #endif
 #define LJ_SOFTFP		(!LJ_ARCH_HASFPU)
+#define LJ_SOFTFP32		(LJ_SOFTFP && LJ_32)
 
 #if LJ_ARCH_ENDIAN == LUAJIT_BE
 #define LJ_LE			0
@@ -544,8 +589,9 @@
 #if defined(__symbian__) || LJ_TARGET_WINDOWS
 #define LUAJIT_NO_EXP2
 #endif
-// iOS NO system(), so close for all platform
+#if LJ_TARGET_CONSOLE || (LJ_TARGET_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0)
 #define LJ_NO_SYSTEM		1
+#endif
 
 #if !defined(LUAJIT_NO_UNWIND) && __GNU_COMPACT_EH__
 /* NYI: no support for compact unwind specification, yet. */
@@ -554,6 +600,18 @@
 
 #if defined(LUAJIT_NO_UNWIND) || defined(__symbian__) || LJ_TARGET_IOS || LJ_TARGET_PS3 || LJ_TARGET_PS4
 #define LJ_NO_UNWIND		1
+#endif
+
+#if LJ_TARGET_WINDOWS
+#if LJ_TARGET_UWP
+#define LJ_WIN_VALLOC	VirtualAllocFromApp
+#define LJ_WIN_VPROTECT	VirtualProtectFromApp
+extern void *LJ_WIN_LOADLIBA(const char *path);
+#else
+#define LJ_WIN_VALLOC	VirtualAlloc
+#define LJ_WIN_VPROTECT	VirtualProtect
+#define LJ_WIN_LOADLIBA(path)	LoadLibraryExA((path), NULL, 0)
+#endif
 #endif
 
 /* Compatibility with Lua 5.1 vs. 5.2. */
