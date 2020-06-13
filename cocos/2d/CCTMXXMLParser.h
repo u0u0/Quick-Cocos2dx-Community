@@ -74,6 +74,7 @@ enum {
     TMXPropertyObjectGroup,
     TMXPropertyObject,
     TMXPropertyTile,
+    TMXPropertyTileObject,
     TMXPropertyGroup,
     TMXPropertyImageLayer
 };

@@ -475,30 +475,37 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         // The parent element is now "layer"
         _parentElement = TMXPropertyGroup;
     } else if (elementName == "objectgroup") {
-        TMXObjectGroup *objectGroup = new (std::nothrow) TMXObjectGroup();
-        objectGroup->setGroupName(attributeDict["name"].asString());
+        if (_parentElement == TMXPropertyMap) {
+            // ObjectGroup Layer
+            TMXObjectGroup *objectGroup = new (std::nothrow) TMXObjectGroup();
+            objectGroup->setGroupName(attributeDict["name"].asString());
         
-        Vec2 positionOffset;
-        positionOffset.x = attributeDict["offsetx"].asFloat() * _tileSize.width;
-        positionOffset.y = attributeDict["offsety"].asFloat() * _tileSize.height;
-        objectGroup->setPositionOffset(positionOffset);
+            Vec2 positionOffset;
+            positionOffset.x = attributeDict["offsetx"].asFloat() * _tileSize.width;
+            positionOffset.y = attributeDict["offsety"].asFloat() * _tileSize.height;
+            objectGroup->setPositionOffset(positionOffset);
         
-        Value& visibleValue = attributeDict["visible"];
-        objectGroup->setVisible(visibleValue.isNull() ? true : visibleValue.asBool());
+            Value& visibleValue = attributeDict["visible"];
+            objectGroup->setVisible(visibleValue.isNull() ? true : visibleValue.asBool());
         
-        Value& opacityValue = attributeDict["opacity"];
-        objectGroup->setOpacity(opacityValue.isNull() ? 255 : (unsigned char)(255.0f * opacityValue.asFloat()));
+            Value& opacityValue = attributeDict["opacity"];
+            objectGroup->setOpacity(opacityValue.isNull() ? 255 : (unsigned char)(255.0f * opacityValue.asFloat()));
 
-        _objectGroups.pushBack(objectGroup);// for set property
-        if (_groupStack.size() > 0) {
-            _groupStack.back()->_children.pushBack(objectGroup);//add to cur group
-        } else {
-            _children.pushBack(objectGroup);//add to map
+            _objectGroups.pushBack(objectGroup);// for set property
+            if (_groupStack.size() > 0) {
+                _groupStack.back()->_children.pushBack(objectGroup);//add to cur group
+            } else {
+                _children.pushBack(objectGroup);//add to map
+            }
+            objectGroup->release();
+
+            // The parent element is now "objectgroup"
+            _parentElement = TMXPropertyObjectGroup;
+        } else if (_parentElement == TMXPropertyTile) {
+            // Collider objects of the tile
+            ValueMap& dict = _tileProperties.at(_parentGID).asValueMap();
+            dict["objectgroup"] = Value(ValueVector());
         }
-        objectGroup->release();
-
-        // The parent element is now "objectgroup"
-        _parentElement = TMXPropertyObjectGroup;
     } else if (elementName == "tileoffset") {
         TMXTilesetInfo* tileset = _tilesets.back();
         float tileOffsetX = attributeDict["x"].asFloat();
@@ -565,8 +572,6 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             _storingCharacters = true;
         }
     } else if (elementName == "object") {
-        TMXObjectGroup* objectGroup = _objectGroups.back();
-
         // The value for "type" was blank or not a valid class name
         // Create an instance of TMXObjectInfo to store the object and its properties
         ValueMap dict;
@@ -597,11 +602,16 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             dict["objectType"] = "tile"; // override rectangle
         }
 
-        // Add the object to the objectGroup
-        objectGroup->getObjects().push_back(Value(dict));
-
-        // The parent element is now "object"
-        _parentElement = TMXPropertyObject;
+        if (_parentElement == TMXPropertyObjectGroup) {
+            TMXObjectGroup* objectGroup = _objectGroups.back();
+            objectGroup->getObjects().push_back(Value(dict));
+            _parentElement = TMXPropertyObject;
+        } else if (_parentElement == TMXPropertyTile) {
+            ValueMap& tpDict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = tpDict["objectgroup"].asValueVector();
+            vector.push_back(Value(dict));
+            _parentElement = TMXPropertyTileObject;
+        }
     } else if (elementName == "property") {
         if (_parentElement == TMXPropertyNone) {
             CCLOG("TMX tile map: Parent element is unsupported. Cannot add property named '%s' with value '%s'",
@@ -646,6 +656,12 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
 
             std::string propertyName = attributeDict["name"].asString();
             dict[propertyName] = attributeDict["value"];
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& dict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = dict["objectgroup"].asValueVector();
+            ValueMap& value = vector.back().asValueMap();
+            std::string propertyName = attributeDict["name"].asString();
+            value[propertyName] = attributeDict["value"];
         }
     } else if (elementName == "animation") {
         if (_parentElement == TMXPropertyTile) {
@@ -662,87 +678,115 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             vector.push_back(attributeDict["duration"]);
         }
     } else if (elementName == "text") {
-        // find parent object's dict and add polygon-points to it
-        TMXObjectGroup* objectGroup = _objectGroups.back();
-        ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
-        
-        dict["objectType"] = "text"; // object type
-        dict["fontfamily"] = attributeDict["fontfamily"];
-        dict["pixelsize"] = attributeDict["pixelsize"].asUnsignedInt();
-        dict["wrap"] = attributeDict["wrap"].asBool();
-        dict["color"] = attributeDict["color"];
-        dict["halign"] = attributeDict["halign"];
-        dict["valign"] = attributeDict["valign"];
+        if (_parentElement == TMXPropertyObject) {
+            // find parent object's dict and add polygon-points to it
+            TMXObjectGroup* objectGroup = _objectGroups.back();
+            ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
+            dict["objectType"] = "text"; // object type
+            dict["fontfamily"] = attributeDict["fontfamily"];
+            dict["pixelsize"] = attributeDict["pixelsize"].asUnsignedInt();
+            dict["wrap"] = attributeDict["wrap"].asBool();
+            dict["color"] = attributeDict["color"];
+            dict["halign"] = attributeDict["halign"];
+            dict["valign"] = attributeDict["valign"];
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& tpDict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = tpDict["objectgroup"].asValueVector();
+            ValueMap& dict = vector.back().asValueMap();
+            dict["objectType"] = "text"; // object type
+            dict["fontfamily"] = attributeDict["fontfamily"];
+            dict["pixelsize"] = attributeDict["pixelsize"].asUnsignedInt();
+            dict["wrap"] = attributeDict["wrap"].asBool();
+            dict["color"] = attributeDict["color"];
+            dict["halign"] = attributeDict["halign"];
+            dict["valign"] = attributeDict["valign"];
+        }
         _storingCharacters = true;
     } else if (elementName == "polygon") {
-        // find parent object's dict and add polygon-points to it
-        TMXObjectGroup* objectGroup = _objectGroups.back();
-        ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
-
         // get points value string
         std::string value = attributeDict["points"].asString();
-        if (!value.empty()) {
-            ValueVector pointsArray;
-            pointsArray.reserve(10);
-
-            // parse points string into a space-separated set of points
-            stringstream pointsStream(value);
-            string pointPair;
-            while (std::getline(pointsStream, pointPair, ' ')) {
-                // parse each point combo into a comma-separated x,y point
-                stringstream pointStream(pointPair);
-                string xStr, yStr;
-                
-                ValueMap pointDict;
-                // set x
-                if (std::getline(pointStream, xStr, ',')) {
-                    pointDict["x"] = Value(atof(xStr.c_str()));
-                }
-                // set y
-                if (std::getline(pointStream, yStr, ',')) {
-                    pointDict["y"] = Value(atof(yStr.c_str()));
-                }
-                
-                // add to points array
-                pointsArray.push_back(Value(pointDict));
+        if (value.empty()) {
+            return;
+        }
+        
+        ValueVector pointsArray;
+        pointsArray.reserve(10);
+        // parse points string into a space-separated set of points
+        stringstream pointsStream(value);
+        string pointPair;
+        while (std::getline(pointsStream, pointPair, ' ')) {
+            // parse each point combo into a comma-separated x,y point
+            stringstream pointStream(pointPair);
+            string xStr, yStr;
+            
+            ValueMap pointDict;
+            // set x
+            if (std::getline(pointStream, xStr, ',')) {
+                pointDict["x"] = Value(atof(xStr.c_str()));
+            }
+            // set y
+            if (std::getline(pointStream, yStr, ',')) {
+                pointDict["y"] = Value(atof(yStr.c_str()));
             }
             
+            // add to points array
+            pointsArray.push_back(Value(pointDict));
+        }
+        
+        if (_parentElement == TMXPropertyObject) {
+            // find parent object's dict and add polygon-points to it
+            TMXObjectGroup* objectGroup = _objectGroups.back();
+            ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
+            dict["points"] = Value(pointsArray);
+            dict["objectType"] = "polygon";
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& tpDict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = tpDict["objectgroup"].asValueVector();
+            ValueMap& dict = vector.back().asValueMap();
             dict["points"] = Value(pointsArray);
             dict["objectType"] = "polygon";
         }
     } else if (elementName == "polyline") {
-        // find parent object's dict and add polyline-points to it
-        TMXObjectGroup* objectGroup = _objectGroups.back();
-        ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
-        
         // get points value string
         std::string value = attributeDict["points"].asString();
-        if (!value.empty()) {
-            ValueVector pointsArray;
-            pointsArray.reserve(10);
+        if (value.empty()) {
+            return;
+        }
+        
+        ValueVector pointsArray;
+        pointsArray.reserve(10);
+        // parse points string into a space-separated set of points
+        stringstream pointsStream(value);
+        string pointPair;
+        while (std::getline(pointsStream, pointPair, ' ')) {
+            // parse each point combo into a comma-separated x,y point
+            stringstream pointStream(pointPair);
+            string xStr, yStr;
             
-            // parse points string into a space-separated set of points
-            stringstream pointsStream(value);
-            string pointPair;
-            while (std::getline(pointsStream, pointPair, ' ')) {
-                // parse each point combo into a comma-separated x,y point
-                stringstream pointStream(pointPair);
-                string xStr, yStr;
-                
-                ValueMap pointDict;
-                // set x
-                if (std::getline(pointStream, xStr, ',')) {
-                    pointDict["x"] = Value(atof(xStr.c_str()));
-                }
-                // set y
-                if (std::getline(pointStream, yStr, ',')) {
-                    pointDict["y"] = Value(atof(yStr.c_str()));
-                }
-                
-                // add to points array
-                pointsArray.push_back(Value(pointDict));
+            ValueMap pointDict;
+            // set x
+            if (std::getline(pointStream, xStr, ',')) {
+                pointDict["x"] = Value(atof(xStr.c_str()));
+            }
+            // set y
+            if (std::getline(pointStream, yStr, ',')) {
+                pointDict["y"] = Value(atof(yStr.c_str()));
             }
             
+            // add to points array
+            pointsArray.push_back(Value(pointDict));
+        }
+        
+        if (_parentElement == TMXPropertyObject) {
+            // find parent object's dict and add polygon-points to it
+            TMXObjectGroup* objectGroup = _objectGroups.back();
+            ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
+            dict["polylinePoints"] = Value(pointsArray);
+            dict["objectType"] = "polyline";
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& tpDict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = tpDict["objectgroup"].asValueVector();
+            ValueMap& dict = vector.back().asValueMap();
             dict["polylinePoints"] = Value(pointsArray);
             dict["objectType"] = "polyline";
         }
@@ -833,6 +877,11 @@ void TMXMapInfo::endElement(void* /*ctx*/, const char *name)
             TMXObjectGroup* objectGroup = _objectGroups.back();
             ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
             dict["text"] = _currentString;
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& dict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = dict["objectgroup"].asValueVector();
+            ValueMap& value = vector.back().asValueMap();
+            value["text"] = _currentString;
         }
         _storingCharacters = false;
         _currentString = "";
@@ -842,6 +891,11 @@ void TMXMapInfo::endElement(void* /*ctx*/, const char *name)
             TMXObjectGroup* objectGroup = _objectGroups.back();
             ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
             dict["objectType"] = "point";
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& dict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = dict["objectgroup"].asValueVector();
+            ValueMap& value = vector.back().asValueMap();
+            value["objectType"] = "point";
         }
     } else if (elementName == "ellipse") {
         if (_parentElement == TMXPropertyObject) {
@@ -849,27 +903,39 @@ void TMXMapInfo::endElement(void* /*ctx*/, const char *name)
             TMXObjectGroup* objectGroup = _objectGroups.back();
             ValueMap& dict = objectGroup->getObjects().rbegin()->asValueMap();
             dict["objectType"] = "ellipse";
+        } else if (_parentElement == TMXPropertyTileObject) {
+            ValueMap& dict = _tileProperties.at(_parentGID).asValueMap();
+            ValueVector& vector = dict["objectgroup"].asValueVector();
+            ValueMap& value = vector.back().asValueMap();
+            value["objectType"] = "ellipse";
         }
     } else if (elementName == "map") {
         // The map element has ended
         _parentElement = TMXPropertyNone;
     } else if (elementName == "layer") {
         // The layer element has ended
-        _parentElement = TMXPropertyNone;
+        _parentElement = TMXPropertyMap;
     } else if (elementName == "imagelayer") {
         // The imagelayer element has ended
         _curImageLayer = nullptr;
-        _parentElement = TMXPropertyNone;
+        _parentElement = TMXPropertyMap;
     } else if (elementName == "group") {
         // The group element has ended
         _groupStack.popBack();
-        _parentElement = TMXPropertyNone;
+        _parentElement = TMXPropertyMap;
     } else if (elementName == "objectgroup") {
-        // The objectgroup element has ended
-        _parentElement = TMXPropertyNone;
+        if (_parentElement == TMXPropertyObjectGroup) {
+            // The objectgroup element has ended
+            _parentElement = TMXPropertyMap;
+        }
     } else if (elementName == "object") {
-        // The object element has ended
-        _parentElement = TMXPropertyNone;
+        if (_parentElement == TMXPropertyTileObject) {
+            // The tile's object element has ended
+            _parentElement = TMXPropertyTile;
+        } else {
+            // The object element has ended
+            _parentElement = TMXPropertyObjectGroup;
+        }
     } else if (elementName == "tileset") {
         _recordFirstGID = true;
     }
