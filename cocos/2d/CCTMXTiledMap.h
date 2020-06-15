@@ -239,6 +239,7 @@ protected:
     void buildWithMapInfo(TMXMapInfo* mapInfo);
     Node *createChild(Ref *childInfo);
     TMXLayer *findLayer(const Node *parent, const std::string& layerName) const;
+    Vec2 getPositionForTileObject(std::string& gridOrientation, Size& gridSize, const Vec2& pos);
 
     /** the map's size property measured in tiles */
     Size _mapSize;

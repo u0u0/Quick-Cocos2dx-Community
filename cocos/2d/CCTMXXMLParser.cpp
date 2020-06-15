@@ -118,6 +118,7 @@ void TMXGroupInfo::setProperties(ValueMap var)
 TMXTilesetInfo::TMXTilesetInfo()
 : _firstGid(0)
 , _tileSize(Size::ZERO)
+, _gridSize(Size::ZERO)
 , _spacing(0)
 , _margin(0)
 , isCOI(false)
@@ -371,17 +372,19 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             
             tileset->_spacing = attributeDict["spacing"].asInt();
             tileset->_margin = attributeDict["margin"].asInt();
-            Size s;
-            s.width = attributeDict["tilewidth"].asFloat();
-            s.height = attributeDict["tileheight"].asFloat();
-            tileset->_tileSize = s;
+            tileset->_tileSize.width = attributeDict["tilewidth"].asFloat();
+            tileset->_tileSize.height = attributeDict["tileheight"].asFloat();
+            tileset->_gridSize = _tileSize; // init gridSize with tileSize
 
             _tilesets.pushBack(tileset);
             tileset->release();
         }
     } else if (elementName == "grid") {
         TMXTilesetInfo* info = _tilesets.back();
-        info->isCOI = true; // Tileset type "Collection of image" has this tag
+        // gridSize is different from tileSize
+        info->_gridOrientation = attributeDict["orientation"].asString();
+        info->_gridSize.width = attributeDict["width"].asFloat();
+        info->_gridSize.height = attributeDict["height"].asFloat();
     } else if (elementName == "tile") {
         if (_parentElement == TMXPropertyLayer) {
             TMXLayerInfo* layer = _layers.back();
@@ -526,6 +529,9 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             _curImageLayer->_imageSize.height = attributeDict["height"].asFloat();
         } else {
             TMXTilesetInfo* info = _tilesets.back();
+            if (_parentElement == TMXPropertyTile) {
+                info->isCOI = true; // Tileset type "Collection of image" has this tag
+            }
             int tileID = info->isCOI ? (_parentGID - info->_firstGid) : 0;
             TMXTilesetImage *tilesetImage = new TMXTilesetImage();
             info->_images.insert(std::pair<int, TMXTilesetImage *>(tileID, tilesetImage));
@@ -938,6 +944,7 @@ void TMXMapInfo::endElement(void* /*ctx*/, const char *name)
         }
     } else if (elementName == "tileset") {
         _recordFirstGID = true;
+        _parentElement = TMXPropertyMap;
     }
 }
 

@@ -182,8 +182,10 @@ class CC_DLL TMXTilesetInfo : public Ref
 {
 public:
     std::string _name;
+    std::string _gridOrientation;
     int _firstGid;
-    Size _tileSize;
+    Size _tileSize; // use for tile show
+    Size _gridSize; // use for count object's pos of groupobject
     int _spacing;
     int _margin;
     Vec2 _tileOffset;

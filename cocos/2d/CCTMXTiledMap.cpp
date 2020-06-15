@@ -200,6 +200,91 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
             addChild(n);
         }
     }
+    
+    // convert tile's properties: objectgroup's pos and size to cocos pos and size
+    for (auto iter = _tileProperties.begin(); iter != _tileProperties.end(); ++iter)
+    {
+        uint32_t gid = iter->first;
+        TMXTilesetInfo *tileset = getTilesetByGID(gid);
+        Size& gridSize = tileset->_gridSize;
+        std::string& gridOrientation = tileset->_gridOrientation;
+        
+        ValueMap& property = (iter->second).asValueMap();
+        if (!property["objectgroup"].isNull()) {
+            ValueVector& objects = property["objectgroup"].asValueVector();
+            for (auto &object : objects) {
+                ValueMap& dict = object.asValueMap();
+                Vec2 objPos(dict["x"].asFloat(), dict["y"].asFloat());
+                Vec2 xPos = getPositionForTileObject(gridOrientation, gridSize, objPos);
+                dict["x"] = xPos.x;
+                dict["y"] = xPos.y;
+                // convert object size to cocos2d-x size, then write back
+                Size objSize(0, 0);
+                if (dict.find("width") != dict.end()) {
+                    objSize.width = dict["width"].asFloat();
+                    objSize.height = dict["height"].asFloat();
+                    objSize = CC_SIZE_PIXELS_TO_POINTS(objSize);
+                    dict["width"] = objSize.width;
+                    dict["height"] = objSize.height;
+                }
+                
+                std::string objectType = dict["objectType"].asString();
+                if ("rectangle" == objectType) {
+                    if (gridOrientation == "isometric") {
+                        // It's a prism in cocos2d-x, need convert to polygon.
+                        Vec2 zero = getPositionForTileObject(gridOrientation, gridSize, Vec2(0, 0));
+                        Vec2 p2 = getPositionForTileObject(gridOrientation, gridSize, Vec2(objSize.width, 0));
+                        Vec2 p3 = getPositionForTileObject(gridOrientation, gridSize, Vec2(objSize.width, objSize.height));
+                        Vec2 p4 = getPositionForTileObject(gridOrientation, gridSize, Vec2(0, objSize.height));
+
+                        ValueVector pointsArray;
+                        pointsArray.reserve(4);
+                        ValueMap pd1;
+                        pd1["x"] = 0.0f;
+                        pd1["y"] = 0.0f;
+                        pointsArray.push_back(Value(pd1));
+                        ValueMap pd2;
+                        pd2["x"] = p2.x - zero.x;
+                        pd2["y"] = p2.y - zero.y;
+                        pointsArray.push_back(Value(pd2));
+                        ValueMap pd3;
+                        pd3["x"] = p3.x - zero.x;
+                        pd3["y"] = p3.y - zero.y;
+                        pointsArray.push_back(Value(pd3));
+                        ValueMap pd4;
+                        pd4["x"] = p4.x - zero.x;
+                        pd4["y"] = p4.y - zero.y;
+                        pointsArray.push_back(Value(pd4));
+                
+                        dict["points"] = Value(pointsArray);
+                        dict["objectType"] = "polygon";
+                    } else {
+                        dict["y"] = xPos.y - objSize.height; // fix y for other _mapOrientation
+                    }
+                } else if ("polygon" == objectType) {
+                    // fix point position
+                    ValueVector &pointsArray = dict["points"].asValueVector();
+                    Vec2 zero = getPositionForTileObject(gridOrientation, gridSize, Vec2(0, 0));
+                    for (auto& p : pointsArray) {
+                        ValueMap &a = p.asValueMap();
+                        Vec2 newP = getPositionForTileObject(gridOrientation, gridSize, Vec2(a["x"].asFloat(), a["y"].asFloat()));
+                        a["x"] = newP.x - zero.x;
+                        a["y"] = newP.y - zero.y;
+                    }
+                } else if ("polyline" == objectType) {
+                    // fix point position
+                    ValueVector &pointsArray = dict["polylinePoints"].asValueVector();
+                    Vec2 zero = getPositionForTileObject(gridOrientation, gridSize, Vec2(0, 0));
+                    for (auto& p : pointsArray) {
+                        ValueMap &a = p.asValueMap();
+                        Vec2 newP = getPositionForTileObject(gridOrientation, gridSize, Vec2(a["x"].asFloat(), a["y"].asFloat()));
+                        a["x"] = newP.x - zero.x;
+                        a["y"] = newP.y - zero.y;
+                    }
+                }
+            }
+        }
+    }
 }
 
 TMXLayer *TMXTiledMap::findLayer(const Node *parent, const std::string& layerName) const
@@ -219,6 +304,22 @@ TMXLayer *TMXTiledMap::findLayer(const Node *parent, const std::string& layerNam
         }
     }
     return nullptr;
+}
+
+Vec2 TMXTiledMap::getPositionForTileObject(std::string& gridOrientation, Size& gridSize, const Vec2& pos)
+{
+    Vec2 ret(0, 0);
+    if (gridOrientation == "isometric") { // 45 degree
+        float min = std::min(gridSize.width, gridSize.height);
+        ret.x = (2 + (pos.x - pos.y) / min) * gridSize.width / 2;
+        ret.y = (ret.x / gridSize.width - pos.x / min) * gridSize.height;
+        ret.x -= gridSize.width / 2;
+    } else { // normal
+        ret.x = pos.x;
+        ret.y = gridSize.height - pos.y;
+    }
+    ret = CC_POINT_PIXELS_TO_POINTS(ret);
+    return ret;
 }
 
 // public
