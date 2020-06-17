@@ -324,11 +324,13 @@ namespace spine {
 				RegionAttachment* attachment = static_cast<RegionAttachment*>(slot->getAttachment());
 				attachmentVertices = static_cast<AttachmentVertices*>(attachment->getRendererObject());
 
-				// Early exit if attachment is invisible
+                // Early exit if attachment is invisible
+#if 0 // Annotate by u0u0, Can't Early exit here, if slot have child, may curse child vertices incorrect.
 				if (attachment->getColor().a == 0) {
 					_clipper->clipEnd(*slot);
 					continue;
 				}
+#endif
 
 				float* dstTriangleVertices = nullptr;
 				int dstStride = 0; // in floats
@@ -415,8 +417,8 @@ namespace spine {
 
 			color.a *= nodeColor.a * _skeleton->getColor().a * slot->getColor().a;
 			// skip rendering if the color of this attachment is 0
-			if (color.a == 0){
-			_clipper->clipEnd(*slot);
+			if (color.a == 0) {
+                _clipper->clipEnd(*slot);
 				continue;
 			}
 			color.r *= nodeColor.r * _skeleton->getColor().r * slot->getColor().r;
@@ -940,7 +942,7 @@ namespace spine {
 				if (slotIsOutRange(slot, startSlotIndex, endSlotIndex)) {
 					continue;
 				}
-					// Early exit if slot is invisible
+                // Early exit if slot is invisible
 				if (slot.getColor().a == 0) {
 					continue;
 				}
