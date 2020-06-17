@@ -893,6 +893,27 @@ tolua_lerror:
     return 0;
 }
 
+// C++ 11 constexpr, make switch work with string
+typedef std::uint64_t hash_t;
+static constexpr hash_t prime = 0x100000001B3ull;
+static constexpr hash_t basis = 0xCBF29CE484222325ull;
+static constexpr hash_t hashStringCompileTime(char const* str, hash_t last_value = basis)
+{
+    return *str ? hashStringCompileTime(str + 1, (*str ^ last_value) * prime) : last_value;
+}
+
+static hash_t hashString(char const* str)
+{
+    hash_t ret{basis};
+
+    while (*str) {
+        ret ^= *str;
+        ret *= prime;
+        str++;
+    }
+    return ret;
+}
+
 static int lua_cocos2dx_spine_SkeletonAnimation_updateBone(lua_State* tolua_S)
 {
     int argc = 0;
@@ -934,62 +955,44 @@ static int lua_cocos2dx_spine_SkeletonAnimation_updateBone(lua_State* tolua_S)
             tolua_error(tolua_S, "sp.SkeletonAnimation:updateBone arg 1 must table", nullptr);
             return 0;
         }
-        // try update x
-        lua_pushstring(tolua_S, "x");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setX(lua_tonumber(tolua_S, -1));
-        }
-        lua_pop(tolua_S, 1);
         
-        // try update y
-        lua_pushstring(tolua_S, "y");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setY(lua_tonumber(tolua_S, -1));
+        lua_pushnil(tolua_S);  /* init nil for key */
+        while (lua_next(tolua_S, 3) != 0) {
+            // only parse string key
+            if (lua_isstring(tolua_S, -2)) {
+                const char *key = lua_tostring(tolua_S, -2);
+                switch (hashString(key)) {
+                    case hashStringCompileTime("active"):
+                        bone->setActive(lua_toboolean(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("x"):
+                        bone->setX(lua_tonumber(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("y"):
+                        bone->setY(lua_tonumber(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("rotation"):
+                        bone->setRotation(lua_tonumber(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("scaleX"):
+                        bone->setScaleX(lua_tonumber(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("scaleY"):
+                        bone->setScaleY(lua_tonumber(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("shearX"):
+                        bone->setShearX(lua_tonumber(tolua_S, -1));
+                        break;
+                    case hashStringCompileTime("shearY"):
+                        bone->setShearY(lua_tonumber(tolua_S, -1));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // pop value, make lua_next happy
+            lua_pop(tolua_S, 1);
         }
-        lua_pop(tolua_S, 1);
-        
-        // try update rotation
-        lua_pushstring(tolua_S, "rotation");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setRotation(lua_tonumber(tolua_S, -1));
-        }
-        lua_pop(tolua_S, 1);
-        
-        // try update scaleX
-        lua_pushstring(tolua_S, "scaleX");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setScaleX(lua_tonumber(tolua_S, -1));
-        }
-        lua_pop(tolua_S, 1);
-        
-        // try update scaleY
-        lua_pushstring(tolua_S, "scaleY");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setScaleY(lua_tonumber(tolua_S, -1));
-        }
-        lua_pop(tolua_S, 1);
-        
-        // try update shearX
-        lua_pushstring(tolua_S, "shearX");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setShearX(lua_tonumber(tolua_S, -1));
-        }
-        lua_pop(tolua_S, 1);
-        
-        // try update shearY
-        lua_pushstring(tolua_S, "shearY");
-        lua_rawget(tolua_S, 3);
-        if (!lua_isnil(tolua_S, -1)) {
-            bone->setShearY(lua_tonumber(tolua_S, -1));
-        }
-        lua_pop(tolua_S, 1);
-        
         return 0;
     }
     luaL_error(tolua_S, "updateBone has wrong number of arguments: %d, was expecting %d \n", argc, 2);
