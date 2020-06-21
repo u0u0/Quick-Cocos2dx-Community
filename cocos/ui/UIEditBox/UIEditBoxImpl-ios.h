@@ -71,6 +71,7 @@ public:
     virtual const char* getNativeDefaultFontName() override;
     virtual void nativeOpenKeyboard() override;
     virtual void nativeCloseKeyboard() override;
+    virtual void setNativeMaxLength(int maxLength) override;
     
     //need to remove siri text
     virtual const char* getText(void)override;

@@ -212,7 +212,12 @@ void EditBoxImplIOS::nativeCloseKeyboard()
 {
     [_systemControl closeKeyboard];
 }
-    
+
+void EditBoxImplIOS::setNativeMaxLength(int maxLength)
+{
+    //not implemented yet
+}
+
 UIFont* EditBoxImplIOS::constructFont(const char *fontName, int fontSize)
 {
     CCASSERT(fontName != nullptr, "fontName can't be nullptr");
