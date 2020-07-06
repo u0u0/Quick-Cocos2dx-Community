@@ -24,6 +24,7 @@
 #include "platform/CCPlatformConfig.h"
 #include "base/CCRef.h"
 
+#define AL_ALEXT_PROTOTYPES
 #include "alext.h"
 
 typedef void (*AudioCallback)(int funcID, ALuint bufferID);

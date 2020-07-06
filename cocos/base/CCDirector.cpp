@@ -57,7 +57,6 @@ THE SOFTWARE.
 #include "base/CCAutoreleasePool.h"
 #include "base/CCConfiguration.h"
 #include "platform/CCApplication.h"
-#include "audio/RDAudio.h"
 //#include "platform/CCGLViewImpl.h"
 
 /**
@@ -158,9 +157,6 @@ bool Director::init(void)
     _renderer = new (std::nothrow) Renderer;
 
     _console = new (std::nothrow) Console;
-
-    // init OpenAL
-    RDAudio::getInstance();
     return true;
 }
 

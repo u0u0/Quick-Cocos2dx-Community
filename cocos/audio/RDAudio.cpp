@@ -66,18 +66,16 @@ void RDAudio::destroyInstance()
 
 void RDAudio::pause()
 {
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    alcMakeContextCurrent(NULL);
-    alcSuspendContext(_context);
-#endif
+    if (_device) {
+        alcDevicePauseSOFT(_device);
+    }
 }
 
 void RDAudio::resume()
 {
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    alcMakeContextCurrent(_context);
-    alcProcessContext(_context);
-#endif
+    if (_device) {
+        alcDeviceResumeSOFT(_device);
+    }
 }
 
 void RDAudio::waitForQuit()
