@@ -261,6 +261,8 @@ void Store::transactionRestored(StorePaymentTransaction* transaction)
 #if CC_LUA_ENGINE_ENABLED > 0
 void Store::requestProductsCompleted(Vector<StoreProduct*>& products, vector<std::string*>& invalidProductsId)
 {
+    LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
+
     LuaValueDict event;
     LuaValueArray products_;
 
@@ -288,39 +290,25 @@ void Store::requestProductsCompleted(Vector<StoreProduct*>& products, vector<std
         event["invalidProductsId"] = LuaValue::arrayValue(invalidProductsId_);
     }
 
-    cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread([=](){
-        LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
+    stack->pushLuaValueDict(event);
+    stack->executeFunctionByHandler(m_loadProductsCallback, 1);
 
-        stack->pushLuaValueDict(event);
-        stack->executeFunctionByHandler(m_loadProductsCallback, 1);
-        
-        lua_State *L = stack->getLuaState();
-
-        toluafix_remove_function_by_refid(L, m_loadProductsCallback);
-    });
-    
-//    m_loadProductsCallback = 0;
+    m_loadProductsCallback = 0;
     m_isLoadProductsLuaNotCompleted = false;
 }
 
 void Store::requestProductsFailed(int errorCode, const char* errorString)
 {
+    LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
+
     LuaValueDict event;
     event["errorCode"] = LuaValue::intValue(errorCode);
     event["errorString"] = LuaValue::stringValue(errorString);
 
-    cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread([=](){
-        LuaStack* stack = LuaEngine::getInstance()->getLuaStack();
+    stack->pushLuaValueDict(event);
+    stack->executeFunctionByHandler(m_loadProductsCallback, 1);
 
-        stack->pushLuaValueDict(event);
-        stack->executeFunctionByHandler(m_loadProductsCallback, 1);
-        
-        lua_State *L = stack->getLuaState();
-        
-        toluafix_remove_function_by_refid(L, m_loadProductsCallback);
-    });
-    
-//    m_loadProductsCallback = 0;
+    m_loadProductsCallback = 0;
     m_isLoadProductsLuaNotCompleted = false;
 }
 #endif
