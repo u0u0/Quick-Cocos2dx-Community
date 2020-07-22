@@ -9,8 +9,9 @@ STRIP="strip"
 rm "$DESTDIR"/*.a
 
 cd $SRCDIR
+export MACOSX_DEPLOYMENT_TARGET=10.9
 make clean
-make CC="gcc -arch x86_64" all
+make CC="gcc -m64 -arch x86_64 -DLUAJIT_ENABLE_GC64" all
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit.a
 
 make clean
