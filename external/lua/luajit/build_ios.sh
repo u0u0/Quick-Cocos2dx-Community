@@ -19,26 +19,17 @@ ISDKP=$IXCODE/usr/bin/
 rm "$DESTDIR"/*.a
 cd $SRCDIR
 
-make clean
-ISDKF="-arch armv7 -isysroot $ISDK/SDKs/$ISDKVER"
-make HOST_CC="gcc -m32 -arch i386" TARGET_FLAGS="$ISDKF" TARGET=armv7 TARGET_SYS=iOS
-mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-armv7.a
+export MACOSX_DEPLOYMENT_TARGET=10.9
 
 make clean
-ISDKF="-arch arm64 -isysroot $ISDK/SDKs/$ISDKVER"
-make HOST_CC="gcc" TARGET_FLAGS="$ISDKF" TARGET=arm64 TARGET_SYS=iOS
+ISDKF="-arch arm64 -isysroot $ISDK/SDKs/$ISDKVER -miphoneos-version-min=9.0"
+make HOST_CC="clang" TARGET_FLAGS="$ISDKF" TARGET=arm64 TARGET_SYS=iOS
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-arm64.a
 
 make clean
-ISDKF="-arch x86_64 -isysroot $SIMDIR/SDKs/$SIMVER -miphoneos-version-min=7.0"
-make HOST_CC="gcc -arch x86_64" TARGET_FLAGS="$ISDKF" TARGET=x86_64 TARGET_SYS=iOS
+ISDKF="-arch x86_64 -isysroot $SIMDIR/SDKs/$SIMVER -miphoneos-version-min=9.0"
+make HOST_CC="clang -arch x86_64" TARGET_FLAGS="$ISDKF" TARGET=x86_64 TARGET_SYS=iOS
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-x86_64.a
-
-
-make clean
-ISDKF="-arch i386 -isysroot $SIMDIR/SDKs/$SIMVER -miphoneos-version-min=7.0"
-make HOST_CC="gcc -arch i386" TARGET_FLAGS="$ISDKF" TARGET=i386 TARGET_SYS=iOS
-mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-i386.a
 
 make clean
 $LIPO -create "$DESTDIR"/libluajit-*.a -output "$DESTDIR"/libluajit.a
