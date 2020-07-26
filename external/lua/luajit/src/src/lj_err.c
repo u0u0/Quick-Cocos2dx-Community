@@ -61,7 +61,7 @@
 ** The POSIX/x64 interpreter only saves r12/r13 for INT (e.g. PS4).
 */
 
-#if defined(__GNUC__) && (LJ_TARGET_X64 || defined(LUAJIT_UNWIND_EXTERNAL)) && !LJ_NO_UNWIND
+#if (defined(__GNUC__) || defined(__clang__)) && (LJ_TARGET_X64 || defined(LUAJIT_UNWIND_EXTERNAL)) && !LJ_NO_UNWIND
 #define LJ_UNWIND_EXT	1
 #elif LJ_TARGET_WINDOWS
 #define LJ_UNWIND_EXT	1
@@ -184,7 +184,7 @@ static void *err_unwind(lua_State *L, void *stopcf, int errcode)
 
 /* -- External frame unwinding -------------------------------------------- */
 
-#if defined(__GNUC__) && !LJ_NO_UNWIND && !LJ_ABI_WIN
+#if (defined(__GNUC__) || defined(__clang__)) && !LJ_NO_UNWIND && !LJ_ABI_WIN
 
 /*
 ** We have to use our own definitions instead of the mandatory (!) unwind.h,
@@ -581,6 +581,7 @@ static ptrdiff_t finderrfunc(lua_State *L)
       if (cframe_canyield(cf)) return 0;
       if (cframe_errfunc(cf) >= 0)
 	return cframe_errfunc(cf);
+      cf = cframe_prev(cf);
       frame = frame_prevd(frame);
       break;
     case FRAME_PCALL:
@@ -589,7 +590,7 @@ static ptrdiff_t finderrfunc(lua_State *L)
 	return savestack(L, frame_prevd(frame)+1);  /* xpcall's errorfunc. */
       return 0;
     default:
-      lua_assert(0);
+      lj_assertL(0, "bad frame type");
       return 0;
     }
   }
