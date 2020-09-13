@@ -167,14 +167,21 @@ Cocos2dExtension::Cocos2dExtension() : DefaultSpineExtension() { }
 Cocos2dExtension::~Cocos2dExtension() { }
 
 char *Cocos2dExtension::_readFile(const spine::String &path, int *length) {
-	Data data = FileUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(path.buffer()));
+    Data data = FileUtils::getInstance()->getDataFromFile(path.buffer());
 	if (data.isNull()) return nullptr;
 
 	// avoid buffer overflow (int is shorter than ssize_t in certain platforms)
+#if COCOS2D_VERSION >= 0x00031200
 	ssize_t tmpLen;
 	char *ret = (char*)data.takeBuffer(&tmpLen);
 	*length = static_cast<int>(tmpLen);
 	return ret;
+#else
+	*length = static_cast<int>(data.getSize());
+    auto bytes = SpineExtension::alloc<char>(*length, __FILE__, __LINE__);
+	memcpy(bytes, data.getBytes(), *length);
+	return bytes;
+#endif
 }
 
 SpineExtension *spine::getDefaultExtension () {
