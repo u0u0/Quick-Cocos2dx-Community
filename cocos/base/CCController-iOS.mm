@@ -34,7 +34,11 @@
 #include "CCDirector.h"
 #include "CCLabel.h"
 
+// avoid xcode 12 build error:
+// Property with 'retain (or strong)' attribute must be of object type
+#define strong assign
 #import <GameController/GameController.h>
+#undef strong
 
 @interface GCControllerConnectionEventHandler : NSObject
 
