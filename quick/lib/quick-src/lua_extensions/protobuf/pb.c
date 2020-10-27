@@ -395,12 +395,13 @@ static int struct_unpack(lua_State *L)
         case 'f':
             {
                 // use union to avoid crash on Android (signal 7)
+                int i = 0;
                 const uint8_t *buf = unpack_fixed32(buffer, out);
                 size_t size = len <= 4 ? len : 4;
                 union IntOrFloat intOrFloat;
                 
                 memset(&intOrFloat.buffer, 0, 4);
-                for (int i = 0; i < size; i++) {
+                for (i = 0; i < size; i++) {
                     intOrFloat.buffer[i] = buf[i];
                 }
                 
@@ -410,12 +411,13 @@ static int struct_unpack(lua_State *L)
         case 'd':
             {
                 // use union to avoid crash on Android (signal 7)
+                int i = 0;
                 const uint8_t *buf = unpack_fixed64(buffer, out);
                 size_t size = len <= 8 ? len : 8;
                 union IntOrDouble intOrDouble;
                 
                 memset(&intOrDouble.buffer, 0, 8);
-                for (int i = 0; i < size; i++) {
+                for (i = 0; i < size; i++) {
                     intOrDouble.buffer[i] = buf[i];
                 }
                 
