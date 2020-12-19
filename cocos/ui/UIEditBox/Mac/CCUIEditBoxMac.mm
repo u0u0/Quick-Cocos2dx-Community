@@ -23,6 +23,7 @@
  THE SOFTWARE.
  ****************************************************************************/
 
+#import "platform/apple/NSObject-apple.h"
 #import "ui/UIEditBox/Mac/CCUIEditBoxMac.h"
 #include "base/CCDirector.h"
 #include "ui/UIEditBox/Mac/CCUISingleLineTextField.h"
@@ -99,11 +100,11 @@
     
     _textInput = [textInput retain];
     
-    [_textInput performSelector:@selector(setTextColor:) withObject:_textInput.ccui_textColor];
-    [_textInput performSelector:@selector(setBackgroundColor:) withObject:[NSColor clearColor]];
+    invokeObjSelector(_textInput, @"setTextColor:", [NSArray arrayWithObject:_textInput.ccui_textColor]);
+    invokeObjSelector(_textInput, @"setBackgroundColor:", [NSArray arrayWithObject:[NSColor clearColor]]);
  
     if (![_textInput isKindOfClass:[NSTextView class]]) {
-        [_textInput performSelector:@selector(setBordered:) withObject:nil];
+        invokeObjSelector(_textInput, @"setBordered:", nil);
     }
     _textInput.hidden = NO;
     _textInput.wantsLayer = YES;

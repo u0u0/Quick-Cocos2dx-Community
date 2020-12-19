@@ -23,7 +23,7 @@
  ****************************************************************************/
 
 #import "ui/UIEditBox/iOS/UITextView+CCUITextInput.h"
-
+#import "platform/apple/NSObject-apple.h"
 
 @implementation UITextView (CCUITextInput)
 
@@ -39,18 +39,18 @@
 
 - (NSString *)ccui_placeholder
 {
-    SEL selector = @selector(placeholder);
-    if ([self respondsToSelector:selector]) {
-        return [self performSelector:selector];
+    NSString *selStr = @"placeholder";
+    if (isObjHasSelector(self, selStr)) {
+        return invokeObjSelector(self, selStr, nil);
     }
     return nil;
 }
 
 - (void)ccui_setPlaceholder:(NSString *)ccui_placeholder
 {
-    SEL selector = @selector(setPlaceholder:);
-    if ([self respondsToSelector:selector]) {
-        [self performSelector:selector withObject:ccui_placeholder];
+    NSString *selStr = @"setPlaceholder:";
+    if (isObjHasSelector(self, selStr)) {
+        invokeObjSelector(self, selStr, [NSArray arrayWithObject:ccui_placeholder]);
     }
 }
 
@@ -86,35 +86,35 @@
 
 - (UIColor *)ccui_placeholderTextColor
 {
-    SEL selector = NSSelectorFromString(@"placeHolderLabel");
-    if ([self respondsToSelector:selector]) {
-        return ((UILabel *)[self performSelector:selector]).textColor;
+    NSString *selStr = @"placeHolderLabel";
+    if (isObjHasSelector(self, selStr)) {
+        return ((UILabel *)invokeObjSelector(self, selStr, nil)).textColor;
     }
     return nil;
 }
 
 - (void)ccui_setPlaceholderTextColor:(UIColor *)ccui_placeholderTextColor
 {
-    SEL selector = NSSelectorFromString(@"placeHolderLabel");
-    if ([self respondsToSelector:selector]) {
-        ((UILabel *)[self performSelector:selector]).textColor = ccui_placeholderTextColor;
+    NSString *selStr = @"placeHolderLabel";
+    if (isObjHasSelector(self, selStr)) {
+        ((UILabel *)invokeObjSelector(self, selStr, nil)).textColor = ccui_placeholderTextColor;
     }
 }
 
 - (UIFont *)ccui_placeholderFont
 {
-    SEL selector = NSSelectorFromString(@"placeHolderLabel");
-    if ([self respondsToSelector:selector]) {
-        return ((UILabel *)[self performSelector:selector]).font;
+    NSString *selStr = @"placeHolderLabel";
+    if (isObjHasSelector(self, selStr)) {
+        return ((UILabel *)invokeObjSelector(self, selStr, nil)).font;
     }
     return nil;
 }
 
 - (void)ccui_setPlaceholderFont:(UIFont *)ccui_placeholderFont
 {
-    SEL selector = NSSelectorFromString(@"placeHolderLabel");
-    if ([self respondsToSelector:selector]) {
-        ((UILabel *)[self performSelector:selector]).font = ccui_placeholderFont;
+    NSString *selStr = @"placeHolderLabel";
+    if (isObjHasSelector(self, selStr)) {
+        ((UILabel *)invokeObjSelector(self, selStr, nil)).font = ccui_placeholderFont;
     }
 }
 

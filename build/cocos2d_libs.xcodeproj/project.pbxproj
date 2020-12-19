@@ -871,6 +871,10 @@
 		0AEE1065237FD1D900DFD2A6 /* libcommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1040237FD1D900DFD2A6 /* libcommon.a */; };
 		0AEE1066237FD1D900DFD2A6 /* libopenal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1042237FD1D900DFD2A6 /* libopenal.a */; };
 		0AEE1068237FD1D900DFD2A6 /* libcommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEE1043237FD1D900DFD2A6 /* libcommon.a */; };
+		0AF28B79258E50B400837711 /* NSObject-apple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF28B77258E50B400837711 /* NSObject-apple.m */; };
+		0AF28B7A258E50B400837711 /* NSObject-apple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF28B77258E50B400837711 /* NSObject-apple.m */; };
+		0AF28B7B258E50B400837711 /* NSObject-apple.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF28B78258E50B400837711 /* NSObject-apple.h */; };
+		0AF28B7C258E50B400837711 /* NSObject-apple.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF28B78258E50B400837711 /* NSObject-apple.h */; };
 		0AFC98931E91487A00F3D63F /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983C1E91487A00F3D63F /* ogg.h */; };
 		0AFC98941E91487A00F3D63F /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983C1E91487A00F3D63F /* ogg.h */; };
 		0AFC98951E91487A00F3D63F /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC983D1E91487A00F3D63F /* os_types.h */; };
@@ -2625,6 +2629,8 @@
 		0AEE1040237FD1D900DFD2A6 /* libcommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcommon.a; sourceTree = "<group>"; };
 		0AEE1042237FD1D900DFD2A6 /* libopenal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopenal.a; sourceTree = "<group>"; };
 		0AEE1043237FD1D900DFD2A6 /* libcommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcommon.a; sourceTree = "<group>"; };
+		0AF28B77258E50B400837711 /* NSObject-apple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject-apple.m"; sourceTree = "<group>"; };
+		0AF28B78258E50B400837711 /* NSObject-apple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject-apple.h"; sourceTree = "<group>"; };
 		0AFC983C1E91487A00F3D63F /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
 		0AFC983D1E91487A00F3D63F /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
 		0AFC983F1E91487A00F3D63F /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitwise.c; sourceTree = "<group>"; };
@@ -5622,6 +5628,8 @@
 		50ABBF1A1926664700A911A9 /* apple */ = {
 			isa = PBXGroup;
 			children = (
+				0AF28B78258E50B400837711 /* NSObject-apple.h */,
+				0AF28B77258E50B400837711 /* NSObject-apple.m */,
 				50ABBF1B1926664700A911A9 /* CCFileUtils-apple.h */,
 				50ABBF1C1926664700A911A9 /* CCFileUtils-apple.mm */,
 				50ABBF1D1926664700A911A9 /* CCLock-apple.cpp */,
@@ -5826,6 +5834,7 @@
 				0A4FC7CB21230D8E00BA1B48 /* CCSGUIReader.h in Headers */,
 				0A009A7723CC642C00D1D9CD /* AttachmentType.h in Headers */,
 				0A0099F323CC642B00D1D9CD /* SlotData.h in Headers */,
+				0AF28B7B258E50B400837711 /* NSObject-apple.h in Headers */,
 				50ABBD8D1925AB4100A911A9 /* CCGLProgram.h in Headers */,
 				0A0099E723CC642B00D1D9CD /* BoundingBoxAttachment.h in Headers */,
 				50ABBEA11925AB6F00A911A9 /* CCScheduler.h in Headers */,
@@ -6805,6 +6814,7 @@
 				0A4FC75E21230D8E00BA1B48 /* ScrollViewReader.h in Headers */,
 				50643BD519BFAECF00EF68ED /* CCGL.h in Headers */,
 				0A009AA423CC642C00D1D9CD /* Updatable.h in Headers */,
+				0AF28B7C258E50B400837711 /* NSObject-apple.h in Headers */,
 				0A767F5A2242880400DF5418 /* TransformObject.h in Headers */,
 				0A009A1A23CC642B00D1D9CD /* PathConstraintSpacingTimeline.h in Headers */,
 				0AFC98E41E91487A00F3D63F /* residue_16.h in Headers */,
@@ -7121,6 +7131,7 @@
 				50ABBE551925AB6F00A911A9 /* CCEventFocus.cpp in Sources */,
 				0A009A0923CC642B00D1D9CD /* PathAttachment.cpp in Sources */,
 				15AE1A8819AAD40300C27E9E /* b2PrismaticJoint.cpp in Sources */,
+				0AF28B79258E50B400837711 /* NSObject-apple.m in Sources */,
 				0A4FC76B21230D8E00BA1B48 /* CCDisplayManager.cpp in Sources */,
 				50ABBE491925AB6F00A911A9 /* CCEventAcceleration.cpp in Sources */,
 				15AE182C19AAD2F700C27E9E /* CCMeshVertexIndexData.cpp in Sources */,
@@ -7556,6 +7567,7 @@
 				0A767F842242880400DF5418 /* AnimationState.cpp in Sources */,
 				0A0099B223CC642B00D1D9CD /* SkeletonData.cpp in Sources */,
 				0A009ABC23CC642C00D1D9CD /* TransformConstraint.cpp in Sources */,
+				0AF28B7A258E50B400837711 /* NSObject-apple.m in Sources */,
 				50ABBD551925AB0000A911A9 /* TransformUtils.cpp in Sources */,
 				0A4FC7C821230D8E00BA1B48 /* CCBone.cpp in Sources */,
 				1A57007A180BC5A10088DEC7 /* CCActionInstant.cpp in Sources */,

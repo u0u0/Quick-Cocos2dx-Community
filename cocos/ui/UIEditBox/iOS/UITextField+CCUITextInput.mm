@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 #import "ui/UIEditBox/iOS/UITextField+CCUITextInput.h"
+#import "platform/apple/NSObject-apple.h"
 
 @implementation UITextField (CCUITextInput)
 
@@ -78,35 +79,35 @@
 
 - (UIColor *)ccui_placeholderTextColor
 {
-    SEL selector = NSSelectorFromString(@"placeholderTextColor");
-    if ([self respondsToSelector:selector]) {
-        return [self performSelector:selector];
+    NSString *selStr = @"placeholderTextColor";
+    if (isObjHasSelector(self, selStr)) {
+        return invokeObjSelector(self, selStr, nil);
     }
     return nil;
 }
 
 - (void)ccui_setPlaceholderTextColor:(UIColor *)ccui_placeholderTextColor
 {
-    SEL selector = NSSelectorFromString(@"setPlaceholderTextColor:");
-    if ([self respondsToSelector:selector]) {
-        [self performSelector:selector withObject:ccui_placeholderTextColor];
+    NSString *selStr = @"setPlaceholderTextColor:";
+    if (isObjHasSelector(self, selStr)) {
+        invokeObjSelector(self, selStr, [NSArray arrayWithObject:ccui_placeholderTextColor]);
     }
 }
 
 - (UIFont *)ccui_placeholderFont
 {
-    SEL selector = NSSelectorFromString(@"placeholderFont");
-    if ([self respondsToSelector:selector]) {
-        return [self performSelector:selector];
+    NSString *selStr = @"placeholderFont";
+    if (isObjHasSelector(self, selStr)) {
+        return invokeObjSelector(self, selStr, nil);
     }
     return nil;
 }
 
 - (void)ccui_setPlaceholderFont:(UIFont *)ccui_placeholderFont
 {
-    SEL selector = NSSelectorFromString(@"setPlaceholderFont:");
-    if ([self respondsToSelector:selector]) {
-        [self performSelector:selector withObject:ccui_placeholderFont];
+    NSString *selStr = @"setPlaceholderFont:";
+    if (isObjHasSelector(self, selStr)) {
+        invokeObjSelector(self, selStr, [NSArray arrayWithObject:ccui_placeholderFont]);
     }
 }
 
