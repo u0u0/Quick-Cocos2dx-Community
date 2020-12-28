@@ -259,16 +259,27 @@ int executeSpineEvent(LuaSkeletonAnimation* skeletonAnimation, int handler, Even
     
     if (nullptr != event)
     {
-        LuaValueDict eventData;
+        LuaValueDict dict; // cur value
+        LuaValueDict dataDict;  // default value
+        
         spine::EventData &data = (spine::EventData &)event->getData();
-        eventData.insert(eventData.end(), LuaValueDict::value_type("name", LuaValue::stringValue(data.getName().buffer())));
-        eventData.insert(eventData.end(), LuaValueDict::value_type("intValue", LuaValue::intValue(data.getIntValue())));
-        eventData.insert(eventData.end(), LuaValueDict::value_type("floatValue", LuaValue::floatValue(data.getFloatValue())));
-        eventData.insert(eventData.end(), LuaValueDict::value_type("stringValue", LuaValue::stringValue(data.getStringValue().buffer())));
-        eventData.insert(eventData.end(), LuaValueDict::value_type("audioPath", LuaValue::stringValue(data.getAudioPath().buffer())));
-        eventData.insert(eventData.end(), LuaValueDict::value_type("volume", LuaValue::floatValue(data.getVolume())));
-        eventData.insert(eventData.end(), LuaValueDict::value_type("balance", LuaValue::floatValue(data.getBalance())));
-        spineEvent.insert(spineEvent.end(), LuaValueDict::value_type("eventData", LuaValue::dictValue(eventData)));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("name", LuaValue::stringValue(data.getName().buffer())));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("intValue", LuaValue::intValue(data.getIntValue())));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("floatValue", LuaValue::floatValue(data.getFloatValue())));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("stringValue", LuaValue::stringValue(data.getStringValue().buffer())));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("audioPath", LuaValue::stringValue(data.getAudioPath().buffer())));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("volume", LuaValue::floatValue(data.getVolume())));
+        dataDict.insert(dataDict.end(), LuaValueDict::value_type("balance", LuaValue::floatValue(data.getBalance())));
+        
+        dict.insert(dict.end(), LuaValueDict::value_type("data", LuaValue::dictValue(dataDict)));
+        dict.insert(dict.end(), LuaValueDict::value_type("time", LuaValue::floatValue(event->getTime())));
+        dict.insert(dict.end(), LuaValueDict::value_type("intValue", LuaValue::intValue(event->getIntValue())));
+        dict.insert(dict.end(), LuaValueDict::value_type("floatValue", LuaValue::floatValue(event->getFloatValue())));
+        dict.insert(dict.end(), LuaValueDict::value_type("stringValue", LuaValue::stringValue(event->getStringValue().buffer())));
+        dict.insert(dict.end(), LuaValueDict::value_type("volume", LuaValue::floatValue(event->getVolume())));
+        dict.insert(dict.end(), LuaValueDict::value_type("balance", LuaValue::floatValue(event->getBalance())));
+        
+        spineEvent.insert(spineEvent.end(), LuaValueDict::value_type("event", LuaValue::dictValue(dict)));
     }
     
     stack->pushLuaValueDict(spineEvent);
