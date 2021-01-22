@@ -111,6 +111,8 @@ static int lSourceGC(lua_State *L)
 {
     RDAudioItem *sourceItem = (RDAudioItem *)luaL_checkudata(L, 1, RD_AUDIO_SOURCE);
     if (!sourceItem->deleted) {
+        alSourceStop(sourceItem->id);
+        alSourcei(sourceItem->id, AL_BUFFER, 0);
         alDeleteSources(1, &sourceItem->id);
         sourceItem->deleted = true;
     }
