@@ -1,3 +1,22 @@
+Quick-Cocos2dx-Community v3.7.10 Release
+
+[新增] TiledMap支持碰撞数据解析.
+
+[改进] Spine Runtime更新到3.8.
+[改进] 更新Luajit到2021.1.12, 解决Android 11下64位崩溃问题。
+[改进] zlib库 更新到1.2.11.
+[改进] Editbox同步4.0改进.
+[改进] Audio优化Android下暂停的性能.
+[改进] Android显示刘海区域.
+[改进] 去dlopen, respondsToSelector & performSelector.
+
+[修正] TiledMap修正散图图集gid读取错误。
+[修正] sp.SkeletonData释放内存泄漏修正。
+[修正] pb解析double和float再优化，fix android release版本crash.
+[修正] iOS Store API修正多线程导致的崩溃.
+[修正] Xcode 12编译错误修正.
+[修正] Audio Lua binding GC内存泄漏修正.
+
 Quick-Cocos2dx-Community v3.7.9 Release
 
 [新增] ccui.Widget 添加 addClickEventListener 支持。
