@@ -1,64 +1,51 @@
-#!/bin/sh
+#!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-SRCDIR=$DIR/src
-cd "$SRCDIR"
+SRCDIR=${DIR}/src
+cd "${SRCDIR}"
 
-NDK=$NDK_ROOT
-NDKABI=8
-NDKVER=$NDK/toolchains/arm-linux-androideabi-4.9
-NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
-NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm"
+orgPath=${PATH}
 
-# Android/ARM, armeabi (ARMv5TE soft-float), Android 2.2+ (Froyo)
-DESTDIR=$DIR/prebuilt/android/armeabi
-rm "$DESTDIR"/*.a
-make clean
-make CC=gcc HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
+# ubuntu cross build 32 bit, `sudo apt-get install libc6-dev-i386`
 
-if [ -f $SRCDIR/src/libluajit.a ]; then
-    mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
-fi;
+toolchainPath=/home/u0u0/works/android/android-ndk-r10d/build/tools/make-standalone-toolchain.sh
+installPrefix=/home/u0u0/works/android/stdr10d
 
-# Android/ARM, armeabi-v7a (ARMv7 VFP), Android 4.0+ (ICS)
-NDKABI=14
-NDKARCH="-march=armv7-a -mfloat-abi=softfp -Wl,--fix-cortex-a8"
-DESTDIR=$DIR/prebuilt/android/armeabi-v7a
-NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm"
-rm "$DESTDIR"/*.a
-make clean
-make CC=gcc HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH"
+archs=("arm" "arm" "x86" "arm64")
+dests=("armeabi" "armeabi-v7a" "x86" "arm64-v8a")
+hostBits=("32" "32" "32" "64")
+apis=("android-9" "android-9" "android-9" "android-21")
+crossPrefixs=("arm-linux-androideabi-" "arm-linux-androideabi-" "i686-linux-android-" "aarch64-linux-android-")
 
-if [ -f $SRCDIR/src/libluajit.a ]; then
-    mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
-fi;
+for ((i=0;i<${#archs[@]};i++)) do
+    arch=${archs[i]}
+    dest=${dests[i]}
+    hostBit=${hostBits[i]}
+    api=${apis[i]}
+    crossPrefix=${crossPrefixs[i]}
+    installRoot=${installPrefix}/standalone-toolchain-${arch}
 
-# Android/x86, x86 (i686 SSE3), Android 4.0+ (ICS)
-NDKABI=14
-DESTDIR=$DIR/prebuilt/android/x86
-NDKVER=$NDK/toolchains/x86-4.9
-NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/i686-linux-android-
-NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-x86"
-rm "$DESTDIR"/*.a
-make clean
-make CC=gcc HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
+    if [ ! -d "${installRoot}" ];then
+        echo "Creating standalone: ${installRoot}"
+        ${toolchainPath} --arch=${arch} --platform=${api} --stl=libc++ --install-dir=${installRoot}
+    fi
 
-if [ -f $SRCDIR/src/libluajit.a ]; then
-    mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
-fi;
+    # standalone setting
+    export PATH="${installRoot}/bin:${orgPath}"
+    # armv7 special fix
+    TFLAGS="--sysroot ${installRoot}/sysroot"
+    if [ ${dest} == "armeabi-v7a" ]; then
+        TFLAGS+=" -march=armv7-a -mfloat-abi=softfp"
+    fi;
+    # start building
+    make clean
+    make CC=gcc HOST_CC="gcc -m${hostBit}" CROSS=${crossPrefix} TARGET_SYS=Linux TARGET_FLAGS="$TFLAGS"
 
-# Android/ARM64 arm64-v8a
-NDKABI=21
-DESTDIR=$DIR/prebuilt/android/arm64-v8a
-NDKVER=$NDK/toolchains/aarch64-linux-android-4.9
-NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/aarch64-linux-android-
-NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm64"
-rm "$DESTDIR"/*.a
-make clean
-make CC=gcc HOST_CC="gcc -m64" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
-
-if [ -f $SRCDIR/src/libluajit.a ]; then
-    mv $SRCDIR/src/libluajit.a $DESTDIR/libluajit.a
-fi;
+    if [ -f ${SRCDIR}/src/libluajit.a ]; then
+        DESTDIR=${DIR}/prebuilt/android/${dest}
+        rm ${DESTDIR}/*.a
+        mv ${SRCDIR}/src/libluajit.a ${DESTDIR}/libluajit.a
+    fi;
+done;
 
 make clean

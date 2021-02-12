@@ -8,8 +8,8 @@ orgPath=${PATH}
 
 # ubuntu cross build 32 bit, `sudo apt-get install libc6-dev-i386`
 
-toolchainPath=/mnt/data/android-ndk-r20b/build/tools/make-standalone-toolchain.sh
-installPrefix=/mnt/data
+toolchainPath=/home/u0u0/works/android/android-ndk-r20b/build/tools/make-standalone-toolchain.sh
+installPrefix=/home/u0u0/works/android
 
 archs=("arm" "x86" "arm64")
 dests=("armeabi-v7a" "x86" "arm64-v8a")
