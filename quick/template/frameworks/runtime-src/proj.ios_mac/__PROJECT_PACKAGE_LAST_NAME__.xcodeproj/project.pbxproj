@@ -1314,7 +1314,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos/platform/ios\" \"$(QUICK_V3_ROOT)/external/curl/include/ios\"";
-				VALID_ARCHS = "arm64 armv7";
+				VALID_ARCHS = "arm64";
 			};
 			name = Debug;
 		};
@@ -1366,7 +1366,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(QUICK_V3_ROOT)/cocos/platform/ios\" \"$(QUICK_V3_ROOT)/external/curl/include/ios\"";
-				VALID_ARCHS = "arm64 armv7";
+				VALID_ARCHS = "arm64";
 			};
 			name = Release;
 		};
