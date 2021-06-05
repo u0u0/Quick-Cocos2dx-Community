@@ -7,8 +7,8 @@ rm "$DESTDIR"/*.a
 
 cd $SRCDIR
 make clean
-make CC="clang -m64 -DLUAJIT_ENABLE_GC64" all
-# make CC="clang -m32" all
+make CC="clang -m64" all
+# make CC="clang -m32 -DLUAJIT_DISABLE_GC64" all
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit.a
 
 make clean

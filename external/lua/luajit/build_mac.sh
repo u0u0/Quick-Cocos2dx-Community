@@ -15,11 +15,11 @@ cd $SRCDIR
 export MACOSX_DEPLOYMENT_TARGET=10.9
 
 make clean
-make CC="clang -m64 -arch x86_64 -DLUAJIT_ENABLE_GC64" all
+make CC="clang -m64 -arch x86_64" all
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-x86_64.a
 
 make clean
-make HOST_CC="clang" TARGET_FLAGS="-arch arm64 -DLUAJIT_ENABLE_GC64 -isysroot $ISDK" TARGET=arm64 TARGET_SYS=Darwin
+make HOST_CC="clang" TARGET_FLAGS="-arch arm64 -isysroot $ISDK" TARGET=arm64 TARGET_SYS=Darwin
 mv "$SRCDIR"/src/libluajit.a "$DESTDIR"/libluajit-arm64.a
 
 make clean
