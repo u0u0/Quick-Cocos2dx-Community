@@ -353,7 +353,11 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
             }
             _recordFirstGID = false;
             
+            // support tsx in sub dir
+            std::string bkTMXFileName = _TMXFileName;
+            _TMXFileName = extTilesetName;
             parseXMLFile(extTilesetName);
+            _TMXFileName = bkTMXFileName;
         } else {
             TMXTilesetInfo *tileset = new (std::nothrow) TMXTilesetInfo();
             tileset->_name = attributeDict["name"].asString();
@@ -478,7 +482,7 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         // The parent element is now "layer"
         _parentElement = TMXPropertyGroup;
     } else if (elementName == "objectgroup") {
-        if (_parentElement == TMXPropertyMap) {
+        if (_parentElement == TMXPropertyMap || _parentElement == TMXPropertyGroup) {
             // ObjectGroup Layer
             TMXObjectGroup *objectGroup = new (std::nothrow) TMXObjectGroup();
             objectGroup->setGroupName(attributeDict["name"].asString());
@@ -677,10 +681,11 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
     } else if (elementName == "frame") {
         // parse tile animation belog to tile properties, auto add key "animation"
         if (_parentElement == TMXPropertyTile) {
+            TMXTilesetInfo* info = _tilesets.back();
             ValueMap& dict = _tileProperties.at(_parentGID).asValueMap();
             // one frame data hava two properites, make a pairs.
             ValueVector& vector = dict["animation"].asValueVector();
-            vector.push_back(Value(attributeDict["tileid"].asUnsignedInt() + 1));// gid++
+            vector.push_back(Value(attributeDict["tileid"].asUnsignedInt() + info->_firstGid));
             vector.push_back(attributeDict["duration"]);
         }
     } else if (elementName == "text") {

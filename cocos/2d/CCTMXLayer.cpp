@@ -3,7 +3,7 @@ Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2016 Chukong Technologies Inc.
-Copyright (c) 2020 cocos2d-lua.org
+Copyright (c) 2020-2021 cocos2d-lua.org
 
 http://www.cocos2d-x.org
 
@@ -173,10 +173,10 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
         // draw image object
         if ("tile" == objectType) {
             int gid = dict["gid"].asUnsignedInt();
-            intptr_t z = getZForPos(pos);
-            Sprite *tile = createTileSprite(z, gid);
-            setupTileAnimation(tile, pos, gid);
-            tile->setTag(dict["id"].asUnsignedInt());
+            int id = dict["id"].asInt();
+            Sprite *tile = createTileSprite(id, gid);
+            setupTileAnimation(tile, pos, gid, id);
+            tile->setTag(id);
             tile->setUserData((void *)&dict); //for sort
             // fix size
             Size textureSize = tile->getContentSize();
@@ -251,7 +251,7 @@ bool TMXLayer::initWithLayerInfo(TMXObjectGroup *layerInfo, TMXTiledMap *tileMap
             label->setVisible(dict["visible"].asBool());
             label->setTag(dict["id"].asUnsignedInt());
             label->setUserData((void *)&dict); // for sort
-        } else if ("rectangle" == objectType) {
+        } else if ("rectangle" == objectType || "ellipse" == objectType) {
             if (TMXOrientationIso == _layerOrientation) {
                 // It's a prism in cocos2d-x, need convert to polygon.
                 Vec2 zero = getPositionForObject(Vec2(0, 0));
@@ -403,11 +403,11 @@ void TMXLayer::setupTiles()
 	for (int y = 0; y < _layerSize.height; y++) {
 		for (int x = 0; x < _layerSize.width; x++) {
             Vec2 pos(x, y);
-			intptr_t z = getZForPos(pos);
-			int gid = _tiles[z]; // Only support little endian stored gid
+			int index = getIndex(pos);
+			int gid = _tiles[index]; // Only support little endian stored gid
 			if (gid != 0) {
-				Sprite *tile = createTileSprite(z, gid);
-                setupTileAnimation(tile, pos, gid);
+				Sprite *tile = createTileSprite(index, gid);
+                setupTileAnimation(tile, pos, gid, index);
 			}
 		}
 	}
@@ -422,17 +422,16 @@ Value TMXLayer::getProperty(const std::string& propertyName) const
 	return Value();
 }
 
-Sprite *TMXLayer::createTileSprite(intptr_t z, uint32_t gid)
+Sprite *TMXLayer::createTileSprite(int index, uint32_t gid)
 {
 	TMXTilesetInfo *tileset = _tileMap->getTilesetByGID(gid);
     TMXTilesetImage *tilesetImage = tileset->getImageForGID(gid);
 	Texture2D *texture = Director::getInstance()->getTextureCache()->getTextureForKey(tilesetImage->sourceImage);
 	Rect rect = tileset->getRectForGID(gid);
     rect = CC_RECT_PIXELS_TO_POINTS(rect);
-    // only apply fixArtifacts on TMXOrientationOrtho
-	Sprite *tile = Sprite::createWithTexture(texture, rect, false, _layerOrientation == TMXOrientationOrtho);
+    Sprite *tile = Sprite::createWithTexture(texture, rect, false, true);
     tile->setCameraMask(getCameraMask());
-    _tileSprites.insert(std::pair<intptr_t, Sprite *>(z, tile));
+    _tileSprites.insert(std::pair<int, Sprite *>(index, tile));
     addChild(tile);
 	return tile;
 }
@@ -492,13 +491,13 @@ void TMXLayer::setupTileSprite(Sprite* sprite, const Vec2& pos, uint32_t gid)
 }
 
 // init tile's animation
-void TMXLayer::setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid)
+void TMXLayer::setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid, int index)
 {
-    intptr_t z = getZForPos(pos);
-    auto it = _tilesAniData.find(z);
+    int size = _tilesAniData.size();
+    auto it = _tilesAniData.find(index);
     if (it != _tilesAniData.end()) { // remove old data
         delete it->second;
-        _tilesAniData.erase(z);
+        _tilesAniData.erase(index);
     }
     Value prop = _tileMap->getPropertiesForGID(gid);
     if (prop.getType() == Value::Type::MAP) {
@@ -521,16 +520,18 @@ void TMXLayer::setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid)
                     gid = tileid; // real render gid
                 }
             }
-            _tilesAniData.insert(std::pair<intptr_t, TileAnimationData *>(z, data));
+            _tilesAniData.insert(std::pair<int, TileAnimationData *>(index, data));
         }
     }
     setupTileSprite(sprite, pos, gid);// do for real gid
     
     // start or stop schedule
-    if (_tilesAniData.size() == 1) {
-        schedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate), 0);
-    } else if (_tilesAniData.size() == 0) {
-        unschedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate));
+    if (size != _tilesAniData.size()){
+        if (_tilesAniData.size() == 1) {
+            schedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate), 0);
+        } else if (_tilesAniData.size() == 0) {
+            unschedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate));
+        }
     }
 }
 
@@ -550,7 +551,8 @@ void TMXLayer::tilesUpdate(float dt)
         uint32_t gid = data->gids[data->frameIndex];
         data->leftTime = data->durations[data->frameIndex];
         setTileTexture(data->tile, gid);
-        setupTileSprite(data->tile, data->pos, gid);
+        // no need change sprite's other properties
+        //setupTileSprite(data->tile, data->pos, gid);
     }
 }
 
@@ -561,14 +563,14 @@ Sprite * TMXLayer::getTileAt(const Vec2& pos)
 	CCASSERT(_tiles, "TMXLayer: the tiles map has been released");
     CCASSERT(_layerType == TMX_LAYER_TILE, "TMXLayer: invalid layer type");
 
-    intptr_t z = getZForPos(pos);
-    auto it = _tileSprites.find(z);
+    int index = getIndex(pos);
+    auto it = _tileSprites.find(index);
     if (it == _tileSprites.end()) {
         Sprite *tile = nullptr;
-        int gid = _tiles[z];
+        int gid = _tiles[index];
         if (gid != 0) { // try create it
-            tile = createTileSprite(z, gid);
-            setupTileAnimation(tile, pos, gid);
+            tile = createTileSprite(index, gid);
+            setupTileAnimation(tile, pos, gid, index);
         }
         return tile;
     }
@@ -582,7 +584,7 @@ uint32_t TMXLayer::getTileGIDAt(const Vec2& pos, TMXTileFlags* flags/* = nullptr
     CCASSERT(_layerType == TMX_LAYER_TILE, "TMXLayer: invalid layer type");
 
 	// Bits on the far end of the 32-bit global tile ID are used for tile flags
-	uint32_t tile = _tiles[getZForPos(pos)];
+	uint32_t tile = _tiles[getIndex(pos)];
 	// issue1264, flipped tiles can be changed dynamically
 	if (flags) {
 		*flags = (TMXTileFlags)(tile & kTMXFlipedAll);
@@ -591,9 +593,9 @@ uint32_t TMXLayer::getTileGIDAt(const Vec2& pos, TMXTileFlags* flags/* = nullptr
 	return (tile & kTMXFlippedMask);
 }
 
-intptr_t TMXLayer::getZForPos(const Vec2& pos) const
+int TMXLayer::getIndex(const Vec2& pos) const
 {
-	intptr_t z = -1;
+	int index = -1;
     int newX = pos.x;
     // fix correct render ordering in Hexagonal maps when stagger axis == x
     if (_staggerAxis == TMXStaggerAxis_X && _layerOrientation == TMXOrientationHex) {
@@ -610,10 +612,10 @@ intptr_t TMXLayer::getZForPos(const Vec2& pos) const
                 newX = pos.x * 2 + 1;
         }
     }
-    z = (newX + pos.y * _layerSize.width);
+    index = (newX + pos.y * _layerSize.width);
 
-	CCASSERT(z != -1, "Invalid Z");
-	return z;
+	CCASSERT(index != -1, "Invalid index");
+	return index;
 }
 
 // TMXLayer - adding / remove tiles
@@ -633,19 +635,19 @@ void TMXLayer::setTileGID(uint32_t gid, const Vec2& pos, TMXTileFlags flags)
 	if (currentGID != gid || currentFlags != flags)
 	{
 		uint32_t gidAndFlags = gid | flags;
-		intptr_t z = getZForPos(pos);
+		int index = getIndex(pos);
         Sprite *tile = nullptr;
-        auto it = _tileSprites.find(z);
+        auto it = _tileSprites.find(index);
         if (it != _tileSprites.end()) {
             tile = it->second;
         }
 		if (tile) {
             setTileTexture(tile, gidAndFlags);
         } else {
-            tile = createTileSprite(z, gidAndFlags);
+            tile = createTileSprite(index, gidAndFlags);
         }
-        setupTileAnimation(tile, pos, gidAndFlags);
-        _tiles[z] = gidAndFlags;
+        setupTileAnimation(tile, pos, gidAndFlags, index);
+        _tiles[index] = gidAndFlags;
 	}
 }
 
@@ -655,22 +657,22 @@ void TMXLayer::removeTileAt(const Vec2& pos, bool cleanGID)
 	CCASSERT(_tiles, "TMXLayer: the tiles map has been released");
     CCASSERT(_layerType == TMX_LAYER_TILE, "TMXLayer: invalid layer type");
 
-	intptr_t z = getZForPos(pos);
-    auto it = _tileSprites.find(z);
+	int index = getIndex(pos);
+    auto it = _tileSprites.find(index);
     if (it != _tileSprites.end()) {
         it->second->removeFromParent();
-        _tileSprites.erase(z);
+        _tileSprites.erase(index);
     }
-    auto itdata = _tilesAniData.find(z);
+    auto itdata = _tilesAniData.find(index);
     if (itdata != _tilesAniData.end()) {
         delete itdata->second;
-        _tilesAniData.erase(z);
+        _tilesAniData.erase(index);
         if (_tilesAniData.size() == 0) {
             unschedule(CC_SCHEDULE_SELECTOR(TMXLayer::tilesUpdate));
         }
     }
     if (cleanGID) {
-        _tiles[z] = 0;
+        _tiles[index] = 0;
     }
 }
 
@@ -706,7 +708,7 @@ Vec2 TMXLayer::calculateLayerOffset(const Vec2& pos)
 
 Vec2 TMXLayer::getPositionAt(const Vec2& pos, uint32_t gid)
 {
-    int newX = pos.x;
+    float newX = pos.x;
     // fix correct render ordering in Hexagonal maps when stagger axis == x
     if (_staggerAxis == TMXStaggerAxis_X && _layerOrientation == TMXOrientationHex) {
         if (_staggerIndex == TMXStaggerIndex_Odd) {

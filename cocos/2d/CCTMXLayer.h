@@ -3,6 +3,7 @@ Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2020-2021 cocos2d-lua.org
 
 http://www.cocos2d-x.org
 
@@ -243,11 +244,11 @@ protected:
     Vec2 getPositionForObject(const Vec2& pos);
     Vec2 calculateLayerOffset(const Vec2& offset);
 
-    intptr_t getZForPos(const Vec2& pos) const;
-    Sprite *createTileSprite(intptr_t z, uint32_t gid);
+    int getIndex(const Vec2& pos) const;
+    Sprite *createTileSprite(int index, uint32_t gid);
     void setTileTexture(Sprite* sprite, uint32_t gid);
     void setupTileSprite(Sprite* sprite, const Vec2& pos, uint32_t gid);
-    void setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid);
+    void setupTileAnimation(Sprite* sprite, const Vec2& pos, uint32_t gid, int index);
     // play tile's animation
     void tilesUpdate(float dt);
 
@@ -266,9 +267,9 @@ protected:
     /** pointer to the map of tiles */
     uint32_t* _tiles;
     /** all tiles's sprite */
-    std::map<intptr_t, Sprite *> _tileSprites;
+    std::map<int, Sprite *> _tileSprites;
     /** tiles's doing animation */
-    std::map<intptr_t, TileAnimationData *> _tilesAniData;
+    std::map<int, TileAnimationData *> _tilesAniData;
     /** Layer orientation, which is the same as the map orientation */
     int _layerOrientation;
     /** Stagger Axis */
