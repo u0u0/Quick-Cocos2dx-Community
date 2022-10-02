@@ -150,14 +150,14 @@ function CreateProjectUI:onEnter()
 						projectConfig:changeFrameOrientationToLandscape()
 						screenDirection = " -l"
 					end
-					local arguments = " -p " .. packageEditbox:getText() .. " -o " .. locationEditbox:getText() .. screenDirection
+					local arguments = scriptPath .. " -p " .. packageEditbox:getText() .. " -o " .. locationEditbox:getText() .. screenDirection
 					if copySrcBox:isSelected() then
 						arguments = arguments .. " --deep-copy"
 					end
 					local taskId = tostring(os.time())
 
 					print("Create Cmd:" .. scriptPath .. " " .. arguments)
-					local task = PlayerProtocol:getInstance():getTaskService():createTask(taskId, scriptPath, arguments)
+					local task = PlayerProtocol:getInstance():getTaskService():createTask(taskId, "python", arguments)
 					eventDispatcher:addEventListenerWithFixedPriority(cc.EventListenerCustom:create(taskId, function()
 						if task:getResultCode() == 0 then
 							createProjectbutton:setTitleText("Open ...")
