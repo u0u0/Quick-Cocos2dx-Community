@@ -390,6 +390,82 @@ function cc.vec3normalize(vec3)
     return {x = vec3.x * n, y = vec3.y * n, z = vec3.z * n}
 end
 
+function cc.vec3Add(vec3a, vec3b)
+    return {x = vec3a.x + vec3b.x, y = vec3a.y + vec3b.y, z = vec3a.z + vec3b.z}
+end
+
+function cc.vec3Sub(vec3a, vec3b)
+    return {x = vec3a.x - vec3b.x, y = vec3a.y - vec3b.y, z = vec3a.z - vec3b.z}
+end
+
+function cc.vec3Mid(vec3a, vec3b)
+    return {x = (vec3a.x + vec3b.x) / 2, y = (vec3a.y + vec3b.y) / 2, z = (vec3a.z + vec3b.z) / 2}
+end
+
+function cc.vec3Mul(vec3, factor)
+    return {x = vec3.x * factor, y = vec3.y * factor, z = vec3.z * factor}
+end
+
+function cc.vec3Dot(vec3a, vec3b)
+    return vec3a.x * vec3b.x + vec3a.y * vec3b.y + vec3a.z * vec3b.z
+end
+
+function cc.vec3Cross(vec3a, vec3b)
+    return {x = vec3a.y * vec3b.z - vec3a.z * vec3b.y, y = vec3a.z * vec3b.x - vec3a.x * vec3b.z, z = vec3a.x * vec3b.y - vec3a.y * vec3b.x}
+end
+
+function cc.vec3Equal(vec3a, vec3b)
+    return vec3a.x == vec3b.x and vec3a.y == vec3b.y and vec3a.z == vec3b.z
+end
+
+-- 根据位置,朝向,顶方向计算欧拉角
+function cc.vec3RotationAngle(position, tangent, up)
+    local xaxis = cc.vec3normalize(tangent)
+    local zaxis = cc.vec3normalize(cc.vec3Cross(xaxis, up))
+    local yaxis = cc.vec3normalize(cc.vec3Cross(zaxis, xaxis))
+
+    local quaternion = cc.quaternion(0, 0, 0, 0)
+    local trace = xaxis.x + yaxis.y + zaxis.z + 1.0
+
+    if trace > 0.000001 then
+        local s = 0.5 / math.sqrt(trace)
+        quaternion.w = 0.25 / s
+        quaternion.x = (yaxis.z - zaxis.y) * s
+        quaternion.y = (zaxis.x - xaxis.z) * s
+        quaternion.z = (xaxis.y - yaxis.x) * s
+    else
+        if xaxis.x > yaxis.y and xaxis.x > zaxis.z then
+            local s = 0.5 / math.sqrt(1.0 + xaxis.x - yaxis.y - zaxis.z)
+            quaternion.w = (yaxis.z - zaxis.y) * s
+            quaternion.x = 0.25 / s
+            quaternion.y = (yaxis.x + xaxis.y) * s
+            quaternion.z = (zaxis.x + xaxis.z) * s
+        elseif yaxis.y > zaxis.z then
+            local s = 0.5 / math.sqrt(1.0 + yaxis.y - xaxis.x - zaxis.z)
+            quaternion.w = (zaxis.x - xaxis.z) * s
+            quaternion.x = (yaxis.x + xaxis.y) * s
+            quaternion.y = 0.25 / s
+            quaternion.z = (zaxis.y + yaxis.z) * s
+        else
+            local s = 0.5 / math.sqrt(1.0 + zaxis.z - xaxis.x - yaxis.y)
+            quaternion.w = (xaxis.y - yaxis.x ) * s
+            quaternion.x = (zaxis.x + xaxis.z ) * s
+            quaternion.y = (zaxis.y + yaxis.z ) * s
+            quaternion.z = 0.25 / s
+        end
+    end
+
+    local rotx = math.atan2(2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z), 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y))
+    local roty = math.asin(cc.clampf(2 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x), -1.0 , 1.0))
+    local rotz = -1 * math.atan2(2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y), 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z))
+
+    local degreesx = rotx * 57.295779513082     --  180 / math.pi
+    local degreesy = roty * 57.295779513082
+    local degreesz = rotz * 57.295779513082
+
+    return cc.vec3(degreesx, degreesy, degreesz)
+end
+
 function cc.quaternion(_x, _y ,_z,_w)
     return { x = _x, y = _y, z = _z, w = _w }
 end
@@ -428,3 +504,71 @@ end
 function cc.mat4.transformVector(self, vector, dst)
     return mat4_transformVector(self, vector, dst)
 end
+
+-- 2D 到 3D 映射
+function cc.unproject(viewProjection, viewPort, src, dst)
+    local screen = cc.vec4(src.x / viewPort.width, src.y / viewPort.height, src.z, 1.0)
+    screen.x = screen.x * 2.0 - 1.0
+    screen.y = screen.y * 2.0 - 1.0
+    screen.z = screen.z * 2.0 - 1.0
+
+    local b = viewProjection:getInversed()
+    local inversed = cc.mat4.new(viewProjection:getInversed())
+    screen = inversed:transformVector(screen, screen)
+
+    if screen.w ~= 0.0 then
+        screen.x = screen.x / screen.w
+        screen.y = screen.y / screen.w
+        screen.z = screen.z / screen.w
+    end
+
+    dst.x = screen.x
+    dst.y = screen.y
+    dst.z = screen.z
+
+    return dst
+end
+
+-- 3D 到 2D 映射
+function cc.project(viewProjection, viewPort, src, dst)
+    local clipPos = cc.vec4(src.x, src.y, src.z, 1);
+    clipPos = viewProjection:transformVector(cc.vec4(src.x, src.y, src.z, 1), clipPos);
+
+    if clipPos.w == 0 then return dst end
+    local ndcX = clipPos.x / clipPos.w;
+    local ndcY = clipPos.y / clipPos.w;
+
+    dst.x = (ndcX + 1.0) * 0.5 * viewPort.width;
+    dst.y = (ndcY + 1.0) * 0.5 * viewPort.height;
+
+    return dst;
+end
+
+-- 获取在Camera中的射线
+function cc.getRayByLocation(ray, location, camera)
+    local viewProjection = cc.mat4.new(camera:getViewProjectionMatrix())
+    local viewPort = display.size
+
+    local nearPoint = cc.vec3(location.x, location.y, -1)
+    nearPoint = cc.unproject(viewProjection, viewPort, nearPoint, nearPoint)
+    local farPoint = cc.vec3(location.x, location.y, 1)
+    farPoint = cc.unproject(viewProjection, viewPort, farPoint, farPoint)
+    local direction = cc.vec3Sub(farPoint, nearPoint)
+
+    ray._origin    = nearPoint
+    ray._direction = cc.vec3normalize(direction)
+
+    return ray
+end
+
+-- 获取Camera中3D转屏幕坐标值
+function cc.getLocationByPosition3D(position, camera)
+    local viewProjection = cc.mat4.new(camera:getViewProjectionMatrix())
+    local viewPort = display.size
+
+    local location = cc.p(0, 0)
+    location = cc.project(viewProjection, viewPort, position, location)
+
+    return location
+end
+

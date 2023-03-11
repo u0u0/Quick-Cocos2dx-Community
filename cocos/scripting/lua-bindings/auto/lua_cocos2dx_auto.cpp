@@ -62367,7 +62367,18 @@ int lua_cocos2dx_AnimationCache_removeAnimation(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_AnimationCache_removeAnimation'", nullptr);
+            return 0;
+        }
+        cobj->removeAnimation();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    else if (argc == 1)
     {
         std::string arg0;
 
